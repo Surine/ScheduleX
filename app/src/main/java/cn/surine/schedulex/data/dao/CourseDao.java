@@ -1,0 +1,49 @@
+package cn.surine.schedulex.data.dao;
+
+import androidx.room.Dao;
+import androidx.room.Delete;
+import androidx.room.Insert;
+import androidx.room.Query;
+import androidx.room.Update;
+
+import java.util.List;
+
+import cn.surine.schedulex.data.entity.Course;
+
+/**
+ * Intro：
+ *
+ * @author sunliwei
+ * @date 2020-01-16 20:49
+ */
+
+@Dao
+public interface CourseDao {
+    @Insert
+    void insert(Course... course);
+
+    @Update
+    void update(Course... courses);
+
+    @Delete
+    void delete(Course... courses);
+
+    @Query("delete from Course where roomId = :scheduleId")
+    void delete(long scheduleId);
+
+    @Query("delete from course")
+    void deleteAll();
+
+    @Query("select * from course")
+    List<Course> getAll();
+
+
+    @Query("select * from course where roomId = :id")
+    Course getById(int id);
+
+
+    @Query("select * from course where belongsToWeek = :week and scheduleId = :scheduleId")
+    List<Course> getByWeek(int week, int scheduleId);
+
+
+}

@@ -1,0 +1,41 @@
+<resources>
+    <string name="app_name">Schedule X</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="welcome">Welcome</string>
+    <string name="login">LOGIN</string>
+    <string name="vpn_guide">VPN GUIDE</string>
+    <string name="et_hint_password">Your Password</string>
+    <string name="skip">SKIP</string>
+    <string name="et_hint_account">Your Account</string>
+    <string name="tv_login_title">Hey, Join us!</string>
+    <string name="param_empty">Empty Input!</string>
+    <string name="warning">Warning</string>
+    <string name="ready_to_login_tust">Ready to login TUST……</string>
+    <string name="ready_to_get_schedule_list">ready to get schedule list,may take half a minute……</string>
+    <string name="login_fail">login fail,please try again later!</string>
+    <string name="handle_success">processed successfully, welcome to use!</string>
+    <string name="get_fail">get failed, please try again later!</string>
+    <string name="named_schedule">give a name to the first schedule！</string>
+    <string name="data_fetch_subtitle">please choose how to get the data</string>
+    <string name="login_tust">login tust</string>
+    <string name="import_json">import json</string>
+    <string name="import_excel">import excel</string>
+    <string name="scan_qrcode">scan QRCode</string>
+    <string name="from_other">from other</string>
+    <string name="arg_exception">parameter exception, please exit and try again</string>
+    <string name="add_course">Add</string>
+    <string name="data_parse_exception">data parse exception</string>
+    <string name="unknown_teacher">UnKnown Teacher</string>
+    <string name="score_2_0">Score 2.0</string>
+    <string name="schedules">Schedules</string>
+    <string name="schedule_config_subtitle">You can manage your \nSchedules</string>
+    <string name="add_schedule">Add Schedule</string>
+    <string name="theme">Theme</string>
+    <string name="theme_list_subtitle">include schedule background \nand course item random color</string>
+    <string name="week">Week.%s</string>
+    <string name="config">Config</string>
+    <string name="config_schedule_subtitle">You can configure your \nschedule properties</string>
+    <string name="export">Export</string>
+</resources>
