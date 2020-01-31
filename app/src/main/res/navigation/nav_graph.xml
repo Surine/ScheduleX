@@ -38,6 +38,9 @@
         <action
             android:id="@+id/action_dailyFragment_to_courseInfoFragment"
             app:destination="@id/courseInfoFragment" />
+        <action
+            android:id="@+id/action_dailyFragment_to_aboutFragment"
+            app:destination="@id/aboutFragment" />
     </fragment>
     <fragment
         android:id="@+id/ScheduleListFragment"
@@ -96,4 +99,8 @@
             android:id="@+id/action_scheduleConfigFragment_to_ScheduleListFragment"
             app:destination="@id/ScheduleListFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/aboutFragment"
+        android:name="cn.surine.schedulex.ui.about.AboutFragment"
+        android:label="AboutFragment" />
 </navigation>

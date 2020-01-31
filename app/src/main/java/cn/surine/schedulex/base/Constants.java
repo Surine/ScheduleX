@@ -24,4 +24,10 @@ public class Constants {
 
     public static final String IS_FIRST = "is_first";
     public static final String CUR_SCHEDULE = "cur_schedule";
+
+
+    /**
+     * 常规颜色值
+     */
+    public static final String NORMAL_COLOR = "#536DFE";
 }

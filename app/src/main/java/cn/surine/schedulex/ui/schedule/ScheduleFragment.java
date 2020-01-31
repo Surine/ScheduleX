@@ -97,6 +97,7 @@ public class ScheduleFragment extends BaseBindingFragment<FragmentScheduleBindin
 
         t.funcBtn.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.action_dailyFragment_to_funcFragment));
         t.addCourse.setOnClickListener(v -> Toasts.toast(getResources().getString(R.string.add_course)));
+        t.title.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.action_dailyFragment_to_aboutFragment));
     }
 
     private boolean isAllNull(List<Course> courseList) {

@@ -3,6 +3,8 @@ package cn.surine.schedulex.data.entity;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
+import java.util.List;
+
 /**
  * Intro：
  *
@@ -33,6 +35,21 @@ public class Schedule extends BaseVm {
 
     /**
      * 主颜色
-     * */
+     */
     public String color;
+
+
+    /**
+     * 背景图
+     */
+    public String imageUrl;
+
+
+    public String getTotalWeekStr() {
+        return "Total_" + totalWeek + "_Week";
+    }
+
+    public String getCurWeekStr() {
+        return "Current Week:" + curWeek;
+    }
 }

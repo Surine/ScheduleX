@@ -10,6 +10,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import cn.surine.schedulex.base.Constants;
 import cn.surine.schedulex.base.utils.Strs;
 import cn.surine.schedulex.data.entity.Course;
 import cn.surine.schedulex.data.entity.Schedule;
@@ -40,6 +41,7 @@ public class ScheduleViewModel extends ViewModel {
         schedule.name = name;
         schedule.totalWeek = totalWeek == 0 ? 24 : totalWeek;
         schedule.curWeek = curWeek == 0 ? 1 : curWeek;
+        schedule.color = Constants.NORMAL_COLOR;
         return scheduleRepository.addSchedule(schedule);
     }
 

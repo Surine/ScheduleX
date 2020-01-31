@@ -9,5 +9,10 @@ import cn.surine.schedulex.base.controller.BaseFragment;
  * @date 2020-01-26 18:48
  */
 public interface IBack {
+    /**
+     * 处理返回事件
+     *
+     * @param baseFragment
+     */
     void onBackKeyClick(BaseFragment baseFragment);
 }

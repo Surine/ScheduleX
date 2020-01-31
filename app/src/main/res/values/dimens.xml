@@ -32,4 +32,5 @@
     <dimen name="t18">18sp</dimen>
     <dimen name="t2">2sp</dimen>
     <dimen name="dp220">220dp</dimen>
+    <dimen name="dp4">4dp</dimen>
 </resources>

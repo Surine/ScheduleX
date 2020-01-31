@@ -53,7 +53,7 @@
             app:layout_constraintTop_toBottomOf="@+id/textView16" />
 
         <TextView
-            android:id="@+id/textView3"
+            android:id="@+id/title"
             style="@style/textview_title_style"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -306,7 +306,7 @@
             android:text="@{timer.curWeekStr}"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="@+id/guideline10"
-            app:layout_constraintTop_toBottomOf="@+id/textView3" />
+            app:layout_constraintTop_toBottomOf="@+id/title" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

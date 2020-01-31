@@ -36,4 +36,15 @@
     <string name="theme_list_subtitle">包含课表背景和课程随机颜色</string>
     <string name="week">第%s周</string>
     <string name="config_schedule_subtitle">你可以配置你的课表属性</string>
+    <string name="delete">删除</string>
+    <string name="export">导出</string>
+    <string name="delete_schedule_dialog_msg">确定删除该课表吗？所有的课程信息都会丢失，请您谨慎操作！</string>
+    <string name="btn_cancel">取消</string>
+    <string name="btn_ok">确定</string>
+    <string name="schedule_is_delete">课表已删除！</string>
+    <string name="open_source_license">Jetpack\\nhttp://www.github.com/jetpack         \\nJetpack is a suite of libraries, tools, and guidance to help developers write high-quality apps easier. These components help you follow best practices, free you from writing boilerplate code, and simplify complex tasks, so you can focus on the code you care about.         \\nRoom\\nhttp://www.github.com/room         \\nJetpack comprises the androidx.* package libraries, unbundled from the platform APIs. This means that it offers backward compatibility and is updated more frequently than the Android platform, making sure you always have access to the latest and greatest versions of the Jetpack components.</string>
+    <string name="background">背景图</string>
+    <string name="palette_color">色卡颜色</string>
+    <string name="schedule_name">课表名称</string>
+    <string name="week_info">时间信息</string>
 </resources>

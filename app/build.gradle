@@ -71,5 +71,6 @@ dependencies {
 
     //palette
     implementation "androidx.palette:palette:1.0.0"
+    implementation 'org.jetbrains:annotations:15.0'
 
 }

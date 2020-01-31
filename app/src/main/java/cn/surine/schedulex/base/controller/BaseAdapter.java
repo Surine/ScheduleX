@@ -7,12 +7,17 @@ import androidx.annotation.NonNull;
 import androidx.databinding.ViewDataBinding;
 import androidx.recyclerview.widget.RecyclerView;
 
+import org.jetbrains.annotations.NotNull;
+
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import cn.surine.schedulex.base.utils.Bindings;
 
 /**
  * Intro：
+ * 基于bind的通用RecyclerView适配器
  *
  * @author sunliwei
  * @date 2020-01-15 20:03
@@ -22,14 +27,51 @@ public class BaseAdapter<T> extends RecyclerView.Adapter<ViewHolder> {
     private int layoutId;
     private int bindName;
 
-    private OnItemClickListener onItemClickListener;
 
-    public interface OnItemClickListener{
+    private OnItemClickListener onItemClickListener;
+    private HashMap<Integer, OnItemElementClickListener> itemElementClickListenerHashMap = new HashMap<>();
+
+
+    /**
+     * 用于实现item点击事件的接口
+     */
+    public interface OnItemClickListener {
+
+        /**
+         * 实现此方法用于接受点击事件的响应
+         *
+         * @param position 点击位置
+         */
         void onClick(int position);
+    }
+
+
+    /**
+     * 用于实现item子view点击事件的抽象类
+     */
+    public abstract static class OnItemElementClickListener {
+        public int id;
+
+        public OnItemElementClickListener(int id) {
+            this.id = id;
+        }
+
+        /**
+         * 实现此方法用于接受点击事件的响应
+         *
+         * @param v        被点击view
+         * @param position 点击位置
+         */
+        public abstract void onClick(View v, int position);
     }
 
     public void setOnItemClickListener(OnItemClickListener onItemClickListener) {
         this.onItemClickListener = onItemClickListener;
+    }
+
+
+    public void setOnItemElementClickListener(@NotNull OnItemElementClickListener onItemElementClickListener) {
+        itemElementClickListenerHashMap.put(onItemElementClickListener.id, onItemElementClickListener);
     }
 
     public BaseAdapter(List<T> mDatas, int layoutId, int bindName) {
@@ -60,9 +102,18 @@ public class BaseAdapter<T> extends RecyclerView.Adapter<ViewHolder> {
         //更新绑定
         holder.getBinding().executePendingBindings();
         //item点击
-        if(onItemClickListener != null){
+        if (onItemClickListener != null) {
             holder.itemView.setOnClickListener(v -> onItemClickListener.onClick(position));
         }
+        //item子项点击
+        for (Map.Entry<Integer, OnItemElementClickListener> entry : itemElementClickListenerHashMap.entrySet()) {
+            try {
+                holder.itemView.findViewById(entry.getKey()).setOnClickListener(v -> entry.getValue().onClick(v, position));
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+
     }
 
     @Override
