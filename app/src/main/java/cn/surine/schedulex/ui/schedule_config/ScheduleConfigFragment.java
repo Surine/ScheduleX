@@ -76,6 +76,14 @@ public class ScheduleConfigFragment extends BaseBindingFragment<FragmentSchedule
         });
 
 
+        t.scheduleNameItem.setOnClickListener(v -> Toasts.toast("测试"));
+        t.scheduleWeekInfoItem.setOnClickListener(v -> Toasts.toast("测试"));
+
+        t.scheduleBackgroundItem.setOnClickListener(v -> {
+
+        });
+
+        t.schedulePaletteItem.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.action_scheduleConfigFragment_to_themeListFragment));
 
 
     }

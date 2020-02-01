@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:scrollbars="none"
+    >
+
+    <LinearLayout
+        android:layout_width="20dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            style="@style/slide_bar_tv_style"
+            android:text="@string/_1" />
+
+        <TextView
+            style="@style/slide_bar_tv_style"
+            android:text="@string/_2" />
+
+        <TextView
+            style="@style/slide_bar_tv_style"
+            android:text="@string/_3" />
+
+        <TextView
+            style="@style/slide_bar_tv_style"
+            android:text="@string/_4" />
+
+        <TextView
+            style="@style/slide_bar_tv_style"
+            android:text="@string/_5" />
+
+        <TextView
+            style="@style/slide_bar_tv_style"
+            android:text="@string/_6" />
+
+        <TextView
+            style="@style/slide_bar_tv_style"
+            android:text="@string/_7" />
+
+        <TextView
+            style="@style/slide_bar_tv_style"
+            android:text="@string/_8" />
+    </LinearLayout>
+</ScrollView>

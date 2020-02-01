@@ -98,9 +98,16 @@
         <action
             android:id="@+id/action_scheduleConfigFragment_to_ScheduleListFragment"
             app:destination="@id/ScheduleListFragment" />
+        <action
+            android:id="@+id/action_scheduleConfigFragment_to_themeListFragment"
+            app:destination="@id/themeListFragment" />
     </fragment>
     <fragment
         android:id="@+id/aboutFragment"
         android:name="cn.surine.schedulex.ui.about.AboutFragment"
         android:label="AboutFragment" />
+    <fragment
+        android:id="@+id/themeListFragment"
+        android:name="cn.surine.schedulex.ui.theme.ThemeListFragment"
+        android:label="ThemeListFragment" />
 </navigation>

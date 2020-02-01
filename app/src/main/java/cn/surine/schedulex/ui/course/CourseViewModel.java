@@ -4,8 +4,11 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Random;
 
+import cn.surine.schedulex.base.Constants;
 import cn.surine.schedulex.base.http.BaseHttpSubscriber;
 import cn.surine.schedulex.data.entity.Course;
 import cn.surine.schedulex.data.entity.CourseList;
@@ -28,6 +31,9 @@ public class CourseViewModel extends ViewModel {
 
     public MutableLiveData<Integer> totalWeek = new MutableLiveData<>();
     public MutableLiveData<Integer> nowWeek = new MutableLiveData<>();
+
+
+    private HashMap<String,String> colorHashMap = new HashMap<>();
 
     public CourseViewModel(CourseRepository courseRepository) {
         this.mCourseRepository = courseRepository;
@@ -78,6 +84,12 @@ public class CourseViewModel extends ViewModel {
                 if (vm.getValue().courseList != null) {
                     for (Course course : vm.getValue().courseList) {
                         course.belongsToWeek = totalWeek;  //对所属周赋值
+                        if(colorHashMap.containsKey(course.coureNumber)){
+                            course.color = colorHashMap.get(course.coureNumber);
+                        }else{
+                            course.color = Constants.COLOR_1[new Random(System.currentTimeMillis()).nextInt(10)];
+                            colorHashMap.put(course.coureNumber,course.color);
+                        }
                         mCourseList.add(course);
                     }
                 }
@@ -87,6 +99,7 @@ public class CourseViewModel extends ViewModel {
                     getWeekCourseByNet(totalWeek - 1);
                 } else {
                     getCourseStatus.setValue(SUCCESS);
+                    colorHashMap.clear();
                 }
             }
 
@@ -94,6 +107,7 @@ public class CourseViewModel extends ViewModel {
             public void onFail(Throwable t) {
                 super.onFail(t);
                 getCourseStatus.setValue(FAIL);
+                colorHashMap.clear();
             }
         });
     }
@@ -105,9 +119,6 @@ public class CourseViewModel extends ViewModel {
     }
 
 
-    public Course getCourseByDb(int id) {
-        return mCourseRepository.getCourseByDb(id);
-    }
 
 
     public List<Course> queryCourseByWeek(int week, int scheduleId) {

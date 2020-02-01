@@ -30,4 +30,16 @@ public class Constants {
      * 常规颜色值
      */
     public static final String NORMAL_COLOR = "#536DFE";
+    public static final String[] COLOR_1 = new String[]{
+            "#FF5252",
+            "#FF4081",
+            "#E040FB",
+            "##536DFE",
+            "#7C4DFF",
+            "#40C4FF",
+            "#18FFFF",
+            "#B2FF59",
+            "#FFFF00",
+            "#FF6E40",
+    };
 }

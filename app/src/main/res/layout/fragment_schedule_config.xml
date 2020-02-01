@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="data"
             type="cn.surine.schedulex.data.entity.Schedule" />
@@ -12,11 +13,12 @@
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:clipToPadding="true"
             android:background="@android:color/white"
+            android:clipToPadding="true"
             tools:context=".ui.schedule_list.ScheduleListFragment">
 
             <androidx.constraintlayout.widget.Guideline
@@ -24,7 +26,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                app:layout_constraintGuide_percent="0.05109489" />
+                app:layout_constraintGuide_percent="0.05" />
 
             <androidx.constraintlayout.widget.Guideline
                 android:id="@+id/guideline22"
@@ -53,13 +55,6 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 app:layout_constraintGuide_percent="0.34" />
-
-            <androidx.constraintlayout.widget.Guideline
-                android:id="@+id/guideline35"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                app:layout_constraintGuide_percent="0.95" />
 
             <TextView
                 android:id="@+id/textView17"
@@ -116,55 +111,83 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
+                android:paddingTop="@dimen/dp8"
+                android:paddingBottom="@dimen/dp8"
                 android:background="@drawable/config_card_background"
+                android:orientation="vertical"
                 app:layout_constraintEnd_toStartOf="@+id/guideline22"
                 app:layout_constraintStart_toStartOf="@+id/guideline21"
                 app:layout_constraintTop_toTopOf="@+id/guideline29">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginTop="@dimen/dp25"
-                    android:layout_marginBottom="@dimen/dp25">
-
+                    style="@style/setting_item_ui"
+                    android:id="@+id/scheduleNameItem"
+                    >
                     <TextView
                         android:id="@+id/textView33"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="16dp"
+                        android:layout_marginStart="@dimen/dp8"
+                        android:layout_marginTop="@dimen/dp8"
                         android:text="@string/schedule_name"
                         android:textColor="@android:color/black"
                         android:textSize="@dimen/t18"
                         android:textStyle="bold"
+                        app:layout_constraintBottom_toTopOf="@id/textView34"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
+
 
                     <TextView
                         android:id="@+id/textView34"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
+                        android:layout_marginTop="@dimen/dp8"
                         android:text="@{data.name}"
+                        android:layout_marginBottom="@dimen/dp16"
+                        app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toStartOf="@+id/textView33"
                         app:layout_constraintTop_toBottomOf="@+id/textView33" />
+
+                    <ImageView
+                        android:id="@+id/imageView10"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="16dp"
+                        app:layout_constraintBottom_toBottomOf="@+id/textView34"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="@+id/textView33"
+                        app:srcCompat="@drawable/ic_person_black_24dp" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    style="@style/setting_item_ui"
+                    android:id="@+id/scheduleWeekInfoItem"
+                    >
 
                     <TextView
                         android:id="@+id/textView35"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="44dp"
+                        android:layout_marginStart="@dimen/dp8"
+                        android:layout_marginTop="@dimen/dp8"
                         android:text="@string/week_info"
                         android:textColor="@android:color/black"
                         android:textSize="18sp"
                         android:textStyle="bold"
-                        app:layout_constraintStart_toStartOf="@+id/textView34"
-                        app:layout_constraintTop_toBottomOf="@+id/textView34" />
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        />
+
 
                     <TextView
                         android:id="@+id/textView36"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
+                        android:layout_marginTop="@dimen/dp8"
+                        android:layout_marginBottom="@dimen/dp16"
+                        app:layout_constraintBottom_toBottomOf="parent"
                         android:text="@{data.getTotalWeekStr() +' '+ data.getCurWeekStr()}"
                         app:layout_constraintStart_toStartOf="@+id/textView35"
                         app:layout_constraintTop_toBottomOf="@+id/textView35" />
@@ -174,103 +197,120 @@
                         android:layout_width="20dp"
                         android:layout_height="20dp"
                         android:layout_marginEnd="16dp"
-                        app:layout_constraintBottom_toBottomOf="@+id/textView34"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="@+id/textView33"
-                        app:srcCompat="@mipmap/ic_more" />
-
-                    <ImageView
-                        android:id="@+id/imageView10"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginEnd="16dp"
                         app:layout_constraintBottom_toBottomOf="@+id/textView36"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toTopOf="@+id/textView35"
-                        app:srcCompat="@drawable/ic_person_black_24dp" />
+                        app:srcCompat="@mipmap/ic_more" />
+
+
                 </androidx.constraintlayout.widget.ConstraintLayout>
+
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="0dp"
-                android:layout_height="200dp"
-                android:layout_marginTop="16dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp16"
                 android:background="@drawable/config_card_background"
+                android:visibility="visible"
+                android:orientation="vertical"
+                android:paddingTop="@dimen/dp8"
+                android:paddingBottom="@dimen/dp8"
                 app:layout_constraintEnd_toEndOf="@+id/linearLayout4"
                 app:layout_constraintStart_toStartOf="@+id/linearLayout4"
                 app:layout_constraintTop_toBottomOf="@+id/linearLayout4">
 
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginTop="@dimen/dp25"
-                    android:layout_marginBottom="@dimen/dp25">
 
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    style="@style/setting_item_ui"
+                    android:id="@+id/scheduleBackgroundItem"
+                    >
                     <TextView
                         android:id="@+id/textView37"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="16dp"
+                        android:layout_marginStart="@dimen/dp8"
+                        android:layout_marginTop="@dimen/dp8"
                         android:text="@string/background"
                         android:textColor="@android:color/black"
                         android:textSize="18sp"
                         android:textStyle="bold"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        />
+
 
                     <TextView
                         android:id="@+id/textView38"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
-                        android:text="Lonely 紫忧"
+                        android:layout_marginTop="@dimen/dp8"
+                        android:layout_marginBottom="@dimen/dp16"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        android:text="紫忧"
                         app:layout_constraintStart_toStartOf="@+id/textView37"
                         app:layout_constraintTop_toBottomOf="@+id/textView37" />
 
+                    <ImageView
+                        android:id="@+id/background_pic"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:layout_marginEnd="16dp"
+                        app:layout_constraintBottom_toBottomOf="@+id/textView38"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="@+id/textView37"
+                        app:srcCompat="@mipmap/test_bg"
+                        android:scaleType="centerCrop"
+                        />
+
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    style="@style/setting_item_ui"
+                    android:id="@+id/schedulePaletteItem"
+                    >
                     <TextView
-                        android:id="@+id/textView39"
+                        android:id="@+id/paletteColor"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="44dp"
+                        android:layout_marginStart="@dimen/dp8"
+                        android:layout_marginTop="@dimen/dp8"
                         android:text="@string/palette_color"
                         android:textColor="@android:color/black"
                         android:textSize="18sp"
                         android:textStyle="bold"
-                        app:layout_constraintStart_toStartOf="@+id/textView38"
-                        app:layout_constraintTop_toBottomOf="@+id/textView38" />
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        />
+
 
                     <TextView
-                        android:id="@+id/textView40"
+                        android:id="@+id/paletteColorSubTitle"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
-                        android:text="Lonely 紫忧"
+                        android:layout_marginTop="@dimen/dp8"
+                        android:layout_marginBottom="@dimen/dp16"
                         app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintStart_toStartOf="@+id/textView39"
-                        app:layout_constraintTop_toBottomOf="@+id/textView39" />
-
-                    <ImageView
-                        android:id="@+id/imageView11"
-                        android:layout_width="20dp"
-                        android:layout_height="20dp"
-                        android:layout_marginEnd="16dp"
-                        android:scaleType="centerCrop"
-                        app:layout_constraintBottom_toBottomOf="@+id/textView38"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="@+id/textView37"
-                        app:srcCompat="@mipmap/test_bg" />
+                        android:text="紫忧"
+                        app:layout_constraintStart_toStartOf="@+id/paletteColor"
+                        app:layout_constraintTop_toBottomOf="@+id/paletteColor" />
 
                     <ImageView
                         android:id="@+id/imageView12"
                         android:layout_width="20dp"
                         android:layout_height="20dp"
                         android:layout_marginEnd="16dp"
-                        app:schedulePaletteColorUi="@{data.color}"
-                        app:layout_constraintBottom_toBottomOf="@+id/textView40"
+                        app:layout_constraintBottom_toBottomOf="@+id/paletteColorSubTitle"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="@+id/textView39"
-                        />
+                        app:layout_constraintTop_toTopOf="@+id/paletteColor"
+                        app:schedulePaletteColorUi="@{data.color}"/>
+
                 </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
             </LinearLayout>
 
         </androidx.constraintlayout.widget.ConstraintLayout>

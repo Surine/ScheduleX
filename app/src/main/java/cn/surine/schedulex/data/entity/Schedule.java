@@ -3,7 +3,7 @@ package cn.surine.schedulex.data.entity;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
-import java.util.List;
+import cn.surine.schedulex.base.utils.Dates;
 
 /**
  * Intro：
@@ -27,10 +27,11 @@ public class Schedule extends BaseVm {
      */
     public int totalWeek;
 
+
     /**
-     * 当前周
+     * 开学时间
      */
-    public int curWeek = 1;
+    public String termStartDate;
 
 
     /**
@@ -50,6 +51,11 @@ public class Schedule extends BaseVm {
     }
 
     public String getCurWeekStr() {
-        return "Current Week:" + curWeek;
+        return "Current Week:" +curWeek();
+    }
+
+
+    public int curWeek(){
+        return (Dates.getDateDif(Dates.getDate(Dates.yyyyMMdd),termStartDate) / 7) + 1;
     }
 }

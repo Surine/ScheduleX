@@ -38,4 +38,23 @@
         <item name="android:layout_height">@dimen/dp65</item>
     </style>
 
+    <style name="setting_item_ui">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginStart">@dimen/dp8</item>
+        <item name="android:layout_marginEnd">@dimen/dp8</item>
+        <item name="android:layout_marginTop">@dimen/dp8</item>
+        <item name="android:layout_marginBottom">@dimen/dp8</item>
+        <item name="android:background">?selectableItemBackground</item>
+    </style>
+
+
+    <style name="slide_bar_tv_style">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">@dimen/course_item_width</item>
+        <item name="android:gravity">center</item>
+        <item name="android:layout_marginTop">@dimen/dp1</item>
+        <item name="android:layout_marginBottom">@dimen/dp1</item>
+    </style>
+
 </resources>

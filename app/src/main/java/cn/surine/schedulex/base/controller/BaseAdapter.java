@@ -80,6 +80,12 @@ public class BaseAdapter<T> extends RecyclerView.Adapter<ViewHolder> {
         this.bindName = bindName;
     }
 
+    private boolean banRecycle;
+
+    public void setBanRecycle(boolean banRecycle) {
+        this.banRecycle = banRecycle;
+    }
+
     @Override
     public int getItemViewType(int position) {
         return super.getItemViewType(position);
@@ -92,6 +98,9 @@ public class BaseAdapter<T> extends RecyclerView.Adapter<ViewHolder> {
         //设置绑定
         ViewHolder viewHolder = new ViewHolder((viewDataBinding = Bindings.bind(parent, layoutId)).getRoot());
         viewHolder.setBinding(viewDataBinding);
+        if(banRecycle){
+            viewHolder.setIsRecyclable(false);
+        }
         return viewHolder;
     }
 

@@ -1,6 +1,7 @@
 package cn.surine.schedulex.ui.schedule;
 
 import android.annotation.SuppressLint;
+import android.text.TextUtils;
 
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
@@ -9,8 +10,10 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 
 import cn.surine.schedulex.base.Constants;
+import cn.surine.schedulex.base.utils.Dates;
 import cn.surine.schedulex.base.utils.Strs;
 import cn.surine.schedulex.data.entity.Course;
 import cn.surine.schedulex.data.entity.Schedule;
@@ -25,13 +28,6 @@ public class ScheduleViewModel extends ViewModel {
         this.scheduleRepository = scheduleRepository;
     }
 
-    public MutableLiveData<List<Course>> getCourseList() {
-        if (courseList == null) {
-            courseList = new MutableLiveData<>();
-        }
-        return courseList;
-    }
-
 
     /**
      * 添加课表
@@ -40,8 +36,8 @@ public class ScheduleViewModel extends ViewModel {
         Schedule schedule = new Schedule();
         schedule.name = name;
         schedule.totalWeek = totalWeek == 0 ? 24 : totalWeek;
-        schedule.curWeek = curWeek == 0 ? 1 : curWeek;
-        schedule.color = Constants.NORMAL_COLOR;
+        schedule.color = Constants.COLOR_1[new Random(System.currentTimeMillis()).nextInt(10)];
+        schedule.termStartDate = Dates.getTermStartDate(curWeek == 0 ? 1 : curWeek);
         return scheduleRepository.addSchedule(schedule);
     }
 
@@ -87,17 +83,25 @@ public class ScheduleViewModel extends ViewModel {
             //处理每周数据
             for (int j = 0; j < unHandleData.get(i).size(); j++) {
                 Course course = unHandleData.get(i).get(j);
+                if(TextUtils.isEmpty(course.classDay)){
+                    continue;
+                }
                 if (!(Strs.equals(course.classDay, "6") || Strs.equals(course.classDay, "7"))) {
                     //持续2节的添加1个空格，持续4节的添加2个空格
                     if (Integer.parseInt(course.continuingSession) == 4) {
-                        handleData.set(Integer.parseInt(course.classSessions) * 5 + (Integer.parseInt(course.classDay) - 1), course);
+                        handleData.set(divide(course.classSessions) * 5 + (Integer.parseInt(course.classDay) - 1), course);
                     }
-                    handleData.set((Integer.parseInt(course.classSessions) - 1) * 5 + (Integer.parseInt(course.classDay) - 1), course);
+                    handleData.set((divide(course.classSessions) - 1) * 5 + (Integer.parseInt(course.classDay) - 1), course);
                 }
             }
             cl.add(handleData);
         }
         return cl;
+    }
+
+    //按照tust课时操作来实现
+    private int divide(String classSessions) {
+        return (Integer.parseInt(classSessions) + 1) /2;
     }
 
     public List<Schedule> getSchedules() {

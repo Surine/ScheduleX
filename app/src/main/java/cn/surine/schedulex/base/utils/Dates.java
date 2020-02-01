@@ -2,6 +2,7 @@ package cn.surine.schedulex.base.utils;
 
 import android.annotation.SuppressLint;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -13,6 +14,8 @@ import java.util.Date;
  * @date 2020-01-22 16:39
  */
 public class Dates {
+
+    public static final String yyyyMMdd = "yyyy-MM-dd";
 
     /**
      * 获取今天星期几的数字
@@ -70,7 +73,73 @@ public class Dates {
         return simpleDateFormat.format(date);
     }
 
+
+
+    /**
+     * 根据字符串获取日期
+     * @param dateStr 字符串
+     * @param format 格式
+     * */
+    public static Date getDate(String dateStr,String format){
+        @SuppressLint("SimpleDateFormat") SimpleDateFormat simpleDateFormat = new SimpleDateFormat(format);
+        try {
+            return simpleDateFormat.parse(dateStr);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+
+
+    /**
+     * 获取开学日期
+     */
+    public static String getTermStartDate(int curWeek) {
+        int day = (curWeek - 1) * 7;
+        Calendar now = Calendar.getInstance();
+        now.setTime(new Date());
+        now.set(Calendar.DATE, now.get(Calendar.DATE) - day);
+        return getMondayByDate(now.getTime());
+    }
+
+
+    /**
+     * 获取某周的周一
+     */
+    public static String getMondayByDate(Date date) {
+        SimpleDateFormat sdf = new SimpleDateFormat(yyyyMMdd);
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(date);
+        int dayWeek = cal.get(Calendar.DAY_OF_WEEK);
+        if (1 == dayWeek) {
+            cal.add(Calendar.DAY_OF_MONTH, -1);
+        }
+        cal.setFirstDayOfWeek(Calendar.MONDAY);
+        int day = cal.get(Calendar.DAY_OF_WEEK);
+        cal.add(Calendar.DATE, cal.getFirstDayOfWeek() - day);
+        String s = sdf.format(cal.getTime());
+        return s;
+    }
+
+
+
+    /**
+     * 获取两个日期相差的天数
+     * @param date1
+     * @param date2
+     * */
+    public static int getDateDif(String date1,String date2){
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(getDate(date1,yyyyMMdd));
+        long time1 = cal.getTimeInMillis();
+        cal.setTime(getDate(date2,yyyyMMdd));
+        long time2 = cal.getTimeInMillis();
+        return (int) Math.abs((time1 - time2)/(1000*3600*24));
+    }
+
+
     public static void main(String[] args) {
-        System.out.println(getDate("MM"));
+        System.out.println(getDateDif("2020-1-20","2020-1-25"));
     }
 }

@@ -15,6 +15,7 @@ public class Course extends BaseVm {
 
     @PrimaryKey(autoGenerate = true)
     public int roomId;
+    public String coureNumber;
 
     //name （傻逼jw后端单词都不会拼）
     public String coureName = "";
@@ -45,6 +46,9 @@ public class Course extends BaseVm {
 
     //属于那一周
     public int belongsToWeek;
+
+    //色值
+    public String color;
 
 
     public Course(int roomId, String coureName, String teacherName, String classWeek, String classDay, String classSessions, String continuingSession, String weekDescription, String campusName, String teachingBuildingName, String classroomName, String coursePropertiesName, String xf, long scheduleId, int belongsToWeek) {

@@ -1,7 +1,5 @@
 package cn.surine.schedulex.data.entity;
 
-import java.util.List;
-
 /**
  * Intro：
  * UI主题
@@ -9,7 +7,7 @@ import java.util.List;
  * @author sunliwei
  * @date 2020-01-28 11:34
  */
-public class PaletteColor extends BaseVm {
+public class Theme extends BaseVm {
 
     /**
      * id
@@ -22,5 +20,11 @@ public class PaletteColor extends BaseVm {
     /**
      * 颜色值
      */
-    public List<String> colorList;
+    public String c1;
+    public String c2;
+    public String c3;
+    public String c4;
+    public String c5;
+    public String c6;
+    public String c7;
 }

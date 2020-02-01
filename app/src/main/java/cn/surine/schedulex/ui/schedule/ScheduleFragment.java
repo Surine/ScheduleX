@@ -1,6 +1,7 @@
 package cn.surine.schedulex.ui.schedule;
 
 import android.annotation.SuppressLint;
+import android.view.MotionEvent;
 import android.view.View;
 
 import androidx.lifecycle.ViewModelProviders;
@@ -42,6 +43,7 @@ public class ScheduleFragment extends BaseBindingFragment<FragmentScheduleBindin
     }
 
 
+    @SuppressLint("StringFormatMatches")
     @Override
     protected void onInit(FragmentScheduleBinding t) {
 
@@ -68,17 +70,23 @@ public class ScheduleFragment extends BaseBindingFragment<FragmentScheduleBindin
         }
 
         //当前周
-        int currentWeek = curSchedule.curWeek == 0 ? 1 : curSchedule.curWeek;
+        int currentWeek = curSchedule.curWeek();
         List<List<Course>> unHandleCourseList = new ArrayList<>();
         for (int i = 0; i < curSchedule.totalWeek; i++) {
             unHandleCourseList.add(courseViewModel.queryCourseByWeek(i + 1,curSchedule.roomId));
         }
         List<List<Course>> cl = scheduleViewModel.getAllCourseUiData(unHandleCourseList, curSchedule);
-        t.viewpager.setCurrentItem(currentWeek - 1);
         ScheduleViewpagerAdapter scheduleViewpagerAdapter = new ScheduleViewpagerAdapter(cl, ScheduleFragment.this);
+        scheduleViewpagerAdapter.setOnScrollBindListener(position -> t.scheduleSlideBar.scrollBy(0,position));
+        t.scheduleSlideBar.setOnTouchListener((v, event) -> true);
+
         t.viewpager.setAdapter(scheduleViewpagerAdapter);
         t.viewpager.setOffscreenPageLimit(1);
         t.viewpager.setOrientation(ViewPager2.ORIENTATION_HORIZONTAL);
+        t.viewpager.setCurrentItem(currentWeek - 1,true);
+        timerViewModel.curWeekStr.setValue("😁😁😁 "+getString(R.string.week,currentWeek));
+
+
         if(isAllNull(cl.get(0))){
 //            t.emptyView.setVisibility(View.VISIBLE);
         }
@@ -87,6 +95,7 @@ public class ScheduleFragment extends BaseBindingFragment<FragmentScheduleBindin
             @Override
             public void onPageSelected(int position) {
                 timerViewModel.curWeekStr.setValue("😁😁😁 "+getString(R.string.week,(position + 1)));
+                t.scheduleSlideBar.scrollBy(0,0);
                 if(isAllNull(cl.get(position))){
 //                    t.emptyView.setVisibility(View.VISIBLE);
                 }else{

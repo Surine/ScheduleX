@@ -2,13 +2,16 @@ package cn.surine.schedulex.ui.schedule;
 
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
+import android.os.Build;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -39,6 +42,18 @@ public class ScheduleViewpagerAdapter extends RecyclerView.Adapter<ScheduleViewp
         this.baseFragment = baseFragment;
     }
 
+
+    public interface OnScrollBindListener{
+        void onScroll(int position);
+    }
+
+
+    private OnScrollBindListener onScrollBindListener;
+
+    public void setOnScrollBindListener(OnScrollBindListener onScrollBindListener) {
+        this.onScrollBindListener = onScrollBindListener;
+    }
+
     @NonNull
     @Override
     public ViewPagerViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -51,8 +66,12 @@ public class ScheduleViewpagerAdapter extends RecyclerView.Adapter<ScheduleViewp
     public void onBindViewHolder(@NonNull ViewPagerViewHolder holder, int position) {
         //课程表
         BaseAdapter<Course> adapter = new BaseAdapter<>(courseList.get(position), R.layout.item_course_view, cn.surine.schedulex.BR.course);
+        adapter.setBanRecycle(true);
         holder.recyclerView.setLayoutManager(new GridLayoutManager(baseFragment.activity(), 5));
         holder.recyclerView.setAdapter(adapter);
+        holder.recyclerView.scrollTo(0,0);
+        //设置滚动监听器
+        setScrollerListener(holder.recyclerView);
 
         adapter.setOnItemClickListener(courseDataPosition -> {
             Course course = courseList.get(position).get(courseDataPosition);
@@ -71,12 +90,25 @@ public class ScheduleViewpagerAdapter extends RecyclerView.Adapter<ScheduleViewp
             courseName.setText(course.coureName);
             coursePosition.setText(course.teachingBuildingName + course.classroomName);
             courseClassDay.setText("周"+course.classDay);
-            courseSession.setText(course.classSessions + "-" + (Integer.parseInt(course.continuingSession) + Integer.parseInt(course.classSessions)) + "节");
+            courseSession.setText(course.classSessions + "-" + (Integer.parseInt(course.continuingSession) + Integer.parseInt(course.classSessions) - 1) + "节");
             courseTeacher.setText(course.teacherName == null ? App.context.getResources().getString(R.string.unknown_teacher):course.teacherName);
             courseScore.setText(course.xf+"分");
             edit.setOnClickListener(v -> Toasts.toast("编辑"));
             builder.setView(view);
             builder.show();
+        });
+    }
+
+    private void setScrollerListener(RecyclerView recyclerView) {
+        recyclerView.setOnScrollListener(new RecyclerView.OnScrollListener() {
+
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+                if(onScrollBindListener != null){
+                    onScrollBindListener.onScroll(dy);
+                }
+            }
         });
     }
 

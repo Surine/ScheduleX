@@ -18,7 +18,6 @@ import cn.surine.schedulex.base.controller.BaseBindingFragment;
 import cn.surine.schedulex.base.utils.InstanceFactory;
 import cn.surine.schedulex.base.utils.Navigations;
 import cn.surine.schedulex.base.utils.Prefs;
-import cn.surine.schedulex.base.utils.Toasts;
 import cn.surine.schedulex.data.entity.Schedule;
 import cn.surine.schedulex.databinding.FragmentScheduleListBinding;
 import cn.surine.schedulex.ui.schedule.ScheduleRepository;

@@ -10,7 +10,6 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import cn.surine.schedulex.R;
 import cn.surine.schedulex.base.Constants;
 
 /**
@@ -56,19 +55,19 @@ public class BindingAdapters {
             color = Constants.NORMAL_COLOR;
         }
         int[] gradientColor = new int[]{Color.parseColor(color), Color.parseColor("#BEF5F2F2")};
-        linearLayout.setBackground(Drawables.getDrawable(GradientDrawable.Orientation.LEFT_RIGHT, gradientColor,20, 0, Color.parseColor(color)));
+        linearLayout.setBackground(Drawables.getDrawable(GradientDrawable.Orientation.LEFT_RIGHT, gradientColor, 20, 0, Color.parseColor(color)));
     }
 
 
     /**
      * 控制当前选中课表的一些元素显示与隐藏
-     * */
+     */
     @androidx.databinding.BindingAdapter("ctrlScheduleCardHelperElement")
-    public static void ctrlScheduleCardHelperElement(ImageView imageView,int id){
-        long curScheduleId =  Prefs.getLong(Constants.CUR_SCHEDULE,-1L);
-        if(id == curScheduleId){
+    public static void ctrlScheduleCardHelperElement(ImageView imageView, int id) {
+        long curScheduleId = Prefs.getLong(Constants.CUR_SCHEDULE, -1L);
+        if (id == curScheduleId) {
             imageView.setVisibility(View.VISIBLE);
-        }else{
+        } else {
             imageView.setVisibility(View.GONE);
         }
     }
@@ -76,12 +75,23 @@ public class BindingAdapters {
 
     /**
      * 课表配置页面色板的颜色显示
-     * */
+     */
     @androidx.databinding.BindingAdapter("schedulePaletteColorUi")
-    public static void schedulePaletteColorUi(ImageView imageView,String color){
+    public static void schedulePaletteColorUi(ImageView imageView, String color) {
         if (color == null || TextUtils.isEmpty(color)) {
             color = Constants.NORMAL_COLOR;
         }
-        imageView.setBackground(Drawables.getDrawable(Color.parseColor(color),180,0,Color.parseColor(color)));
+        imageView.setBackground(Drawables.getDrawable(Color.parseColor(color), 180, 0, Color.parseColor(color)));
+    }
+
+
+    /**
+     * 给课程添加背景
+     */
+    @androidx.databinding.BindingAdapter("courseItemCardBackground")
+    public static void courseItemCardBackground(LinearLayout linearLayout, String color) {
+        if (color != null && !TextUtils.isEmpty(color)) {
+            linearLayout.setBackground(Drawables.getDrawable(Color.parseColor(color), 20, 5, Color.WHITE));
+        }
     }
 }
