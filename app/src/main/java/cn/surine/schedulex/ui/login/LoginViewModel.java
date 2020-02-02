@@ -1,6 +1,7 @@
 package cn.surine.schedulex.ui.login;
 
 import android.text.Editable;
+import android.text.TextUtils;
 import android.text.TextWatcher;
 
 import androidx.lifecycle.MutableLiveData;
@@ -10,6 +11,7 @@ import cn.surine.schedulex.base.Constants;
 import cn.surine.schedulex.base.http.BaseHttpSubscriber;
 import cn.surine.schedulex.base.utils.SimpleTextWatcher;
 import cn.surine.schedulex.base.utils.Strs;
+import cn.surine.schedulex.base.utils.Toasts;
 import cn.surine.schedulex.data.entity.VmResultString;
 
 public class LoginViewModel extends ViewModel {
@@ -52,6 +54,9 @@ public class LoginViewModel extends ViewModel {
      * 登录操作
      */
     public void login() {
+        if(TextUtils.isEmpty(account.getValue()) || TextUtils.isEmpty(password.getValue())){
+            return;
+        }
         loginStatus.setValue(START_LOGIN);
         mLoginRepository.login(account.getValue(), password.getValue()).subscribe(new BaseHttpSubscriber<VmResultString>() {
             @Override

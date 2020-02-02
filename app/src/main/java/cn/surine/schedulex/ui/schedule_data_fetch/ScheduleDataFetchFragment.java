@@ -5,10 +5,12 @@ import android.os.Bundle;
 import androidx.lifecycle.ViewModelProviders;
 
 import cn.surine.schedulex.R;
+import cn.surine.schedulex.base.Constants;
 import cn.surine.schedulex.base.controller.BaseBindingFragment;
 import cn.surine.schedulex.base.utils.InstanceFactory;
 import cn.surine.schedulex.base.utils.Navigations;
 import cn.surine.schedulex.base.utils.Objs;
+import cn.surine.schedulex.base.utils.Prefs;
 import cn.surine.schedulex.base.utils.Toasts;
 import cn.surine.schedulex.databinding.FragmentDataFetchBinding;
 import cn.surine.schedulex.ui.schedule.ScheduleRepository;
@@ -51,7 +53,7 @@ public class ScheduleDataFetchFragment extends BaseBindingFragment<FragmentDataF
         t.scanQrCode.setOnClickListener(v -> Toasts.toast("qr"));
         t.other.setOnClickListener(v -> Toasts.toast("other"));
         t.skip.setOnClickListener(v -> {
-            scheduleViewModel.addSchedule(scheduleName, 24, 1);
+            Prefs.save(Constants.CUR_SCHEDULE,scheduleViewModel.addSchedule(scheduleName, 24, 1));
             Navigations.open(ScheduleDataFetchFragment.this, R.id.action_dataFetchFragment_to_dailyFragment);
         });
     }

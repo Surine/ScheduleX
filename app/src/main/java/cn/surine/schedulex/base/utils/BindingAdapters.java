@@ -54,8 +54,12 @@ public class BindingAdapters {
         if (color == null || TextUtils.isEmpty(color)) {
             color = Constants.NORMAL_COLOR;
         }
-        int[] gradientColor = new int[]{Color.parseColor(color), Color.parseColor("#BEF5F2F2")};
-        linearLayout.setBackground(Drawables.getDrawable(GradientDrawable.Orientation.LEFT_RIGHT, gradientColor, 20, 0, Color.parseColor(color)));
+        try {
+            int[] gradientColor = new int[]{Color.parseColor(color), Color.parseColor("#BEF5F2F2")};
+            linearLayout.setBackground(Drawables.getDrawable(GradientDrawable.Orientation.LEFT_RIGHT, gradientColor, 20, 0, Color.parseColor(color)));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
 

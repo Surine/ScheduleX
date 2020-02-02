@@ -141,25 +141,10 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/dp8"
                         android:text="@{data.name}"
-                        app:layout_constraintBottom_toTopOf="@id/schedule_name_input"
+                        app:layout_constraintBottom_toBottomOf="parent"
                         android:layout_marginBottom="@dimen/dp16"
                         app:layout_constraintStart_toStartOf="@+id/textView33"
                         app:layout_constraintTop_toBottomOf="@+id/textView33" />
-
-
-                    <EditText
-                        style="@style/edit_text_style"
-                        android:layout_width="0dp"
-                        android:id="@+id/schedule_name_input"
-                        android:paddingStart="@dimen/dp16"
-                        android:layout_height="@dimen/dp40"
-                        android:visibility="gone"
-                        android:layout_marginTop="@dimen/dp8"
-                        android:layout_marginBottom="@dimen/dp16"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="@+id/imageView10"
-                        app:layout_constraintStart_toStartOf="@+id/textView33"
-                        app:layout_constraintTop_toBottomOf="@id/textView34" />
 
                     <ImageView
                         android:id="@+id/imageView10"
@@ -259,7 +244,7 @@
                         android:layout_marginTop="@dimen/dp8"
                         android:layout_marginBottom="@dimen/dp16"
                         app:layout_constraintBottom_toBottomOf="parent"
-                        android:text="紫忧"
+                        android:text="@string/choose_schedule_background"
                         app:layout_constraintStart_toStartOf="@+id/textView37"
                         app:layout_constraintTop_toBottomOf="@+id/textView37" />
 

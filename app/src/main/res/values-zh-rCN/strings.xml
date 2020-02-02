@@ -62,4 +62,9 @@
     <string name="course_name">课表名</string>
     <string name="course_name_subtitle">Please enter the class name</string>
     <string name="position">上课地点</string>
+    <string name="permission_is_denied">权限被禁止！</string>
+    <string name="unsupport">不支持当前格式</string>
+    <string name="update_success">更新成功！</string>
+    <string name="pic_choose_fail">图片选择失败</string>
+    <string name="choose_schedule_background">选择课表背景图</string>
 </resources>

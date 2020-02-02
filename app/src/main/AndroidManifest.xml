@@ -3,6 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="cn.surine.schedulex">
     <uses-permission android:name="android.permission.INTERNET"/>
+    <!--读取SD卡的权限:打开相册选取图片所必须的权限-->
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <application
         android:allowBackup="false"
         android:icon="@mipmap/ic_launcher"

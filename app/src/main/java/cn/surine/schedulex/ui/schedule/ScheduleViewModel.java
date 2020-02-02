@@ -110,4 +110,11 @@ public class ScheduleViewModel extends ViewModel {
 
 
 
+    /**
+     * 更新课表
+     * @param schedule 课表
+     * */
+    public void updateSchedule(Schedule schedule) {
+        scheduleRepository.updateSchedule(schedule);
+    }
 }

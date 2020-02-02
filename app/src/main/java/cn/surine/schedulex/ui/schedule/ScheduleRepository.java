@@ -56,4 +56,13 @@ public class ScheduleRepository extends BaseRepository {
     public List<Schedule> getSchedules() {
         return appDatabase.scheduleDao().getAll();
     }
+
+
+    /**
+     * 更新课表
+     * @param schedule 课表
+     */
+    public void updateSchedule(Schedule schedule) {
+        appDatabase.scheduleDao().update(schedule);
+    }
 }

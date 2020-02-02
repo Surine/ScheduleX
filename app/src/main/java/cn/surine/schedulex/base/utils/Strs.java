@@ -38,4 +38,12 @@ public class Strs {
        return false;
     }
 
+
+    public static boolean equalsIgnoreCase(String str1,String str2){
+        if(str1 != null){
+            return str1.equalsIgnoreCase(str2);
+        }
+        return false;
+    }
+
 }
