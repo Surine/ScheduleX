@@ -35,7 +35,7 @@
     <string name="theme">Theme</string>
     <string name="theme_list_subtitle">include schedule background \nand course item random color</string>
     <string name="week">Week.%s</string>
-    <string name="config">Config</string>
+    <string name="config" translatable="false">Config</string>
     <string name="config_schedule_subtitle">You can configure your \nschedule properties</string>
     <string name="export">Export</string>
     <string name="delete">Delete</string>
@@ -59,4 +59,11 @@
     <string name="_6">6</string>
     <string name="_7">7</string>
     <string name="_8">8</string>
+    <string name="total_week">Total %s Week</string>
+    <string name="current_week">Current Week : %s</string>
+    <string name="add_your_custom_course">add your custom course</string>
+    <string name="save">Save</string>
+    <string name="course_name">Course Name</string>
+    <string name="course_name_subtitle">Please enter the course name</string>
+    <string name="position">Position</string>
 </resources>

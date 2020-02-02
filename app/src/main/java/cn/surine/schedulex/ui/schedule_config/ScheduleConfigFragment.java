@@ -2,6 +2,7 @@ package cn.surine.schedulex.ui.schedule_config;
 
 import android.app.AlertDialog;
 import android.view.View;
+import android.view.animation.AnimationUtils;
 
 import androidx.lifecycle.ViewModelProviders;
 import androidx.navigation.Navigation;
@@ -76,7 +77,14 @@ public class ScheduleConfigFragment extends BaseBindingFragment<FragmentSchedule
         });
 
 
-        t.scheduleNameItem.setOnClickListener(v -> Toasts.toast("测试"));
+        t.scheduleNameItem.setOnClickListener(v -> {
+            if(t.scheduleNameInput.getVisibility() == View.GONE){
+                t.scheduleNameInput.setAnimation(AnimationUtils.loadAnimation(activity(),R.anim.page_rotate_in));
+                t.scheduleNameInput.setVisibility(View.VISIBLE);
+            }
+        });
+
+
         t.scheduleWeekInfoItem.setOnClickListener(v -> Toasts.toast("测试"));
 
         t.scheduleBackgroundItem.setOnClickListener(v -> {

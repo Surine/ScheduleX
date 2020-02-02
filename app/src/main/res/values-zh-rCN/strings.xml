@@ -47,4 +47,19 @@
     <string name="palette_color">色卡颜色</string>
     <string name="schedule_name">课表名称</string>
     <string name="week_info">时间信息</string>
+    <string name="_1">1</string>
+    <string name="_2">2</string>
+    <string name="_3">3</string>
+    <string name="_4">4</string>
+    <string name="_5">5</string>
+    <string name="_6">6</string>
+    <string name="_7">7</string>
+    <string name="_8">8</string>
+    <string name="current_week">当前 %s 周</string>
+    <string name="total_week">共 %s 周</string>
+    <string name="add_your_custom_course">添加自定义课程</string>
+    <string name="save">保存</string>
+    <string name="course_name">课表名</string>
+    <string name="course_name_subtitle">Please enter the class name</string>
+    <string name="position">上课地点</string>
 </resources>

@@ -36,11 +36,11 @@
             app:popEnterAnim="@anim/page_rotate_in"
             app:popExitAnim="@anim/page_rotate_out" />
         <action
-            android:id="@+id/action_dailyFragment_to_courseInfoFragment"
-            app:destination="@id/courseInfoFragment" />
-        <action
             android:id="@+id/action_dailyFragment_to_aboutFragment"
             app:destination="@id/aboutFragment" />
+        <action
+            android:id="@+id/action_dailyFragment_to_addCourseFragment"
+            app:destination="@id/addCourseFragment" />
     </fragment>
     <fragment
         android:id="@+id/ScheduleListFragment"
@@ -84,14 +84,6 @@
             app:destination="@id/dailyFragment" />
     </fragment>
     <fragment
-        android:id="@+id/courseInfoFragment"
-        android:name="cn.surine.schedulex.ui.course_info.CourseInfoFragment"
-        android:label="CourseInfoFragment" >
-        <action
-            android:id="@+id/action_courseInfoFragment_to_dailyFragment"
-            app:destination="@id/dailyFragment" />
-    </fragment>
-    <fragment
         android:id="@+id/scheduleConfigFragment"
         android:name="cn.surine.schedulex.ui.schedule_config.ScheduleConfigFragment"
         android:label="ScheduleConfigFragment" >
@@ -110,4 +102,8 @@
         android:id="@+id/themeListFragment"
         android:name="cn.surine.schedulex.ui.theme.ThemeListFragment"
         android:label="ThemeListFragment" />
+    <fragment
+        android:id="@+id/addCourseFragment"
+        android:name="cn.surine.schedulex.ui.add_course.AddCourseFragment"
+        android:label="AddCourseFragment" />
 </navigation>

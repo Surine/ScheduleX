@@ -2,11 +2,15 @@ package cn.surine.schedulex.ui.schedule;
 
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.os.Build;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -78,6 +82,7 @@ public class ScheduleViewpagerAdapter extends RecyclerView.Adapter<ScheduleViewp
             if(course == null){
                 return;
             }
+
             AlertDialog.Builder builder = new AlertDialog.Builder(baseFragment.activity());
             View view = LayoutInflater.from(baseFragment.activity()).inflate(R.layout.view_course_info,null);
             TextView courseName = view.findViewById(R.id.courseName);

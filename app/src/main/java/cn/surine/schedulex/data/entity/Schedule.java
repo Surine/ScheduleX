@@ -1,8 +1,12 @@
 package cn.surine.schedulex.data.entity;
 
+import android.annotation.SuppressLint;
+
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
+import cn.surine.schedulex.R;
+import cn.surine.schedulex.base.controller.App;
 import cn.surine.schedulex.base.utils.Dates;
 
 /**
@@ -46,12 +50,14 @@ public class Schedule extends BaseVm {
     public String imageUrl;
 
 
+    @SuppressLint("StringFormatMatches")
     public String getTotalWeekStr() {
-        return "Total_" + totalWeek + "_Week";
+        return App.context.getString(R.string.total_week,totalWeek);
     }
 
+    @SuppressLint({"StringFormatInvalid", "StringFormatMatches"})
     public String getCurWeekStr() {
-        return "Current Week:" +curWeek();
+        return App.context.getString(R.string.current_week,curWeek());
     }
 
 
