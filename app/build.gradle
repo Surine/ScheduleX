@@ -77,5 +77,8 @@ dependencies {
     implementation 'com.tbruyelle.rxpermissions2:rxpermissions:0.9.4@aar'
 
 
+    implementation 'com.github.didikee:AndroidDonate:0.1.0'
+    implementation 'androidx.dynamicanimation:dynamicanimation:1.0.0'
+
 
 }

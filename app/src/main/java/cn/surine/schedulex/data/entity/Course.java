@@ -51,24 +51,6 @@ public class Course extends BaseVm {
     public String color;
 
 
-    public Course(int roomId, String coureName, String teacherName, String classWeek, String classDay, String classSessions, String continuingSession, String weekDescription, String campusName, String teachingBuildingName, String classroomName, String coursePropertiesName, String xf, long scheduleId, int belongsToWeek) {
-        this.roomId = roomId;
-        this.coureName = coureName;
-        this.teacherName = teacherName;
-        this.classWeek = classWeek;
-        this.classDay = classDay;
-        this.classSessions = classSessions;
-        this.continuingSession = continuingSession;
-        this.weekDescription = weekDescription;
-        this.campusName = campusName;
-        this.teachingBuildingName = teachingBuildingName;
-        this.classroomName = classroomName;
-        this.coursePropertiesName = coursePropertiesName;
-        this.xf = xf;
-        this.scheduleId = scheduleId;
-        this.belongsToWeek = belongsToWeek;
-    }
-
     /**
      * item数据
      * */

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">小天盒子概念版</string>
+    <string name="app_name">ScheduleX</string>
     <string name="et_hint_account">TUST学号</string>
     <string name="et_hint_password">TUST密码</string>
     <string name="hello_blank_fragment">你好，空页面</string>
@@ -42,7 +42,12 @@
     <string name="btn_cancel">取消</string>
     <string name="btn_ok">确定</string>
     <string name="schedule_is_delete">课表已删除！</string>
-    <string name="open_source_license">Jetpack\\nhttp://www.github.com/jetpack         \\nJetpack is a suite of libraries, tools, and guidance to help developers write high-quality apps easier. These components help you follow best practices, free you from writing boilerplate code, and simplify complex tasks, so you can focus on the code you care about.         \\nRoom\\nhttp://www.github.com/room         \\nJetpack comprises the androidx.* package libraries, unbundled from the platform APIs. This means that it offers backward compatibility and is updated more frequently than the Android platform, making sure you always have access to the latest and greatest versions of the Jetpack components.</string>
+    <string name="open_source_license">
+    Android Jetpack\nhttps://developer.android.google.cn/jetpack\nData Binding: Declaratively bind observable data to UI elements\nLive Data: Notify views when underlying database changes\nNavigation: Handle everything needed for in-app navigation\nRoom: Fluent SQLite database access\nViewModel: Manage UI-related data in a lifecycle-conscious way\nViewPager2: Create swipe views between tabs\n\n
+
+
+
+    </string>
     <string name="background">背景图</string>
     <string name="palette_color">色卡颜色</string>
     <string name="schedule_name">课表名称</string>
@@ -60,11 +65,26 @@
     <string name="add_your_custom_course">添加自定义课程</string>
     <string name="save">保存</string>
     <string name="course_name">课表名</string>
-    <string name="course_name_subtitle">Please enter the class name</string>
+    <string name="course_name_subtitle">请输入课程名</string>
     <string name="position">上课地点</string>
     <string name="permission_is_denied">权限被禁止！</string>
     <string name="unsupport">不支持当前格式</string>
     <string name="update_success">更新成功！</string>
     <string name="pic_choose_fail">图片选择失败</string>
     <string name="choose_schedule_background">选择课表背景图</string>
+    <string name="alipay_copied">支付宝账号已复制</string>
+    <string name="star_on_github">Github Star</string>
+    <string name="donate_me_with_alipay">使用支付宝支持开发者</string>
+    <string name="qq_copy">QQ号已复制到剪贴板</string>
+    <string name="developer_subtitle">Android/UI ：Surine</string>
+    <string name="developers">开发者</string>
+    <string name="material_subtitle">图标来自于Iconfont，\n插图来自unDraw</string>
+    <string name="materials">素材</string>
+    <string name="no_coolapk">未安装酷安</string>
+    <string name="osl">开源许可</string>
+    <string name="please_input_content">请输入内容</string>
+    <string name="course_plan">时间计划</string>
+    <string name="course_position">请输入你的上课地点</string>
+    <string name="please_input_schedule_name">请输入课表名</string>
+    <string name="class_time">请选择课程时间</string>
 </resources>

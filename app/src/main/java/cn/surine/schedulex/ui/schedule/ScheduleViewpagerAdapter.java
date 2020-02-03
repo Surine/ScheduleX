@@ -28,6 +28,7 @@ import cn.surine.schedulex.base.controller.BaseFragment;
 import cn.surine.schedulex.base.utils.Toasts;
 import cn.surine.schedulex.data.entity.Course;
 import cn.surine.schedulex.ui.view.custom.EmptyView;
+import cn.surine.schedulex.ui.view.custom.helper.BtmDialogs;
 
 /**
  * Intro：
@@ -82,25 +83,7 @@ public class ScheduleViewpagerAdapter extends RecyclerView.Adapter<ScheduleViewp
             if(course == null){
                 return;
             }
-
-            AlertDialog.Builder builder = new AlertDialog.Builder(baseFragment.activity());
-            View view = LayoutInflater.from(baseFragment.activity()).inflate(R.layout.view_course_info,null);
-            TextView courseName = view.findViewById(R.id.courseName);
-            TextView coursePosition = view.findViewById(R.id.coursePosition);
-            TextView courseClassDay = view.findViewById(R.id.courseClassDay);
-            TextView courseSession = view.findViewById(R.id.courseSession);
-            TextView courseTeacher = view.findViewById(R.id.courseTeacher);
-            TextView courseScore = view.findViewById(R.id.courseScore);
-            ImageView edit = view.findViewById(R.id.courseEdit);
-            courseName.setText(course.coureName);
-            coursePosition.setText(course.teachingBuildingName + course.classroomName);
-            courseClassDay.setText("周"+course.classDay);
-            courseSession.setText(course.classSessions + "-" + (Integer.parseInt(course.continuingSession) + Integer.parseInt(course.classSessions) - 1) + "节");
-            courseTeacher.setText(course.teacherName == null ? App.context.getResources().getString(R.string.unknown_teacher):course.teacherName);
-            courseScore.setText(course.xf+"分");
-            edit.setOnClickListener(v -> Toasts.toast("编辑"));
-            builder.setView(view);
-            builder.show();
+            BtmDialogs.showCourseInfoBtmDialog(baseFragment.activity(),course);
         });
     }
 

@@ -163,21 +163,6 @@
             app:layout_constraintTop_toTopOf="@+id/guideline11"
             app:layout_constraintVertical_bias="0.566" />
 
-        <Button
-            android:id="@+id/addCourse"
-            android:drawableLeft="@drawable/ic_add_black_24dp"
-            android:textColor="@android:color/white"
-            android:background="@drawable/button_full_radius_primary_color"
-            android:layout_width="wrap_content"
-            android:layout_height="@dimen/dp45"
-            android:text="@string/add_course"
-            android:paddingStart="@dimen/dp12"
-            android:paddingEnd="@dimen/dp12"
-            android:textStyle="bold"
-            android:layout_marginRight="@dimen/dp5"
-            android:layout_marginBottom="@dimen/dp5"
-            app:layout_constraintBottom_toTopOf="@+id/guideline12"
-            app:layout_constraintEnd_toStartOf="@+id/guideline13" />
 
         <ImageView
             android:layout_width="0dp"
@@ -226,6 +211,16 @@
             app:layout_constraintEnd_toStartOf="@+id/guideline16"
             app:layout_constraintStart_toStartOf="@+id/guideline10"
             app:layout_constraintTop_toTopOf="@+id/guideline15" />
+
+        <ImageView
+            android:id="@+id/addCourse"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="24dp"
+            app:layout_constraintBottom_toBottomOf="@+id/func_btn"
+            app:layout_constraintEnd_toStartOf="@+id/func_btn"
+            app:layout_constraintTop_toTopOf="@+id/func_btn"
+            app:srcCompat="@drawable/ic_add_circle_black_24dp" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

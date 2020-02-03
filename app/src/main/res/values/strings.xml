@@ -43,10 +43,20 @@
     <string name="btn_ok">Ok</string>
     <string name="btn_cancel">Cancel</string>
     <string name="schedule_is_delete">Schedule has been deleted!</string>
-    <string name="open_source_license">Jetpack\nhttp://www.github.com/jetpack
-        \nJetpack is a suite of libraries, tools, and guidance to help developers write high-quality apps easier. These components help you follow best practices, free you from writing boilerplate code, and simplify complex tasks, so you can focus on the code you care about.
-        \nRoom\nhttp://www.github.com/room
-        \nJetpack comprises the androidx.* package libraries, unbundled from the platform APIs. This means that it offers backward compatibility and is updated more frequently than the Android platform, making sure you always have access to the latest and greatest versions of the Jetpack components.</string>
+    <string name="open_source_license">
+                Android Jetpack\n
+        https://developer.android.google.cn/jetpack\n
+
+        Data Binding: Declaratively bind observable data to UI elements
+        Live Data: Notify views when underlying database changes
+        Navigation: Handle everything needed for in-app navigation
+        Room: Fluent SQLite database access
+        ViewModel: Manage UI-related data in a lifecycle-conscious way
+        ViewPager2: Create swipe views between tabs\n\n
+
+
+
+    </string>
     <string name="schedule_name">Schedule Name</string>
     <string name="week_info">Week Info</string>
     <string name="background">Background</string>
@@ -71,4 +81,20 @@
     <string name="update_success">update completed!</string>
     <string name="pic_choose_fail">Image selection failed!</string>
     <string name="choose_schedule_background">Select the schedule background</string>
+    <string name="alipay_copied">Alipay account has been copied</string>
+    <string name="star_on_github">Star On Github</string>
+    <string name="donate_me_with_alipay">Donate Me With Alipay</string>
+    <string name="qq_copy">QQ number has been copied to the clipboard</string>
+    <string name="developers">Developers</string>
+    <string name="developer_subtitle"><![CDATA[Android & UI By Surine]]></string>
+    <string name="materials">Materials</string>
+    <string name="material_subtitle"><![CDATA[Icon from Iconfont,\nillustration from unDraw]]></string>
+    <string name="no_coolapk">CoolApk is not installed！</string>
+    <string name="osl">Open Source License</string>
+    <string name="v1_0_0_build_on_jetpack" translatable="false">v1.0.0 Build On JetPack</string>
+    <string name="please_input_content">Please enter content</string>
+    <string name="course_plan">Course Plan</string>
+    <string name="class_time">Please select a class time</string>
+    <string name="course_position">Please enter your class location</string>
+    <string name="please_input_schedule_name">Please enter the schedule name</string>
 </resources>

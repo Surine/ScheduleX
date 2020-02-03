@@ -25,6 +25,7 @@ import java.io.FileNotFoundException;
 import cn.surine.schedulex.R;
 import cn.surine.schedulex.base.Constants;
 import cn.surine.schedulex.base.controller.BaseBindingFragment;
+import cn.surine.schedulex.base.interfaces.DCall;
 import cn.surine.schedulex.base.utils.InstanceFactory;
 import cn.surine.schedulex.base.utils.Prefs;
 import cn.surine.schedulex.base.utils.Toasts;
@@ -35,6 +36,7 @@ import cn.surine.schedulex.ui.course.CourseViewModel;
 import cn.surine.schedulex.ui.schedule.ScheduleRepository;
 import cn.surine.schedulex.ui.schedule.ScheduleViewModel;
 import cn.surine.schedulex.ui.schedule_list.ScheduleListFragment;
+import cn.surine.schedulex.ui.view.custom.helper.BtmDialogs;
 
 import static android.app.Activity.RESULT_OK;
 
@@ -98,7 +100,12 @@ public class ScheduleConfigFragment extends BaseBindingFragment<FragmentSchedule
 
 
         t.scheduleNameItem.setOnClickListener(v -> {
-
+            BtmDialogs.showEditBtmDialog(activity(), getString(R.string.please_input_schedule_name), s -> {
+                schedule.name = s;
+                t.courseNameSubTitle.setText(s);
+                Toasts.toast(getString(R.string.update_success));
+                scheduleViewModel.updateSchedule(schedule);
+            });
         });
 
 

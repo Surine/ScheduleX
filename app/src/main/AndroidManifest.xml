@@ -13,6 +13,7 @@
         android:supportsRtl="true"
         android:name=".base.controller.App"
         android:theme="@style/AppTheme"
+        tools:replace="android:allowBackup"
         android:networkSecurityConfig="@xml/network_security_config"
         tools:ignore="GoogleAppIndexingWarning">
         <activity android:name=".ui.MainActivity"

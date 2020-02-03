@@ -78,7 +78,7 @@
                 app:layout_constraintVertical_bias="0.38" />
 
             <Button
-                android:id="@+id/exportSchedule"
+                android:id="@+id/github"
                 style="@style/button_style"
                 android:layout_width="wrap_content"
                 android:layout_height="@dimen/dp40"
@@ -98,9 +98,9 @@
                 android:layout_marginEnd="16dp"
                 android:text="@string/delete"
                 android:textColor="@android:color/holo_red_dark"
-                app:layout_constraintBottom_toBottomOf="@+id/exportSchedule"
-                app:layout_constraintEnd_toStartOf="@+id/exportSchedule"
-                app:layout_constraintTop_toTopOf="@+id/exportSchedule" />
+                app:layout_constraintBottom_toBottomOf="@+id/github"
+                app:layout_constraintEnd_toStartOf="@+id/github"
+                app:layout_constraintTop_toTopOf="@+id/github" />
 
 
             <LinearLayout
@@ -130,13 +130,13 @@
                         android:textColor="@android:color/black"
                         android:textSize="@dimen/t18"
                         android:textStyle="bold"
-                        app:layout_constraintBottom_toTopOf="@id/textView34"
+                        app:layout_constraintBottom_toTopOf="@id/courseNameSubTitle"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
 
                     <TextView
-                        android:id="@+id/textView34"
+                        android:id="@+id/courseNameSubTitle"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/dp8"
@@ -150,8 +150,8 @@
                         android:id="@+id/imageView10"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginEnd="16dp"
-                        app:layout_constraintBottom_toBottomOf="@+id/textView34"
+                        android:layout_marginEnd="8dp"
+                        app:layout_constraintBottom_toBottomOf="@+id/courseNameSubTitle"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toTopOf="@+id/textView33"
                         app:srcCompat="@drawable/ic_person_black_24dp" />
@@ -179,7 +179,7 @@
 
 
                     <TextView
-                        android:id="@+id/textView36"
+                        android:id="@+id/coursePositionSubtitle"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/dp8"
@@ -193,8 +193,8 @@
                         android:id="@+id/imageView9"
                         android:layout_width="20dp"
                         android:layout_height="20dp"
-                        android:layout_marginEnd="16dp"
-                        app:layout_constraintBottom_toBottomOf="@+id/textView36"
+                        android:layout_marginEnd="8dp"
+                        app:layout_constraintBottom_toBottomOf="@+id/coursePositionSubtitle"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toTopOf="@+id/textView35"
                         app:srcCompat="@mipmap/ic_more" />
@@ -252,13 +252,12 @@
                         android:id="@+id/background_pic"
                         android:layout_width="20dp"
                         android:layout_height="20dp"
-                        android:layout_marginEnd="16dp"
+                        android:layout_marginEnd="8dp"
+                        android:scaleType="centerCrop"
                         app:layout_constraintBottom_toBottomOf="@+id/textView38"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toTopOf="@+id/textView37"
-                        app:srcCompat="@mipmap/test_bg"
-                        android:scaleType="centerCrop"
-                        />
+                        app:srcCompat="@mipmap/test_bg" />
 
 
                 </androidx.constraintlayout.widget.ConstraintLayout>

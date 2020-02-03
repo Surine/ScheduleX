@@ -1,26 +1,41 @@
 package cn.surine.schedulex.ui.about;
 
 
-import androidx.fragment.app.Fragment;
-
-import android.view.View;
+import androidx.dynamicanimation.animation.SpringAnimation;
+import androidx.dynamicanimation.animation.SpringForce;
 
 import cn.surine.schedulex.R;
-import cn.surine.schedulex.base.controller.BaseFragment;
+import cn.surine.schedulex.base.controller.BaseBindingFragment;
+import cn.surine.schedulex.base.utils.Others;
+import cn.surine.schedulex.base.utils.Toasts;
+import cn.surine.schedulex.databinding.FragmentAboutBinding;
 
-/**
- * A simple {@link Fragment} subclass.
- */
-public class AboutFragment extends BaseFragment {
+
+public class AboutFragment extends BaseBindingFragment<FragmentAboutBinding> {
 
     @Override
     public int layoutId() {
         return R.layout.fragment_about;
     }
 
-    @Override
-    public void onInit(View parent) {
 
+    @Override
+    protected void onInit(FragmentAboutBinding t) {
+        t.aboutItemQQ.setOnClickListener(v -> {
+            Others.startQQ(activity(), "635622188");
+            Toasts.toast(getString(R.string.qq_copy));
+        });
+        t.github.setOnClickListener(v -> Others.openUrl("https://github.com/surine/ScheduleX"));
+        t.alipay.setOnClickListener(v -> Others.donateAlipay(activity(), "fkx00798tue4qrncwkknh09"));
+        t.aboutItemCoolApk.setOnClickListener(v -> Others.startCoolApk("667393"));
+
+
+        SpringForce springForce = new SpringForce(360);
+        springForce.setDampingRatio(SpringForce.DAMPING_RATIO_MEDIUM_BOUNCY);
+        springForce.setStiffness(SpringForce.STIFFNESS_VERY_LOW);
+        SpringAnimation animation = new SpringAnimation(t.jetpack, SpringAnimation.ROTATION_Y);
+        animation.setSpring(springForce);
+        animation.start();
     }
 
 }

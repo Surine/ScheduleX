@@ -2,11 +2,13 @@ package cn.surine.schedulex.ui.schedule;
 
 import android.annotation.SuppressLint;
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.text.TextUtils;
 import android.view.View;
 
+import androidx.core.graphics.ColorUtils;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.navigation.Navigation;
 import androidx.palette.graphics.Palette;
@@ -21,6 +23,7 @@ import cn.surine.schedulex.R;
 import cn.surine.schedulex.base.Constants;
 import cn.surine.schedulex.base.controller.BaseBindingFragment;
 import cn.surine.schedulex.base.utils.InstanceFactory;
+import cn.surine.schedulex.base.utils.Objs;
 import cn.surine.schedulex.base.utils.Prefs;
 import cn.surine.schedulex.data.entity.Course;
 import cn.surine.schedulex.data.entity.Schedule;
@@ -120,10 +123,14 @@ public class ScheduleFragment extends BaseBindingFragment<FragmentScheduleBindin
      */
     private void configPaletteTextColor(FragmentScheduleBinding b) {
 //        Bitmap bitmap =((BitmapDrawable)b.background.getDrawable()).getBitmap();
-//        Palette.from(bitmap).generate(palette -> {
-//            int textColor = palette.getDominantSwatch().getTitleTextColor();
-//            b.title.setTextColor(textColor);
-//        });
+//        Palette.from(bitmap).generate(palette -> Objs.isNullCall(palette.getLightMutedSwatch(), () -> {
+//            int color = palette.getLightMutedSwatch().getRgb();
+//            if(ColorUtils.calculateLuminance(color) > 0.5){
+//                b.title.setTextColor(Color.BLACK);
+//            }else{
+//                b.title.setTextColor(Color.WHITE);
+//            }
+//        }));
     }
 
 

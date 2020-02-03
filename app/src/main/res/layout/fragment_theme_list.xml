@@ -74,7 +74,7 @@
         app:layout_constraintVertical_bias="0.305" />
 
     <Button
-        android:id="@+id/exportSchedule"
+        android:id="@+id/github"
         style="@style/button_style"
         android:layout_width="wrap_content"
         android:layout_height="@dimen/dp40"
