@@ -5,7 +5,7 @@
     <string name="et_hint_password">TUST密码</string>
     <string name="hello_blank_fragment">你好，空页面</string>
     <string name="login">登录</string>
-    <string name="param_empty">存在空输入！</string>
+    <string name="param_empty">存在空输入，请检查!</string>
     <string name="skip">跳过</string>
     <string name="tv_login_title">嗨，登录吗？</string>
     <string name="vpn_guide">校外登录引导</string>
@@ -26,15 +26,15 @@
     <string name="arg_exception">参数异常，请退出重试</string>
     <string name="add_course">添加</string>
     <string name="data_parse_exception">数据解析异常</string>
-    <string name="unknown_teacher">未知教师</string>
-    <string name="score_2_0">2.0学分</string>
+    <string name="unknown">未知</string>
+    <string name="score_2_0">%s学分</string>
     <string name="config">配置</string>
     <string name="schedules">课表</string>
     <string name="add_schedule">添加课表</string>
     <string name="schedule_config_subtitle">你可以管理你的课表</string>
     <string name="theme">主题</string>
     <string name="theme_list_subtitle">包含课表背景和课程随机颜色</string>
-    <string name="week">第%s周</string>
+    <string name="week">%s周</string>
     <string name="config_schedule_subtitle">你可以配置你的课表属性</string>
     <string name="delete">删除</string>
     <string name="export">导出</string>
@@ -64,7 +64,7 @@
     <string name="total_week">共 %s 周</string>
     <string name="add_your_custom_course">添加自定义课程</string>
     <string name="save">保存</string>
-    <string name="course_name">课表名</string>
+    <string name="course_name">课程名</string>
     <string name="course_name_subtitle">请输入课程名</string>
     <string name="position">上课地点</string>
     <string name="permission_is_denied">权限被禁止！</string>
@@ -87,4 +87,20 @@
     <string name="course_position">请输入你的上课地点</string>
     <string name="please_input_schedule_name">请输入课表名</string>
     <string name="class_time">请选择课程时间</string>
+    <string name="overlimit">超过节次限制 (最大为8)</string>
+    <string name="course_null">课程信息为空，请重新填写</string>
+    <string name="add_success">Added successfully</string>
+    <string name="teacher">教师</string>
+    <string name="please_input_teacher">请输入教师姓名</string>
+    <string name="please_enter_course_credits">请输入课程学分</string>
+    <string name="score">学分</string>
+    <string name="weekday">星期 %s</string>
+    <string name="session">节</string>
+    <string name="choose_session">开始节次</string>
+    <string name="cotinue_session">持续节次</string>
+    <string name="param_is_illgal">参数不合法</string>
+    <string name="coolapk_follow">点击关注我</string>
+    <string name="coolapk_id">酷安ID</string>
+    <string name="qq_group">QQ群</string>
+    <string name="qq">点击复制QQ:635622188</string>
 </resources>

@@ -5,8 +5,6 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.text.TextUtils;
 import android.view.View;
-import android.view.animation.BounceInterpolator;
-import android.view.animation.OvershootInterpolator;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -78,8 +76,9 @@ public class BtmDialogs {
         coursePosition.setText(course.teachingBuildingName + course.classroomName);
         courseClassDay.setText("周" + course.classDay);
         courseSession.setText(course.classSessions + "-" + (Integer.parseInt(course.continuingSession) + Integer.parseInt(course.classSessions) - 1) + "节");
-        courseTeacher.setText(course.teacherName == null ? App.context.getResources().getString(R.string.unknown_teacher) : course.teacherName);
+        courseTeacher.setText(course.teacherName == null ? App.context.getResources().getString(R.string.unknown) : course.teacherName);
         courseScore.setText(course.xf + "分");
         edit.setOnClickListener(v -> Toasts.toast("编辑"));
     }
+
 }

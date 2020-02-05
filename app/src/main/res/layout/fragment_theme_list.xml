@@ -77,7 +77,7 @@
         android:id="@+id/github"
         style="@style/button_style"
         android:layout_width="wrap_content"
-        android:layout_height="@dimen/dp40"
+        android:layout_height="wrap_content"
         android:layout_marginEnd="24dp"
         android:drawableLeft="@drawable/ic_add_black_24dp"
         android:paddingStart="@dimen/dp10"

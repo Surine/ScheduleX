@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:id="@+id/view_course_time_plan"
+    android:paddingBottom="@dimen/dp16"
+    android:background="@drawable/top_left_right_radius_white"
+    >
+</FrameLayout>

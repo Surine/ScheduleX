@@ -3,6 +3,7 @@ package cn.surine.schedulex.data.dao;
 import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
+import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
 import androidx.room.Update;
 
@@ -19,8 +20,8 @@ import cn.surine.schedulex.data.entity.Course;
 
 @Dao
 public interface CourseDao {
-    @Insert
-    void insert(Course... course);
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    long insert(Course course);
 
     @Update
     void update(Course... courses);
@@ -28,7 +29,7 @@ public interface CourseDao {
     @Delete
     void delete(Course... courses);
 
-    @Query("delete from Course where roomId = :scheduleId")
+    @Query("delete from Course where scheduleId = :scheduleId")
     void delete(long scheduleId);
 
     @Query("delete from course")
@@ -38,12 +39,8 @@ public interface CourseDao {
     List<Course> getAll();
 
 
-    @Query("select * from course where roomId = :id")
-    Course getById(int id);
-
-
-    @Query("select * from course where belongsToWeek = :week and scheduleId = :scheduleId")
-    List<Course> getByWeek(int week, int scheduleId);
+    @Query("select * from course where scheduleId = :scheduleId")
+    List<Course> getByScheduleId(int scheduleId);
 
 
 }

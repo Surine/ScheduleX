@@ -1,5 +1,7 @@
 package cn.surine.schedulex.ui.course;
 
+import android.util.Log;
+
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
@@ -83,11 +85,10 @@ public class CourseViewModel extends ViewModel {
                 //添加数据
                 if (vm.getValue().courseList != null) {
                     for (Course course : vm.getValue().courseList) {
-                        course.belongsToWeek = totalWeek;  //对所属周赋值
                         if(colorHashMap.containsKey(course.coureNumber)){
                             course.color = colorHashMap.get(course.coureNumber);
                         }else{
-                            course.color = Constants.COLOR_1[new Random(System.currentTimeMillis()).nextInt(10)];
+                            course.color = Constants.COLOR_1[new Random(System.currentTimeMillis()).nextInt(Constants.COLOR_1.length)];
                             colorHashMap.put(course.coureNumber,course.color);
                         }
                         mCourseList.add(course);
@@ -113,12 +114,11 @@ public class CourseViewModel extends ViewModel {
     }
 
 
-    public void saveCourseByDb(List<Course> courseList) {
-        mCourseRepository.clearCourseByDb();
+    public void saveCourseByDb(List<Course> courseList, long scheduleId) {
+        //注意是清空当前课表的数据，不能清空全部数据库
+        mCourseRepository.clearCourseByDb(scheduleId);
         mCourseRepository.saveCourseByDb(courseList);
     }
-
-
 
 
     public List<Course> queryCourseByWeek(int week, int scheduleId) {
@@ -127,5 +127,13 @@ public class CourseViewModel extends ViewModel {
 
     public void deleteCourseByScheduleId(long scheduleId) {
         mCourseRepository.deleteCourseByScheduleId(scheduleId);
+    }
+
+
+    /**
+     * 添加课程
+     * */
+    public long insert(Course course) {
+        return mCourseRepository.insert(course);
     }
 }

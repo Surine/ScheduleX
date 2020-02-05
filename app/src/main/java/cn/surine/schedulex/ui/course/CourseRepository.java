@@ -28,32 +28,42 @@ public class CourseRepository extends BaseRepository {
     };
 
 
-    Flowable<CourseList> getCourseByNet(int week){
+    Flowable<CourseList> getCourseByNet(int week) {
         return Loader.getInstance().getService().getSchedule(week).compose(schedulerHelper());
     }
 
-    void saveCourseByDb(List<Course> courseList){
-        for (Course course :courseList) {
+    void saveCourseByDb(List<Course> courseList) {
+        for (Course course : courseList) {
+            //如果已插入course id 的数据，则失败
             appDatabase.courseDao().insert(course);
         }
     }
 
-    Course getCourseByDb(int id){
-        return  appDatabase.courseDao().getById(id);
+    List<Course> queryCourseByWeek(int week, int scheduleId) {
+        List<Course> list = appDatabase.courseDao().getByScheduleId(scheduleId);
+        List<Course> handleList = new ArrayList<>();
+        for (Course course : list) {
+            try {
+                if(course.classWeek.charAt(week - 1) == '1'){
+                    handleList.add(course);
+                }
+            }catch (Exception ignored){
+            }
+        }
+        return handleList;
     }
 
 
-    List<Course> queryCourseByWeek(int week, int scheduleId){
-        return appDatabase.courseDao().getByWeek(week,scheduleId);
-    }
-
-
-    void clearCourseByDb() {
-        appDatabase.courseDao().deleteAll();
+    void clearCourseByDb(long scheduleId) {
+        appDatabase.courseDao().delete(scheduleId);
     }
 
 
     public void deleteCourseByScheduleId(long scheduleId) {
         appDatabase.courseDao().delete(scheduleId);
+    }
+
+    public long insert(Course course) {
+        return appDatabase.courseDao().insert(course);
     }
 }

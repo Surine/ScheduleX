@@ -21,6 +21,7 @@ public class Schedule extends BaseVm {
     @PrimaryKey(autoGenerate = true)
     public int roomId;
 
+
     /**
      * 课程表名字
      */

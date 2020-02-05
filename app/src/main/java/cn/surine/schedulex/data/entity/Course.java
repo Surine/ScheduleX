@@ -1,7 +1,11 @@
 package cn.surine.schedulex.data.entity;
 
+import androidx.annotation.NonNull;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
+
+import cn.surine.schedulex.R;
+import cn.surine.schedulex.base.controller.App;
 
 /**
  * Intro：
@@ -13,15 +17,19 @@ import androidx.room.PrimaryKey;
 @Entity
 public class Course extends BaseVm {
 
-    @PrimaryKey(autoGenerate = true)
-    public int roomId;
-    public String coureNumber;
+    /**
+     * 课程id
+     */
+    @PrimaryKey
+    @NonNull
+    public String id = "";
 
     //name （傻逼jw后端单词都不会拼）
+    public String coureNumber;
     public String coureName = "";
     public String teacherName = "UnKnown";
 
-    //week
+    //week  ex:100101011111
     public String classWeek = "";
 
     //day time
@@ -44,8 +52,6 @@ public class Course extends BaseVm {
     //课表外键，属于哪个课表
     public long scheduleId;
 
-    //属于那一周
-    public int belongsToWeek;
 
     //色值
     public String color;
@@ -53,17 +59,36 @@ public class Course extends BaseVm {
 
     /**
      * item数据
-     * */
+     */
     public String itemData() {
         return coureName + "\n" + teachingBuildingName + classroomName;
     }
 
 
+    public String getWeekDescription() {
+        StringBuilder stringBuilder = new StringBuilder();
+        for (int i = 0; i < classWeek.length(); i++) {
+            if (classWeek.charAt(i) == '1') {
+                stringBuilder.append(i + 1).append(",");
+            }
+        }
+        return stringBuilder.append(App.context.getString(R.string.week, "")).toString();
+    }
+
+
+    public String getClassDayDescription() {
+        return App.context.getString(R.string.weekday, classDay);
+    }
+
+
+    public String getSessionDescription() {
+        return classSessions + "-" + (Integer.parseInt(classSessions) + Integer.parseInt(continuingSession) - 1) + App.context.getString(R.string.session);
+    }
+
 
     @Override
     public String toString() {
         return "Course{" +
-                "roomId=" + roomId +
                 ", courseName='" + coureName + '\'' +
                 ", teacherName='" + teacherName + '\'' +
                 ", classWeek='" + classWeek + '\'' +
@@ -77,7 +102,7 @@ public class Course extends BaseVm {
                 ", coursePropertiesName='" + coursePropertiesName + '\'' +
                 ", xf='" + xf + '\'' +
                 ", scheduleId=" + scheduleId +
-                ", belongsToWeek=" + belongsToWeek +
                 '}';
     }
+
 }

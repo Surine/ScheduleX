@@ -36,7 +36,6 @@ dependencies {
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
 
-
     //http framework
     api 'com.squareup.retrofit2:retrofit:2.6.0'
     api 'com.squareup.retrofit2:converter-gson:2.6.0'
@@ -77,7 +76,10 @@ dependencies {
     implementation 'com.tbruyelle.rxpermissions2:rxpermissions:0.9.4@aar'
 
 
+    //捐助
     implementation 'com.github.didikee:AndroidDonate:0.1.0'
+
+    //弹簧动画
     implementation 'androidx.dynamicanimation:dynamicanimation:1.0.0'
 
 

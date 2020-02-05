@@ -78,7 +78,6 @@ public class LoginFragment extends BaseBindingFragment<FragmentLoginBinding> {
             }
             if(status == CourseViewModel.SUCCESS){
                 dialog.dismiss();
-                Toasts.toast(getString(R.string.handle_success));
                 //保存课表
                 if(getArguments() == null || TextUtils.isEmpty(getArguments().getString(ScheduleInitFragment.SCHEDULE_NAME))){
                     Toasts.toast(getString(R.string.arg_exception));
@@ -91,9 +90,11 @@ public class LoginFragment extends BaseBindingFragment<FragmentLoginBinding> {
                 List<Course> courseList = courseViewModel.mMutableCourses.getValue();
                 for (Course course:courseList) {
                     course.scheduleId = scheduleId;
+                    course.id = course.scheduleId +"-"+ course.id;
                 }
-                courseViewModel.saveCourseByDb(courseList);
+                courseViewModel.saveCourseByDb(courseList,scheduleId);
                 Navigations.open(this,R.id.dailyFragment);
+                Toasts.toast(getString(R.string.handle_success));
             }
             if(status == CourseViewModel.FAIL){
                 dialog.dismiss();

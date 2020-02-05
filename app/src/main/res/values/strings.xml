@@ -27,8 +27,8 @@
     <string name="arg_exception">parameter exception, please exit and try again</string>
     <string name="add_course">Add</string>
     <string name="data_parse_exception">data parse exception</string>
-    <string name="unknown_teacher">UnKnown Teacher</string>
-    <string name="score_2_0">Score 2.0</string>
+    <string name="unknown">UnKnown</string>
+    <string name="score_2_0">%s Score</string>
     <string name="schedules">Schedules</string>
     <string name="schedule_config_subtitle">You can manage your \nSchedules</string>
     <string name="add_schedule">Add Schedule</string>
@@ -97,4 +97,20 @@
     <string name="class_time">Please select a class time</string>
     <string name="course_position">Please enter your class location</string>
     <string name="please_input_schedule_name">Please enter the schedule name</string>
+    <string name="overlimit">Exceeded section limit (Max = 8)</string>
+    <string name="course_null">Course information is empty, please fill in again</string>
+    <string name="add_success">Added successfully</string>
+    <string name="teacher">Teacher</string>
+    <string name="please_input_teacher">Please enter teacher name</string>
+    <string name="score">Score</string>
+    <string name="please_enter_course_credits">Please enter course credits</string>
+    <string name="weekday">Week: %s</string>
+    <string name="session">Session</string>
+    <string name="choose_session">Start Session</string>
+    <string name="cotinue_session">Continue Session</string>
+    <string name="param_is_illgal">Illegal parameter</string>
+    <string name="qq_group">QQ Group</string>
+    <string name="coolapk_follow">Click to follow me</string>
+    <string name="coolapk_id">CoolApk ID</string>
+    <string name="qq">Click to copy QQ: 635622188</string>
 </resources>

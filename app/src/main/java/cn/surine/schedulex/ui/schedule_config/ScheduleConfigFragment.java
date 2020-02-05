@@ -7,10 +7,15 @@ import android.content.ContentResolver;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.provider.MediaStore;
 import android.text.TextUtils;
 import android.view.View;
+import android.widget.Button;
+import android.widget.SeekBar;
+import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 import androidx.lifecycle.ViewModelProviders;
@@ -18,6 +23,7 @@ import androidx.navigation.Navigation;
 import androidx.navigation.fragment.NavHostFragment;
 
 import com.bumptech.glide.Glide;
+import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.tbruyelle.rxpermissions2.RxPermissions;
 
 import java.io.FileNotFoundException;
@@ -25,10 +31,12 @@ import java.io.FileNotFoundException;
 import cn.surine.schedulex.R;
 import cn.surine.schedulex.base.Constants;
 import cn.surine.schedulex.base.controller.BaseBindingFragment;
-import cn.surine.schedulex.base.interfaces.DCall;
+import cn.surine.schedulex.base.utils.Dates;
 import cn.surine.schedulex.base.utils.InstanceFactory;
+import cn.surine.schedulex.base.utils.MySeekBarChangeListener;
 import cn.surine.schedulex.base.utils.Prefs;
 import cn.surine.schedulex.base.utils.Toasts;
+import cn.surine.schedulex.base.utils.Uis;
 import cn.surine.schedulex.data.entity.Schedule;
 import cn.surine.schedulex.databinding.FragmentScheduleConfigBinding;
 import cn.surine.schedulex.ui.course.CourseRepository;
@@ -109,7 +117,9 @@ public class ScheduleConfigFragment extends BaseBindingFragment<FragmentSchedule
         });
 
 
-        t.scheduleWeekInfoItem.setOnClickListener(v -> Toasts.toast("测试"));
+        t.scheduleWeekInfoItem.setOnClickListener(v -> {
+            showTimeConfigDialog();
+        });
 
         t.scheduleBackgroundItem.setOnClickListener(v -> {
             RxPermissions rxPermissions = new RxPermissions(activity());
@@ -129,6 +139,68 @@ public class ScheduleConfigFragment extends BaseBindingFragment<FragmentSchedule
         t.schedulePaletteItem.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.action_scheduleConfigFragment_to_themeListFragment));
 
 
+    }
+
+
+    /**
+     * 时间配置
+     */
+    @SuppressLint("StringFormatMatches")
+    private void showTimeConfigDialog() {
+        BottomSheetDialog bt = new BottomSheetDialog(activity());
+        View view;
+        bt.setContentView(view = Uis.inflate(activity(), R.layout.view_schedule_time));
+        bt.getWindow().findViewById(R.id.design_bottom_sheet).setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        bt.show();
+        view.animate().translationY(50);
+
+        SeekBar s1 = view.findViewById(R.id.seekBar);
+        SeekBar s2 = view.findViewById(R.id.seekBar2);
+        TextView t1 = view.findViewById(R.id.tvS1);
+        TextView t2 = view.findViewById(R.id.tvS2);
+        Button button = view.findViewById(R.id.button);
+
+        final int[] mTotalWeek = new int[1];
+        final int[] mCurWeek = new int[1];
+
+
+        //初始化
+        s1.setMax(30);
+        s1.setProgress(schedule.totalWeek);
+        s2.setMax(schedule.totalWeek);
+        s2.setProgress(schedule.curWeek());
+        t1.setText(getString(R.string.total_week,schedule.totalWeek));
+        t2.setText(getString(R.string.current_week,schedule.curWeek()));
+
+        //监听
+        s1.setOnSeekBarChangeListener(new MySeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                s2.setMax(progress);
+                t1.setText(getString(R.string.total_week, String.valueOf(progress)));
+                mTotalWeek[0] = progress;
+            }
+        });
+
+        s2.setOnSeekBarChangeListener(new MySeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                t2.setText(getString(R.string.current_week, String.valueOf(progress)));
+                mCurWeek[0] = progress;
+            }
+        });
+
+        button.setOnClickListener(v -> {
+            if (mTotalWeek[0] == 0 || mCurWeek[0] == 0) {
+                Toasts.toast(getString(R.string.param_is_illgal));
+            } else {
+                schedule.totalWeek = mTotalWeek[0];
+                schedule.termStartDate = Dates.getTermStartDate(mCurWeek[0]);
+                globalT.scheduleWeekSubtitle.setText(t1.getText().toString() + t2.getText().toString());
+                scheduleViewModel.updateSchedule(schedule);
+                bt.dismiss();
+            }
+        });
     }
 
 

@@ -27,7 +27,7 @@
         android:id="@+id/button"
         style="@style/button_style"
         android:layout_width="wrap_content"
-        android:layout_height="@dimen/dp45"
+        android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/dp25"
         android:text="@string/btn_ok"
         app:layout_constraintEnd_toEndOf="@+id/editText"

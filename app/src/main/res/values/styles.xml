@@ -1,14 +1,16 @@
 <resources>
 
-    <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+    <!--    这边注意下，为了使用Material Design库内的一些资源，需要使用MaterialComponents布局，
+    但是使用这个主题后旧组件会被兼容成MD的样子，所以在后面跟Bridge忽略兼容-->
+    <style name="AppTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="chipIconTint">@color/chipIconTint</item>
     </style>
 
-    <style name="button_style">
+    <style name="button_style" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="android:background">@drawable/button_background</item>
         <item name="android:textColor">@android:color/white</item>
         <item name="android:textSize">@dimen/t14</item>
@@ -57,6 +59,19 @@
         <item name="android:layout_marginBottom">@dimen/dp1</item>
     </style>
 
+    <style name="course_add_week_chip_style" parent="Widget.MaterialComponents.Chip.Filter" />
 
+    <style name="optional_parameter_tv">
+        <item name="android:text">可选</item>
+        <item name="android:textSize">10sp</item>
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:background">@drawable/primary_color_10r_rect</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:paddingStart">4dp</item>
+        <item name="android:paddingEnd">4dp</item>
+        <item name="android:paddingTop">2dp</item>
+        <item name="android:paddingBottom">2dp</item>
+    </style>
 
 </resources>

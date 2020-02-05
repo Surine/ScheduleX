@@ -1,13 +1,38 @@
 package cn.surine.schedulex.ui.add_course;
 
+import android.annotation.SuppressLint;
 import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
+import android.view.View;
+import android.widget.Button;
+import android.widget.DatePicker;
+import android.widget.FrameLayout;
+import android.widget.NumberPicker;
 
-import androidx.core.graphics.ColorUtils;
+import androidx.lifecycle.ViewModelProviders;
+import androidx.navigation.fragment.NavHostFragment;
+
+import com.google.android.material.bottomsheet.BottomSheetDialog;
+import com.google.android.material.chip.Chip;
+import com.google.android.material.chip.ChipGroup;
+import com.google.android.material.snackbar.Snackbar;
+
+import java.util.Random;
 
 import cn.surine.schedulex.R;
+import cn.surine.schedulex.base.Constants;
 import cn.surine.schedulex.base.controller.BaseBindingFragment;
+import cn.surine.schedulex.base.utils.InstanceFactory;
+import cn.surine.schedulex.base.utils.Strs;
+import cn.surine.schedulex.base.utils.Toasts;
+import cn.surine.schedulex.base.utils.Uis;
 import cn.surine.schedulex.data.entity.Course;
+import cn.surine.schedulex.data.entity.Schedule;
 import cn.surine.schedulex.databinding.FragmentAddCourseBinding;
+import cn.surine.schedulex.ui.course.CourseRepository;
+import cn.surine.schedulex.ui.course.CourseViewModel;
+import cn.surine.schedulex.ui.schedule.ScheduleRepository;
+import cn.surine.schedulex.ui.schedule.ScheduleViewModel;
 import cn.surine.schedulex.ui.view.custom.helper.BtmDialogs;
 
 /**
@@ -18,6 +43,13 @@ import cn.surine.schedulex.ui.view.custom.helper.BtmDialogs;
  */
 public class AddCourseFragment extends BaseBindingFragment<FragmentAddCourseBinding> {
 
+
+    private ScheduleViewModel scheduleViewModel;
+    private Schedule schedule;
+    private Course course;
+    private CourseViewModel courseViewModel;
+    private FragmentAddCourseBinding globalT;
+
     @Override
     public int layoutId() {
         return R.layout.fragment_add_course;
@@ -26,7 +58,23 @@ public class AddCourseFragment extends BaseBindingFragment<FragmentAddCourseBind
 
     @Override
     protected void onInit(FragmentAddCourseBinding t) {
-        Course course = new Course();
+        globalT = t;
+        course = new Course();
+
+
+        Class[] classesForSchedule = new Class[]{ScheduleRepository.class};
+        Object[] argsForSchedule = new Object[]{ScheduleRepository.abt.getInstance()};
+        scheduleViewModel = ViewModelProviders.of(this, InstanceFactory.getInstance(classesForSchedule, argsForSchedule)).get(ScheduleViewModel.class);
+        Class[] classesForCourse = new Class[]{CourseRepository.class};
+        Object[] argsForCourse = new Object[]{CourseRepository.abt.getInstance()};
+        courseViewModel = ViewModelProviders.of(this, InstanceFactory.getInstance(classesForCourse, argsForCourse)).get(CourseViewModel.class);
+
+
+        //获取当前课表
+        schedule = scheduleViewModel.getCurSchedule();
+        course.scheduleId = schedule.roomId;
+        course.color = Constants.COLOR_1[new Random(System.currentTimeMillis()).nextInt(Constants.COLOR_1.length)];
+        course.id = String.valueOf(System.currentTimeMillis());
 
         //编辑课表名
         t.editCourseName.setOnClickListener(v -> BtmDialogs.showEditBtmDialog(activity(), t.courseNameSubTitle.getText().toString(), s -> {
@@ -40,5 +88,194 @@ public class AddCourseFragment extends BaseBindingFragment<FragmentAddCourseBind
             t.coursePositionSubtitle.setText(s);
         }));
 
+
+        //编辑教师姓名
+        t.editCourseTeacher.setOnClickListener(v -> BtmDialogs.showEditBtmDialog(activity(), t.courseTeacherSubtitle.getText().toString(), s -> {
+            course.teacherName = s;
+            t.courseTeacherSubtitle.setText(s);
+        }));
+
+
+        //编辑学分
+        t.editCourseScore.setOnClickListener(v -> BtmDialogs.showEditBtmDialog(activity(), t.courseScoreSubtitle.getText().toString(), s -> {
+            course.xf = s;
+            t.courseScoreSubtitle.setText(getString(R.string.score_2_0, s));
+        }));
+
+        //编辑上课时间
+        t.editCoursePlan.setOnClickListener(v -> showPlanTime());
+
+
+        //保存课程
+        t.addCourse.setOnClickListener(v -> {
+            if (course != null) {
+                if (Strs.hasEmpty(course.coureName, course.classWeek, course.classDay, course.classSessions, course.continuingSession)) {
+                    Toasts.toast(getString(R.string.param_empty));
+                } else {
+                    courseViewModel.insert(course);
+                    Toasts.toast(getString(R.string.add_success));
+                    NavHostFragment.findNavController(AddCourseFragment.this).navigateUp();
+                }
+            } else {
+                Toasts.toast(getString(R.string.course_null));
+            }
+        });
+
+    }
+
+
+    private void showPlanTime() {
+        BottomSheetDialog bt = new BottomSheetDialog(activity());
+        View view;
+        bt.setContentView(view = Uis.inflate(activity(), R.layout.view_course_time_plan));
+        bt.getWindow().findViewById(R.id.design_bottom_sheet).setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        bt.show();
+        view.animate().translationY(50);
+        FrameLayout frameLayout = view.findViewById(R.id.view_course_time_plan);
+        frameLayout.addView(getWeekView(frameLayout, bt));
+    }
+
+
+    /**
+     * 添加周View
+     *
+     * @param frameLayout
+     * @param bt
+     */
+    @SuppressLint("SetTextI18n")
+    private View getWeekView(FrameLayout frameLayout, BottomSheetDialog bt) {
+        View weekView = Uis.inflate(activity(), R.layout.view_week_choose);
+        //周选择
+        ChipGroup chipGroup = weekView.findViewById(R.id.chipGroup);
+        chipGroup.removeAllViews();
+        for (int i = 0; i < schedule.totalWeek; i++) {
+            Chip chip = new Chip(activity());
+            chip.setText("" + (i + 1));
+            chip.setCheckable(true);
+            chip.setCheckedIconVisible(true);
+            chipGroup.addView(chip);
+        }
+
+        Button single = weekView.findViewById(R.id.single);
+        Button doubleWeek = weekView.findViewById(R.id.doubleWeek);
+        Button all = weekView.findViewById(R.id.all);
+
+        single.setOnClickListener(v -> {
+            chipGroup.clearCheck();
+            for (int i = 0; i < schedule.totalWeek; i++) {
+                Chip chip = (Chip) chipGroup.getChildAt(i);
+                if (Integer.parseInt(chip.getText().toString()) % 2 != 0) {
+                    chip.setChecked(true);
+                }
+            }
+        });
+
+        doubleWeek.setOnClickListener(v -> {
+            chipGroup.clearCheck();
+            for (int i = 0; i < schedule.totalWeek; i++) {
+                Chip chip = (Chip) chipGroup.getChildAt(i);
+                if (Integer.parseInt(chip.getText().toString()) % 2 == 0) {
+                    chip.setChecked(true);
+                }
+            }
+        });
+
+
+        all.setOnClickListener(v -> {
+            chipGroup.clearCheck();
+            for (int i = 0; i < schedule.totalWeek; i++) {
+                Chip chip = (Chip) chipGroup.getChildAt(i);
+                chip.setChecked(true);
+            }
+        });
+
+
+        Button button = weekView.findViewById(R.id.button);
+        button.setOnClickListener(v -> {
+            StringBuilder sb = new StringBuilder();
+            for (int i = 0; i < schedule.totalWeek; i++) {
+                Chip chip = (Chip) chipGroup.getChildAt(i);
+                if (chip.isChecked()) {
+                    sb.append(1);
+                } else {
+                    sb.append(0);
+                }
+            }
+
+            if (sb.toString().contains("1")) {
+                course.classWeek = sb.toString();
+                frameLayout.removeAllViews();
+                frameLayout.addView(getDayView(frameLayout, bt));
+            }
+
+        });
+        return weekView;
+    }
+
+
+    /**
+     * 获取周view
+     */
+    private View getDayView(FrameLayout frameLayout, BottomSheetDialog bt) {
+        View dayView = Uis.inflate(activity(), R.layout.view_day_choose);
+        NumberPicker numberPicker = dayView.findViewById(R.id.number_picker);
+        String[] city = {"星期一", "星期二", "星期三", "星期四", "星期五"};
+        numberPicker.setDisplayedValues(city);
+        numberPicker.setMinValue(0);
+        numberPicker.setMaxValue(city.length - 1);
+        numberPicker.setDescendantFocusability(DatePicker.FOCUS_BLOCK_DESCENDANTS);
+        Button ok = dayView.findViewById(R.id.button);
+        ok.setOnClickListener(v -> {
+            course.classDay = String.valueOf(numberPicker.getValue() + 1);
+            frameLayout.removeAllViews();
+            frameLayout.addView(getSessionView(frameLayout, bt));
+        });
+        return dayView;
+    }
+
+    /**
+     * 获取节次view
+     */
+    @SuppressLint("SetTextI18n")
+    private View getSessionView(FrameLayout frameLayout, BottomSheetDialog bt) {
+        View sessionView = Uis.inflate(activity(), R.layout.view_session_choose);
+        NumberPicker npForStartSession = sessionView.findViewById(R.id.number_picker);
+        String[] s1 = {"1", "3", "5", "7"};
+        npForStartSession.setDisplayedValues(s1);
+        npForStartSession.setMinValue(0);
+        npForStartSession.setMaxValue(s1.length - 1);
+        npForStartSession.setDescendantFocusability(DatePicker.FOCUS_BLOCK_DESCENDANTS);
+
+        NumberPicker npForContinueSession = sessionView.findViewById(R.id.numberPicker2);
+        String[] s2 = {"2", "4"};
+        npForContinueSession.setDisplayedValues(s2);
+        npForContinueSession.setMinValue(0);
+        npForContinueSession.setMaxValue(s2.length - 1);
+        npForContinueSession.setDescendantFocusability(DatePicker.FOCUS_BLOCK_DESCENDANTS);
+
+        Button sessionOk = sessionView.findViewById(R.id.button);
+        sessionOk.setOnClickListener(v -> {
+            String result_1 = s1[npForStartSession.getValue()];
+            String result_2 = s2[npForContinueSession.getValue()];
+            if (Integer.parseInt(result_1) + Integer.parseInt(result_2) -1 <= 8) {
+                course.classSessions = result_1;
+                course.continuingSession = result_2;
+                bt.dismiss();
+                globalT.courseTimeSubtitle.setText(course.getWeekDescription() + "\n" + course.getClassDayDescription() + " " + course.getSessionDescription());
+            } else {
+                Toasts.toast(getString(R.string.overlimit));
+            }
+        });
+        return sessionView;
+    }
+
+
+    @Override
+    public void onBackPressed() {
+        if (course != null) {
+            Snackbar.make(getView(), "您还没有保存，确定退出么？", Snackbar.LENGTH_LONG).setAction(R.string.btn_ok, v -> NavHostFragment.findNavController(AddCourseFragment.this).navigateUp()).show();
+        } else {
+            super.onBackPressed();
+        }
     }
 }

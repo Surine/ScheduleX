@@ -7,12 +7,16 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.annotation.CallSuper;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.databinding.ViewDataBinding;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.Navigation;
+import androidx.navigation.fragment.NavHostFragment;
 
 import cn.surine.schedulex.base.interfaces.IBack;
+import cn.surine.schedulex.base.utils.Navigations;
 
 /**
  * Intro：
@@ -46,9 +50,11 @@ public abstract class BaseFragment extends Fragment {
     /**
      * the method for back key pressed
      * */
-    public boolean onBackPressed(){
-        return false;
+    @CallSuper
+    public void onBackPressed(){
+        NavHostFragment.findNavController(this).navigateUp();
     }
+
 
     public Activity activity() {
         return getActivity() == null ? activity : getActivity();
@@ -67,11 +73,7 @@ public abstract class BaseFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(layoutId(), container, false);
-        if(getActivity() instanceof IBack){
-            this.iBack = (IBack) getActivity();
-        }else{
-            throw new ClassCastException("Hosting Activity must implement BackHandledInterface");
-        }
+
         onInit(view);
         return view;
     }
@@ -79,6 +81,12 @@ public abstract class BaseFragment extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
-        iBack.onBackKeyClick(this);
+        if(getActivity() instanceof IBack){
+            this.iBack = (IBack) getActivity();
+            //此时将返回键任务交给fragment
+            iBack.onBackKeyClick(this);
+        }else {
+            throw new ClassCastException("Hosting Activity must implement BackHandledInterface");
+        }
     }
 }

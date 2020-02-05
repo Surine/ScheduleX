@@ -87,7 +87,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/textView17"
                 app:layout_constraintVertical_bias="0.38" />
 
-            <Button
+            <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/github"
                 style="@style/button_style"
                 android:layout_width="wrap_content"
@@ -101,7 +101,7 @@
                 app:layout_constraintTop_toTopOf="@+id/guideline24" />
 
 
-            <Button
+            <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/alipay"
                 style="@style/button_style"
                 android:layout_width="wrap_content"
@@ -221,7 +221,7 @@
                         android:layout_marginTop="@dimen/dp8"
                         android:textColor="@android:color/black"
                         android:textSize="18sp"
-                        android:text="QQ Group"
+                        android:text="@string/qq_group"
                         android:textStyle="bold"
                         app:layout_constraintLeft_toLeftOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
@@ -232,7 +232,7 @@
                         android:id="@+id/b1"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="点击复制QQ"
+                        android:text="@string/qq"
                         android:layout_marginTop="@dimen/dp8"
                         android:layout_marginBottom="@dimen/dp16"
                         app:layout_constraintBottom_toBottomOf="parent"
@@ -265,7 +265,7 @@
                         android:layout_marginTop="@dimen/dp8"
                         android:textColor="@android:color/black"
                         android:textSize="18sp"
-                        android:text="酷安ID"
+                        android:text="@string/coolapk_id"
                         android:textStyle="bold"
                         app:layout_constraintLeft_toLeftOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
@@ -276,7 +276,7 @@
                         android:id="@+id/b2"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="点击关注我"
+                        android:text="@string/coolapk_follow"
                         android:layout_marginTop="@dimen/dp8"
                         android:layout_marginBottom="@dimen/dp16"
                         app:layout_constraintBottom_toBottomOf="parent"

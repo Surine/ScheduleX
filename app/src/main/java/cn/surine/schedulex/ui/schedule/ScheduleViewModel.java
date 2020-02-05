@@ -36,7 +36,7 @@ public class ScheduleViewModel extends ViewModel {
         Schedule schedule = new Schedule();
         schedule.name = name;
         schedule.totalWeek = totalWeek == 0 ? 24 : totalWeek;
-        schedule.color = Constants.COLOR_1[new Random(System.currentTimeMillis()).nextInt(10)];
+        schedule.color = Constants.COLOR_1[new Random(System.currentTimeMillis()).nextInt(Constants.COLOR_1.length)];
         schedule.termStartDate = Dates.getTermStartDate(curWeek == 0 ? 1 : curWeek);
         return scheduleRepository.addSchedule(schedule);
     }

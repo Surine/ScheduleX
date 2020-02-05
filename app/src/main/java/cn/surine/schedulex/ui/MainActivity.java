@@ -21,7 +21,7 @@ import static androidx.lifecycle.ViewModelProviders.of;
  * @author sunliwei
  * @date 2020-01-17 10:59
  */
-public class MainActivity extends AppCompatActivity implements IBack {
+public class MainActivity extends AppCompatActivity implements IBack{
     MainViewModel viewModel;
     private BaseFragment curFragment;
 
@@ -44,11 +44,11 @@ public class MainActivity extends AppCompatActivity implements IBack {
         }
     }
 
+
     @Override
     public void onBackPressed() {
-        //如果返回true就拦截，拦截之后直接关闭app
-        if(curFragment != null && curFragment.onBackPressed()){
-            finish();
+        if(curFragment != null){
+            curFragment.onBackPressed();
         }else{
             super.onBackPressed();
         }

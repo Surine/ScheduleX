@@ -81,7 +81,7 @@
                 android:id="@+id/github"
                 style="@style/button_style"
                 android:layout_width="wrap_content"
-                android:layout_height="@dimen/dp40"
+                android:layout_height="wrap_content"
                 android:layout_marginEnd="12dp"
                 android:paddingStart="@dimen/dp10"
                 android:paddingEnd="@dimen/dp10"
@@ -90,7 +90,7 @@
                 app:layout_constraintEnd_toStartOf="@+id/guideline22"
                 app:layout_constraintTop_toTopOf="@+id/guideline24" />
 
-            <Button
+            <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/deleteSchedule"
                 style="@style/Widget.AppCompat.Button.Borderless.Colored"
                 android:layout_width="wrap_content"
@@ -179,7 +179,7 @@
 
 
                     <TextView
-                        android:id="@+id/coursePositionSubtitle"
+                        android:id="@+id/scheduleWeekSubtitle"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/dp8"
@@ -194,7 +194,7 @@
                         android:layout_width="20dp"
                         android:layout_height="20dp"
                         android:layout_marginEnd="8dp"
-                        app:layout_constraintBottom_toBottomOf="@+id/coursePositionSubtitle"
+                        app:layout_constraintBottom_toBottomOf="@+id/scheduleWeekSubtitle"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toTopOf="@+id/textView35"
                         app:srcCompat="@mipmap/ic_more" />

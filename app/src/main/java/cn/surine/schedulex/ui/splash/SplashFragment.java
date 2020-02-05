@@ -3,6 +3,8 @@ package cn.surine.schedulex.ui.splash;
 import android.os.Handler;
 import android.view.View;
 
+import androidx.navigation.fragment.NavHostFragment;
+
 import cn.surine.schedulex.R;
 import cn.surine.schedulex.base.Constants;
 import cn.surine.schedulex.base.controller.BaseFragment;
@@ -34,7 +36,9 @@ public class SplashFragment extends BaseFragment {
             }
         };
 
-        mHandler.postDelayed(runnable,1500);
+        if(mHandler != null){
+            mHandler.postDelayed(runnable,1500);
+        }
     }
 
     @Override

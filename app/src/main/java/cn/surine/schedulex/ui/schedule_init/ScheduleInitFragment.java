@@ -1,6 +1,7 @@
 package cn.surine.schedulex.ui.schedule_init;
 
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.text.TextUtils;
 
@@ -43,8 +44,9 @@ public class ScheduleInitFragment extends BaseBindingFragment<FragmentScheduleIn
         });
     }
 
+    @SuppressLint("MissingSuperCall")
     @Override
-    public boolean onBackPressed() {
-        return true;
+    public void onBackPressed() {
+        activity().finish();
     }
 }

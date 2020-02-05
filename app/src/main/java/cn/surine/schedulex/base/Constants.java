@@ -33,15 +33,23 @@ public class Constants {
      */
     public static final String NORMAL_COLOR = "#536DFE";
     public static final String[] COLOR_1 = new String[]{
-            "#FF5252",
-            "#FF4081",
-            "#E040FB",
-            "##536DFE",
-            "#7C4DFF",
-            "#40C4FF",
-            "#18FFFF",
-            "#B2FF59",
-            "#FFFF00",
-            "#FF6E40",
+            "#df0404",
+            "#0d629b",
+            "#b99f09",
+            "#569707",
+            "#d15808",
+            "#d15808",
+            "#0ca154",
+            "#0ca0a3",
+            "#c211ad",
+            "#1e1880",
+            "#b30c35",
+            "#75139c",
+            "#138f07",
+            "#a4145a",
+            "#b91148",
+            "#3d1496",
+            "#86051d"
     };
+
 }

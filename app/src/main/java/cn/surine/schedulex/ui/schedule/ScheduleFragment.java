@@ -1,17 +1,11 @@
 package cn.surine.schedulex.ui.schedule;
 
 import android.annotation.SuppressLint;
-import android.graphics.Bitmap;
-import android.graphics.Color;
-import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.text.TextUtils;
-import android.view.View;
 
-import androidx.core.graphics.ColorUtils;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.navigation.Navigation;
-import androidx.palette.graphics.Palette;
 import androidx.viewpager2.widget.ViewPager2;
 
 import com.bumptech.glide.Glide;
@@ -23,7 +17,6 @@ import cn.surine.schedulex.R;
 import cn.surine.schedulex.base.Constants;
 import cn.surine.schedulex.base.controller.BaseBindingFragment;
 import cn.surine.schedulex.base.utils.InstanceFactory;
-import cn.surine.schedulex.base.utils.Objs;
 import cn.surine.schedulex.base.utils.Prefs;
 import cn.surine.schedulex.data.entity.Course;
 import cn.surine.schedulex.data.entity.Schedule;
@@ -79,7 +72,8 @@ public class ScheduleFragment extends BaseBindingFragment<FragmentScheduleBindin
         int currentWeek = curSchedule.curWeek();
         List<List<Course>> unHandleCourseList = new ArrayList<>();
         for (int i = 0; i < curSchedule.totalWeek; i++) {
-            unHandleCourseList.add(courseViewModel.queryCourseByWeek(i + 1, curSchedule.roomId));
+            List<Course> dbData = courseViewModel.queryCourseByWeek(i + 1, curSchedule.roomId);
+            unHandleCourseList.add(dbData);
         }
         List<List<Course>> cl = scheduleViewModel.getAllCourseUiData(unHandleCourseList, curSchedule);
         ScheduleViewpagerAdapter scheduleViewpagerAdapter = new ScheduleViewpagerAdapter(cl, ScheduleFragment.this);
@@ -134,9 +128,9 @@ public class ScheduleFragment extends BaseBindingFragment<FragmentScheduleBindin
     }
 
 
-
+    @SuppressLint("MissingSuperCall")
     @Override
-    public boolean onBackPressed() {
-        return true;
+    public void onBackPressed() {
+        activity().finish();
     }
 }
