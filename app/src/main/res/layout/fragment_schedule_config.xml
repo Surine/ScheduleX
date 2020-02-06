@@ -65,14 +65,15 @@
                 app:layout_constraintTop_toTopOf="@+id/guideline23" />
 
             <TextView
-                android:id="@+id/textView26"
-                android:layout_width="wrap_content"
+                android:id="@+id/version_slogan"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:lineSpacingExtra="@dimen/t2"
                 android:text="@string/config_schedule_subtitle"
                 android:textAlignment="viewStart"
                 android:textSize="@dimen/t18"
                 app:layout_constraintBottom_toTopOf="@+id/guideline24"
+                app:layout_constraintEnd_toStartOf="@+id/guideline22"
                 app:layout_constraintStart_toStartOf="@+id/textView17"
                 app:layout_constraintTop_toBottomOf="@+id/textView17"
                 app:layout_constraintVertical_bias="0.38" />
@@ -302,7 +303,7 @@
                         app:layout_constraintBottom_toBottomOf="@+id/textView38"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toTopOf="@+id/textView37"
-                        app:srcCompat="@mipmap/test_bg" />
+                        />
 
 
                 </androidx.constraintlayout.widget.ConstraintLayout>

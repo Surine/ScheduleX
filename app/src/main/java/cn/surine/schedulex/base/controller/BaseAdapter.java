@@ -29,6 +29,7 @@ public class BaseAdapter<T> extends RecyclerView.Adapter<ViewHolder> {
 
 
     private OnItemClickListener onItemClickListener;
+    private OnMyItemLongClickListener onItemLongClickListener;
     private HashMap<Integer, OnItemElementClickListener> itemElementClickListenerHashMap = new HashMap<>();
 
 
@@ -43,6 +44,16 @@ public class BaseAdapter<T> extends RecyclerView.Adapter<ViewHolder> {
          * @param position 点击位置
          */
         void onClick(int position);
+    }
+
+
+    public interface OnMyItemLongClickListener {
+        /**
+         * 实现此方法用于接受点击事件的响应
+         *
+         * @param position 点击位置
+         */
+        boolean onClick(int position);
     }
 
 
@@ -74,6 +85,10 @@ public class BaseAdapter<T> extends RecyclerView.Adapter<ViewHolder> {
         itemElementClickListenerHashMap.put(onItemElementClickListener.id, onItemElementClickListener);
     }
 
+    public void setOnItemLongClickListener(OnMyItemLongClickListener onItemLongClickListener) {
+        this.onItemLongClickListener = onItemLongClickListener;
+    }
+
     public BaseAdapter(List<T> mDatas, int layoutId, int bindName) {
         this.mDatas = mDatas;
         this.layoutId = layoutId;
@@ -98,7 +113,7 @@ public class BaseAdapter<T> extends RecyclerView.Adapter<ViewHolder> {
         //设置绑定
         ViewHolder viewHolder = new ViewHolder((viewDataBinding = Bindings.bind(parent, layoutId)).getRoot());
         viewHolder.setBinding(viewDataBinding);
-        if(banRecycle){
+        if (banRecycle) {
             viewHolder.setIsRecyclable(false);
         }
         return viewHolder;
@@ -114,6 +129,12 @@ public class BaseAdapter<T> extends RecyclerView.Adapter<ViewHolder> {
         if (onItemClickListener != null) {
             holder.itemView.setOnClickListener(v -> onItemClickListener.onClick(position));
         }
+
+        //长按事件
+        if(onItemLongClickListener != null){
+            holder.itemView.setOnLongClickListener(v -> onItemLongClickListener.onClick(position));
+        }
+
         //item子项点击
         for (Map.Entry<Integer, OnItemElementClickListener> entry : itemElementClickListenerHashMap.entrySet()) {
             try {

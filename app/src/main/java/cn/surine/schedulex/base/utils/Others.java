@@ -8,6 +8,7 @@ import android.content.pm.PackageManager;
 import android.didikee.donate.AlipayDonate;
 import android.net.Uri;
 
+import cn.surine.schedulex.BuildConfig;
 import cn.surine.schedulex.R;
 import cn.surine.schedulex.base.controller.App;
 
@@ -86,5 +87,13 @@ public class Others {
             Toasts.toast(App.context.getString(R.string.no_coolapk));
             e.printStackTrace();
         }
+    }
+
+
+    /**
+     * 获取版本号
+     * */
+    public static String getAppVersion() {
+        return BuildConfig.VERSION_NAME;
     }
 }

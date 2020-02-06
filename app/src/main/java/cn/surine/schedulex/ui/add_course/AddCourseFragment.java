@@ -1,7 +1,6 @@
 package cn.surine.schedulex.ui.add_course;
 
 import android.annotation.SuppressLint;
-import android.app.AlertDialog;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
@@ -36,6 +35,7 @@ import cn.surine.schedulex.ui.course.CourseViewModel;
 import cn.surine.schedulex.ui.schedule.ScheduleRepository;
 import cn.surine.schedulex.ui.schedule.ScheduleViewModel;
 import cn.surine.schedulex.ui.view.custom.helper.BtmDialogs;
+import cn.surine.schedulex.ui.view.custom.helper.CommonDialogs;
 
 /**
  * Intro：
@@ -71,13 +71,13 @@ public class AddCourseFragment extends BaseBindingFragment<FragmentAddCourseBind
         schedule = scheduleViewModel.getCurSchedule();
 
         Bundle bundle = getArguments();
-        if(bundle == null){
+        if (bundle == null) {
             //bundle为空的情况
             course = new Course();
             course.scheduleId = schedule.roomId;
             course.color = Constants.COLOR_1[new Random(System.currentTimeMillis()).nextInt(Constants.COLOR_1.length)];
             course.id = course.scheduleId + "@" + System.currentTimeMillis();
-        }else if(Strs.isNotEmpty(bundle.getString(BtmDialogs.COURSE_ID))){
+        } else if (Strs.isNotEmpty(bundle.getString(BtmDialogs.COURSE_ID))) {
             //course id不为空的情况
             course = courseViewModel.getCourseById(getArguments().getString(BtmDialogs.COURSE_ID));
             if (course != null) {
@@ -87,7 +87,7 @@ public class AddCourseFragment extends BaseBindingFragment<FragmentAddCourseBind
                 Toasts.toast(getString(R.string.get_course_fail));
                 return;
             }
-        }else{
+        } else {
             Toasts.toast(getString(R.string.get_course_fail));
             return;
         }
@@ -169,16 +169,12 @@ public class AddCourseFragment extends BaseBindingFragment<FragmentAddCourseBind
      * 删除课表
      */
     private void deleteCourse() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(activity());
-        builder.setTitle(R.string.warning);
-        builder.setMessage(R.string.delete_course_dialog_msg);
-        builder.setNegativeButton(R.string.btn_ok, (dialog, which) -> {
-            courseViewModel.deleteByCourseId(course.id);
-            Toasts.toast(getString(R.string.course_is_delete));
-            NavHostFragment.findNavController(AddCourseFragment.this).navigateUp();
-        });
-        builder.setPositiveButton(R.string.btn_cancel, null);
-        builder.show();
+        CommonDialogs.getCommonDialog(activity(), getString(R.string.warning), getString(R.string.delete_schedule_dialog_msg)
+                , () -> {
+                    courseViewModel.deleteByCourseId(course.id);
+                    Toasts.toast(getString(R.string.delete_course_dialog_msg));
+                    NavHostFragment.findNavController(AddCourseFragment.this).navigateUp();
+                }, null).show();
     }
 
 

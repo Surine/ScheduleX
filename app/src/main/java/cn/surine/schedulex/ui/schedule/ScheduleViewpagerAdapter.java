@@ -15,7 +15,6 @@ import cn.surine.schedulex.R;
 import cn.surine.schedulex.base.controller.BaseAdapter;
 import cn.surine.schedulex.base.controller.BaseFragment;
 import cn.surine.schedulex.data.entity.Course;
-import cn.surine.schedulex.ui.view.custom.EmptyView;
 import cn.surine.schedulex.ui.view.custom.helper.BtmDialogs;
 
 /**
@@ -36,7 +35,7 @@ public class ScheduleViewpagerAdapter extends RecyclerView.Adapter<ScheduleViewp
     }
 
 
-    public interface OnScrollBindListener{
+    public interface OnScrollBindListener {
         void onScroll(int position);
     }
 
@@ -62,16 +61,16 @@ public class ScheduleViewpagerAdapter extends RecyclerView.Adapter<ScheduleViewp
         adapter.setBanRecycle(true);
         holder.recyclerView.setLayoutManager(new GridLayoutManager(baseFragment.activity(), 5));
         holder.recyclerView.setAdapter(adapter);
-        holder.recyclerView.scrollTo(0,0);
+        holder.recyclerView.scrollTo(0, 0);
         //设置滚动监听器
         setScrollerListener(holder.recyclerView);
 
         adapter.setOnItemClickListener(courseDataPosition -> {
             Course course = courseList.get(position).get(courseDataPosition);
-            if(course == null){
+            if (course == null) {
                 return;
             }
-            BtmDialogs.showCourseInfoBtmDialog(baseFragment,course);
+            BtmDialogs.showCourseInfoBtmDialog(baseFragment, course);
         });
     }
 
@@ -81,7 +80,7 @@ public class ScheduleViewpagerAdapter extends RecyclerView.Adapter<ScheduleViewp
             @Override
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
                 super.onScrolled(recyclerView, dx, dy);
-                if(onScrollBindListener != null){
+                if (onScrollBindListener != null) {
                     onScrollBindListener.onScroll(dy);
                 }
             }
@@ -95,7 +94,6 @@ public class ScheduleViewpagerAdapter extends RecyclerView.Adapter<ScheduleViewp
 
     class ViewPagerViewHolder extends RecyclerView.ViewHolder {
         RecyclerView recyclerView;
-        EmptyView emptyView;
 
         ViewPagerViewHolder(@NonNull View itemView) {
             super(itemView);

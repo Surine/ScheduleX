@@ -8,6 +8,7 @@ import androidx.lifecycle.ViewModelProviders;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 import java.util.List;
 
@@ -46,8 +47,8 @@ public class ScheduleListFragment extends BaseBindingFragment<FragmentScheduleLi
         data = scheduleViewModel.getSchedules();
         BaseAdapter<Schedule> adapter = new BaseAdapter<>(data, R.layout.item_schedule_view, cn.surine.schedulex.BR.schedule);
         RecyclerView recyclerview = (RecyclerView) t.viewRecycler;
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(activity());
-        recyclerview.setLayoutManager(linearLayoutManager);
+        StaggeredGridLayoutManager staggeredGridLayoutManager = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
+        recyclerview.setLayoutManager(staggeredGridLayoutManager);
         recyclerview.setAdapter(adapter);
 
         adapter.setOnItemClickListener(position -> {
@@ -57,13 +58,11 @@ public class ScheduleListFragment extends BaseBindingFragment<FragmentScheduleLi
         });
 
 
-        adapter.setOnItemElementClickListener(new BaseAdapter.OnItemElementClickListener(R.id.editSchedule) {
-            @Override
-            public void onClick(View v, int position) {
-                Bundle bundle = new Bundle();
-                bundle.putInt(SCHEDULE_ID, data.get(position).roomId);
-                Navigations.open(ScheduleListFragment.this, R.id.action_ScheduleListFragment_to_scheduleConfigFragment,bundle);
-            }
+        adapter.setOnItemLongClickListener(position -> {
+            Bundle bundle = new Bundle();
+            bundle.putInt(SCHEDULE_ID, data.get(position).roomId);
+            Navigations.open(ScheduleListFragment.this, R.id.action_ScheduleListFragment_to_scheduleConfigFragment,bundle);
+            return true;
         });
 
 

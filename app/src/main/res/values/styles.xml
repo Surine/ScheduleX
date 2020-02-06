@@ -72,4 +72,9 @@
         <item name="android:paddingBottom">2dp</item>
     </style>
 
+    <style name="DialogAnimations" parent="android:Animation">
+        <item name="android:windowEnterAnimation" >@anim/slide_bottom_in</item>
+        <item name="android:windowExitAnimation" >@anim/slide_bottom_out</item>
+    </style>
+
 </resources>

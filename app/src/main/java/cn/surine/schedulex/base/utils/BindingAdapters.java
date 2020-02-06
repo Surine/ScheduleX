@@ -10,7 +10,14 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import androidx.cardview.widget.CardView;
+
+import com.bumptech.glide.Glide;
+
+import java.io.File;
+
 import cn.surine.schedulex.base.Constants;
+import cn.surine.schedulex.base.controller.App;
 
 /**
  * Intro：自定义绑定
@@ -50,13 +57,13 @@ public class BindingAdapters {
      * 给schedule 卡片添加背景
      */
     @androidx.databinding.BindingAdapter("scheduleCardMainBackground")
-    public static void scheduleCardMainBackground(LinearLayout linearLayout, String color) {
+    public static void scheduleCardMainBackground(CardView cardView, String color) {
         if (color == null || TextUtils.isEmpty(color)) {
             color = Constants.NORMAL_COLOR;
         }
         try {
             int[] gradientColor = new int[]{Color.parseColor(color), Color.parseColor("#BEF5F2F2")};
-            linearLayout.setBackground(Drawables.getDrawable(GradientDrawable.Orientation.LEFT_RIGHT, gradientColor, 20, 0, Color.parseColor(color)));
+            cardView.setBackground(Drawables.getDrawable(GradientDrawable.Orientation.LEFT_RIGHT, gradientColor, 20, 0, Color.parseColor(color)));
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -96,6 +103,17 @@ public class BindingAdapters {
     public static void courseItemCardBackground(LinearLayout linearLayout, String color) {
         if (color != null && !TextUtils.isEmpty(color)) {
             linearLayout.setBackground(Drawables.getDrawable(Color.parseColor(color), 20, 3, Color.WHITE));
+        }
+    }
+
+
+    /**
+     * 给image设置背景（使用glide）
+     * */
+    @androidx.databinding.BindingAdapter("glideToImage")
+    public static void glideToImage(ImageView imageView,String s){
+        if (s != null){
+            Glide.with(App.context).load(new File(s)).into(imageView);
         }
     }
 }

@@ -121,11 +121,11 @@ public class ScheduleDataFetchFragment extends BaseBindingFragment<FragmentDataF
      */
     private void loadData(String jsonPath) {
         String jsonContent = Files.getFileContent(jsonPath);
+        long id;
         List<Course> list;
         try {
             list = Jsons.parseJsonWithGsonToList(jsonContent, Course.class);
             Course[] courses = new Course[list.size()];
-            long id;
             Prefs.save(Constants.CUR_SCHEDULE, (id = scheduleViewModel.addSchedule(scheduleName, 24, 1)));
             for (int i = 0; i < list.size(); i++) {
                 Course course = list.get(i);

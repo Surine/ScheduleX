@@ -9,15 +9,19 @@ import androidx.navigation.Navigation;
 import androidx.viewpager2.widget.ViewPager2;
 
 import com.bumptech.glide.Glide;
+import com.google.android.material.snackbar.Snackbar;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
 import cn.surine.schedulex.R;
 import cn.surine.schedulex.base.Constants;
 import cn.surine.schedulex.base.controller.BaseBindingFragment;
+import cn.surine.schedulex.base.interfaces.Call;
 import cn.surine.schedulex.base.utils.InstanceFactory;
 import cn.surine.schedulex.base.utils.Prefs;
+import cn.surine.schedulex.base.utils.Toasts;
 import cn.surine.schedulex.data.entity.Course;
 import cn.surine.schedulex.data.entity.Schedule;
 import cn.surine.schedulex.databinding.FragmentScheduleBinding;
@@ -25,6 +29,7 @@ import cn.surine.schedulex.ui.course.CourseRepository;
 import cn.surine.schedulex.ui.course.CourseViewModel;
 import cn.surine.schedulex.ui.timer.TimerRepository;
 import cn.surine.schedulex.ui.timer.TimerViewModel;
+import cn.surine.schedulex.ui.view.custom.helper.CommonDialogs;
 import cn.surine.schedulex.ui.view.custom.helper.ZoomOutPageTransformer;
 
 public class ScheduleFragment extends BaseBindingFragment<FragmentScheduleBinding> {
@@ -43,6 +48,7 @@ public class ScheduleFragment extends BaseBindingFragment<FragmentScheduleBindin
     protected void onInit(FragmentScheduleBinding t) {
 
         if (Prefs.getBoolean(Constants.IS_FIRST, false)) {
+            CommonDialogs.getCommonDialog(activity(), getString(R.string.warning), getString(R.string.first_toast), null,null).show();
             Prefs.save(Constants.IS_FIRST, true);
         }
 
@@ -102,8 +108,8 @@ public class ScheduleFragment extends BaseBindingFragment<FragmentScheduleBindin
         t.title.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.action_dailyFragment_to_aboutFragment));
 
         if (!TextUtils.isEmpty(curSchedule.imageUrl)) {
-            Uri uri = Uri.parse(curSchedule.imageUrl);
-            Glide.with(activity()).load(uri).into(t.background);
+//            Uri uri = Uri.parse(curSchedule.imageUrl);
+            Glide.with(activity()).load(new File(curSchedule.imageUrl)).into(t.background);
             configPaletteTextColor(t);
         }
 

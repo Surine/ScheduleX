@@ -28,7 +28,7 @@
     <string name="config">配置</string>
     <string name="schedules">课表</string>
     <string name="add_schedule">添加课表</string>
-    <string name="schedule_config_subtitle">你可以管理你的课表</string>
+    <string name="schedule_config_subtitle">点击切换课表，\n长按进行课表编辑</string>
     <string name="theme">主题</string>
     <string name="theme_list_subtitle">包含课表背景和课程随机颜色</string>
     <string name="week">%s周</string>
@@ -41,12 +41,7 @@
     <string name="btn_ok">确定</string>
     <string name="schedule_is_delete">课表已删除！</string>
     <string name="course_is_delete">课程已删除！</string>
-    <string name="open_source_license">
-    Android Jetpack\nhttps://developer.android.google.cn/jetpack\nData Binding: Declaratively bind observable data to UI elements\nLive Data: Notify views when underlying database changes\nNavigation: Handle everything needed for in-app navigation\nRoom: Fluent SQLite database access\nViewModel: Manage UI-related data in a lifecycle-conscious way\nViewPager2: Create swipe views between tabs\n\n
-
-
-
-    </string>
+    <string name="open_source_license">Jetpack framework &amp; AndroidX ViewModel,Navigation,DataBinding,Room,ViewPager2,Dynamicanimation,Palette  https://developer.android.google.cn/jetpack/   Retrofit  https://github.com/square/retrofit   Okhttp3  https://github.com/square/okhttp   Gson  https://github.com/google/gson   Glide  https://github.com/bumptech/glide   Rxjava  https://github.com/ReactiveX/RxJava   Rxpermissions  https://github.com/tbruyelle/RxPermissions   AndroidDonate  https://github.com/didikee/AndroidDonate  </string>
     <string name="background">背景图</string>
     <string name="palette_color">色卡颜色</string>
     <string name="schedule_name">课表名称</string>
@@ -108,4 +103,5 @@
     <string name="my_qrcode">我的二维码</string>
     <string name="export_json">导出Json</string>
     <string name="parse_fail">解析失败,请选择课程文件</string>
+    <string name="first_toast">试试左右滑动切换周吧~ 点击标题小表情可以回到当前周哦！</string>
 </resources>

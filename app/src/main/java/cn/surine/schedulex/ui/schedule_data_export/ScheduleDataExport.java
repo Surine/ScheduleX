@@ -2,6 +2,7 @@ package cn.surine.schedulex.ui.schedule_data_export;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
+import android.view.View;
 
 import androidx.lifecycle.ViewModelProviders;
 
@@ -71,6 +72,9 @@ public class ScheduleDataExport extends BaseBindingFragment<FragmentDateExportBi
             });
         });
 
+        t.exportExcel.setOnClickListener(v -> Toasts.toast("暂不支持！"));
+        t.myQrCode.setOnClickListener(v -> Toasts.toast("暂不支持！"));
+        t.other.setOnClickListener(v -> Toasts.toast("欢迎加群提出意见！"));
     }
 
     /**

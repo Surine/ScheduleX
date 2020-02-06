@@ -27,7 +27,7 @@
     <string name="unknown">UnKnown</string>
     <string name="score_2_0">%s Score</string>
     <string name="schedules">Schedules</string>
-    <string name="schedule_config_subtitle">You can manage your \nSchedules</string>
+    <string name="schedule_config_subtitle">Click to switch the schedule, \nlong press to edit the schedule</string>
     <string name="add_schedule">Add Schedule</string>
     <string name="theme">Theme</string>
     <string name="theme_list_subtitle">include schedule background \nand course item random color</string>
@@ -42,18 +42,29 @@
     <string name="btn_cancel">Cancel</string>
     <string name="schedule_is_delete">Schedule has been deleted!</string>
     <string name="course_is_delete">Course has been deleted!</string>
-    <string name="open_source_license">
-                Android Jetpack\n
-        https://developer.android.google.cn/jetpack\n
+    <string name="open_source_license">Jetpack framework &amp; AndroidX\nViewModel,Navigation,DataBinding,Room,ViewPager2,Dynamicanimation,Palette\n
+        https://developer.android.google.cn/jetpack/\n\n
 
-        Data Binding: Declaratively bind observable data to UI elements
-        Live Data: Notify views when underlying database changes
-        Navigation: Handle everything needed for in-app navigation
-        Room: Fluent SQLite database access
-        ViewModel: Manage UI-related data in a lifecycle-conscious way
-        ViewPager2: Create swipe views between tabs\n\n
+        Retrofit\n
+        https://github.com/square/retrofit\n\n
 
+        Okhttp3\n
+        https://github.com/square/okhttp\n\n
 
+        Gson\n
+        https://github.com/google/gson\n\n
+
+        Glide\n
+        https://github.com/bumptech/glide\n\n
+
+        Rxjava\n
+        https://github.com/ReactiveX/RxJava\n\n
+
+        Rxpermissions\n
+        https://github.com/tbruyelle/RxPermissions\n\n
+
+        AndroidDonate\n
+        https://github.com/didikee/AndroidDonate\n\n
 
     </string>
     <string name="week_info">Week Info</string>
@@ -87,7 +98,7 @@
     <string name="material_subtitle"><![CDATA[Icon from Iconfont,\nillustration from unDraw]]></string>
     <string name="no_coolapk">CoolApk is not installed！</string>
     <string name="osl">Open Source License</string>
-    <string name="v1_0_0_build_on_jetpack" translatable="false">v1.0.0 Build On JetPack</string>
+    <string name="version_slogan" translatable="false">v%s Build On JetPack</string>
     <string name="please_input_content">Please enter content</string>
     <string name="course_plan">Course Plan</string>
     <string name="class_time">Please select a class time</string>
@@ -118,4 +129,5 @@
     <string name="my_qrcode">My QRCode</string>
     <string name="export_json">Export Json</string>
     <string name="parse_fail">Parsing failed, please select a course file</string>
+    <string name="first_toast">Try swiping left or right to switch the week ~ Click on the small smiley title to return to the current week!</string>
 </resources>

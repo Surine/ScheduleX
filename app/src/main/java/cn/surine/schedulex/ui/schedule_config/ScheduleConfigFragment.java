@@ -2,7 +2,6 @@ package cn.surine.schedulex.ui.schedule_config;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
-import android.app.AlertDialog;
 import android.content.ContentResolver;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -27,12 +26,15 @@ import com.bumptech.glide.Glide;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.tbruyelle.rxpermissions2.RxPermissions;
 
+import java.io.File;
 import java.io.FileNotFoundException;
+import java.lang.reflect.Field;
 
 import cn.surine.schedulex.R;
 import cn.surine.schedulex.base.Constants;
 import cn.surine.schedulex.base.controller.BaseBindingFragment;
 import cn.surine.schedulex.base.utils.Dates;
+import cn.surine.schedulex.base.utils.Files;
 import cn.surine.schedulex.base.utils.InstanceFactory;
 import cn.surine.schedulex.base.utils.MySeekBarChangeListener;
 import cn.surine.schedulex.base.utils.Prefs;
@@ -46,6 +48,7 @@ import cn.surine.schedulex.ui.schedule.ScheduleRepository;
 import cn.surine.schedulex.ui.schedule.ScheduleViewModel;
 import cn.surine.schedulex.ui.schedule_list.ScheduleListFragment;
 import cn.surine.schedulex.ui.view.custom.helper.BtmDialogs;
+import cn.surine.schedulex.ui.view.custom.helper.CommonDialogs;
 
 import static android.app.Activity.RESULT_OK;
 
@@ -95,18 +98,14 @@ public class ScheduleConfigFragment extends BaseBindingFragment<FragmentSchedule
         t.setData(schedule);
 
         t.deleteSchedule.setOnClickListener(v -> {
-            AlertDialog.Builder builder = new AlertDialog.Builder(activity());
-            builder.setTitle(R.string.warning);
-            builder.setMessage(R.string.delete_schedule_dialog_msg);
-            builder.setNegativeButton(R.string.btn_ok, (dialog, which) -> {
-                //删除课表后需要删除所有相关课程
-                scheduleViewModel.deleteScheduleById(scheduleId);
-                courseViewModel.deleteCourseByScheduleId(scheduleId);
-                Toasts.toast(getString(R.string.schedule_is_delete));
-                NavHostFragment.findNavController(ScheduleConfigFragment.this).navigateUp();
-            });
-            builder.setPositiveButton(R.string.btn_cancel, null);
-            builder.show();
+            CommonDialogs.getCommonDialog(activity(), getString(R.string.warning), getString(R.string.delete_schedule_dialog_msg)
+                    , () -> {
+                        //删除课表后需要删除所有相关课程
+                        scheduleViewModel.deleteScheduleById(scheduleId);
+                        courseViewModel.deleteCourseByScheduleId(scheduleId);
+                        Toasts.toast(getString(R.string.schedule_is_delete));
+                        NavHostFragment.findNavController(ScheduleConfigFragment.this).navigateUp();
+                    }, null).show();
         });
 
 
@@ -131,16 +130,15 @@ public class ScheduleConfigFragment extends BaseBindingFragment<FragmentSchedule
             });
         });
         if (!TextUtils.isEmpty(schedule.imageUrl)) {
-            Uri uri = Uri.parse(schedule.imageUrl);
-            Glide.with(activity()).load(uri).into(t.backgroundPic);
+            Glide.with(activity()).load(new File(schedule.imageUrl)).into(t.backgroundPic);
         }
 
         t.schedulePaletteItem.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.action_scheduleConfigFragment_to_themeListFragment));
 
 
         Bundle bundle = new Bundle();
-        bundle.putInt(SCHEDULE_ID,scheduleId);
-        t.export.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.action_scheduleConfigFragment_to_scheduleDataExport,bundle));
+        bundle.putInt(SCHEDULE_ID, scheduleId);
+        t.export.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.action_scheduleConfigFragment_to_scheduleDataExport, bundle));
 
     }
 
@@ -172,8 +170,8 @@ public class ScheduleConfigFragment extends BaseBindingFragment<FragmentSchedule
         s1.setProgress(schedule.totalWeek);
         s2.setMax(schedule.totalWeek);
         s2.setProgress(schedule.curWeek());
-        t1.setText(getString(R.string.total_week,schedule.totalWeek));
-        t2.setText(getString(R.string.current_week,schedule.curWeek()));
+        t1.setText(getString(R.string.total_week, schedule.totalWeek));
+        t2.setText(getString(R.string.current_week, schedule.curWeek()));
 
         //监听
         s1.setOnSeekBarChangeListener(new MySeekBarChangeListener() {
@@ -241,10 +239,10 @@ public class ScheduleConfigFragment extends BaseBindingFragment<FragmentSchedule
         Bitmap bitmap;
         try {
             bitmap = BitmapFactory.decodeStream(cr.openInputStream(uri));
-            globalT.backgroundPic.setImageBitmap(bitmap);
             Toasts.toast(getString(R.string.update_success));
-            schedule.imageUrl = uri.toString();
+            schedule.imageUrl = Files.getFilePath(activity(),uri);
             scheduleViewModel.updateSchedule(schedule);
+            Glide.with(activity()).load(new File(schedule.imageUrl)).into(globalT.backgroundPic);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
             Toasts.toast(getString(R.string.pic_choose_fail));
