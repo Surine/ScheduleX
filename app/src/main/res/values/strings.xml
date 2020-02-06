@@ -69,7 +69,7 @@
     </string>
     <string name="week_info">Week Info</string>
     <string name="background">Background</string>
-    <string name="palette_color">Palette Color</string>
+    <string name="palette_color">Text color compatible</string>
     <string name="_1">1</string>
     <string name="_2">2</string>
     <string name="_3">3</string>
@@ -130,4 +130,6 @@
     <string name="export_json">Export Json</string>
     <string name="parse_fail">Parsing failed, please select a course file</string>
     <string name="first_toast">Try swiping left or right to switch the week ~ Click on the small smiley title to return to the current week!</string>
+    <string name="white_txt">White text</string>
+    <string name="black_txt">Black text</string>
 </resources>

@@ -1,6 +1,7 @@
 package cn.surine.schedulex.ui.schedule;
 
 import android.annotation.SuppressLint;
+import android.graphics.Color;
 import android.net.Uri;
 import android.text.TextUtils;
 
@@ -21,6 +22,7 @@ import cn.surine.schedulex.base.controller.BaseBindingFragment;
 import cn.surine.schedulex.base.interfaces.Call;
 import cn.surine.schedulex.base.utils.InstanceFactory;
 import cn.surine.schedulex.base.utils.Prefs;
+import cn.surine.schedulex.base.utils.StatusBars;
 import cn.surine.schedulex.base.utils.Toasts;
 import cn.surine.schedulex.data.entity.Course;
 import cn.surine.schedulex.data.entity.Schedule;
@@ -66,9 +68,8 @@ public class ScheduleFragment extends BaseBindingFragment<FragmentScheduleBindin
         ScheduleViewModel scheduleViewModel = ViewModelProviders.of(this, InstanceFactory.getInstance(classesForSchedule, argsForSchedule)).get(ScheduleViewModel.class);
 
 
-
-
         Schedule curSchedule = scheduleViewModel.getCurSchedule();
+        t.setSchedule(curSchedule);
         if (curSchedule == null) {
             return;
         }
@@ -108,28 +109,11 @@ public class ScheduleFragment extends BaseBindingFragment<FragmentScheduleBindin
         t.title.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.action_dailyFragment_to_aboutFragment));
 
         if (!TextUtils.isEmpty(curSchedule.imageUrl)) {
-//            Uri uri = Uri.parse(curSchedule.imageUrl);
             Glide.with(activity()).load(new File(curSchedule.imageUrl)).into(t.background);
-            configPaletteTextColor(t);
         }
-
     }
 
 
-    /**
-     * 配置文字颜色
-     */
-    private void configPaletteTextColor(FragmentScheduleBinding b) {
-//        Bitmap bitmap =((BitmapDrawable)b.background.getDrawable()).getBitmap();
-//        Palette.from(bitmap).generate(palette -> Objs.isNullCall(palette.getLightMutedSwatch(), () -> {
-//            int color = palette.getLightMutedSwatch().getRgb();
-//            if(ColorUtils.calculateLuminance(color) > 0.5){
-//                b.title.setTextColor(Color.BLACK);
-//            }else{
-//                b.title.setTextColor(Color.WHITE);
-//            }
-//        }));
-    }
 
 
     @SuppressLint("MissingSuperCall")

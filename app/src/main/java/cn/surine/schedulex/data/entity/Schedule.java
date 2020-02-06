@@ -1,6 +1,7 @@
 package cn.surine.schedulex.data.entity;
 
 import android.annotation.SuppressLint;
+import android.graphics.Color;
 
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
@@ -51,6 +52,13 @@ public class Schedule extends BaseVm {
     public String imageUrl;
 
 
+
+    /**
+     * 是否使用亮色文本
+     * */
+    public boolean lightText;
+
+
     @SuppressLint("StringFormatMatches")
     public String getTotalWeekStr() {
         return App.context.getString(R.string.total_week,totalWeek);
@@ -64,5 +72,9 @@ public class Schedule extends BaseVm {
 
     public int curWeek(){
         return (Dates.getDateDif(Dates.getDate(Dates.yyyyMMdd),termStartDate) / 7) + 1;
+    }
+
+    public int lightTextColor(){
+        return lightText ? Color.WHITE : Color.BLACK;
     }
 }

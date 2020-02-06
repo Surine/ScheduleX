@@ -11,34 +11,42 @@
         android:orientation="vertical">
 
         <TextView
+            android:id="@+id/_1"
             style="@style/slide_bar_tv_style"
             android:text="@string/_1" />
 
         <TextView
+            android:id="@+id/_2"
             style="@style/slide_bar_tv_style"
             android:text="@string/_2" />
 
         <TextView
+            android:id="@+id/_3"
             style="@style/slide_bar_tv_style"
             android:text="@string/_3" />
 
         <TextView
+            android:id="@+id/_4"
             style="@style/slide_bar_tv_style"
             android:text="@string/_4" />
 
         <TextView
+            android:id="@+id/_5"
             style="@style/slide_bar_tv_style"
             android:text="@string/_5" />
 
         <TextView
+            android:id="@+id/_6"
             style="@style/slide_bar_tv_style"
             android:text="@string/_6" />
 
         <TextView
+            android:id="@+id/_7"
             style="@style/slide_bar_tv_style"
             android:text="@string/_7" />
 
         <TextView
+            android:id="@+id/_8"
             style="@style/slide_bar_tv_style"
             android:text="@string/_8" />
     </LinearLayout>

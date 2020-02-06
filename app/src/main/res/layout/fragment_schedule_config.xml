@@ -311,7 +311,6 @@
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     style="@style/setting_item_ui"
-                    android:visibility="gone"
                     android:id="@+id/schedulePaletteItem"
                     >
                     <TextView
@@ -335,20 +334,21 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/dp8"
                         android:layout_marginBottom="@dimen/dp16"
+                        android:text="@{data.lightText? @string/white_txt : @string/black_txt}"
                         app:layout_constraintBottom_toBottomOf="parent"
-                        android:text="紫忧"
                         app:layout_constraintStart_toStartOf="@+id/paletteColor"
                         app:layout_constraintTop_toBottomOf="@+id/paletteColor" />
 
-                    <ImageView
-                        android:id="@+id/imageView12"
-                        android:layout_width="20dp"
+                    <Switch
+                        android:id="@+id/switchs"
+                        android:layout_width="wrap_content"
                         android:layout_height="20dp"
+                        android:clickable="false"
                         android:layout_marginEnd="16dp"
                         app:layout_constraintBottom_toBottomOf="@+id/paletteColorSubTitle"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toTopOf="@+id/paletteColor"
-                        app:schedulePaletteColorUi="@{data.color}"/>
+                       />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 

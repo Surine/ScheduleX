@@ -28,7 +28,6 @@ import com.tbruyelle.rxpermissions2.RxPermissions;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.lang.reflect.Field;
 
 import cn.surine.schedulex.R;
 import cn.surine.schedulex.base.Constants;
@@ -133,7 +132,14 @@ public class ScheduleConfigFragment extends BaseBindingFragment<FragmentSchedule
             Glide.with(activity()).load(new File(schedule.imageUrl)).into(t.backgroundPic);
         }
 
-        t.schedulePaletteItem.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.action_scheduleConfigFragment_to_themeListFragment));
+        t.switchs.setChecked(schedule.lightText);
+
+        t.schedulePaletteItem.setOnClickListener(v -> {
+            schedule.lightText = !schedule.lightText;
+            scheduleViewModel.updateSchedule(schedule);
+            t.switchs.setChecked(schedule.lightText);
+            t.paletteColorSubTitle.setText(schedule.lightText ?R.string.white_txt:R.string.black_txt);
+        });
 
 
         Bundle bundle = new Bundle();
