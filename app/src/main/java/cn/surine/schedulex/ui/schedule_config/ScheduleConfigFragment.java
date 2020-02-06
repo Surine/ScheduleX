@@ -20,7 +20,6 @@ import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 import androidx.lifecycle.ViewModelProviders;
-import androidx.navigation.NavAction;
 import androidx.navigation.Navigation;
 import androidx.navigation.fragment.NavHostFragment;
 
@@ -222,14 +221,10 @@ public class ScheduleConfigFragment extends BaseBindingFragment<FragmentSchedule
         if (data == null) {
             return;
         }
-        switch (requestCode) {
-            case PICK_PHOTO:
-                if (resultCode == RESULT_OK) {
-                    handleImage(data);
-                }
-                break;
-            default:
-                break;
+        if (requestCode == PICK_PHOTO) {
+            if (resultCode == RESULT_OK) {
+                handleImage(data);
+            }
         }
     }
 

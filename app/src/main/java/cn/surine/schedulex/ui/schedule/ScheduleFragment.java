@@ -29,9 +29,7 @@ import cn.surine.schedulex.ui.view.custom.helper.ZoomOutPageTransformer;
 
 public class ScheduleFragment extends BaseBindingFragment<FragmentScheduleBinding> {
 
-    private CourseViewModel courseViewModel;
     private TimerViewModel timerViewModel;
-    private ScheduleViewModel scheduleViewModel;
 
 
     @Override
@@ -44,13 +42,13 @@ public class ScheduleFragment extends BaseBindingFragment<FragmentScheduleBindin
     @Override
     protected void onInit(FragmentScheduleBinding t) {
 
-        if (!Prefs.getBoolean(Constants.IS_FIRST, false)) {
+        if (Prefs.getBoolean(Constants.IS_FIRST, false)) {
             Prefs.save(Constants.IS_FIRST, true);
         }
 
         Class[] classesForCourse = new Class[]{CourseRepository.class};
         Object[] argsForCourse = new Object[]{CourseRepository.abt.getInstance()};
-        courseViewModel = ViewModelProviders.of(this, InstanceFactory.getInstance(classesForCourse, argsForCourse)).get(CourseViewModel.class);
+        CourseViewModel courseViewModel = ViewModelProviders.of(this, InstanceFactory.getInstance(classesForCourse, argsForCourse)).get(CourseViewModel.class);
 
         Class[] classesForTimer = new Class[]{TimerRepository.class};
         Object[] argsForTimer = new Object[]{TimerRepository.abt.getInstance()};
@@ -59,7 +57,7 @@ public class ScheduleFragment extends BaseBindingFragment<FragmentScheduleBindin
 
         Class[] classesForSchedule = new Class[]{ScheduleRepository.class};
         Object[] argsForSchedule = new Object[]{ScheduleRepository.abt.getInstance()};
-        scheduleViewModel = ViewModelProviders.of(this, InstanceFactory.getInstance(classesForSchedule, argsForSchedule)).get(ScheduleViewModel.class);
+        ScheduleViewModel scheduleViewModel = ViewModelProviders.of(this, InstanceFactory.getInstance(classesForSchedule, argsForSchedule)).get(ScheduleViewModel.class);
 
 
 

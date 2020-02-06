@@ -23,8 +23,7 @@ public class Jsons {
      */
     public static <T> T parseJsonWithGson(String jsonData, Class<T> type) {
         Gson gson = new Gson();
-        T result = gson.fromJson(jsonData, type);
-        return result;
+        return gson.fromJson(jsonData, type);
     }
 
     /**
@@ -35,7 +34,7 @@ public class Jsons {
      */
     public static <T> List<T> parseJsonWithGsonToList(String json, Class<T> cls) {
         Gson gson = new Gson();
-        List<T> mList = new ArrayList<T>();
+        List<T> mList = new ArrayList<>();
         JsonArray array = new JsonParser().parse(json).getAsJsonArray();
         for (final JsonElement elem : array) {
             mList.add(gson.fromJson(elem, cls));

@@ -3,8 +3,6 @@ package cn.surine.schedulex.ui.splash;
 import android.os.Handler;
 import android.view.View;
 
-import androidx.navigation.fragment.NavHostFragment;
-
 import cn.surine.schedulex.R;
 import cn.surine.schedulex.base.Constants;
 import cn.surine.schedulex.base.controller.BaseFragment;
@@ -29,7 +27,7 @@ public class SplashFragment extends BaseFragment {
     @Override
     public void onInit(View parent) {
         runnable = () -> {
-            if(!Prefs.getBoolean(Constants.IS_FIRST,false)){
+            if(Prefs.getBoolean(Constants.IS_FIRST, false)){
                 Navigations.open(SplashFragment.this,R.id.action_splashFragment_to_scheduleInitFragment);
             }else{
                 Navigations.open(SplashFragment.this,R.id.action_splashFragment_to_dailyFragment);

@@ -5,7 +5,6 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.view.View;
 
 import androidx.annotation.Nullable;
 import androidx.lifecycle.ViewModelProviders;
@@ -107,13 +106,9 @@ public class ScheduleDataFetchFragment extends BaseBindingFragment<FragmentDataF
             // 用户未选择任何文件，直接返回
             return;
         }
-        switch (requestCode) {
-            case JSON_REQUEST_CODE:
-                Uri uri = data.getData();
-                loadData(Files.getFilePath(activity(), uri));
-                break;
-            default:
-                break;
+        if (requestCode == JSON_REQUEST_CODE) {
+            Uri uri = data.getData();
+            loadData(Files.getFilePath(activity(), uri));
         }
 
     }

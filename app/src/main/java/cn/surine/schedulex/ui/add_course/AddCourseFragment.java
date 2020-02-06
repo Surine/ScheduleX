@@ -46,7 +46,6 @@ import cn.surine.schedulex.ui.view.custom.helper.BtmDialogs;
 public class AddCourseFragment extends BaseBindingFragment<FragmentAddCourseBinding> {
 
 
-    private ScheduleViewModel scheduleViewModel;
     private Schedule schedule;
     private Course course;
     private CourseViewModel courseViewModel;
@@ -64,7 +63,7 @@ public class AddCourseFragment extends BaseBindingFragment<FragmentAddCourseBind
         globalT = t;
         Class[] classesForSchedule = new Class[]{ScheduleRepository.class};
         Object[] argsForSchedule = new Object[]{ScheduleRepository.abt.getInstance()};
-        scheduleViewModel = ViewModelProviders.of(this, InstanceFactory.getInstance(classesForSchedule, argsForSchedule)).get(ScheduleViewModel.class);
+        ScheduleViewModel scheduleViewModel = ViewModelProviders.of(this, InstanceFactory.getInstance(classesForSchedule, argsForSchedule)).get(ScheduleViewModel.class);
         Class[] classesForCourse = new Class[]{CourseRepository.class};
         Object[] argsForCourse = new Object[]{CourseRepository.abt.getInstance()};
         courseViewModel = ViewModelProviders.of(this, InstanceFactory.getInstance(classesForCourse, argsForCourse)).get(CourseViewModel.class);

@@ -11,9 +11,6 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import androidx.navigation.Navigation;
-import androidx.navigation.fragment.NavHostFragment;
-
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 
 import cn.surine.schedulex.R;

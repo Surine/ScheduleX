@@ -2,8 +2,6 @@ package cn.surine.schedulex.ui.login;
 
 import android.os.Bundle;
 
-import androidx.lifecycle.MutableLiveData;
-
 import cn.surine.schedulex.base.controller.AbstractSingleTon;
 import cn.surine.schedulex.base.controller.BaseRepository;
 import cn.surine.schedulex.data.entity.VmResultString;

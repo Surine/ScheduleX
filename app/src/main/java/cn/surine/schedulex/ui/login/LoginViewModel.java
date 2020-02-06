@@ -11,7 +11,6 @@ import cn.surine.schedulex.base.Constants;
 import cn.surine.schedulex.base.http.BaseHttpSubscriber;
 import cn.surine.schedulex.base.utils.SimpleTextWatcher;
 import cn.surine.schedulex.base.utils.Strs;
-import cn.surine.schedulex.base.utils.Toasts;
 import cn.surine.schedulex.data.entity.VmResultString;
 
 public class LoginViewModel extends ViewModel {

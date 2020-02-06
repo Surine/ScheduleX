@@ -9,8 +9,7 @@ import cn.surine.schedulex.data.entity.Theme;
 
 public class ThemeListViewModel extends ViewModel {
     public List<Theme> getThemeData() {
-        List<Theme> themes = new ArrayList<>();
-        return themes;
+        return new ArrayList<>();
     }
 
 }

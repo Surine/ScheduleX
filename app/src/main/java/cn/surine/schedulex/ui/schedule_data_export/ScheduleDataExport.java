@@ -2,11 +2,8 @@ package cn.surine.schedulex.ui.schedule_data_export;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
-import android.os.Bundle;
-import android.view.View;
 
 import androidx.lifecycle.ViewModelProviders;
-import androidx.navigation.Navigation;
 
 import com.google.android.material.snackbar.Snackbar;
 import com.tbruyelle.rxpermissions2.RxPermissions;
@@ -16,7 +13,6 @@ import cn.surine.schedulex.base.controller.BaseBindingFragment;
 import cn.surine.schedulex.base.utils.Files;
 import cn.surine.schedulex.base.utils.InstanceFactory;
 import cn.surine.schedulex.base.utils.Jsons;
-import cn.surine.schedulex.base.utils.Navigations;
 import cn.surine.schedulex.base.utils.Objs;
 import cn.surine.schedulex.base.utils.Toasts;
 import cn.surine.schedulex.data.entity.Schedule;
@@ -34,7 +30,6 @@ import cn.surine.schedulex.ui.schedule_config.ScheduleConfigFragment;
  * @date 2020-02-05 15:14
  */
 public class ScheduleDataExport extends BaseBindingFragment<FragmentDateExportBinding> {
-    private ScheduleViewModel scheduleViewModel;
     private Schedule schedule;
     private CourseViewModel courseViewModel;
 
@@ -52,7 +47,7 @@ public class ScheduleDataExport extends BaseBindingFragment<FragmentDateExportBi
 
         Class[] classes = new Class[]{ScheduleRepository.class};
         Object[] args = new Object[]{ScheduleRepository.abt.getInstance()};
-        scheduleViewModel = ViewModelProviders.of(this, InstanceFactory.getInstance(classes, args)).get(ScheduleViewModel.class);
+        ScheduleViewModel scheduleViewModel = ViewModelProviders.of(this, InstanceFactory.getInstance(classes, args)).get(ScheduleViewModel.class);
 
         Class[] classesForCourse = new Class[]{CourseRepository.class};
         Object[] argsForCourse = new Object[]{CourseRepository.abt.getInstance()};

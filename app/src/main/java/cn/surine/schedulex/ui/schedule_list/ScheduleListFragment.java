@@ -25,8 +25,6 @@ import cn.surine.schedulex.ui.schedule.ScheduleViewModel;
 
 public class ScheduleListFragment extends BaseBindingFragment<FragmentScheduleListBinding> {
 
-    private ScheduleListViewModel mViewModel;
-    private ScheduleViewModel scheduleViewModel;
     public static final String SCHEDULE_ID = "schedule_id";
     private List<Schedule> data;
 
@@ -42,7 +40,7 @@ public class ScheduleListFragment extends BaseBindingFragment<FragmentScheduleLi
 
         Class[] classesForSchedule = new Class[]{ScheduleRepository.class};
         Object[] argsForSchedule = new Object[]{ScheduleRepository.abt.getInstance()};
-        scheduleViewModel = ViewModelProviders.of(this, InstanceFactory.getInstance(classesForSchedule, argsForSchedule)).get(ScheduleViewModel.class);
+        ScheduleViewModel scheduleViewModel = ViewModelProviders.of(this, InstanceFactory.getInstance(classesForSchedule, argsForSchedule)).get(ScheduleViewModel.class);
 
 
         data = scheduleViewModel.getSchedules();
@@ -76,7 +74,7 @@ public class ScheduleListFragment extends BaseBindingFragment<FragmentScheduleLi
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        mViewModel = ViewModelProviders.of(this).get(ScheduleListViewModel.class);
+        ScheduleListViewModel mViewModel = ViewModelProviders.of(this).get(ScheduleListViewModel.class);
     }
 
 }

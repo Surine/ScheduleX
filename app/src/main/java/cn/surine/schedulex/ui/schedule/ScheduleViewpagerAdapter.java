@@ -1,31 +1,19 @@
 package cn.surine.schedulex.ui.schedule;
 
 import android.annotation.SuppressLint;
-import android.app.AlertDialog;
-import android.app.Dialog;
-import android.os.Build;
-import android.view.Gravity;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.Window;
-import android.view.WindowManager;
-import android.widget.ImageView;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.RequiresApi;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
 import cn.surine.schedulex.R;
-import cn.surine.schedulex.base.controller.App;
 import cn.surine.schedulex.base.controller.BaseAdapter;
 import cn.surine.schedulex.base.controller.BaseFragment;
-import cn.surine.schedulex.base.utils.Toasts;
 import cn.surine.schedulex.data.entity.Course;
 import cn.surine.schedulex.ui.view.custom.EmptyView;
 import cn.surine.schedulex.ui.view.custom.helper.BtmDialogs;

@@ -12,11 +12,9 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.databinding.ViewDataBinding;
 import androidx.fragment.app.Fragment;
-import androidx.navigation.Navigation;
 import androidx.navigation.fragment.NavHostFragment;
 
 import cn.surine.schedulex.base.interfaces.IBack;
-import cn.surine.schedulex.base.utils.Navigations;
 
 /**
  * Intro：

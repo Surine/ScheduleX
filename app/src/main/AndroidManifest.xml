@@ -7,9 +7,6 @@
     <!--读取SD卡的权限:打开相册选取图片所必须的权限-->
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <!--ZXING需要拍照和震动权限-->
-    <uses-permission android:name="android.permission.CAMERA" />
-    <uses-permission android:name="android.permission.VIBRATE" />
 
     <!--沙盒的话，后期有时间单独学习一下，目前通过requestLegacyExternalStorage使用旧版存储系统-->
     <application

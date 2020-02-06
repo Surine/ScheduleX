@@ -118,8 +118,7 @@ public class Dates {
         cal.setFirstDayOfWeek(Calendar.MONDAY);
         int day = cal.get(Calendar.DAY_OF_WEEK);
         cal.add(Calendar.DATE, cal.getFirstDayOfWeek() - day);
-        String s = sdf.format(cal.getTime());
-        return s;
+        return sdf.format(cal.getTime());
     }
 
 
