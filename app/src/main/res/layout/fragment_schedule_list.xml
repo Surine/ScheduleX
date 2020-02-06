@@ -13,7 +13,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:clipToPadding="true"
-        android:background="@android:color/white"
         tools:context=".ui.schedule_list.ScheduleListFragment">
 
         <androidx.constraintlayout.widget.Guideline
@@ -96,14 +95,21 @@
             app:layout_constraintEnd_toStartOf="@+id/guideline22"
             app:layout_constraintTop_toTopOf="@+id/guideline24" />
 
-        <include
-            layout="@layout/view_recycler"
-            android:layout_width="0dp"
+
+        <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/viewRecycler"
+            android:layout_width="0dp"
             android:layout_height="0dp"
+            android:elevation="@dimen/dp2"
+            android:paddingStart="@dimen/dp20"
+            android:paddingEnd="@dimen/dp20"
+            android:overScrollMode="never"
+            android:background="@drawable/top_left_right_radius_white"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/guideline22"
-            app:layout_constraintStart_toStartOf="@+id/guideline21"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/guideline29" />
+
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

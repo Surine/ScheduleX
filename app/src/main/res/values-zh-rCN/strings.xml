@@ -41,7 +41,6 @@
     <string name="btn_ok">确定</string>
     <string name="schedule_is_delete">课表已删除！</string>
     <string name="course_is_delete">课程已删除！</string>
-    <string name="open_source_license">Jetpack framework &amp; AndroidX ViewModel,Navigation,DataBinding,Room,ViewPager2,Dynamicanimation,Palette  https://developer.android.google.cn/jetpack/   Retrofit  https://github.com/square/retrofit   Okhttp3  https://github.com/square/okhttp   Gson  https://github.com/google/gson   Glide  https://github.com/bumptech/glide   Rxjava  https://github.com/ReactiveX/RxJava   Rxpermissions  https://github.com/tbruyelle/RxPermissions   AndroidDonate  https://github.com/didikee/AndroidDonate  </string>
     <string name="background">背景图</string>
     <string name="palette_color">文本颜色兼容</string>
     <string name="schedule_name">课表名称</string>

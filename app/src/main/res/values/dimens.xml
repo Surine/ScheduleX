@@ -32,4 +32,5 @@
     <dimen name="dp1">1dp</dimen>
     <dimen name="dp20">20dp</dimen>
     <dimen name="t20">20sp</dimen>
+    <dimen name="dp6">6dp</dimen>
 </resources>

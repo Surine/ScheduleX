@@ -342,13 +342,11 @@
                     <Switch
                         android:id="@+id/switchs"
                         android:layout_width="wrap_content"
-                        android:layout_height="20dp"
+                        android:layout_height="@dimen/dp20"
                         android:clickable="false"
-                        android:layout_marginEnd="16dp"
                         app:layout_constraintBottom_toBottomOf="@+id/paletteColorSubTitle"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="@+id/paletteColor"
-                       />
+                        app:layout_constraintTop_toTopOf="@+id/paletteColor" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 

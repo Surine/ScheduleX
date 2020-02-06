@@ -10,6 +10,21 @@
         <item name="chipIconTint">@color/chipIconTint</item>
     </style>
 
+
+    <attr name="main_text_color" format="color" />
+    <attr name="main_bg_color" format="color" />
+    <style name="lightTheme" parent="AppTheme">
+        <item name="main_text_color">@color/main_text_color_light</item>
+        <item name="main_bg_color">@color/main_bg_color_light</item>
+    </style>
+
+    <style name="darkTheme" parent="AppTheme">
+        <item name="main_text_color">@color/main_text_color_light</item>
+        <item name="main_bg_color">@color/main_bg_color_light</item>
+    </style>
+
+
+
     <style name="button_style" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="android:background">@drawable/button_background</item>
         <item name="android:textColor">@android:color/white</item>

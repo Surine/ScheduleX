@@ -6,6 +6,14 @@
     <color name="colorAccent">#448AFF</color>
     <color name="e0">#e0e0e0</color>
     <color name="main_back_color">#BEF5F2F2</color>
+    <color name="main_back_color_2">#33C6C6C6</color>
     <color name="blue">#448AFF</color>
     <color name="chipIconTint">#000</color>
+
+    //不同模式下的颜色属性值
+    <color name="main_text_color_light">#000000</color>
+    <color name="main_text_color_dark">#ffffff</color>
+    <color name="main_bg_color_light">#ffffff</color>
+    <color name="main_bg_color_dark">#000000</color>
+
 </resources>

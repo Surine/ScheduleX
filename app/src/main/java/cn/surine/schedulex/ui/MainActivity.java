@@ -13,6 +13,7 @@ import cn.surine.schedulex.base.interfaces.IBack;
 import cn.surine.schedulex.base.utils.StatusBars;
 
 import static androidx.lifecycle.ViewModelProviders.of;
+import static cn.surine.schedulex.base.utils.Uis.getDarkModeStatus;
 
 
 /**

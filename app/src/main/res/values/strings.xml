@@ -42,30 +42,22 @@
     <string name="btn_cancel">Cancel</string>
     <string name="schedule_is_delete">Schedule has been deleted!</string>
     <string name="course_is_delete">Course has been deleted!</string>
-    <string name="open_source_license">Jetpack framework &amp; AndroidX\nViewModel,Navigation,DataBinding,Room,ViewPager2,Dynamicanimation,Palette\n
+    <string name="open_source_license" translatable="false">Jetpack framework &amp; AndroidX\nViewModel,Navigation,DataBinding,Room,ViewPager2,Dynamicanimation,Palette\n
         https://developer.android.google.cn/jetpack/\n\n
-
         Retrofit\n
         https://github.com/square/retrofit\n\n
-
         Okhttp3\n
         https://github.com/square/okhttp\n\n
-
         Gson\n
         https://github.com/google/gson\n\n
-
         Glide\n
         https://github.com/bumptech/glide\n\n
-
         Rxjava\n
         https://github.com/ReactiveX/RxJava\n\n
-
         Rxpermissions\n
         https://github.com/tbruyelle/RxPermissions\n\n
-
         AndroidDonate\n
         https://github.com/didikee/AndroidDonate\n\n
-
     </string>
     <string name="week_info">Week Info</string>
     <string name="background">Background</string>

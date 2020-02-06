@@ -48,6 +48,7 @@
                         android:textColor="@android:color/white"
                         android:textSize="@dimen/t22"
                         android:textStyle="bold"
+                        android:layout_marginStart="@dimen/dp10"
                         app:layout_constraintBottom_toTopOf="@+id/textView28"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintHorizontal_bias="0.084"
