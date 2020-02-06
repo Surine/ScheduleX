@@ -44,10 +44,10 @@ public class CourseRepository extends BaseRepository {
         List<Course> handleList = new ArrayList<>();
         for (Course course : list) {
             try {
-                if(course.classWeek.charAt(week - 1) == '1'){
+                if (course.classWeek.charAt(week - 1) == '1') {
                     handleList.add(course);
                 }
-            }catch (Exception ignored){
+            } catch (Exception ignored) {
             }
         }
         return handleList;
@@ -65,5 +65,27 @@ public class CourseRepository extends BaseRepository {
 
     public long insert(Course course) {
         return appDatabase.courseDao().insert(course);
+    }
+
+
+    public void insert(Course... course) {
+        appDatabase.courseDao().insert(course);
+    }
+
+
+    public Course getCourseById(String id) {
+        return appDatabase.courseDao().getByCourseId(id);
+    }
+
+    public void update(Course course) {
+        appDatabase.courseDao().update(course);
+    }
+
+    public void deleteByCourseId(String id) {
+        appDatabase.courseDao().deleteByCourseId(id);
+    }
+
+    public List<Course> getCourseByScheduleId(int scheduleId) {
+        return appDatabase.courseDao().getByScheduleId(scheduleId);
     }
 }

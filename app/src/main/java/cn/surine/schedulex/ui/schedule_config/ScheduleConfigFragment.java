@@ -10,6 +10,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
+import android.os.Bundle;
 import android.provider.MediaStore;
 import android.text.TextUtils;
 import android.view.View;
@@ -19,6 +20,7 @@ import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 import androidx.lifecycle.ViewModelProviders;
+import androidx.navigation.NavAction;
 import androidx.navigation.Navigation;
 import androidx.navigation.fragment.NavHostFragment;
 
@@ -64,6 +66,8 @@ public class ScheduleConfigFragment extends BaseBindingFragment<FragmentSchedule
     private Schedule schedule;
     private FragmentScheduleConfigBinding globalT;
 
+    public static final String SCHEDULE_ID = "SCHEDULE_ID";
+
     @Override
     public int layoutId() {
         return R.layout.fragment_schedule_config;
@@ -107,19 +111,15 @@ public class ScheduleConfigFragment extends BaseBindingFragment<FragmentSchedule
         });
 
 
-        t.scheduleNameItem.setOnClickListener(v -> {
-            BtmDialogs.showEditBtmDialog(activity(), getString(R.string.please_input_schedule_name), s -> {
-                schedule.name = s;
-                t.courseNameSubTitle.setText(s);
-                Toasts.toast(getString(R.string.update_success));
-                scheduleViewModel.updateSchedule(schedule);
-            });
-        });
+        t.scheduleNameItem.setOnClickListener(v -> BtmDialogs.showEditBtmDialog(activity(), schedule.name, true, s -> {
+            schedule.name = s;
+            t.courseNameSubTitle.setText(s);
+            Toasts.toast(getString(R.string.update_success));
+            scheduleViewModel.updateSchedule(schedule);
+        }));
 
 
-        t.scheduleWeekInfoItem.setOnClickListener(v -> {
-            showTimeConfigDialog();
-        });
+        t.scheduleWeekInfoItem.setOnClickListener(v -> showTimeConfigDialog());
 
         t.scheduleBackgroundItem.setOnClickListener(v -> {
             RxPermissions rxPermissions = new RxPermissions(activity());
@@ -138,6 +138,10 @@ public class ScheduleConfigFragment extends BaseBindingFragment<FragmentSchedule
 
         t.schedulePaletteItem.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.action_scheduleConfigFragment_to_themeListFragment));
 
+
+        Bundle bundle = new Bundle();
+        bundle.putInt(SCHEDULE_ID,scheduleId);
+        t.export.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.action_scheduleConfigFragment_to_scheduleDataExport,bundle));
 
     }
 

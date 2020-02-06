@@ -95,7 +95,7 @@ public class BindingAdapters {
     @androidx.databinding.BindingAdapter("courseItemCardBackground")
     public static void courseItemCardBackground(LinearLayout linearLayout, String color) {
         if (color != null && !TextUtils.isEmpty(color)) {
-            linearLayout.setBackground(Drawables.getDrawable(Color.parseColor(color), 20, 5, Color.WHITE));
+            linearLayout.setBackground(Drawables.getDrawable(Color.parseColor(color), 20, 3, Color.WHITE));
         }
     }
 }

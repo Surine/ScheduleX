@@ -1,8 +1,10 @@
 package cn.surine.schedulex.ui.add_course;
 
 import android.annotation.SuppressLint;
+import android.app.AlertDialog;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -49,6 +51,7 @@ public class AddCourseFragment extends BaseBindingFragment<FragmentAddCourseBind
     private Course course;
     private CourseViewModel courseViewModel;
     private FragmentAddCourseBinding globalT;
+    private boolean hasCourseData;
 
     @Override
     public int layoutId() {
@@ -59,45 +62,64 @@ public class AddCourseFragment extends BaseBindingFragment<FragmentAddCourseBind
     @Override
     protected void onInit(FragmentAddCourseBinding t) {
         globalT = t;
-        course = new Course();
-
-
         Class[] classesForSchedule = new Class[]{ScheduleRepository.class};
         Object[] argsForSchedule = new Object[]{ScheduleRepository.abt.getInstance()};
         scheduleViewModel = ViewModelProviders.of(this, InstanceFactory.getInstance(classesForSchedule, argsForSchedule)).get(ScheduleViewModel.class);
         Class[] classesForCourse = new Class[]{CourseRepository.class};
         Object[] argsForCourse = new Object[]{CourseRepository.abt.getInstance()};
         courseViewModel = ViewModelProviders.of(this, InstanceFactory.getInstance(classesForCourse, argsForCourse)).get(CourseViewModel.class);
-
-
         //获取当前课表
         schedule = scheduleViewModel.getCurSchedule();
-        course.scheduleId = schedule.roomId;
-        course.color = Constants.COLOR_1[new Random(System.currentTimeMillis()).nextInt(Constants.COLOR_1.length)];
-        course.id = String.valueOf(System.currentTimeMillis());
+
+        Bundle bundle = getArguments();
+        if(bundle == null){
+            //bundle为空的情况
+            course = new Course();
+            course.scheduleId = schedule.roomId;
+            course.color = Constants.COLOR_1[new Random(System.currentTimeMillis()).nextInt(Constants.COLOR_1.length)];
+            course.id = course.scheduleId + "@" + System.currentTimeMillis();
+        }else if(Strs.isNotEmpty(bundle.getString(BtmDialogs.COURSE_ID))){
+            //course id不为空的情况
+            course = courseViewModel.getCourseById(getArguments().getString(BtmDialogs.COURSE_ID));
+            if (course != null) {
+                hasCourseData = true;
+                initCourseUi(t);
+            } else {
+                Toasts.toast(getString(R.string.get_course_fail));
+                return;
+            }
+        }else{
+            Toasts.toast(getString(R.string.get_course_fail));
+            return;
+        }
+
 
         //编辑课表名
-        t.editCourseName.setOnClickListener(v -> BtmDialogs.showEditBtmDialog(activity(), t.courseNameSubTitle.getText().toString(), s -> {
+        t.editCourseName.setOnClickListener(v -> BtmDialogs.showEditBtmDialog(activity(), hasCourseData ? course.coureName : t.courseNameSubTitle.getText().toString(), hasCourseData, s -> {
             course.coureName = s;
             t.courseNameSubTitle.setText(s);
         }));
 
         //编辑上课地点
-        t.editCoursePosition.setOnClickListener(v -> BtmDialogs.showEditBtmDialog(activity(), t.coursePositionSubtitle.getText().toString(), s -> {
+        t.editCoursePosition.setOnClickListener(v -> BtmDialogs.showEditBtmDialog(activity(), hasCourseData ? course.teachingBuildingName + course.classroomName : t.coursePositionSubtitle.getText().toString(), hasCourseData, s -> {
             course.teachingBuildingName = s;
+            //如果是修改，直接保存building就可
+            if (hasCourseData) {
+                course.classroomName = "";
+            }
             t.coursePositionSubtitle.setText(s);
         }));
 
 
         //编辑教师姓名
-        t.editCourseTeacher.setOnClickListener(v -> BtmDialogs.showEditBtmDialog(activity(), t.courseTeacherSubtitle.getText().toString(), s -> {
+        t.editCourseTeacher.setOnClickListener(v -> BtmDialogs.showEditBtmDialog(activity(), hasCourseData ? course.teacherName : t.courseTeacherSubtitle.getText().toString(), hasCourseData, s -> {
             course.teacherName = s;
             t.courseTeacherSubtitle.setText(s);
         }));
 
 
         //编辑学分
-        t.editCourseScore.setOnClickListener(v -> BtmDialogs.showEditBtmDialog(activity(), t.courseScoreSubtitle.getText().toString(), s -> {
+        t.editCourseScore.setOnClickListener(v -> BtmDialogs.showEditBtmDialog(activity(), hasCourseData ? course.xf : t.courseScoreSubtitle.getText().toString(), hasCourseData, s -> {
             course.xf = s;
             t.courseScoreSubtitle.setText(getString(R.string.score_2_0, s));
         }));
@@ -112,8 +134,13 @@ public class AddCourseFragment extends BaseBindingFragment<FragmentAddCourseBind
                 if (Strs.hasEmpty(course.coureName, course.classWeek, course.classDay, course.classSessions, course.continuingSession)) {
                     Toasts.toast(getString(R.string.param_empty));
                 } else {
-                    courseViewModel.insert(course);
-                    Toasts.toast(getString(R.string.add_success));
+                    //分更新和升级
+                    if (hasCourseData) {
+                        courseViewModel.update(course);
+                    } else {
+                        courseViewModel.insert(course);
+                    }
+                    Toasts.toast(getString(R.string.handle_success));
                     NavHostFragment.findNavController(AddCourseFragment.this).navigateUp();
                 }
             } else {
@@ -121,6 +148,38 @@ public class AddCourseFragment extends BaseBindingFragment<FragmentAddCourseBind
             }
         });
 
+    }
+
+    /**
+     * 加载初始UI
+     *
+     * @param t
+     */
+    private void initCourseUi(FragmentAddCourseBinding t) {
+        t.courseNameSubTitle.setText(course.coureName);
+        t.courseTimeSubtitle.setText(course.getWeekDescription() + "\n" + course.getClassDayDescription() + " " + course.getSessionDescription());
+        t.coursePositionSubtitle.setText(course.teachingBuildingName + course.classroomName);
+        t.courseTeacherSubtitle.setText(course.teacherName);
+        t.courseScoreSubtitle.setText(course.xf);
+        t.delete.setVisibility(View.VISIBLE);
+        t.delete.setOnClickListener(v -> deleteCourse());
+    }
+
+
+    /**
+     * 删除课表
+     */
+    private void deleteCourse() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(activity());
+        builder.setTitle(R.string.warning);
+        builder.setMessage(R.string.delete_course_dialog_msg);
+        builder.setNegativeButton(R.string.btn_ok, (dialog, which) -> {
+            courseViewModel.deleteByCourseId(course.id);
+            Toasts.toast(getString(R.string.course_is_delete));
+            NavHostFragment.findNavController(AddCourseFragment.this).navigateUp();
+        });
+        builder.setPositiveButton(R.string.btn_cancel, null);
+        builder.show();
     }
 
 
@@ -153,6 +212,9 @@ public class AddCourseFragment extends BaseBindingFragment<FragmentAddCourseBind
             chip.setText("" + (i + 1));
             chip.setCheckable(true);
             chip.setCheckedIconVisible(true);
+            if (hasCourseData && Strs.isNotEmpty(course.classWeek) && course.classWeek.charAt(i) == '1') {
+                chip.setChecked(true);
+            }
             chipGroup.addView(chip);
         }
 
@@ -223,6 +285,9 @@ public class AddCourseFragment extends BaseBindingFragment<FragmentAddCourseBind
         numberPicker.setDisplayedValues(city);
         numberPicker.setMinValue(0);
         numberPicker.setMaxValue(city.length - 1);
+        if (hasCourseData && Strs.isNotEmpty(course.classDay)) {
+            numberPicker.setValue(Integer.parseInt(course.classDay) - 1);
+        }
         numberPicker.setDescendantFocusability(DatePicker.FOCUS_BLOCK_DESCENDANTS);
         Button ok = dayView.findViewById(R.id.button);
         ok.setOnClickListener(v -> {
@@ -245,6 +310,9 @@ public class AddCourseFragment extends BaseBindingFragment<FragmentAddCourseBind
         npForStartSession.setMinValue(0);
         npForStartSession.setMaxValue(s1.length - 1);
         npForStartSession.setDescendantFocusability(DatePicker.FOCUS_BLOCK_DESCENDANTS);
+        if (hasCourseData && Strs.isNotEmpty(course.classSessions)) {
+            npForStartSession.setValue(getCursor(s1, course.classSessions));
+        }
 
         NumberPicker npForContinueSession = sessionView.findViewById(R.id.numberPicker2);
         String[] s2 = {"2", "4"};
@@ -252,12 +320,15 @@ public class AddCourseFragment extends BaseBindingFragment<FragmentAddCourseBind
         npForContinueSession.setMinValue(0);
         npForContinueSession.setMaxValue(s2.length - 1);
         npForContinueSession.setDescendantFocusability(DatePicker.FOCUS_BLOCK_DESCENDANTS);
+        if (hasCourseData && Strs.isNotEmpty(course.continuingSession)) {
+            npForContinueSession.setValue(getCursor(s2, course.continuingSession));
+        }
 
         Button sessionOk = sessionView.findViewById(R.id.button);
         sessionOk.setOnClickListener(v -> {
             String result_1 = s1[npForStartSession.getValue()];
             String result_2 = s2[npForContinueSession.getValue()];
-            if (Integer.parseInt(result_1) + Integer.parseInt(result_2) -1 <= 8) {
+            if (Integer.parseInt(result_1) + Integer.parseInt(result_2) - 1 <= 8) {
                 course.classSessions = result_1;
                 course.continuingSession = result_2;
                 bt.dismiss();
@@ -269,11 +340,23 @@ public class AddCourseFragment extends BaseBindingFragment<FragmentAddCourseBind
         return sessionView;
     }
 
+    /**
+     * 获取某个值的数组下标
+     */
+    private int getCursor(String[] values, String target) {
+        for (int i = 0; i < values.length; i++) {
+            if (Strs.equals(values[i], target)) {
+                return i;
+            }
+        }
+        return 0;
+    }
+
 
     @Override
     public void onBackPressed() {
         if (course != null) {
-            Snackbar.make(getView(), "您还没有保存，确定退出么？", Snackbar.LENGTH_LONG).setAction(R.string.btn_ok, v -> NavHostFragment.findNavController(AddCourseFragment.this).navigateUp()).show();
+            Snackbar.make(getView(), getString(R.string.snack_course_edit), Snackbar.LENGTH_LONG).setAction(R.string.btn_ok, v -> NavHostFragment.findNavController(AddCourseFragment.this).navigateUp()).show();
         } else {
             super.onBackPressed();
         }

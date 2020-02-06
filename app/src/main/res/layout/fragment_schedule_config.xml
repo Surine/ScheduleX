@@ -78,7 +78,7 @@
                 app:layout_constraintVertical_bias="0.38" />
 
             <Button
-                android:id="@+id/github"
+                android:id="@+id/export"
                 style="@style/button_style"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -98,9 +98,9 @@
                 android:layout_marginEnd="16dp"
                 android:text="@string/delete"
                 android:textColor="@android:color/holo_red_dark"
-                app:layout_constraintBottom_toBottomOf="@+id/github"
-                app:layout_constraintEnd_toStartOf="@+id/github"
-                app:layout_constraintTop_toTopOf="@+id/github" />
+                app:layout_constraintBottom_toBottomOf="@+id/export"
+                app:layout_constraintEnd_toStartOf="@+id/export"
+                app:layout_constraintTop_toTopOf="@+id/export" />
 
 
             <LinearLayout
@@ -197,6 +197,51 @@
                         app:layout_constraintBottom_toBottomOf="@+id/scheduleWeekSubtitle"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toTopOf="@+id/textView35"
+                        app:srcCompat="@mipmap/ic_more" />
+
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    style="@style/setting_item_ui"
+                    android:visibility="gone"
+                    android:id="@+id/scheduleImportItem"
+                    >
+
+                    <TextView
+                        android:id="@+id/textView35_import"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/dp8"
+                        android:layout_marginTop="@dimen/dp8"
+                        android:text="@string/import_course_data"
+                        android:textColor="@android:color/black"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        />
+
+
+                    <TextView
+                        android:id="@+id/scheduleImportSubtitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dp8"
+                        android:layout_marginBottom="@dimen/dp16"
+                        android:text="@string/import_course_data_subtitle"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="@+id/textView35_import"
+                        app:layout_constraintTop_toBottomOf="@+id/textView35_import" />
+
+                    <ImageView
+                        android:id="@+id/imageView9_import"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:layout_marginEnd="8dp"
+                        app:layout_constraintBottom_toBottomOf="@+id/scheduleImportSubtitle"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="@+id/textView35_import"
                         app:srcCompat="@mipmap/ic_more" />
 
 

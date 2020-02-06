@@ -34,7 +34,7 @@ public class TimerViewModel extends ViewModel {
      * 首页当前日背景
      */
     public Drawable getWeekDayBackground(int i) {
-        return mTimerRepository.getWeekDay() - 1 != i ? null : App.context.getResources().getDrawable(R.drawable.primary_color_full_raidus_rect);
+        return mTimerRepository.getWeekDay() - 1 != i ? null : App.context.getResources().getDrawable(R.drawable.primary_color_10r_rect);
     }
 
 

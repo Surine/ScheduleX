@@ -83,7 +83,7 @@ public class ScheduleViewpagerAdapter extends RecyclerView.Adapter<ScheduleViewp
             if(course == null){
                 return;
             }
-            BtmDialogs.showCourseInfoBtmDialog(baseFragment.activity(),course);
+            BtmDialogs.showCourseInfoBtmDialog(baseFragment,course);
         });
     }
 

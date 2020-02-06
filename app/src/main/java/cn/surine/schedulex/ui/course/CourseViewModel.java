@@ -1,7 +1,5 @@
 package cn.surine.schedulex.ui.course;
 
-import android.util.Log;
-
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
@@ -35,7 +33,7 @@ public class CourseViewModel extends ViewModel {
     public MutableLiveData<Integer> nowWeek = new MutableLiveData<>();
 
 
-    private HashMap<String,String> colorHashMap = new HashMap<>();
+    private HashMap<String, String> colorHashMap = new HashMap<>();
 
     public CourseViewModel(CourseRepository courseRepository) {
         this.mCourseRepository = courseRepository;
@@ -55,7 +53,7 @@ public class CourseViewModel extends ViewModel {
         mCourseRepository.getCourseByNet(-1).subscribe(new BaseHttpSubscriber<CourseList>() {
             @Override
             public void onSuccess(MutableLiveData<CourseList> vm) {
-                int tWeek = 0,nWeek = 0;
+                int tWeek = 0, nWeek = 0;
                 if (vm.getValue() != null) {
                     tWeek = vm.getValue().weeks;
                     nWeek = vm.getValue().nowWeek;
@@ -85,11 +83,11 @@ public class CourseViewModel extends ViewModel {
                 //添加数据
                 if (vm.getValue().courseList != null) {
                     for (Course course : vm.getValue().courseList) {
-                        if(colorHashMap.containsKey(course.coureNumber)){
+                        if (colorHashMap.containsKey(course.coureNumber)) {
                             course.color = colorHashMap.get(course.coureNumber);
-                        }else{
+                        } else {
                             course.color = Constants.COLOR_1[new Random(System.currentTimeMillis()).nextInt(Constants.COLOR_1.length)];
-                            colorHashMap.put(course.coureNumber,course.color);
+                            colorHashMap.put(course.coureNumber, course.color);
                         }
                         mCourseList.add(course);
                     }
@@ -122,7 +120,7 @@ public class CourseViewModel extends ViewModel {
 
 
     public List<Course> queryCourseByWeek(int week, int scheduleId) {
-        return mCourseRepository.queryCourseByWeek(week,scheduleId);
+        return mCourseRepository.queryCourseByWeek(week, scheduleId);
     }
 
     public void deleteCourseByScheduleId(long scheduleId) {
@@ -132,8 +130,50 @@ public class CourseViewModel extends ViewModel {
 
     /**
      * 添加课程
-     * */
+     */
     public long insert(Course course) {
         return mCourseRepository.insert(course);
+    }
+
+
+    /**
+     * 添加课程（多添加）
+     * */
+    public void insert(Course ... courses){
+        mCourseRepository.insert(courses);
+    }
+
+
+    /**
+     * 根据id获取课程
+     *
+     * @param id
+     */
+    public Course getCourseById(String id) {
+        return mCourseRepository.getCourseById(id);
+    }
+
+
+    /**
+     * 更新课程
+     * */
+    public void update(Course course) {
+        mCourseRepository.update(course);
+    }
+
+
+    /**
+     * 删除课程
+     * */
+    public void deleteByCourseId(String id) {
+        mCourseRepository.deleteByCourseId(id);
+    }
+
+
+    /**
+     * 通过课表id获取课程
+     * */
+    public List<Course> getCourseByScheduleId(int scheduleId) {
+        return mCourseRepository.getCourseByScheduleId(scheduleId);
     }
 }

@@ -3,12 +3,10 @@
     <string name="app_name">ScheduleX</string>
     <string name="et_hint_account">TUST学号</string>
     <string name="et_hint_password">TUST密码</string>
-    <string name="hello_blank_fragment">你好，空页面</string>
     <string name="login">登录</string>
     <string name="param_empty">存在空输入，请检查!</string>
     <string name="skip">跳过</string>
     <string name="tv_login_title">嗨，登录吗？</string>
-    <string name="vpn_guide">校外登录引导</string>
     <string name="welcome">欢迎</string>
     <string name="ready_to_login_tust">正在登录教务处……</string>
     <string name="warning">提示</string>
@@ -25,7 +23,6 @@
     <string name="from_other">其他方式</string>
     <string name="arg_exception">参数异常，请退出重试</string>
     <string name="add_course">添加</string>
-    <string name="data_parse_exception">数据解析异常</string>
     <string name="unknown">未知</string>
     <string name="score_2_0">%s学分</string>
     <string name="config">配置</string>
@@ -39,9 +36,11 @@
     <string name="delete">删除</string>
     <string name="export">导出</string>
     <string name="delete_schedule_dialog_msg">确定删除该课表吗？所有的课程信息都会丢失，请您谨慎操作！</string>
+    <string name="delete_course_dialog_msg">确定删除该课程吗？请您谨慎操作！</string>
     <string name="btn_cancel">取消</string>
     <string name="btn_ok">确定</string>
     <string name="schedule_is_delete">课表已删除！</string>
+    <string name="course_is_delete">课程已删除！</string>
     <string name="open_source_license">
     Android Jetpack\nhttps://developer.android.google.cn/jetpack\nData Binding: Declaratively bind observable data to UI elements\nLive Data: Notify views when underlying database changes\nNavigation: Handle everything needed for in-app navigation\nRoom: Fluent SQLite database access\nViewModel: Manage UI-related data in a lifecycle-conscious way\nViewPager2: Create swipe views between tabs\n\n
 
@@ -62,17 +61,15 @@
     <string name="_8">8</string>
     <string name="current_week">当前 %s 周</string>
     <string name="total_week">共 %s 周</string>
-    <string name="add_your_custom_course">添加自定义课程</string>
+    <string name="add_your_custom_course">在本页面可以添加自定义课程</string>
     <string name="save">保存</string>
     <string name="course_name">课程名</string>
     <string name="course_name_subtitle">请输入课程名</string>
     <string name="position">上课地点</string>
     <string name="permission_is_denied">权限被禁止！</string>
-    <string name="unsupport">不支持当前格式</string>
     <string name="update_success">更新成功！</string>
     <string name="pic_choose_fail">图片选择失败</string>
     <string name="choose_schedule_background">选择课表背景图</string>
-    <string name="alipay_copied">支付宝账号已复制</string>
     <string name="star_on_github">Github Star</string>
     <string name="donate_me_with_alipay">使用支付宝支持开发者</string>
     <string name="qq_copy">QQ号已复制到剪贴板</string>
@@ -85,11 +82,9 @@
     <string name="please_input_content">请输入内容</string>
     <string name="course_plan">时间计划</string>
     <string name="course_position">请输入你的上课地点</string>
-    <string name="please_input_schedule_name">请输入课表名</string>
     <string name="class_time">请选择课程时间</string>
     <string name="overlimit">超过节次限制 (最大为8)</string>
     <string name="course_null">课程信息为空，请重新填写</string>
-    <string name="add_success">Added successfully</string>
     <string name="teacher">教师</string>
     <string name="please_input_teacher">请输入教师姓名</string>
     <string name="please_enter_course_credits">请输入课程学分</string>
@@ -103,4 +98,14 @@
     <string name="coolapk_id">酷安ID</string>
     <string name="qq_group">QQ群</string>
     <string name="qq">点击复制QQ:635622188</string>
+    <string name="get_course_fail">获取课程信息失败,请退出重试!</string>
+    <string name="snack_course_edit">您还没有保存，确定退出么？</string>
+    <string name="import_course_data_subtitle">点此重新导入课表数据</string>
+    <string name="import_course_data">导入课程数据</string>
+    <string name="please_select_a_data_export_method">请选择数据导出方式</string>
+    <string name="export_excel">导出Excel</string>
+    <string name="export_ics">导出ICS</string>
+    <string name="my_qrcode">我的二维码</string>
+    <string name="export_json">导出Json</string>
+    <string name="parse_fail">解析失败,请选择课程文件</string>
 </resources>

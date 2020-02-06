@@ -28,7 +28,7 @@ public class Objs {
      * @param target 目标对象
      */
     public static boolean isNull(Object target) {
-        return notNull(target);
+        return !notNull(target);
     }
 
 

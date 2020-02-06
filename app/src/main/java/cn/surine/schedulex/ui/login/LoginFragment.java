@@ -90,7 +90,7 @@ public class LoginFragment extends BaseBindingFragment<FragmentLoginBinding> {
                 List<Course> courseList = courseViewModel.mMutableCourses.getValue();
                 for (Course course:courseList) {
                     course.scheduleId = scheduleId;
-                    course.id = course.scheduleId +"-"+ course.id;
+                    course.id = course.scheduleId +"@"+ course.id;
                 }
                 courseViewModel.saveCourseByDb(courseList,scheduleId);
                 Navigations.open(this,R.id.dailyFragment);

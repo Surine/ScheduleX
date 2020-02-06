@@ -11,24 +11,24 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:text="@string/import_excel"
+            android:text="@string/export_excel"
             android:textColor="@android:color/black"
             android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="@+id/importExcel"
+            app:layout_constraintEnd_toEndOf="@+id/exportExcel"
             app:layout_constraintStart_toStartOf="@+id/guideline25"
-            app:layout_constraintTop_toBottomOf="@+id/importExcel" />
+            app:layout_constraintTop_toBottomOf="@+id/exportExcel" />
 
         <TextView
             android:id="@+id/textView24"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:text="@string/scan_qrcode"
+            android:text="@string/my_qrcode"
             android:textColor="@android:color/black"
             android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="@+id/scanQrCode"
+            app:layout_constraintEnd_toEndOf="@+id/myQrCode"
             app:layout_constraintStart_toStartOf="@+id/guideline32"
-            app:layout_constraintTop_toBottomOf="@+id/scanQrCode" />
+            app:layout_constraintTop_toBottomOf="@+id/myQrCode" />
 
         <TextView
             android:id="@+id/textView25"
@@ -69,7 +69,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/dp2"
-            android:text="@string/data_fetch_subtitle"
+            android:text="@string/please_select_a_data_export_method"
             android:textSize="@dimen/t17"
             app:layout_constraintStart_toStartOf="@+id/schedule_title"
             app:layout_constraintTop_toBottomOf="@+id/schedule_title" />
@@ -110,7 +110,7 @@
             app:layout_constraintGuide_percent="0.9" />
 
         <ImageView
-            android:id="@+id/loginJw"
+            android:id="@+id/exportIcs"
             android:layout_width="@dimen/dp90"
             android:layout_height="@dimen/dp90"
             android:src="@mipmap/i1"
@@ -119,7 +119,7 @@
             app:layout_constraintTop_toTopOf="@+id/guideline27" />
 
         <ImageView
-            android:id="@+id/importExcel"
+            android:id="@+id/exportExcel"
             android:layout_width="@dimen/dp90"
             android:layout_height="@dimen/dp90"
             android:background="?selectableItemBackgroundBorderless"
@@ -139,7 +139,7 @@
             />
 
         <ImageView
-            android:id="@+id/scanQrCode"
+            android:id="@+id/myQrCode"
             android:layout_width="@dimen/dp90"
             android:layout_height="@dimen/dp90"
             android:background="?selectableItemBackgroundBorderless"
@@ -149,7 +149,7 @@
             />
 
         <ImageView
-            android:id="@+id/importJson"
+            android:id="@+id/exportJson"
             android:layout_width="@dimen/dp90"
             android:layout_height="@dimen/dp90"
             android:background="?selectableItemBackgroundBorderless"
@@ -163,34 +163,24 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:text="@string/login_tust"
+            android:text="@string/export_ics"
             android:textColor="@android:color/black"
             android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="@+id/loginJw"
+            app:layout_constraintEnd_toEndOf="@+id/exportIcs"
             app:layout_constraintStart_toStartOf="@+id/guideline25"
-            app:layout_constraintTop_toBottomOf="@+id/loginJw" />
+            app:layout_constraintTop_toBottomOf="@+id/exportIcs" />
 
         <TextView
             android:id="@+id/textView22"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:text="@string/import_json"
+            android:text="@string/export_json"
             android:textColor="@android:color/black"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="@+id/exportJson"
-            app:layout_constraintStart_toStartOf="@+id/importJson"
-            app:layout_constraintTop_toBottomOf="@+id/importJson" />
+            app:layout_constraintStart_toStartOf="@+id/exportJson"
+            app:layout_constraintTop_toBottomOf="@+id/exportJson" />
 
-        <Button
-            android:id="@+id/skip"
-            style="@style/button_style"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="16dp"
-            android:text="@string/skip"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/guideline31" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

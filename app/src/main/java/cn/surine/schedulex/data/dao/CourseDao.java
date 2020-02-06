@@ -23,6 +23,10 @@ public interface CourseDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     long insert(Course course);
 
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    void insert(Course ...course);
+
+
     @Update
     void update(Course... courses);
 
@@ -43,4 +47,10 @@ public interface CourseDao {
     List<Course> getByScheduleId(int scheduleId);
 
 
+    @Query("select * from course where id = :id")
+    Course getByCourseId(String id);
+
+
+    @Query("delete from Course where id = :id")
+    void deleteByCourseId(String id);
 }

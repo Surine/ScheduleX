@@ -379,6 +379,19 @@
 
         </ScrollView>
 
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/delete"
+            style="@style/Widget.AppCompat.Button.Borderless.Colored"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/dp16"
+            android:text="@string/delete"
+            android:visibility="gone"
+            android:textColor="@android:color/holo_red_light"
+            app:layout_constraintBottom_toBottomOf="@+id/addCourse"
+            app:layout_constraintEnd_toStartOf="@+id/addCourse"
+            app:layout_constraintTop_toTopOf="@+id/addCourse" />
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

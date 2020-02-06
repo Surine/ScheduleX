@@ -93,6 +93,9 @@
         <action
             android:id="@+id/action_scheduleConfigFragment_to_themeListFragment"
             app:destination="@id/themeListFragment" />
+        <action
+            android:id="@+id/action_scheduleConfigFragment_to_scheduleDataExport"
+            app:destination="@id/scheduleDataExport" />
     </fragment>
     <fragment
         android:id="@+id/aboutFragment"
@@ -106,4 +109,8 @@
         android:id="@+id/addCourseFragment"
         android:name="cn.surine.schedulex.ui.add_course.AddCourseFragment"
         android:label="AddCourseFragment" />
+    <fragment
+        android:id="@+id/scheduleDataExport"
+        android:name="cn.surine.schedulex.ui.schedule_data_export.ScheduleDataExport"
+        android:label="ScheduleDataExport" />
 </navigation>

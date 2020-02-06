@@ -8,26 +8,21 @@
     <dimen name="dp50">50dp</dimen>
     <dimen name="dp7">7dp</dimen>
     <dimen name="t30">30sp</dimen>
-    <dimen name="dp70">70dp</dimen>
     <dimen name="dp65">65dp</dimen>
     <dimen name="dp180">180dp</dimen>
     <dimen name="dp37">37dp</dimen>
     <dimen name="dp24">24dp</dimen>
     <dimen name="dp250">250dp</dimen>
     <dimen name="dp40">40dp</dimen>
-    <dimen name="dp200">200dp</dimen>
     <dimen name="dp16">16dp</dimen>
     <dimen name="dp2">2dp</dimen>
     <dimen name="dp90">90dp</dimen>
     <dimen name="t22">22sp</dimen>
-    <dimen name="dp100">100dp</dimen>
     <dimen name="dp45">45dp</dimen>
     <dimen name="dp12">12dp</dimen>
     <dimen name="dp5">5dp</dimen>
     <dimen name="dp8">8dp</dimen>
-    <dimen name="dp380">380dp</dimen>
     <dimen name="dp32">32dp</dimen>
-    <dimen name="dp300">300dp</dimen>
     <dimen name="t18">18sp</dimen>
     <dimen name="t2">2sp</dimen>
     <dimen name="dp220">220dp</dimen>
@@ -35,6 +30,5 @@
     <dimen name="course_item_height">120dp</dimen>
     <dimen name="course_item_width">60dp</dimen>
     <dimen name="dp1">1dp</dimen>
-    <dimen name="dp48">48dp</dimen>
     <dimen name="dp20">20dp</dimen>
 </resources>
