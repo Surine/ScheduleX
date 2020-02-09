@@ -63,6 +63,7 @@ public class LoginFragment extends BaseBindingFragment<FragmentLoginBinding> {
                 dialog.show();
             }
             if(status == LoginViewModel.LOGIN_SUCCESS){
+                loginViewModel.saveAccountAndPassword();
                 courseViewModel.getCourseByNet();
             }
             if(status == LoginViewModel.LOGIN_FAIL){

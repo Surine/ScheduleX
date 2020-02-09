@@ -81,5 +81,6 @@ dependencies {
 
     //弹簧动画
     implementation 'androidx.dynamicanimation:dynamicanimation:1.0.0'
+    implementation project(path: ':courseTableView')
 
 }

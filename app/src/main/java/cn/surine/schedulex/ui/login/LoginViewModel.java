@@ -9,6 +9,7 @@ import androidx.lifecycle.ViewModel;
 
 import cn.surine.schedulex.base.Constants;
 import cn.surine.schedulex.base.http.BaseHttpSubscriber;
+import cn.surine.schedulex.base.utils.Prefs;
 import cn.surine.schedulex.base.utils.SimpleTextWatcher;
 import cn.surine.schedulex.base.utils.Strs;
 import cn.surine.schedulex.data.entity.VmResultString;
@@ -67,4 +68,11 @@ public class LoginViewModel extends ViewModel {
     }
 
 
+    /**
+     * 保存账号密码
+     * */
+    public void saveAccountAndPassword() {
+        Prefs.save(Constants.ACCOUNT,account.getValue());
+        Prefs.save(Constants.PASSWORD,account.getValue());
+    }
 }

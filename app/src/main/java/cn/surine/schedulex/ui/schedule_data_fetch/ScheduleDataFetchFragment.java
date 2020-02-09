@@ -8,6 +8,7 @@ import android.os.Bundle;
 
 import androidx.annotation.Nullable;
 import androidx.lifecycle.ViewModelProviders;
+import androidx.navigation.Navigation;
 
 import com.tbruyelle.rxpermissions2.RxPermissions;
 
@@ -61,7 +62,6 @@ public class ScheduleDataFetchFragment extends BaseBindingFragment<FragmentDataF
         Object[] argsForCourse = new Object[]{CourseRepository.abt.getInstance()};
         courseViewModel = ViewModelProviders.of(this, InstanceFactory.getInstance(classesForCourse, argsForCourse)).get(CourseViewModel.class);
 
-
         scheduleName = Objs.notNull(getArguments()) ? getArguments().getString(ScheduleInitFragment.SCHEDULE_NAME) : "UNKNOWN";
         t.scheduleTitle.setText(scheduleName);
 
@@ -80,11 +80,12 @@ public class ScheduleDataFetchFragment extends BaseBindingFragment<FragmentDataF
         });
         t.scanQrCode.setOnClickListener(v -> Toasts.toast("暂不支持！"));
         t.importExcel.setOnClickListener(v -> Toasts.toast("暂不支持"));
-        t.other.setOnClickListener(v -> Toasts.toast("欢迎加群提出意见！"));
+        t.other.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.action_dataFetchFragment_to_superLoginFragment));
         t.skip.setOnClickListener(v -> {
             Prefs.save(Constants.CUR_SCHEDULE, scheduleViewModel.addSchedule(scheduleName, 24, 1));
             Navigations.open(ScheduleDataFetchFragment.this, R.id.action_dataFetchFragment_to_dailyFragment);
         });
+
     }
 
 

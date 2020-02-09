@@ -71,6 +71,9 @@
         <action
             android:id="@+id/action_dataFetchFragment_to_dailyFragment"
             app:destination="@id/dailyFragment" />
+        <action
+            android:id="@+id/action_dataFetchFragment_to_superLoginFragment"
+            app:destination="@id/superLoginFragment" />
     </fragment>
     <fragment
         android:id="@+id/splashFragment"
@@ -82,6 +85,9 @@
         <action
             android:id="@+id/action_splashFragment_to_dailyFragment"
             app:destination="@id/dailyFragment" />
+        <action
+            android:id="@+id/action_splashFragment_to_scheduleFragmentTerm2"
+            app:destination="@id/scheduleFragmentTerm2" />
     </fragment>
     <fragment
         android:id="@+id/scheduleConfigFragment"
@@ -113,4 +119,16 @@
         android:id="@+id/scheduleDataExport"
         android:name="cn.surine.schedulex.ui.schedule_data_export.ScheduleDataExport"
         android:label="ScheduleDataExport" />
+    <fragment
+        android:id="@+id/superLoginFragment"
+        android:name="cn.surine.schedulex.super_import.view.SuperLoginFragment"
+        android:label="SuperLoginFragment" />
+    <fragment
+        android:id="@+id/scheduleFragmentTerm2"
+        android:name="cn.surine.schedulex.ui.schedule.ScheduleFragmentTerm2"
+        android:label="ScheduleFragmentTerm2" >
+        <action
+            android:id="@+id/action_scheduleFragmentTerm2_to_addCourseFragment"
+            app:destination="@id/addCourseFragment" />
+    </fragment>
 </navigation>

@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/shape_rect_10_white"
+    android:orientation="vertical"
+    android:paddingTop="@dimen/dp16"
+    android:paddingBottom="@dimen/dp16">
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline17"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.05109489" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline33"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.95" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline34"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.0" />
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="登录成功"
+        android:textColor="@android:color/black"
+        android:textSize="@dimen/t22"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="@+id/guideline17"
+        app:layout_constraintTop_toTopOf="@+id/guideline34" />
+
+    <TextView
+        android:id="@+id/msg"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp5"
+        android:text="请选择一个学期课表导入"
+        android:textSize="@dimen/t17"
+        app:layout_constraintEnd_toStartOf="@+id/guideline33"
+        app:layout_constraintStart_toStartOf="@+id/guideline17"
+        app:layout_constraintTop_toBottomOf="@+id/title" />
+
+    <TextView
+        android:id="@+id/item1"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="@dimen/dp24"
+        android:gravity="center_vertical"
+        android:text="2019学年-2020学年 第一学期"
+        android:textColor="@android:color/black"
+        android:textSize="@dimen/t18"
+        app:layout_constraintEnd_toStartOf="@id/guideline33"
+        app:layout_constraintStart_toStartOf="@id/guideline17"
+        app:layout_constraintTop_toBottomOf="@id/msg" />
+
+    <TextView
+        android:id="@+id/item2"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="@dimen/dp12"
+        android:gravity="center_vertical"
+        android:text="2019学年-2020学年 第一学期"
+        android:textColor="@android:color/black"
+        android:textSize="@dimen/t18"
+        app:layout_constraintEnd_toStartOf="@id/guideline33"
+        app:layout_constraintStart_toStartOf="@id/guideline17"
+        app:layout_constraintTop_toBottomOf="@id/item1" />
+
+    <TextView
+        android:id="@+id/item3"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="@dimen/dp12"
+        android:gravity="center_vertical"
+        android:text="2019学年-2020学年 第一学期"
+        android:textColor="@android:color/black"
+        android:textSize="@dimen/t18"
+        app:layout_constraintEnd_toStartOf="@id/guideline33"
+        app:layout_constraintStart_toStartOf="@id/guideline17"
+        app:layout_constraintTop_toBottomOf="@id/item2" />
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="@dimen/dp12"
+        android:gravity="center_vertical"
+        android:text="2019学年-2020学年 第一学期"
+        android:textColor="@android:color/black"
+        android:textSize="@dimen/t18"
+        app:layout_constraintEnd_toStartOf="@id/guideline33"
+        app:layout_constraintStart_toStartOf="@id/guideline17"
+        app:layout_constraintTop_toBottomOf="@id/item3" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -51,4 +51,9 @@ public class Constants {
             "#3d1496",
             "#86051d"
     };
+    public static final String ACCOUNT = "ACCOUNT";
+    public static final String PASSWORD = "PASSWORD";
+
+    //强制最大周
+    public static int MAX_WEEK = 30;
 }

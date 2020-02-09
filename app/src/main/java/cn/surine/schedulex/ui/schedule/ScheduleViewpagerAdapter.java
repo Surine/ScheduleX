@@ -25,7 +25,6 @@ import cn.surine.schedulex.ui.view.custom.helper.BtmDialogs;
  */
 public class ScheduleViewpagerAdapter extends RecyclerView.Adapter<ScheduleViewpagerAdapter.ViewPagerViewHolder> {
 
-    public static final String COURSE_ID = "course_id";
     private List<List<Course>> courseList;
     private BaseFragment baseFragment;
 
