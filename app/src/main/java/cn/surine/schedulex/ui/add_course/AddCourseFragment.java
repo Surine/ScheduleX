@@ -300,7 +300,7 @@ public class AddCourseFragment extends BaseBindingFragment<FragmentAddCourseBind
     private View getSessionView(FrameLayout frameLayout, BottomSheetDialog bt) {
         View sessionView = Uis.inflate(activity(), R.layout.view_session_choose);
         NumberPicker npForStartSession = sessionView.findViewById(R.id.number_picker);
-        String[] s1 = {"1", "3", "5", "7"};
+        String[] s1 = {"1", "2", "3", "4","5","6","7","8","9","10","11","12"};
         npForStartSession.setDisplayedValues(s1);
         npForStartSession.setMinValue(0);
         npForStartSession.setMaxValue(s1.length - 1);
@@ -310,7 +310,7 @@ public class AddCourseFragment extends BaseBindingFragment<FragmentAddCourseBind
         }
 
         NumberPicker npForContinueSession = sessionView.findViewById(R.id.numberPicker2);
-        String[] s2 = {"2", "4"};
+        String[] s2 = s1;
         npForContinueSession.setDisplayedValues(s2);
         npForContinueSession.setMinValue(0);
         npForContinueSession.setMaxValue(s2.length - 1);

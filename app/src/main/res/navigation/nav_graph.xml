@@ -20,40 +20,14 @@
         android:label="fragment_login"
         tools:layout="@layout/fragment_login">
         <action
-            android:id="@+id/action_loginFragment_to_dailyFragment"
-            app:destination="@id/dailyFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/dailyFragment"
-        android:name="cn.surine.schedulex.ui.schedule.ScheduleFragment"
-        android:label="fragment_daily"
-        tools:layout="@layout/fragment_schedule">
-        <action
-            android:id="@+id/action_dailyFragment_to_funcFragment"
-            app:destination="@id/ScheduleListFragment"
-            app:enterAnim="@anim/page_rotate_in"
-            app:exitAnim="@anim/page_rotate_out"
-            app:popEnterAnim="@anim/page_rotate_in"
-            app:popExitAnim="@anim/page_rotate_out" />
-        <action
-            android:id="@+id/action_dailyFragment_to_aboutFragment"
-            app:destination="@id/aboutFragment" />
-        <action
-            android:id="@+id/action_dailyFragment_to_addCourseFragment"
-            app:destination="@id/addCourseFragment" />
+            android:id="@+id/action_loginFragment_to_scheduleFragment"
+            app:destination="@id/scheduleFragment" />
     </fragment>
     <fragment
         android:id="@+id/ScheduleListFragment"
         android:name="cn.surine.schedulex.ui.schedule_list.ScheduleListFragment"
         android:label="fragment_schedule_list"
         tools:layout="@layout/fragment_schedule_list">
-        <action
-            android:id="@+id/action_funcFragment_to_dailyFragment"
-            app:destination="@id/dailyFragment"
-            app:enterAnim="@anim/page_rotate_out"
-            app:exitAnim="@anim/page_rotate_in"
-            app:popEnterAnim="@anim/page_rotate_out"
-            app:popExitAnim="@anim/page_rotate_in" />
         <action
             android:id="@+id/action_ScheduleListFragment_to_scheduleConfigFragment"
             app:destination="@id/scheduleConfigFragment" />
@@ -69,11 +43,11 @@
             android:id="@+id/action_dataFetchFragment_to_loginFragment"
             app:destination="@id/loginFragment" />
         <action
-            android:id="@+id/action_dataFetchFragment_to_dailyFragment"
-            app:destination="@id/dailyFragment" />
-        <action
             android:id="@+id/action_dataFetchFragment_to_superLoginFragment"
             app:destination="@id/superLoginFragment" />
+        <action
+            android:id="@+id/action_dataFetchFragment_to_scheduleFragment"
+            app:destination="@id/scheduleFragment" />
     </fragment>
     <fragment
         android:id="@+id/splashFragment"
@@ -83,11 +57,8 @@
             android:id="@+id/action_splashFragment_to_scheduleInitFragment"
             app:destination="@id/scheduleInitFragment" />
         <action
-            android:id="@+id/action_splashFragment_to_dailyFragment"
-            app:destination="@id/dailyFragment" />
-        <action
-            android:id="@+id/action_splashFragment_to_scheduleFragmentTerm2"
-            app:destination="@id/scheduleFragmentTerm2" />
+            android:id="@+id/action_splashFragment_to_scheduleFragment"
+            app:destination="@id/scheduleFragment" />
     </fragment>
     <fragment
         android:id="@+id/scheduleConfigFragment"
@@ -97,9 +68,6 @@
             android:id="@+id/action_scheduleConfigFragment_to_ScheduleListFragment"
             app:destination="@id/ScheduleListFragment" />
         <action
-            android:id="@+id/action_scheduleConfigFragment_to_themeListFragment"
-            app:destination="@id/themeListFragment" />
-        <action
             android:id="@+id/action_scheduleConfigFragment_to_scheduleDataExport"
             app:destination="@id/scheduleDataExport" />
     </fragment>
@@ -107,10 +75,6 @@
         android:id="@+id/aboutFragment"
         android:name="cn.surine.schedulex.ui.about.AboutFragment"
         android:label="AboutFragment" />
-    <fragment
-        android:id="@+id/themeListFragment"
-        android:name="cn.surine.schedulex.ui.theme.ThemeListFragment"
-        android:label="ThemeListFragment" />
     <fragment
         android:id="@+id/addCourseFragment"
         android:name="cn.surine.schedulex.ui.add_course.AddCourseFragment"
@@ -124,11 +88,18 @@
         android:name="cn.surine.schedulex.super_import.view.SuperLoginFragment"
         android:label="SuperLoginFragment" />
     <fragment
-        android:id="@+id/scheduleFragmentTerm2"
-        android:name="cn.surine.schedulex.ui.schedule.ScheduleFragmentTerm2"
-        android:label="ScheduleFragmentTerm2" >
+        android:id="@+id/scheduleFragment"
+        android:name="cn.surine.schedulex.ui.schedule.ScheduleFragment"
+        android:label="ScheduleFragment">
+
         <action
-            android:id="@+id/action_scheduleFragmentTerm2_to_addCourseFragment"
+            android:id="@+id/action_scheduleFragment_to_addCourseFragment"
             app:destination="@id/addCourseFragment" />
+        <action
+            android:id="@+id/action_scheduleFragment_to_aboutFragment2"
+            app:destination="@id/aboutFragment" />
+        <action
+            android:id="@+id/action_scheduleFragment_to_ScheduleListFragment2"
+            app:destination="@id/ScheduleListFragment" />
     </fragment>
 </navigation>

@@ -29,7 +29,7 @@ import cn.surine.schedulex.ui.view.custom.helper.BtmDialogs;
  * @author sunliwei
  * @date 2020-02-09 16:38
  */
-public class ScheduleViewPagerTerm2Adapter extends RecyclerView.Adapter<ScheduleViewPagerTerm2Adapter.ViewPagerViewHolder> {
+public class ScheduleViewPagerAdapter extends RecyclerView.Adapter<ScheduleViewPagerAdapter.ViewPagerViewHolder> {
 
     private int week;
     private List<List<BCourse>> courseList;
@@ -38,7 +38,7 @@ public class ScheduleViewPagerTerm2Adapter extends RecyclerView.Adapter<Schedule
     private UIConfig uiConfig;
 
 
-    public ScheduleViewPagerTerm2Adapter(List<List<BCourse>> courseList, BaseFragment baseFragment, Schedule schedule,int week) {
+    public ScheduleViewPagerAdapter(List<List<BCourse>> courseList, BaseFragment baseFragment, Schedule schedule, int week) {
         this.courseList = courseList;
         this.baseFragment = baseFragment;
         this.schedule = schedule;
@@ -57,7 +57,7 @@ public class ScheduleViewPagerTerm2Adapter extends RecyclerView.Adapter<Schedule
         uiConfig.setSectionHeight(Uis.dip2px(App.context,64));
         uiConfig.setItemTopMargin(10);
         uiConfig.setChooseWeekColor(App.context.getResources().getColor(R.color.colorPrimary));
-        uiConfig.setItemSideMargin(13);
+        uiConfig.setItemSideMargin(11);
         uiConfig.setColorUI(schedule.lightText ? UIConfig.LIGHT : UIConfig.DARK);
     }
 
@@ -67,14 +67,14 @@ public class ScheduleViewPagerTerm2Adapter extends RecyclerView.Adapter<Schedule
 
     @NonNull
     @Override
-    public ScheduleViewPagerTerm2Adapter.ViewPagerViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public ScheduleViewPagerAdapter.ViewPagerViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_course_table, parent, false);
-        return new ScheduleViewPagerTerm2Adapter.ViewPagerViewHolder(view);
+        return new ScheduleViewPagerAdapter.ViewPagerViewHolder(view);
     }
 
     @SuppressLint("SetTextI18n")
     @Override
-    public void onBindViewHolder(@NonNull ScheduleViewPagerTerm2Adapter.ViewPagerViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull ScheduleViewPagerAdapter.ViewPagerViewHolder holder, int position) {
 
         DataConfig dataConfig = new DataConfig();
         dataConfig.setCurTermStartDate(schedule.termStartDate)

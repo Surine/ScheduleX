@@ -77,7 +77,7 @@
     <string name="course_plan">时间计划</string>
     <string name="course_position">请输入你的上课地点</string>
     <string name="class_time">请选择课程时间</string>
-    <string name="overlimit">超过节次限制 (最大为8)</string>
+    <string name="overlimit">超过节次限制 (最大为12)</string>
     <string name="course_null">课程信息为空，请重新填写</string>
     <string name="teacher">教师</string>
     <string name="please_input_teacher">请输入教师姓名</string>

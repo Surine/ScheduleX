@@ -30,9 +30,7 @@ public class SplashFragment extends BaseFragment {
             if(Prefs.getBoolean(Constants.IS_FIRST, false)){
                 Navigations.open(SplashFragment.this,R.id.action_splashFragment_to_scheduleInitFragment);
             }else{
-                //TODO
-//                Navigations.open(SplashFragment.this,R.id.action_splashFragment_to_dailyFragment);
-                Navigations.open(SplashFragment.this,R.id.action_splashFragment_to_scheduleFragmentTerm2);
+                Navigations.open(SplashFragment.this,R.id.action_splashFragment_to_scheduleFragment);
             }
         };
 

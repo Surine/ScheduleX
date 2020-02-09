@@ -83,7 +83,7 @@ public class ScheduleDataFetchFragment extends BaseBindingFragment<FragmentDataF
         t.other.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.action_dataFetchFragment_to_superLoginFragment));
         t.skip.setOnClickListener(v -> {
             Prefs.save(Constants.CUR_SCHEDULE, scheduleViewModel.addSchedule(scheduleName, 24, 1));
-            Navigations.open(ScheduleDataFetchFragment.this, R.id.action_dataFetchFragment_to_dailyFragment);
+            Navigations.open(ScheduleDataFetchFragment.this, R.id.action_dataFetchFragment_to_scheduleFragment);
         });
 
     }
@@ -136,7 +136,7 @@ public class ScheduleDataFetchFragment extends BaseBindingFragment<FragmentDataF
             }
             courseViewModel.insert(courses);
             Toasts.toast(getString(R.string.handle_success));
-            Navigations.open(ScheduleDataFetchFragment.this, R.id.action_dataFetchFragment_to_dailyFragment);
+            Navigations.open(ScheduleDataFetchFragment.this, R.id.action_dataFetchFragment_to_scheduleFragment);
         } catch (Exception e) {
             Toasts.toast(getString(R.string.parse_fail));
             e.printStackTrace();

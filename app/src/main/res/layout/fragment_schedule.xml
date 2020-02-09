@@ -62,7 +62,7 @@
             android:orientation="horizontal"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintGuide_percent="0.97"
-             />
+            />
 
         <TextView
             android:id="@+id/title"
@@ -91,69 +91,6 @@
             android:orientation="horizontal"
             app:layout_constraintGuide_percent="0.26"
             app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/mon"
-            style="@style/textview_week_chip_style"
-            android:background="@{timer.getWeekDayBackground(1)}"
-            android:text="Mon"
-            android:textColor="@{schedule.lightTextColor()}"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="@id/guideline15"
-            app:layout_constraintEnd_toStartOf="@+id/tue"
-            app:layout_constraintStart_toStartOf="@id/guideline16"
-            app:layout_constraintTop_toTopOf="@id/guideline14" />
-
-        <TextView
-            android:id="@+id/tue"
-            style="@style/textview_week_chip_style"
-            android:background="@{timer.getWeekDayBackground(2)}"
-            android:text="Tue"
-            android:textColor="@{schedule.lightTextColor()}"
-            app:layout_constraintBottom_toBottomOf="@+id/mon"
-            app:layout_constraintEnd_toStartOf="@+id/wed"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/mon"
-            app:layout_constraintTop_toTopOf="@+id/mon" />
-
-        <TextView
-            android:id="@+id/wed"
-            style="@style/textview_week_chip_style"
-            android:background="@{timer.getWeekDayBackground(3)}"
-            android:text="Wed"
-            android:textColor="@{schedule.lightTextColor()}"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="@+id/tue"
-            app:layout_constraintEnd_toStartOf="@+id/thu"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/tue"
-            app:layout_constraintTop_toTopOf="@+id/tue" />
-
-        <TextView
-            android:id="@+id/thu"
-            style="@style/textview_week_chip_style"
-            android:background="@{timer.getWeekDayBackground(4)}"
-            android:text="Thu"
-            android:textColor="@{schedule.lightTextColor()}"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="@+id/wed"
-            app:layout_constraintEnd_toStartOf="@+id/fri"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/wed"
-            app:layout_constraintTop_toTopOf="@+id/wed" />
-
-        <TextView
-            android:id="@+id/fri"
-            style="@style/textview_week_chip_style"
-            android:background="@{timer.getWeekDayBackground(5)}"
-            android:text="Fri"
-            android:textColor="@{schedule.lightTextColor()}"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="@+id/thu"
-            app:layout_constraintEnd_toStartOf="@+id/guideline13"
-            app:layout_constraintStart_toEndOf="@+id/thu"
-            app:layout_constraintTop_toTopOf="@+id/thu" />
-
 
         <ImageView
             android:id="@+id/func_btn"
@@ -184,14 +121,14 @@
             android:id="@+id/viewpager"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:layout_marginStart="@dimen/dp16"
+            android:layout_marginStart="@dimen/dp10"
+            android:layout_marginEnd="@dimen/dp10"
             android:background="@android:color/transparent"
             android:orientation="vertical"
-            android:layout_marginEnd="@dimen/dp16"
             app:layout_constraintBottom_toTopOf="@+id/guideline12"
-            app:layout_constraintEnd_toStartOf="@+id/guideline13"
-            app:layout_constraintStart_toStartOf="@+id/guideline16"
-            app:layout_constraintTop_toTopOf="@+id/guideline15" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/guideline14" />
 
 
 
@@ -206,65 +143,6 @@
             android:textColor="@{schedule.lightTextColor()}"
             app:layout_constraintStart_toStartOf="@+id/guideline10"
             app:layout_constraintTop_toBottomOf="@+id/title" />
-
-        <ScrollView
-            android:id="@+id/schedule_slide_bar"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:scrollbars="none"
-            android:layout_marginStart="@dimen/dp4"
-            app:layout_constraintRight_toRightOf="@id/guideline16"
-            app:layout_constraintBottom_toBottomOf="@id/guideline12"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toTopOf="@id/guideline15">
-
-            <LinearLayout
-                android:layout_width="@dimen/dp20"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
-
-                <TextView
-                    style="@style/slide_bar_tv_style"
-                    android:text="@string/_1"
-                    android:textColor="@{schedule.lightTextColor()}" />
-
-                <TextView
-                    style="@style/slide_bar_tv_style"
-                    android:text="@string/_2"
-                    android:textColor="@{schedule.lightTextColor()}" />
-
-                <TextView
-                    style="@style/slide_bar_tv_style"
-                    android:text="@string/_3"
-                    android:textColor="@{schedule.lightTextColor()}" />
-
-                <TextView
-                    style="@style/slide_bar_tv_style"
-                    android:text="@string/_4"
-                    android:textColor="@{schedule.lightTextColor()}" />
-
-                <TextView
-                    style="@style/slide_bar_tv_style"
-                    android:text="@string/_5"
-                    android:textColor="@{schedule.lightTextColor()}" />
-
-                <TextView
-                    style="@style/slide_bar_tv_style"
-                    android:text="@string/_6"
-                    android:textColor="@{schedule.lightTextColor()}" />
-
-                <TextView
-                    style="@style/slide_bar_tv_style"
-                    android:text="@string/_7"
-                    android:textColor="@{schedule.lightTextColor()}" />
-
-                <TextView
-                    style="@style/slide_bar_tv_style"
-                    android:text="@string/_8"
-                    android:textColor="@{schedule.lightTextColor()}" />
-            </LinearLayout>
-        </ScrollView>
-
 
 
         <ImageView

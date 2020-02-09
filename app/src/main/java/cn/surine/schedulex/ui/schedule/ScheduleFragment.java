@@ -1,8 +1,6 @@
 package cn.surine.schedulex.ui.schedule;
 
 import android.annotation.SuppressLint;
-import android.graphics.Color;
-import android.net.Uri;
 import android.text.TextUtils;
 
 import androidx.lifecycle.ViewModelProviders;
@@ -10,21 +8,18 @@ import androidx.navigation.Navigation;
 import androidx.viewpager2.widget.ViewPager2;
 
 import com.bumptech.glide.Glide;
-import com.google.android.material.snackbar.Snackbar;
 
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-import cn.surine.coursetableview.View.CourseTableView;
+import cn.surine.coursetableview.entity.BCourse;
 import cn.surine.schedulex.R;
 import cn.surine.schedulex.base.Constants;
 import cn.surine.schedulex.base.controller.BaseBindingFragment;
-import cn.surine.schedulex.base.interfaces.Call;
+import cn.surine.schedulex.base.utils.DataMaps;
 import cn.surine.schedulex.base.utils.InstanceFactory;
 import cn.surine.schedulex.base.utils.Prefs;
-import cn.surine.schedulex.base.utils.StatusBars;
-import cn.surine.schedulex.base.utils.Toasts;
 import cn.surine.schedulex.data.entity.Course;
 import cn.surine.schedulex.data.entity.Schedule;
 import cn.surine.schedulex.databinding.FragmentScheduleBinding;
@@ -35,18 +30,20 @@ import cn.surine.schedulex.ui.timer.TimerViewModel;
 import cn.surine.schedulex.ui.view.custom.helper.CommonDialogs;
 import cn.surine.schedulex.ui.view.custom.helper.ZoomOutPageTransformer;
 
+/**
+ * Intro：
+ * 二期课表
+ * @author sunliwei
+ * @date 2020-02-09 16:18
+ */
 public class ScheduleFragment extends BaseBindingFragment<FragmentScheduleBinding> {
-
-    private TimerViewModel timerViewModel;
-
-
     @Override
     public int layoutId() {
         return R.layout.fragment_schedule;
     }
 
 
-    @SuppressLint({"StringFormatMatches", "ClickableViewAccessibility"})
+    @SuppressLint("StringFormatMatches")
     @Override
     protected void onInit(FragmentScheduleBinding t) {
 
@@ -61,7 +58,7 @@ public class ScheduleFragment extends BaseBindingFragment<FragmentScheduleBindin
 
         Class[] classesForTimer = new Class[]{TimerRepository.class};
         Object[] argsForTimer = new Object[]{TimerRepository.abt.getInstance()};
-        timerViewModel = ViewModelProviders.of(this, InstanceFactory.getInstance(classesForTimer, argsForTimer)).get(TimerViewModel.class);
+        TimerViewModel timerViewModel = ViewModelProviders.of(this, InstanceFactory.getInstance(classesForTimer, argsForTimer)).get(TimerViewModel.class);
         t.setTimer(timerViewModel);
 
         Class[] classesForSchedule = new Class[]{ScheduleRepository.class};
@@ -76,17 +73,19 @@ public class ScheduleFragment extends BaseBindingFragment<FragmentScheduleBindin
         }
         //当前周
         int currentWeek = curSchedule.curWeek();
-        List<List<Course>> unHandleCourseList = new ArrayList<>();
+        List<List<BCourse>> handleCourseList = new ArrayList<>();
         for (int i = 0; i < curSchedule.totalWeek; i++) {
             List<Course> dbData = courseViewModel.queryCourseByWeek(i + 1, curSchedule.roomId);
-            unHandleCourseList.add(dbData);
+            List<BCourse> bCourseList = new ArrayList<>();
+            for (Course course :dbData) {
+                bCourseList.add(DataMaps.dataMappingByCourse(course));
+            }
+            handleCourseList.add(bCourseList);
         }
-        List<List<Course>> cl = scheduleViewModel.getAllCourseUiData(unHandleCourseList, curSchedule);
-        ScheduleViewpagerAdapter scheduleViewpagerAdapter = new ScheduleViewpagerAdapter(cl, ScheduleFragment.this);
-        scheduleViewpagerAdapter.setOnScrollBindListener(position -> t.scheduleSlideBar.scrollBy(0, position));
-        t.scheduleSlideBar.setOnTouchListener((v, event) -> true);
 
-        t.viewpager.setAdapter(scheduleViewpagerAdapter);
+        ScheduleViewPagerAdapter scheduleViewPagerTerm2Adapter = new ScheduleViewPagerAdapter(handleCourseList, ScheduleFragment.this,curSchedule,currentWeek);
+
+        t.viewpager.setAdapter(scheduleViewPagerTerm2Adapter);
         t.viewpager.setOffscreenPageLimit(1);
         t.viewpager.setOrientation(ViewPager2.ORIENTATION_HORIZONTAL);
         t.viewpager.setCurrentItem(currentWeek - 1, true);
@@ -99,22 +98,20 @@ public class ScheduleFragment extends BaseBindingFragment<FragmentScheduleBindin
             @Override
             public void onPageSelected(int position) {
                 timerViewModel.curWeekStr.setValue("😁😁😁 " + getString(R.string.week, (position + 1)));
-                t.scheduleSlideBar.scrollBy(0, 0);
+                scheduleViewPagerTerm2Adapter.setWeek(position + 1);
+                scheduleViewPagerTerm2Adapter.notifyItemChanged(position);
             }
         });
 
 
-        t.funcBtn.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.action_dailyFragment_to_funcFragment));
-        t.addCourse.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.action_dailyFragment_to_addCourseFragment));
-        t.title.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.action_dailyFragment_to_aboutFragment));
+        t.funcBtn.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.action_scheduleFragment_to_ScheduleListFragment2));
+        t.addCourse.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.action_scheduleFragment_to_addCourseFragment));
+        t.title.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.action_scheduleFragment_to_aboutFragment2));
 
         if (!TextUtils.isEmpty(curSchedule.imageUrl)) {
             Glide.with(activity()).load(new File(curSchedule.imageUrl)).into(t.background);
         }
     }
-
-
-
 
     @SuppressLint("MissingSuperCall")
     @Override

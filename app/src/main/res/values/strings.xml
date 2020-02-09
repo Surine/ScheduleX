@@ -95,7 +95,7 @@
     <string name="course_plan">Course Plan</string>
     <string name="class_time">Please select a class time</string>
     <string name="course_position">Please enter your class location</string>
-    <string name="overlimit">Exceeded section limit (Max = 8)</string>
+    <string name="overlimit">Exceeded section limit (Max = 12)</string>
     <string name="course_null">Course information is empty, please fill in again</string>
     <string name="teacher">Teacher</string>
     <string name="please_input_teacher">Please enter teacher name</string>

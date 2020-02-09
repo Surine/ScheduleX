@@ -94,7 +94,7 @@ public class LoginFragment extends BaseBindingFragment<FragmentLoginBinding> {
                     course.id = course.scheduleId +"@"+ course.id;
                 }
                 courseViewModel.saveCourseByDb(courseList,scheduleId);
-                Navigations.open(this,R.id.dailyFragment);
+                Navigations.open(this,R.id.scheduleFragment);
                 Toasts.toast(getString(R.string.handle_success));
             }
             if(status == CourseViewModel.FAIL){

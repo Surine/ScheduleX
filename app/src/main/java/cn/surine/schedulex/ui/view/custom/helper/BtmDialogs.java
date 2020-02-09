@@ -94,7 +94,7 @@ public class BtmDialogs {
         Bundle bundle = new Bundle();
         bundle.putString(COURSE_ID,course.id);
         edit.setOnClickListener(v -> {
-            Navigations.open(baseFragment,R.id.action_dailyFragment_to_addCourseFragment,bundle);
+            Navigations.open(baseFragment,R.id.action_scheduleFragment_to_addCourseFragment,bundle);
             bt.dismiss();
         });
     }
