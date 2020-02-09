@@ -51,5 +51,4 @@ public class Constants {
             "#3d1496",
             "#86051d"
     };
-
 }

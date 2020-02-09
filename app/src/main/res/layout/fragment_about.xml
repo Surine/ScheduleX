@@ -1,120 +1,107 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<layout xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
 
     </data>
 
     <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
         android:id="@+id/about_fragment_view"
-        >
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@android:color/white">
+            android:layout_height="match_parent"
+            android:background="@android:color/white"
+            android:orientation="vertical"
+            android:paddingStart="@dimen/dp20"
+            android:paddingEnd="@dimen/dp20"
+            android:paddingBottom="@dimen/dp20"
+            >
 
-            <androidx.constraintlayout.widget.Guideline
-                android:id="@+id/guideline21"
-                android:layout_width="wrap_content"
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                app:layout_constraintGuide_percent="0.05109489" />
-
-            <androidx.constraintlayout.widget.Guideline
-                android:id="@+id/guideline22"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                app:layout_constraintGuide_percent="0.95" />
-
-            <androidx.constraintlayout.widget.Guideline
-                android:id="@+id/guideline23"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                app:layout_constraintGuide_percent="0.05" />
-
-            <androidx.constraintlayout.widget.Guideline
-                android:id="@+id/guideline24"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                app:layout_constraintGuide_percent="0.12" />
-
-            <androidx.constraintlayout.widget.Guideline
-                android:id="@+id/guideline29"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                app:layout_constraintGuide_percent="0.2" />
-
-            <androidx.constraintlayout.widget.Guideline
-                android:id="@+id/guideline35"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                app:layout_constraintGuide_percent="1.0" />
-
-            <TextView
-                android:id="@+id/textView17"
-                style="@style/textview_title_style"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="12dp"
-                android:text="@string/app_name"
-                android:textStyle="bold"
-                app:layout_constraintStart_toStartOf="@+id/guideline21"
-                app:layout_constraintTop_toTopOf="@+id/guideline23" />
-
-            <TextView
-                android:id="@+id/version_slogan"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:lineSpacingExtra="@dimen/t2"
-                android:textAlignment="viewStart"
-                android:text="@string/version_slogan"
-                android:textSize="@dimen/t18"
-                app:layout_constraintBottom_toTopOf="@+id/guideline24"
-                app:layout_constraintStart_toStartOf="@+id/textView17"
-                app:layout_constraintTop_toBottomOf="@+id/textView17"
-                app:layout_constraintVertical_bias="0.38" />
-
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/github"
-                style="@style/button_style"
-                android:layout_width="wrap_content"
-                android:layout_height="@dimen/dp40"
-                android:layout_marginTop="32dp"
-                android:layout_marginEnd="12dp"
-                android:paddingStart="@dimen/dp10"
-                android:paddingEnd="@dimen/dp10"
-                android:text="@string/star_on_github"
-                app:layout_constraintEnd_toStartOf="@+id/guideline22"
-                app:layout_constraintTop_toTopOf="@+id/guideline24" />
+                android:paddingBottom="@dimen/dp50"
+                >
 
 
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/alipay"
-                style="@style/button_style"
-                android:layout_width="wrap_content"
-                android:layout_height="@dimen/dp40"
-                android:layout_marginEnd="12dp"
-                android:background="@drawable/button_background_2"
-                android:paddingStart="@dimen/dp10"
-                android:paddingEnd="@dimen/dp10"
-                android:text="@string/donate_me_with_alipay"
-                app:layout_constraintBottom_toTopOf="@+id/guideline29"
-                app:layout_constraintEnd_toStartOf="@+id/guideline22"
-                app:layout_constraintTop_toBottomOf="@+id/github" />
+                <TextView
+                    android:id="@+id/textView17"
+                    style="@style/textview_title_style"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp100"
+                    android:text="@string/app_name"
+                    android:textStyle="bold"
+                    android:layout_marginStart="@dimen/dp12"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    />
+
+                <TextView
+                    android:id="@+id/version_slogan"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentBottom="true"
+                    android:lineSpacingExtra="@dimen/t2"
+                    android:text="@string/version_slogan"
+                    android:textAlignment="viewStart"
+                    android:textSize="@dimen/t18"
+                    android:layout_marginStart="@dimen/dp12"
+                    android:layout_marginTop="@dimen/dp16"
+                    app:layout_constraintTop_toBottomOf="@id/textView17"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/github"
+                    style="@style/button_style"
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/dp40"
+                    android:layout_marginTop="@dimen/dp50"
+                    android:layout_marginEnd="@dimen/dp12"
+                    app:layout_constraintTop_toBottomOf="@id/jetpack"
+                    android:paddingStart="@dimen/dp10"
+                    android:paddingEnd="@dimen/dp10"
+                    app:layout_constraintRight_toRightOf="parent"
+                    android:text="@string/star_on_github" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/alipay"
+                    style="@style/button_style"
+                    app:layout_constraintTop_toBottomOf="@id/github"
+                    android:layout_width="wrap_content"
+                    app:layout_constraintRight_toRightOf="parent"
+                    android:layout_height="@dimen/dp40"
+                    android:layout_marginTop="@dimen/dp20"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginEnd="@dimen/dp12"
+                    android:background="@drawable/button_background_2"
+                    android:paddingStart="@dimen/dp10"
+                    android:paddingEnd="@dimen/dp10"
+                    android:text="@string/donate_me_with_alipay" />
+
+                <ImageView
+                    android:id="@+id/jetpack"
+                    android:layout_width="@dimen/dp90"
+                    android:layout_height="@dimen/dp90"
+                    android:padding="@dimen/dp10"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintBottom_toBottomOf="@id/version_slogan"
+                    app:layout_constraintTop_toTopOf="@id/textView17"
+                    android:src="@mipmap/jetpack_hero" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
 
             <LinearLayout
                 android:id="@+id/linearLayout4"
-                android:layout_width="0dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
                 android:background="@drawable/config_card_background"
@@ -178,7 +165,7 @@
                         app:layout_constraintBottom_toBottomOf="@+id/courseNameSubTitle"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toTopOf="@+id/textView33"
-                        app:srcCompat="@mipmap/ic_more" />
+                        app:srcCompat="@drawable/ic_person_black_24dp" />
 
                     <ImageView
                         android:id="@+id/imageView10"
@@ -188,60 +175,58 @@
                         app:layout_constraintBottom_toBottomOf="@+id/coursePositionSubtitle"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toTopOf="@+id/textView35"
-                        app:srcCompat="@drawable/ic_person_black_24dp" />
+                        app:srcCompat="@drawable/about_material_24dp" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </LinearLayout>
 
             <LinearLayout
                 android:id="@+id/linearLayout5"
-                android:layout_width="0dp"
-                android:orientation="vertical"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="40dp"
+                android:background="@drawable/config_card_background"
+                android:orientation="vertical"
                 android:paddingTop="@dimen/dp12"
                 android:paddingBottom="@dimen/dp12"
-                android:background="@drawable/config_card_background"
                 app:layout_constraintEnd_toStartOf="@+id/guideline22"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="@+id/guideline21"
                 app:layout_constraintTop_toBottomOf="@+id/linearLayout4">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
-                    style="@style/setting_item_ui"
                     android:id="@+id/aboutItemQQ"
-                    >
+                    style="@style/setting_item_ui">
+
                     <TextView
                         android:id="@+id/a1"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="@dimen/dp8"
                         android:layout_marginTop="@dimen/dp8"
+                        android:text="@string/qq_group"
                         android:textColor="@android:color/black"
                         android:textSize="18sp"
-                        android:text="@string/qq_group"
                         android:textStyle="bold"
                         app:layout_constraintLeft_toLeftOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        />
+                        app:layout_constraintTop_toTopOf="parent" />
 
 
                     <TextView
                         android:id="@+id/b1"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/qq"
                         android:layout_marginTop="@dimen/dp8"
                         android:layout_marginBottom="@dimen/dp16"
+                        android:text="@string/qq"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toStartOf="@+id/a1"
                         app:layout_constraintTop_toBottomOf="@+id/a1" />
 
                     <ImageView
-                        android:id="@+id/switchs"
                         android:layout_width="20dp"
                         android:layout_height="20dp"
                         android:layout_marginEnd="8dp"
-                        android:src="@mipmap/ic_more"
+                        android:src="@drawable/ic_chat_black_24dp"
                         app:layout_constraintBottom_toBottomOf="@+id/b1"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toTopOf="@id/a1" />
@@ -250,32 +235,31 @@
 
 
                 <androidx.constraintlayout.widget.ConstraintLayout
-                    style="@style/setting_item_ui"
                     android:id="@+id/aboutItemCoolApk"
-                    android:layout_marginTop="@dimen/dp12"
-                    >
+                    style="@style/setting_item_ui"
+                    android:layout_marginTop="@dimen/dp12">
+
                     <TextView
                         android:id="@+id/a2"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="@dimen/dp8"
                         android:layout_marginTop="@dimen/dp8"
+                        android:text="@string/coolapk_id"
                         android:textColor="@android:color/black"
                         android:textSize="18sp"
-                        android:text="@string/coolapk_id"
                         android:textStyle="bold"
                         app:layout_constraintLeft_toLeftOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        />
+                        app:layout_constraintTop_toTopOf="parent" />
 
 
                     <TextView
                         android:id="@+id/b2"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/coolapk_follow"
                         android:layout_marginTop="@dimen/dp8"
                         android:layout_marginBottom="@dimen/dp16"
+                        android:text="@string/coolapk_follow"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toStartOf="@+id/a2"
                         app:layout_constraintTop_toBottomOf="@+id/a2" />
@@ -285,7 +269,7 @@
                         android:layout_width="20dp"
                         android:layout_height="20dp"
                         android:layout_marginEnd="8dp"
-                        android:src="@mipmap/ic_more"
+                        android:src="@drawable/about_coolapk"
                         app:layout_constraintBottom_toBottomOf="@+id/b2"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toTopOf="@id/a2" />
@@ -297,7 +281,7 @@
 
             <LinearLayout
                 android:id="@+id/linearLayout5_3"
-                android:layout_width="0dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="40dp"
                 android:background="@drawable/config_card_background"
@@ -335,21 +319,10 @@
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="@+id/textView33_3"
                         app:layout_constraintTop_toBottomOf="@+id/textView33_3" />
-
-
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </LinearLayout>
 
-            <ImageView
-                android:id="@+id/jetpack"
-                android:layout_width="90dp"
-                android:layout_height="90dp"
-                android:padding="10dp"
-                android:src="@mipmap/jetpack_hero"
-                app:layout_constraintBottom_toBottomOf="@+id/version_slogan"
-                app:layout_constraintEnd_toStartOf="@+id/guideline22"
-                app:layout_constraintTop_toTopOf="@+id/guideline23" />
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
+        </LinearLayout>
     </ScrollView>
 </layout>

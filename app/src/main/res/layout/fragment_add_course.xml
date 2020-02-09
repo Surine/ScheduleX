@@ -155,13 +155,13 @@
 
                         <ImageView
                             android:id="@+id/imageView10"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
+                            android:layout_width="@dimen/dp20"
+                            android:layout_height="@dimen/dp20"
                             android:layout_marginEnd="16dp"
                             app:layout_constraintBottom_toBottomOf="@+id/courseNameSubTitle"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintTop_toTopOf="@+id/textView33"
-                            app:srcCompat="@drawable/ic_person_black_24dp" />
+                            app:srcCompat="@drawable/course_name_24dp" />
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -202,7 +202,7 @@
                             app:layout_constraintBottom_toBottomOf="@+id/course_time_subtitle"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintTop_toTopOf="@+id/textView35_3"
-                            app:srcCompat="@mipmap/ic_more" />
+                            app:srcCompat="@drawable/course_time_black_24dp" />
 
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
@@ -259,7 +259,7 @@
                             app:layout_constraintBottom_toBottomOf="@+id/coursePositionSubtitle"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintTop_toTopOf="@+id/textView35"
-                            app:srcCompat="@mipmap/ic_more" />
+                            app:srcCompat="@drawable/course_position_24dp" />
 
                         <TextView
                             android:id="@+id/textView10"
@@ -310,7 +310,7 @@
                             app:layout_constraintBottom_toBottomOf="@+id/courseTeacherSubtitle"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintTop_toTopOf="@+id/textView35_4"
-                            app:srcCompat="@mipmap/ic_more" />
+                            app:srcCompat="@drawable/ic_person_black_24dp" />
 
                         <TextView
                             android:id="@+id/textView11"
@@ -362,7 +362,7 @@
                             app:layout_constraintBottom_toBottomOf="@+id/courseScoreSubtitle"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintTop_toTopOf="@+id/textView35_5"
-                            app:srcCompat="@mipmap/ic_more" />
+                            app:srcCompat="@drawable/course_xf_24dp" />
 
                         <TextView
                             android:id="@+id/textView12"

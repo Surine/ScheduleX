@@ -74,13 +74,13 @@ public class Dates {
     }
 
 
-
     /**
      * 根据字符串获取日期
+     *
      * @param dateStr 字符串
-     * @param format 格式
-     * */
-    public static Date getDate(String dateStr,String format){
+     * @param format  格式
+     */
+    public static Date getDate(String dateStr, String format) {
         @SuppressLint("SimpleDateFormat") SimpleDateFormat simpleDateFormat = new SimpleDateFormat(format);
         try {
             return simpleDateFormat.parse(dateStr);
@@ -89,7 +89,6 @@ public class Dates {
         }
         return null;
     }
-
 
 
     /**
@@ -122,23 +121,26 @@ public class Dates {
     }
 
 
-
     /**
      * 获取两个日期相差的天数
+     *
      * @param date1
      * @param date2
-     * */
-    public static int getDateDif(String date1,String date2){
+     */
+    public static int getDateDif(String date1, String date2) {
         Calendar cal = Calendar.getInstance();
-        cal.setTime(getDate(date1,yyyyMMdd));
+        cal.setTime(getDate(date1, yyyyMMdd));
         long time1 = cal.getTimeInMillis();
-        cal.setTime(getDate(date2,yyyyMMdd));
+        cal.setTime(getDate(date2, yyyyMMdd));
         long time2 = cal.getTimeInMillis();
-        return (int) Math.abs((time1 - time2)/(1000*3600*24));
+        return (int) Math.abs((time1 - time2) / (1000 * 3600 * 24));
     }
 
 
     public static void main(String[] args) {
-        System.out.println(getDateDif("2020-1-20","2020-1-25"));
+        System.out.println(getDateDif("2020-1-20", "2020-1-25"));
     }
+
+
+
 }

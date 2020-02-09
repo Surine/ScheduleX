@@ -11,6 +11,7 @@ import com.tbruyelle.rxpermissions2.RxPermissions;
 
 import cn.surine.schedulex.R;
 import cn.surine.schedulex.base.controller.BaseBindingFragment;
+import cn.surine.schedulex.base.utils.CalendarProviders;
 import cn.surine.schedulex.base.utils.Files;
 import cn.surine.schedulex.base.utils.InstanceFactory;
 import cn.surine.schedulex.base.utils.Jsons;
@@ -59,6 +60,17 @@ public class ScheduleDataExport extends BaseBindingFragment<FragmentDateExportBi
         schedule = scheduleViewModel.getScheduleById(scheduleId);
         t.scheduleTitle.setText(schedule.name);
 
+        t.exportIcs.setOnClickListener(v -> {
+            RxPermissions permission = new RxPermissions(activity());
+            permission.request(Manifest.permission.READ_CALENDAR,Manifest.permission.WRITE_CALENDAR).subscribe(aBoolean -> {
+                if (aBoolean) {
+                    exportIcs();
+                } else {
+                    Toasts.toast(getString(R.string.permission_is_denied));
+                }
+            });
+        });
+
 
         //导出为Json
         t.exportJson.setOnClickListener(v -> {
@@ -75,6 +87,14 @@ public class ScheduleDataExport extends BaseBindingFragment<FragmentDateExportBi
         t.exportExcel.setOnClickListener(v -> Toasts.toast("暂不支持！"));
         t.myQrCode.setOnClickListener(v -> Toasts.toast("暂不支持！"));
         t.other.setOnClickListener(v -> Toasts.toast("欢迎加群提出意见！"));
+    }
+
+
+    /**
+     * 导出到日历
+     * */
+    private void exportIcs() {
+        CalendarProviders.addEvent(activity(),"测试","测试文本",System.currentTimeMillis(),System.currentTimeMillis() + 60 * 1000);
     }
 
     /**
