@@ -56,4 +56,5 @@ public class Constants {
 
     //强制最大周
     public static int MAX_WEEK = 30;
+    public static int MAX_SESSION = 12;
 }

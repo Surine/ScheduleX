@@ -76,18 +76,18 @@
             style="@style/textview_title_style"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="登录超表"
+            android:text="@string/login_super_cn"
             app:layout_constraintBottom_toTopOf="@+id/guideline2"
             app:layout_constraintStart_toStartOf="@+id/guideline3" />
 
         <TextView
             android:id="@+id/skip"
-            android:visibility="gone"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:text="@string/skip"
             android:textStyle="bold"
+            android:visibility="gone"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.947"
             app:layout_constraintStart_toStartOf="parent"
@@ -99,7 +99,7 @@
             android:drawableLeft="@drawable/ic_person_black_24dp"
             android:drawablePadding="@dimen/dp15"
             android:ems="10"
-            android:hint="超级课程表账号"
+            android:hint="@string/Super_Account"
             android:inputType="textPersonName"
             android:paddingStart="@dimen/dp15"
             app:layout_constraintBottom_toTopOf="@+id/guideline5"
@@ -114,7 +114,7 @@
             android:drawableStart="@drawable/ic_remove_red_eye_black_24dp"
             android:drawablePadding="@dimen/dp15"
             android:ems="10"
-            android:hint="超级课程表密码"
+            android:hint="@string/Super_Password"
             android:inputType="textPassword"
             android:paddingLeft="@dimen/dp15"
             app:layout_constraintBottom_toTopOf="@+id/guideline6"
@@ -136,5 +136,14 @@
             app:layout_constraintStart_toStartOf="@+id/guideline3"
             app:layout_constraintTop_toTopOf="@+id/guideline6"
             app:layout_constraintVertical_bias="0.165" />
+
+        <TextView
+            android:id="@+id/super_tip"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="@string/how_to_fetch_super_data"
+            app:layout_constraintEnd_toStartOf="@+id/guideline9"
+            app:layout_constraintTop_toBottomOf="@+id/login" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

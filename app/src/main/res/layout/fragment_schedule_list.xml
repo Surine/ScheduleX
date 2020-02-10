@@ -110,6 +110,16 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/guideline29" />
 
+        <ImageView
+            android:id="@+id/setting"
+            android:layout_width="@dimen/dp40"
+            android:layout_height="@dimen/dp40"
+            android:padding="@dimen/dp6"
+            app:layout_constraintBottom_toBottomOf="@+id/textView17"
+            app:layout_constraintEnd_toEndOf="@+id/addSchedule"
+            app:layout_constraintTop_toTopOf="@+id/guideline23"
+            app:srcCompat="@drawable/ic_settings_black_24dp" />
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

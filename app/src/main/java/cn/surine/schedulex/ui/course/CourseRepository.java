@@ -1,6 +1,7 @@
 package cn.surine.schedulex.ui.course;
 
 import android.os.Bundle;
+import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,7 +36,7 @@ public class CourseRepository extends BaseRepository {
     void saveCourseByDb(List<Course> courseList) {
         for (Course course : courseList) {
             //如果已插入course id 的数据，则失败
-            appDatabase.courseDao().insert(course);
+            Log.d("slw", "saveCourseByDb: " + appDatabase.courseDao().insert(course));
         }
     }
 

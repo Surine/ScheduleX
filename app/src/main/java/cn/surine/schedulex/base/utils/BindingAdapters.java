@@ -85,18 +85,6 @@ public class BindingAdapters {
 
 
     /**
-     * 课表配置页面色板的颜色显示
-     */
-    @androidx.databinding.BindingAdapter("schedulePaletteColorUi")
-    public static void schedulePaletteColorUi(ImageView imageView, String color) {
-        if (color == null || TextUtils.isEmpty(color)) {
-            color = Constants.NORMAL_COLOR;
-        }
-        imageView.setBackground(Drawables.getDrawable(Color.parseColor(color), 180, 0, Color.parseColor(color)));
-    }
-
-
-    /**
      * 给课程添加背景
      */
     @androidx.databinding.BindingAdapter("courseItemCardBackground")
@@ -109,10 +97,10 @@ public class BindingAdapters {
 
     /**
      * 给image设置背景（使用glide）
-     * */
+     */
     @androidx.databinding.BindingAdapter("glideToImage")
-    public static void glideToImage(ImageView imageView,String s){
-        if (s != null){
+    public static void glideToImage(ImageView imageView, String s) {
+        if (s != null) {
             Glide.with(App.context).load(new File(s)).into(imageView);
         }
     }

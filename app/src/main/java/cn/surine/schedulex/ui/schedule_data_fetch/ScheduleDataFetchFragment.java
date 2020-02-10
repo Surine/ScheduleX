@@ -78,9 +78,9 @@ public class ScheduleDataFetchFragment extends BaseBindingFragment<FragmentDataF
                 }
             });
         });
-        t.scanQrCode.setOnClickListener(v -> Toasts.toast("暂不支持！"));
+        t.superClass.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.action_dataFetchFragment_to_superLoginFragment, bundle));
         t.importExcel.setOnClickListener(v -> Toasts.toast("暂不支持"));
-        t.other.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.action_dataFetchFragment_to_superLoginFragment));
+        t.other.setOnClickListener(v -> Toasts.toast("欢迎加群反馈！"));
         t.skip.setOnClickListener(v -> {
             Prefs.save(Constants.CUR_SCHEDULE, scheduleViewModel.addSchedule(scheduleName, 24, 1));
             Navigations.open(ScheduleDataFetchFragment.this, R.id.action_dataFetchFragment_to_scheduleFragment);

@@ -113,15 +113,14 @@
                     android:id="@+id/linearLayout4"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp4"
                     android:background="@drawable/config_card_background"
                     android:orientation="vertical"
                     android:paddingTop="@dimen/dp8"
                     android:paddingBottom="@dimen/dp8"
-                    app:layout_constraintTop_toTopOf="parent"
-                    android:layout_marginTop="@dimen/dp4"
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintRight_toRightOf="parent"
-                    >
+                    app:layout_constraintTop_toTopOf="parent">
 
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:id="@+id/edit_course_name"
@@ -144,12 +143,13 @@
 
                         <TextView
                             android:id="@+id/courseNameSubTitle"
-                            android:layout_width="wrap_content"
+                            android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/dp8"
                             android:layout_marginBottom="@dimen/dp16"
                             android:text="@string/course_name_subtitle"
                             app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toStartOf="@+id/imageView10"
                             app:layout_constraintStart_toStartOf="@+id/textView33"
                             app:layout_constraintTop_toBottomOf="@+id/textView33" />
 
@@ -185,12 +185,13 @@
 
                         <TextView
                             android:id="@+id/course_time_subtitle"
-                            android:layout_width="wrap_content"
+                            android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/dp8"
                             android:layout_marginBottom="@dimen/dp16"
                             android:text="@string/class_time"
                             app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toStartOf="@+id/imageView9_3"
                             app:layout_constraintStart_toStartOf="@+id/textView35_3"
                             app:layout_constraintTop_toBottomOf="@+id/textView35_3" />
 
@@ -242,12 +243,13 @@
 
                         <TextView
                             android:id="@+id/coursePositionSubtitle"
-                            android:layout_width="wrap_content"
+                            android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/dp8"
                             android:layout_marginBottom="@dimen/dp16"
                             android:text="@string/course_position"
                             app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toStartOf="@+id/imageView9"
                             app:layout_constraintStart_toStartOf="@+id/textView35"
                             app:layout_constraintTop_toBottomOf="@+id/textView35" />
 
@@ -263,8 +265,8 @@
 
                         <TextView
                             android:id="@+id/textView10"
-                            android:layout_marginStart="@dimen/dp12"
                             style="@style/optional_parameter_tv"
+                            android:layout_marginStart="@dimen/dp12"
                             app:layout_constraintBottom_toBottomOf="@+id/textView35"
                             app:layout_constraintStart_toEndOf="@+id/textView35"
                             app:layout_constraintTop_toTopOf="@+id/textView35" />
@@ -293,12 +295,13 @@
 
                         <TextView
                             android:id="@+id/courseTeacherSubtitle"
-                            android:layout_width="wrap_content"
+                            android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/dp8"
                             android:layout_marginBottom="@dimen/dp16"
                             android:text="@string/please_input_teacher"
                             app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toStartOf="@+id/imageView9_4"
                             app:layout_constraintStart_toStartOf="@+id/textView35_4"
                             app:layout_constraintTop_toBottomOf="@+id/textView35_4" />
 
@@ -314,8 +317,8 @@
 
                         <TextView
                             android:id="@+id/textView11"
-                            android:layout_marginStart="@dimen/dp12"
                             style="@style/optional_parameter_tv"
+                            android:layout_marginStart="@dimen/dp12"
                             app:layout_constraintBottom_toBottomOf="@+id/textView35_4"
                             app:layout_constraintStart_toEndOf="@+id/textView35_4"
                             app:layout_constraintTop_toTopOf="@+id/textView35_4" />
@@ -345,12 +348,13 @@
 
                         <TextView
                             android:id="@+id/courseScoreSubtitle"
-                            android:layout_width="wrap_content"
+                            android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/dp8"
                             android:layout_marginBottom="@dimen/dp16"
                             android:text="@string/please_enter_course_credits"
                             app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toStartOf="@+id/imageView9_5"
                             app:layout_constraintStart_toStartOf="@+id/textView35_5"
                             app:layout_constraintTop_toBottomOf="@+id/textView35_5" />
 
@@ -366,8 +370,8 @@
 
                         <TextView
                             android:id="@+id/textView12"
-                            android:layout_marginStart="@dimen/dp12"
                             style="@style/optional_parameter_tv"
+                            android:layout_marginStart="@dimen/dp12"
                             app:layout_constraintBottom_toBottomOf="@+id/textView35_5"
                             app:layout_constraintStart_toEndOf="@+id/textView35_5"
                             app:layout_constraintTop_toTopOf="@+id/textView35_5" />
@@ -386,11 +390,18 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="@dimen/dp16"
             android:text="@string/delete"
-            android:visibility="gone"
             android:textColor="@android:color/holo_red_light"
+            android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="@+id/addCourse"
             app:layout_constraintEnd_toStartOf="@+id/addCourse"
             app:layout_constraintTop_toTopOf="@+id/addCourse" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline41"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.81751823" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

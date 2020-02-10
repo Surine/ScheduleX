@@ -20,6 +20,7 @@ import cn.surine.schedulex.base.controller.BaseBindingFragment;
 import cn.surine.schedulex.base.utils.DataMaps;
 import cn.surine.schedulex.base.utils.InstanceFactory;
 import cn.surine.schedulex.base.utils.Prefs;
+import cn.surine.schedulex.base.utils.Toasts;
 import cn.surine.schedulex.data.entity.Course;
 import cn.surine.schedulex.data.entity.Schedule;
 import cn.surine.schedulex.databinding.FragmentScheduleBinding;
@@ -33,10 +34,15 @@ import cn.surine.schedulex.ui.view.custom.helper.ZoomOutPageTransformer;
 /**
  * Intro：
  * 二期课表
+ *
  * @author sunliwei
  * @date 2020-02-09 16:18
  */
 public class ScheduleFragment extends BaseBindingFragment<FragmentScheduleBinding> {
+    private ScheduleViewPagerAdapter scheduleViewPagerAdapter;
+    private FragmentScheduleBinding globalT;
+    private Schedule curSchedule;
+
     @Override
     public int layoutId() {
         return R.layout.fragment_schedule;
@@ -47,8 +53,10 @@ public class ScheduleFragment extends BaseBindingFragment<FragmentScheduleBindin
     @Override
     protected void onInit(FragmentScheduleBinding t) {
 
+        globalT = t;
+
         if (Prefs.getBoolean(Constants.IS_FIRST, false)) {
-            CommonDialogs.getCommonDialog(activity(), getString(R.string.warning), getString(R.string.first_toast), null,null).show();
+            CommonDialogs.getCommonDialog(activity(), getString(R.string.warning), getString(R.string.first_toast), null, null).show();
             Prefs.save(Constants.IS_FIRST, true);
         }
 
@@ -66,26 +74,27 @@ public class ScheduleFragment extends BaseBindingFragment<FragmentScheduleBindin
         ScheduleViewModel scheduleViewModel = ViewModelProviders.of(this, InstanceFactory.getInstance(classesForSchedule, argsForSchedule)).get(ScheduleViewModel.class);
 
 
-        Schedule curSchedule = scheduleViewModel.getCurSchedule();
+        curSchedule = scheduleViewModel.getCurSchedule();
         t.setSchedule(curSchedule);
         if (curSchedule == null) {
             return;
         }
+
         //当前周
         int currentWeek = curSchedule.curWeek();
         List<List<BCourse>> handleCourseList = new ArrayList<>();
         for (int i = 0; i < curSchedule.totalWeek; i++) {
             List<Course> dbData = courseViewModel.queryCourseByWeek(i + 1, curSchedule.roomId);
             List<BCourse> bCourseList = new ArrayList<>();
-            for (Course course :dbData) {
+            for (Course course : dbData) {
                 bCourseList.add(DataMaps.dataMappingByCourse(course));
             }
             handleCourseList.add(bCourseList);
         }
 
-        ScheduleViewPagerAdapter scheduleViewPagerTerm2Adapter = new ScheduleViewPagerAdapter(handleCourseList, ScheduleFragment.this,curSchedule,currentWeek);
+        scheduleViewPagerAdapter = new ScheduleViewPagerAdapter(handleCourseList, ScheduleFragment.this, curSchedule, currentWeek);
 
-        t.viewpager.setAdapter(scheduleViewPagerTerm2Adapter);
+        t.viewpager.setAdapter(scheduleViewPagerAdapter);
         t.viewpager.setOffscreenPageLimit(1);
         t.viewpager.setOrientation(ViewPager2.ORIENTATION_HORIZONTAL);
         t.viewpager.setCurrentItem(currentWeek - 1, true);
@@ -98,15 +107,16 @@ public class ScheduleFragment extends BaseBindingFragment<FragmentScheduleBindin
             @Override
             public void onPageSelected(int position) {
                 timerViewModel.curWeekStr.setValue("😁😁😁 " + getString(R.string.week, (position + 1)));
-                scheduleViewPagerTerm2Adapter.setWeek(position + 1);
-                scheduleViewPagerTerm2Adapter.notifyItemChanged(position);
+                scheduleViewPagerAdapter.setWeek(position + 1);
+                scheduleViewPagerAdapter.notifyItemChanged(position);
             }
         });
 
 
         t.funcBtn.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.action_scheduleFragment_to_ScheduleListFragment2));
         t.addCourse.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.action_scheduleFragment_to_addCourseFragment));
-        t.title.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.action_scheduleFragment_to_aboutFragment2));
+
+        t.title.setOnClickListener(v -> Toasts.toast("莫挨老子！😡😡😡"));
 
         if (!TextUtils.isEmpty(curSchedule.imageUrl)) {
             Glide.with(activity()).load(new File(curSchedule.imageUrl)).into(t.background);
@@ -117,5 +127,13 @@ public class ScheduleFragment extends BaseBindingFragment<FragmentScheduleBindin
     @Override
     public void onBackPressed() {
         activity().finish();
+    }
+
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        //回到当前周，有个小bug可以临时通过这个解决一下
+        globalT.viewpager.setCurrentItem(curSchedule.curWeek() - 1);
     }
 }

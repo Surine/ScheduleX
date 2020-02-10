@@ -90,7 +90,8 @@ public class BtmDialogs {
         courseTeacher.setText(course.teacherName == null ? App.context.getResources().getString(R.string.unknown) : course.teacherName);
         courseScore.setText(course.xf + "分");
         courseWeekInfo.setText(course.getWeekDescription());
-        courseSession.setBackground(Drawables.getDrawable(Color.parseColor(course.color),0,0,0));
+        courseSession.setBackground(Drawables.getDrawable(Color.parseColor(course.color),180,0,0));
+        courseClassDay.setBackground(Drawables.getDrawable(App.context.getResources().getColor(R.color.colorPrimary),180,0,0));
         Bundle bundle = new Bundle();
         bundle.putString(COURSE_ID,course.id);
         edit.setOnClickListener(v -> {

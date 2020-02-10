@@ -23,12 +23,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:text="@string/scan_qrcode"
+            android:text="@string/import_super_class"
             android:textColor="@android:color/black"
             android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="@+id/scanQrCode"
+            app:layout_constraintEnd_toEndOf="@+id/superClass"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="@+id/guideline32"
-            app:layout_constraintTop_toBottomOf="@+id/scanQrCode" />
+            app:layout_constraintTop_toBottomOf="@+id/superClass" />
 
         <TextView
             android:id="@+id/textView25"
@@ -43,10 +44,10 @@
 
         <TextView
             android:id="@+id/schedule_title"
-            android:text="@string/schedule_name"
             style="@style/textview_title_style"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:text="@string/schedule_name"
             app:layout_constraintStart_toStartOf="@+id/guideline25"
             app:layout_constraintTop_toTopOf="@+id/guideline26" />
 
@@ -113,8 +114,8 @@
             android:id="@+id/loginJw"
             android:layout_width="@dimen/dp90"
             android:layout_height="@dimen/dp90"
-            android:src="@mipmap/i1"
             android:background="?selectableItemBackgroundBorderless"
+            android:src="@mipmap/i1"
             app:layout_constraintStart_toStartOf="@+id/guideline25"
             app:layout_constraintTop_toTopOf="@+id/guideline27" />
 
@@ -123,40 +124,37 @@
             android:layout_width="@dimen/dp90"
             android:layout_height="@dimen/dp90"
             android:background="?selectableItemBackgroundBorderless"
-            app:layout_constraintStart_toStartOf="@+id/guideline25"
-            app:layout_constraintTop_toTopOf="@+id/guideline28"
             android:src="@mipmap/i3"
-            />
+            app:layout_constraintStart_toStartOf="@+id/guideline25"
+            app:layout_constraintTop_toTopOf="@+id/guideline28" />
 
         <ImageView
             android:id="@+id/other"
             android:layout_width="@dimen/dp90"
             android:layout_height="@dimen/dp90"
             android:background="?selectableItemBackgroundBorderless"
-            app:layout_constraintStart_toStartOf="@+id/guideline25"
-            app:layout_constraintTop_toTopOf="@+id/guideline30"
             android:src="@mipmap/i5"
-            />
+            app:layout_constraintStart_toStartOf="@+id/guideline25"
+            app:layout_constraintTop_toTopOf="@+id/guideline30" />
 
         <ImageView
-            android:id="@+id/scanQrCode"
+            android:id="@+id/superClass"
             android:layout_width="@dimen/dp90"
             android:layout_height="@dimen/dp90"
             android:background="?selectableItemBackgroundBorderless"
+            android:padding="@dimen/dp5"
+            android:src="@mipmap/super_class"
             app:layout_constraintStart_toStartOf="@+id/guideline32"
-            app:layout_constraintTop_toTopOf="@+id/guideline28"
-            android:src="@mipmap/i4"
-            />
+            app:layout_constraintTop_toTopOf="@+id/guideline28" />
 
         <ImageView
             android:id="@+id/importJson"
             android:layout_width="@dimen/dp90"
             android:layout_height="@dimen/dp90"
             android:background="?selectableItemBackgroundBorderless"
-            app:layout_constraintStart_toStartOf="@+id/guideline32"
-            app:layout_constraintTop_toTopOf="@+id/guideline27"
             android:src="@mipmap/i2"
-            />
+            app:layout_constraintStart_toStartOf="@+id/guideline32"
+            app:layout_constraintTop_toTopOf="@+id/guideline27" />
 
         <TextView
             android:id="@+id/textView21"

@@ -1,12 +1,10 @@
 package cn.surine.schedulex.ui.schedule_list;
 
 import android.os.Bundle;
-import android.view.View;
 
 import androidx.annotation.Nullable;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.navigation.Navigation;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
@@ -53,7 +51,7 @@ public class ScheduleListFragment extends BaseBindingFragment<FragmentScheduleLi
 
         adapter.setOnItemClickListener(position -> {
             Long scheduleId = (long) data.get(position).roomId;
-            Prefs.save(Constants.CUR_SCHEDULE,scheduleId);
+            Prefs.save(Constants.CUR_SCHEDULE, scheduleId);
             adapter.notifyDataSetChanged();
         });
 
@@ -61,11 +59,11 @@ public class ScheduleListFragment extends BaseBindingFragment<FragmentScheduleLi
         adapter.setOnItemLongClickListener(position -> {
             Bundle bundle = new Bundle();
             bundle.putInt(SCHEDULE_ID, data.get(position).roomId);
-            Navigations.open(ScheduleListFragment.this, R.id.action_ScheduleListFragment_to_scheduleConfigFragment,bundle);
+            Navigations.open(ScheduleListFragment.this, R.id.action_ScheduleListFragment_to_scheduleConfigFragment, bundle);
             return true;
         });
 
-
+        t.setting.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.action_ScheduleListFragment_to_aboutFragment));
         t.addSchedule.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.action_ScheduleListFragment_to_scheduleInitFragment));
     }
 

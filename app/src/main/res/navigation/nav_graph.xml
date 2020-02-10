@@ -34,6 +34,9 @@
         <action
             android:id="@+id/action_ScheduleListFragment_to_scheduleInitFragment"
             app:destination="@id/scheduleInitFragment" />
+        <action
+            android:id="@+id/action_ScheduleListFragment_to_aboutFragment"
+            app:destination="@id/aboutFragment" />
     </fragment>
     <fragment
         android:id="@+id/dataFetchFragment"
@@ -52,7 +55,7 @@
     <fragment
         android:id="@+id/splashFragment"
         android:name="cn.surine.schedulex.ui.splash.SplashFragment"
-        android:label="SplashFragment" >
+        android:label="SplashFragment">
         <action
             android:id="@+id/action_splashFragment_to_scheduleInitFragment"
             app:destination="@id/scheduleInitFragment" />
@@ -63,7 +66,7 @@
     <fragment
         android:id="@+id/scheduleConfigFragment"
         android:name="cn.surine.schedulex.ui.schedule_config.ScheduleConfigFragment"
-        android:label="ScheduleConfigFragment" >
+        android:label="ScheduleConfigFragment">
         <action
             android:id="@+id/action_scheduleConfigFragment_to_ScheduleListFragment"
             app:destination="@id/ScheduleListFragment" />
@@ -95,9 +98,6 @@
         <action
             android:id="@+id/action_scheduleFragment_to_addCourseFragment"
             app:destination="@id/addCourseFragment" />
-        <action
-            android:id="@+id/action_scheduleFragment_to_aboutFragment2"
-            app:destination="@id/aboutFragment" />
         <action
             android:id="@+id/action_scheduleFragment_to_ScheduleListFragment2"
             app:destination="@id/ScheduleListFragment" />

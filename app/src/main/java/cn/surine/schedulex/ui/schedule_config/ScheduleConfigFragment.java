@@ -176,6 +176,8 @@ public class ScheduleConfigFragment extends BaseBindingFragment<FragmentSchedule
         s1.setProgress(schedule.totalWeek);
         s2.setMax(schedule.totalWeek);
         s2.setProgress(schedule.curWeek());
+        mTotalWeek[0] = schedule.totalWeek;
+        mCurWeek[0] = schedule.curWeek();
         t1.setText(getString(R.string.total_week, schedule.totalWeek));
         t2.setText(getString(R.string.current_week, schedule.curWeek()));
 

@@ -72,4 +72,6 @@ public class DataMaps {
         bCourse.setWeek(list);
         return bCourse;
     }
+
+
 }

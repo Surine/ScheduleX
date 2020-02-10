@@ -26,6 +26,7 @@ import cn.surine.schedulex.ui.view.custom.helper.BtmDialogs;
 /**
  * Intro：
  * 课表二期
+ *
  * @author sunliwei
  * @date 2020-02-09 16:38
  */
@@ -43,18 +44,18 @@ public class ScheduleViewPagerAdapter extends RecyclerView.Adapter<ScheduleViewP
         this.baseFragment = baseFragment;
         this.schedule = schedule;
         this.week = week;
-
         initUI();
     }
 
     /**
      * 加载一遍默认UI
-     * */
+     */
     private void initUI() {
         uiConfig = new UIConfig();
         uiConfig.setMaxClassDay(5);
         uiConfig.setItemTextSize(14);
-        uiConfig.setSectionHeight(Uis.dip2px(App.context,64));
+        uiConfig.setShowCurWeekCourse(false);
+        uiConfig.setSectionHeight(Uis.dip2px(App.context, 64));
         uiConfig.setItemTopMargin(10);
         uiConfig.setChooseWeekColor(App.context.getResources().getColor(R.color.colorPrimary));
         uiConfig.setItemSideMargin(11);
@@ -82,7 +83,7 @@ public class ScheduleViewPagerAdapter extends RecyclerView.Adapter<ScheduleViewP
                 .setCurrentWeek(week);
 
 
-        holder.courseTableView.update(uiConfig,dataConfig);
+        holder.courseTableView.update(uiConfig, dataConfig);
 
         holder.courseTableView.setmClickCourseItemListener((list, itemPosition, isThisWeek) -> {
             Course course = DataMaps.dataMappingByBCourse(courseList.get(position).get(itemPosition));

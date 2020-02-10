@@ -124,4 +124,17 @@
     <string name="first_toast">Try swiping left or right to switch the week ~ Click on the small smiley title to return to the current week!</string>
     <string name="white_txt">White text</string>
     <string name="black_txt">Black text</string>
+    <string name="ready_to_fetch_course">getting class schedule……</string>
+    <string name="fetch_fail_please_retry">Get failed, please try again!</string>
+    <string name="import_super_class">import 3rd app data</string>
+    <string name="ready_to_login_super_class">Ready to login Super.cn……</string>
+    <string name="login_super_cn">Login Super.cn</string>
+    <string name="how_to_fetch_super_data">How to get data using super.cn?</string>
+    <string name="Super_Account">Super.cn Account</string>
+    <string name="Super_Password">Super.cn Password</string>
+    <string name="super_tip">"1. Log in with your super.cn app account to get the most recent semester timetable; \n2. Click to select the timetable you want to import and it will be successfully imported. If there is no data in this timetable, the imported data will also be empty. \n\n Note: If you do not have a super.cn account or password, you can refer to how to use the super.cn app! "</string>
+    <string name="please_choose_one_term">Please select a semester schedule</string>
+    <string name="login_success">login successful</string>
+    <string name="year_term1">Year Term1</string>
+    <string name="year_term2">Year Term2</string>
 </resources>
