@@ -54,6 +54,8 @@ public class Constants {
     public static final String ACCOUNT = "ACCOUNT";
     public static final String PASSWORD = "PASSWORD";
 
+    public static final int MAX_SCHEDULE_LIMIT = 5;
+
     //强制最大周
     public static int MAX_WEEK = 30;
     public static int MAX_SESSION = 12;

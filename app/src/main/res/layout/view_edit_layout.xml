@@ -13,6 +13,7 @@
         android:layout_width="0dp"
         android:layout_height="@dimen/dp50"
         android:ems="10"
+        android:maxLength="14"
         android:paddingStart="@dimen/dp16"
         android:hint="@string/please_input_content"
         android:layout_marginStart="@dimen/dp16"

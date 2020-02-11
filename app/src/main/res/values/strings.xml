@@ -137,4 +137,5 @@
     <string name="login_success">login successful</string>
     <string name="year_term1">Year Term1</string>
     <string name="year_term2">Year Term2</string>
+    <string name="no_permission_to_add">You do not have permission to add more timetables!</string>
 </resources>

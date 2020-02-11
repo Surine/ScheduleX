@@ -40,7 +40,7 @@ public class ScheduleInitFragment extends BaseBindingFragment<FragmentScheduleIn
             //传递数据给DataFetch
             Bundle bundle = new Bundle();
             bundle.putString(SCHEDULE_NAME, scheduleInitViewModel.scheduleName.getValue());
-            Navigations.open(ScheduleInitFragment.this, R.id.dataFetchFragment, bundle);
+            Navigations.open(ScheduleInitFragment.this, R.id.action_scheduleInitFragment_to_dataFetchFragment, bundle);
         });
     }
 

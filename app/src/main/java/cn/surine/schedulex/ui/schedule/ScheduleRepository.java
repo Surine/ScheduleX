@@ -65,4 +65,12 @@ public class ScheduleRepository extends BaseRepository {
     public void updateSchedule(Schedule schedule) {
         appDatabase.scheduleDao().update(schedule);
     }
+
+
+    /**
+     * 获取课表数量
+     * */
+    public int getSchedulesNumber() {
+        return appDatabase.scheduleDao().getTotalNum();
+    }
 }

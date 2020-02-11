@@ -11,8 +11,10 @@
         android:label="fragment_schedule_init"
         tools:layout="@layout/fragment_schedule_init">
         <action
-            android:id="@+id/action_splashFragment_to_dataFetchFragment"
-            app:destination="@id/dataFetchFragment" />
+            android:id="@+id/action_scheduleInitFragment_to_dataFetchFragment"
+            app:destination="@id/dataFetchFragment"
+            app:enterAnim="@anim/fragment_open_enter"
+            app:popEnterAnim="@anim/fragment_open_enter" />
     </fragment>
     <fragment
         android:id="@+id/loginFragment"
@@ -21,7 +23,9 @@
         tools:layout="@layout/fragment_login">
         <action
             android:id="@+id/action_loginFragment_to_scheduleFragment"
-            app:destination="@id/scheduleFragment" />
+            app:destination="@id/scheduleFragment"
+            app:enterAnim="@anim/fragment_open_enter"
+            app:popEnterAnim="@anim/fragment_open_enter" />
     </fragment>
     <fragment
         android:id="@+id/ScheduleListFragment"
@@ -30,13 +34,19 @@
         tools:layout="@layout/fragment_schedule_list">
         <action
             android:id="@+id/action_ScheduleListFragment_to_scheduleConfigFragment"
-            app:destination="@id/scheduleConfigFragment" />
+            app:destination="@id/scheduleConfigFragment"
+            app:enterAnim="@anim/fragment_open_enter"
+            app:popEnterAnim="@anim/fragment_open_enter" />
         <action
             android:id="@+id/action_ScheduleListFragment_to_scheduleInitFragment"
-            app:destination="@id/scheduleInitFragment" />
+            app:destination="@id/scheduleInitFragment"
+            app:enterAnim="@anim/fragment_open_enter"
+            app:popEnterAnim="@anim/fragment_open_enter" />
         <action
             android:id="@+id/action_ScheduleListFragment_to_aboutFragment"
-            app:destination="@id/aboutFragment" />
+            app:destination="@id/aboutFragment"
+            app:enterAnim="@anim/fragment_open_enter"
+            app:popEnterAnim="@anim/fragment_open_enter" />
     </fragment>
     <fragment
         android:id="@+id/dataFetchFragment"
@@ -44,13 +54,19 @@
         android:label="DataFetchFragment">
         <action
             android:id="@+id/action_dataFetchFragment_to_loginFragment"
-            app:destination="@id/loginFragment" />
+            app:destination="@id/loginFragment"
+            app:enterAnim="@anim/fragment_open_enter"
+            app:popEnterAnim="@anim/fragment_open_enter" />
         <action
             android:id="@+id/action_dataFetchFragment_to_superLoginFragment"
-            app:destination="@id/superLoginFragment" />
+            app:destination="@id/superLoginFragment"
+            app:enterAnim="@anim/fragment_open_enter"
+            app:popEnterAnim="@anim/fragment_open_enter" />
         <action
             android:id="@+id/action_dataFetchFragment_to_scheduleFragment"
-            app:destination="@id/scheduleFragment" />
+            app:destination="@id/scheduleFragment"
+            app:enterAnim="@anim/fragment_open_enter"
+            app:popEnterAnim="@anim/fragment_open_enter" />
     </fragment>
     <fragment
         android:id="@+id/splashFragment"
@@ -58,10 +74,14 @@
         android:label="SplashFragment">
         <action
             android:id="@+id/action_splashFragment_to_scheduleInitFragment"
-            app:destination="@id/scheduleInitFragment" />
+            app:destination="@id/scheduleInitFragment"
+            app:enterAnim="@anim/fragment_open_enter"
+            app:popEnterAnim="@anim/fragment_open_enter" />
         <action
             android:id="@+id/action_splashFragment_to_scheduleFragment"
-            app:destination="@id/scheduleFragment" />
+            app:destination="@id/scheduleFragment"
+            app:enterAnim="@anim/fragment_open_enter"
+            app:popEnterAnim="@anim/fragment_open_enter" />
     </fragment>
     <fragment
         android:id="@+id/scheduleConfigFragment"
@@ -69,10 +89,14 @@
         android:label="ScheduleConfigFragment">
         <action
             android:id="@+id/action_scheduleConfigFragment_to_ScheduleListFragment"
-            app:destination="@id/ScheduleListFragment" />
+            app:destination="@id/ScheduleListFragment"
+            app:enterAnim="@anim/fragment_open_enter"
+            app:popEnterAnim="@anim/fragment_open_enter" />
         <action
             android:id="@+id/action_scheduleConfigFragment_to_scheduleDataExport"
-            app:destination="@id/scheduleDataExport" />
+            app:destination="@id/scheduleDataExport"
+            app:enterAnim="@anim/fragment_open_enter"
+            app:popEnterAnim="@anim/fragment_open_enter" />
     </fragment>
     <fragment
         android:id="@+id/aboutFragment"
@@ -97,9 +121,13 @@
 
         <action
             android:id="@+id/action_scheduleFragment_to_addCourseFragment"
-            app:destination="@id/addCourseFragment" />
+            app:destination="@id/addCourseFragment"
+            app:enterAnim="@anim/fragment_open_enter"
+            app:popEnterAnim="@anim/fragment_open_enter" />
         <action
             android:id="@+id/action_scheduleFragment_to_ScheduleListFragment2"
-            app:destination="@id/ScheduleListFragment" />
+            app:destination="@id/ScheduleListFragment"
+            app:enterAnim="@anim/fragment_open_enter"
+            app:popEnterAnim="@anim/fragment_open_enter" />
     </fragment>
 </navigation>

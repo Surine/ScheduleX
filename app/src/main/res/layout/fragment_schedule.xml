@@ -94,9 +94,11 @@
 
         <ImageView
             android:id="@+id/func_btn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="@dimen/dp40"
+            android:layout_height="@dimen/dp40"
             android:layout_marginEnd="8dp"
+            android:padding="@dimen/dp6"
+            android:background="?selectableItemBackgroundBorderless"
             android:tint="@{schedule.lightTextColor()}"
             android:src="@drawable/ic_settings_black_24dp"
             app:layout_constraintBottom_toTopOf="@+id/guideline14"
@@ -147,8 +149,10 @@
 
         <ImageView
             android:id="@+id/addCourse"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="@dimen/dp40"
+            android:layout_height="@dimen/dp40"
+            android:padding="@dimen/dp6"
+            android:background="?selectableItemBackgroundBorderless"
             android:layout_marginEnd="@dimen/dp32"
             android:tint="@{schedule.lightTextColor()}"
             app:layout_constraintBottom_toBottomOf="@+id/func_btn"

@@ -2,13 +2,13 @@ package cn.surine.schedulex.ui.schedule;
 
 import android.annotation.SuppressLint;
 import android.text.TextUtils;
+import android.view.View;
 
 import androidx.lifecycle.ViewModelProviders;
 import androidx.navigation.Navigation;
 import androidx.viewpager2.widget.ViewPager2;
 
 import com.bumptech.glide.Glide;
-import com.tencent.bugly.crashreport.CrashReport;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -103,6 +103,12 @@ public class ScheduleFragment extends BaseBindingFragment<FragmentScheduleBindin
 
         t.curWeekTv.setOnClickListener(v -> t.viewpager.setCurrentItem(currentWeek - 1));
         timerViewModel.curWeekStr.setValue("😁😁😁 " + getString(R.string.week, currentWeek));
+
+
+        //显示空视图
+        if (TextUtils.isEmpty(curSchedule.imageUrl)) {
+            t.emptyView.setVisibility(handleCourseList.get(currentWeek - 1).size() != 0 ? View.GONE : View.VISIBLE);
+        }
         t.viewpager.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
             @SuppressLint("StringFormatMatches")
             @Override
@@ -110,6 +116,9 @@ public class ScheduleFragment extends BaseBindingFragment<FragmentScheduleBindin
                 timerViewModel.curWeekStr.setValue("😁😁😁 " + getString(R.string.week, (position + 1)));
                 scheduleViewPagerAdapter.setWeek(position + 1);
                 scheduleViewPagerAdapter.notifyItemChanged(position);
+                if (TextUtils.isEmpty(curSchedule.imageUrl)) {
+                    t.emptyView.setVisibility(handleCourseList.get(position).size() != 0 ? View.GONE : View.VISIBLE);
+                }
             }
         });
 
@@ -120,7 +129,7 @@ public class ScheduleFragment extends BaseBindingFragment<FragmentScheduleBindin
         t.title.setOnClickListener(v -> Toasts.toast("莫挨老子！😡😡😡"));
 
         if (!TextUtils.isEmpty(curSchedule.imageUrl)) {
-            Glide.with(activity()).load(new File(curSchedule.imageUrl)).into(t.background);
+            Glide.with(activity()).load(new File(curSchedule.imageUrl)).crossFade().into(t.background);
         }
     }
 

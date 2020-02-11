@@ -1,6 +1,7 @@
 package cn.surine.schedulex.ui.schedule_list;
 
 import android.os.Bundle;
+import android.view.View;
 
 import androidx.annotation.Nullable;
 import androidx.lifecycle.ViewModelProviders;
@@ -17,6 +18,7 @@ import cn.surine.schedulex.base.controller.BaseBindingFragment;
 import cn.surine.schedulex.base.utils.InstanceFactory;
 import cn.surine.schedulex.base.utils.Navigations;
 import cn.surine.schedulex.base.utils.Prefs;
+import cn.surine.schedulex.base.utils.Toasts;
 import cn.surine.schedulex.data.entity.Schedule;
 import cn.surine.schedulex.databinding.FragmentScheduleListBinding;
 import cn.surine.schedulex.ui.schedule.ScheduleRepository;
@@ -44,10 +46,9 @@ public class ScheduleListFragment extends BaseBindingFragment<FragmentScheduleLi
 
         data = scheduleViewModel.getSchedules();
         BaseAdapter<Schedule> adapter = new BaseAdapter<>(data, R.layout.item_schedule_view, cn.surine.schedulex.BR.schedule);
-        RecyclerView recyclerview = (RecyclerView) t.viewRecycler;
         StaggeredGridLayoutManager staggeredGridLayoutManager = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
-        recyclerview.setLayoutManager(staggeredGridLayoutManager);
-        recyclerview.setAdapter(adapter);
+        t.viewRecycler.setLayoutManager(staggeredGridLayoutManager);
+        t.viewRecycler.setAdapter(adapter);
 
         adapter.setOnItemClickListener(position -> {
             Long scheduleId = (long) data.get(position).roomId;
@@ -64,14 +65,13 @@ public class ScheduleListFragment extends BaseBindingFragment<FragmentScheduleLi
         });
 
         t.setting.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.action_ScheduleListFragment_to_aboutFragment));
-        t.addSchedule.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.action_ScheduleListFragment_to_scheduleInitFragment));
+
+        t.addSchedule.setOnClickListener(v -> {
+            if(scheduleViewModel.getSchedulesNumber() < Constants.MAX_SCHEDULE_LIMIT){
+                Navigations.open(ScheduleListFragment.this,R.id.action_ScheduleListFragment_to_scheduleInitFragment);
+            }else{
+                Toasts.toast(getString(R.string.no_permission_to_add));
+            }
+        });
     }
-
-
-    @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-        ScheduleListViewModel mViewModel = ViewModelProviders.of(this).get(ScheduleListViewModel.class);
-    }
-
 }

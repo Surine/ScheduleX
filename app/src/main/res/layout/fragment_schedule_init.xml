@@ -55,6 +55,7 @@
             android:layout_marginBottom="@dimen/dp25"
             android:background="@drawable/edit_background"
             android:ems="10"
+            android:maxLength="10"
             android:hint="@string/named_schedule"
             android:paddingStart="@dimen/dp25"
             app:layout_constraintBottom_toTopOf="@+id/welcome"

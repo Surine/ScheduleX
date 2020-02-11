@@ -118,4 +118,5 @@
     <string name="please_choose_one_term">请选择一个学期课表</string>
     <string name="year_term1">年 第一学期</string>
     <string name="year_term2">年 第二学期</string>
+    <string name="no_permission_to_add">您没有权限添加更多课程表!</string>
 </resources>

@@ -39,4 +39,6 @@ public interface ScheduleDao {
     @Query("select * from Schedule where roomId = :id")
     Schedule getById(long id);
 
+    @Query("select count(*) from Schedule")
+    int getTotalNum();
 }

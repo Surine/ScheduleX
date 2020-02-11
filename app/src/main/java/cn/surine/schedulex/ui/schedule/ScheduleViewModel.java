@@ -117,4 +117,12 @@ public class ScheduleViewModel extends ViewModel {
     public void updateSchedule(Schedule schedule) {
         scheduleRepository.updateSchedule(schedule);
     }
+
+
+    /**
+     * 获取课表数量
+     * */
+    public int getSchedulesNumber() {
+        return scheduleRepository.getSchedulesNumber();
+    }
 }
