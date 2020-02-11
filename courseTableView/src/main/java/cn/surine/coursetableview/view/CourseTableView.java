@@ -1,9 +1,8 @@
-package cn.surine.coursetableview.View;
+package cn.surine.coursetableview.view;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Color;
-import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -213,6 +212,7 @@ public class CourseTableView extends LinearLayout {
                 tvWeekName.setText(mUiConfig.getWeekInfoStyle()[i - 1] + "\n"+ today);
                 int color = (i==getWeekDay()) ? mUiConfig.getChooseWeekColor() : mUiConfig.getColorUI();
                 tvWeekName.setTextColor(color);
+                tvWeekName.getPaint().setFakeBoldText(i == getWeekDay());
                 tvWeekName.setGravity(Gravity.CENTER);
                 tvWeekName.setLayoutParams(lp);
             }

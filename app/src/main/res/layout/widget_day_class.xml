@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/shape_rect_10_white"
+    >
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:layout_marginTop="10dp"
+        android:background="@android:color/white"
+        android:orientation="horizontal"
+        android:id="@+id/task_widget_head"
+        >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="每日课程"
+            android:textStyle="bold"
+            android:layout_marginStart="20dp"
+            android:textColor="@android:color/black"
+            android:gravity="center"
+            />
+
+    </RelativeLayout>
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/listview"
+        android:divider="@null"
+        android:dividerHeight="0dp"
+        android:layout_below="@id/task_widget_head"
+        android:layout_margin="10dp"
+        />
+</RelativeLayout>

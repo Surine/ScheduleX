@@ -89,4 +89,16 @@ public class CourseRepository extends BaseRepository {
     public List<Course> getCourseByScheduleId(int scheduleId) {
         return appDatabase.courseDao().getByScheduleId(scheduleId);
     }
+
+
+    public List<Course> getTodayCourseListByScheduleId(int day, int curWeek, int roomId) {
+        List<Course> courseList = appDatabase.courseDao().getTodayCourse(day, roomId);
+        List<Course> handleList = new ArrayList<>();
+        for (int i = 0; i < courseList.size(); i++) {
+            if(courseList.get(i).classWeek.charAt(curWeek - 1) == '1'){
+                handleList.add(courseList.get(i));
+            }
+        }
+        return handleList;
+    }
 }

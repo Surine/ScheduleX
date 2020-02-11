@@ -34,4 +34,11 @@
     <dimen name="t20">20sp</dimen>
     <dimen name="dp6">6dp</dimen>
     <dimen name="dp100">100dp</dimen>
+
+    <!--计算size的公式: (70*n) -30  n为部件所需的大小(占几格) -->
+    <dimen name="widget_1">40dp</dimen>
+    <dimen name="widget_2">110dp</dimen>
+    <dimen name="widget_3">180dp</dimen>
+    <dimen name="widget_4">250dp</dimen>
+    <dimen name="dp80">80dp</dimen>
 </resources>

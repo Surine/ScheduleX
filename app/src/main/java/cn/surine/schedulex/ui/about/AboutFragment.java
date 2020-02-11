@@ -24,7 +24,7 @@ public class AboutFragment extends BaseBindingFragment<FragmentAboutBinding> {
     @Override
     protected void onInit(FragmentAboutBinding t) {
         t.aboutItemQQ.setOnClickListener(v -> {
-            Others.startQQ(activity(), "635622188");
+            Others.startQQ(activity(), "686976115");
             Toasts.toast(getString(R.string.qq_copy));
         });
         t.github.setOnClickListener(v -> Others.openUrl("https://github.com/surine/ScheduleX"));

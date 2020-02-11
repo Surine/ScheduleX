@@ -12,7 +12,7 @@
     <string name="warning">提示</string>
     <string name="ready_to_get_schedule_list">准备获取课程表,这可能需要半分钟的时间……</string>
     <string name="login_fail">验证失败，请稍后再试！</string>
-    <string name="handle_success">处理成功，欢迎使用！</string>
+    <string name="handle_success">处理成功！</string>
     <string name="get_fail">获取失败，请稍后再试</string>
     <string name="named_schedule">给课表取个名字吧！</string>
     <string name="data_fetch_subtitle">请选择数据获取方式</string>

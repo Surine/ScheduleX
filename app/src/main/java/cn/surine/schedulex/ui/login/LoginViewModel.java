@@ -54,14 +54,13 @@ public class LoginViewModel extends ViewModel {
      * 登录操作
      */
     public void login() {
-        if(TextUtils.isEmpty(account.getValue()) || TextUtils.isEmpty(password.getValue())){
+        if (TextUtils.isEmpty(account.getValue()) || TextUtils.isEmpty(password.getValue())) {
             return;
         }
         loginStatus.setValue(START_LOGIN);
         mLoginRepository.login(account.getValue(), password.getValue()).subscribe(new BaseHttpSubscriber<VmResultString>() {
             @Override
             public void onSuccess(MutableLiveData<VmResultString> vm) {
-                //TODO:这边如果getValue为空的话，可能会出问题
                 loginStatus.setValue(Strs.equals(Constants.LOGIN_SUCCESS, vm.getValue().result) ? LOGIN_SUCCESS : LOGIN_FAIL);
             }
         });
@@ -70,9 +69,10 @@ public class LoginViewModel extends ViewModel {
 
     /**
      * 保存账号密码
-     * */
+     */
     public void saveAccountAndPassword() {
-        Prefs.save(Constants.ACCOUNT,account.getValue());
-        Prefs.save(Constants.PASSWORD,account.getValue());
+        //如果支持多种教务的话，可以拼接ID保存，
+        Prefs.save(Constants.ACCOUNT, account.getValue());
+        Prefs.save(Constants.PASSWORD, account.getValue());
     }
 }

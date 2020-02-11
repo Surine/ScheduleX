@@ -107,6 +107,8 @@
             android:gravity="center"
             android:paddingStart="10dp"
             android:paddingEnd="10dp"
+            android:maxLength="7"
+            android:ellipsize="end"
             android:text="@{schedule.name}"
             android:textColor="@android:color/white"
             android:textStyle="bold"

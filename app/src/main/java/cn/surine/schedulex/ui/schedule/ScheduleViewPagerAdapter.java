@@ -10,9 +10,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
-import cn.surine.coursetableview.View.CourseTableView;
-import cn.surine.coursetableview.View.DataConfig;
-import cn.surine.coursetableview.View.UIConfig;
+import cn.surine.coursetableview.view.CourseTableView;
+import cn.surine.coursetableview.view.DataConfig;
+import cn.surine.coursetableview.view.UIConfig;
 import cn.surine.coursetableview.entity.BCourse;
 import cn.surine.schedulex.R;
 import cn.surine.schedulex.base.controller.App;

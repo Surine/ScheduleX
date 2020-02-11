@@ -13,7 +13,7 @@
     <string name="ready_to_login_tust">Ready to login TUST……</string>
     <string name="ready_to_get_schedule_list">ready to get schedule list,may take half a minute……</string>
     <string name="login_fail">login fail,please try again later!</string>
-    <string name="handle_success">processed successfully, welcome to use!</string>
+    <string name="handle_success">processed successfully</string>
     <string name="get_fail">get failed, please try again later!</string>
     <string name="named_schedule">give a name to the first schedule！</string>
     <string name="data_fetch_subtitle">please choose how to get the data</string>

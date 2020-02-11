@@ -54,6 +54,32 @@
                 android:resource="@xml/filepaths" />
         </provider>
 
+
+        <receiver
+            android:name=".ui.view.appwidget.WidgetProviderDayClass"
+            android:label="今日课程">
+            <intent-filter>
+                <action android:name="wake_up" />
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE_OPTIONS" />
+                <!-- 广播式更新，正常情况,手动更新 -->
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE_MY" />
+                <!-- 图片点击事件 -->
+                <action android:name="IMAGE_CLICK" />
+                <!-- 小部件默认点击事件 -->
+                <action android:name="ELEMENT_CLICK" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/widget_4_2" />
+        </receiver>
+
+        <service
+            android:name=".ui.view.appwidget.WidgetServiceDayClass"
+            android:exported="false"
+            android:permission="android.permission.BIND_REMOTEVIEWS" />
+
     </application>
 
 </manifest>

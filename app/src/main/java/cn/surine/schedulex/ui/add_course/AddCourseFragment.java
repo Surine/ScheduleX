@@ -172,7 +172,7 @@ public class AddCourseFragment extends BaseBindingFragment<FragmentAddCourseBind
         CommonDialogs.getCommonDialog(activity(), getString(R.string.warning), getString(R.string.delete_schedule_dialog_msg)
                 , () -> {
                     courseViewModel.deleteByCourseId(course.id);
-                    Toasts.toast(getString(R.string.delete_course_dialog_msg));
+                    Toasts.toast(getString(R.string.handle_success));
                     NavHostFragment.findNavController(AddCourseFragment.this).navigateUp();
                 }, null).show();
     }

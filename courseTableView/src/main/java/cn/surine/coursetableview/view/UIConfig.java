@@ -1,4 +1,4 @@
-package cn.surine.coursetableview.View;
+package cn.surine.coursetableview.view;
 
 import android.graphics.Color;
 
