@@ -36,7 +36,7 @@ public class CourseRepository extends BaseRepository {
     void saveCourseByDb(List<Course> courseList) {
         for (Course course : courseList) {
             //如果已插入course id 的数据，则失败
-            Log.d("slw", "saveCourseByDb: " + appDatabase.courseDao().insert(course));
+             appDatabase.courseDao().insert(course);
         }
     }
 

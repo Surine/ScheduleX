@@ -16,7 +16,13 @@ android {
     }
     buildTypes {
         release {
+            minifyEnabled true
+            debuggable false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+        debug{
             minifyEnabled false
+            debuggable true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
@@ -81,6 +87,11 @@ dependencies {
 
     //弹簧动画
     implementation 'androidx.dynamicanimation:dynamicanimation:1.0.0'
+
+    //课程表
     implementation project(path: ':courseTableView')
+
+    //bugly
+    implementation 'com.tencent.bugly:crashreport:3.1.0'
 
 }

@@ -35,7 +35,7 @@ public class Schedule extends BaseVm {
 
 
     /**
-     * 开学时间
+     * 开学时间 yyyyMMdd
      */
     public String termStartDate;
 

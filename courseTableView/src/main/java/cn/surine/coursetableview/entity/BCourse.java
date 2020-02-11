@@ -1,5 +1,7 @@
 package cn.surine.coursetableview.entity;
 
+import androidx.annotation.Keep;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -9,6 +11,7 @@ import java.util.List;
  * 课程实体基础类
  */
 
+@Keep
 public class BCourse implements Serializable{
    private String id;
    private long scheduleId;

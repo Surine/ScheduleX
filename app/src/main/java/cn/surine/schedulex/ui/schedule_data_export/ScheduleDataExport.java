@@ -9,14 +9,19 @@ import androidx.lifecycle.ViewModelProviders;
 import com.google.android.material.snackbar.Snackbar;
 import com.tbruyelle.rxpermissions2.RxPermissions;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import cn.surine.schedulex.R;
 import cn.surine.schedulex.base.controller.BaseBindingFragment;
 import cn.surine.schedulex.base.utils.CalendarProviders;
+import cn.surine.schedulex.base.utils.Dates;
 import cn.surine.schedulex.base.utils.Files;
 import cn.surine.schedulex.base.utils.InstanceFactory;
 import cn.surine.schedulex.base.utils.Jsons;
 import cn.surine.schedulex.base.utils.Objs;
 import cn.surine.schedulex.base.utils.Toasts;
+import cn.surine.schedulex.data.entity.Course;
 import cn.surine.schedulex.data.entity.Schedule;
 import cn.surine.schedulex.databinding.FragmentDateExportBinding;
 import cn.surine.schedulex.ui.course.CourseRepository;
@@ -94,7 +99,33 @@ public class ScheduleDataExport extends BaseBindingFragment<FragmentDateExportBi
      * 导出到日历
      * */
     private void exportIcs() {
-        CalendarProviders.addEvent(activity(),"测试","测试文本",System.currentTimeMillis(),System.currentTimeMillis() + 60 * 1000);
+        List<Course> data = courseViewModel.getCourseByScheduleId(schedule.roomId);
+        for (int i = 0; i < data.size(); i++) {
+            Course course = data.get(i);
+            List<Integer> weeks = new ArrayList<>();
+            for (int j = 0; j < course.classWeek.length(); j++) {
+                if(course.classWeek.charAt(i) == '1'){
+                    weeks.add(j + 1);
+                }
+            }
+            for (int j = 0; j < weeks.size(); j++) {
+                //只记录比当前周大的数据
+                if(weeks.get(j) >= schedule.curWeek()){
+                    long startTime = getCalendarTime(weeks.get(j),course.classDay);
+                    long endTime = startTime + 45 * 60 * 1000;
+//                    CalendarProviders.addEvent(activity(),course.coureName,course.teachingBuildingName + course.classroomName,startTime,endTime);
+                    CalendarProviders.deleteCalendarEvent(activity(),course.coureName);
+                }
+            }
+        }
+    }
+
+
+    /**
+     * 求得起始时间
+     * */
+    private long getCalendarTime(int week, String classDay) {
+        return Dates.getDate(schedule.termStartDate,Dates.yyyyMMdd).getTime() + (7 * (week - 1) + Integer.parseInt(classDay) - 1) * Dates.ONE_DAY;
     }
 
     /**

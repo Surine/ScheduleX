@@ -85,6 +85,12 @@ public class CalendarProviders {
     }
 
 
+
+    private static void deleteCalendar(){
+
+    }
+
+
     /**
      * 添加事件
      * */
@@ -139,7 +145,8 @@ public class CalendarProviders {
      * @param title 事件标题
      */
     public static void deleteCalendarEvent(@NonNull Context context, String title) {
-        Cursor cursor = contentResolver.query(calendarUri, null, null, null, null);
+        contentResolver = context.getContentResolver();
+        Cursor cursor = contentResolver.query(eventUri, null, null, null, null);
         try {
             if (cursor == null) {
                 return;
@@ -151,7 +158,7 @@ public class CalendarProviders {
                     if (!TextUtils.isEmpty(title) && title.equals(eventTitle)) {
                         //查询到名字一致的话， 就拼接id后进行删除
                         int id = cursor.getInt(cursor.getColumnIndex(CalendarContract.Calendars._ID));
-                        Uri deleteUri = ContentUris.withAppendedId(calendarUri, id);
+                        Uri deleteUri = ContentUris.withAppendedId(eventUri, id);
                         int rows = context.getContentResolver().delete(deleteUri, null, null);
                         if (rows == -1) {
                             return;
@@ -165,4 +172,5 @@ public class CalendarProviders {
             }
         }
     }
+
 }

@@ -4,6 +4,10 @@ import android.annotation.SuppressLint;
 import android.app.Application;
 import android.content.Context;
 
+import com.tencent.bugly.crashreport.CrashReport;
+
+import cn.surine.schedulex.BuildConfig;
+
 /**
  * Intro：
  *
@@ -19,6 +23,8 @@ public class App extends Application {
     public void onCreate() {
         super.onCreate();
         context = getApplicationContext();
+        //初始化bugly
+        CrashReport.initCrashReport(getApplicationContext(), "2d69e03a71", BuildConfig.DEBUG);
     }
 
 }

@@ -16,6 +16,7 @@ import java.util.Date;
 public class Dates {
 
     public static final String yyyyMMdd = "yyyy-MM-dd";
+    public static final long ONE_DAY = 24 * 60 * 60 * 1000;
 
     /**
      * 获取今天星期几的数字
