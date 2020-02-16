@@ -22,6 +22,7 @@ import cn.surine.schedulex.ui.course.CourseViewModel;
 import cn.surine.schedulex.ui.schedule.ScheduleRepository;
 import cn.surine.schedulex.ui.schedule.ScheduleViewModel;
 import cn.surine.schedulex.ui.schedule_init.ScheduleInitFragment;
+import cn.surine.schedulex.ui.view.custom.helper.CommonDialogs;
 
 public class LoginFragment extends BaseBindingFragment<FragmentLoginBinding> {
 
@@ -106,5 +107,7 @@ public class LoginFragment extends BaseBindingFragment<FragmentLoginBinding> {
                 Toasts.toast(getString(R.string.get_fail));
             }
         });
+
+        binding.loginTip.setOnClickListener(v -> CommonDialogs.getCommonDialog(activity(),getString(R.string.warning),getString(R.string.welcome_to_use),null,null).show());
     }
 }

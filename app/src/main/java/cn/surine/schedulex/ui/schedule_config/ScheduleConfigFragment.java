@@ -96,16 +96,14 @@ public class ScheduleConfigFragment extends BaseBindingFragment<FragmentSchedule
         schedule = scheduleViewModel.getScheduleById(scheduleId);
         t.setData(schedule);
 
-        t.deleteSchedule.setOnClickListener(v -> {
-            CommonDialogs.getCommonDialog(activity(), getString(R.string.warning), getString(R.string.delete_schedule_dialog_msg)
-                    , () -> {
-                        //删除课表后需要删除所有相关课程
-                        scheduleViewModel.deleteScheduleById(scheduleId);
-                        courseViewModel.deleteCourseByScheduleId(scheduleId);
-                        Toasts.toast(getString(R.string.schedule_is_delete));
-                        NavHostFragment.findNavController(ScheduleConfigFragment.this).navigateUp();
-                    }, null).show();
-        });
+        t.deleteSchedule.setOnClickListener(v -> CommonDialogs.getCommonDialog(activity(), getString(R.string.warning), getString(R.string.delete_schedule_dialog_msg)
+                , () -> {
+                    //删除课表后需要删除所有相关课程
+                    scheduleViewModel.deleteScheduleById(scheduleId);
+                    courseViewModel.deleteCourseByScheduleId(scheduleId);
+                    Toasts.toast(getString(R.string.schedule_is_delete));
+                    NavHostFragment.findNavController(ScheduleConfigFragment.this).navigateUp();
+                }, null).show());
 
 
         t.scheduleNameItem.setOnClickListener(v -> BtmDialogs.showEditBtmDialog(activity(), schedule.name, true, s -> {

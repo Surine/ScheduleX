@@ -27,7 +27,7 @@ public class SplashFragment extends BaseFragment {
     @Override
     public void onInit(View parent) {
         runnable = () -> {
-            if(Prefs.getBoolean(Constants.IS_FIRST, false)){
+            if(!Prefs.getBoolean(Constants.IS_FIRST, false)){
                 Navigations.open(SplashFragment.this,R.id.action_splashFragment_to_scheduleInitFragment);
             }else{
                 Navigations.open(SplashFragment.this,R.id.action_splashFragment_to_scheduleFragment);

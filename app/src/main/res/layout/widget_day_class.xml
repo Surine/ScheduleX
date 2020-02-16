@@ -1,37 +1,51 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/shape_rect_10_white"
-    >
+    android:background="@drawable/shape_rect_10_white">
+
     <RelativeLayout
+        android:id="@+id/task_widget_head"
         android:layout_width="match_parent"
         android:layout_height="30dp"
         android:layout_marginTop="10dp"
         android:background="@android:color/white"
-        android:orientation="horizontal"
-        android:id="@+id/task_widget_head"
-        >
+        android:orientation="horizontal">
 
         <TextView
+            android:id="@+id/widget_day_class_title"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:text="每日课程"
-            android:textStyle="bold"
-            android:layout_marginStart="20dp"
-            android:textColor="@android:color/black"
+            android:layout_marginStart="@dimen/dp20"
             android:gravity="center"
-            />
+            android:text="2月6日课程"
+            android:textColor="@android:color/black"
+            android:textStyle="bold" />
 
+        <ImageView
+            android:id="@+id/widget_day_class_next_day"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="@dimen/dp20"
+            android:src="@drawable/ic_keyboard_arrow_right_black_24dp" />
     </RelativeLayout>
+
+
+    <ImageView
+        android:id="@+id/emptyViewImage"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp200"
+        android:alpha="0.5"
+        android:layout_alignParentBottom="true"
+        android:src="@mipmap/undraw_code_thinking_1jeh" />
+
     <ListView
+        android:id="@+id/listview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/listview"
-        android:divider="@null"
-        android:dividerHeight="0dp"
         android:layout_below="@id/task_widget_head"
-        android:layout_margin="10dp"
-        />
+        android:layout_margin="@dimen/dp10"
+        android:divider="@null"
+        android:dividerHeight="0dp" />
 </RelativeLayout>

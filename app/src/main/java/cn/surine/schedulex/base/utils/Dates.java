@@ -24,7 +24,26 @@ public class Dates {
      */
     public static int getWeekDay() {
         Calendar cal = Calendar.getInstance();
-        return cal.get(Calendar.DAY_OF_WEEK);
+        int day =  cal.get(Calendar.DAY_OF_WEEK);
+        if(day == 0){
+            day = 7;
+        }
+        return day;
+    }
+
+
+
+    /**
+     * 获取下一天星期数字
+     * */
+    public static int getNextDay(){
+        if(getWeekDay() == 6){
+            return 7;
+        }
+        if(getWeekDay() == 7){
+            return 1;
+        }
+        return getWeekDay() + 1;
     }
 
 

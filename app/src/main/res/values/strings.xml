@@ -38,8 +38,8 @@
     <string name="delete">Delete</string>
     <string name="delete_schedule_dialog_msg">Are you sure you want to delete this schedule?\nAll course information will be lost, please exercise caution!</string>
     <string name="delete_course_dialog_msg">Are you sure you want to delete this course?\nplease exercise caution!</string>
-    <string name="btn_ok">Ok</string>
-    <string name="btn_cancel">Cancel</string>
+    <string name="btn_ok">@android:string/ok</string>
+    <string name="btn_cancel">@android:string/cancel</string>
     <string name="schedule_is_delete">Schedule has been deleted!</string>
     <string name="course_is_delete">Course has been deleted!</string>
     <string name="open_source_license" translatable="false">Jetpack framework &amp; AndroidX\nViewModel,Navigation,DataBinding,Room,ViewPager2,Dynamicanimation,Palette\n
@@ -138,4 +138,6 @@
     <string name="year_term1">Year Term1</string>
     <string name="year_term2">Year Term2</string>
     <string name="no_permission_to_add">You do not have permission to add more timetables!</string>
+    <string name="login_jw_introduce">Registration instructions</string>
+    <string name="welcome_to_use">1. In this way, you can log in to the Academic Affairs Office of Tianjin University of Science and Technology to obtain class schedules, without linking to the campus network \\n2. The account number is your student number, and the password is the password of the Academic Affairs Department. If the verification fails, please check if you entered it correctly!</string>
 </resources>

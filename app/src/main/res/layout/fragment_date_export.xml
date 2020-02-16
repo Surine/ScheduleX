@@ -15,20 +15,9 @@
             android:textColor="@android:color/black"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="@+id/exportExcel"
-            app:layout_constraintStart_toStartOf="@+id/guideline25"
+            app:layout_constraintStart_toStartOf="@+id/guideline32"
             app:layout_constraintTop_toBottomOf="@+id/exportExcel" />
 
-        <TextView
-            android:id="@+id/textView24"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:text="@string/my_qrcode"
-            android:textColor="@android:color/black"
-            android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="@+id/myQrCode"
-            app:layout_constraintStart_toStartOf="@+id/guideline32"
-            app:layout_constraintTop_toBottomOf="@+id/myQrCode" />
 
         <TextView
             android:id="@+id/textView25"
@@ -37,17 +26,17 @@
             android:text="@string/from_other"
             android:textColor="@android:color/black"
             android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/textView22"
             app:layout_constraintEnd_toEndOf="@+id/other"
-            app:layout_constraintStart_toStartOf="@+id/other"
-            app:layout_constraintTop_toBottomOf="@+id/other" />
+            app:layout_constraintStart_toStartOf="@+id/other" />
 
         <TextView
             android:id="@+id/schedule_title"
-            android:text="@string/schedule_name"
             style="@style/textview_title_style"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintStart_toStartOf="@+id/guideline25"
+            android:text="@string/schedule_name"
+            app:layout_constraintStart_toStartOf="@+id/guideline32"
             app:layout_constraintTop_toTopOf="@+id/guideline26" />
 
         <androidx.constraintlayout.widget.Guideline
@@ -55,14 +44,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            app:layout_constraintGuide_percent="0.1" />
+            app:layout_constraintGuide_percent="0.5" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline32"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            app:layout_constraintGuide_percent="0.5" />
+            app:layout_constraintGuide_percent="0.1" />
 
         <TextView
             android:id="@+id/textView19"
@@ -114,6 +103,7 @@
             android:layout_width="@dimen/dp90"
             android:layout_height="@dimen/dp90"
             android:src="@mipmap/i1"
+            android:visibility="gone"
             android:background="?selectableItemBackgroundBorderless"
             app:layout_constraintStart_toStartOf="@+id/guideline25"
             app:layout_constraintTop_toTopOf="@+id/guideline27" />
@@ -123,30 +113,20 @@
             android:layout_width="@dimen/dp90"
             android:layout_height="@dimen/dp90"
             android:background="?selectableItemBackgroundBorderless"
-            app:layout_constraintStart_toStartOf="@+id/guideline25"
-            app:layout_constraintTop_toTopOf="@+id/guideline28"
             android:src="@mipmap/i3"
-            />
+            app:layout_constraintStart_toStartOf="@+id/guideline32"
+            app:layout_constraintTop_toTopOf="@+id/guideline28" />
 
         <ImageView
             android:id="@+id/other"
             android:layout_width="@dimen/dp90"
             android:layout_height="@dimen/dp90"
             android:background="?selectableItemBackgroundBorderless"
-            app:layout_constraintStart_toStartOf="@+id/guideline25"
-            app:layout_constraintTop_toTopOf="@+id/guideline30"
             android:src="@mipmap/i5"
-            />
+            app:layout_constraintStart_toStartOf="@+id/guideline25"
+            app:layout_constraintTop_toTopOf="@+id/guideline27" />
 
-        <ImageView
-            android:id="@+id/myQrCode"
-            android:layout_width="@dimen/dp90"
-            android:layout_height="@dimen/dp90"
-            android:background="?selectableItemBackgroundBorderless"
-            app:layout_constraintStart_toStartOf="@+id/guideline32"
-            app:layout_constraintTop_toTopOf="@+id/guideline28"
-            android:src="@mipmap/i4"
-            />
+
 
         <ImageView
             android:id="@+id/exportJson"
@@ -155,7 +135,7 @@
             android:background="?selectableItemBackgroundBorderless"
             app:layout_constraintStart_toStartOf="@+id/guideline32"
             app:layout_constraintTop_toTopOf="@+id/guideline27"
-            android:src="@mipmap/i2"
+            android:src="@mipmap/i1"
             />
 
         <TextView
@@ -166,6 +146,7 @@
             android:text="@string/export_ics"
             android:textColor="@android:color/black"
             android:textStyle="bold"
+            android:visibility="gone"
             app:layout_constraintEnd_toEndOf="@+id/exportIcs"
             app:layout_constraintStart_toStartOf="@+id/guideline25"
             app:layout_constraintTop_toBottomOf="@+id/exportIcs" />

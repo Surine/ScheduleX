@@ -1,12 +1,9 @@
 package cn.surine.schedulex.ui.schedule_list;
 
 import android.os.Bundle;
-import android.view.View;
 
-import androidx.annotation.Nullable;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.navigation.Navigation;
-import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 import java.util.List;

@@ -57,7 +57,7 @@ public class Prefs {
 
 
     public static boolean getBoolean(String key, boolean defV) {
-        return !sharedPreferences.getBoolean(key, defV);
+        return sharedPreferences.getBoolean(key, defV);
     }
 
     public static Long getLong(String key,Long defV){

@@ -3,24 +3,18 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="cn.surine.schedulex">
 
-    <uses-permission android:name="android.permission.INTERNET" />
-    <!--读取SD卡的权限:打开相册选取图片所必须的权限-->
+    <uses-permission android:name="android.permission.INTERNET" /> <!-- 读取SD卡的权限:打开相册选取图片所必须的权限 -->
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-
-    <!--日历权限-->
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" /> <!-- 日历权限 -->
     <uses-permission android:name="android.permission.READ_CALENDAR" />
-    <uses-permission android:name="android.permission.WRITE_CALENDAR" />
-
-    <!--bulgy-->
+    <uses-permission android:name="android.permission.WRITE_CALENDAR" /> <!-- bulgy -->
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
-    <uses-permission android:name="android.permission.READ_LOGS"
+    <uses-permission
+        android:name="android.permission.READ_LOGS"
         tools:ignore="ProtectedPermissions" />
 
-
-    <!--沙盒的话，后期有时间单独学习一下，目前通过requestLegacyExternalStorage使用旧版存储系统-->
     <application
         android:name=".base.controller.App"
         android:allowBackup="false"
@@ -43,7 +37,6 @@
             </intent-filter>
         </activity>
 
-
         <provider
             android:name="androidx.core.content.FileProvider"
             android:authorities="cn.surine.schedulex.authorities"
@@ -55,31 +48,39 @@
         </provider>
 
 
+
         <receiver
-            android:name=".ui.view.appwidget.WidgetProviderDayClass"
-            android:label="今日课程">
+            android:name=".app_widget.core.WidgetProviderDayClass"
+            android:label="每日课程">
             <intent-filter>
-                <action android:name="wake_up" />
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE_OPTIONS" />
-                <!-- 广播式更新，正常情况,手动更新 -->
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE_MY" />
-                <!-- 图片点击事件 -->
-                <action android:name="IMAGE_CLICK" />
-                <!-- 小部件默认点击事件 -->
-                <action android:name="ELEMENT_CLICK" />
+                <!--唤醒小部件-->
+                <action android:name="android.appwidget.action.WAKE_UP" />
+                <!--切换天用的广播-->
+                <action android:name="android.appwidget.action.NEXT_DAY" />
+                <action android:name="android.appwidget.action.PREVIOUS_DAY" />
+
             </intent-filter>
 
             <meta-data
                 android:name="android.appwidget.provider"
-                android:resource="@xml/widget_4_2" />
+                android:resource="@xml/widget_4_4" />
         </receiver>
 
+        <!-- 小部件保活服务 -->
         <service
-            android:name=".ui.view.appwidget.WidgetServiceDayClass"
-            android:exported="false"
-            android:permission="android.permission.BIND_REMOTEVIEWS" />
+            android:name=".app_widget.core.KeepService"
+            android:enabled="true"
+            android:exported="true"
+            />
 
+        <service android:name=".app_widget.core.WidgetServiceDayClass"
+            android:enabled="true"
+            android:exported="true"
+            android:permission="android.permission.BIND_REMOTEVIEWS"
+            />
     </application>
 
 </manifest>

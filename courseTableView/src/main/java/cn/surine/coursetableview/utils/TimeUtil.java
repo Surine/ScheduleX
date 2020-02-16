@@ -75,8 +75,8 @@ public class TimeUtil {
      * */
     public static String getDateBeforeOrAfter(String dateString,String format,int number,boolean isAfter){
         SimpleDateFormat sdf = new SimpleDateFormat(format);
-        Date date = null;
-        Date date1 = null;
+        Date date;
+        Date date1;
         try {
             date = sdf.parse(dateString);
             Calendar calendar = Calendar.getInstance();

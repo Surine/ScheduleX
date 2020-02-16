@@ -35,4 +35,12 @@ public class TimerRepository extends BaseRepository {
     int getWeekDay() {
         return Dates.getWeekDay();
     }
+
+
+    /**
+     * 获取小部件日视图标题
+     * */
+    public String getWidgetDayClassTitle(){
+        return Dates.getDate("MM月dd日");
+    }
 }

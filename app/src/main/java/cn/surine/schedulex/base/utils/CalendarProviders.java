@@ -146,8 +146,7 @@ public class CalendarProviders {
      */
     public static void deleteCalendarEvent(@NonNull Context context, String title) {
         contentResolver = context.getContentResolver();
-        Cursor cursor = contentResolver.query(eventUri, null, null, null, null);
-        try {
+        try (Cursor cursor = contentResolver.query(eventUri, null, null, null, null)) {
             if (cursor == null) {
                 return;
             }
@@ -165,10 +164,6 @@ public class CalendarProviders {
                         }
                     }
                 }
-            }
-        } finally {
-            if (cursor != null) {
-                cursor.close();
             }
         }
     }

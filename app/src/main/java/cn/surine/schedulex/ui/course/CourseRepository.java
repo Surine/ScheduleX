@@ -1,7 +1,6 @@
 package cn.surine.schedulex.ui.course;
 
 import android.os.Bundle;
-import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.List;

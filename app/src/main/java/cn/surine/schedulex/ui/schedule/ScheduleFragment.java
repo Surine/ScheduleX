@@ -56,7 +56,7 @@ public class ScheduleFragment extends BaseBindingFragment<FragmentScheduleBindin
 
         globalT = t;
 
-        if (Prefs.getBoolean(Constants.IS_FIRST, false)) {
+        if (!Prefs.getBoolean(Constants.IS_FIRST, false)) {
             CommonDialogs.getCommonDialog(activity(), getString(R.string.warning), getString(R.string.first_toast), null, null).show();
             Prefs.save(Constants.IS_FIRST, true);
         }

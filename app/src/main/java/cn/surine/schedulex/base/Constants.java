@@ -55,6 +55,8 @@ public class Constants {
     public static final String PASSWORD = "PASSWORD";
 
     public static final int MAX_SCHEDULE_LIMIT = 5;
+    public static final String APP_WIDGET_ID = "app_widget_id";
+    public static final String NEXT_DAY_STATUS = "NEXT_DAY_STATUS_";
 
     //强制最大周
     public static int MAX_WEEK = 30;
