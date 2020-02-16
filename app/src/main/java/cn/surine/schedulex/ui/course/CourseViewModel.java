@@ -1,5 +1,6 @@
 package cn.surine.schedulex.ui.course;
 
+import androidx.annotation.Keep;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
@@ -19,6 +20,8 @@ import cn.surine.schedulex.data.entity.CourseList;
  * @author sunliwei
  * @date 2020-01-19 22:12
  */
+
+@Keep
 public class CourseViewModel extends ViewModel {
 
     private CourseRepository mCourseRepository;

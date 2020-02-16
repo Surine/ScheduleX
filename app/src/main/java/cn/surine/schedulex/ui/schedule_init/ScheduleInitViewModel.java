@@ -3,6 +3,7 @@ package cn.surine.schedulex.ui.schedule_init;
 import android.text.Editable;
 import android.text.TextWatcher;
 
+import androidx.annotation.Keep;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
@@ -14,6 +15,8 @@ import cn.surine.schedulex.base.utils.SimpleTextWatcher;
  * @author sunliwei
  * @date 2020-01-22 19:09
  */
+
+@Keep
 public class ScheduleInitViewModel extends ViewModel {
     public MutableLiveData<String> scheduleName = new MutableLiveData<>();
 

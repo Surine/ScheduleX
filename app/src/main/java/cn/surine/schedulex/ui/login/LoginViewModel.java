@@ -4,6 +4,7 @@ import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
 
+import androidx.annotation.Keep;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
@@ -14,6 +15,7 @@ import cn.surine.schedulex.base.utils.SimpleTextWatcher;
 import cn.surine.schedulex.base.utils.Strs;
 import cn.surine.schedulex.data.entity.VmResultString;
 
+@Keep
 public class LoginViewModel extends ViewModel {
 
     private LoginRepository mLoginRepository;

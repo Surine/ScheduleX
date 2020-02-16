@@ -34,22 +34,6 @@
 -keep class * implements com.android.base.proguard.KeepClassName
 
 
-# GSON #
--keep class com.google.**{*;}
--keepclassmembers class * implements java.io.Serializable {
-    static final long serialVersionUID;
-    private static final java.io.ObjectStreamField[] serialPersistentFields;
-    private void writeObject(java.io.ObjectOutputStream);
-    private void readObject(java.io.ObjectInputStream);
-    java.lang.Object writeReplace();
-    java.lang.Object readResolve();
-}
-# Gson uses generic type information stored in a class file when working with fields. Proguard removes such information by default, so configure it to keep all of it.
--keepattributes Signature
-# Gson specific classes
--keep class sun.misc.Unsafe { *; }
-
-
 # Glide #
 -keep public class * implements com.bumptech.glide.module.GlideModule
 -keep public class * extends com.bumptech.glide.module.AppGlideModule
@@ -60,23 +44,28 @@
 -dontwarn com.bumptech.glide.load.resource.bitmap.VideoDecoder
 
 
-################ okhttp ###############
--dontwarn okhttp3.**
--dontwarn okio.**
+
+# AndroidX
+-keep class com.google.android.material.** {*;}
+-keep class androidx.** {*;}
+-keep public class * extends androidx.**
+-keep interface androidx.** {*;}
+-dontwarn com.google.android.material.**
+-dontnote com.google.android.material.**
+-dontwarn androidx.**
+
+
+
 -dontwarn javax.annotation.**
--dontwarn org.conscrypt.**
--keepnames class okhttp3.internal.publicsuffix.PublicSuffixDatabase
-
-
-################ retrofit ###############
--keepattributes Signature
--keepclassmembernames,allowobfuscation interface * {
-    @retrofit2.http.* <methods>;
-}
--dontwarn org.codehaus.mojo.animal_sniffer.IgnoreJRERequirement
-
-
-################ RxJava and RxAndroid ###############
+-dontwarn javax.inject.**
+# OkHttp3
+-dontwarn okhttp3.logging.**
+-keep class okhttp3.internal.**{*;}
+-dontwarn okio.**
+# Retrofit
+-dontwarn retrofit2.**
+-keep class retrofit2.** { *; }
+# RxJava RxAndroid
 -dontwarn sun.misc.**
 -keepclassmembers class rx.internal.util.unsafe.*ArrayQueue*Field* {
     long producerIndex;
@@ -88,3 +77,8 @@
 -keepclassmembers class rx.internal.util.unsafe.BaseLinkedQueueConsumerNodeRef {
     rx.internal.util.atomic.LinkedQueueNode consumerNode;
 }
+
+# Gson
+-keep class com.google.gson.stream.** { *; }
+-keepattributes EnclosingMethod
+-keep class cn.surine.schedulex.data.entity.**{*;}

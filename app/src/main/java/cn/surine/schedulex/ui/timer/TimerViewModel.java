@@ -1,5 +1,6 @@
 package cn.surine.schedulex.ui.timer;
 
+import androidx.annotation.Keep;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
@@ -9,6 +10,8 @@ import androidx.lifecycle.ViewModel;
  * @author sunliwei
  * @date 2020-01-22 16:11
  */
+
+@Keep
 public class TimerViewModel extends ViewModel {
 
     private TimerRepository mTimerRepository;

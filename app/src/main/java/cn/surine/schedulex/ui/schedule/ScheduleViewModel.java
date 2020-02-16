@@ -3,6 +3,7 @@ package cn.surine.schedulex.ui.schedule;
 import android.annotation.SuppressLint;
 import android.text.TextUtils;
 
+import androidx.annotation.Keep;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
@@ -18,6 +19,7 @@ import cn.surine.schedulex.base.utils.Strs;
 import cn.surine.schedulex.data.entity.Course;
 import cn.surine.schedulex.data.entity.Schedule;
 
+@Keep
 public class ScheduleViewModel extends ViewModel {
 
     private MutableLiveData<List<Course>> courseList;

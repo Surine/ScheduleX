@@ -4,9 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-        <variable
-            name="data"
-            type="cn.surine.schedulex.ui.schedule_list.ScheduleListViewModel" />
+
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
