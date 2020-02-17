@@ -1,8 +1,16 @@
 package cn.surine.schedulex.ui.schedule;
 
 import android.annotation.SuppressLint;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
+import android.os.Handler;
 import android.text.TextUtils;
+import android.view.Gravity;
 import android.view.View;
+import android.view.WindowManager;
+import android.widget.PopupWindow;
+import android.widget.SeekBar;
+import android.widget.TextView;
 
 import androidx.lifecycle.ViewModelProviders;
 import androidx.navigation.Navigation;
@@ -20,9 +28,12 @@ import cn.surine.schedulex.app_widget.BoardCastSender;
 import cn.surine.schedulex.base.Constants;
 import cn.surine.schedulex.base.controller.BaseBindingFragment;
 import cn.surine.schedulex.base.utils.DataMaps;
+import cn.surine.schedulex.base.utils.Drawables;
 import cn.surine.schedulex.base.utils.InstanceFactory;
+import cn.surine.schedulex.base.utils.MySeekBarChangeListener;
 import cn.surine.schedulex.base.utils.Prefs;
 import cn.surine.schedulex.base.utils.Toasts;
+import cn.surine.schedulex.base.utils.Uis;
 import cn.surine.schedulex.data.entity.Course;
 import cn.surine.schedulex.data.entity.Schedule;
 import cn.surine.schedulex.databinding.FragmentScheduleBinding;
@@ -44,6 +55,10 @@ public class ScheduleFragment extends BaseBindingFragment<FragmentScheduleBindin
     private ScheduleViewPagerAdapter scheduleViewPagerAdapter;
     private FragmentScheduleBinding globalT;
     private Schedule curSchedule;
+    private int curViewPagerPosition;
+    private PopupWindow popupWindow;
+    private Handler handler = new Handler();
+    private Runnable runnable;
 
     @Override
     public int layoutId() {
@@ -102,7 +117,38 @@ public class ScheduleFragment extends BaseBindingFragment<FragmentScheduleBindin
         t.viewpager.setCurrentItem(currentWeek - 1, true);
         t.viewpager.setPageTransformer(new ZoomOutPageTransformer());
 
-        t.curWeekTv.setOnClickListener(v -> t.viewpager.setCurrentItem(currentWeek - 1));
+        t.curWeekTv.setOnClickListener(v -> {
+            View view = Uis.inflate(activity(),R.layout.view_change_week_quickly);
+            popupWindow = new PopupWindow(view, Uis.dip2px(activity(),200), WindowManager.LayoutParams.WRAP_CONTENT);
+            //设置外面可触
+            popupWindow.setOutsideTouchable(true);
+            //设置可触
+            popupWindow.setFocusable(false);
+            popupWindow.setBackgroundDrawable(Drawables.getDrawable(Color.WHITE,180,0,Color.WHITE));
+            popupWindow.setTouchable(true);
+            popupWindow.setElevation(8F);
+            popupWindow.showAsDropDown(t.curWeekTv,20,30);
+
+            SeekBar seekBar = view.findViewById(R.id.seekBar);
+            TextView weekTv = view.findViewById(R.id.weekText);
+            seekBar.setMax(curSchedule.totalWeek);
+            seekBar.setProgress(curViewPagerPosition);
+            weekTv.setText(String.valueOf(curViewPagerPosition + 1));
+            seekBar.setOnSeekBarChangeListener(new MySeekBarChangeListener(){
+                @Override
+                public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                    super.onProgressChanged(seekBar, progress, fromUser);
+                    weekTv.setText(String.valueOf(progress + 1));
+                    t.viewpager.setCurrentItem(progress);
+                    if(popupWindow != null && popupWindow.isShowing()){
+                        handler.removeCallbacks(runnable);
+                        runnable = () -> popupWindow.dismiss();
+                        handler.postDelayed(runnable,2000);
+                    }
+                }
+            });
+        });
+
         timerViewModel.curWeekStr.setValue("😁😁😁 " + getString(R.string.week, currentWeek));
 
 
@@ -114,6 +160,7 @@ public class ScheduleFragment extends BaseBindingFragment<FragmentScheduleBindin
             @SuppressLint("StringFormatMatches")
             @Override
             public void onPageSelected(int position) {
+                curViewPagerPosition = position;
                 timerViewModel.curWeekStr.setValue("😁😁😁 " + getString(R.string.week, (position + 1)));
                 scheduleViewPagerAdapter.setWeek(position + 1);
                 scheduleViewPagerAdapter.notifyItemChanged(position);
@@ -148,5 +195,14 @@ public class ScheduleFragment extends BaseBindingFragment<FragmentScheduleBindin
         super.onResume();
         //回到当前周，有个小bug可以临时通过这个解决一下
         globalT.viewpager.setCurrentItem(curSchedule.curWeek() - 1);
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        if(handler != null){
+            handler.removeCallbacks(runnable);
+            handler = null;
+        }
     }
 }

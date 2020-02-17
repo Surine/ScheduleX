@@ -108,4 +108,6 @@ dependencies {
     //bugly
     implementation 'com.tencent.bugly:crashreport:3.1.0'
 
+    //引导库
+    implementation 'com.github.iammert:MaterialIntroView:1.6.0'
 }

@@ -2,8 +2,12 @@ package cn.surine.schedulex.base.utils;
 
 import android.content.Context;
 import android.content.res.Configuration;
+import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.WindowManager;
+
+import cn.surine.schedulex.base.controller.App;
 
 /**
  * Intro：
@@ -13,6 +17,9 @@ import android.view.View;
  * @date 2020-02-03 11:03
  */
 public class Uis {
+
+    public static int height = getScreenHeight();              // 屏幕高度
+    public static int width = getScreenWidth();                // 屏幕宽度
 
     /**
      * 获取反射布局
@@ -49,4 +56,20 @@ public class Uis {
         final float scale = context.getResources().getDisplayMetrics().density;
         return (int) (pxValue / scale + 0.5f);
     }
+
+    public static int getScreenWidth() {
+        return getDisplayMetrics(App.context).widthPixels;
+    }
+
+    public static int getScreenHeight() {
+        return getDisplayMetrics(App.context).heightPixels;
+    }
+
+
+    private static DisplayMetrics getDisplayMetrics(Context context) {
+        final DisplayMetrics metrics = new DisplayMetrics();
+        ((WindowManager) context.getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay().getMetrics(metrics);
+        return metrics;
+    }
+
 }
