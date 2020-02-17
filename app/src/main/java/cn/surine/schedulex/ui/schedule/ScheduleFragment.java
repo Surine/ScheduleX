@@ -197,9 +197,10 @@ public class ScheduleFragment extends BaseBindingFragment<FragmentScheduleBindin
         globalT.viewpager.setCurrentItem(curSchedule.curWeek() - 1);
     }
 
+
     @Override
-    public void onPause() {
-        super.onPause();
+    public void onDestroyView() {
+        super.onDestroyView();
         if(handler != null){
             handler.removeCallbacks(runnable);
             handler = null;
