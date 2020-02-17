@@ -55,6 +55,6 @@ public interface CourseDao {
     void deleteByCourseId(String id);
 
 
-    @Query("select * from course where classDay = :day and scheduleId = :roomId")
+    @Query("select * from course where classDay = :day and scheduleId = :roomId order by classSessions")
     List<Course> getTodayCourse(int day,int roomId);
 }

@@ -25,25 +25,11 @@ public class Dates {
     public static int getWeekDay() {
         Calendar cal = Calendar.getInstance();
         int day =  cal.get(Calendar.DAY_OF_WEEK);
-        if(day == 0){
-            day = 7;
-        }
-        return day;
-    }
-
-
-
-    /**
-     * 获取下一天星期数字
-     * */
-    public static int getNextDay(){
-        if(getWeekDay() == 6){
+        //返回1的话就是周日,2是周一，3是周二，以此类推
+        if(day == 1){
             return 7;
         }
-        if(getWeekDay() == 7){
-            return 1;
-        }
-        return getWeekDay() + 1;
+        return day - 1;
     }
 
 
@@ -157,9 +143,6 @@ public class Dates {
     }
 
 
-    public static void main(String[] args) {
-        System.out.println(getDateDif("2020-1-20", "2020-1-25"));
-    }
 
 
 

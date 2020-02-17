@@ -16,6 +16,7 @@ import java.util.List;
 
 import cn.surine.coursetableview.entity.BCourse;
 import cn.surine.schedulex.R;
+import cn.surine.schedulex.app_widget.BoardCastSender;
 import cn.surine.schedulex.base.Constants;
 import cn.surine.schedulex.base.controller.BaseBindingFragment;
 import cn.surine.schedulex.base.utils.DataMaps;
@@ -131,6 +132,8 @@ public class ScheduleFragment extends BaseBindingFragment<FragmentScheduleBindin
         if (!TextUtils.isEmpty(curSchedule.imageUrl)) {
             Glide.with(activity()).load(new File(curSchedule.imageUrl)).crossFade().into(t.background);
         }
+
+        BoardCastSender.notifyWidget(activity());
     }
 
     @SuppressLint("MissingSuperCall")
