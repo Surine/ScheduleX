@@ -15,6 +15,7 @@ import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
 
 import cn.surine.schedulex.base.interfaces.IBack;
+import cn.surine.schedulex.base.utils.StatusBars;
 
 /**
  * Intro：
@@ -47,9 +48,9 @@ public abstract class BaseFragment extends Fragment {
 
     /**
      * the method for back key pressed
-     * */
+     */
     @CallSuper
-    public void onBackPressed(){
+    public void onBackPressed() {
         NavHostFragment.findNavController(this).navigateUp();
     }
 
@@ -79,12 +80,22 @@ public abstract class BaseFragment extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
-        if(getActivity() instanceof IBack){
+        if (getActivity() instanceof IBack) {
             this.iBack = (IBack) getActivity();
             //此时将返回键任务交给fragment
             iBack.onBackKeyClick(this);
-        }else {
+        } else {
             throw new ClassCastException("Hosting Activity must implement BackHandledInterface");
         }
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        statusBarUi();
+    }
+
+    protected void statusBarUi() {
+        StatusBars.setStatusBarUI(activity(), true);
     }
 }

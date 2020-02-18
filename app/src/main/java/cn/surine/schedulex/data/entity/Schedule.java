@@ -59,6 +59,18 @@ public class Schedule extends BaseVm {
     public boolean lightText;
 
 
+    /**
+     * 是否显示周末
+     * */
+    public boolean isShowWeekend;
+
+
+    /**
+     * 课程格子不透明度
+     * */
+    public int alphaForCourseItem = 100;
+
+
     @SuppressLint("StringFormatMatches")
     public String getTotalWeekStr() {
         return App.context.getString(R.string.total_week,totalWeek);

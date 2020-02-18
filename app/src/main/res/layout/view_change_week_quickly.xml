@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:orientation="vertical"
     android:paddingTop="@dimen/dp16"
     android:paddingBottom="@dimen/dp16">
 
     <SeekBar
         android:id="@+id/seekBar"
+        style="@android:style/Widget.Material.SeekBar"
         android:layout_width="0dp"
-        android:layout_marginStart="@dimen/dp16"
-        android:layout_marginEnd="@dimen/dp16"
         android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dp16"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/weekText"
         app:layout_constraintStart_toStartOf="parent"
@@ -22,12 +22,11 @@
         android:id="@+id/weekText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="10"
-        android:textStyle="bold"
-        android:textSize="@dimen/t20"
-        android:textColor="@android:color/black"
-        android:layout_marginStart="@dimen/dp16"
         android:layout_marginEnd="@dimen/dp16"
+        android:text="10"
+        android:textColor="@android:color/black"
+        android:textSize="@dimen/t20"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

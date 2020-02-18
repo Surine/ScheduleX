@@ -3,7 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
-        <import type="cn.surine.schedulex.data.entity.Course"/>
+
+        <import type="cn.surine.schedulex.data.entity.Course" />
+
         <variable
             name="course"
             type="Course" />
@@ -35,9 +37,9 @@
                 android:paddingStart="@dimen/dp5"
                 android:paddingEnd="@dimen/dp5"
                 android:text="@{course.itemData()}"
-                android:textStyle="bold"
+                android:textColor="@android:color/white"
                 android:textSize="@dimen/t14"
-                android:textColor="@android:color/white" />
+                android:textStyle="bold" />
 
         </LinearLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>

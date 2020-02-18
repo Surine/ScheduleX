@@ -130,14 +130,24 @@ public class ScheduleConfigFragment extends BaseBindingFragment<FragmentSchedule
             Glide.with(activity()).load(new File(schedule.imageUrl)).into(t.backgroundPic);
         }
 
+        //设置颜色适配开关
         t.switchs.setChecked(schedule.lightText);
-
         t.schedulePaletteItem.setOnClickListener(v -> {
             schedule.lightText = !schedule.lightText;
             scheduleViewModel.updateSchedule(schedule);
             t.switchs.setChecked(schedule.lightText);
             t.paletteColorSubTitle.setText(schedule.lightText ?R.string.white_txt:R.string.black_txt);
         });
+
+        //设置是否展示周末开关
+        t.showWeekSwitchs.setChecked(schedule.isShowWeekend);
+        t.scheduleShowWeekItem.setOnClickListener(v -> {
+            schedule.isShowWeekend = !schedule.isShowWeekend;
+            scheduleViewModel.updateSchedule(schedule);
+            t.showWeekSwitchs.setChecked(schedule.isShowWeekend);
+            t.showWeekSubTitle.setText(schedule.isShowWeekend ? R.string.show_weekend : R.string.not_show_weekend);
+        });
+
 
 
         Bundle bundle = new Bundle();

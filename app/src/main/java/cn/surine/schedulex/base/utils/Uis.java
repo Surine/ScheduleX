@@ -18,8 +18,8 @@ import cn.surine.schedulex.base.controller.App;
  */
 public class Uis {
 
-    public static int height = getScreenHeight();              // 屏幕高度
-    public static int width = getScreenWidth();                // 屏幕宽度
+    public static int height = getScreenHeight();
+    public static int width = getScreenWidth();
 
     /**
      * 获取反射布局
@@ -70,6 +70,20 @@ public class Uis {
         final DisplayMetrics metrics = new DisplayMetrics();
         ((WindowManager) context.getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay().getMetrics(metrics);
         return metrics;
+    }
+
+
+    /**
+     * 给color添加透明度
+     *
+     * @param alpha     透明度 0f～1f
+     * @param baseColor 基本颜色
+     * @return
+     */
+    public static int getColorWithAlpha(float alpha, int baseColor) {
+        int a = Math.min(255, Math.max(0, (int) (alpha * 255))) << 24;
+        int rgb = 0x00ffffff & baseColor;
+        return a + rgb;
     }
 
 }

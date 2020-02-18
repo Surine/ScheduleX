@@ -10,10 +10,10 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
+import cn.surine.coursetableview.entity.BCourse;
 import cn.surine.coursetableview.view.CourseTableView;
 import cn.surine.coursetableview.view.DataConfig;
 import cn.surine.coursetableview.view.UIConfig;
-import cn.surine.coursetableview.entity.BCourse;
 import cn.surine.schedulex.R;
 import cn.surine.schedulex.base.controller.App;
 import cn.surine.schedulex.base.controller.BaseFragment;
@@ -52,13 +52,21 @@ public class ScheduleViewPagerAdapter extends RecyclerView.Adapter<ScheduleViewP
      */
     private void initUI() {
         uiConfig = new UIConfig();
-        uiConfig.setMaxClassDay(5);
-        uiConfig.setItemTextSize(14);
+        if (schedule.isShowWeekend) {
+            uiConfig.setMaxClassDay(7);
+            uiConfig.setItemTextSize(12);
+            uiConfig.setSectionHeight(Uis.dip2px(App.context, 54));
+            uiConfig.setItemTopMargin(5);
+            uiConfig.setItemSideMargin(3);
+        } else {
+            uiConfig.setMaxClassDay(5);
+            uiConfig.setItemTextSize(14);
+            uiConfig.setSectionHeight(Uis.dip2px(App.context, 64));
+            uiConfig.setItemTopMargin(10);
+            uiConfig.setItemSideMargin(12);
+        }
         uiConfig.setShowCurWeekCourse(false);
-        uiConfig.setSectionHeight(Uis.dip2px(App.context, 64));
-        uiConfig.setItemTopMargin(10);
         uiConfig.setChooseWeekColor(App.context.getResources().getColor(R.color.colorPrimary));
-        uiConfig.setItemSideMargin(11);
         uiConfig.setColorUI(schedule.lightText ? UIConfig.LIGHT : UIConfig.DARK);
     }
 

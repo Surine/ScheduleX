@@ -2,10 +2,7 @@ package cn.surine.schedulex.ui.schedule;
 
 import android.annotation.SuppressLint;
 import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
-import android.os.Handler;
 import android.text.TextUtils;
-import android.view.Gravity;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.PopupWindow;
@@ -32,6 +29,7 @@ import cn.surine.schedulex.base.utils.Drawables;
 import cn.surine.schedulex.base.utils.InstanceFactory;
 import cn.surine.schedulex.base.utils.MySeekBarChangeListener;
 import cn.surine.schedulex.base.utils.Prefs;
+import cn.surine.schedulex.base.utils.StatusBars;
 import cn.surine.schedulex.base.utils.Toasts;
 import cn.surine.schedulex.base.utils.Uis;
 import cn.surine.schedulex.data.entity.Course;
@@ -57,8 +55,6 @@ public class ScheduleFragment extends BaseBindingFragment<FragmentScheduleBindin
     private Schedule curSchedule;
     private int curViewPagerPosition;
     private PopupWindow popupWindow;
-    private Handler handler = new Handler();
-    private Runnable runnable;
 
     @Override
     public int layoutId() {
@@ -118,33 +114,28 @@ public class ScheduleFragment extends BaseBindingFragment<FragmentScheduleBindin
         t.viewpager.setPageTransformer(new ZoomOutPageTransformer());
 
         t.curWeekTv.setOnClickListener(v -> {
-            View view = Uis.inflate(activity(),R.layout.view_change_week_quickly);
-            popupWindow = new PopupWindow(view, Uis.dip2px(activity(),200), WindowManager.LayoutParams.WRAP_CONTENT);
+            View view = Uis.inflate(activity(), R.layout.view_change_week_quickly);
+            popupWindow = new PopupWindow(view, Uis.dip2px(activity(), 200), WindowManager.LayoutParams.WRAP_CONTENT);
             //设置外面可触
             popupWindow.setOutsideTouchable(true);
             //设置可触
             popupWindow.setFocusable(false);
-            popupWindow.setBackgroundDrawable(Drawables.getDrawable(Color.WHITE,180,0,Color.WHITE));
+            popupWindow.setBackgroundDrawable(Drawables.getDrawable(Color.WHITE, 180, 0, Color.WHITE));
             popupWindow.setTouchable(true);
             popupWindow.setElevation(8F);
-            popupWindow.showAsDropDown(t.curWeekTv,20,30);
+            popupWindow.showAsDropDown(t.curWeekTv, 20, 30);
 
             SeekBar seekBar = view.findViewById(R.id.seekBar);
             TextView weekTv = view.findViewById(R.id.weekText);
             seekBar.setMax(curSchedule.totalWeek);
             seekBar.setProgress(curViewPagerPosition);
             weekTv.setText(String.valueOf(curViewPagerPosition + 1));
-            seekBar.setOnSeekBarChangeListener(new MySeekBarChangeListener(){
+            seekBar.setOnSeekBarChangeListener(new MySeekBarChangeListener() {
                 @Override
                 public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
                     super.onProgressChanged(seekBar, progress, fromUser);
                     weekTv.setText(String.valueOf(progress + 1));
                     t.viewpager.setCurrentItem(progress);
-                    if(popupWindow != null && popupWindow.isShowing()){
-                        handler.removeCallbacks(runnable);
-                        runnable = () -> popupWindow.dismiss();
-                        handler.postDelayed(runnable,2000);
-                    }
                 }
             });
         });
@@ -199,11 +190,9 @@ public class ScheduleFragment extends BaseBindingFragment<FragmentScheduleBindin
 
 
     @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        if(handler != null){
-            handler.removeCallbacks(runnable);
-            handler = null;
+    protected void statusBarUi() {
+        if (curSchedule != null) {
+            StatusBars.setStatusBarUI(activity(), !curSchedule.lightText);
         }
     }
 }
