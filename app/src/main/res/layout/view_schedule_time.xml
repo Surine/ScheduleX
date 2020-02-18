@@ -10,7 +10,7 @@
     android:paddingBottom="@dimen/dp16">
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/dialog_title"
         style="@style/textview_title_style"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -64,7 +64,7 @@
         android:layout_marginTop="@dimen/dp32"
         app:layout_constraintEnd_toStartOf="@+id/guideline39"
         app:layout_constraintStart_toStartOf="@+id/guideline18"
-        app:layout_constraintTop_toBottomOf="@+id/textView2" />
+        app:layout_constraintTop_toBottomOf="@+id/dialog_title" />
 
     <TextView
         android:id="@+id/tvS1"

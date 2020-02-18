@@ -58,6 +58,8 @@
         https://github.com/tbruyelle/RxPermissions\n\n
         AndroidDonate\n
         https://github.com/didikee/AndroidDonate\n\n
+        MaterialIntroView\n
+        https://github.com/xiangzhihong/MaterialIntroView-master\n\n
     </string>
     <string name="week_info">Week Info</string>
     <string name="background">Background</string>
@@ -121,7 +123,7 @@
     <string name="my_qrcode">My QRCode</string>
     <string name="export_json">Export Json</string>
     <string name="parse_fail">Parsing failed, please select a course file</string>
-    <string name="first_toast">Try swiping left or right to switch the week ~ Click on the small smiley title to return to the current week!</string>
+    <string name="first_toast">Swipe left or right on the main interface or click on the week display text to quickly switch the week.</string>
     <string name="white_txt">White text</string>
     <string name="black_txt">Black text</string>
     <string name="ready_to_fetch_course">getting class schedule……</string>
@@ -143,4 +145,5 @@
     <string name="is_show_week">Whether to show weekend</string>
     <string name="not_show_weekend">Not show weekend</string>
     <string name="show_weekend">Show weekend</string>
+    <string name="nothing_to_show">You do n’t see anything like this! o (.﹏.) o</string>
 </resources>

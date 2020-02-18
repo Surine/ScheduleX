@@ -102,7 +102,7 @@
     <string name="my_qrcode">我的二维码</string>
     <string name="export_json">导出Json</string>
     <string name="parse_fail">解析失败,请选择课程文件</string>
-    <string name="first_toast">试试左右滑动切换周吧~ 点击标题小表情可以回到当前周哦！</string>
+    <string name="first_toast">主界面左右滑动或者点击周显示文字都可以快速切换周哦！</string>
     <string name="black_txt">黑色文字</string>
     <string name="white_txt">白色文字</string>
     <string name="ready_to_fetch_course">正在获取课表……</string>
@@ -124,4 +124,5 @@
     <string name="show_weekend">当前展示周末</string>
     <string name="not_show_weekend">当前不展示周末</string>
     <string name="is_show_week">是否显示周末</string>
+    <string name="nothing_to_show">你这个样子，啥也看不见啊！o(。﹏ 。)o</string>
 </resources>

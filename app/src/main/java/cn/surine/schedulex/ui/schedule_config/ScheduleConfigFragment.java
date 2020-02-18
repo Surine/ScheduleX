@@ -148,12 +148,60 @@ public class ScheduleConfigFragment extends BaseBindingFragment<FragmentSchedule
             t.showWeekSubTitle.setText(schedule.isShowWeekend ? R.string.show_weekend : R.string.not_show_weekend);
         });
 
+        t.scheduleCourseAlphaItem.setOnClickListener(v -> showCourseItemAlphaDialog());
+
 
 
         Bundle bundle = new Bundle();
         bundle.putInt(SCHEDULE_ID, scheduleId);
         t.export.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.action_scheduleConfigFragment_to_scheduleDataExport, bundle));
 
+    }
+
+
+    /**
+     * 课程卡片透明度
+     * */
+    @SuppressLint("SetTextI18n")
+    private void showCourseItemAlphaDialog() {
+        BottomSheetDialog bt = new BottomSheetDialog(activity());
+        View view;
+        bt.setContentView(view = Uis.inflate(activity(), R.layout.view_schedule_time));
+        bt.getWindow().findViewById(R.id.design_bottom_sheet).setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        bt.show();
+        view.animate().translationY(50);
+
+        TextView tv = view.findViewById(R.id.dialog_title);
+        SeekBar s1 = view.findViewById(R.id.seekBar);
+        SeekBar s2 = view.findViewById(R.id.seekBar2);
+        TextView t1 = view.findViewById(R.id.tvS1);
+        TextView t2 = view.findViewById(R.id.tvS2);
+        Button button = view.findViewById(R.id.button);
+
+        tv.setText("配置透明度");
+        s2.setVisibility(View.GONE);
+        t2.setVisibility(View.GONE);
+
+
+        s1.setMax(10);
+        s1.setProgress(schedule.alphaForCourseItem);
+        t1.setText("L"+schedule.alphaForCourseItem);
+        s1.setOnSeekBarChangeListener(new MySeekBarChangeListener(){
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                t1.setText("L"+progress);
+            }
+        });
+        button.setOnClickListener(v -> {
+            if(s1.getProgress() == 0){
+                Toasts.toast(getString(R.string.nothing_to_show));
+            }else{
+                schedule.alphaForCourseItem = s1.getProgress();
+                globalT.scheduleCourseAlphaSubTitle.setText("L"+s1.getProgress());
+                scheduleViewModel.updateSchedule(schedule);
+                bt.dismiss();
+            }
+        });
     }
 
 

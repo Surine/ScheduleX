@@ -9,7 +9,7 @@
     android:paddingBottom="@dimen/dp16">
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/dialog_title"
         style="@style/textview_title_style"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -25,8 +25,8 @@
         app:chipSpacingHorizontal="@dimen/dp25"
         app:chipSpacingVertical="@dimen/dp10"
         app:layout_constraintEnd_toStartOf="@+id/guideline19"
-        app:layout_constraintStart_toStartOf="@+id/textView2"
-        app:layout_constraintTop_toBottomOf="@+id/textView2" />
+        app:layout_constraintStart_toStartOf="@+id/dialog_title"
+        app:layout_constraintTop_toBottomOf="@+id/dialog_title" />
 
     <Button
         android:id="@+id/button"

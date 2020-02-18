@@ -350,7 +350,8 @@ public class AddCourseFragment extends BaseBindingFragment<FragmentAddCourseBind
 
     @Override
     public void onBackPressed() {
-        if (course != null) {
+        boolean condition = Strs.isNotEmpty(course.coureName) || Strs.isNotEmpty(course.classWeek) || Strs.isNotEmpty(course.classDay) || Strs.isNotEmpty(course.classSessions) || Strs.isNotEmpty(course.continuingSession);
+        if (condition) {
             Snackbar.make(getView(), getString(R.string.snack_course_edit), Snackbar.LENGTH_LONG).setAction(R.string.btn_ok, v -> NavHostFragment.findNavController(AddCourseFragment.this).navigateUp()).show();
         } else {
             super.onBackPressed();

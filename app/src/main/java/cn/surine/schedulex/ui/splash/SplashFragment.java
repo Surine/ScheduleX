@@ -42,7 +42,9 @@ public class SplashFragment extends BaseFragment {
     @Override
     public void onStop() {
         super.onStop();
-        mHandler.removeCallbacks(runnable);
-        mHandler = null;
+        if(mHandler != null){
+            mHandler.removeCallbacks(runnable);
+            mHandler = null;
+        }
     }
 }

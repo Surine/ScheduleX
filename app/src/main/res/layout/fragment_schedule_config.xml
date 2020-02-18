@@ -106,15 +106,18 @@
 
         <ScrollView
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
+            android:scrollbars="none"
             app:layout_constraintEnd_toStartOf="@+id/guideline22"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginBottom="@dimen/dp24"
             app:layout_constraintStart_toStartOf="@+id/guideline21"
             app:layout_constraintTop_toTopOf="@+id/guideline29">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
                 <LinearLayout
                     android:id="@+id/linearLayout4"
                     android:layout_width="match_parent"
@@ -394,11 +397,52 @@
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
 
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/scheduleCourseAlphaItem"
+                        style="@style/setting_item_ui">
+
+                        <TextView
+                            android:id="@+id/scheduleCourseAlphaTitle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/dp8"
+                            android:layout_marginTop="@dimen/dp8"
+                            android:text="课程卡片透明度"
+                            android:textColor="@android:color/black"
+                            android:textSize="18sp"
+                            android:textStyle="bold"
+                            app:layout_constraintLeft_toLeftOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+
+                        <TextView
+                            android:id="@+id/scheduleCourseAlphaSubTitle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/dp8"
+                            android:layout_marginBottom="@dimen/dp16"
+                            android:text="@{data.getAlphaForCourseItemText()}"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toStartOf="@+id/scheduleCourseAlphaTitle"
+                            app:layout_constraintTop_toBottomOf="@+id/scheduleCourseAlphaTitle" />
+
+                        <ImageView
+                            android:id="@+id/scheduleCourseAlphaIm"
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:layout_marginEnd="8dp"
+                            app:layout_constraintBottom_toBottomOf="@+id/scheduleCourseAlphaSubTitle"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="@+id/scheduleCourseAlphaTitle"
+                            app:srcCompat="@mipmap/ic_more" />
+
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
                 </LinearLayout>
             </androidx.constraintlayout.widget.ConstraintLayout>
-
         </ScrollView>
-
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

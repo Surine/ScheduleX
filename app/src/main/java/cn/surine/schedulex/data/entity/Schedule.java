@@ -68,7 +68,7 @@ public class Schedule extends BaseVm {
     /**
      * 课程格子不透明度
      * */
-    public int alphaForCourseItem = 100;
+    public int alphaForCourseItem = 10;
 
 
     @SuppressLint("StringFormatMatches")
@@ -79,6 +79,11 @@ public class Schedule extends BaseVm {
     @SuppressLint({"StringFormatInvalid", "StringFormatMatches"})
     public String getCurWeekStr() {
         return App.context.getString(R.string.current_week,curWeek());
+    }
+
+
+    public String getAlphaForCourseItemText(){
+        return "L"+alphaForCourseItem;
     }
 
 

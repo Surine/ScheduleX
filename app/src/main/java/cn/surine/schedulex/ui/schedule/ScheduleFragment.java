@@ -41,6 +41,9 @@ import cn.surine.schedulex.ui.timer.TimerRepository;
 import cn.surine.schedulex.ui.timer.TimerViewModel;
 import cn.surine.schedulex.ui.view.custom.helper.CommonDialogs;
 import cn.surine.schedulex.ui.view.custom.helper.ZoomOutPageTransformer;
+import co.mobiwise.materialintro.shape.Focus;
+import co.mobiwise.materialintro.shape.FocusGravity;
+import co.mobiwise.materialintro.view.MaterialIntroView;
 
 /**
  * Intro：
@@ -69,7 +72,17 @@ public class ScheduleFragment extends BaseBindingFragment<FragmentScheduleBindin
         globalT = t;
 
         if (!Prefs.getBoolean(Constants.IS_FIRST, false)) {
-            CommonDialogs.getCommonDialog(activity(), getString(R.string.warning), getString(R.string.first_toast), null, null).show();
+            new MaterialIntroView.Builder(activity())
+                    .enableDotAnimation(true)
+                    .enableIcon(false)
+                    .setFocusGravity(FocusGravity.CENTER)
+                    .setFocusType(Focus.MINIMUM)
+                    .setDelayMillis(500)
+                    .enableFadeAnimation(true)
+                    .performClick(true)
+                    .setInfoText(getString(R.string.first_toast))
+                    .setTarget(t.curWeekTv)
+                    .show();
             Prefs.save(Constants.IS_FIRST, true);
         }
 
@@ -100,7 +113,9 @@ public class ScheduleFragment extends BaseBindingFragment<FragmentScheduleBindin
             List<Course> dbData = courseViewModel.queryCourseByWeek(i + 1, curSchedule.roomId);
             List<BCourse> bCourseList = new ArrayList<>();
             for (Course course : dbData) {
-                bCourseList.add(DataMaps.dataMappingByCourse(course));
+                BCourse bCourse = DataMaps.dataMappingByCourse(course);
+                bCourse.setColor("#"+Integer.toHexString(Uis.getColorWithAlpha(curSchedule.alphaForCourseItem / 10F,Color.parseColor(bCourse.getColor()))));
+                bCourseList.add(bCourse);
             }
             handleCourseList.add(bCourseList);
         }

@@ -84,16 +84,6 @@ public class BindingAdapters {
     }
 
 
-    /**
-     * 给课程添加背景
-     */
-    @androidx.databinding.BindingAdapter("courseItemCardBackground")
-    public static void courseItemCardBackground(LinearLayout linearLayout, String color) {
-        if (color != null && !TextUtils.isEmpty(color)) {
-            linearLayout.setBackground(Drawables.getDrawable(Color.parseColor(color), 20, 5, Color.WHITE));
-        }
-    }
-
 
     /**
      * 给image设置背景（使用glide）
