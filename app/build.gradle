@@ -65,10 +65,10 @@ dependencies {
 
 
     //Jetpack framework
-    implementation 'androidx.navigation:navigation-fragment:2.2.0'
-    implementation 'androidx.navigation:navigation-ui:2.2.0'
+    implementation 'androidx.navigation:navigation-fragment:2.2.1'
+    implementation 'androidx.navigation:navigation-ui:2.2.1'
     implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0'
-    implementation 'androidx.lifecycle:lifecycle-viewmodel-savedstate:1.0.0'
+    implementation 'androidx.lifecycle:lifecycle-viewmodel-savedstate:2.2.0'
     implementation "androidx.room:room-runtime:2.2.3"
     // miss the bottom line will cause : java.lang.RuntimeException: cannot find implementation for AppDatabase. AppDatabase_Impl does not exist
     annotationProcessor 'android.arch.persistence.room:compiler:1.1.1'
