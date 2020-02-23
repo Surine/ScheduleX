@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Schedule X</string>
+    <string name="app_name" translatable="false">Schedule X</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="welcome">Welcome</string>
@@ -146,4 +146,7 @@
     <string name="not_show_weekend">Not show weekend</string>
     <string name="show_weekend">Show weekend</string>
     <string name="nothing_to_show">You do n’t see anything like this! o (.﹏.) o</string>
+    <string name="course_card_alpha">Course Card Transparency</string>
+    <string name="course_item_height">Course Item height</string>
+    <string name="max_session">maximum sessions</string>
 </resources>

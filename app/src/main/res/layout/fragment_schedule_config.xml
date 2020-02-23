@@ -407,7 +407,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginStart="@dimen/dp8"
                             android:layout_marginTop="@dimen/dp8"
-                            android:text="课程卡片透明度"
+                            android:text="@string/course_card_alpha"
                             android:textColor="@android:color/black"
                             android:textSize="18sp"
                             android:textStyle="bold"
@@ -436,6 +436,90 @@
                             app:layout_constraintTop_toTopOf="@+id/scheduleCourseAlphaTitle"
                             app:srcCompat="@mipmap/ic_more" />
 
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/scheduleMaxSessionItem"
+                        style="@style/setting_item_ui">
+
+                        <TextView
+                            android:id="@+id/scheduleMaxSessionTitle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/dp8"
+                            android:layout_marginTop="@dimen/dp8"
+                            android:text="@string/max_session"
+                            android:textColor="@android:color/black"
+                            android:textSize="18sp"
+                            android:textStyle="bold"
+                            app:layout_constraintLeft_toLeftOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+
+                        <TextView
+                            android:id="@+id/scheduleMaxSessionSubtitle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/dp8"
+                            android:layout_marginBottom="@dimen/dp16"
+                            android:text="@{data.getAlphaForCourseItemText()}"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toStartOf="@+id/scheduleMaxSessionTitle"
+                            app:layout_constraintTop_toBottomOf="@+id/scheduleMaxSessionTitle" />
+
+                        <ImageView
+                            android:id="@+id/scheduleMaxSessionIcon"
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:layout_marginEnd="8dp"
+                            app:layout_constraintBottom_toBottomOf="@+id/scheduleMaxSessionSubtitle"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="@+id/scheduleMaxSessionTitle"
+                            app:srcCompat="@mipmap/ic_more" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/scheduleCourseItemHeightItem"
+                        style="@style/setting_item_ui">
+
+                        <TextView
+                            android:id="@+id/scheduleCourseItemHeightTitle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/dp8"
+                            android:layout_marginTop="@dimen/dp8"
+                            android:text="@string/course_item_height"
+                            android:textColor="@android:color/black"
+                            android:textSize="18sp"
+                            android:textStyle="bold"
+                            app:layout_constraintLeft_toLeftOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+
+                        <TextView
+                            android:id="@+id/scheduleCourseItemHeightSubtitle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/dp8"
+                            android:layout_marginBottom="@dimen/dp16"
+                            android:text="@{data.getAlphaForCourseItemText()}"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toStartOf="@+id/scheduleCourseItemHeightTitle"
+                            app:layout_constraintTop_toBottomOf="@+id/scheduleCourseItemHeightTitle" />
+
+                        <ImageView
+                            android:id="@+id/scheduleCourseItemHeightIcon"
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:layout_marginEnd="8dp"
+                            app:layout_constraintBottom_toBottomOf="@+id/scheduleCourseItemHeightSubtitle"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="@+id/scheduleCourseItemHeightTitle"
+                            app:srcCompat="@mipmap/ic_more" />
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
 

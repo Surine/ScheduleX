@@ -1,0 +1,191 @@
+{
+  "formatVersion": 1,
+  "database": {
+    "version": 2,
+    "identityHash": "b516c8622492a568ba5ce4fe8a1d1942",
+    "entities": [
+      {
+        "tableName": "Course",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` TEXT NOT NULL, `coureNumber` TEXT, `coureName` TEXT, `teacherName` TEXT, `classWeek` TEXT, `classDay` TEXT, `classSessions` TEXT, `continuingSession` TEXT, `weekDescription` TEXT, `campusName` TEXT, `teachingBuildingName` TEXT, `classroomName` TEXT, `coursePropertiesName` TEXT, `xf` TEXT, `scheduleId` INTEGER NOT NULL, `color` TEXT, PRIMARY KEY(`id`))",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "coureNumber",
+            "columnName": "coureNumber",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "coureName",
+            "columnName": "coureName",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "teacherName",
+            "columnName": "teacherName",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "classWeek",
+            "columnName": "classWeek",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "classDay",
+            "columnName": "classDay",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "classSessions",
+            "columnName": "classSessions",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "continuingSession",
+            "columnName": "continuingSession",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "weekDescription",
+            "columnName": "weekDescription",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "campusName",
+            "columnName": "campusName",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "teachingBuildingName",
+            "columnName": "teachingBuildingName",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "classroomName",
+            "columnName": "classroomName",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "coursePropertiesName",
+            "columnName": "coursePropertiesName",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "xf",
+            "columnName": "xf",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "scheduleId",
+            "columnName": "scheduleId",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "color",
+            "columnName": "color",
+            "affinity": "TEXT",
+            "notNull": false
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "id"
+          ],
+          "autoGenerate": false
+        },
+        "indices": [],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "Schedule",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`roomId` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `name` TEXT, `totalWeek` INTEGER NOT NULL, `termStartDate` TEXT, `color` TEXT, `imageUrl` TEXT, `lightText` INTEGER NOT NULL, `isShowWeekend` INTEGER NOT NULL, `alphaForCourseItem` INTEGER NOT NULL)",
+        "fields": [
+          {
+            "fieldPath": "roomId",
+            "columnName": "roomId",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "name",
+            "columnName": "name",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "totalWeek",
+            "columnName": "totalWeek",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "termStartDate",
+            "columnName": "termStartDate",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "color",
+            "columnName": "color",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "imageUrl",
+            "columnName": "imageUrl",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "lightText",
+            "columnName": "lightText",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "isShowWeekend",
+            "columnName": "isShowWeekend",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "alphaForCourseItem",
+            "columnName": "alphaForCourseItem",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "roomId"
+          ],
+          "autoGenerate": true
+        },
+        "indices": [],
+        "foreignKeys": []
+      }
+    ],
+    "setupQueries": [
+      "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, \"b516c8622492a568ba5ce4fe8a1d1942\")"
+    ]
+  }
+}

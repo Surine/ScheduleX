@@ -125,4 +125,7 @@
     <string name="not_show_weekend">当前不展示周末</string>
     <string name="is_show_week">是否显示周末</string>
     <string name="nothing_to_show">你这个样子，啥也看不见啊！o(。﹏ 。)o</string>
+    <string name="course_card_alpha">课程卡片透明度</string>
+    <string name="course_item_height">课程格子高度</string>
+    <string name="max_session">最大节次</string>
 </resources>
