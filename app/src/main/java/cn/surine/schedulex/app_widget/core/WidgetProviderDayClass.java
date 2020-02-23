@@ -14,19 +14,23 @@ import cn.surine.schedulex.app_widget.data.Actions;
 import cn.surine.schedulex.base.Constants;
 import cn.surine.schedulex.base.utils.Prefs;
 import cn.surine.schedulex.ui.MainActivity;
+
 public class WidgetProviderDayClass extends AppWidgetProvider {
     private static int CURRENT;
 
     @Override
     public void onReceive(Context context, Intent intent) {
+        super.onReceive(context, intent);
         AppWidgetManager am = AppWidgetManager.getInstance(context);
         int[] appWidgetIds = am.getAppWidgetIds(new ComponentName(context, WidgetProviderDayClass.class));
-
         for (int i = 0; i < appWidgetIds.length; i++) {
-            updateUi(context,am,appWidgetIds[i]);
+            if (Actions.NEXT_DAY.equals(intent.getAction())) {
+                Prefs.save(Constants.NEXT_DAY_STATUS+appWidgetIds[i], true);
+            } else if (Actions.PREVIOUS_DAY.equals(intent.getAction())) {
+                Prefs.save(Constants.NEXT_DAY_STATUS+appWidgetIds[i], false);
+            }
+            updateUi(context, am, appWidgetIds[i]);
         }
-
-        am.notifyAppWidgetViewDataChanged(appWidgetIds, R.id.listview);
     }
 
     @Override
@@ -64,12 +68,9 @@ public class WidgetProviderDayClass extends AppWidgetProvider {
     }
 
     private void configNextDayCourse(RemoteViews remoteViews, int i, Context context) {
-        StringBuilder sb = new StringBuilder();
-        sb.append(Constants.NEXT_DAY_STATUS);
-        sb.append(i);
-        boolean z = Prefs.getBoolean(sb.toString(), false);
+        boolean isNextDay = Prefs.getBoolean(Constants.NEXT_DAY_STATUS + i, false);
         Intent intent = new Intent(context, WidgetProviderDayClass.class);
-        if (!z) {
+        if (!isNextDay) {
             remoteViews.setImageViewResource(R.id.widget_day_class_next_day, R.drawable.ic_keyboard_arrow_right_black_24dp);
             intent.setAction(Actions.NEXT_DAY);
         } else {

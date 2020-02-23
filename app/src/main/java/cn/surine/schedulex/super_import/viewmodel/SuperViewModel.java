@@ -25,7 +25,7 @@ public class SuperViewModel extends ViewModel {
     public TextWatcher accountWatcher = new SimpleTextWatcher() {
         @Override
         public void afterTextChanged(Editable editable) {
-            SuperViewModel.this.account.setValue(editable.toString());
+            account.setValue(editable.toString());
         }
     };
     public MutableLiveData<Integer> getCourseStatus = new MutableLiveData<>();
@@ -34,59 +34,59 @@ public class SuperViewModel extends ViewModel {
     public TextWatcher passwordWatcher = new SimpleTextWatcher() {
         @Override
         public void afterTextChanged(Editable editable) {
-            SuperViewModel.this.password.setValue(editable.toString());
+            password.setValue(editable.toString());
         }
     };
     public MutableLiveData<SuperCourseList> superCourseList;
     private SuperResository superResository;
 
-    public SuperViewModel(SuperResository superResository2) {
-        this.superResository = superResository2;
+    public SuperViewModel(SuperResository superResository) {
+        this.superResository = superResository;
         this.superCourseList = new MutableLiveData<>();
-        if (this.superCourseList.getValue() == null) {
-            this.superCourseList.setValue(new SuperCourseList());
+        if (superCourseList.getValue() == null) {
+            superCourseList.setValue(new SuperCourseList());
         }
     }
 
     public SuperCourseList getSuperCourseList() {
-        return this.superCourseList.getValue();
+        return superCourseList.getValue();
     }
 
     public void login() {
-        if (!TextUtils.isEmpty(this.account.getValue()) && !TextUtils.isEmpty((CharSequence) this.password.getValue())) {
-            this.loginStatus.setValue(Integer.valueOf(0));
-            this.superResository.loginSuper(this.account.getValue(), (String) this.password.getValue()).subscribe(new BaseHttpSubscriber<SuperBaseModel<User>>() {
+        if (!TextUtils.isEmpty(account.getValue()) && !TextUtils.isEmpty(password.getValue())) {
+            loginStatus.setValue(START_LOGIN);
+            superResository.loginSuper(account.getValue(), password.getValue()).subscribe(new BaseHttpSubscriber<SuperBaseModel<User>>() {
                 @Override
                 public void onSuccess(MutableLiveData<SuperBaseModel<User>> mutableLiveData) {
                     if (mutableLiveData.getValue().status == 1) {
-                        SuperViewModel.this.loginStatus.setValue(Integer.valueOf(1));
+                        loginStatus.setValue(LOGIN_SUCCESS);
                     } else {
-                        SuperViewModel.this.loginStatus.setValue(Integer.valueOf(2));
+                        loginStatus.setValue(LOGIN_FAIL);
                     }
                 }
 
                 @Override
                 public void onFail(Throwable th) {
                     super.onFail(th);
-                    SuperViewModel.this.loginStatus.setValue(Integer.valueOf(2));
+                    loginStatus.setValue(LOGIN_FAIL);
                 }
             });
         }
     }
 
     public void getCourseList(int i, int i2) {
-        this.getCourseStatus.setValue(Integer.valueOf(0));
-        this.superResository.getCourseList(i, i2).subscribe(new BaseHttpSubscriber<SuperBaseModel<SuperCourseList>>() {
+        getCourseStatus.setValue(START_FETCH);
+        superResository.getCourseList(i, i2).subscribe(new BaseHttpSubscriber<SuperBaseModel<SuperCourseList>>() {
             @Override
-            public void onSuccess(MutableLiveData<SuperBaseModel<SuperCourseList>> mutableLiveData) throws Exception {
+            public void onSuccess(MutableLiveData<SuperBaseModel<SuperCourseList>> mutableLiveData) {
                 SuperViewModel.this.superCourseList.setValue((mutableLiveData.getValue()).data);
-                SuperViewModel.this.getCourseStatus.setValue(Integer.valueOf(1));
+                SuperViewModel.this.getCourseStatus.setValue(FETCH_SUCCESS);
             }
 
             @Override
             public void onFail(Throwable th) {
                 super.onFail(th);
-                SuperViewModel.this.getCourseStatus.setValue(Integer.valueOf(2));
+                SuperViewModel.this.getCourseStatus.setValue(FETCH_FAIL);
             }
         });
     }

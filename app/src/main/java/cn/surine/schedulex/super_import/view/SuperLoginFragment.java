@@ -8,6 +8,7 @@ import android.text.TextUtils;
 import androidx.lifecycle.ViewModelProviders;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 import java.util.UUID;
 
@@ -81,8 +82,8 @@ public class SuperLoginFragment extends BaseBindingFragment<FragmentLoginSuperBi
                     String str = ScheduleInitFragment.SCHEDULE_NAME;
                     if (!TextUtils.isEmpty(arguments.getString(str))) {
                         scheduleId = scheduleViewModel.addSchedule(getArguments().getString(str), 24, 1);
-                        Prefs.save(Constants.CUR_SCHEDULE, Long.valueOf(scheduleId));
-                        ArrayList arrayList = new ArrayList();
+                        Prefs.save(Constants.CUR_SCHEDULE, scheduleId);
+                        List<Course> courseList = new ArrayList();
                         for (SuperCourse superCourse : superViewModel.getSuperCourseList().lessonList) {
                             Course course = new Course();
                             course.scheduleId = scheduleId;
@@ -112,14 +113,14 @@ public class SuperLoginFragment extends BaseBindingFragment<FragmentLoginSuperBi
                                 sb2.replace(parseInt2 - 1, parseInt2, String.valueOf(1));
                             }
                             course.classWeek = sb2.toString();
-                            arrayList.add(course);
+                            courseList.add(course);
                         }
-                        courseViewModel.saveCourseByDb(arrayList, scheduleId);
+                        courseViewModel.saveCourseByDb(courseList, scheduleId);
                         Navigations.open(SuperLoginFragment.this, R.id.scheduleFragment);
                     }
+                }else{
+                    Toasts.toast(getString(R.string.arg_exception));
                 }
-                Toasts.toast(getString(R.string.arg_exception));
-                return;
             } else if (num == SuperViewModel.FETCH_FAIL) {
                 dialog.dismiss();
                 Toasts.toast(getString(R.string.fetch_fail_please_retry));
