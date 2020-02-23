@@ -4,6 +4,7 @@ import android.os.Build;
 import android.os.Build.VERSION;
 import android.os.Bundle;
 import java.util.HashMap;
+import java.util.Map;
 
 import cn.surine.schedulex.base.controller.AbstractSingleTon;
 import cn.surine.schedulex.base.controller.BaseRepository;
@@ -19,25 +20,25 @@ public class SuperResository extends BaseRepository {
     };
 
     public Flowable<SuperBaseModel<User>> loginSuper(String str, String str2) {
-        HashMap hashMap = new HashMap();
+        Map<String,Object> hashMap = new HashMap(9);
         hashMap.put("account", SuperUtil.encrypt(str));
         hashMap.put("password", SuperUtil.encrypt(str2));
-        hashMap.put("platform", Integer.valueOf(1));
-        hashMap.put("phoneVersion", Integer.valueOf(VERSION.SDK_INT));
+        hashMap.put("platform", 1);
+        hashMap.put("phoneVersion", VERSION.SDK_INT);
         hashMap.put("phoneBrand", Build.BRAND);
         hashMap.put("versionNumber", "9.4.1");
         hashMap.put("phoneModel", Build.MODEL);
-        hashMap.put("updateInfo", Boolean.valueOf(false));
+        hashMap.put("updateInfo", Boolean.FALSE);
         hashMap.put("channel", "ppMarket");
         return SuperLoader.getInstance().getService().login(hashMap).compose(schedulerHelper());
     }
 
     public Flowable<SuperBaseModel<SuperCourseList>> getCourseList(int i, int i2) {
-        HashMap hashMap = new HashMap();
-        hashMap.put("beginYear", Integer.valueOf(i));
-        hashMap.put("term", Integer.valueOf(i2));
-        hashMap.put("platform", Integer.valueOf(1));
-        hashMap.put("phoneVersion", Integer.valueOf(VERSION.SDK_INT));
+        Map<String,Object> hashMap = new HashMap(7);
+        hashMap.put("beginYear", i);
+        hashMap.put("term", i2);
+        hashMap.put("platform", 1);
+        hashMap.put("phoneVersion", VERSION.SDK_INT);
         hashMap.put("phoneBrand", Build.BRAND);
         hashMap.put("versionNumber", "9.4.1");
         hashMap.put("phoneModel", Build.MODEL);

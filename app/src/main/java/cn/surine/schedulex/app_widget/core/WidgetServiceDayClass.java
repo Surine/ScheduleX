@@ -2,10 +2,12 @@ package cn.surine.schedulex.app_widget.core;
 
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 import android.widget.RemoteViews;
 import android.widget.RemoteViewsService;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import cn.surine.schedulex.R;
@@ -89,12 +91,14 @@ public class WidgetServiceDayClass extends RemoteViewsService {
             StringBuilder sb = new StringBuilder();
             sb.append(Constants.NEXT_DAY_STATUS);
             sb.append(this.mAppWidgetId);
-            //TODO: 更改
-//            int nextDay = Prefs.getBoolean(sb.toString(), false) ? Dates.getNextDay() : Dates.getWeekDay();
-            int nextDay = Prefs.getBoolean(sb.toString(), false) ? Dates.getWeekDay() : Dates.getWeekDay();
+            boolean isNextDay = Prefs.getBoolean(sb.toString(), false);
+            int today = Dates.getWeekDay();
+            int nextDay =  Dates.getWeekDay() + 1 % 7 == 0 ? 7 : Dates.getWeekDay() + 1 % 7 ;
+            int day = isNextDay ? nextDay : today;
+            Log.d("slw", "onDataSetChanged: "+today + "/" + nextDay);
             try {
                 Schedule curSchedule = WidgetServiceDayClass.this.scheduleRepository.getCurSchedule();
-                WidgetServiceDayClass.this.courseList = WidgetServiceDayClass.this.courseRepository.getTodayCourseListByScheduleId(nextDay, curSchedule.curWeek(), curSchedule.roomId);
+                WidgetServiceDayClass.this.courseList = WidgetServiceDayClass.this.courseRepository.getTodayCourseListByScheduleId(day, curSchedule.curWeek(), curSchedule.roomId);
             } catch (Exception e) {
                 e.printStackTrace();
             }

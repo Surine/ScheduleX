@@ -20,12 +20,11 @@ public class Dates {
 
     /**
      * 获取今天星期几的数字
-     * 0 = 星期日
+     * 周一1  周二2  …… 周日7
      */
     public static int getWeekDay() {
         Calendar cal = Calendar.getInstance();
         int day =  cal.get(Calendar.DAY_OF_WEEK);
-        //返回1的话就是周日,2是周一，3是周二，以此类推
         if(day == 1){
             return 7;
         }

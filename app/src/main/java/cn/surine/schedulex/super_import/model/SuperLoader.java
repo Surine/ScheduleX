@@ -4,7 +4,7 @@ import cn.surine.schedulex.base.http.Retrofits;
 
 public class SuperLoader {
     private static SuperLoader sLoader;
-    private SuperApi mService = ((SuperApi) Retrofits.getService(SuperApi.class));
+    private SuperApi mService = Retrofits.getService(SuperApi.class);
 
     public static synchronized SuperLoader getInstance() {
         SuperLoader superLoader;

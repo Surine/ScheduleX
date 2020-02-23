@@ -21,9 +21,12 @@ public class WidgetProviderDayClass extends AppWidgetProvider {
     public void onReceive(Context context, Intent intent) {
         AppWidgetManager am = AppWidgetManager.getInstance(context);
         int[] appWidgetIds = am.getAppWidgetIds(new ComponentName(context, WidgetProviderDayClass.class));
+
         for (int i = 0; i < appWidgetIds.length; i++) {
             updateUi(context,am,appWidgetIds[i]);
         }
+
+        am.notifyAppWidgetViewDataChanged(appWidgetIds, R.id.listview);
     }
 
     @Override
