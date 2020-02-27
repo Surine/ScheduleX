@@ -42,4 +42,5 @@
     <dimen name="widget_4">250dp</dimen>
     <dimen name="dp80">80dp</dimen>
     <dimen name="dp200">200dp</dimen>
+    <dimen name="dp280">280dp</dimen>
 </resources>

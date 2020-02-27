@@ -11,11 +11,12 @@
     <TextView
         android:id="@+id/courseName"
         style="@style/textview_title_style"
-        android:layout_width="wrap_content"
+        android:layout_width="@dimen/dp280"
         android:layout_height="wrap_content"
         android:layout_marginStart="28dp"
         android:layout_marginTop="48dp"
         android:text="Internet of Things"
+        app:layout_constraintHorizontal_bias="0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -139,4 +140,5 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         app:layout_constraintGuide_percent="0.93430656" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
