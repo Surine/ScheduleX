@@ -21,7 +21,7 @@ import cn.surine.schedulex.data.entity.Schedule;
  * @author sunliwei
  * @date 2020-01-16 20:53
  */
-@Database(entities = {Course.class, Schedule.class}, version = 2)
+@Database(entities = {Course.class, Schedule.class}, version = 3)
 public abstract class BaseAppDatabase extends RoomDatabase {
     private volatile static BaseAppDatabase instance;
 
@@ -31,7 +31,7 @@ public abstract class BaseAppDatabase extends RoomDatabase {
                 if (instance == null) {
                     instance = Room.databaseBuilder(context.getApplicationContext(), BaseAppDatabase.class, Constants.DB_NAME)
                             .allowMainThreadQueries()  //TODO：slw 主线程访问，不安全
-                            .addMigrations(mg_1_2)
+                            .addMigrations(mg_1_2,mg_2_3)
                             .build();
                 }
             }
@@ -45,6 +45,15 @@ public abstract class BaseAppDatabase extends RoomDatabase {
         public void migrate(@NonNull SupportSQLiteDatabase database) {
             database.execSQL("ALTER TABLE schedule ADD COLUMN isShowWeekend INTEGER NOT NULL DEFAULT 0 ");
             database.execSQL("ALTER TABLE schedule ADD COLUMN alphaForCourseItem INTEGER NOT NULL DEFAULT 10 ");
+        }
+    };
+
+
+    static final Migration mg_2_3 = new Migration(2,3) {
+        @Override
+        public void migrate(@NonNull SupportSQLiteDatabase database) {
+            database.execSQL("ALTER TABLE schedule ADD COLUMN maxSession INTEGER NOT NULL DEFAULT 12");
+            database.execSQL("ALTER TABLE schedule ADD COLUMN itemHeight INTEGER NOT NULL DEFAULT 60 ");
         }
     };
 

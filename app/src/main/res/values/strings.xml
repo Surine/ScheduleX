@@ -149,4 +149,5 @@
     <string name="course_card_alpha">Course Card Transparency</string>
     <string name="course_item_height">Course Item height</string>
     <string name="max_session">maximum sessions</string>
+    <string name="cant_small_than_30">Not less than 30</string>
 </resources>

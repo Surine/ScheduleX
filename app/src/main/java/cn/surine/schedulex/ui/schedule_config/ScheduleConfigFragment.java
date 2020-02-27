@@ -9,6 +9,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.text.TextUtils;
@@ -57,6 +58,7 @@ import static android.app.Activity.RESULT_OK;
  * @author sunliwei
  * @date 2020-01-30 15:23
  */
+@SuppressLint("SetTextI18n")
 public class ScheduleConfigFragment extends BaseBindingFragment<FragmentScheduleConfigBinding> {
 
 
@@ -148,14 +150,113 @@ public class ScheduleConfigFragment extends BaseBindingFragment<FragmentSchedule
             t.showWeekSubTitle.setText(schedule.isShowWeekend ? R.string.show_weekend : R.string.not_show_weekend);
         });
 
+        //打开透明度配置窗口
         t.scheduleCourseAlphaItem.setOnClickListener(v -> showCourseItemAlphaDialog());
 
+        //配置最大节次
+        t.scheduleMaxSessionItem.setOnClickListener(v -> showMaxSessionDialog());
+        //配置课表最大高度
+        t.scheduleCourseItemHeightItem.setOnClickListener(v -> showItemHeightDialog());
 
 
         Bundle bundle = new Bundle();
         bundle.putInt(SCHEDULE_ID, scheduleId);
         t.export.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.action_scheduleConfigFragment_to_scheduleDataExport, bundle));
 
+    }
+
+
+
+    /**
+     * 课表item高度
+     * */
+    private void showItemHeightDialog() {
+        BottomSheetDialog bt = new BottomSheetDialog(activity());
+        View view;
+        bt.setContentView(view = Uis.inflate(activity(), R.layout.view_schedule_time));
+        bt.getWindow().findViewById(R.id.design_bottom_sheet).setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        bt.show();
+        view.animate().translationY(50);
+
+        TextView tv = view.findViewById(R.id.dialog_title);
+        SeekBar s1 = view.findViewById(R.id.seekBar);
+        SeekBar s2 = view.findViewById(R.id.seekBar2);
+        TextView t1 = view.findViewById(R.id.tvS1);
+        TextView t2 = view.findViewById(R.id.tvS2);
+        Button button = view.findViewById(R.id.button);
+
+        tv.setText("配置课程格子高度");
+        s2.setVisibility(View.GONE);
+        t2.setVisibility(View.GONE);
+
+
+        s1.setMax(150);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            s1.setMin(30);
+        }
+        s1.setProgress(schedule.itemHeight);
+        t1.setText(schedule.itemHeight+"dp");
+        s1.setOnSeekBarChangeListener(new MySeekBarChangeListener(){
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                t1.setText(progress+"dp");
+            }
+        });
+        button.setOnClickListener(v -> {
+            if(s1.getProgress() < 30){
+                Toasts.toast(getString(R.string.cant_small_than_30));
+            }else{
+                schedule.itemHeight = s1.getProgress();
+                globalT.scheduleCourseItemHeightSubtitle.setText(s1.getProgress()+"px");
+                scheduleViewModel.updateSchedule(schedule);
+                bt.dismiss();
+            }
+        });
+    }
+
+
+    /**
+     * 最大节次
+     * */
+    private void showMaxSessionDialog() {
+        BottomSheetDialog bt = new BottomSheetDialog(activity());
+        View view;
+        bt.setContentView(view = Uis.inflate(activity(), R.layout.view_schedule_time));
+        bt.getWindow().findViewById(R.id.design_bottom_sheet).setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        bt.show();
+        view.animate().translationY(50);
+
+        TextView tv = view.findViewById(R.id.dialog_title);
+        SeekBar s1 = view.findViewById(R.id.seekBar);
+        SeekBar s2 = view.findViewById(R.id.seekBar2);
+        TextView t1 = view.findViewById(R.id.tvS1);
+        TextView t2 = view.findViewById(R.id.tvS2);
+        Button button = view.findViewById(R.id.button);
+
+        tv.setText("配置最大节次");
+        s2.setVisibility(View.GONE);
+        t2.setVisibility(View.GONE);
+
+
+        s1.setMax(20);
+        s1.setProgress(schedule.maxSession);
+        t1.setText(schedule.maxSession+"节");
+        s1.setOnSeekBarChangeListener(new MySeekBarChangeListener(){
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                t1.setText(progress+"节");
+            }
+        });
+        button.setOnClickListener(v -> {
+            if(s1.getProgress() == 0){
+                Toasts.toast(getString(R.string.param_is_illgal));
+            }else{
+                schedule.maxSession = s1.getProgress();
+                globalT.scheduleMaxSessionSubtitle.setText(s1.getProgress()+"节");
+                scheduleViewModel.updateSchedule(schedule);
+                bt.dismiss();
+            }
+        });
     }
 
 

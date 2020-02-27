@@ -463,7 +463,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/dp8"
                             android:layout_marginBottom="@dimen/dp16"
-                            android:text="@{data.getAlphaForCourseItemText()}"
+                            android:text="@{data.getMaxSessionItemText()}"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintStart_toStartOf="@+id/scheduleMaxSessionTitle"
                             app:layout_constraintTop_toBottomOf="@+id/scheduleMaxSessionTitle" />
@@ -476,7 +476,7 @@
                             app:layout_constraintBottom_toBottomOf="@+id/scheduleMaxSessionSubtitle"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintTop_toTopOf="@+id/scheduleMaxSessionTitle"
-                            app:srcCompat="@mipmap/ic_more" />
+                            app:srcCompat="@drawable/ic_format_list_numbered_black_24dp" />
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -506,7 +506,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/dp8"
                             android:layout_marginBottom="@dimen/dp16"
-                            android:text="@{data.getAlphaForCourseItemText()}"
+                            android:text="@{data.getItemSessionHeight()}"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintStart_toStartOf="@+id/scheduleCourseItemHeightTitle"
                             app:layout_constraintTop_toBottomOf="@+id/scheduleCourseItemHeightTitle" />
@@ -519,7 +519,7 @@
                             app:layout_constraintBottom_toBottomOf="@+id/scheduleCourseItemHeightSubtitle"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintTop_toTopOf="@+id/scheduleCourseItemHeightTitle"
-                            app:srcCompat="@mipmap/ic_more" />
+                            app:srcCompat="@drawable/ic_height_black_24dp" />
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
 

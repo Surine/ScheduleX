@@ -10,7 +10,7 @@ import android.graphics.Color;
 public class UIConfig {
 
     /*默认数据*/
-    private final int NORMAL_MAX_SECTION = 12;
+    private final int NORMAL_MAX_SECTION = 30;
     private final int NORMAL_MAX_CLASS_DAY = 7;
     private final int NORMAL_SECTION_HEIGHT = 200;
     private final int NORMAL_CHOOSE_WEEK_COLOR = Color.RED;
@@ -97,7 +97,7 @@ public class UIConfig {
      * @return UIConfig
      * */
     public UIConfig setSectionViewWidth(int sectionViewWidth) {
-        if(sectionViewWidth >= 20 && sectionViewWidth <= 100){
+        if(sectionViewWidth >= 20 && sectionViewWidth <= 200){
             this.sectionViewWidth = sectionViewWidth;
         }
         return this;
@@ -190,7 +190,7 @@ public class UIConfig {
      * @param maxSection 最大上课节次
      * */
     public UIConfig setMaxSection(int maxSection) {
-        //限制最大12 section
+        //限制最大 section
         if(maxSection <= NORMAL_MAX_SECTION){
             this.maxSection = maxSection;
         }
@@ -226,7 +226,7 @@ public class UIConfig {
      * */
     public UIConfig setSectionHeight(int sectionHeight) {
         //暂时限制宽高
-        if(sectionHeight >= 50 && sectionHeight < 500){
+        if(sectionHeight >= 30 && sectionHeight < 500){
             this.sectionHeight = sectionHeight;
         }
         return this;

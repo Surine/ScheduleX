@@ -2,7 +2,7 @@
   "formatVersion": 1,
   "database": {
     "version": 2,
-    "identityHash": "b516c8622492a568ba5ce4fe8a1d1942",
+    "identityHash": "fbbc6af8c42313d8812c72dc18fb1a0f",
     "entities": [
       {
         "tableName": "Course",
@@ -116,7 +116,7 @@
       },
       {
         "tableName": "Schedule",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`roomId` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `name` TEXT, `totalWeek` INTEGER NOT NULL, `termStartDate` TEXT, `color` TEXT, `imageUrl` TEXT, `lightText` INTEGER NOT NULL, `isShowWeekend` INTEGER NOT NULL, `alphaForCourseItem` INTEGER NOT NULL)",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`roomId` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `name` TEXT, `totalWeek` INTEGER NOT NULL, `termStartDate` TEXT, `color` TEXT, `imageUrl` TEXT, `lightText` INTEGER NOT NULL, `isShowWeekend` INTEGER NOT NULL, `alphaForCourseItem` INTEGER NOT NULL, `maxSession` INTEGER NOT NULL, `itemHeight` INTEGER NOT NULL)",
         "fields": [
           {
             "fieldPath": "roomId",
@@ -171,6 +171,18 @@
             "columnName": "alphaForCourseItem",
             "affinity": "INTEGER",
             "notNull": true
+          },
+          {
+            "fieldPath": "maxSession",
+            "columnName": "maxSession",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "itemHeight",
+            "columnName": "itemHeight",
+            "affinity": "INTEGER",
+            "notNull": true
           }
         ],
         "primaryKey": {
@@ -185,7 +197,7 @@
     ],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, \"b516c8622492a568ba5ce4fe8a1d1942\")"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, \"fbbc6af8c42313d8812c72dc18fb1a0f\")"
     ]
   }
 }

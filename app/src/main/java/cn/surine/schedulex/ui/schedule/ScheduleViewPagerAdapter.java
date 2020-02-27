@@ -1,6 +1,7 @@
 package cn.surine.schedulex.ui.schedule;
 
 import android.annotation.SuppressLint;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -55,17 +56,19 @@ public class ScheduleViewPagerAdapter extends RecyclerView.Adapter<ScheduleViewP
         if (schedule.isShowWeekend) {
             uiConfig.setMaxClassDay(7);
             uiConfig.setItemTextSize(12);
-            uiConfig.setSectionHeight(Uis.dip2px(App.context, 54));
             uiConfig.setItemTopMargin(5);
             uiConfig.setItemSideMargin(3);
+            uiConfig.setSectionViewWidth(0);
         } else {
             uiConfig.setMaxClassDay(5);
             uiConfig.setItemTextSize(14);
-            uiConfig.setSectionHeight(Uis.dip2px(App.context, 64));
             uiConfig.setItemTopMargin(10);
-            uiConfig.setItemSideMargin(12);
+            uiConfig.setItemSideMargin(8);
+            uiConfig.setSectionViewWidth(Uis.dip2px(App.context,45));
         }
         uiConfig.setShowCurWeekCourse(false);
+        uiConfig.setMaxSection(schedule.maxSession);
+        uiConfig.setSectionHeight(Uis.dip2px(App.context,schedule.itemHeight));
         uiConfig.setChooseWeekColor(App.context.getResources().getColor(R.color.colorPrimary));
         uiConfig.setColorUI(schedule.lightText ? UIConfig.LIGHT : UIConfig.DARK);
     }

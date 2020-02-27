@@ -128,4 +128,5 @@
     <string name="course_card_alpha">课程卡片透明度</string>
     <string name="course_item_height">课程格子高度</string>
     <string name="max_session">最大节次</string>
+    <string name="cant_small_than_30">不得小于30</string>
 </resources>

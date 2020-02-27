@@ -15,5 +15,6 @@
     <color name="main_text_color_dark">#ffffff</color>
     <color name="main_bg_color_light">#ffffff</color>
     <color name="main_bg_color_dark">#000000</color>
+    <color name="white_transparent">#D6FFFFFF</color>
 
 </resources>

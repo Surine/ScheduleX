@@ -285,13 +285,15 @@ public class CourseTableView extends LinearLayout {
             itemPosition = i;
             boolean isCurWeek;
             BCourse bCourse = mBcourses.get(i);
-            if(bCourse == null){
+            if(bCourse == null || bCourse.getSectionStart() > mUiConfig.getMaxSection() + 1){
                 continue;
             }
+
             //check the position
             if(bCourse.getSectionStart() + bCourse.getSectionContinue() > mUiConfig.getMaxSection() + 1){
-                throw new IllegalArgumentException("out of the section view limit");
+                bCourse.setSectionContinue(bCourse.getSectionContinue() - (mUiConfig.getMaxSection() + 1 - bCourse.getSectionStart()));
             }
+
             //is this week
             int thisDay = bCourse.getDay() - 1;
             RelativeLayout curDayLayout = layoutList.get(thisDay);
@@ -372,7 +374,7 @@ public class CourseTableView extends LinearLayout {
             }
             //check the position
             if(bCourse.getSectionStart() + bCourse.getSectionContinue() > mUiConfig.getMaxSection() + 1){
-                throw new IllegalArgumentException("out of the section view limit");
+                bCourse.setSectionContinue(bCourse.getSectionContinue() - (mUiConfig.getMaxSection() + 1 - bCourse.getSectionStart()));
             }
             //is this week
             int thisDay = bCourse.getDay() - 1;

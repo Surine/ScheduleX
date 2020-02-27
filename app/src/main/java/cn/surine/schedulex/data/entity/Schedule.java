@@ -66,9 +66,22 @@ public class Schedule extends BaseVm {
 
 
     /**
-     * 课程格子不透明度
+     * 课程格子不透明度1-10
      * */
     public int alphaForCourseItem = 10;
+
+
+
+    /**
+     * 最大节次
+     * */
+    public int maxSession = 12;
+
+
+    /**
+     * 课程高度
+     * */
+    public int itemHeight = 60;
 
 
     @SuppressLint("StringFormatMatches")
@@ -86,6 +99,14 @@ public class Schedule extends BaseVm {
         return "L"+alphaForCourseItem;
     }
 
+
+    public String getMaxSessionItemText(){
+        return maxSession +"节";
+    }
+
+    public String getItemSessionHeight(){
+        return itemHeight +"dp";
+    }
 
     public int curWeek(){
         return (Dates.getDateDif(Dates.getDate(Dates.yyyyMMdd),termStartDate) / 7) + 1;
