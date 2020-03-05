@@ -43,4 +43,11 @@
     <dimen name="dp80">80dp</dimen>
     <dimen name="dp200">200dp</dimen>
     <dimen name="dp280">280dp</dimen>
+    <dimen name="dp96">96dp</dimen>
+    <dimen name="dp108">108dp</dimen>
+    <dimen name="top_bar_height">80dp</dimen>
+    <dimen name="dp3">3dp</dimen>
+    <dimen name="t10">10sp</dimen>
+    <dimen name="dp120">120dp</dimen>
+    <dimen name="dp9">9dp</dimen>
 </resources>

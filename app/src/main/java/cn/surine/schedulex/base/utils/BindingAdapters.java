@@ -74,12 +74,12 @@ public class BindingAdapters {
      * 控制当前选中课表的一些元素显示与隐藏
      */
     @androidx.databinding.BindingAdapter("ctrlScheduleCardHelperElement")
-    public static void ctrlScheduleCardHelperElement(ImageView imageView, int id) {
+    public static void ctrlScheduleCardHelperElement(View view, int id) {
         long curScheduleId = Prefs.getLong(Constants.CUR_SCHEDULE, -1L);
         if (id == curScheduleId) {
-            imageView.setVisibility(View.VISIBLE);
+            view.setVisibility(View.VISIBLE);
         } else {
-            imageView.setVisibility(View.GONE);
+            view.setVisibility(View.GONE);
         }
     }
 

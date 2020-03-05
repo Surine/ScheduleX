@@ -179,7 +179,8 @@ public class AddCourseFragment extends BaseBindingFragment<FragmentAddCourseBind
 
 
     private void showPlanTime() {
-        BottomSheetDialog bt = new BottomSheetDialog(activity());
+        BottomSheetDialog bt = new BottomSheetDialog(activity(),R.style.BottomSheetDialogTheme);
+        bt.setDismissWithAnimation(true);
         View view;
         bt.setContentView(view = Uis.inflate(activity(), R.layout.view_course_time_plan));
         bt.getWindow().findViewById(R.id.design_bottom_sheet).setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));

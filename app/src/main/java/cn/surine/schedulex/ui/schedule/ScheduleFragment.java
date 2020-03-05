@@ -155,7 +155,7 @@ public class ScheduleFragment extends BaseBindingFragment<FragmentScheduleBindin
             });
         });
 
-        timerViewModel.curWeekStr.setValue("😁😁😁 " + getString(R.string.week, currentWeek));
+        timerViewModel.curWeekStr.setValue(getString(R.string.week, currentWeek));
 
 
         //显示空视图
@@ -167,7 +167,7 @@ public class ScheduleFragment extends BaseBindingFragment<FragmentScheduleBindin
             @Override
             public void onPageSelected(int position) {
                 curViewPagerPosition = position;
-                timerViewModel.curWeekStr.setValue("😁😁😁 " + getString(R.string.week, (position + 1)));
+                timerViewModel.curWeekStr.setValue(getString(R.string.week, (position + 1)) + ((currentWeek == position + 1) ? "" : (" ["+getString(R.string.not_cur_week))+"]"));
                 scheduleViewPagerAdapter.setWeek(position + 1);
                 scheduleViewPagerAdapter.notifyItemChanged(position);
                 if (TextUtils.isEmpty(curSchedule.imageUrl)) {
@@ -179,8 +179,6 @@ public class ScheduleFragment extends BaseBindingFragment<FragmentScheduleBindin
 
         t.funcBtn.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.action_scheduleFragment_to_ScheduleListFragment2));
         t.addCourse.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.action_scheduleFragment_to_addCourseFragment));
-
-        t.title.setOnClickListener(v -> Toasts.toast("莫挨老子！😡😡😡"));
 
         if (!TextUtils.isEmpty(curSchedule.imageUrl)) {
             Glide.with(activity()).load(new File(curSchedule.imageUrl)).crossFade().into(t.background);

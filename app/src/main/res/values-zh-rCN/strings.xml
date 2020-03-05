@@ -31,7 +31,7 @@
     <string name="schedule_config_subtitle">点击切换课表，\n长按进行课表编辑</string>
     <string name="theme">主题</string>
     <string name="theme_list_subtitle">包含课表背景和课程随机颜色</string>
-    <string name="week">%s周</string>
+    <string name="week">第%s周</string>
     <string name="config_schedule_subtitle">你可以配置你的课表属性</string>
     <string name="delete">删除</string>
     <string name="export">导出</string>
@@ -63,7 +63,7 @@
     <string name="permission_is_denied">权限被禁止！</string>
     <string name="update_success">更新成功！</string>
     <string name="pic_choose_fail">图片选择失败</string>
-    <string name="choose_schedule_background">选择课表背景图</string>
+    <string name="choose_schedule_background">选择课表背景图,长按恢复默认</string>
     <string name="star_on_github">Github Star</string>
     <string name="donate_me_with_alipay">使用支付宝支持开发者</string>
     <string name="qq_copy">QQ号已复制到剪贴板</string>
@@ -129,4 +129,5 @@
     <string name="course_item_height">课程格子高度</string>
     <string name="max_session">最大节次</string>
     <string name="cant_small_than_30">不得小于30</string>
+    <string name="not_cur_week">非本周</string>
 </resources>

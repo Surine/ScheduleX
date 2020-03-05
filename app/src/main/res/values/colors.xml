@@ -9,6 +9,7 @@
     <color name="main_back_color_2">#33C6C6C6</color>
     <color name="blue">#448AFF</color>
     <color name="chipIconTint">#000</color>
+    <color name="gray">#999999</color>
 
     //不同模式下的颜色属性值
     <color name="main_text_color_light">#000000</color>
@@ -16,5 +17,6 @@
     <color name="main_bg_color_light">#ffffff</color>
     <color name="main_bg_color_dark">#000000</color>
     <color name="white_transparent">#D6FFFFFF</color>
+    <color name="text">#333333</color>
 
 </resources>

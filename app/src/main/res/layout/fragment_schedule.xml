@@ -66,10 +66,10 @@
 
         <TextView
             android:id="@+id/title"
-            style="@style/textview_title_style"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingStart="@dimen/dp15"
+            style="@style/TextAppearance.MaterialComponents.Headline5"
             android:text="@{timer.indexTitle}"
             android:textColor="@{schedule.lightTextColor()}"
             app:layout_constraintBottom_toTopOf="@+id/guideline14"
@@ -82,7 +82,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.18" />
+            app:layout_constraintGuide_percent="0.15" />
 
 
         <ImageView
@@ -91,7 +91,7 @@
             android:layout_height="@dimen/dp40"
             android:layout_marginEnd="8dp"
             android:background="?selectableItemBackgroundBorderless"
-            android:padding="@dimen/dp6"
+            android:padding="@dimen/dp8"
             android:src="@drawable/ic_settings_black_24dp"
             android:tint="@{schedule.lightTextColor()}"
             app:layout_constraintBottom_toTopOf="@+id/guideline14"
@@ -130,8 +130,8 @@
             android:id="@+id/curWeekTv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="12dp"
+            android:layout_marginStart="@dimen/dp16"
+            android:layout_marginTop="@dimen/dp5"
             android:text="@{timer.curWeekStr}"
             android:textColor="@{schedule.lightTextColor()}"
             android:textStyle="bold"
@@ -145,7 +145,7 @@
             android:layout_height="@dimen/dp40"
             android:layout_marginEnd="@dimen/dp32"
             android:background="?selectableItemBackgroundBorderless"
-            android:padding="@dimen/dp6"
+            android:padding="@dimen/dp8"
             android:tint="@{schedule.lightTextColor()}"
             app:layout_constraintBottom_toBottomOf="@+id/func_btn"
             app:layout_constraintEnd_toStartOf="@+id/func_btn"

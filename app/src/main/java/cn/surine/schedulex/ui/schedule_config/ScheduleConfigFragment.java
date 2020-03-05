@@ -32,6 +32,7 @@ import java.io.FileNotFoundException;
 
 import cn.surine.schedulex.R;
 import cn.surine.schedulex.base.Constants;
+import cn.surine.schedulex.base.controller.App;
 import cn.surine.schedulex.base.controller.BaseBindingFragment;
 import cn.surine.schedulex.base.utils.Dates;
 import cn.surine.schedulex.base.utils.Files;
@@ -61,13 +62,17 @@ import static android.app.Activity.RESULT_OK;
 @SuppressLint("SetTextI18n")
 public class ScheduleConfigFragment extends BaseBindingFragment<FragmentScheduleConfigBinding> {
 
-
+    public static final int CHANGE_WEEK_INFO = 101;
+    public static final int CHANGE_BACKGROUND = 102;
+    public static final int CHANGE_COURSE_ITEM_HEIGHT = 103;
     private static final int PICK_PHOTO = 1;
+
     private ScheduleViewModel scheduleViewModel;
     int scheduleId;
     private CourseViewModel courseViewModel;
     private Schedule schedule;
     private FragmentScheduleConfigBinding globalT;
+    private int mSettingItemTag;
 
     public static final String SCHEDULE_ID = "SCHEDULE_ID";
 
@@ -89,7 +94,7 @@ public class ScheduleConfigFragment extends BaseBindingFragment<FragmentSchedule
         Object[] argsForCourse = new Object[]{CourseRepository.abt.getInstance()};
         courseViewModel = ViewModelProviders.of(this, InstanceFactory.getInstance(classesForCourse, argsForCourse)).get(CourseViewModel.class);
 
-        scheduleId = getArguments() == null ? -1 : getArguments().getInt(ScheduleListFragment.SCHEDULE_ID);
+        scheduleId = getArguments() == null ? -1 : getArguments().getInt(SCHEDULE_ID);
 
         if (scheduleId == Prefs.getLong(Constants.CUR_SCHEDULE, -1L)) {
             t.deleteSchedule.setVisibility(View.GONE);
@@ -97,6 +102,27 @@ public class ScheduleConfigFragment extends BaseBindingFragment<FragmentSchedule
 
         schedule = scheduleViewModel.getScheduleById(scheduleId);
         t.setData(schedule);
+
+
+        /***
+         * 捷径
+         */
+        if (getArguments() != null && (mSettingItemTag = getArguments().getInt(ScheduleListFragment.FUNCTION_TAG, -1)) != -1) {
+            switch (mSettingItemTag) {
+                case CHANGE_WEEK_INFO:
+                    showTimeConfigDialog();
+                    break;
+                case CHANGE_COURSE_ITEM_HEIGHT:
+                    showItemHeightDialog();
+                    break;
+                case CHANGE_BACKGROUND:
+                    chooseBackgroundPicture();
+                    break;
+                default:
+                    break;
+            }
+        }
+
 
         t.deleteSchedule.setOnClickListener(v -> CommonDialogs.getCommonDialog(activity(), getString(R.string.warning), getString(R.string.delete_schedule_dialog_msg)
                 , () -> {
@@ -118,15 +144,12 @@ public class ScheduleConfigFragment extends BaseBindingFragment<FragmentSchedule
 
         t.scheduleWeekInfoItem.setOnClickListener(v -> showTimeConfigDialog());
 
-        t.scheduleBackgroundItem.setOnClickListener(v -> {
-            RxPermissions rxPermissions = new RxPermissions(activity());
-            rxPermissions.request(Manifest.permission.READ_EXTERNAL_STORAGE).subscribe(aBoolean -> {
-                if (aBoolean) {
-                    startChoosePicture();
-                } else {
-                    Toasts.toast(getString(R.string.permission_is_denied));
-                }
-            });
+        t.scheduleBackgroundItem.setOnClickListener(v -> chooseBackgroundPicture());
+        t.scheduleBackgroundItem.setOnLongClickListener(v -> {
+            schedule.imageUrl = "";
+            scheduleViewModel.updateSchedule(schedule);
+            Toasts.toast(App.context.getResources().getString(R.string.handle_success));
+            return true;
         });
         if (!TextUtils.isEmpty(schedule.imageUrl)) {
             Glide.with(activity()).load(new File(schedule.imageUrl)).into(t.backgroundPic);
@@ -138,7 +161,7 @@ public class ScheduleConfigFragment extends BaseBindingFragment<FragmentSchedule
             schedule.lightText = !schedule.lightText;
             scheduleViewModel.updateSchedule(schedule);
             t.switchs.setChecked(schedule.lightText);
-            t.paletteColorSubTitle.setText(schedule.lightText ?R.string.white_txt:R.string.black_txt);
+            t.paletteColorSubTitle.setText(schedule.lightText ? R.string.white_txt : R.string.black_txt);
         });
 
         //设置是否展示周末开关
@@ -166,13 +189,25 @@ public class ScheduleConfigFragment extends BaseBindingFragment<FragmentSchedule
     }
 
 
+    private void chooseBackgroundPicture() {
+        RxPermissions rxPermissions = new RxPermissions(activity());
+        rxPermissions.request(Manifest.permission.READ_EXTERNAL_STORAGE).subscribe(aBoolean -> {
+            if (aBoolean) {
+                startChoosePicture();
+            } else {
+                Toasts.toast(getString(R.string.permission_is_denied));
+            }
+        });
+    }
+
 
     /**
      * 课表item高度
-     * */
+     */
     private void showItemHeightDialog() {
-        BottomSheetDialog bt = new BottomSheetDialog(activity());
+        BottomSheetDialog bt = new BottomSheetDialog(activity(), R.style.BottomSheetDialogTheme);
         View view;
+        bt.setDismissWithAnimation(true);
         bt.setContentView(view = Uis.inflate(activity(), R.layout.view_schedule_time));
         bt.getWindow().findViewById(R.id.design_bottom_sheet).setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         bt.show();
@@ -195,19 +230,19 @@ public class ScheduleConfigFragment extends BaseBindingFragment<FragmentSchedule
             s1.setMin(30);
         }
         s1.setProgress(schedule.itemHeight);
-        t1.setText(schedule.itemHeight+"dp");
-        s1.setOnSeekBarChangeListener(new MySeekBarChangeListener(){
+        t1.setText(schedule.itemHeight + "dp");
+        s1.setOnSeekBarChangeListener(new MySeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                t1.setText(progress+"dp");
+                t1.setText(progress + "dp");
             }
         });
         button.setOnClickListener(v -> {
-            if(s1.getProgress() < 30){
+            if (s1.getProgress() < 30) {
                 Toasts.toast(getString(R.string.cant_small_than_30));
-            }else{
+            } else {
                 schedule.itemHeight = s1.getProgress();
-                globalT.scheduleCourseItemHeightSubtitle.setText(s1.getProgress()+"px");
+                globalT.scheduleCourseItemHeightSubtitle.setText(s1.getProgress() + "px");
                 scheduleViewModel.updateSchedule(schedule);
                 bt.dismiss();
             }
@@ -217,10 +252,11 @@ public class ScheduleConfigFragment extends BaseBindingFragment<FragmentSchedule
 
     /**
      * 最大节次
-     * */
+     */
     private void showMaxSessionDialog() {
-        BottomSheetDialog bt = new BottomSheetDialog(activity());
+        BottomSheetDialog bt = new BottomSheetDialog(activity(), R.style.BottomSheetDialogTheme);
         View view;
+        bt.setDismissWithAnimation(true);
         bt.setContentView(view = Uis.inflate(activity(), R.layout.view_schedule_time));
         bt.getWindow().findViewById(R.id.design_bottom_sheet).setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         bt.show();
@@ -240,19 +276,19 @@ public class ScheduleConfigFragment extends BaseBindingFragment<FragmentSchedule
 
         s1.setMax(20);
         s1.setProgress(schedule.maxSession);
-        t1.setText(schedule.maxSession+"节");
-        s1.setOnSeekBarChangeListener(new MySeekBarChangeListener(){
+        t1.setText(schedule.maxSession + "节");
+        s1.setOnSeekBarChangeListener(new MySeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                t1.setText(progress+"节");
+                t1.setText(progress + "节");
             }
         });
         button.setOnClickListener(v -> {
-            if(s1.getProgress() == 0){
+            if (s1.getProgress() == 0) {
                 Toasts.toast(getString(R.string.param_is_illgal));
-            }else{
+            } else {
                 schedule.maxSession = s1.getProgress();
-                globalT.scheduleMaxSessionSubtitle.setText(s1.getProgress()+"节");
+                globalT.scheduleMaxSessionSubtitle.setText(s1.getProgress() + "节");
                 scheduleViewModel.updateSchedule(schedule);
                 bt.dismiss();
             }
@@ -262,11 +298,12 @@ public class ScheduleConfigFragment extends BaseBindingFragment<FragmentSchedule
 
     /**
      * 课程卡片透明度
-     * */
+     */
     @SuppressLint("SetTextI18n")
     private void showCourseItemAlphaDialog() {
-        BottomSheetDialog bt = new BottomSheetDialog(activity());
+        BottomSheetDialog bt = new BottomSheetDialog(activity(), R.style.BottomSheetDialogTheme);
         View view;
+        bt.setDismissWithAnimation(true);
         bt.setContentView(view = Uis.inflate(activity(), R.layout.view_schedule_time));
         bt.getWindow().findViewById(R.id.design_bottom_sheet).setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         bt.show();
@@ -286,19 +323,19 @@ public class ScheduleConfigFragment extends BaseBindingFragment<FragmentSchedule
 
         s1.setMax(10);
         s1.setProgress(schedule.alphaForCourseItem);
-        t1.setText("L"+schedule.alphaForCourseItem);
-        s1.setOnSeekBarChangeListener(new MySeekBarChangeListener(){
+        t1.setText("L" + schedule.alphaForCourseItem);
+        s1.setOnSeekBarChangeListener(new MySeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                t1.setText("L"+progress);
+                t1.setText("L" + progress);
             }
         });
         button.setOnClickListener(v -> {
-            if(s1.getProgress() == 0){
+            if (s1.getProgress() == 0) {
                 Toasts.toast(getString(R.string.nothing_to_show));
-            }else{
+            } else {
                 schedule.alphaForCourseItem = s1.getProgress();
-                globalT.scheduleCourseAlphaSubTitle.setText("L"+s1.getProgress());
+                globalT.scheduleCourseAlphaSubTitle.setText("L" + s1.getProgress());
                 scheduleViewModel.updateSchedule(schedule);
                 bt.dismiss();
             }
@@ -311,8 +348,9 @@ public class ScheduleConfigFragment extends BaseBindingFragment<FragmentSchedule
      */
     @SuppressLint("StringFormatMatches")
     private void showTimeConfigDialog() {
-        BottomSheetDialog bt = new BottomSheetDialog(activity());
+        BottomSheetDialog bt = new BottomSheetDialog(activity(), R.style.BottomSheetDialogTheme);
         View view;
+        bt.setDismissWithAnimation(true);
         bt.setContentView(view = Uis.inflate(activity(), R.layout.view_schedule_time));
         bt.getWindow().findViewById(R.id.design_bottom_sheet).setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         bt.show();
@@ -405,7 +443,7 @@ public class ScheduleConfigFragment extends BaseBindingFragment<FragmentSchedule
         try {
             bitmap = BitmapFactory.decodeStream(cr.openInputStream(uri));
             Toasts.toast(getString(R.string.update_success));
-            schedule.imageUrl = Files.getFilePath(activity(),uri);
+            schedule.imageUrl = Files.getFilePath(activity(), uri);
             scheduleViewModel.updateSchedule(schedule);
             Glide.with(activity()).load(new File(schedule.imageUrl)).into(globalT.backgroundPic);
         } catch (FileNotFoundException e) {

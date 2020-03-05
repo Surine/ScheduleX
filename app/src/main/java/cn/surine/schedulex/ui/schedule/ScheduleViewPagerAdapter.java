@@ -1,6 +1,7 @@
 package cn.surine.schedulex.ui.schedule;
 
 import android.annotation.SuppressLint;
+import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.List;
 
 import cn.surine.coursetableview.entity.BCourse;
+import cn.surine.coursetableview.interfaces.OnClickCourseItemListener;
 import cn.surine.coursetableview.view.CourseTableView;
 import cn.surine.coursetableview.view.DataConfig;
 import cn.surine.coursetableview.view.UIConfig;
@@ -19,10 +21,13 @@ import cn.surine.schedulex.R;
 import cn.surine.schedulex.base.controller.App;
 import cn.surine.schedulex.base.controller.BaseFragment;
 import cn.surine.schedulex.base.utils.DataMaps;
+import cn.surine.schedulex.base.utils.Navigations;
 import cn.surine.schedulex.base.utils.Uis;
 import cn.surine.schedulex.data.entity.Course;
 import cn.surine.schedulex.data.entity.Schedule;
 import cn.surine.schedulex.ui.view.custom.helper.BtmDialogs;
+
+import static cn.surine.schedulex.ui.view.custom.helper.BtmDialogs.COURSE_ID;
 
 /**
  * Intro：
@@ -102,6 +107,12 @@ public class ScheduleViewPagerAdapter extends RecyclerView.Adapter<ScheduleViewP
                 return;
             }
             BtmDialogs.showCourseInfoBtmDialog(baseFragment, course);
+        });
+
+        holder.courseTableView.setLongClickCourseItemListener((list, itemPosition, isThisWeek) -> {
+            Bundle bundle = new Bundle();
+            bundle.putString(COURSE_ID,list.get(itemPosition).getId());
+            Navigations.open(baseFragment,R.id.action_scheduleFragment_to_addCourseFragment,bundle);
         });
 
     }

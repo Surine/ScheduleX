@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="schedule"
+            type="cn.surine.schedulex.data.entity.Schedule" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dp10"
+        android:layout_marginEnd="@dimen/dp10"
+        android:layout_marginTop="@dimen/dp6"
+        android:layout_marginBottom="@dimen/dp4"
+        android:background="@drawable/schedule_item_choose_background"
+        >
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:id="@+id/layout_1"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_height="100dp">
+            <TextView
+                android:id="@+id/textView4"
+                android:textSize="@dimen/t18"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{schedule.name}"
+                android:textColor="@color/text"
+                android:layout_marginStart="@dimen/dp16"
+                app:layout_constraintBottom_toTopOf="@id/textView6"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_chainStyle="packed" />
+
+            <TextView
+                android:id="@+id/textView6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{schedule.getScheduleItemSubtitle}"
+                android:layout_marginTop="@dimen/dp10"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/textView4"
+                app:layout_constraintTop_toBottomOf="@+id/textView4" />
+
+            <ImageView
+                android:id="@+id/importWay"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:padding="3dp"
+                android:visibility="gone"
+                android:background="?selectableItemBackgroundBorderless"
+                android:src="@{schedule.getImportWayIcon()}"
+                android:layout_marginEnd="@dimen/dp16"
+                android:layout_marginStart="@dimen/dp16"
+                app:layout_constraintEnd_toStartOf="@id/more_function"
+                app:layout_constraintBottom_toBottomOf="@+id/textView6"
+                app:layout_constraintTop_toTopOf="@+id/textView4"
+                />
+
+            <ImageView
+                android:id="@+id/more_function"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:background="?selectableItemBackgroundBorderless"
+                android:padding="@dimen/dp3"
+                android:layout_marginEnd="@dimen/dp16"
+                app:layout_constraintBottom_toBottomOf="@+id/importWay"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/importWay"
+                app:srcCompat="@drawable/ic_more_vert_black_24dp" />
+
+            <TextView
+                android:id="@+id/textView7"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="当前"
+                app:ctrlScheduleCardHelperElement="@{schedule.roomId}"
+                android:background="@drawable/primary_color_full_raidus_rect"
+                android:textColor="@android:color/white"
+                android:paddingTop="@dimen/dp3"
+                android:textSize="@dimen/t10"
+                android:paddingBottom="@dimen/dp3"
+                android:paddingStart="@dimen/dp10"
+                android:paddingEnd="@dimen/dp10"
+                android:layout_marginStart="@dimen/dp10"
+                app:layout_constraintBottom_toBottomOf="@+id/textView4"
+                app:layout_constraintStart_toEndOf="@+id/textView4"
+                app:layout_constraintTop_toTopOf="@+id/textView4" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/layout_2"
+            android:paddingBottom="@dimen/dp10"
+            app:ctrlScheduleCardHelperElement="@{schedule.roomId}"
+            app:layout_constraintTop_toBottomOf="@id/layout_1"
+            >
+
+            <SeekBar
+                android:id="@+id/seekBar3"
+                android:layout_width="0dp"
+                android:layout_marginStart="@dimen/dp16"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                android:layout_marginEnd="@dimen/dp16"
+                app:layout_constraintTop_toBottomOf="@id/chipgroup"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                />
+
+            <com.google.android.material.chip.ChipGroup
+                android:id="@+id/chipgroup"
+                android:layout_marginStart="@dimen/dp16"
+                android:layout_marginEnd="@dimen/dp16"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:itemSpacing="@dimen/dp16"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <com.google.android.material.chip.Chip
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="配置当前周数"
+                    android:textColor="@android:color/white"
+                    android:textStyle="bold"
+                    android:id="@+id/chip_config_week"
+                    app:chipBackgroundColor="#CC2D8B7F" />
+
+                <com.google.android.material.chip.Chip
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="修改背景图"
+                    android:id="@+id/chip_change_background"
+                    android:textColor="@android:color/white"
+                    android:textStyle="bold"
+                    app:chipBackgroundColor="#CCFFAB40" />
+
+                <com.google.android.material.chip.Chip
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="课程格子高度"
+                    android:textColor="@android:color/white"
+                    android:textStyle="bold"
+                    android:id="@+id/chip_course_item_height"
+                    app:chipBackgroundColor="#CCFF5252" />
+
+                <com.google.android.material.chip.Chip
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="更多设置"
+                    android:id="@+id/chip_more_setting"
+                    android:textColor="@android:color/white"
+                    android:textStyle="bold"
+                    app:chipBackgroundColor="#CC536DFE" />
+
+            </com.google.android.material.chip.ChipGroup>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp100"
+            android:id="@+id/layout_3"
+            app:ctrlScheduleCardHelperElement="@{schedule.roomId}"
+            app:layout_constraintTop_toBottomOf="@id/layout_2">
+
+            <ImageView
+                android:id="@+id/short_btn_add"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:layout_marginStart="@dimen/dp24"
+                app:layout_constraintHorizontal_chainStyle="spread_inside"
+                android:background="@drawable/shape_full_radius_gray"
+                android:padding="@dimen/dp7"
+                android:src="@drawable/ic_add_black_24dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/short_btn_share"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/short_btn_hide"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:background="@drawable/primary_color_full_raidus_rect"
+                android:padding="@dimen/dp7"
+                android:layout_marginEnd="@dimen/dp24"
+                android:src="@drawable/ic_remove_red_eye_black_24dp"
+                android:tint="@android:color/white"
+                app:layout_constraintBottom_toBottomOf="@+id/short_btn_edit"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/short_btn_edit"
+                app:layout_constraintTop_toTopOf="@+id/short_btn_edit" />
+
+            <ImageView
+                android:id="@+id/short_btn_share"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:background="@drawable/shape_full_radius_gray"
+                android:padding="@dimen/dp9"
+                android:src="@drawable/ic_share_black_24dp"
+                app:layout_constraintBottom_toBottomOf="@+id/short_btn_add"
+                app:layout_constraintEnd_toStartOf="@+id/short_btn_edit"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/short_btn_add"
+                app:layout_constraintTop_toTopOf="@+id/short_btn_add" />
+
+            <ImageView
+                android:id="@+id/short_btn_edit"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:background="@drawable/shape_full_radius_gray"
+                android:padding="@dimen/dp9"
+                android:src="@drawable/ic_create_black_24dp"
+                app:layout_constraintBottom_toBottomOf="@+id/short_btn_share"
+                app:layout_constraintEnd_toStartOf="@+id/short_btn_hide"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/short_btn_share"
+                app:layout_constraintTop_toTopOf="@+id/short_btn_share" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

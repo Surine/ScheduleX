@@ -16,6 +16,7 @@ import cn.surine.schedulex.base.utils.Navigations;
 import cn.surine.schedulex.base.utils.Prefs;
 import cn.surine.schedulex.base.utils.Toasts;
 import cn.surine.schedulex.data.entity.Course;
+import cn.surine.schedulex.data.entity.Schedule;
 import cn.surine.schedulex.databinding.FragmentLoginBinding;
 import cn.surine.schedulex.ui.course.CourseRepository;
 import cn.surine.schedulex.ui.course.CourseViewModel;
@@ -85,7 +86,7 @@ public class LoginFragment extends BaseBindingFragment<FragmentLoginBinding> {
                     Toasts.toast(getString(R.string.arg_exception));
                     return;
                 }
-                scheduleId = scheduleViewModel.addSchedule(getArguments().getString(ScheduleInitFragment.SCHEDULE_NAME),courseViewModel.totalWeek.getValue(),courseViewModel.nowWeek.getValue());
+                scheduleId = scheduleViewModel.addSchedule(getArguments().getString(ScheduleInitFragment.SCHEDULE_NAME),courseViewModel.totalWeek.getValue(),courseViewModel.nowWeek.getValue(), Schedule.IMPORT_WAY.JW);
                 //保存当前选中课表
                 Prefs.save(Constants.CUR_SCHEDULE,scheduleId);
                 //对课程所属课表进行赋值

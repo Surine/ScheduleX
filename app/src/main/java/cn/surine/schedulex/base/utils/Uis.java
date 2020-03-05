@@ -1,5 +1,6 @@
 package cn.surine.schedulex.base.utils;
 
+import android.animation.ObjectAnimator;
 import android.content.Context;
 import android.content.res.Configuration;
 import android.util.DisplayMetrics;
@@ -20,6 +21,7 @@ public class Uis {
 
     public static int height = getScreenHeight();
     public static int width = getScreenWidth();
+    public static float densityDpi = getDisplayMetrics(App.context).densityDpi;
 
     /**
      * 获取反射布局
@@ -84,6 +86,39 @@ public class Uis {
         int a = Math.min(255, Math.max(0, (int) (alpha * 255))) << 24;
         int rgb = 0x00ffffff & baseColor;
         return a + rgb;
+    }
+
+
+    /**
+     * 获取推荐课程高度
+     * @return dp
+     * */
+    public static int getRecommendHeightItem(){
+        return (int) (48 * 421 / densityDpi);
+    }
+
+
+    /**
+     * 显示元素
+     * */
+    public static void show(View ... views) {
+        for (View view :views) {
+            if(view != null){
+                view.setVisibility(View.VISIBLE);
+            }
+        }
+    }
+
+
+    /**
+     * 隐藏元素
+     * */
+    public static void hide(View ... views){
+        for (View view :views) {
+            if(view != null){
+                view.setVisibility(View.GONE);
+            }
+        }
     }
 
 }

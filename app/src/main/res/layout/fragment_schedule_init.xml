@@ -15,52 +15,64 @@
         android:background="@android:color/white"
         tools:context=".ui.schedule_init.ScheduleInitFragment">
 
-
         <ImageView
-            android:id="@+id/imageView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintVertical_bias="0.4"
+            android:src="@mipmap/undraw_season_change_f99v"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/textInputLayout"
+            app:layout_constraintTop_toBottomOf="@id/textView2"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_marginTop="@dimen/dp37"
+            android:layout_marginStart="@dimen/dp25"
+            android:layout_marginEnd="@dimen/dp25"
+            app:layout_constraintBottom_toTopOf="@id/welcome"
+            android:layout_height="wrap_content">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:hint="@string/named_schedule"
+                android:maxLength="20"
+                android:maxLines="1"
+                app:textWatcher="@{data.scheduleWatcher}" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/welcome"
+            style="@style/button_style"
+            android:layout_width="110dp"
+            android:layout_height="55dp"
+            android:layout_marginTop="@dimen/dp20"
+            android:layout_marginEnd="@dimen/dp25"
+            android:text="@string/welcome"
+            app:cornerRadius="@dimen/dp180"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textInputLayout" />
+
+        <TextView
+            android:id="@+id/textView2"
+            style="@style/TextAppearance.MaterialComponents.Headline4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@mipmap/undraw_chore_list_iof3"
-            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginStart="@dimen/dp20"
+            android:text="Start!"
+            android:visibility="gone"
+            android:textStyle="bold"
+            app:layout_constraintVertical_bias="0.9"
+            app:layout_constraintVertical_chainStyle="packed"
+            app:layout_constraintBottom_toTopOf="@id/textInputLayout"
+            android:textColor="@android:color/black"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/welcome"
-            style="@style/button_style"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/dp25"
-            android:layout_marginEnd="@dimen/dp25"
-            android:text="@string/welcome"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.498"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/guideline"
-            app:layout_constraintVertical_bias="0.754" />
 
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guideline"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.6" />
-
-        <EditText
-            android:id="@+id/editText3"
-            style="@style/edit_text_style"
-            android:layout_marginStart="@dimen/dp25"
-            android:layout_marginEnd="@dimen/dp25"
-            android:layout_marginBottom="@dimen/dp25"
-            android:background="@drawable/edit_background"
-            android:ems="10"
-            android:maxLength="10"
-            android:hint="@string/named_schedule"
-            android:paddingStart="@dimen/dp25"
-            app:layout_constraintBottom_toTopOf="@+id/welcome"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:textWatcher="@{data.scheduleWatcher}" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

@@ -82,7 +82,7 @@
     <string name="permission_is_denied">Permission denied！</string>
     <string name="update_success">update completed!</string>
     <string name="pic_choose_fail">Image selection failed!</string>
-    <string name="choose_schedule_background">Select the schedule background</string>
+    <string name="choose_schedule_background">Select the schedule background,long press to reset</string>
     <string name="star_on_github">Star On Github</string>
     <string name="donate_me_with_alipay">Donate Me With Alipay</string>
     <string name="qq_copy">QQ number has been copied to the clipboard</string>
@@ -150,4 +150,5 @@
     <string name="course_item_height">Course Item height</string>
     <string name="max_session">maximum sessions</string>
     <string name="cant_small_than_30">Not less than 30</string>
+    <string name="not_cur_week">Non-current week</string>
 </resources>

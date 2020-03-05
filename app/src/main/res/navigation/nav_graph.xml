@@ -47,6 +47,11 @@
             app:destination="@id/aboutFragment"
             app:enterAnim="@anim/fragment_open_enter"
             app:popEnterAnim="@anim/fragment_open_enter" />
+        <action
+            android:id="@+id/action_ScheduleListFragment_to_scheduleDataExport"
+            app:destination="@id/scheduleDataExport"
+            app:enterAnim="@anim/fragment_open_enter"
+            app:popEnterAnim="@anim/fragment_fade_enter" />
     </fragment>
     <fragment
         android:id="@+id/dataFetchFragment"

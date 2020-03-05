@@ -11,6 +11,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 
 import cn.surine.schedulex.R;
@@ -32,6 +33,25 @@ public class BtmDialogs {
 
     public static final String COURSE_ID = "course_id";
 
+
+    /**
+     * 获取一个底部弹窗的基础UI
+     * */
+    public static void getBaseConfig(Context context,View view,DCall<View> showCall){
+        BottomSheetDialog bt = new BottomSheetDialog(context,R.style.BottomSheetDialogTheme);
+        bt.getWindow().findViewById(R.id.design_bottom_sheet).setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        bt.setDismissWithAnimation(true);
+        bt.setContentView(view);
+        view.animate().translationY(50);
+        if(showCall != null){
+            showCall.back(view);
+        }
+        bt.show();
+    }
+
+
+
+
     /**
      * 显示一个编辑底部框
      *
@@ -39,9 +59,10 @@ public class BtmDialogs {
      * @param dcall   数据回调
      */
     public static void showEditBtmDialog(Context context, String txt,boolean isText, DCall<String> dcall) {
-        BottomSheetDialog bt = new BottomSheetDialog(context);
+        BottomSheetDialog bt = new BottomSheetDialog(context,R.style.BottomSheetDialogTheme);
         View view;
         bt.setContentView(view = Uis.inflate(context, R.layout.view_edit_layout));
+        bt.setDismissWithAnimation(true);
         bt.getWindow().findViewById(R.id.design_bottom_sheet).setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         bt.show();
         EditText editText = view.findViewById(R.id.editText);
@@ -69,10 +90,11 @@ public class BtmDialogs {
      * @param course  课程
      */
     public static void showCourseInfoBtmDialog(BaseFragment baseFragment, Course course) {
-        BottomSheetDialog bt = new BottomSheetDialog(baseFragment.activity());
+        BottomSheetDialog bt = new BottomSheetDialog(baseFragment.activity(),R.style.BottomSheetDialogTheme);
         View view;
         bt.setContentView(view = Uis.inflate(baseFragment.activity(), R.layout.view_course_info));
         bt.getWindow().findViewById(R.id.design_bottom_sheet).setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        bt.setDismissWithAnimation(true);
         bt.show();
         view.animate().translationY(50);
         TextView courseName = view.findViewById(R.id.courseName);

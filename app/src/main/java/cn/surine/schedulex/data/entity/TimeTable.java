@@ -10,33 +10,14 @@ package cn.surine.schedulex.data.entity;
 public class TimeTable extends BaseVm {
 
     /**
-     * 课时，一般为45分钟，或者40分钟
+     * 起始 如8:00
      */
-    private int classHour;
-
-
-    /**
-     * 早上，下午，晚上开始上课时间
-     */
-    private String amTime;
-    private String pmTime;
-    private String nightTime;
+    private int startTime;
 
     /**
-     * 默认课时，后期需要兼容的话再改
-     */
-    private int amClassHour = 4;
-    private int pmClassHour = 4;
-    private int nightClassHour = 4;
-
-    /**
-     * 课时间隔
-     */
-    private int classHourGap;
-
-    /**
-     * 课间隔
-     */
-    private int classGap;
+     * 规则
+     * {"45","10","45","10","45" ……}
+     * */
+    private String rule;
 
 }

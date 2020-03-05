@@ -11,6 +11,7 @@ import androidx.lifecycle.ViewModelProviders;
 import androidx.navigation.Navigation;
 
 import com.tbruyelle.rxpermissions2.RxPermissions;
+import com.tencent.bugly.crashreport.CrashReport;
 
 import java.util.List;
 
@@ -25,6 +26,7 @@ import cn.surine.schedulex.base.utils.Objs;
 import cn.surine.schedulex.base.utils.Prefs;
 import cn.surine.schedulex.base.utils.Toasts;
 import cn.surine.schedulex.data.entity.Course;
+import cn.surine.schedulex.data.entity.Schedule;
 import cn.surine.schedulex.databinding.FragmentDataFetchBinding;
 import cn.surine.schedulex.ui.course.CourseRepository;
 import cn.surine.schedulex.ui.course.CourseViewModel;
@@ -82,7 +84,7 @@ public class ScheduleDataFetchFragment extends BaseBindingFragment<FragmentDataF
         t.importExcel.setOnClickListener(v -> Toasts.toast("暂不支持"));
         t.other.setOnClickListener(v -> Toasts.toast("欢迎加群反馈！"));
         t.skip.setOnClickListener(v -> {
-            Prefs.save(Constants.CUR_SCHEDULE, scheduleViewModel.addSchedule(scheduleName, 24, 1));
+            Prefs.save(Constants.CUR_SCHEDULE, scheduleViewModel.addSchedule(scheduleName, 24, 1, Schedule.IMPORT_WAY.ADD));
             Navigations.open(ScheduleDataFetchFragment.this, R.id.action_dataFetchFragment_to_scheduleFragment);
         });
 
@@ -108,8 +110,12 @@ public class ScheduleDataFetchFragment extends BaseBindingFragment<FragmentDataF
             return;
         }
         if (requestCode == JSON_REQUEST_CODE) {
-            Uri uri = data.getData();
-            loadData(Files.getFilePath(activity(), uri));
+            try {
+                Uri uri = data.getData();
+                loadData(Files.getFilePath(activity(), uri));
+            }catch (Exception e){
+                CrashReport.postCatchedException(e);
+            }
         }
 
     }
@@ -127,7 +133,7 @@ public class ScheduleDataFetchFragment extends BaseBindingFragment<FragmentDataF
         try {
             list = Jsons.parseJsonWithGsonToList(jsonContent, Course.class);
             Course[] courses = new Course[list.size()];
-            Prefs.save(Constants.CUR_SCHEDULE, (id = scheduleViewModel.addSchedule(scheduleName, 24, 1)));
+            Prefs.save(Constants.CUR_SCHEDULE, (id = scheduleViewModel.addSchedule(scheduleName, 24, 1,Schedule.IMPORT_WAY.JSON)));
             for (int i = 0; i < list.size(); i++) {
                 Course course = list.get(i);
                 course.scheduleId = id;

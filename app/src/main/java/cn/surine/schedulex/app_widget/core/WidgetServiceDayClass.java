@@ -95,7 +95,6 @@ public class WidgetServiceDayClass extends RemoteViewsService {
             int today = Dates.getWeekDay();
             int nextDay =  Dates.getWeekDay() + 1 % 7 == 0 ? 7 : Dates.getWeekDay() + 1 % 7 ;
             int day = isNextDay ? nextDay : today;
-            Log.d("slw", "onDataSetChanged: "+today + "/" + nextDay);
             try {
                 Schedule curSchedule = WidgetServiceDayClass.this.scheduleRepository.getCurSchedule();
                 WidgetServiceDayClass.this.courseList = WidgetServiceDayClass.this.courseRepository.getTodayCourseListByScheduleId(day, curSchedule.curWeek(), curSchedule.roomId);

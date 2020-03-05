@@ -16,6 +16,7 @@ import java.util.Random;
 import cn.surine.schedulex.base.Constants;
 import cn.surine.schedulex.base.utils.Dates;
 import cn.surine.schedulex.base.utils.Strs;
+import cn.surine.schedulex.base.utils.Uis;
 import cn.surine.schedulex.data.entity.Course;
 import cn.surine.schedulex.data.entity.Schedule;
 
@@ -34,10 +35,12 @@ public class ScheduleViewModel extends ViewModel {
     /**
      * 添加课表
      */
-    public long addSchedule(String name, int totalWeek, int curWeek) {
+    public long addSchedule(String name, int totalWeek, int curWeek,int source) {
         Schedule schedule = new Schedule();
         schedule.name = name;
         schedule.totalWeek = totalWeek == 0 ? 24 : totalWeek;
+        schedule.itemHeight = Uis.getRecommendHeightItem();
+        schedule.importWay = source;
         schedule.color = Constants.COLOR_1[new Random(System.currentTimeMillis()).nextInt(Constants.COLOR_1.length)];
         schedule.termStartDate = Dates.getTermStartDate(curWeek == 0 ? 1 : curWeek);
         return scheduleRepository.addSchedule(schedule);

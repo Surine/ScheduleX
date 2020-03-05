@@ -21,6 +21,7 @@ import cn.surine.schedulex.base.utils.Navigations;
 import cn.surine.schedulex.base.utils.Prefs;
 import cn.surine.schedulex.base.utils.Toasts;
 import cn.surine.schedulex.data.entity.Course;
+import cn.surine.schedulex.data.entity.Schedule;
 import cn.surine.schedulex.databinding.FragmentLoginSuperBinding;
 import cn.surine.schedulex.super_import.model.SuperCourse;
 import cn.surine.schedulex.super_import.model.SuperResository;
@@ -81,7 +82,7 @@ public class SuperLoginFragment extends BaseBindingFragment<FragmentLoginSuperBi
                     Bundle arguments = getArguments();
                     String str = ScheduleInitFragment.SCHEDULE_NAME;
                     if (!TextUtils.isEmpty(arguments.getString(str))) {
-                        scheduleId = scheduleViewModel.addSchedule(getArguments().getString(str), 24, 1);
+                        scheduleId = scheduleViewModel.addSchedule(getArguments().getString(str), 24, 1, Schedule.IMPORT_WAY.SUPER_CN);
                         Prefs.save(Constants.CUR_SCHEDULE, scheduleId);
                         List<Course> courseList = new ArrayList();
                         for (SuperCourse superCourse : superViewModel.getSuperCourseList().lessonList) {

@@ -2,7 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/shape_rect_10_white">
+    android:background="@drawable/shape_rect_10_transparentwhite">
 
     <RelativeLayout
         android:id="@+id/task_widget_head"
@@ -17,7 +17,7 @@
             android:layout_height="match_parent"
             android:layout_marginStart="@dimen/dp20"
             android:gravity="center"
-            android:text="2月6日课程"
+            android:text="今日课程"
             android:textColor="@android:color/black"
             android:textStyle="bold" />
 
@@ -36,6 +36,7 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp200"
         android:alpha="0.5"
+        android:visibility="gone"
         android:layout_alignParentBottom="true"
         android:src="@mipmap/undraw_code_thinking_1jeh" />
 
@@ -46,5 +47,6 @@
         android:layout_below="@id/task_widget_head"
         android:layout_margin="@dimen/dp10"
         android:divider="@null"
+        android:scrollbars="none"
         android:dividerHeight="0dp" />
 </RelativeLayout>

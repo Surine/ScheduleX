@@ -35,7 +35,7 @@ public class SplashFragment extends BaseFragment {
         };
 
         if(mHandler != null){
-            mHandler.postDelayed(runnable,1500);
+            mHandler.postDelayed(runnable,1200);
         }
     }
 
