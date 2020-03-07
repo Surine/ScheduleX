@@ -43,16 +43,17 @@ public class ScheduleRepository extends BaseRepository {
 
     /**
      * 获取当前选中课表
-     * */
+     */
     public Schedule getCurSchedule() {
-        long curScheduleId =  Prefs.getLong(Constants.CUR_SCHEDULE,-1L);
+        long curScheduleId = Prefs.getLong(Constants.CUR_SCHEDULE, -1L);
         return getScheduleById(curScheduleId);
     }
 
     /**
      * 获取所有课表
      *
-     * @return*/
+     * @return
+     */
     public List<Schedule> getSchedules() {
         return appDatabase.scheduleDao().getAll();
     }
@@ -60,6 +61,7 @@ public class ScheduleRepository extends BaseRepository {
 
     /**
      * 更新课表
+     *
      * @param schedule 课表
      */
     public void updateSchedule(Schedule schedule) {
@@ -69,7 +71,7 @@ public class ScheduleRepository extends BaseRepository {
 
     /**
      * 获取课表数量
-     * */
+     */
     public int getSchedulesNumber() {
         return appDatabase.scheduleDao().getTotalNum();
     }

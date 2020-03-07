@@ -48,7 +48,6 @@ import cn.surine.schedulex.ui.course.CourseViewModel;
 import cn.surine.schedulex.ui.schedule.ScheduleRepository;
 import cn.surine.schedulex.ui.schedule.ScheduleViewModel;
 import cn.surine.schedulex.ui.schedule_list.ScheduleListFragment;
-import cn.surine.schedulex.ui.view.custom.helper.BtmDialogs;
 import cn.surine.schedulex.ui.view.custom.helper.CommonDialogs;
 
 import static android.app.Activity.RESULT_OK;
@@ -62,6 +61,7 @@ import static android.app.Activity.RESULT_OK;
 @SuppressLint("SetTextI18n")
 public class ScheduleConfigFragment extends BaseBindingFragment<FragmentScheduleConfigBinding> {
 
+    public static final int CHANGE_SCHEDULE_NAME = 100;
     public static final int CHANGE_WEEK_INFO = 101;
     public static final int CHANGE_BACKGROUND = 102;
     public static final int CHANGE_COURSE_ITEM_HEIGHT = 103;
@@ -118,6 +118,9 @@ public class ScheduleConfigFragment extends BaseBindingFragment<FragmentSchedule
                 case CHANGE_BACKGROUND:
                     chooseBackgroundPicture();
                     break;
+                case CHANGE_SCHEDULE_NAME:
+                    modifyScheduleName();
+                    break;
                 default:
                     break;
             }
@@ -134,12 +137,7 @@ public class ScheduleConfigFragment extends BaseBindingFragment<FragmentSchedule
                 }, null).show());
 
 
-        t.scheduleNameItem.setOnClickListener(v -> BtmDialogs.showEditBtmDialog(activity(), schedule.name, true, s -> {
-            schedule.name = s;
-            t.courseNameSubTitle.setText(s);
-            Toasts.toast(getString(R.string.update_success));
-            scheduleViewModel.updateSchedule(schedule);
-        }));
+        t.scheduleNameItem.setOnClickListener(v -> modifyScheduleName());
 
 
         t.scheduleWeekInfoItem.setOnClickListener(v -> showTimeConfigDialog());
@@ -186,6 +184,15 @@ public class ScheduleConfigFragment extends BaseBindingFragment<FragmentSchedule
         bundle.putInt(SCHEDULE_ID, scheduleId);
         t.export.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.action_scheduleConfigFragment_to_scheduleDataExport, bundle));
 
+    }
+
+    private void modifyScheduleName() {
+        CommonDialogs.getEditDialog(activity(), schedule.name, true, s -> {
+            schedule.name = s;
+            globalT.courseNameSubTitle.setText(s);
+            Toasts.toast(getString(R.string.update_success));
+            scheduleViewModel.updateSchedule(schedule);
+        }, null);
     }
 
 

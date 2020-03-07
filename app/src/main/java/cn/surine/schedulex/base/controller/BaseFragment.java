@@ -98,4 +98,9 @@ public abstract class BaseFragment extends Fragment {
     protected void statusBarUi() {
         StatusBars.setStatusBarUI(activity(), true);
     }
+
+
+    public BaseFragment fragment() {
+        return this;
+    }
 }

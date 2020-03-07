@@ -4,7 +4,6 @@ import android.annotation.SuppressLint;
 import android.text.TextUtils;
 
 import androidx.annotation.Keep;
-import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import java.util.ArrayList;
@@ -23,7 +22,6 @@ import cn.surine.schedulex.data.entity.Schedule;
 @Keep
 public class ScheduleViewModel extends ViewModel {
 
-    private MutableLiveData<List<Course>> courseList;
 
     private ScheduleRepository scheduleRepository;
 
@@ -35,7 +33,7 @@ public class ScheduleViewModel extends ViewModel {
     /**
      * 添加课表
      */
-    public long addSchedule(String name, int totalWeek, int curWeek,int source) {
+    public long addSchedule(String name, int totalWeek, int curWeek, int source) {
         Schedule schedule = new Schedule();
         schedule.name = name;
         schedule.totalWeek = totalWeek == 0 ? 24 : totalWeek;
@@ -88,7 +86,7 @@ public class ScheduleViewModel extends ViewModel {
             //处理每周数据
             for (int j = 0; j < unHandleData.get(i).size(); j++) {
                 Course course = unHandleData.get(i).get(j);
-                if(TextUtils.isEmpty(course.classDay)){
+                if (TextUtils.isEmpty(course.classDay)) {
                     continue;
                 }
                 if (!(Strs.equals(course.classDay, "6") || Strs.equals(course.classDay, "7"))) {
@@ -106,7 +104,7 @@ public class ScheduleViewModel extends ViewModel {
 
     //按照tust课时操作来实现
     private int divide(String classSessions) {
-        return (Integer.parseInt(classSessions) + 1) /2;
+        return (Integer.parseInt(classSessions) + 1) / 2;
     }
 
     public List<Schedule> getSchedules() {
@@ -114,11 +112,11 @@ public class ScheduleViewModel extends ViewModel {
     }
 
 
-
     /**
      * 更新课表
+     *
      * @param schedule 课表
-     * */
+     */
     public void updateSchedule(Schedule schedule) {
         scheduleRepository.updateSchedule(schedule);
     }
@@ -126,7 +124,7 @@ public class ScheduleViewModel extends ViewModel {
 
     /**
      * 获取课表数量
-     * */
+     */
     public int getSchedulesNumber() {
         return scheduleRepository.getSchedulesNumber();
     }

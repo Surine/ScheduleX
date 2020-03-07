@@ -3,14 +3,18 @@ package cn.surine.schedulex.ui.view.custom.helper;
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.app.TimePickerDialog;
 import android.content.Context;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import cn.surine.schedulex.R;
 import cn.surine.schedulex.base.interfaces.Call;
+import cn.surine.schedulex.base.interfaces.DCall;
 
 /**
  * Intro：
@@ -101,5 +105,58 @@ public class CommonDialogs {
          * @param term      学期
          */
         void onClick(int startYear, int term);
+    }
+
+
+    /**
+     * 修改框
+     *
+     * @param context
+     * @param text       文本
+     * @param dCall      确认call
+     * @param cancelCall 取消call
+     */
+    public static Dialog getEditDialog(Context context, String text, boolean isText, DCall<String> dCall, Call cancelCall) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        View view = LayoutInflater.from(context).inflate(R.layout.view_edit_layout,
+                null);
+        builder.setView(view);
+        Dialog dialog = builder.create();
+        dialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
+        dialog.getWindow().setWindowAnimations(R.style.DialogAnimations);
+
+        EditText editText = view.findViewById(R.id.editText);
+        if (!isText) {
+            editText.setHint(text);
+        } else {
+            editText.setText(text);
+        }
+
+        Button okBtn = view.findViewById(R.id.ok);
+        Button cancelBtn = view.findViewById(R.id.cancel);
+        okBtn.setOnClickListener(v -> {
+            if (dCall != null && !TextUtils.isEmpty(editText.getText().toString())) {
+                dCall.back(editText.getText().toString());
+            }
+            dialog.dismiss();
+        });
+        cancelBtn.setOnClickListener(v -> {
+            if (cancelCall != null) {
+                cancelCall.back();
+            }
+            dialog.dismiss();
+        });
+        dialog.show();
+        return dialog;
+    }
+
+
+    /**
+     * 时间选择框
+     */
+    public static Dialog timePickerDialog(Context context, String title, int hour, int minute, TimePickerDialog.OnTimeSetListener onTimeSetListener) {
+        TimePickerDialog dialog = new TimePickerDialog(context, onTimeSetListener, hour, minute, true);
+        dialog.setTitle(title);
+        return dialog;
     }
 }

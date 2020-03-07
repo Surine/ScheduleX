@@ -52,6 +52,9 @@
             app:destination="@id/scheduleDataExport"
             app:enterAnim="@anim/fragment_open_enter"
             app:popEnterAnim="@anim/fragment_fade_enter" />
+        <action
+            android:id="@+id/action_ScheduleListFragment_to_timeTableListFragment"
+            app:destination="@id/timeTableListFragment" />
     </fragment>
     <fragment
         android:id="@+id/dataFetchFragment"
@@ -135,4 +138,16 @@
             app:enterAnim="@anim/fragment_open_enter"
             app:popEnterAnim="@anim/fragment_open_enter" />
     </fragment>
+    <fragment
+        android:id="@+id/timeTableListFragment"
+        android:name="cn.surine.schedulex.ui.timetable_list.TimeTableListFragment"
+        android:label="TimeTableListFragment">
+        <action
+            android:id="@+id/action_timeTableListFragment_to_addTimeTableFragment"
+            app:destination="@id/addTimeTableFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/addTimeTableFragment"
+        android:name="cn.surine.schedulex.ui.add_timetable.AddTimeTableFragment"
+        android:label="AddTimeTableFragment" />
 </navigation>

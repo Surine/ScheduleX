@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+    </data>
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/main_back_color"
+        android:fitsSystemWindows="true">
+
+        <cn.surine.schedulex.ui.view.custom.helper.TopBar
+            android:id="@+id/topbar"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp100"
+            app:title="时间表" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/viewRecycler"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="120dp"
+            android:layout_marginBottom="@dimen/dp16"
+            android:paddingBottom="@dimen/dp16"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+
+
+        <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+            android:id="@+id/addTimeTable"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|end"
+            android:layout_margin="@dimen/dp16"
+            android:backgroundTint="@color/colorPrimary"
+            android:text="ADD TIMETABLE"
+            android:textColor="@android:color/white"
+            app:icon="@drawable/ic_add_black_24dp"
+            app:iconTint="@android:color/white" />
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+</layout>

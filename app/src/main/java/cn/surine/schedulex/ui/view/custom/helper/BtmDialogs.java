@@ -4,13 +4,9 @@ import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.text.TextUtils;
 import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 
@@ -36,61 +32,28 @@ public class BtmDialogs {
 
     /**
      * 获取一个底部弹窗的基础UI
-     * */
-    public static void getBaseConfig(Context context,View view,DCall<View> showCall){
-        BottomSheetDialog bt = new BottomSheetDialog(context,R.style.BottomSheetDialogTheme);
+     */
+    public static void getBaseConfig(Context context, View view, DCall<View> showCall) {
+        BottomSheetDialog bt = new BottomSheetDialog(context, R.style.BottomSheetDialogTheme);
         bt.getWindow().findViewById(R.id.design_bottom_sheet).setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         bt.setDismissWithAnimation(true);
         bt.setContentView(view);
         view.animate().translationY(50);
-        if(showCall != null){
+        if (showCall != null) {
             showCall.back(view);
         }
         bt.show();
     }
 
 
-
-
-    /**
-     * 显示一个编辑底部框
-     *
-     * @param context 上下文
-     * @param dcall   数据回调
-     */
-    public static void showEditBtmDialog(Context context, String txt,boolean isText, DCall<String> dcall) {
-        BottomSheetDialog bt = new BottomSheetDialog(context,R.style.BottomSheetDialogTheme);
-        View view;
-        bt.setContentView(view = Uis.inflate(context, R.layout.view_edit_layout));
-        bt.setDismissWithAnimation(true);
-        bt.getWindow().findViewById(R.id.design_bottom_sheet).setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-        bt.show();
-        EditText editText = view.findViewById(R.id.editText);
-        if(isText){
-            editText.setText(txt);
-        }else{
-            editText.setHint(txt);
-        }
-        Button button = view.findViewById(R.id.button);
-        button.setOnClickListener(v1 -> {
-            String s = editText.getText().toString();
-            if (!TextUtils.isEmpty(s)) {
-                bt.dismiss();
-                dcall.back(s);
-            }
-        });
-    }
-
-
-
     /**
      * 显示课详情
      *
      * @param baseFragment 上下文
-     * @param course  课程
+     * @param course       课程
      */
     public static void showCourseInfoBtmDialog(BaseFragment baseFragment, Course course) {
-        BottomSheetDialog bt = new BottomSheetDialog(baseFragment.activity(),R.style.BottomSheetDialogTheme);
+        BottomSheetDialog bt = new BottomSheetDialog(baseFragment.activity(), R.style.BottomSheetDialogTheme);
         View view;
         bt.setContentView(view = Uis.inflate(baseFragment.activity(), R.layout.view_course_info));
         bt.getWindow().findViewById(R.id.design_bottom_sheet).setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
@@ -112,12 +75,12 @@ public class BtmDialogs {
         courseTeacher.setText(course.teacherName == null ? App.context.getResources().getString(R.string.unknown) : course.teacherName);
         courseScore.setText(course.xf + "分");
         courseWeekInfo.setText(course.getWeekDescription());
-        courseSession.setBackground(Drawables.getDrawable(Color.parseColor(course.color),180,0,0));
-        courseClassDay.setBackground(Drawables.getDrawable(App.context.getResources().getColor(R.color.colorPrimary),180,0,0));
+        courseSession.setBackground(Drawables.getDrawable(Color.parseColor(course.color), 180, 0, 0));
+        courseClassDay.setBackground(Drawables.getDrawable(App.context.getResources().getColor(R.color.colorPrimary), 180, 0, 0));
         Bundle bundle = new Bundle();
-        bundle.putString(COURSE_ID,course.id);
+        bundle.putString(COURSE_ID, course.id);
         edit.setOnClickListener(v -> {
-            Navigations.open(baseFragment,R.id.action_scheduleFragment_to_addCourseFragment,bundle);
+            Navigations.open(baseFragment, R.id.action_scheduleFragment_to_addCourseFragment, bundle);
             bt.dismiss();
         });
     }

@@ -23,8 +23,7 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/dp100"
             android:layout_marginTop="@dimen/dp100"
-            android:visibility="gone"
-            >
+            android:visibility="gone">
 
 
             <TextView
@@ -92,7 +91,7 @@
             android:layout_gravity="bottom|end"
             android:layout_margin="@dimen/dp16"
             android:backgroundTint="@color/colorPrimary"
-            android:text="Add Schedule"
+            android:text="@string/add_schedule"
             android:textColor="@android:color/white"
             app:icon="@drawable/ic_add_black_24dp"
             app:iconTint="@android:color/white" />

@@ -16,7 +16,11 @@ import java.util.Date;
 public class Dates {
 
     public static final String yyyyMMdd = "yyyy-MM-dd";
+    public static final String HHmm = "HH:mm";
     public static final long ONE_DAY = 24 * 60 * 60 * 1000;
+    public static final long ONE_MIN = 60 * 1000;
+    public static final long ONE_HOUR = ONE_MIN * 60;
+
 
     /**
      * 获取今天星期几的数字
@@ -24,8 +28,8 @@ public class Dates {
      */
     public static int getWeekDay() {
         Calendar cal = Calendar.getInstance();
-        int day =  cal.get(Calendar.DAY_OF_WEEK);
-        if(day == 1){
+        int day = cal.get(Calendar.DAY_OF_WEEK);
+        if (day == 1) {
             return 7;
         }
         return day - 1;
@@ -142,7 +146,43 @@ public class Dates {
     }
 
 
+    /**
+     * 根据时间戳返回时间字符串
+     *
+     * @param time   时间戳
+     * @param format 表达式
+     */
+    public static String getDateStringByStamp(long time, String format) {
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(format);
+        return simpleDateFormat.format(time);
+    }
 
 
+    /**
+     * 将分为单位的时间转换为 HH:mm格式
+     */
+    public static String getTransformTimeNumber(long time) {
+        time %= 60 * 24;
+        long s1 = time / 60;
+        long s2 = time - s1 * 60;
+        StringBuilder stringBuilder = new StringBuilder();
+        if (s1 < 10) {
+            stringBuilder.append("0");
+        }
+        stringBuilder.append(s1).append(":");
+        if (s2 < 10) {
+            stringBuilder.append("0");
+        }
+        stringBuilder.append(s2);
+        return stringBuilder.toString();
+    }
+
+
+    /**
+     * 将HH:mm的时间转换为分为单位的数字
+     */
+    public static long getTransformTimeString(String time) {
+        return Integer.parseInt(time.split(":")[0]) * 60 + Integer.parseInt(time.split(":")[1]);
+    }
 
 }

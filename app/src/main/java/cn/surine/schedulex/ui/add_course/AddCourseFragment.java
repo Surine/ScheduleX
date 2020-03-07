@@ -94,34 +94,34 @@ public class AddCourseFragment extends BaseBindingFragment<FragmentAddCourseBind
 
 
         //编辑课表名
-        t.editCourseName.setOnClickListener(v -> BtmDialogs.showEditBtmDialog(activity(), hasCourseData ? course.coureName : t.courseNameSubTitle.getText().toString(), hasCourseData, s -> {
+        t.editCourseName.setOnClickListener(v -> CommonDialogs.getEditDialog(activity(), hasCourseData ? course.coureName : t.courseNameSubTitle.getText().toString(), hasCourseData, s -> {
             course.coureName = s;
             t.courseNameSubTitle.setText(s);
-        }));
+        }, null));
 
         //编辑上课地点
-        t.editCoursePosition.setOnClickListener(v -> BtmDialogs.showEditBtmDialog(activity(), hasCourseData ? course.teachingBuildingName + course.classroomName : t.coursePositionSubtitle.getText().toString(), hasCourseData, s -> {
+        t.editCoursePosition.setOnClickListener(v -> CommonDialogs.getEditDialog(activity(), hasCourseData ? course.teachingBuildingName + course.classroomName : t.coursePositionSubtitle.getText().toString(), hasCourseData, s -> {
             course.teachingBuildingName = s;
             //如果是修改，直接保存building就可
             if (hasCourseData) {
                 course.classroomName = "";
             }
             t.coursePositionSubtitle.setText(s);
-        }));
+        }, null));
 
 
         //编辑教师姓名
-        t.editCourseTeacher.setOnClickListener(v -> BtmDialogs.showEditBtmDialog(activity(), hasCourseData ? course.teacherName : t.courseTeacherSubtitle.getText().toString(), hasCourseData, s -> {
+        t.editCourseTeacher.setOnClickListener(v -> CommonDialogs.getEditDialog(activity(), hasCourseData ? course.teacherName : t.courseTeacherSubtitle.getText().toString(), hasCourseData, s -> {
             course.teacherName = s;
             t.courseTeacherSubtitle.setText(s);
-        }));
+        }, null));
 
 
         //编辑学分
-        t.editCourseScore.setOnClickListener(v -> BtmDialogs.showEditBtmDialog(activity(), hasCourseData ? course.xf : t.courseScoreSubtitle.getText().toString(), hasCourseData, s -> {
+        t.editCourseScore.setOnClickListener(v -> CommonDialogs.getEditDialog(activity(), hasCourseData ? course.xf : t.courseScoreSubtitle.getText().toString(), hasCourseData, s -> {
             course.xf = s;
             t.courseScoreSubtitle.setText(getString(R.string.score_2_0, s));
-        }));
+        }, null));
 
         //编辑上课时间
         t.editCoursePlan.setOnClickListener(v -> showPlanTime());
@@ -179,7 +179,7 @@ public class AddCourseFragment extends BaseBindingFragment<FragmentAddCourseBind
 
 
     private void showPlanTime() {
-        BottomSheetDialog bt = new BottomSheetDialog(activity(),R.style.BottomSheetDialogTheme);
+        BottomSheetDialog bt = new BottomSheetDialog(activity(), R.style.BottomSheetDialogTheme);
         bt.setDismissWithAnimation(true);
         View view;
         bt.setContentView(view = Uis.inflate(activity(), R.layout.view_course_time_plan));

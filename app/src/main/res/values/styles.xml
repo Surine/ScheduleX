@@ -103,4 +103,12 @@
         <item name="android:backgroundDimAmount">0.6</item>
     </style>
 
+
+    <style name="SliderStyle" parent="Widget.MaterialComponents.Slider">
+        <item name="trackHeight">@dimen/dp24</item>
+        <item name="thumbRadius">@dimen/dp8</item>
+        <item name="thumbColor">@android:color/white</item>
+        <item name="tickColorActive">@android:color/transparent</item>
+        <item name="tickColorInactive">@android:color/transparent</item>
+    </style>
 </resources>

@@ -6,11 +6,11 @@ import android.view.View;
 import androidx.annotation.NonNull;
 import androidx.appcompat.widget.PopupMenu;
 import androidx.lifecycle.ViewModelProviders;
-import androidx.navigation.Navigation;
 import androidx.navigation.fragment.NavHostFragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.snackbar.Snackbar;
 import com.tencent.bugly.crashreport.CrashReport;
 
 import java.util.List;
@@ -68,7 +68,7 @@ public class ScheduleListFragment extends BaseBindingFragment<FragmentScheduleMa
 
 
         data = scheduleViewModel.getSchedules();
-        adapter = new BaseAdapter<>(data, R.layout.item_schedules, cn.surine.schedulex.BR.schedule);
+        adapter = new BaseAdapter<>(data, R.layout.item_schedule_list, cn.surine.schedulex.BR.schedule);
         t.viewRecycler.setLayoutManager(layoutManager = new LinearLayoutManager(getActivity()));
         t.viewRecycler.setAdapter(adapter);
 
@@ -89,6 +89,7 @@ public class ScheduleListFragment extends BaseBindingFragment<FragmentScheduleMa
             Long scheduleId = (long) data.get(position).roomId;
             Prefs.save(Constants.CUR_SCHEDULE, scheduleId);
             adapter.notifyDataSetChanged();
+            Snackbar.make(t.addSchedule, "切换课表成功", Snackbar.LENGTH_SHORT).show();
         });
 
 
@@ -129,6 +130,13 @@ public class ScheduleListFragment extends BaseBindingFragment<FragmentScheduleMa
             }
         });
 
+
+        adapter.setOnItemElementClickListener(new BaseAdapter.OnItemElementClickListener(R.id.chip_config_name) {
+            @Override
+            public void onClick(View v, int position) {
+                openScheduleSetting(position, ScheduleConfigFragment.CHANGE_SCHEDULE_NAME);
+            }
+        });
 
         adapter.setOnItemElementClickListener(new BaseAdapter.OnItemElementClickListener(R.id.chip_config_week) {
             @Override
@@ -171,7 +179,7 @@ public class ScheduleListFragment extends BaseBindingFragment<FragmentScheduleMa
             public void onClick(View v, int position) {
                 Bundle bundle = new Bundle();
                 bundle.putInt(SCHEDULE_ID, data.get(position).roomId);
-                NavHostFragment.findNavController(ScheduleListFragment.this).navigate(R.id.action_ScheduleListFragment_to_scheduleDataExport,bundle);
+                NavHostFragment.findNavController(ScheduleListFragment.this).navigate(R.id.action_ScheduleListFragment_to_scheduleDataExport, bundle);
             }
         });
 
@@ -190,14 +198,16 @@ public class ScheduleListFragment extends BaseBindingFragment<FragmentScheduleMa
                     View view = layoutManager.findViewByPosition(position);
                     View l2 = view.findViewById(R.id.layout_2);
                     View l3 = view.findViewById(R.id.layout_3);
-                    Uis.hide(l2,l3);
-                }catch (Exception e){
+                    Uis.hide(l2, l3);
+                } catch (Exception e) {
                     CrashReport.postCatchedException(e);
                 }
             }
         });
 
-        t.topbar.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.action_ScheduleListFragment_to_aboutFragment));
+//        t.topbar.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.action_ScheduleListFragment_to_aboutFragment));
+
+        t.topbar.setOnClickListener(v -> Navigations.open(ScheduleListFragment.this, R.id.action_ScheduleListFragment_to_timeTableListFragment));
 
         t.addSchedule.setOnClickListener(v -> {
             if (scheduleViewModel.getSchedulesNumber() < Constants.MAX_SCHEDULE_LIMIT) {
