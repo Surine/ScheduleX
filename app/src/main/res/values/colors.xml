@@ -11,6 +11,7 @@
     <color name="blue">#448AFF</color>
     <color name="chipIconTint">#000</color>
     <color name="gray">#999999</color>
+    <color name="gray2">#7C7B7B</color>
 
     //不同模式下的颜色属性值
     <color name="main_text_color_light">#000000</color>

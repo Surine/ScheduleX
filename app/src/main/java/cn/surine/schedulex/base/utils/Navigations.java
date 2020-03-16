@@ -20,4 +20,9 @@ public class Navigations {
     public static void open(Fragment fragment, int id, Bundle bundle) {
         NavHostFragment.findNavController(fragment).navigate(id, bundle);
     }
+
+    public static void close(Fragment fragment) {
+        NavHostFragment.findNavController(fragment).navigateUp();
+
+    }
 }

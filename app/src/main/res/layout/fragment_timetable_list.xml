@@ -9,14 +9,13 @@
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/main_back_color"
         android:fitsSystemWindows="true">
 
         <cn.surine.schedulex.ui.view.custom.helper.TopBar
             android:id="@+id/topbar"
             android:layout_width="match_parent"
             android:layout_height="@dimen/dp100"
-            app:title="时间表" />
+            app:title="@string/choose_timetable" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/viewRecycler"
@@ -35,7 +34,7 @@
             android:layout_gravity="bottom|end"
             android:layout_margin="@dimen/dp16"
             android:backgroundTint="@color/colorPrimary"
-            android:text="ADD TIMETABLE"
+            android:text="@string/add_timetable"
             android:textColor="@android:color/white"
             app:icon="@drawable/ic_add_black_24dp"
             app:iconTint="@android:color/white" />

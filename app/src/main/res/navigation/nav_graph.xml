@@ -52,9 +52,6 @@
             app:destination="@id/scheduleDataExport"
             app:enterAnim="@anim/fragment_open_enter"
             app:popEnterAnim="@anim/fragment_fade_enter" />
-        <action
-            android:id="@+id/action_ScheduleListFragment_to_timeTableListFragment"
-            app:destination="@id/timeTableListFragment" />
     </fragment>
     <fragment
         android:id="@+id/dataFetchFragment"
@@ -105,6 +102,11 @@
             app:destination="@id/scheduleDataExport"
             app:enterAnim="@anim/fragment_open_enter"
             app:popEnterAnim="@anim/fragment_open_enter" />
+        <action
+            android:id="@+id/action_scheduleConfigFragment_to_timeTableListFragment"
+            app:destination="@id/timeTableListFragment"
+            app:enterAnim="@anim/fragment_open_enter"
+            app:popEnterAnim="@anim/fragment_open_enter" />
     </fragment>
     <fragment
         android:id="@+id/aboutFragment"
@@ -144,7 +146,9 @@
         android:label="TimeTableListFragment">
         <action
             android:id="@+id/action_timeTableListFragment_to_addTimeTableFragment"
-            app:destination="@id/addTimeTableFragment" />
+            app:destination="@id/addTimeTableFragment"
+            app:enterAnim="@anim/fragment_open_enter"
+            app:popEnterAnim="@anim/fragment_open_enter" />
     </fragment>
     <fragment
         android:id="@+id/addTimeTableFragment"

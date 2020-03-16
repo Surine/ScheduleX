@@ -41,7 +41,18 @@ public class TimeTableRepository extends BaseRepository {
     /**
      * 通过id查询时间表
      */
-    public TimeTable getTimeTableById(int id) {
+    public TimeTable getTimeTableById(long id) {
         return appDatabase.timeTableDao().getById(id);
+    }
+
+    /**
+     * 更新时间表
+     * */
+    public void updateTimeTable(TimeTable timeTable) {
+        appDatabase.timeTableDao().update(timeTable);
+    }
+
+    public void deleteTimeTableById(int roomId) {
+        appDatabase.timeTableDao().delete(roomId);
     }
 }

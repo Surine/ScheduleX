@@ -39,6 +39,7 @@ public class ScheduleViewModel extends ViewModel {
         schedule.totalWeek = totalWeek == 0 ? 24 : totalWeek;
         schedule.itemHeight = Uis.getRecommendHeightItem();
         schedule.importWay = source;
+        schedule.isShowWeekend = true;
         schedule.color = Constants.COLOR_1[new Random(System.currentTimeMillis()).nextInt(Constants.COLOR_1.length)];
         schedule.termStartDate = Dates.getTermStartDate(curWeek == 0 ? 1 : curWeek);
         return scheduleRepository.addSchedule(schedule);

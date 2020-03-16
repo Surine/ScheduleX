@@ -11,14 +11,14 @@
         android:orderInCategory="100"
         android:title="删除课表"
         app:showAsAction="never" />
-    <item
-        android:id="@+id/popup_menu_action_3"
-        android:orderInCategory="100"
-        android:title="导入课表配置"
-        app:showAsAction="never" />
+    <!--    <item-->
+    <!--        android:id="@+id/popup_menu_action_3"-->
+    <!--        android:orderInCategory="100"-->
+    <!--        android:title="导入课表"-->
+    <!--        app:showAsAction="never" />-->
     <item
         android:id="@+id/popup_menu_action_4"
         android:orderInCategory="100"
-        android:title="导出课表配置"
+        android:title="导出课表"
         app:showAsAction="never" />
 </menu>

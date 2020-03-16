@@ -3,10 +3,10 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:paddingTop="@dimen/dp16"
-    android:paddingBottom="@dimen/dp4"
     android:background="@drawable/shape_rect_10_white"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:paddingTop="@dimen/dp16"
+    android:paddingBottom="@dimen/dp4">
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline17"
@@ -34,9 +34,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="提示"
-        android:textStyle="bold"
         android:textColor="@android:color/black"
         android:textSize="@dimen/t22"
+        android:textStyle="bold"
         app:layout_constraintStart_toStartOf="@+id/guideline17"
         app:layout_constraintTop_toTopOf="@+id/guideline34" />
 
@@ -46,7 +46,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/dp16"
         android:text="提示信息"
-        android:textColor="@android:color/black"
+        android:textColor="@color/text"
         android:textSize="@dimen/t17"
         app:layout_constraintEnd_toStartOf="@+id/guideline33"
         app:layout_constraintStart_toStartOf="@+id/guideline17"

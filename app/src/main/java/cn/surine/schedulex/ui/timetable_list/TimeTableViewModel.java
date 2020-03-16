@@ -28,7 +28,31 @@ public class TimeTableViewModel extends ViewModel {
     /**
      * 获取时间表
      */
-    public TimeTable getTimTableById(int i) {
+    public TimeTable getTimTableById(long i) {
         return timeTableRepository.getTimeTableById(i);
+    }
+
+
+    /**
+     * 添加时间表
+     */
+    public void addTimeTable(TimeTable timeTable) {
+        timeTableRepository.insertTimeTable(timeTable);
+    }
+
+
+    /**
+     * 更新时间表
+     */
+    public void updateTimeTable(TimeTable timeTable) {
+        timeTableRepository.updateTimeTable(timeTable);
+    }
+
+
+    /**
+     * 删除时间表
+     */
+    public void deleteTimeTableById(int roomId) {
+        timeTableRepository.deleteTimeTableById(roomId);
     }
 }

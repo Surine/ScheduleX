@@ -56,6 +56,7 @@
                     android:layout_width="0dp"
                     android:layout_height="@dimen/dp50"
                     android:layout_marginTop="@dimen/dp24"
+                    android:background="?selectableItemBackground"
                     app:layout_constraintLeft_toLeftOf="@id/textInputLayout"
                     app:layout_constraintRight_toRightOf="@id/textInputLayout"
                     app:layout_constraintTop_toBottomOf="@id/textInputLayout">
@@ -80,15 +81,22 @@
                         android:text="50分钟" />
                 </LinearLayout>
 
-                <com.google.android.material.slider.Slider
-                    android:id="@+id/slider"
-                    style="@style/SliderStyle"
-                    android:layout_width="0dp"
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/add_session"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:stepSize="5"
-                    android:valueFrom="10"
-                    android:valueTo="120"
-                    app:layout_constraintLeft_toLeftOf="@id/textInputLayout"
+                    android:layout_marginTop="@dimen/dp20"
+                    android:layout_marginEnd="@dimen/dp5"
+                    android:layout_marginBottom="@dimen/dp20"
+                    android:backgroundTint="@color/colorAccent"
+                    android:drawableLeft="@drawable/ic_add_black_24dp"
+                    android:drawablePadding="@dimen/dp10"
+                    android:drawableTint="@android:color/white"
+                    android:gravity="center_vertical"
+                    android:text="添加一节"
+                    android:textSize="16sp"
+                    app:cornerRadius="@dimen/dp180"
+                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintRight_toRightOf="@id/textInputLayout"
                     app:layout_constraintTop_toBottomOf="@id/setting_item_every_session_time" />
 
@@ -101,8 +109,6 @@
                 android:layout_marginStart="@dimen/dp24"
                 android:layout_marginEnd="@dimen/dp24"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintLeft_toLeftOf="@id/textInputLayout"
-                app:layout_constraintRight_toRightOf="@id/textInputLayout"
                 app:layout_constraintTop_toBottomOf="@+id/constraintLayout" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -111,11 +117,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|end"
-            android:layout_margin="@dimen/dp16"
+            android:layout_marginEnd="@dimen/dp24"
+            android:layout_marginBottom="@dimen/dp32"
             android:backgroundTint="@color/colorPrimary"
-            android:text="Save TimeTable"
+            android:text="保存"
             android:textColor="@android:color/white"
-            app:icon="@drawable/ic_settings_black_24dp"
+            app:icon="@drawable/ic_check_black_24dp"
             app:iconTint="@android:color/white" />
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>

@@ -11,9 +11,11 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="@dimen/dp80"
+        android:layout_height="60dp"
         android:background="?selectableItemBackground"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:paddingStart="@dimen/dp5"
+        android:paddingEnd="@dimen/dp5">
 
         <TextView
             android:id="@+id/position"

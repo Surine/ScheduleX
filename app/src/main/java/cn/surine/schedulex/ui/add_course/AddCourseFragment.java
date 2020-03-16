@@ -182,11 +182,11 @@ public class AddCourseFragment extends BaseBindingFragment<FragmentAddCourseBind
         BottomSheetDialog bt = new BottomSheetDialog(activity(), R.style.BottomSheetDialogTheme);
         bt.setDismissWithAnimation(true);
         View view;
-        bt.setContentView(view = Uis.inflate(activity(), R.layout.view_course_time_plan));
+        bt.setContentView(view = Uis.inflate(activity(), R.layout.view_base_btm_dialog_ui));
         bt.getWindow().findViewById(R.id.design_bottom_sheet).setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         bt.show();
         view.animate().translationY(50);
-        FrameLayout frameLayout = view.findViewById(R.id.view_course_time_plan);
+        FrameLayout frameLayout = view.findViewById(R.id.view_base_btm_dialog_ui);
         frameLayout.addView(getWeekView(frameLayout, bt));
     }
 
@@ -275,12 +275,12 @@ public class AddCourseFragment extends BaseBindingFragment<FragmentAddCourseBind
      * 获取周view
      */
     private View getDayView(FrameLayout frameLayout, BottomSheetDialog bt) {
-        View dayView = Uis.inflate(activity(), R.layout.view_day_choose);
+        View dayView = Uis.inflate(activity(), R.layout.view_number_picker);
         NumberPicker numberPicker = dayView.findViewById(R.id.number_picker);
-        String[] city = {"星期一", "星期二", "星期三", "星期四", "星期五"};
-        numberPicker.setDisplayedValues(city);
+        String[] weeks = {"星期一", "星期二", "星期三", "星期四", "星期五", "星期六", "星期日"};
+        numberPicker.setDisplayedValues(weeks);
         numberPicker.setMinValue(0);
-        numberPicker.setMaxValue(city.length - 1);
+        numberPicker.setMaxValue(weeks.length - 1);
         if (hasCourseData && Strs.isNotEmpty(course.classDay)) {
             numberPicker.setValue(Integer.parseInt(course.classDay) - 1);
         }
@@ -324,7 +324,7 @@ public class AddCourseFragment extends BaseBindingFragment<FragmentAddCourseBind
         sessionOk.setOnClickListener(v -> {
             String result_1 = s1[npForStartSession.getValue()];
             String result_2 = s2[npForContinueSession.getValue()];
-            if (Integer.parseInt(result_1) + Integer.parseInt(result_2) - 1 <= Constants.MAX_SESSION) {
+            if (Integer.parseInt(result_1) + Integer.parseInt(result_2) - 1 <= schedule.maxSession) {
                 course.classSessions = result_1;
                 course.continuingSession = result_2;
                 bt.dismiss();

@@ -49,4 +49,23 @@ public class TimeTable extends BaseVm {
                 ", rule='" + rule + '\'' +
                 '}';
     }
+
+
+    /**
+     * 获取时间表支持的节数
+     */
+    public int getSessionNum() {
+        return rule.split(",").length / 2;
+    }
+
+    /**
+     * 默认时间表
+     */
+    public static TimeTable tedaNormal() {
+        TimeTable timeTable = new TimeTable("默认时间表_1");
+        timeTable.roomId = 0;
+        timeTable.startTime = 8 * 60 + 20;
+        timeTable.rule = "45,10,45,20,45,10,45,120,45,10,45,15,45,10,45,55,45,10,45,15,45,10,45,0";
+        return timeTable;
+    }
 }

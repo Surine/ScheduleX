@@ -107,10 +107,10 @@
         <ScrollView
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:scrollbars="none"
-            app:layout_constraintEnd_toStartOf="@+id/guideline22"
-            app:layout_constraintBottom_toBottomOf="parent"
             android:layout_marginBottom="@dimen/dp24"
+            android:scrollbars="none"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/guideline22"
             app:layout_constraintStart_toStartOf="@+id/guideline21"
             app:layout_constraintTop_toTopOf="@+id/guideline29">
 
@@ -118,6 +118,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
+
                 <LinearLayout
                     android:id="@+id/linearLayout4"
                     android:layout_width="match_parent"
@@ -212,6 +213,48 @@
 
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/scheduleTimeTableItem"
+                        style="@style/setting_item_ui">
+
+                        <TextView
+                            android:id="@+id/textView_time_table_title"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/dp8"
+                            android:layout_marginTop="@dimen/dp8"
+                            android:text="@string/timetable_info"
+                            android:textColor="@android:color/black"
+                            android:textSize="18sp"
+                            android:textStyle="bold"
+                            app:layout_constraintLeft_toLeftOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+
+                        <TextView
+                            android:id="@+id/textView_time_table_subtitle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/dp8"
+                            android:layout_marginBottom="@dimen/dp16"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toStartOf="@+id/textView_time_table_title"
+                            app:layout_constraintTop_toBottomOf="@+id/textView_time_table_title" />
+
+                        <ImageView
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:layout_marginEnd="8dp"
+                            app:layout_constraintBottom_toBottomOf="@+id/textView_time_table_subtitle"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="@+id/textView_time_table_title"
+                            app:srcCompat="@mipmap/ic_more" />
+
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
 
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:id="@+id/scheduleImportItem"
@@ -479,7 +522,6 @@
                             app:srcCompat="@drawable/ic_format_list_numbered_black_24dp" />
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
-
 
 
                     <androidx.constraintlayout.widget.ConstraintLayout

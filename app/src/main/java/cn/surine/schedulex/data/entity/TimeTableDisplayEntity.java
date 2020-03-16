@@ -21,4 +21,20 @@ public class TimeTableDisplayEntity {
     public String displaySession() {
         return "第" + session + "节";
     }
+
+
+    public TimeTableDisplayEntity setSession(int session) {
+        this.session = session;
+        return this;
+    }
+
+    public TimeTableDisplayEntity setStartTime(String startTime) {
+        this.startTime = startTime;
+        return this;
+    }
+
+    public TimeTableDisplayEntity setEndTime(String endTime) {
+        this.endTime = endTime;
+        return this;
+    }
 }

@@ -38,6 +38,7 @@ import cn.surine.schedulex.base.utils.Dates;
 import cn.surine.schedulex.base.utils.Files;
 import cn.surine.schedulex.base.utils.InstanceFactory;
 import cn.surine.schedulex.base.utils.MySeekBarChangeListener;
+import cn.surine.schedulex.base.utils.Navigations;
 import cn.surine.schedulex.base.utils.Prefs;
 import cn.surine.schedulex.base.utils.Toasts;
 import cn.surine.schedulex.base.utils.Uis;
@@ -48,6 +49,8 @@ import cn.surine.schedulex.ui.course.CourseViewModel;
 import cn.surine.schedulex.ui.schedule.ScheduleRepository;
 import cn.surine.schedulex.ui.schedule.ScheduleViewModel;
 import cn.surine.schedulex.ui.schedule_list.ScheduleListFragment;
+import cn.surine.schedulex.ui.timetable_list.TimeTableRepository;
+import cn.surine.schedulex.ui.timetable_list.TimeTableViewModel;
 import cn.surine.schedulex.ui.view.custom.helper.CommonDialogs;
 
 import static android.app.Activity.RESULT_OK;
@@ -75,6 +78,7 @@ public class ScheduleConfigFragment extends BaseBindingFragment<FragmentSchedule
     private int mSettingItemTag;
 
     public static final String SCHEDULE_ID = "SCHEDULE_ID";
+    private TimeTableViewModel timeTableViewModel;
 
     @Override
     public int layoutId() {
@@ -93,6 +97,10 @@ public class ScheduleConfigFragment extends BaseBindingFragment<FragmentSchedule
         Class[] classesForCourse = new Class[]{CourseRepository.class};
         Object[] argsForCourse = new Object[]{CourseRepository.abt.getInstance()};
         courseViewModel = ViewModelProviders.of(this, InstanceFactory.getInstance(classesForCourse, argsForCourse)).get(CourseViewModel.class);
+
+        Class[] classesForTimeTable = new Class[]{TimeTableRepository.class};
+        Object[] argsForTimeTable = new Object[]{TimeTableRepository.abt.getInstance()};
+        timeTableViewModel = ViewModelProviders.of(this, InstanceFactory.getInstance(classesForTimeTable, argsForTimeTable)).get(TimeTableViewModel.class);
 
         scheduleId = getArguments() == null ? -1 : getArguments().getInt(SCHEDULE_ID);
 
@@ -141,6 +149,17 @@ public class ScheduleConfigFragment extends BaseBindingFragment<FragmentSchedule
 
 
         t.scheduleWeekInfoItem.setOnClickListener(v -> showTimeConfigDialog());
+
+        t.scheduleTimeTableItem.setOnClickListener(v -> {
+            Bundle bundle = new Bundle();
+            bundle.putLong(ScheduleConfigFragment.SCHEDULE_ID, scheduleId);
+            Navigations.open(ScheduleConfigFragment.this, R.id.action_scheduleConfigFragment_to_timeTableListFragment, bundle);
+        });
+        try {
+            t.textViewTimeTableSubtitle.setText(timeTableViewModel.getTimTableById(schedule.timeTableId).name);
+        } catch (Exception e) {
+            t.textViewTimeTableSubtitle.setText("No Data");
+        }
 
         t.scheduleBackgroundItem.setOnClickListener(v -> chooseBackgroundPicture());
         t.scheduleBackgroundItem.setOnLongClickListener(v -> {

@@ -57,8 +57,10 @@ public class Constants {
     public static final int MAX_SCHEDULE_LIMIT = 5;
     public static final String APP_WIDGET_ID = "app_widget_id";
     public static final String NEXT_DAY_STATUS = "NEXT_DAY_STATUS_";
+    public static final String ADD_NORMAL_TIMETABLE = "add_normal_timetable";
 
     //强制最大周
     public static int MAX_WEEK = 30;
-    public static int MAX_SESSION = 12;
+    public static int STAND_SESSION = 12;
+    public static int MAX_SESSION = 20;
 }

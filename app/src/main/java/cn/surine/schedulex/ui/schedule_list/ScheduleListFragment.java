@@ -87,9 +87,11 @@ public class ScheduleListFragment extends BaseBindingFragment<FragmentScheduleMa
 
         adapter.setOnItemClickListener(position -> {
             Long scheduleId = (long) data.get(position).roomId;
-            Prefs.save(Constants.CUR_SCHEDULE, scheduleId);
-            adapter.notifyDataSetChanged();
-            Snackbar.make(t.addSchedule, "切换课表成功", Snackbar.LENGTH_SHORT).show();
+            if (!Prefs.getLong(Constants.CUR_SCHEDULE, -1L).equals(scheduleId)) {
+                Prefs.save(Constants.CUR_SCHEDULE, scheduleId);
+                adapter.notifyDataSetChanged();
+                Snackbar.make(t.addSchedule, R.string.timetable_switched_successfully, Snackbar.LENGTH_SHORT).show();
+            }
         });
 
 
@@ -110,7 +112,7 @@ public class ScheduleListFragment extends BaseBindingFragment<FragmentScheduleMa
             @Override
             public void onClick(View v, int position) {
                 PopupMenu popupMenu = new PopupMenu(getContext(), v);
-                popupMenu.getMenuInflater().inflate(R.menu.popup_menu_main, popupMenu.getMenu());
+                popupMenu.getMenuInflater().inflate(R.menu.popup_menu_schedule, popupMenu.getMenu());
                 popupMenu.setOnMenuItemClickListener(item -> {
                     switch (item.getItemId()) {
                         case R.id.popup_menu_action_1:
@@ -119,9 +121,8 @@ public class ScheduleListFragment extends BaseBindingFragment<FragmentScheduleMa
                         case R.id.popup_menu_action_2:
                             deleteSchedule(position);
                             break;
-                        case R.id.popup_menu_action_3:
                         case R.id.popup_menu_action_4:
-                            Toasts.toast("暂不支持");
+                            exportCourse(position);
                             break;
                     }
                     return false;
@@ -207,8 +208,6 @@ public class ScheduleListFragment extends BaseBindingFragment<FragmentScheduleMa
 
 //        t.topbar.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.action_ScheduleListFragment_to_aboutFragment));
 
-        t.topbar.setOnClickListener(v -> Navigations.open(ScheduleListFragment.this, R.id.action_ScheduleListFragment_to_timeTableListFragment));
-
         t.addSchedule.setOnClickListener(v -> {
             if (scheduleViewModel.getSchedulesNumber() < Constants.MAX_SCHEDULE_LIMIT) {
                 Navigations.open(ScheduleListFragment.this, R.id.action_ScheduleListFragment_to_scheduleInitFragment);
@@ -216,6 +215,12 @@ public class ScheduleListFragment extends BaseBindingFragment<FragmentScheduleMa
                 Toasts.toast(getString(R.string.no_permission_to_add));
             }
         });
+    }
+
+    private void exportCourse(int position) {
+        Bundle bundle = new Bundle();
+        bundle.putInt(SCHEDULE_ID, data.get(position).roomId);
+        NavHostFragment.findNavController(ScheduleListFragment.this).navigate(R.id.action_ScheduleListFragment_to_scheduleDataExport, bundle);
     }
 
 
@@ -232,7 +237,8 @@ public class ScheduleListFragment extends BaseBindingFragment<FragmentScheduleMa
                         scheduleViewModel.deleteScheduleById(data.get(position).roomId);
                         courseViewModel.deleteCourseByScheduleId(data.get(position).roomId);
                         Toasts.toast(getString(R.string.schedule_is_delete));
-                        adapter.notifyItemRemoved(position);
+                        data.remove(position);
+                        adapter.notifyDataSetChanged();
                     }, null).show();
 
         }

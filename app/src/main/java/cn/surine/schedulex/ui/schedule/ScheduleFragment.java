@@ -30,16 +30,17 @@ import cn.surine.schedulex.base.utils.InstanceFactory;
 import cn.surine.schedulex.base.utils.MySeekBarChangeListener;
 import cn.surine.schedulex.base.utils.Prefs;
 import cn.surine.schedulex.base.utils.StatusBars;
-import cn.surine.schedulex.base.utils.Toasts;
 import cn.surine.schedulex.base.utils.Uis;
 import cn.surine.schedulex.data.entity.Course;
 import cn.surine.schedulex.data.entity.Schedule;
+import cn.surine.schedulex.data.entity.TimeTable;
 import cn.surine.schedulex.databinding.FragmentScheduleBinding;
 import cn.surine.schedulex.ui.course.CourseRepository;
 import cn.surine.schedulex.ui.course.CourseViewModel;
 import cn.surine.schedulex.ui.timer.TimerRepository;
 import cn.surine.schedulex.ui.timer.TimerViewModel;
-import cn.surine.schedulex.ui.view.custom.helper.CommonDialogs;
+import cn.surine.schedulex.ui.timetable_list.TimeTableRepository;
+import cn.surine.schedulex.ui.timetable_list.TimeTableViewModel;
 import cn.surine.schedulex.ui.view.custom.helper.ZoomOutPageTransformer;
 import co.mobiwise.materialintro.shape.Focus;
 import co.mobiwise.materialintro.shape.FocusGravity;
@@ -86,6 +87,7 @@ public class ScheduleFragment extends BaseBindingFragment<FragmentScheduleBindin
             Prefs.save(Constants.IS_FIRST, true);
         }
 
+
         Class[] classesForCourse = new Class[]{CourseRepository.class};
         Object[] argsForCourse = new Object[]{CourseRepository.abt.getInstance()};
         CourseViewModel courseViewModel = ViewModelProviders.of(this, InstanceFactory.getInstance(classesForCourse, argsForCourse)).get(CourseViewModel.class);
@@ -99,6 +101,18 @@ public class ScheduleFragment extends BaseBindingFragment<FragmentScheduleBindin
         Object[] argsForSchedule = new Object[]{ScheduleRepository.abt.getInstance()};
         ScheduleViewModel scheduleViewModel = ViewModelProviders.of(this, InstanceFactory.getInstance(classesForSchedule, argsForSchedule)).get(ScheduleViewModel.class);
 
+
+        Class[] classesForTimeTable = new Class[]{TimeTableRepository.class};
+        Object[] argsForTimeTable = new Object[]{TimeTableRepository.abt.getInstance()};
+        TimeTableViewModel timeTableViewModel = ViewModelProviders.of(this, InstanceFactory.getInstance(classesForTimeTable, argsForTimeTable)).get(TimeTableViewModel.class);
+
+
+        //初始化的时候添加时间表，但是不会重复添加
+        if (!Prefs.getBoolean(Constants.ADD_NORMAL_TIMETABLE, false)) {
+            timeTableViewModel.addTimeTable(TimeTable.tedaNormal());
+            Prefs.save(Constants.ADD_NORMAL_TIMETABLE, true);
+            timeTableViewModel.getAllTimeTables();
+        }
 
         curSchedule = scheduleViewModel.getCurSchedule();
         t.setSchedule(curSchedule);
@@ -114,7 +128,7 @@ public class ScheduleFragment extends BaseBindingFragment<FragmentScheduleBindin
             List<BCourse> bCourseList = new ArrayList<>();
             for (Course course : dbData) {
                 BCourse bCourse = DataMaps.dataMappingByCourse(course);
-                bCourse.setColor("#"+Integer.toHexString(Uis.getColorWithAlpha(curSchedule.alphaForCourseItem / 10F,Color.parseColor(bCourse.getColor()))));
+                bCourse.setColor("#" + Integer.toHexString(Uis.getColorWithAlpha(curSchedule.alphaForCourseItem / 10F, Color.parseColor(bCourse.getColor()))));
                 bCourseList.add(bCourse);
             }
             handleCourseList.add(bCourseList);
@@ -167,7 +181,7 @@ public class ScheduleFragment extends BaseBindingFragment<FragmentScheduleBindin
             @Override
             public void onPageSelected(int position) {
                 curViewPagerPosition = position;
-                timerViewModel.curWeekStr.setValue(getString(R.string.week, (position + 1)) + ((currentWeek == position + 1) ? "" : (" ["+getString(R.string.not_cur_week))+"]"));
+                timerViewModel.curWeekStr.setValue(getString(R.string.week, (position + 1)) + ((currentWeek == position + 1) ? "" : (" [" + getString(R.string.not_cur_week)) + "]"));
                 scheduleViewPagerAdapter.setWeek(position + 1);
                 scheduleViewPagerAdapter.notifyItemChanged(position);
                 if (TextUtils.isEmpty(curSchedule.imageUrl)) {

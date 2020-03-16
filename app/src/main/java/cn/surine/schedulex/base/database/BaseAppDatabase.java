@@ -33,7 +33,7 @@ public abstract class BaseAppDatabase extends RoomDatabase {
                 if (instance == null) {
                     instance = Room.databaseBuilder(context.getApplicationContext(), BaseAppDatabase.class, Constants.DB_NAME)
                             .allowMainThreadQueries()  //TODO：slw 主线程访问，不安全
-                            .addMigrations(mg_1_2, mg_2_3, mg_3_4, mg_4_5)
+                            .addMigrations(mg_1_2, mg_2_3, mg_3_4)
                             .build();
                 }
             }
@@ -68,22 +68,15 @@ public abstract class BaseAppDatabase extends RoomDatabase {
 
     /**
      * 课程表支持显示导入方式
+     * 新加入时间表
+     * 课表支持时间显示
      */
     static final Migration mg_3_4 = new Migration(3, 4) {
         @Override
         public void migrate(@NonNull SupportSQLiteDatabase database) {
             database.execSQL("ALTER TABLE schedule ADD COLUMN importWay INTEGER NOT NULL DEFAULT 0");
-        }
-    };
-
-
-    /**
-     * 新加入时间表
-     */
-    static final Migration mg_4_5 = new Migration(4, 5) {
-        @Override
-        public void migrate(@NonNull SupportSQLiteDatabase database) {
             database.execSQL("CREATE TABLE IF NOT EXISTS timetable (roomId INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, name TEXT,startTime INTEGER NOT NULL DEFAULT 0,rule TEXT)");
+            database.execSQL("ALTER TABLE schedule ADD COLUMN timeTableId INTEGER NOT NULL DEFAULT 1");
         }
     };
 

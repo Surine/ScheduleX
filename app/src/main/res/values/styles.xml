@@ -1,7 +1,7 @@
 <resources>
 
     <!--    这边注意下，为了使用Material Design库内的一些资源，需要使用MaterialComponents布局，
-    但是使用这个主题后旧组件会被兼容成MD的样子，所以在后面跟Bridge忽略兼容-->
+    但是使用这个主题后旧组件会被兼容成MD的样子，在后面跟Bridge忽略可兼容，否则使用Material系控件-->
     <style name="AppTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>

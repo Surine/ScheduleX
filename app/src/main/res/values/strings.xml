@@ -151,4 +151,21 @@
     <string name="max_session">maximum sessions</string>
     <string name="cant_small_than_30">Not less than 30</string>
     <string name="not_cur_week">Non-current week</string>
+    <string name="timetable_switched_successfully">Timetable switched successfully</string>
+    <string name="timetable_info">TimeTable Info</string>
+    <string name="time_table_has_been_deleted">TimeTable has been deleted!</string>
+    <string name="are_you_sure_to_delete_timetable">Are you sure you want to delete this timetable?</string>
+    <string name="is_ban_to_delete">The default timetable does not allow deletion！</string>
+    <string name="app_error">System failure, please exit and try again</string>
+    <string name="session_is_not_match">Timetable supports max %s, but current schedule requires %s</string>
+    <string name="add_timetable">ADD TIMETABLE</string>
+    <string name="choose_timetable">Choose a timetable</string>
+    <string name="need_today">Time is not allowed to cross today</string>
+    <string name="min">min</string>
+    <string name="setting_one_session_time">Set the length of a lesson (minutes)</string>
+    <string name="delete_timetable_session_note">This operation will delete this section and all subsequent sections. Please confirm the operation after selecting it correctly. If you make a mistake, please exit and abandon it directly!</string>
+    <string name="delete_rule">Allows to delete custom sections (after 12 sections), sections 1–12 can be ignored</string>
+    <string name="max_support">Supports up to %s sections</string>
+    <string name="time_rule">This class must not be earlier than the last class</string>
+    <string name="please_choose_time">Please select the class time</string>
 </resources>

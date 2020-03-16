@@ -101,8 +101,8 @@ public class SuperLoginFragment extends BaseBindingFragment<FragmentLoginSuperBi
                             course.color = Constants.COLOR_1[new Random().nextInt(Constants.COLOR_1.length)];
                             course.classSessions = String.valueOf(superCourse.sectionstart);
                             int i = (superCourse.sectionend - superCourse.sectionstart) + 1;
-                            if (i > Constants.MAX_SESSION) {
-                                i = Constants.MAX_SESSION;
+                            if (i > Constants.STAND_SESSION) {
+                                i = Constants.STAND_SESSION;
                             }
                             course.continuingSession = String.valueOf(i);
                             StringBuilder sb2 = new StringBuilder();
@@ -119,7 +119,7 @@ public class SuperLoginFragment extends BaseBindingFragment<FragmentLoginSuperBi
                         courseViewModel.saveCourseByDb(courseList, scheduleId);
                         Navigations.open(SuperLoginFragment.this, R.id.scheduleFragment);
                     }
-                }else{
+                } else {
                     Toasts.toast(getString(R.string.arg_exception));
                 }
             } else if (num == SuperViewModel.FETCH_FAIL) {
