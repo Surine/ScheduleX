@@ -147,4 +147,5 @@
     <string name="max_support">最多支持%s节</string>
     <string name="time_rule">本节上课时间不得比上一节下课时间早</string>
     <string name="please_choose_time">请选择本节课上课时间</string>
+    <string name="timetable_is_selected">时间表选择成功!</string>
 </resources>

@@ -2,7 +2,6 @@ package cn.surine.schedulex.ui.schedule;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,7 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.List;
 
 import cn.surine.coursetableview.entity.BCourse;
-import cn.surine.coursetableview.interfaces.OnClickCourseItemListener;
+import cn.surine.coursetableview.entity.BTimeTable;
 import cn.surine.coursetableview.view.CourseTableView;
 import cn.surine.coursetableview.view.DataConfig;
 import cn.surine.coursetableview.view.UIConfig;
@@ -43,13 +42,15 @@ public class ScheduleViewPagerAdapter extends RecyclerView.Adapter<ScheduleViewP
     private BaseFragment baseFragment;
     private Schedule schedule;
     private UIConfig uiConfig;
+    private BTimeTable timeTable;
 
 
-    public ScheduleViewPagerAdapter(List<List<BCourse>> courseList, BaseFragment baseFragment, Schedule schedule, int week) {
+    public ScheduleViewPagerAdapter(List<List<BCourse>> courseList, BTimeTable timeTable, BaseFragment baseFragment, Schedule schedule, int week) {
         this.courseList = courseList;
         this.baseFragment = baseFragment;
         this.schedule = schedule;
         this.week = week;
+        this.timeTable = timeTable;
         initUI();
     }
 
@@ -63,17 +64,17 @@ public class ScheduleViewPagerAdapter extends RecyclerView.Adapter<ScheduleViewP
             uiConfig.setItemTextSize(12);
             uiConfig.setItemTopMargin(5);
             uiConfig.setItemSideMargin(3);
-            uiConfig.setSectionViewWidth(0);
+            uiConfig.setSectionViewWidth(Uis.dip2px(App.context, 45));
         } else {
             uiConfig.setMaxClassDay(5);
             uiConfig.setItemTextSize(14);
             uiConfig.setItemTopMargin(10);
             uiConfig.setItemSideMargin(8);
-            uiConfig.setSectionViewWidth(Uis.dip2px(App.context,45));
+            uiConfig.setSectionViewWidth(Uis.dip2px(App.context, 50));
         }
         uiConfig.setShowCurWeekCourse(false);
         uiConfig.setMaxSection(schedule.maxSession);
-        uiConfig.setSectionHeight(Uis.dip2px(App.context,schedule.itemHeight));
+        uiConfig.setSectionHeight(Uis.dip2px(App.context, schedule.itemHeight));
         uiConfig.setChooseWeekColor(App.context.getResources().getColor(R.color.colorPrimary));
         uiConfig.setColorUI(schedule.lightText ? UIConfig.LIGHT : UIConfig.DARK);
     }
@@ -96,6 +97,7 @@ public class ScheduleViewPagerAdapter extends RecyclerView.Adapter<ScheduleViewP
         DataConfig dataConfig = new DataConfig();
         dataConfig.setCurTermStartDate(schedule.termStartDate)
                 .setCourseList(courseList.get(position))
+                .setTimeTable(timeTable)
                 .setCurrentWeek(week);
 
 
@@ -111,8 +113,8 @@ public class ScheduleViewPagerAdapter extends RecyclerView.Adapter<ScheduleViewP
 
         holder.courseTableView.setLongClickCourseItemListener((list, itemPosition, isThisWeek) -> {
             Bundle bundle = new Bundle();
-            bundle.putString(COURSE_ID,list.get(itemPosition).getId());
-            Navigations.open(baseFragment,R.id.action_scheduleFragment_to_addCourseFragment,bundle);
+            bundle.putString(COURSE_ID, list.get(itemPosition).getId());
+            Navigations.open(baseFragment, R.id.action_scheduleFragment_to_addCourseFragment, bundle);
         });
 
     }

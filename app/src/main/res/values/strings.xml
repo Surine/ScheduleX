@@ -168,4 +168,5 @@
     <string name="max_support">Supports up to %s sections</string>
     <string name="time_rule">This class must not be earlier than the last class</string>
     <string name="please_choose_time">Please select the class time</string>
+    <string name="timetable_is_selected">Successfully selected schedule</string>
 </resources>

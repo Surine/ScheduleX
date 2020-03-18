@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import cn.surine.coursetableview.entity.BCourse;
+import cn.surine.coursetableview.entity.BTimeTable;
 import cn.surine.coursetableview.utils.TimeUtil;
 
 import static cn.surine.coursetableview.utils.TimeUtil.compareDate;
@@ -29,6 +30,8 @@ public class DataConfig {
     /*最大周*/
     private int maxWeek = MAXWEEK;
     private String curTermStartDate = NORMAL_CUR_TERM_DATE;
+
+    private BTimeTable timeTable;
 
 
     public String getCurTermStartDate() {
@@ -106,6 +109,15 @@ public class DataConfig {
         if (maxWeek >= 1 && maxWeek < 50) {
             this.maxWeek = maxWeek;
         }
+        return this;
+    }
+
+    public BTimeTable getTimeTable() {
+        return timeTable;
+    }
+
+    public DataConfig setTimeTable(BTimeTable timeTable) {
+        this.timeTable = timeTable;
         return this;
     }
 }

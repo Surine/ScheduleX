@@ -4,8 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import cn.surine.coursetableview.entity.BCourse;
+import cn.surine.coursetableview.entity.BTimeTable;
 import cn.surine.schedulex.base.Constants;
 import cn.surine.schedulex.data.entity.Course;
+import cn.surine.schedulex.data.entity.TimeTable;
 
 /**
  * Intro：
@@ -74,4 +76,25 @@ public class DataMaps {
     }
 
 
+    /**
+     * 数据映射
+     */
+    public static BTimeTable dataMappingTimeTableToBTimeTable(TimeTable timeTable) {
+        if (timeTable == null) return null;
+        BTimeTable bTimeTable = new BTimeTable();
+        List<BTimeTable.BTimeInfo> timeList = new ArrayList<>();
+        String[] ruleData = timeTable.rule.split(",");
+        long startTime = timeTable.startTime;
+        for (int i = 0; i < ruleData.length; i += 2) {
+            long endTime = startTime + Integer.parseInt(ruleData[i]);
+            BTimeTable.BTimeInfo bTimeInfo = new BTimeTable.BTimeInfo();
+            bTimeInfo.sessionNo = i / 2 + 1;
+            bTimeInfo.startTime = Dates.getTransformTimeNumber(startTime);
+            bTimeInfo.endTime = Dates.getTransformTimeNumber(endTime);
+            startTime = endTime += Integer.parseInt(ruleData[i + 1]);
+            timeList.add(bTimeInfo);
+        }
+        bTimeTable.timeInfoList = timeList;
+        return bTimeTable;
+    }
 }

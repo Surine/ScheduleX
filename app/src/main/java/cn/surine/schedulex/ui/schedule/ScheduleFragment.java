@@ -20,6 +20,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import cn.surine.coursetableview.entity.BCourse;
+import cn.surine.coursetableview.entity.BTimeTable;
 import cn.surine.schedulex.R;
 import cn.surine.schedulex.app_widget.BoardCastSender;
 import cn.surine.schedulex.base.Constants;
@@ -134,7 +135,8 @@ public class ScheduleFragment extends BaseBindingFragment<FragmentScheduleBindin
             handleCourseList.add(bCourseList);
         }
 
-        scheduleViewPagerAdapter = new ScheduleViewPagerAdapter(handleCourseList, ScheduleFragment.this, curSchedule, currentWeek);
+        BTimeTable timeTable = DataMaps.dataMappingTimeTableToBTimeTable(timeTableViewModel.getTimTableById(curSchedule.timeTableId));
+        scheduleViewPagerAdapter = new ScheduleViewPagerAdapter(handleCourseList, timeTable, ScheduleFragment.this, curSchedule, currentWeek);
 
         t.viewpager.setAdapter(scheduleViewPagerAdapter);
         t.viewpager.setOffscreenPageLimit(1);

@@ -93,6 +93,7 @@ public class TimeTableListFragment extends BaseBindingFragment<FragmentTimetable
                 } else {
                     schedule.timeTableId = timeTable.roomId;
                     scheduleViewModel.updateSchedule(schedule);
+                    Toasts.toast(getString(R.string.timetable_is_selected));
                     Navigations.close(TimeTableListFragment.this);
                 }
             }
