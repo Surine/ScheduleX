@@ -1,6 +1,11 @@
 package cn.surine.schedulex.super_import.model;
 
-public class SuperCourse {
+import androidx.annotation.Keep;
+
+import cn.surine.schedulex.data.entity.BaseVm;
+
+@Keep
+public class SuperCourse extends BaseVm {
     public int day;
     public String locale;
     public String name;

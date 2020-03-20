@@ -4,6 +4,7 @@ import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
 
+import androidx.annotation.Keep;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
@@ -11,9 +12,9 @@ import cn.surine.schedulex.base.http.BaseHttpSubscriber;
 import cn.surine.schedulex.base.utils.SimpleTextWatcher;
 import cn.surine.schedulex.super_import.model.SuperBaseModel;
 import cn.surine.schedulex.super_import.model.SuperCourseList;
-import cn.surine.schedulex.super_import.model.SuperResository;
 import cn.surine.schedulex.super_import.model.User;
 
+@Keep
 public class SuperViewModel extends ViewModel {
     public static final int FETCH_FAIL = 2;
     public static final int FETCH_SUCCESS = 1;
@@ -38,9 +39,9 @@ public class SuperViewModel extends ViewModel {
         }
     };
     public MutableLiveData<SuperCourseList> superCourseList;
-    private SuperResository superResository;
+    private SuperRepository superResository;
 
-    public SuperViewModel(SuperResository superResository) {
+    public SuperViewModel(SuperRepository superResository) {
         this.superResository = superResository;
         this.superCourseList = new MutableLiveData<>();
         if (superCourseList.getValue() == null) {

@@ -1,5 +1,6 @@
 package cn.surine.schedulex.ui.timetable_list;
 
+import androidx.annotation.Keep;
 import androidx.lifecycle.ViewModel;
 
 import java.util.List;
@@ -12,6 +13,7 @@ import cn.surine.schedulex.data.entity.TimeTable;
  * @author sunliwei
  * @date 2020-03-05 21:16
  */
+@Keep
 public class TimeTableViewModel extends ViewModel {
     private TimeTableRepository timeTableRepository;
 

@@ -24,7 +24,7 @@ import cn.surine.schedulex.data.entity.Course;
 import cn.surine.schedulex.data.entity.Schedule;
 import cn.surine.schedulex.databinding.FragmentLoginSuperBinding;
 import cn.surine.schedulex.super_import.model.SuperCourse;
-import cn.surine.schedulex.super_import.model.SuperResository;
+import cn.surine.schedulex.super_import.viewmodel.SuperRepository;
 import cn.surine.schedulex.super_import.viewmodel.SuperViewModel;
 import cn.surine.schedulex.ui.course.CourseRepository;
 import cn.surine.schedulex.ui.course.CourseViewModel;
@@ -48,7 +48,7 @@ public class SuperLoginFragment extends BaseBindingFragment<FragmentLoginSuperBi
 
     @Override
     public void onInit(FragmentLoginSuperBinding fragmentLoginSuperBinding) {
-        superViewModel = ViewModelProviders.of(this, InstanceFactory.getInstance(new Class[]{SuperResository.class}, new Object[]{SuperResository.abt.getInstance()})).get(SuperViewModel.class);
+        superViewModel = ViewModelProviders.of(this, InstanceFactory.getInstance(new Class[]{SuperRepository.class}, new Object[]{SuperRepository.abt.getInstance()})).get(SuperViewModel.class);
         fragmentLoginSuperBinding.setData(this.superViewModel);
         courseViewModel = ViewModelProviders.of(this, InstanceFactory.getInstance(new Class[]{CourseRepository.class}, new Object[]{CourseRepository.abt.getInstance()})).get(CourseViewModel.class);
         scheduleViewModel = ViewModelProviders.of(this, InstanceFactory.getInstance(new Class[]{ScheduleRepository.class}, new Object[]{ScheduleRepository.abt.getInstance()})).get(ScheduleViewModel.class);
