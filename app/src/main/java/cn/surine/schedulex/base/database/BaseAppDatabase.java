@@ -77,6 +77,7 @@ public abstract class BaseAppDatabase extends RoomDatabase {
             database.execSQL("ALTER TABLE schedule ADD COLUMN importWay INTEGER NOT NULL DEFAULT 0");
             database.execSQL("CREATE TABLE IF NOT EXISTS timetable (roomId INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, name TEXT,startTime INTEGER NOT NULL DEFAULT 0,rule TEXT)");
             database.execSQL("ALTER TABLE schedule ADD COLUMN timeTableId INTEGER NOT NULL DEFAULT 1");
+            database.execSQL("ALTER TABLE schedule ADD COLUMN isShowTime INTEGER NOT NULL DEFAULT 1 ");
         }
     };
 

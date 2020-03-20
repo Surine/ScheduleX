@@ -3,6 +3,7 @@ package cn.surine.schedulex.ui.view.custom.helper;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.util.AttributeSet;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -20,6 +21,7 @@ public class TopBar extends LinearLayout {
 
     String titleStr = "";
     private TextView vTitle;
+    private ImageView vFunctionIcon;
 
     public TopBar(Context context) {
         this(context,null);
@@ -43,8 +45,17 @@ public class TopBar extends LinearLayout {
         inflate(context, R.layout.view_header, this);
         vTitle = findViewById(R.id.title);
         vTitle.setText(titleStr);
+        vFunctionIcon = findViewById(R.id.function);
     }
 
+    public ImageView getFunctionView() {
+        return vFunctionIcon;
+    }
+
+    public void setFunctionIcon(int src) {
+        vFunctionIcon.setVisibility(VISIBLE);
+        vFunctionIcon.setImageResource(src);
+    }
 
     /**
      * 设置标题

@@ -133,7 +133,7 @@
     <string name="timetable_switched_successfully">切换课表成功</string>
     <string name="timetable_info">时间表信息</string>
     <string name="time_table_has_been_deleted">时间表已删除</string>
-    <string name="are_you_sure_to_delete_timetable">确定删除该时间表吗？</string>
+    <string name="are_you_sure_to_delete_timetable">确定删除该时间表吗？删除后选择该时间表的课程表将不会显示时间</string>
     <string name="is_ban_to_delete">默认时间表不允许删除</string>
     <string name="app_error">系统故障，请退出重新尝试</string>
     <string name="session_is_not_match">时间表最大支持%s节，但是当前课程表需要%s节</string>
@@ -148,4 +148,7 @@
     <string name="time_rule">本节上课时间不得比上一节下课时间早</string>
     <string name="please_choose_time">请选择本节课上课时间</string>
     <string name="timetable_is_selected">时间表选择成功!</string>
+    <string name="not_show_timetable">当前不展示时间表</string>
+    <string name="show_time">当前展示时间表</string>
+    <string name="whether_to_show_time">是否显示时间表</string>
 </resources>

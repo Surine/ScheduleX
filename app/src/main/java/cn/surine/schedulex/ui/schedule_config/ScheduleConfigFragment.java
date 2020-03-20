@@ -198,6 +198,14 @@ public class ScheduleConfigFragment extends BaseBindingFragment<FragmentSchedule
         //配置课表最大高度
         t.scheduleCourseItemHeightItem.setOnClickListener(v -> showItemHeightDialog());
 
+        //是否显示时间表
+        t.showTimesSwitch.setChecked(schedule.isShowTime);
+        t.scheduleShowTimeItem.setOnClickListener(v -> {
+            schedule.isShowTime = !schedule.isShowTime;
+            scheduleViewModel.updateSchedule(schedule);
+            t.showTimesSwitch.setChecked(schedule.isShowTime);
+            t.scheduleShowTimeItemSubTitle.setText(schedule.isShowTime ? R.string.show_time : R.string.not_show_timetable);
+        });
 
         Bundle bundle = new Bundle();
         bundle.putInt(SCHEDULE_ID, scheduleId);

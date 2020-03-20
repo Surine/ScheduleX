@@ -72,6 +72,7 @@ public class ScheduleViewPagerAdapter extends RecyclerView.Adapter<ScheduleViewP
             uiConfig.setItemSideMargin(8);
             uiConfig.setSectionViewWidth(Uis.dip2px(App.context, 50));
         }
+        uiConfig.setShowTimeTable(schedule.isShowTime);
         uiConfig.setShowCurWeekCourse(false);
         uiConfig.setMaxSection(schedule.maxSession);
         uiConfig.setSectionHeight(Uis.dip2px(App.context, schedule.itemHeight));

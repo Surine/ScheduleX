@@ -58,7 +58,7 @@ public class SuperViewModel extends ViewModel {
             superResository.loginSuper(account.getValue(), password.getValue()).subscribe(new BaseHttpSubscriber<SuperBaseModel<User>>() {
                 @Override
                 public void onSuccess(MutableLiveData<SuperBaseModel<User>> mutableLiveData) {
-                    if (mutableLiveData.getValue().status == 1) {
+                    if (mutableLiveData.getValue().status == 1 && mutableLiveData.getValue().data.statusInt == 1) {
                         loginStatus.setValue(LOGIN_SUCCESS);
                     } else {
                         loginStatus.setValue(LOGIN_FAIL);

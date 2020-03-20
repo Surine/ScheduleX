@@ -252,7 +252,6 @@ public class CourseTableView extends LinearLayout {
         mSectionView.removeViews(0, mSectionView.getChildCount());
 
         BTimeTable bTimeTable = mDataConfig.getTimeTable();
-        List<BTimeTable.BTimeInfo> timeInfoList = bTimeTable.timeInfoList;
 
         //计算当前时间
         Date date = new Date();
@@ -271,19 +270,26 @@ public class CourseTableView extends LinearLayout {
             tvSection.setTextSize(12);
 
             int numberLen = String.valueOf(i).length();
-            String startTime = timeInfoList.get(i - 1).startTime;
-            String endTime = timeInfoList.get(i - 1).endTime;
-            SpannableString ss = new SpannableString(i + "\n" + startTime + "\n" + endTime);
+            SpannableString ss;
+            List<BTimeTable.BTimeInfo> timeInfoList;
+            if (bTimeTable != null && (timeInfoList = bTimeTable.timeInfoList) != null && timeInfoList.size() > 0 && getUiConfig().isShowTimeTable()) {
+                try {
+                    String startTime = timeInfoList.get(i - 1).startTime;
+                    String endTime = timeInfoList.get(i - 1).endTime;
+                    ss = new SpannableString(i + "\n" + startTime + "\n" + endTime);
+                    if (curTimeNum > transTime(startTime) && curTimeNum < transTime(endTime)) {
+                        tvSection.setTextColor(mUiConfig.getChooseWeekColor());
+                    }
+                } catch (Exception e) {
+                    ss = new SpannableString(String.valueOf(i));
+                }
+            } else {
+                ss = new SpannableString(String.valueOf(i));
+            }
             RelativeSizeSpan relativeSizeSpan = new RelativeSizeSpan(0.8f);
             ss.setSpan(relativeSizeSpan, numberLen, ss.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
             tvSection.setText(ss);
             tvSection.setLayoutParams(lp);
-
-            if (curTimeNum > transTime(startTime) && curTimeNum < transTime(endTime)) {
-                tvSection.setTextColor(mUiConfig.getChooseWeekColor());
-            }
-
-
             mSectionView.addView(tvSection);
         }
     }

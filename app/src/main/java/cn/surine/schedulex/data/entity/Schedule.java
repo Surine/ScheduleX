@@ -63,7 +63,7 @@ public class Schedule extends BaseVm {
     /**
      * 是否显示周末
      */
-    public boolean isShowWeekend;
+    public boolean isShowWeekend = true;
 
 
     /**
@@ -94,6 +94,11 @@ public class Schedule extends BaseVm {
      */
     public long timeTableId = 1;
 
+    /**
+     * 是否显示时间
+     */
+    public boolean isShowTime = true;
+
     @SuppressLint("StringFormatMatches")
     public String getTotalWeekStr() {
         return App.context.getString(R.string.total_week, totalWeek);
@@ -121,6 +126,10 @@ public class Schedule extends BaseVm {
 
     public String getItemSessionHeight() {
         return itemHeight + "dp";
+    }
+
+    public String getIsShowTimeTableStr() {
+        return isShowWeekend ? App.context.getString(R.string.show_time) : App.context.getString(R.string.not_show_weekend);
     }
 
     public int curWeek() {

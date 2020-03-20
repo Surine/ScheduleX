@@ -144,7 +144,9 @@
     <string name="welcome_to_use">1. In this way, you can log in to the Academic Affairs Office of Tianjin University of Science and Technology to obtain class schedules, without linking to the campus network \n2. The account number is your student number, and the password is the password of the Academic Affairs Department. If the verification fails, please check if you entered it correctly!</string>
     <string name="is_show_week">Whether to show weekend</string>
     <string name="not_show_weekend">Not show weekend</string>
+    <string name="not_show_timetable">Not show TimeTable</string>
     <string name="show_weekend">Show weekend</string>
+    <string name="show_time">Show TimeTable</string>
     <string name="nothing_to_show">You do n’t see anything like this! o (.﹏.) o</string>
     <string name="course_card_alpha">Course Card Transparency</string>
     <string name="course_item_height">Course Item height</string>
@@ -154,7 +156,7 @@
     <string name="timetable_switched_successfully">Timetable switched successfully</string>
     <string name="timetable_info">TimeTable Info</string>
     <string name="time_table_has_been_deleted">TimeTable has been deleted!</string>
-    <string name="are_you_sure_to_delete_timetable">Are you sure you want to delete this timetable?</string>
+    <string name="are_you_sure_to_delete_timetable">Are you sure you want to delete this timetable? After deleting the schedule, the corresponding schedule will not show the time</string>
     <string name="is_ban_to_delete">The default timetable does not allow deletion！</string>
     <string name="app_error">System failure, please exit and try again</string>
     <string name="session_is_not_match">Timetable supports max %s, but current schedule requires %s</string>
@@ -169,4 +171,5 @@
     <string name="time_rule">This class must not be earlier than the last class</string>
     <string name="please_choose_time">Please select the class time</string>
     <string name="timetable_is_selected">Successfully selected schedule</string>
+    <string name="whether_to_show_time">Whether to display the Timetable</string>
 </resources>

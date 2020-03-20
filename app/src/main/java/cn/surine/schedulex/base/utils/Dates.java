@@ -182,7 +182,11 @@ public class Dates {
      * 将HH:mm的时间转换为分为单位的数字
      */
     public static long getTransformTimeString(String time) {
-        return Integer.parseInt(time.split(":")[0]) * 60 + Integer.parseInt(time.split(":")[1]);
+        try {
+            return Integer.parseInt(time.split(":")[0]) * 60 + Integer.parseInt(time.split(":")[1]);
+        } catch (Exception e) {
+            return 0;
+        }
     }
 
 }

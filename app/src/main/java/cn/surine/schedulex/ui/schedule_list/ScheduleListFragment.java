@@ -6,6 +6,7 @@ import android.view.View;
 import androidx.annotation.NonNull;
 import androidx.appcompat.widget.PopupMenu;
 import androidx.lifecycle.ViewModelProviders;
+import androidx.navigation.Navigation;
 import androidx.navigation.fragment.NavHostFragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -206,8 +207,8 @@ public class ScheduleListFragment extends BaseBindingFragment<FragmentScheduleMa
             }
         });
 
-//        t.topbar.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.action_ScheduleListFragment_to_aboutFragment));
-
+        t.topbar.setFunctionIcon(R.drawable.ic_settings_black_24dp);
+        t.topbar.getFunctionView().setOnClickListener(Navigation.createNavigateOnClickListener(R.id.action_ScheduleListFragment_to_aboutFragment));
         t.addSchedule.setOnClickListener(v -> {
             if (scheduleViewModel.getSchedulesNumber() < Constants.MAX_SCHEDULE_LIMIT) {
                 Navigations.open(ScheduleListFragment.this, R.id.action_ScheduleListFragment_to_scheduleInitFragment);

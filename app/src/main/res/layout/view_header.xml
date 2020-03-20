@@ -9,10 +9,21 @@
         style="@style/TextAppearance.MaterialComponents.Headline5"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent"
-        android:layout_marginBottom="@dimen/dp24"
         android:layout_marginStart="@dimen/dp24"
         android:layout_marginTop="@dimen/dp80"
+        android:layout_marginBottom="@dimen/dp24"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/function"
+        android:layout_width="@dimen/dp30"
+        android:layout_height="@dimen/dp30"
+        android:layout_marginEnd="@dimen/dp20"
+        android:padding="@dimen/dp5"
+        android:src="@drawable/ic_settings_black_24dp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="@id/title"
+        app:layout_constraintRight_toRightOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
