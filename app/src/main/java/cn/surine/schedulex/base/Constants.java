@@ -58,6 +58,7 @@ public class Constants {
     public static final String APP_WIDGET_ID = "app_widget_id";
     public static final String NEXT_DAY_STATUS = "NEXT_DAY_STATUS_";
     public static final String ADD_NORMAL_TIMETABLE = "add_normal_timetable";
+    public static final String EGG = "EGG";
 
     //强制最大周
     public static int MAX_WEEK = 30;

@@ -8,6 +8,7 @@ import android.view.WindowManager;
 import android.widget.PopupWindow;
 import android.widget.SeekBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.lifecycle.ViewModelProviders;
 import androidx.navigation.Navigation;
@@ -24,6 +25,7 @@ import cn.surine.coursetableview.entity.BTimeTable;
 import cn.surine.schedulex.R;
 import cn.surine.schedulex.app_widget.BoardCastSender;
 import cn.surine.schedulex.base.Constants;
+import cn.surine.schedulex.base.controller.App;
 import cn.surine.schedulex.base.controller.BaseBindingFragment;
 import cn.surine.schedulex.base.utils.DataMaps;
 import cn.surine.schedulex.base.utils.Drawables;
@@ -31,6 +33,7 @@ import cn.surine.schedulex.base.utils.InstanceFactory;
 import cn.surine.schedulex.base.utils.MySeekBarChangeListener;
 import cn.surine.schedulex.base.utils.Prefs;
 import cn.surine.schedulex.base.utils.StatusBars;
+import cn.surine.schedulex.base.utils.Toasts;
 import cn.surine.schedulex.base.utils.Uis;
 import cn.surine.schedulex.data.entity.Course;
 import cn.surine.schedulex.data.entity.Schedule;
@@ -196,6 +199,17 @@ public class ScheduleFragment extends BaseBindingFragment<FragmentScheduleBindin
         t.funcBtn.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.action_scheduleFragment_to_ScheduleListFragment2));
         t.addCourse.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.action_scheduleFragment_to_addCourseFragment));
 
+        t.title.setOnClickListener(v -> {
+            if(!Prefs.getBoolean(Constants.EGG,false)){
+                Toasts.toast("你发现了彩蛋，点击已添加的课程格子试试看");
+                t.title.setTextColor(App.context.getResources().getColor(R.color.blue));
+                Prefs.save(Constants.EGG,true);
+            }else{
+                t.title.setTextColor(Color.BLACK);
+                Toasts.toast("彩蛋关闭，好好上课！");
+                Prefs.save(Constants.EGG,false);
+            }
+        });
         if (!TextUtils.isEmpty(curSchedule.imageUrl)) {
             Glide.with(activity()).load(new File(curSchedule.imageUrl)).crossFade().into(t.background);
         }

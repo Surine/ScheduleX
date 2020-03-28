@@ -1,6 +1,7 @@
 package cn.surine.schedulex.ui.schedule;
 
 import android.annotation.SuppressLint;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,6 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
+import java.util.Random;
 
 import cn.surine.coursetableview.entity.BCourse;
 import cn.surine.coursetableview.entity.BTimeTable;
@@ -17,10 +19,12 @@ import cn.surine.coursetableview.view.CourseTableView;
 import cn.surine.coursetableview.view.DataConfig;
 import cn.surine.coursetableview.view.UIConfig;
 import cn.surine.schedulex.R;
+import cn.surine.schedulex.base.Constants;
 import cn.surine.schedulex.base.controller.App;
 import cn.surine.schedulex.base.controller.BaseFragment;
 import cn.surine.schedulex.base.utils.DataMaps;
 import cn.surine.schedulex.base.utils.Navigations;
+import cn.surine.schedulex.base.utils.Prefs;
 import cn.surine.schedulex.base.utils.Uis;
 import cn.surine.schedulex.data.entity.Course;
 import cn.surine.schedulex.data.entity.Schedule;
@@ -43,6 +47,11 @@ public class ScheduleViewPagerAdapter extends RecyclerView.Adapter<ScheduleViewP
     private Schedule schedule;
     private UIConfig uiConfig;
     private BTimeTable timeTable;
+    int[] raws = new int[]{
+            R.raw.a4,R.raw.a4m,R.raw.b4,R.raw.c4,
+            R.raw.c4m,R.raw.d4,R.raw.d4m,R.raw.e4,
+            R.raw.f4,R.raw.f4m,R.raw.g4,R.raw.g4m,
+    };
 
 
     public ScheduleViewPagerAdapter(List<List<BCourse>> courseList, BTimeTable timeTable, BaseFragment baseFragment, Schedule schedule, int week) {
@@ -105,11 +114,16 @@ public class ScheduleViewPagerAdapter extends RecyclerView.Adapter<ScheduleViewP
         holder.courseTableView.update(uiConfig, dataConfig);
 
         holder.courseTableView.setmClickCourseItemListener((list, itemPosition, isThisWeek) -> {
-            Course course = DataMaps.dataMappingByBCourse(courseList.get(position).get(itemPosition));
-            if (course == null) {
-                return;
+            if(!Prefs.getBoolean(Constants.EGG,false)){
+                Course course = DataMaps.dataMappingByBCourse(courseList.get(position).get(itemPosition));
+                if (course == null) {
+                    return;
+                }
+                BtmDialogs.showCourseInfoBtmDialog(baseFragment, course);
+            }else{
+                MediaPlayer mp = MediaPlayer.create(baseFragment.activity(),raws[new Random().nextInt(12)]);
+                mp.start();
             }
-            BtmDialogs.showCourseInfoBtmDialog(baseFragment, course);
         });
 
         holder.courseTableView.setLongClickCourseItemListener((list, itemPosition, isThisWeek) -> {
