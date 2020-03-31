@@ -415,14 +415,14 @@ public class CourseTableView extends LinearLayout {
                     if (mClickCourseItemListener == null) {
                         return;
                     }
-                    mClickCourseItemListener.onClickItem(mDataConfig.getCourseList(), finalItemPostion, tempIsCurWeek);
+                    mClickCourseItemListener.onClickItem(view, mDataConfig.getCourseList(), finalItemPostion, tempIsCurWeek);
                 }
             });
             frameLayout.setOnLongClickListener(new OnLongClickListener() {
                 @Override
                 public boolean onLongClick(View v) {
                     if (mLongClickCourseItemListener != null) {
-                        mLongClickCourseItemListener.onClickItem(mDataConfig.getCourseList(), finalItemPostion, tempIsCurWeek);
+                        mLongClickCourseItemListener.onClickItem(v, mDataConfig.getCourseList(), finalItemPostion, tempIsCurWeek);
                     }
                     return true;
                 }
@@ -498,7 +498,7 @@ public class CourseTableView extends LinearLayout {
                     if (mClickCourseItemListener == null) {
                         return;
                     }
-                    mClickCourseItemListener.onClickItem(mDataConfig.getCourseList(), finalItemPostion, tempIsCurWeek);
+                    mClickCourseItemListener.onClickItem(view, mDataConfig.getCourseList(), finalItemPostion, tempIsCurWeek);
                 }
             });
 

@@ -51,4 +51,7 @@
     <dimen name="dp120">120dp</dimen>
     <dimen name="dp9">9dp</dimen>
     <dimen name="dp30">30dp</dimen>
+    <dimen name="t12">12sp</dimen>
+    <dimen name="dp22">22dp</dimen>
+    <dimen name="dp300">300dp</dimen>
 </resources>

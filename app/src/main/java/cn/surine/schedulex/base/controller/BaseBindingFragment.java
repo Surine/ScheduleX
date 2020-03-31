@@ -27,14 +27,22 @@ public abstract class BaseBindingFragment<D> extends BaseFragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         dataBind = DataBindingUtil.inflate(inflater, layoutId(), container, false);
         d = (D) dataBind;
-        if(getActivity() instanceof IBack){
+        if (getActivity() instanceof IBack) {
             this.iBack = (IBack) getActivity();
-        }else{
+        } else {
             throw new ClassCastException("Hosting Activity must implement BackHandledInterface");
         }
         onInit(d);
         dataBind.setLifecycleOwner(this);
         return dataBind.getRoot();
+    }
+
+
+    /**
+     * 获取databinding
+     */
+    public D getDataBinding() {
+        return d;
     }
 
     @CallSuper

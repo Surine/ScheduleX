@@ -8,7 +8,6 @@ import android.view.WindowManager;
 import android.widget.PopupWindow;
 import android.widget.SeekBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.lifecycle.ViewModelProviders;
 import androidx.navigation.Navigation;
@@ -63,6 +62,8 @@ public class ScheduleFragment extends BaseBindingFragment<FragmentScheduleBindin
     private Schedule curSchedule;
     private int curViewPagerPosition;
     private PopupWindow popupWindow;
+    private CourseViewModel courseViewModel;
+    private List<List<BCourse>> handleCourseList;
 
     @Override
     public int layoutId() {
@@ -94,7 +95,7 @@ public class ScheduleFragment extends BaseBindingFragment<FragmentScheduleBindin
 
         Class[] classesForCourse = new Class[]{CourseRepository.class};
         Object[] argsForCourse = new Object[]{CourseRepository.abt.getInstance()};
-        CourseViewModel courseViewModel = ViewModelProviders.of(this, InstanceFactory.getInstance(classesForCourse, argsForCourse)).get(CourseViewModel.class);
+        courseViewModel = ViewModelProviders.of(this, InstanceFactory.getInstance(classesForCourse, argsForCourse)).get(CourseViewModel.class);
 
         Class[] classesForTimer = new Class[]{TimerRepository.class};
         Object[] argsForTimer = new Object[]{TimerRepository.abt.getInstance()};
@@ -126,27 +127,20 @@ public class ScheduleFragment extends BaseBindingFragment<FragmentScheduleBindin
 
         //当前周
         int currentWeek = curSchedule.curWeek();
-        List<List<BCourse>> handleCourseList = new ArrayList<>();
-        for (int i = 0; i < curSchedule.totalWeek; i++) {
-            List<Course> dbData = courseViewModel.queryCourseByWeek(i + 1, curSchedule.roomId);
-            List<BCourse> bCourseList = new ArrayList<>();
-            for (Course course : dbData) {
-                BCourse bCourse = DataMaps.dataMappingByCourse(course);
-                bCourse.setColor("#" + Integer.toHexString(Uis.getColorWithAlpha(curSchedule.alphaForCourseItem / 10F, Color.parseColor(bCourse.getColor()))));
-                bCourseList.add(bCourse);
-            }
-            handleCourseList.add(bCourseList);
-        }
+        handleCourseList = new ArrayList<>();
+        initData(false);
 
         BTimeTable timeTable = DataMaps.dataMappingTimeTableToBTimeTable(timeTableViewModel.getTimTableById(curSchedule.timeTableId));
-        scheduleViewPagerAdapter = new ScheduleViewPagerAdapter(handleCourseList, timeTable, ScheduleFragment.this, curSchedule, currentWeek);
+        scheduleViewPagerAdapter = new ScheduleViewPagerAdapter(handleCourseList, timeTable, ScheduleFragment.this, curSchedule, currentWeek, courseViewModel);
 
         t.viewpager.setAdapter(scheduleViewPagerAdapter);
         t.viewpager.setOffscreenPageLimit(1);
         t.viewpager.setOrientation(ViewPager2.ORIENTATION_HORIZONTAL);
         t.viewpager.setCurrentItem(currentWeek - 1, true);
         t.viewpager.setPageTransformer(new ZoomOutPageTransformer());
-
+        scheduleViewPagerAdapter.setDataSetUpdateCall(() -> {
+            initData(true);
+        });
         t.curWeekTv.setOnClickListener(v -> {
             View view = Uis.inflate(activity(), R.layout.view_change_week_quickly);
             popupWindow = new PopupWindow(view, Uis.dip2px(activity(), 200), WindowManager.LayoutParams.WRAP_CONTENT);
@@ -192,6 +186,7 @@ public class ScheduleFragment extends BaseBindingFragment<FragmentScheduleBindin
                 if (TextUtils.isEmpty(curSchedule.imageUrl)) {
                     t.emptyView.setVisibility(handleCourseList.get(position).size() != 0 ? View.GONE : View.VISIBLE);
                 }
+                Uis.hide(t.courseOp);
             }
         });
 
@@ -200,14 +195,14 @@ public class ScheduleFragment extends BaseBindingFragment<FragmentScheduleBindin
         t.addCourse.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.action_scheduleFragment_to_addCourseFragment));
 
         t.title.setOnClickListener(v -> {
-            if(!Prefs.getBoolean(Constants.EGG,false)){
+            if (!Prefs.getBoolean(Constants.EGG, false)) {
                 Toasts.toast("你发现了彩蛋，点击已添加的课程格子试试看");
                 t.title.setTextColor(App.context.getResources().getColor(R.color.blue));
-                Prefs.save(Constants.EGG,true);
-            }else{
+                Prefs.save(Constants.EGG, true);
+            } else {
                 t.title.setTextColor(Color.BLACK);
                 Toasts.toast("彩蛋关闭，好好上课！");
-                Prefs.save(Constants.EGG,false);
+                Prefs.save(Constants.EGG, false);
             }
         });
         if (!TextUtils.isEmpty(curSchedule.imageUrl)) {
@@ -215,6 +210,23 @@ public class ScheduleFragment extends BaseBindingFragment<FragmentScheduleBindin
         }
 
         BoardCastSender.notifyWidget(activity());
+    }
+
+    private void initData(boolean b) {
+        handleCourseList.clear();
+        for (int i = 0; i < curSchedule.totalWeek; i++) {
+            List<Course> dbData = courseViewModel.queryCourseByWeek(i + 1, curSchedule.roomId);
+            List<BCourse> bCourseList = new ArrayList<>();
+            for (Course course : dbData) {
+                BCourse bCourse = DataMaps.dataMappingByCourse(course);
+                bCourse.setColor("#" + Integer.toHexString(Uis.getColorWithAlpha(curSchedule.alphaForCourseItem / 10F, Color.parseColor(bCourse.getColor()))));
+                bCourseList.add(bCourse);
+            }
+            handleCourseList.add(bCourseList);
+            if (b) {
+                scheduleViewPagerAdapter.notifyItemChanged(i);
+            }
+        }
     }
 
     @SuppressLint("MissingSuperCall")

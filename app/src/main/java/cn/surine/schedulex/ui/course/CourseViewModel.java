@@ -141,8 +141,8 @@ public class CourseViewModel extends ViewModel {
 
     /**
      * 添加课程（多添加）
-     * */
-    public void insert(Course ... courses){
+     */
+    public void insert(Course... courses) {
         mCourseRepository.insert(courses);
     }
 
@@ -159,7 +159,7 @@ public class CourseViewModel extends ViewModel {
 
     /**
      * 更新课程
-     * */
+     */
     public void update(Course course) {
         mCourseRepository.update(course);
     }
@@ -167,7 +167,7 @@ public class CourseViewModel extends ViewModel {
 
     /**
      * 删除课程
-     * */
+     */
     public void deleteByCourseId(String id) {
         mCourseRepository.deleteByCourseId(id);
     }
@@ -175,8 +175,19 @@ public class CourseViewModel extends ViewModel {
 
     /**
      * 通过课表id获取课程
-     * */
+     */
     public List<Course> getCourseByScheduleId(int scheduleId) {
         return mCourseRepository.getCourseByScheduleId(scheduleId);
+    }
+
+    /**
+     * 删除这节课程的week周
+     */
+    public void deleteCourseWeekByCourseId(String id, int week) {
+        Course course = mCourseRepository.getCourseById(id);
+        StringBuilder stringBuilder = new StringBuilder(course.classWeek);
+        stringBuilder.replace(week - 1, week, "0");
+        course.classWeek = stringBuilder.toString();
+        mCourseRepository.update(course);
     }
 }

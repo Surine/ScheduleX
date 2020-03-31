@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="bCourse"
+            type="cn.surine.coursetableview.entity.BCourse" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="170dp"
+        android:layout_height="160dp"
+        android:layout_margin="@dimen/dp10"
+        android:layout_marginEnd="@dimen/dp5">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:baseAlpha="@{0.1F}"
+            app:baseColor="@{bCourse.color}" />
+
+
+        <TextView
+            android:id="@+id/courseName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dp20"
+            android:layout_marginTop="@dimen/dp20"
+            android:ellipsize="end"
+            android:maxEms="6"
+            android:maxLines="1"
+            android:text="@{bCourse.name}"
+            android:textColor="@color/text"
+            android:textSize="@dimen/t17"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/time_info"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp10"
+            android:text="@{String.valueOf(bCourse.day)}"
+            app:layout_constraintLeft_toLeftOf="@id/courseName"
+            app:layout_constraintTop_toBottomOf="@id/courseName" />
+
+        <TextView
+            android:id="@+id/other_info"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Teda 8-410"
+            app:layout_constraintLeft_toLeftOf="@id/courseName"
+            app:layout_constraintTop_toBottomOf="@id/time_info"
+            tools:layout_editor_absoluteX="20dp"
+            tools:layout_editor_absoluteY="97dp" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

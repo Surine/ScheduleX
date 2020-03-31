@@ -13,4 +13,17 @@ public class SuperCourse extends BaseVm {
     public int sectionend;
     public int sectionstart;
     public String teacher;
+
+    @Override
+    public String toString() {
+        return "SuperCourse{" +
+                "day=" + day +
+                ", locale='" + locale + '\'' +
+                ", name='" + name + '\'' +
+                ", period='" + period + '\'' +
+                ", sectionend=" + sectionend +
+                ", sectionstart=" + sectionstart +
+                ", teacher='" + teacher + '\'' +
+                '}';
+    }
 }

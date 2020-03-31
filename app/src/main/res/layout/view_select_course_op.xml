@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:scrollbars="none">
+
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/top_left_right_radius_white">
+
+        <TextView
+            android:id="@+id/dialog_title"
+            style="@style/textview_title_style"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dp25"
+            android:layout_marginTop="@dimen/dp16"
+            android:text="批量操作"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dp20"
+            android:layout_marginTop="@dimen/dp20"
+            android:layout_marginEnd="@dimen/dp20"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/dialog_title" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/deleteItem"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp100"
+            android:layout_marginTop="@dimen/dp20"
+            android:layout_marginBottom="@dimen/dp30"
+            app:layout_constraintTop_toBottomOf="@id/recyclerview">
+
+            <TextView
+                android:id="@+id/textView5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dp30"
+                android:layout_marginTop="@dimen/dp20"
+                android:text="批量删除"
+                android:textColor="@color/text"
+                android:textSize="@dimen/t17"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:layout_editor_absoluteX="31dp"
+                tools:layout_editor_absoluteY="24dp" />
+
+            <CheckBox
+                android:id="@+id/checkBox"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/dp20"
+                android:layout_marginStart="@dimen/dp22"
+                android:layout_marginTop="@dimen/dp10"
+                android:text="仅影响当前周"
+                android:textSize="@dimen/t12"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/textView5"
+                tools:layout_editor_absoluteX="24dp"
+                tools:layout_editor_absoluteY="41dp" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/delete"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/dp20"
+                android:backgroundTint="@android:color/holo_red_dark"
+                android:text="@string/delete"
+                android:textColor="@android:color/white"
+                app:layout_constraintBottom_toBottomOf="@id/checkBox"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/textView5" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/dp30"
+            app:layout_constraintTop_toBottomOf="@id/deleteItem">
+
+            <TextView
+                android:id="@+id/textView6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dp30"
+                android:layout_marginTop="@dimen/dp20"
+                android:text="节假日调课"
+                android:textColor="@color/text"
+                android:textSize="@dimen/t17"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:layout_editor_absoluteX="31dp"
+                tools:layout_editor_absoluteY="24dp" />
+
+            <TextView
+                android:id="@+id/curTimeInfo"
+                android:layout_width="@dimen/dp300"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp10"
+                android:text="将选中的课程(当天)将移动至目标日期对应节次"
+                android:textSize="@dimen/t12"
+                app:layout_constraintLeft_toLeftOf="@id/textView6"
+                app:layout_constraintTop_toBottomOf="@id/textView6"
+                tools:layout_editor_absoluteX="24dp"
+                tools:layout_editor_absoluteY="41dp" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/chooseDate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/dp20"
+                android:text="确定时间"
+                android:textColor="@android:color/white"
+                app:layout_constraintBottom_toBottomOf="@id/curTimeInfo"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/textView6" />
+
+            <CalendarView
+                android:id="@+id/calendar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp20"
+                android:layout_marginBottom="@dimen/dp10"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/chooseDate" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.core.widget.NestedScrollView>

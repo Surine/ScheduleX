@@ -13,7 +13,6 @@ import com.google.android.material.bottomsheet.BottomSheetDialog;
 import cn.surine.schedulex.R;
 import cn.surine.schedulex.base.controller.App;
 import cn.surine.schedulex.base.controller.BaseFragment;
-import cn.surine.schedulex.base.interfaces.DCall;
 import cn.surine.schedulex.base.utils.Drawables;
 import cn.surine.schedulex.base.utils.Navigations;
 import cn.surine.schedulex.base.utils.Uis;
@@ -29,20 +28,27 @@ public class BtmDialogs {
 
     public static final String COURSE_ID = "course_id";
 
+    public interface DialogCall {
+        void onDialogCall(View view, BottomSheetDialog bottomSheetDialog);
+    }
+
 
     /**
      * 获取一个底部弹窗的基础UI
+     *
+     * @return
      */
-    public static void getBaseConfig(Context context, View view, DCall<View> showCall) {
+    public static BottomSheetDialog getBaseConfig(Context context, View view, DialogCall dialogCall) {
         BottomSheetDialog bt = new BottomSheetDialog(context, R.style.BottomSheetDialogTheme);
+        bt.setContentView(view);
         bt.getWindow().findViewById(R.id.design_bottom_sheet).setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         bt.setDismissWithAnimation(true);
-        bt.setContentView(view);
         view.animate().translationY(50);
-        if (showCall != null) {
-            showCall.back(view);
+        if (dialogCall != null) {
+            dialogCall.onDialogCall(view, bt);
         }
         bt.show();
+        return bt;
     }
 
 

@@ -37,6 +37,27 @@ public class Dates {
 
 
     /**
+     * 获取某一日对应的星期
+     */
+    public static int getWeekDay(String dateStr) {
+        SimpleDateFormat f = new SimpleDateFormat("yyyy-MM-dd");
+        Calendar cal = Calendar.getInstance();
+        Date date;
+        try {
+            date = f.parse(dateStr);
+            cal.setTime(date);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        int day = cal.get(Calendar.DAY_OF_WEEK);
+        if (day == 1) {
+            return 7;
+        }
+        return day - 1;
+    }
+
+
+    /**
      * 获取月份的英语
      */
     public static String getMonthInEng() {
@@ -142,7 +163,7 @@ public class Dates {
         long time1 = cal.getTimeInMillis();
         cal.setTime(getDate(date2, yyyyMMdd));
         long time2 = cal.getTimeInMillis();
-        return (int) Math.abs((time1 - time2) / (1000 * 3600 * 24));
+        return (int) (time1 - time2) / (1000 * 3600 * 24);
     }
 
 

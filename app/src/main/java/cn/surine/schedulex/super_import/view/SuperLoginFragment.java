@@ -78,6 +78,10 @@ public class SuperLoginFragment extends BaseBindingFragment<FragmentLoginSuperBi
                 dialog.show();
             } else if (num == SuperViewModel.FETCH_SUCCESS) {
                 dialog.dismiss();
+                if (superViewModel.getSuperCourseList().lessonList.size() == 0) {
+                    Toasts.toast("未检测到课程！");
+                    return;
+                }
                 if (getArguments() != null) {
                     Bundle arguments = getArguments();
                     String str = ScheduleInitFragment.SCHEDULE_NAME;

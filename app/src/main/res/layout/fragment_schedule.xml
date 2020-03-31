@@ -66,10 +66,10 @@
 
         <TextView
             android:id="@+id/title"
+            style="@style/TextAppearance.MaterialComponents.Headline5"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingStart="@dimen/dp15"
-            style="@style/TextAppearance.MaterialComponents.Headline5"
             android:text="@{timer.indexTitle}"
             android:textColor="@{schedule.lightTextColor()}"
             app:layout_constraintBottom_toTopOf="@+id/guideline14"
@@ -151,6 +151,24 @@
             app:layout_constraintEnd_toStartOf="@+id/func_btn"
             app:layout_constraintTop_toTopOf="@+id/func_btn"
             app:srcCompat="@drawable/ic_add_circle_black_24dp" />
+
+
+        <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+            android:id="@+id/courseOp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|end"
+            android:layout_marginEnd="@dimen/dp24"
+            android:layout_marginBottom="@dimen/dp32"
+            android:backgroundTint="@color/colorPrimary"
+            android:text="批量操作"
+            android:textColor="@android:color/white"
+            android:visibility="gone"
+            app:icon="@drawable/ic_check_black_24dp"
+            app:iconTint="@android:color/white"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

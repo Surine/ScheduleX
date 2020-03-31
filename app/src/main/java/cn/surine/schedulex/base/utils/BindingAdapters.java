@@ -7,7 +7,6 @@ import android.text.TextWatcher;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.cardview.widget.CardView;
@@ -84,7 +83,6 @@ public class BindingAdapters {
     }
 
 
-
     /**
      * 给image设置背景（使用glide）
      */
@@ -93,5 +91,19 @@ public class BindingAdapters {
         if (s != null) {
             Glide.with(App.context).load(new File(s)).into(imageView);
         }
+    }
+
+
+    /**
+     * 给view设置背景
+     */
+    @androidx.databinding.BindingAdapter(value = {"baseColor", "baseAlpha"})
+    public static void setViewDrawable(View view, String baseColor, float baseAlpha) {
+        if (baseColor == null || TextUtils.isEmpty(baseColor)) {
+            baseColor = Constants.NORMAL_COLOR;
+        }
+        if (baseAlpha == 0) baseAlpha = 1;
+        int colorInt = Uis.getColorWithAlpha(baseAlpha, Color.parseColor(baseColor));
+        view.setBackground(Drawables.getDrawable(colorInt, 20, 0, Color.WHITE));
     }
 }

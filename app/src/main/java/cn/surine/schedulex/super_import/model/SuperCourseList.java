@@ -11,4 +11,13 @@ public class SuperCourseList extends BaseVm {
     public String endSchoolYear;
     public List<SuperCourse> lessonList;
     public String startSchoolYear;
+
+    @Override
+    public String toString() {
+        return "SuperCourseList{" +
+                "endSchoolYear='" + endSchoolYear + '\'' +
+                ", lessonList=" + lessonList +
+                ", startSchoolYear='" + startSchoolYear + '\'' +
+                '}';
+    }
 }

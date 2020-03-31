@@ -8,6 +8,8 @@ import androidx.annotation.Keep;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
+import com.tencent.bugly.crashreport.CrashReport;
+
 import cn.surine.schedulex.base.http.BaseHttpSubscriber;
 import cn.surine.schedulex.base.utils.SimpleTextWatcher;
 import cn.surine.schedulex.super_import.model.SuperBaseModel;
@@ -80,6 +82,8 @@ public class SuperViewModel extends ViewModel {
         superResository.getCourseList(i, i2).subscribe(new BaseHttpSubscriber<SuperBaseModel<SuperCourseList>>() {
             @Override
             public void onSuccess(MutableLiveData<SuperBaseModel<SuperCourseList>> mutableLiveData) {
+                //上报返回数据协助排查错误信息，后续版本删除
+                CrashReport.postCatchedException(new RuntimeException(mutableLiveData.getValue().data.lessonList.toString()));
                 SuperViewModel.this.superCourseList.setValue((mutableLiveData.getValue()).data);
                 SuperViewModel.this.getCourseStatus.setValue(FETCH_SUCCESS);
             }
