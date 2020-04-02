@@ -54,4 +54,6 @@
     <dimen name="dp22">22dp</dimen>
     <dimen name="dp300">300dp</dimen>
     <dimen name="t17">17sp</dimen>
+    <dimen name="dp320">320dp</dimen>
+    <dimen name="dp110">110dp</dimen>
 </resources>

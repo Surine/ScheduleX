@@ -4,6 +4,7 @@ package cn.surine.schedulex.ui.about;
 import androidx.dynamicanimation.animation.SpringAnimation;
 import androidx.dynamicanimation.animation.SpringForce;
 
+import com.tencent.bugly.beta.Beta;
 import cn.surine.schedulex.R;
 import cn.surine.schedulex.base.controller.BaseBindingFragment;
 import cn.surine.schedulex.base.utils.Others;
@@ -38,7 +39,10 @@ public class AboutFragment extends BaseBindingFragment<FragmentAboutBinding> {
         t.aboutItemCoolApk.setOnClickListener(v -> Others.startCoolApk("667393"));
         t.versionSlogan.setText(getString(R.string.version_slogan, Others.getAppVersion()));
         loadAnimation(t);
-        t.jetpack.setOnClickListener(v -> loadAnimation(t));
+        t.jetpack.setOnClickListener(v -> {
+            Beta.checkUpgrade(true, false);
+            loadAnimation(t);
+        });
     }
 
     private void loadAnimation(FragmentAboutBinding t) {

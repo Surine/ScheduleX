@@ -20,6 +20,11 @@ android {
                 arguments = ["room.schemaLocation": "$projectDir/schemas".toString()]
             }
         }
+
+        ndk {
+            //兼容armeabi
+            abiFilters 'armeabi-v7a' //, 'x86', 'armeabi-v7a', 'x86_64', 'arm64-v8a'
+        }
     }
     buildTypes {
         release {
@@ -108,7 +113,7 @@ dependencies {
     implementation project(path: ':courseTableView')
 
     //bugly
-    implementation 'com.tencent.bugly:crashreport:3.1.0'
+    implementation 'com.tencent.bugly:crashreport_upgrade:1.4.2'
 
     //引导库
     implementation 'com.github.iammert:MaterialIntroView:1.6.0'

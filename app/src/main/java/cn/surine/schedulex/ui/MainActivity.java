@@ -21,14 +21,14 @@ import static androidx.lifecycle.ViewModelProviders.of;
  * @author sunliwei
  * @date 2020-01-17 10:59
  */
-public class MainActivity extends AppCompatActivity implements IBack{
+public class MainActivity extends AppCompatActivity implements IBack {
     MainViewModel viewModel;
     private BaseFragment curFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        StatusBars.setStatusBarUI(this,true);
+        StatusBars.setStatusBarUI(this, true);
         setContentView(R.layout.activity_main);
         viewModel = of(this).get(MainViewModel.class);
     }
@@ -47,9 +47,9 @@ public class MainActivity extends AppCompatActivity implements IBack{
 
     @Override
     public void onBackPressed() {
-        if(curFragment != null){
+        if (curFragment != null) {
             curFragment.onBackPressed();
-        }else{
+        } else {
             super.onBackPressed();
         }
     }

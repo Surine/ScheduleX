@@ -4,9 +4,11 @@ import android.annotation.SuppressLint;
 import android.app.Application;
 import android.content.Context;
 
-import com.tencent.bugly.crashreport.CrashReport;
+import com.tencent.bugly.Bugly;
+import com.tencent.bugly.beta.Beta;
 
 import cn.surine.schedulex.BuildConfig;
+import cn.surine.schedulex.R;
 
 /**
  * Intro：
@@ -24,7 +26,9 @@ public class App extends Application {
         super.onCreate();
         context = getApplicationContext();
         //初始化bugly
-        CrashReport.initCrashReport(getApplicationContext(), "2d69e03a71", BuildConfig.DEBUG);
+        Beta.upgradeDialogLayoutId = R.layout.view_upgrade_dialog;
+        Bugly.init(getApplicationContext(), "2d69e03a71", BuildConfig.DEBUG);
     }
+
 
 }

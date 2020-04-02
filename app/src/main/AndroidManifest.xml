@@ -28,7 +28,7 @@
         tools:replace="android:allowBackup">
         <activity
             android:name=".ui.MainActivity"
-            android:screenOrientation="portrait"
+            android:screenOrientation="fullSensor"
             android:windowSoftInputMode="adjustPan">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -36,6 +36,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <!-- bugly-->
+        <activity
+            android:name="com.tencent.bugly.beta.ui.BetaActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize|locale"
+            android:theme="@android:style/Theme.Translucent" />
 
         <provider
             android:name="androidx.core.content.FileProvider"
@@ -46,7 +52,6 @@
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/filepaths" />
         </provider>
-
 
 
         <receiver
@@ -73,14 +78,13 @@
         <service
             android:name=".app_widget.core.KeepService"
             android:enabled="true"
-            android:exported="true"
-            />
+            android:exported="true" />
 
-        <service android:name=".app_widget.core.WidgetServiceDayClass"
+        <service
+            android:name=".app_widget.core.WidgetServiceDayClass"
             android:enabled="true"
             android:exported="true"
-            android:permission="android.permission.BIND_REMOTEVIEWS"
-            />
+            android:permission="android.permission.BIND_REMOTEVIEWS" />
     </application>
 
 </manifest>
