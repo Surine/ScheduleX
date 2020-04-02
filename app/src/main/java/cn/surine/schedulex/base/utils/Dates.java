@@ -58,6 +58,17 @@ public class Dates {
 
 
     /**
+     * 获取星期的汉语
+     */
+    public static String getWeekInChi(int day) {
+        if (day < 1 && day > 7) {
+            return "";
+        }
+        String[] weeks = new String[]{"一", "二", "三", "四", "五", "六", "日"};
+        return weeks[day - 1];
+    }
+
+    /**
      * 获取月份的英语
      */
     public static String getMonthInEng() {

@@ -34,6 +34,7 @@ import cn.surine.schedulex.ui.course.CourseRepository;
 import cn.surine.schedulex.ui.course.CourseViewModel;
 import cn.surine.schedulex.ui.schedule.ScheduleRepository;
 import cn.surine.schedulex.ui.schedule.ScheduleViewModel;
+import cn.surine.schedulex.ui.schedule.ScheduleViewPagerAdapter;
 import cn.surine.schedulex.ui.view.custom.helper.BtmDialogs;
 import cn.surine.schedulex.ui.view.custom.helper.CommonDialogs;
 
@@ -90,6 +91,14 @@ public class AddCourseFragment extends BaseBindingFragment<FragmentAddCourseBind
         } else {
             Toasts.toast(getString(R.string.get_course_fail));
             return;
+        }
+
+        //课程拷贝，需要重新赋值id
+        if (bundle != null && bundle.getBoolean(ScheduleViewPagerAdapter.IS_COPY)) {
+            hasCourseData = false;
+            course.scheduleId = schedule.roomId;
+            course.color = Constants.COLOR_1[new Random(System.currentTimeMillis()).nextInt(Constants.COLOR_1.length)];
+            course.id = course.scheduleId + "@" + System.currentTimeMillis();
         }
 
 
@@ -154,6 +163,7 @@ public class AddCourseFragment extends BaseBindingFragment<FragmentAddCourseBind
      *
      * @param t
      */
+    @SuppressLint("SetTextI18n")
     private void initCourseUi(FragmentAddCourseBinding t) {
         t.courseNameSubTitle.setText(course.coureName);
         t.courseTimeSubtitle.setText(course.getWeekDescription() + "\n" + course.getClassDayDescription() + " " + course.getSessionDescription());

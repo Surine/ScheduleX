@@ -67,7 +67,7 @@ public class Schedule extends BaseVm {
 
 
     /**
-     * 课程格子不透明度1-10
+     * 课程格子不透明度0-10
      */
     public int alphaForCourseItem = 10;
 

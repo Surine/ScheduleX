@@ -38,6 +38,7 @@ import cn.surine.schedulex.base.controller.BaseFragment;
 import cn.surine.schedulex.base.interfaces.Call;
 import cn.surine.schedulex.base.utils.DataMaps;
 import cn.surine.schedulex.base.utils.Dates;
+import cn.surine.schedulex.base.utils.Navigations;
 import cn.surine.schedulex.base.utils.Prefs;
 import cn.surine.schedulex.base.utils.Toasts;
 import cn.surine.schedulex.base.utils.Uis;
@@ -66,6 +67,7 @@ public class ScheduleViewPagerAdapter extends RecyclerView.Adapter<ScheduleViewP
     private CourseViewModel courseViewModel;
     private Call dataSetUpdateCall;
     private HashMap<String, BCourse> selectCourse = new HashMap<>();
+    public static final String IS_COPY = "IS_COPY";
     int[] raws = new int[]{
             R.raw.a4, R.raw.a4m, R.raw.b4, R.raw.c4,
             R.raw.c4m, R.raw.d4, R.raw.d4m, R.raw.e4,
@@ -142,7 +144,7 @@ public class ScheduleViewPagerAdapter extends RecyclerView.Adapter<ScheduleViewP
                 if (course == null) {
                     return;
                 }
-                BtmDialogs.showCourseInfoBtmDialog(baseFragment, course);
+                BtmDialogs.showCourseInfoBtmDialog(baseFragment, course, schedule.alphaForCourseItem);
             } else {
                 MediaPlayer mp = MediaPlayer.create(baseFragment.activity(), raws[new Random().nextInt(12)]);
                 mp.start();
@@ -199,6 +201,16 @@ public class ScheduleViewPagerAdapter extends RecyclerView.Adapter<ScheduleViewP
             BaseAdapter<BCourse> adapter = new BaseAdapter<>(bCourses, R.layout.item_select_course_list_ui, BR.bCourse);
             recyclerView.setLayoutManager(new LinearLayoutManager(baseFragment.activity(), RecyclerView.HORIZONTAL, false));
             recyclerView.setAdapter(adapter);
+            adapter.setOnItemElementClickListener(new BaseAdapter.OnItemElementClickListener(R.id.copy_course) {
+                @Override
+                public void onClick(View v, int position) {
+                    Bundle bundle = new Bundle();
+                    bundle.putString(COURSE_ID, bCourses.get(position).getId());
+                    bundle.putBoolean(IS_COPY, true);
+                    Navigations.open(baseFragment, R.id.action_scheduleFragment_to_addCourseFragment, bundle);
+                    bottomSheetDialog.dismiss();;
+                }
+            });
 
             //delete
             Button vDelete = targetView.findViewById(R.id.delete);
@@ -241,7 +253,10 @@ public class ScheduleViewPagerAdapter extends RecyclerView.Adapter<ScheduleViewP
                     Course course = DataMaps.dataMappingByBCourse(bc);
                     //获取
                     String weekInfo = getDateMappingWeek(dateStr[0], schedule.termStartDate);
-                    if (TextUtils.isEmpty(weekInfo)) return true;
+                    if (TextUtils.isEmpty(weekInfo)) {
+                        Toasts.toast("不得移动至学期外！");
+                        return true;
+                    }
                     course.classWeek = weekInfo;
                     try {
                         course.classDay = String.valueOf(Dates.getWeekDay(dateStr[0]));

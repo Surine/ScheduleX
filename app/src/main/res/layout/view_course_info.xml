@@ -26,7 +26,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/dp8"
         android:text="8-210(d)"
-        android:textSize="@dimen/t22"
+        android:textSize="@dimen/t17"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="@+id/courseName"
         app:layout_constraintTop_toBottomOf="@+id/courseName" />
@@ -59,12 +59,14 @@
 
     <ImageView
         android:id="@+id/imageView4"
-        android:layout_width="@dimen/dp37"
-        android:layout_height="@dimen/dp37"
+        android:layout_width="@dimen/dp25"
+        android:layout_height="@dimen/dp25"
         android:layout_marginTop="56dp"
+        android:tint="@android:color/holo_orange_dark"
         app:layout_constraintStart_toStartOf="@+id/courseClassDay"
         app:layout_constraintTop_toBottomOf="@+id/courseClassDay"
-        app:srcCompat="@mipmap/ic_teacher" />
+        android:src="@mipmap/ic_teacher"
+        />
 
     <TextView
         android:id="@+id/courseTeacher"
@@ -72,7 +74,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
         android:text="Mr.R"
-        android:textColor="@android:color/black"
+        android:textColor="@color/text"
         android:textSize="@dimen/t17"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@+id/imageView4"
@@ -83,19 +85,20 @@
 
     <ImageView
         android:id="@+id/imageView5"
-        android:layout_width="@dimen/dp37"
-        android:layout_height="@dimen/dp37"
+        android:layout_width="@dimen/dp25"
+        android:layout_height="@dimen/dp25"
         android:layout_marginTop="40dp"
+        android:tint="@android:color/holo_red_dark"
         app:layout_constraintStart_toStartOf="@+id/imageView4"
         app:layout_constraintTop_toBottomOf="@+id/imageView4"
-        app:srcCompat="@mipmap/ic_score" />
+        android:src="@mipmap/ic_score" />
 
     <TextView
         android:id="@+id/courseScore"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="2.0分"
-        android:textColor="@android:color/black"
+        android:textColor="@color/text"
         android:textSize="@dimen/t17"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@+id/imageView5"
@@ -107,7 +110,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="Info"
-        android:textColor="@android:color/black"
+        android:textColor="@color/text"
         android:textSize="@dimen/t17"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@+id/imageView2"
@@ -122,17 +125,18 @@
         app:layout_constraintBottom_toBottomOf="@+id/courseName"
         app:layout_constraintEnd_toStartOf="@+id/guideline40"
         app:layout_constraintTop_toTopOf="@+id/courseName"
-        app:srcCompat="@drawable/ic_create_black_24dp" />
+        android:src="@drawable/ic_create_black_24dp" />
 
     <ImageView
         android:id="@+id/imageView2"
-        android:layout_width="@dimen/dp37"
-        android:layout_height="@dimen/dp37"
+        android:layout_width="@dimen/dp25"
+        android:layout_height="@dimen/dp25"
         android:layout_marginTop="40dp"
+        android:tint="@android:color/holo_blue_dark"
         app:layout_constraintEnd_toEndOf="@+id/imageView5"
         app:layout_constraintStart_toStartOf="@+id/imageView5"
         app:layout_constraintTop_toBottomOf="@+id/imageView5"
-        app:srcCompat="@mipmap/ic_more" />
+        android:src="@mipmap/ic_more" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline40"

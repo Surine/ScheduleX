@@ -381,7 +381,11 @@ public class CourseTableView extends LinearLayout {
                     + bCourse.getSectionStart() * mUiConfig.getItemTopMargin();
             flp.setMargins(0, topMargin, 0, 0);
             //is cur week
-            frameLayout.setBackground(Drawables.getDrawable(Color.parseColor(bCourse.getColor()), 20, 3, Color.WHITE));
+            if(bCourse.getColor() != null){
+                frameLayout.setBackground(Drawables.getDrawable(Color.parseColor(bCourse.getColor()), 20, 3, Color.WHITE));
+            }else{
+                frameLayout.setBackground(Drawables.getDrawable(Color.TRANSPARENT, 20, 3, Color.WHITE));
+            }
             tv.setTextColor(Color.WHITE);
             tv.setText(bCourse.getName() + "\n @" + bCourse.getPosition());
             tv.setLayoutParams(tlp);

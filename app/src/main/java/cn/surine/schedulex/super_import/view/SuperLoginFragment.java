@@ -121,7 +121,7 @@ public class SuperLoginFragment extends BaseBindingFragment<FragmentLoginSuperBi
                             courseList.add(course);
                         }
                         courseViewModel.saveCourseByDb(courseList, scheduleId);
-                        Navigations.open(SuperLoginFragment.this, R.id.scheduleFragment);
+                        fragmentLoginSuperBinding.getRoot().postDelayed(() -> Navigations.open(SuperLoginFragment.this, R.id.scheduleFragment),1500);
                     }
                 } else {
                     Toasts.toast(getString(R.string.arg_exception));

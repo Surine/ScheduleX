@@ -31,7 +31,7 @@
     <string name="schedule_config_subtitle">点击切换课表，\n长按进行课表编辑</string>
     <string name="theme">主题</string>
     <string name="theme_list_subtitle">包含课表背景和课程随机颜色</string>
-    <string name="week">第%s周</string>
+    <string name="week">%s周</string>
     <string name="config_schedule_subtitle">你可以配置你的课表属性</string>
     <string name="delete">删除</string>
     <string name="export">导出</string>

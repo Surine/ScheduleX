@@ -219,7 +219,11 @@ public class ScheduleFragment extends BaseBindingFragment<FragmentScheduleBindin
             List<BCourse> bCourseList = new ArrayList<>();
             for (Course course : dbData) {
                 BCourse bCourse = DataMaps.dataMappingByCourse(course);
-                bCourse.setColor("#" + Integer.toHexString(Uis.getColorWithAlpha(curSchedule.alphaForCourseItem / 10F, Color.parseColor(bCourse.getColor()))));
+                if(curSchedule.alphaForCourseItem != 0){
+                    bCourse.setColor("#" + Integer.toHexString(Uis.getColorWithAlpha(curSchedule.alphaForCourseItem / 10F, Color.parseColor(bCourse.getColor()))));
+                }else{
+                    bCourse.setColor(null);
+                }
                 bCourseList.add(bCourse);
             }
             handleCourseList.add(bCourseList);

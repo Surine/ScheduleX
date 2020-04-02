@@ -1,5 +1,6 @@
 package cn.surine.schedulex.base.utils;
 
+import android.annotation.SuppressLint;
 import android.graphics.Color;
 import android.graphics.drawable.GradientDrawable;
 import android.text.TextUtils;
@@ -106,4 +107,16 @@ public class BindingAdapters {
         int colorInt = Uis.getColorWithAlpha(baseAlpha, Color.parseColor(baseColor));
         view.setBackground(Drawables.getDrawable(colorInt, 20, 0, Color.WHITE));
     }
+
+    /**
+     * 返回星期字符串
+     */
+    @SuppressLint("SetTextI18n")
+    @androidx.databinding.BindingAdapter("setWeekTextByDayId")
+    public static void setWeekTextByDayId(View view, String dayId) {
+        if (view instanceof TextView) {
+            ((TextView) view).setText("周" + Dates.getWeekInChi(Integer.parseInt(dayId)));
+        }
+    }
+
 }

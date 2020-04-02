@@ -3,7 +3,6 @@
     <dimen name="dp15">15dp</dimen>
     <dimen name="dp10">10dp</dimen>
     <dimen name="dp25">25dp</dimen>
-    <dimen name="t17">17sp</dimen>
     <dimen name="t14">14sp</dimen>
     <dimen name="dp50">50dp</dimen>
     <dimen name="dp7">7dp</dimen>
@@ -54,4 +53,5 @@
     <dimen name="t12">12sp</dimen>
     <dimen name="dp22">22dp</dimen>
     <dimen name="dp300">300dp</dimen>
+    <dimen name="t17">17sp</dimen>
 </resources>

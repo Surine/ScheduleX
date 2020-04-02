@@ -27,10 +27,16 @@ public class AboutFragment extends BaseBindingFragment<FragmentAboutBinding> {
             Others.startQQ(activity(), "686976115");
             Toasts.toast(getString(R.string.qq_copy));
         });
-        t.github.setOnClickListener(v -> Others.openUrl("https://github.com/surine/ScheduleX"));
-        t.alipay.setOnClickListener(v -> Others.donateAlipay(activity(), "fkx00798tue4qrncwkknh09"));
+        t.github.setOnClickListener(v -> {
+            Toasts.toast("求个star，感谢啦！");
+            Others.openUrl("https://github.com/surine/ScheduleX");
+        });
+        t.alipay.setOnClickListener(v -> {
+            Toasts.toast("开心到飞起~~~");
+            Others.donateAlipay(activity(), "fkx00798tue4qrncwkknh09");
+        });
         t.aboutItemCoolApk.setOnClickListener(v -> Others.startCoolApk("667393"));
-        t.versionSlogan.setText(getString(R.string.version_slogan,Others.getAppVersion()));
+        t.versionSlogan.setText(getString(R.string.version_slogan, Others.getAppVersion()));
         loadAnimation(t);
         t.jetpack.setOnClickListener(v -> loadAnimation(t));
     }

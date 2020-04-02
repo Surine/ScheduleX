@@ -31,6 +31,8 @@ public class BCourse implements Serializable{
    private String color;
    /*第几周到第几周上*/
    private List<Integer> week = new ArrayList<>();
+   /**学分*/
+   public String score;
 
     public String getName() {
         return name;
@@ -125,6 +127,14 @@ public class BCourse implements Serializable{
         if(week != null && week.size() >= 1){
             this.week = week;
         }
+    }
+
+    public String getScore() {
+        return score;
+    }
+
+    public void setScore(String score) {
+        this.score = score;
     }
 
     @Override

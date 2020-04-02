@@ -69,7 +69,8 @@ public class Course extends BaseVm {
         StringBuilder stringBuilder = new StringBuilder();
         for (int i = 0; i < classWeek.length(); i++) {
             if (classWeek.charAt(i) == '1') {
-                stringBuilder.append(i + 1).append(",");
+                stringBuilder.append(i + 1);
+                stringBuilder.append(" ");
             }
         }
         return stringBuilder.append(App.context.getString(R.string.week, "")).toString();

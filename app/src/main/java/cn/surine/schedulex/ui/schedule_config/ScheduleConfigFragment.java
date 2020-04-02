@@ -365,14 +365,10 @@ public class ScheduleConfigFragment extends BaseBindingFragment<FragmentSchedule
             }
         });
         button.setOnClickListener(v -> {
-            if (s1.getProgress() == 0) {
-                Toasts.toast(getString(R.string.nothing_to_show));
-            } else {
-                schedule.alphaForCourseItem = s1.getProgress();
-                globalT.scheduleCourseAlphaSubTitle.setText("L" + s1.getProgress());
-                scheduleViewModel.updateSchedule(schedule);
-                bt.dismiss();
-            }
+            schedule.alphaForCourseItem = s1.getProgress();
+            globalT.scheduleCourseAlphaSubTitle.setText("L" + s1.getProgress());
+            scheduleViewModel.updateSchedule(schedule);
+            bt.dismiss();
         });
     }
 
