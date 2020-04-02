@@ -124,7 +124,6 @@ public class ScheduleFragment extends BaseBindingFragment<FragmentScheduleBindin
         if (curSchedule == null) {
             return;
         }
-
         //当前周
         int currentWeek = curSchedule.curWeek();
         handleCourseList = new ArrayList<>();
@@ -138,9 +137,7 @@ public class ScheduleFragment extends BaseBindingFragment<FragmentScheduleBindin
         t.viewpager.setOrientation(ViewPager2.ORIENTATION_HORIZONTAL);
         t.viewpager.setCurrentItem(currentWeek - 1, true);
         t.viewpager.setPageTransformer(new ZoomOutPageTransformer());
-        scheduleViewPagerAdapter.setDataSetUpdateCall(() -> {
-            initData(true);
-        });
+        scheduleViewPagerAdapter.setDataSetUpdateCall(() -> initData(true));
         t.curWeekTv.setOnClickListener(v -> {
             View view = Uis.inflate(activity(), R.layout.view_change_week_quickly);
             popupWindow = new PopupWindow(view, Uis.dip2px(activity(), 200), WindowManager.LayoutParams.WRAP_CONTENT);
@@ -173,7 +170,9 @@ public class ScheduleFragment extends BaseBindingFragment<FragmentScheduleBindin
 
         //显示空视图
         if (TextUtils.isEmpty(curSchedule.imageUrl)) {
-            t.emptyView.setVisibility(handleCourseList.get(currentWeek - 1).size() != 0 ? View.GONE : View.VISIBLE);
+            if (currentWeek > 0) {
+                t.emptyView.setVisibility(handleCourseList.get(currentWeek - 1).size() != 0 ? View.GONE : View.VISIBLE);
+            }
         }
         t.viewpager.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
             @SuppressLint("StringFormatMatches")
@@ -219,9 +218,9 @@ public class ScheduleFragment extends BaseBindingFragment<FragmentScheduleBindin
             List<BCourse> bCourseList = new ArrayList<>();
             for (Course course : dbData) {
                 BCourse bCourse = DataMaps.dataMappingByCourse(course);
-                if(curSchedule.alphaForCourseItem != 0){
+                if (curSchedule.alphaForCourseItem != 0) {
                     bCourse.setColor("#" + Integer.toHexString(Uis.getColorWithAlpha(curSchedule.alphaForCourseItem / 10F, Color.parseColor(bCourse.getColor()))));
-                }else{
+                } else {
                     bCourse.setColor(null);
                 }
                 bCourseList.add(bCourse);

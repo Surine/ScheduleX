@@ -208,7 +208,7 @@ public class ScheduleViewPagerAdapter extends RecyclerView.Adapter<ScheduleViewP
                     bundle.putString(COURSE_ID, bCourses.get(position).getId());
                     bundle.putBoolean(IS_COPY, true);
                     Navigations.open(baseFragment, R.id.action_scheduleFragment_to_addCourseFragment, bundle);
-                    bottomSheetDialog.dismiss();;
+                    bottomSheetDialog.dismiss();
                 }
             });
 
@@ -288,17 +288,16 @@ public class ScheduleViewPagerAdapter extends RecyclerView.Adapter<ScheduleViewP
      * 获取选中日期对应的周信息
      */
     private String getDateMappingWeek(String s, String termStartDate) {
-        int week = (Dates.getDateDif(s, termStartDate) / 7) + 1;
-        if (week < 0) {
+        if (Dates.compareDate(s, termStartDate) <= 0) {
             return null;
-        } else {
-            StringBuilder stringBuilder = new StringBuilder();
-            for (int i = 0; i < Constants.MAX_WEEK; i++) {
-                stringBuilder.append(0);
-            }
-            stringBuilder.replace(week - 1, week, "1");
-            return stringBuilder.toString();
         }
+        int week = (Dates.getDateDif(s, termStartDate) / 7) + 1;
+        StringBuilder stringBuilder = new StringBuilder();
+        for (int i = 0; i < Constants.MAX_WEEK; i++) {
+            stringBuilder.append(0);
+        }
+        stringBuilder.replace(week - 1, week, "1");
+        return stringBuilder.toString();
     }
 
 

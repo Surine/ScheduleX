@@ -51,6 +51,7 @@
             android:id="@+id/other_info"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/dp10"
             android:text="@{bCourse.position +' '+ bCourse.teacher}"
             app:layout_constraintLeft_toLeftOf="@id/courseName"
             app:layout_constraintTop_toBottomOf="@id/time_info"
@@ -58,6 +59,7 @@
             tools:layout_editor_absoluteY="97dp" />
 
         <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/copy_course"
             android:layout_width="@dimen/dp50"
             android:layout_height="@dimen/dp25"
             android:layout_marginEnd="@dimen/dp10"
@@ -66,7 +68,6 @@
             android:gravity="center"
             android:padding="@dimen/dp5"
             android:text="拷贝"
-            android:id="@+id/copy_course"
             android:textColor="@color/text"
             android:textSize="@dimen/t12"
             app:layout_constraintBottom_toBottomOf="parent"

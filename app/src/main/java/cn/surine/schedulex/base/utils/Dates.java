@@ -174,7 +174,20 @@ public class Dates {
         long time1 = cal.getTimeInMillis();
         cal.setTime(getDate(date2, yyyyMMdd));
         long time2 = cal.getTimeInMillis();
-        return (int) (time1 - time2) / (1000 * 3600 * 24);
+        return (int) Math.abs((time1 - time2) / (1000 * 3600 * 24));
+    }
+
+
+    /**
+     * 比较两天的大小
+     */
+    public static int compareDate(String date1, String date2) {
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(getDate(date1, yyyyMMdd));
+        long time1 = cal.getTimeInMillis();
+        cal.setTime(getDate(date2, yyyyMMdd));
+        long time2 = cal.getTimeInMillis();
+        return Long.compare(time1, time2);
     }
 
 
