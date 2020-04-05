@@ -2,12 +2,10 @@ package cn.surine.schedulex.app_widget.core;
 
 import android.content.Context;
 import android.content.Intent;
-import android.util.Log;
 import android.widget.RemoteViews;
 import android.widget.RemoteViewsService;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import cn.surine.schedulex.R;
@@ -93,7 +91,7 @@ public class WidgetServiceDayClass extends RemoteViewsService {
             sb.append(this.mAppWidgetId);
             boolean isNextDay = Prefs.getBoolean(sb.toString(), false);
             int today = Dates.getWeekDay();
-            int nextDay =  Dates.getWeekDay() + 1 % 7 == 0 ? 7 : Dates.getWeekDay() + 1 % 7 ;
+            int nextDay = Dates.getWeekDay() + 1 % 7 == 0 ? 7 : (Dates.getWeekDay() + 1) % 7;
             int day = isNextDay ? nextDay : today;
             try {
                 Schedule curSchedule = WidgetServiceDayClass.this.scheduleRepository.getCurSchedule();
