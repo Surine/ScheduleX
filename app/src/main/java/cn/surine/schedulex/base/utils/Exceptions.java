@@ -9,6 +9,6 @@ package cn.surine.schedulex.base.utils;
 public class Exceptions {
 
     public static void handle(Throwable t) {
-
+//        Toasts.toast(t.getMessage());
     }
 }

@@ -172,4 +172,5 @@
     <string name="please_choose_time">Please select the class time</string>
     <string name="timetable_is_selected">Successfully selected schedule</string>
     <string name="whether_to_show_time">Whether to display the Timetable</string>
+    <string name="please_select_term">请选择学期</string>
 </resources>

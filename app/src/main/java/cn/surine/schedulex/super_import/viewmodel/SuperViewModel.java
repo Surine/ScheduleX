@@ -8,8 +8,6 @@ import androidx.annotation.Keep;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-import com.tencent.bugly.crashreport.CrashReport;
-
 import cn.surine.schedulex.base.http.BaseHttpSubscriber;
 import cn.surine.schedulex.base.utils.SimpleTextWatcher;
 import cn.surine.schedulex.super_import.model.SuperBaseModel;
@@ -19,6 +17,7 @@ import cn.surine.schedulex.super_import.model.User;
 @Keep
 public class SuperViewModel extends ViewModel {
     public static final int FETCH_FAIL = 2;
+    public static final int TOKEN_FAIL = 3;
     public static final int FETCH_SUCCESS = 1;
     public static final int LOGIN_FAIL = 2;
     public static final int LOGIN_SUCCESS = 1;
@@ -42,6 +41,7 @@ public class SuperViewModel extends ViewModel {
     };
     public MutableLiveData<SuperCourseList> superCourseList;
     private SuperRepository superResository;
+    public MutableLiveData<User> userData = new MutableLiveData<>();
 
     public SuperViewModel(SuperRepository superResository) {
         this.superResository = superResository;
@@ -62,6 +62,7 @@ public class SuperViewModel extends ViewModel {
                 @Override
                 public void onSuccess(MutableLiveData<SuperBaseModel<User>> mutableLiveData) {
                     if (mutableLiveData.getValue().status == 1 && mutableLiveData.getValue().data.statusInt == 1) {
+                        userData.setValue(mutableLiveData.getValue().data);
                         loginStatus.setValue(LOGIN_SUCCESS);
                     } else {
                         loginStatus.setValue(LOGIN_FAIL);
@@ -82,10 +83,12 @@ public class SuperViewModel extends ViewModel {
         superResository.getCourseList(i, i2).subscribe(new BaseHttpSubscriber<SuperBaseModel<SuperCourseList>>() {
             @Override
             public void onSuccess(MutableLiveData<SuperBaseModel<SuperCourseList>> mutableLiveData) {
-                //上报返回数据协助排查错误信息，后续版本删除
-                CrashReport.postCatchedException(new RuntimeException(mutableLiveData.getValue().data.lessonList.toString()));
-                SuperViewModel.this.superCourseList.setValue((mutableLiveData.getValue()).data);
-                SuperViewModel.this.getCourseStatus.setValue(FETCH_SUCCESS);
+                if (mutableLiveData.getValue().data == null) {
+                    SuperViewModel.this.getCourseStatus.setValue(TOKEN_FAIL);
+                } else {
+                    SuperViewModel.this.superCourseList.setValue((mutableLiveData.getValue()).data);
+                    SuperViewModel.this.getCourseStatus.setValue(FETCH_SUCCESS);
+                }
             }
 
             @Override

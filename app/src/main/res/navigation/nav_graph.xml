@@ -123,7 +123,13 @@
     <fragment
         android:id="@+id/superLoginFragment"
         android:name="cn.surine.schedulex.super_import.view.SuperLoginFragment"
-        android:label="SuperLoginFragment" />
+        android:label="SuperLoginFragment">
+        <action
+            android:id="@+id/action_superLoginFragment_to_superCourseFetchFragment"
+            app:destination="@id/superCourseFetchFragment"
+            app:enterAnim="@anim/fragment_open_enter"
+            app:popEnterAnim="@anim/fragment_open_enter" />
+    </fragment>
     <fragment
         android:id="@+id/scheduleFragment"
         android:name="cn.surine.schedulex.ui.schedule.ScheduleFragment"
@@ -154,4 +160,14 @@
         android:id="@+id/addTimeTableFragment"
         android:name="cn.surine.schedulex.ui.add_timetable.AddTimeTableFragment"
         android:label="AddTimeTableFragment" />
+    <fragment
+        android:id="@+id/superCourseFetchFragment"
+        android:name="cn.surine.schedulex.super_import.view.SuperCourseFetchFragment"
+        android:label="SuperCourseFetchFragment">
+        <action
+            android:id="@+id/action_superCourseFetchFragment_to_scheduleFragment"
+            app:destination="@id/scheduleFragment"
+            app:enterAnim="@anim/fragment_open_enter"
+            app:popEnterAnim="@anim/fragment_open_enter" />
+    </fragment>
 </navigation>
