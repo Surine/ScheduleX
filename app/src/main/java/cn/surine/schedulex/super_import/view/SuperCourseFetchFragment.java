@@ -146,11 +146,21 @@ public class SuperCourseFetchFragment extends BaseBindingFragment<FragmentSuperC
             for (int i2 = 0; i2 < Constants.MAX_WEEK; i2++) {
                 sb2.append(0);
             }
-            for (String parseInt : superCourse.period.split(" ")) {
-                int parseInt2 = Integer.parseInt(parseInt);
-                sb2.replace(parseInt2 - 1, parseInt2, String.valueOf(1));
+            //上课周处理
+            if (superCourse.period.equals("全周")) {
+                course.classWeek = "111111111111111111111111111111";
+            } else if (superCourse.period.equals("单周")) {
+                course.classWeek = "101010101010101010101010101010";
+            } else if (superCourse.period.equals("双周")) {
+                course.classWeek = "010101010101010101010101010101";
+            } else {
+                for (String parseInt : superCourse.period.split(" ")) {
+                    int parseInt2 = Integer.parseInt(parseInt);
+                    sb2.replace(parseInt2 - 1, parseInt2, String.valueOf(1));
+                }
+                course.classWeek = sb2.toString();
             }
-            course.classWeek = sb2.toString();
+
             courseList.add(course);
         }
         courseViewModel.saveCourseByDb(courseList, scheduleId);
