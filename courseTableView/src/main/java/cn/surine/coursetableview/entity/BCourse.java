@@ -12,34 +12,44 @@ import java.util.List;
  */
 
 @Keep
-public class BCourse implements Serializable{
-   private String id;
-   private long scheduleId;
-   /*课程名*/
-   private String name = "";
-   /*上课地点*/
-   private String position = "";
-   /*老师*/
-   private String teacher = "";
-   /*周几上*/
-   private int day = 1;
-   /*第几节开始*/
-   private int sectionStart = 0;
-   /*持续几节*/
-   private int sectionContinue = 1;
-   /*课程颜色*/
-   private String color;
-   /*第几周到第几周上*/
-   private List<Integer> week = new ArrayList<>();
-   /**学分*/
-   public String score;
+public class BCourse implements Serializable {
+    private String id;
+    private long scheduleId;
+    /*课程名*/
+    private String name = "";
+    /*上课地点*/
+    private String position = "";
+    /*老师*/
+    private String teacher = "";
+    /*周几上*/
+    private int day = 1;
+    /*第几节开始*/
+    private int sectionStart = 0;
+    /*持续几节*/
+    private int sectionContinue = 1;
+    /*课程颜色*/
+    private String color;
+    /*第几周到第几周上*/
+    private List<Integer> week = new ArrayList<>();
+    /**
+     * 学分
+     */
+    public String score;
 
     public String getName() {
         return name;
     }
 
+    public String getSimpleName() {
+        if (name.length() > 6) {
+            return name.substring(0, 6) + "...";
+        }
+        return name;
+    }
+
+
     public void setName(String name) {
-        if(name != null){
+        if (name != null) {
             this.name = name;
         }
     }
@@ -66,7 +76,7 @@ public class BCourse implements Serializable{
     }
 
     public void setPosition(String position) {
-        if(position != null){
+        if (position != null) {
             this.position = position;
         }
     }
@@ -76,7 +86,7 @@ public class BCourse implements Serializable{
     }
 
     public void setTeacher(String teacher) {
-        if(teacher != null){
+        if (teacher != null) {
             this.teacher = teacher;
         }
     }
@@ -86,7 +96,7 @@ public class BCourse implements Serializable{
     }
 
     public void setDay(int day) {
-        if(day >= 1 && day <= 7){
+        if (day >= 1 && day <= 7) {
             this.day = day;
         }
     }
@@ -97,7 +107,7 @@ public class BCourse implements Serializable{
 
     public void setSectionStart(int sectionStart) {
         //按照1标志位开始
-        if(sectionStart >= 1)
+        if (sectionStart >= 1)
             this.sectionStart = sectionStart;
     }
 
@@ -106,7 +116,7 @@ public class BCourse implements Serializable{
     }
 
     public void setSectionContinue(int sectionContinue) {
-        if(sectionContinue >= 1){
+        if (sectionContinue >= 1) {
             this.sectionContinue = sectionContinue;
         }
     }
@@ -124,7 +134,7 @@ public class BCourse implements Serializable{
     }
 
     public void setWeek(List<Integer> week) {
-        if(week != null && week.size() >= 1){
+        if (week != null && week.size() >= 1) {
             this.week = week;
         }
     }

@@ -32,7 +32,7 @@
             android:ellipsize="end"
             android:maxEms="6"
             android:maxLines="1"
-            android:text="@{bCourse.name}"
+            android:text="@{bCourse.getSimpleName}"
             android:textColor="@color/text"
             android:textSize="@dimen/t17"
             app:layout_constraintLeft_toLeftOf="parent"

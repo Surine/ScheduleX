@@ -95,10 +95,10 @@ public class ScheduleViewPagerAdapter extends RecyclerView.Adapter<ScheduleViewP
             uiConfig.setItemTextSize(12);
             uiConfig.setItemTopMargin(5);
             uiConfig.setItemSideMargin(3);
-            uiConfig.setSectionViewWidth(Uis.dip2px(App.context, 45));
+            uiConfig.setSectionViewWidth(Uis.dip2px(App.context, 46));
         } else {
             uiConfig.setMaxClassDay(5);
-            uiConfig.setItemTextSize(14);
+            uiConfig.setItemTextSize(13);
             uiConfig.setItemTopMargin(10);
             uiConfig.setItemSideMargin(8);
             uiConfig.setSectionViewWidth(Uis.dip2px(App.context, 50));

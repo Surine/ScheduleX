@@ -9,7 +9,7 @@ public class SuperCourse extends BaseVm {
     public int day;
     public String locale;
     public String name;
-    public String period;
+    public String smartPeriod;
     public int sectionend;
     public int sectionstart;
     public String teacher;
@@ -20,7 +20,7 @@ public class SuperCourse extends BaseVm {
                 "day=" + day +
                 ", locale='" + locale + '\'' +
                 ", name='" + name + '\'' +
-                ", period='" + period + '\'' +
+                ", smartPeriod='" + smartPeriod + '\'' +
                 ", sectionend=" + sectionend +
                 ", sectionstart=" + sectionstart +
                 ", teacher='" + teacher + '\'' +

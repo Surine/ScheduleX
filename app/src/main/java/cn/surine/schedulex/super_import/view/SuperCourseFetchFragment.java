@@ -77,13 +77,13 @@ public class SuperCourseFetchFragment extends BaseBindingFragment<FragmentSuperC
                     dialog.dismiss();
                     if (getArguments() != null) {
                         Bundle arguments = getArguments();
-                        String str = ScheduleInitFragment.SCHEDULE_NAME;
-                        if (!TextUtils.isEmpty(arguments.getString(str))) {
+                        String scheduleName;
+                        if (!TextUtils.isEmpty(scheduleName = arguments.getString(ScheduleInitFragment.SCHEDULE_NAME))) {
                             List<Course> courseList = new ArrayList();
                             List<SuperCourse> superCourseData = superViewModel.getSuperCourseList().lessonList;
                             if (superCourseData.size() == 0) {
                                 Dialog warnDialog = CommonDialogs.getCommonDialog(activity(), getString(R.string.warning), "没有检测到该学期的课程,确定继续导入么？", () -> {
-                                    parseCourse(arguments.getString(str), courseList, superCourseData);
+                                    parseCourse(scheduleName, courseList, superCourseData);
                                 }, () -> {
                                     Toasts.toast("请重新登录获取最新数据！");
                                     Navigations.close(SuperCourseFetchFragment.this);
@@ -91,7 +91,7 @@ public class SuperCourseFetchFragment extends BaseBindingFragment<FragmentSuperC
                                 warnDialog.setCancelable(false);
                                 warnDialog.show();
                             } else {
-                                parseCourse(arguments.getString(str), courseList, superCourseData);
+                                parseCourse(scheduleName, courseList, superCourseData);
                             }
                         }
                     } else {
@@ -120,7 +120,7 @@ public class SuperCourseFetchFragment extends BaseBindingFragment<FragmentSuperC
      * 导入
      */
     private void parseCourse(String str, List<Course> courseList, List<SuperCourse> superCourseData) {
-        scheduleId = scheduleViewModel.addSchedule(getArguments().getString(str), 24, 1, Schedule.IMPORT_WAY.SUPER_CN);
+        scheduleId = scheduleViewModel.addSchedule(str, 24, 1, Schedule.IMPORT_WAY.SUPER_CN);
         Prefs.save(Constants.CUR_SCHEDULE, scheduleId);
         for (SuperCourse superCourse : superCourseData) {
             Course course = new Course();
@@ -147,19 +147,12 @@ public class SuperCourseFetchFragment extends BaseBindingFragment<FragmentSuperC
                 sb2.append(0);
             }
             //上课周处理
-            if (superCourse.period.equals("全周")) {
-                course.classWeek = "111111111111111111111111111111";
-            } else if (superCourse.period.equals("单周")) {
-                course.classWeek = "101010101010101010101010101010";
-            } else if (superCourse.period.equals("双周")) {
-                course.classWeek = "010101010101010101010101010101";
-            } else {
-                for (String parseInt : superCourse.period.split(" ")) {
-                    int parseInt2 = Integer.parseInt(parseInt);
-                    sb2.replace(parseInt2 - 1, parseInt2, String.valueOf(1));
-                }
-                course.classWeek = sb2.toString();
+            for (String parseInt : superCourse.smartPeriod.split(" ")) {
+                int parseInt2 = Integer.parseInt(parseInt);
+                sb2.replace(parseInt2 - 1, parseInt2, String.valueOf(1));
             }
+            course.classWeek = sb2.toString();
+
 
             courseList.add(course);
         }

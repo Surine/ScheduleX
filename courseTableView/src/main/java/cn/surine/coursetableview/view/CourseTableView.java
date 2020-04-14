@@ -381,13 +381,13 @@ public class CourseTableView extends LinearLayout {
                     + bCourse.getSectionStart() * mUiConfig.getItemTopMargin();
             flp.setMargins(0, topMargin, 0, 0);
             //is cur week
-            if(bCourse.getColor() != null){
+            if (bCourse.getColor() != null) {
                 frameLayout.setBackground(Drawables.getDrawable(Color.parseColor(bCourse.getColor()), 20, 3, Color.WHITE));
-            }else{
+            } else {
                 frameLayout.setBackground(Drawables.getDrawable(Color.TRANSPARENT, 20, 3, Color.WHITE));
             }
             tv.setTextColor(Color.WHITE);
-            tv.setText(bCourse.getName() + "\n @" + bCourse.getPosition());
+            tv.setText(bCourse.getSimpleName() + "\n @" + bCourse.getPosition());
             tv.setLayoutParams(tlp);
             tv.setPadding(10, 10, 10, 10);
             tv.getPaint().setFakeBoldText(true);
@@ -480,9 +480,9 @@ public class CourseTableView extends LinearLayout {
                     + bCourse.getSectionStart() * mUiConfig.getItemTopMargin();
             flp.setMargins(0, topMargin, 0, 0);
             //is non cur week
-            frameLayout.setBackground(Drawables.getDrawable(mUiConfig.getItemNotCurWeekCourseColor(), 20, 3, Color.WHITE));
+            frameLayout.setBackground(Drawables.getDrawable(mUiConfig.getItemNotCurWeekCourseColor(), 20, 3, mUiConfig.getColorUI()));
             tv.setTextColor(Color.BLACK);
-            tv.setText(bCourse.getName() + "\n @" + bCourse.getPosition() + "\n[非本周]");
+            tv.setText(bCourse.getSimpleName() + "\n @" + bCourse.getPosition() + "\n[非本周]");
             tv.setLayoutParams(tlp);
             tv.setPadding(10, 10, 10, 10);
             tv.setGravity(Gravity.CENTER);
