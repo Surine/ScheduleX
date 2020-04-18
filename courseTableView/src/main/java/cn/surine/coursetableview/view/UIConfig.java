@@ -41,7 +41,7 @@ public class UIConfig {
     /*课程项距离 top margin*/
     private int itemTopMargin = NORMAL_ITEM_TOP_MARGIN;
     /*是否显示非本周上的课*/
-    private boolean showCurWeekCourse = NORMAL_SHOW_CUR_WEEK_COURSE;
+    private boolean showNotCurWeekCourse = NORMAL_SHOW_CUR_WEEK_COURSE;
     /*课程项字体大小*/
     private int itemTextSize = NORMAL_COURSE_TEXT_SIZE;
     /*非本周上的课的课程颜色*/
@@ -143,18 +143,18 @@ public class UIConfig {
     }
 
 
-    public boolean isShowCurWeekCourse() {
-        return showCurWeekCourse;
+    public boolean isShowNotCurWeekCourse() {
+        return showNotCurWeekCourse;
     }
 
     /**
      * 是否显示非本周上的课
      *
-     * @param showCurWeekCourse true为显示，false为不显示 默认显示
+     * @param showNotCurWeekCourse true为显示，false为不显示 默认显示
      * @return UIConfig
      */
-    public UIConfig setShowCurWeekCourse(boolean showCurWeekCourse) {
-        this.showCurWeekCourse = showCurWeekCourse;
+    public UIConfig setShowNotCurWeekCourse(boolean showNotCurWeekCourse) {
+        this.showNotCurWeekCourse = showNotCurWeekCourse;
         return this;
     }
 

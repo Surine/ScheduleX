@@ -95,7 +95,7 @@ public class ScheduleViewPagerAdapter extends RecyclerView.Adapter<ScheduleViewP
             uiConfig.setItemTextSize(12);
             uiConfig.setItemTopMargin(5);
             uiConfig.setItemSideMargin(3);
-            uiConfig.setSectionViewWidth(Uis.dip2px(App.context, 46));
+            uiConfig.setSectionViewWidth(Uis.dip2px(App.context, 40));
         } else {
             uiConfig.setMaxClassDay(5);
             uiConfig.setItemTextSize(13);
@@ -104,8 +104,8 @@ public class ScheduleViewPagerAdapter extends RecyclerView.Adapter<ScheduleViewP
             uiConfig.setSectionViewWidth(Uis.dip2px(App.context, 50));
         }
         uiConfig.setShowTimeTable(schedule.isShowTime);
-        uiConfig.setShowCurWeekCourse(false);
         uiConfig.setMaxSection(schedule.maxSession);
+        uiConfig.setShowNotCurWeekCourse(false);
         uiConfig.setSectionHeight(Uis.dip2px(App.context, schedule.itemHeight));
         uiConfig.setChooseWeekColor(App.context.getResources().getColor(R.color.colorPrimary));
         uiConfig.setColorUI(schedule.lightText ? UIConfig.LIGHT : UIConfig.DARK);

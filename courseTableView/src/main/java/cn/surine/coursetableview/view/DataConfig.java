@@ -1,5 +1,6 @@
 package cn.surine.coursetableview.view;
 
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -119,5 +120,14 @@ public class DataConfig {
     public DataConfig setTimeTable(BTimeTable timeTable) {
         this.timeTable = timeTable;
         return this;
+    }
+
+    public int curWeek() {
+        try {
+            return TimeUtil.getRealWeek(curTermStartDate);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return 1;
     }
 }

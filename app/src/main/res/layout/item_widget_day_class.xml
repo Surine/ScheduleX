@@ -1,42 +1,65 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-     android:layout_width="match_parent"
+    android:layout_width="match_parent"
     android:layout_height="@dimen/dp100">
-    <TextView
-        android:layout_width="@dimen/dp80"
-        android:layout_height="match_parent"
-        android:text="1-2"
-        android:gravity="center"
-        android:textColor="@color/colorPrimary"
-        android:textSize="@dimen/t22"
-        android:id="@+id/day_class_session"
-        android:textStyle="bold"
-        />
+
     <LinearLayout
+        android:layout_width="@dimen/dp70"
+        android:layout_height="match_parent"
+        android:layout_marginTop="@dimen/dp20"
+        android:layout_marginBottom="@dimen/dp20"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/day_class_session"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="1-2"
+            android:textColor="@color/colorPrimary"
+            android:textSize="@dimen/t22"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/widget_day_class_course_time"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="8:00" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/widget_day_class_course_info"
         android:layout_width="0dp"
         android:layout_height="match_parent"
+        android:layout_marginTop="@dimen/dp20"
+        android:layout_marginEnd="@dimen/dp20"
+        android:layout_marginBottom="@dimen/dp20"
         android:layout_weight="1"
-        android:orientation="vertical"
-        >
+        android:orientation="vertical">
+
         <TextView
+            android:id="@+id/day_class_title"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
-            android:text="面向对象程序设计"
             android:gravity="bottom"
-            android:id="@+id/day_class_title"
-            android:textStyle="bold"
+            android:paddingStart="@dimen/dp10"
+            android:text="面向对象程序设计"
             android:textColor="@android:color/black"
             android:textSize="@dimen/t17"
-            />
+            android:textStyle="bold" />
+
         <TextView
+            android:id="@+id/day_class_subtitle"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1"
-            android:text="8-210(d)"
-            android:id="@+id/day_class_subtitle"
             android:layout_marginTop="@dimen/dp8"
+            android:layout_weight="1"
             android:gravity="top"
-            />
+            android:paddingStart="@dimen/dp10"
+            android:text="8-210(d)" />
     </LinearLayout>
 </LinearLayout>

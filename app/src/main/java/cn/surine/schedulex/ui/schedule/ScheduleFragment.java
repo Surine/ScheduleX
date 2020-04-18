@@ -14,6 +14,7 @@ import androidx.navigation.Navigation;
 import androidx.viewpager2.widget.ViewPager2;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -195,7 +196,7 @@ public class ScheduleFragment extends BaseBindingFragment<FragmentScheduleBindin
 
         t.title.setOnClickListener(v -> {
             if (!Prefs.getBoolean(Constants.EGG, false)) {
-                Toasts.toast("你发现了彩蛋，点击已添加的课程格子试试看");
+                Toasts.toast("你发现了彩蛋，点击已添加的课程格子试试看，（要小点声哦~）");
                 t.title.setTextColor(App.context.getResources().getColor(R.color.blue));
                 Prefs.save(Constants.EGG, true);
             } else {
@@ -205,7 +206,7 @@ public class ScheduleFragment extends BaseBindingFragment<FragmentScheduleBindin
             }
         });
         if (!TextUtils.isEmpty(curSchedule.imageUrl)) {
-            Glide.with(activity()).load(new File(curSchedule.imageUrl)).crossFade().into(t.background);
+            Glide.with(activity()).load(new File(curSchedule.imageUrl)).asGif().diskCacheStrategy(DiskCacheStrategy.SOURCE).crossFade().into(t.background);
         }
 
         BoardCastSender.notifyWidget(activity());

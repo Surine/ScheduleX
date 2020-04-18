@@ -33,23 +33,23 @@ public class Constants {
      */
     public static final String NORMAL_COLOR = "#536DFE";
     public static final String[] COLOR_1 = new String[]{
-            "#df0404",
-            "#0d629b",
-            "#b99f09",
-            "#569707",
-            "#d15808",
-            "#d15808",
-            "#0ca154",
-            "#0ca0a3",
-            "#c211ad",
-            "#1e1880",
-            "#b30c35",
-            "#75139c",
-            "#138f07",
-            "#a4145a",
-            "#b91148",
-            "#3d1496",
-            "#86051d"
+            "#A992FE",
+            "#FDDF4E",
+            "#5EEFA0",
+            "#FFA17D",
+            "#D68DF9",
+            "#86B0FC",
+            "#FC9586",
+            "#65BFEA",
+            "#659DEA",
+            "#6A65EA",
+            "#A97CF8",
+            "#E891F3",
+            "#F391D5",
+            "#F391B4",
+            "#F39193",
+            "#96C487",
+            "#87C2C4"
     };
     public static final String ACCOUNT = "ACCOUNT";
     public static final String PASSWORD = "PASSWORD";

@@ -56,4 +56,5 @@
     <dimen name="t17">17sp</dimen>
     <dimen name="dp320">320dp</dimen>
     <dimen name="dp110">110dp</dimen>
+    <dimen name="dp70">70dp</dimen>
 </resources>

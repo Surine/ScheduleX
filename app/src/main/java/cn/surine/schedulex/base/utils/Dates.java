@@ -17,6 +17,7 @@ public class Dates {
 
     public static final String yyyyMMdd = "yyyy-MM-dd";
     public static final String HHmm = "HH:mm";
+    public static final String yyyyMMddHHmmss = "yyyy-MM-dd HH:mm:ss";
     public static final long ONE_DAY = 24 * 60 * 60 * 1000;
     public static final long ONE_MIN = 60 * 1000;
     public static final long ONE_HOUR = ONE_MIN * 60;
@@ -110,6 +111,17 @@ public class Dates {
      */
     public static String getDate(String format) {
         Date date = new Date();
+        @SuppressLint("SimpleDateFormat") SimpleDateFormat simpleDateFormat = new SimpleDateFormat(format);
+        return simpleDateFormat.format(date);
+    }
+
+    /**
+     * 获取日期
+     *
+     * @param date   字符串
+     * @param format 格式
+     */
+    public static String getDateFormat(Date date, String format) {
         @SuppressLint("SimpleDateFormat") SimpleDateFormat simpleDateFormat = new SimpleDateFormat(format);
         return simpleDateFormat.format(date);
     }
@@ -234,4 +246,23 @@ public class Dates {
         }
     }
 
+
+    /**
+     * 获取某个日期的前后几天
+     */
+    public static Date getDateBeforeOfAfter(String time, int num) {
+        @SuppressLint("SimpleDateFormat") SimpleDateFormat sdf = new SimpleDateFormat(yyyyMMdd);
+        Calendar calendar = Calendar.getInstance();
+        Date date = null;
+        try {
+            date = sdf.parse(time);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        calendar.setTime(date);
+        int day = calendar.get(Calendar.DATE);
+        // 后一天为 +1   前一天 为-1
+        calendar.set(Calendar.DATE, day + num);
+        return calendar.getTime();
+    }
 }

@@ -15,6 +15,11 @@ import cn.surine.schedulex.base.Constants;
 import cn.surine.schedulex.base.utils.Prefs;
 import cn.surine.schedulex.ui.MainActivity;
 
+import static cn.surine.schedulex.base.utils.Dates.getDate;
+import static cn.surine.schedulex.base.utils.Dates.getDateBeforeOfAfter;
+import static cn.surine.schedulex.base.utils.Dates.getDateFormat;
+import static cn.surine.schedulex.base.utils.Dates.yyyyMMdd;
+
 public class WidgetProviderDayClass extends AppWidgetProvider {
     private static int CURRENT;
 
@@ -24,10 +29,13 @@ public class WidgetProviderDayClass extends AppWidgetProvider {
         AppWidgetManager am = AppWidgetManager.getInstance(context);
         int[] appWidgetIds = am.getAppWidgetIds(new ComponentName(context, WidgetProviderDayClass.class));
         for (int i = 0; i < appWidgetIds.length; i++) {
+            //自动切换
+            //如果是
+
             if (Actions.NEXT_DAY.equals(intent.getAction())) {
-                Prefs.save(Constants.NEXT_DAY_STATUS+appWidgetIds[i], true);
+                Prefs.save(Constants.NEXT_DAY_STATUS + appWidgetIds[i], true);
             } else if (Actions.PREVIOUS_DAY.equals(intent.getAction())) {
-                Prefs.save(Constants.NEXT_DAY_STATUS+appWidgetIds[i], false);
+                Prefs.save(Constants.NEXT_DAY_STATUS + appWidgetIds[i], false);
             }
             updateUi(context, am, appWidgetIds[i]);
         }
@@ -53,6 +61,7 @@ public class WidgetProviderDayClass extends AppWidgetProvider {
         sb.append(Constants.NEXT_DAY_STATUS);
         sb.append(appId);
         remoteViews.setTextViewText(R.id.widget_day_class_title, Prefs.getBoolean(sb.toString(), false) ? "明日课程" : "今日课程");
+        remoteViews.setTextViewText(R.id.widget_day_class_subtitle, Prefs.getBoolean(sb.toString(), false) ? getDateFormat(getDateBeforeOfAfter(getDate(yyyyMMdd), 1), "MM月dd E") : getDate("MM月dd E"));
         configNextDayCourse(remoteViews, appId, context);
         Intent intent = new Intent(context, MainActivity.class);
         String str = Constants.APP_WIDGET_ID;

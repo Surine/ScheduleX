@@ -7,25 +7,37 @@
     <RelativeLayout
         android:id="@+id/task_widget_head"
         android:layout_width="match_parent"
-        android:layout_height="30dp"
+        android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
+        android:gravity="center_vertical"
         android:orientation="horizontal">
 
         <TextView
             android:id="@+id/widget_day_class_title"
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/dp20"
             android:gravity="center"
             android:text="今日课程"
             android:textColor="@android:color/black"
             android:textStyle="bold" />
 
+        <TextView
+            android:id="@+id/widget_day_class_subtitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/widget_day_class_title"
+            android:layout_marginStart="@dimen/dp20"
+            android:gravity="center"
+            android:textColor="@android:color/darker_gray" />
+
+
         <ImageView
             android:id="@+id/widget_day_class_next_day"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
+            android:layout_width="@dimen/dp20"
+            android:layout_height="@dimen/dp20"
             android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
             android:layout_marginEnd="@dimen/dp20"
             android:src="@drawable/ic_keyboard_arrow_right_black_24dp" />
     </RelativeLayout>
@@ -35,10 +47,10 @@
         android:id="@+id/emptyViewImage"
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp200"
-        android:alpha="0.5"
-        android:visibility="gone"
         android:layout_alignParentBottom="true"
-        android:src="@mipmap/undraw_code_thinking_1jeh" />
+        android:alpha="0.5"
+        android:src="@mipmap/undraw_code_thinking_1jeh"
+        android:visibility="gone" />
 
     <ListView
         android:id="@+id/listview"
@@ -47,6 +59,6 @@
         android:layout_below="@id/task_widget_head"
         android:layout_margin="@dimen/dp10"
         android:divider="@null"
-        android:scrollbars="none"
-        android:dividerHeight="0dp" />
+        android:dividerHeight="0dp"
+        android:scrollbars="none" />
 </RelativeLayout>

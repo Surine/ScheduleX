@@ -387,11 +387,11 @@ public class CourseTableView extends LinearLayout {
                 frameLayout.setBackground(Drawables.getDrawable(Color.TRANSPARENT, 20, 3, Color.WHITE));
             }
             tv.setTextColor(Color.WHITE);
-            tv.setText(bCourse.getSimpleName() + "\n @" + bCourse.getPosition());
+            tv.setText(bCourse.getSimpleName() + "@" + bCourse.getPosition());
             tv.setLayoutParams(tlp);
             tv.setPadding(10, 10, 10, 10);
             tv.getPaint().setFakeBoldText(true);
-            tv.setGravity(Gravity.CENTER);
+            tv.setGravity(Gravity.START);
             tv.setTextSize(mUiConfig.getItemTextSize());
 
             frameLayout.setLayoutParams(flp);
@@ -434,10 +434,9 @@ public class CourseTableView extends LinearLayout {
         }
 
         //not show non cur week
-        if (!mUiConfig.isShowCurWeekCourse()) {
+        if (!mUiConfig.isShowNotCurWeekCourse()) {
             return;
         }
-
 
         for (int i = 0; i < mBcourses.size(); i++) {
             itemPosition = i;
@@ -453,7 +452,7 @@ public class CourseTableView extends LinearLayout {
             //is this week
             int thisDay = bCourse.getDay() - 1;
             RelativeLayout curDayLayout = layoutList.get(thisDay);
-            isCurWeek = bCourse.getWeek().contains(mDataConfig.getCurrentWeek());
+            isCurWeek = bCourse.getWeek().contains(mDataConfig.curWeek());
             //first to load curweek class
             if (isCurWeek) {
                 continue;
@@ -482,7 +481,7 @@ public class CourseTableView extends LinearLayout {
             //is non cur week
             frameLayout.setBackground(Drawables.getDrawable(mUiConfig.getItemNotCurWeekCourseColor(), 20, 3, mUiConfig.getColorUI()));
             tv.setTextColor(Color.BLACK);
-            tv.setText(bCourse.getSimpleName() + "\n @" + bCourse.getPosition() + "\n[非本周]");
+            tv.setText(bCourse.getSimpleName() + "@" + bCourse.getPosition() + "[非本周]");
             tv.setLayoutParams(tlp);
             tv.setPadding(10, 10, 10, 10);
             tv.setGravity(Gravity.CENTER);
