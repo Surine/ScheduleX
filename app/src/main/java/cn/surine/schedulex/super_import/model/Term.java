@@ -1,5 +1,7 @@
 package cn.surine.schedulex.super_import.model;
 
+import androidx.annotation.Keep;
+
 import java.io.Serializable;
 
 /**
@@ -8,6 +10,7 @@ import java.io.Serializable;
  * @author sunliwei
  * @date 2020/4/9 20:07
  */
+@Keep
 public class Term implements Serializable {
     public int beginYear;
     public int term;

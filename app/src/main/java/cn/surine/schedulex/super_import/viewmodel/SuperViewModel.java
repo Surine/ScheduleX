@@ -3,13 +3,17 @@ package cn.surine.schedulex.super_import.viewmodel;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
+import android.widget.Toast;
 
 import androidx.annotation.Keep;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
+import com.tencent.bugly.crashreport.CrashReport;
+
 import cn.surine.schedulex.base.http.BaseHttpSubscriber;
 import cn.surine.schedulex.base.utils.SimpleTextWatcher;
+import cn.surine.schedulex.base.utils.Toasts;
 import cn.surine.schedulex.super_import.model.SuperBaseModel;
 import cn.surine.schedulex.super_import.model.SuperCourseList;
 import cn.surine.schedulex.super_import.model.User;
@@ -72,6 +76,7 @@ public class SuperViewModel extends ViewModel {
                 @Override
                 public void onFail(Throwable th) {
                     super.onFail(th);
+                    CrashReport.postCatchedException(new RuntimeException(th.getMessage()));
                     loginStatus.setValue(LOGIN_FAIL);
                 }
             });
