@@ -206,7 +206,11 @@ public class ScheduleFragment extends BaseBindingFragment<FragmentScheduleBindin
             }
         });
         if (!TextUtils.isEmpty(curSchedule.imageUrl)) {
-            Glide.with(activity()).load(new File(curSchedule.imageUrl)).asGif().diskCacheStrategy(DiskCacheStrategy.SOURCE).crossFade().into(t.background);
+            if(curSchedule.imageUrl.endsWith("gif")){
+                Glide.with(activity()).load(new File(curSchedule.imageUrl)).asGif().diskCacheStrategy(DiskCacheStrategy.SOURCE).crossFade().into(t.background);
+            }else{
+                Glide.with(activity()).load(new File(curSchedule.imageUrl)).crossFade().into(t.background);
+            }
         }
 
         BoardCastSender.notifyWidget(activity());
