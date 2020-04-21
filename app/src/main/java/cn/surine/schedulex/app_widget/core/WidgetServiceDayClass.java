@@ -101,9 +101,10 @@ public class WidgetServiceDayClass extends RemoteViewsService {
             int today = Dates.getWeekDay();
             int nextDay = Dates.getWeekDay() + 1 % 7 == 0 ? 7 : (Dates.getWeekDay() + 1) % 7;
             int day = isNextDay ? nextDay : today;
+            boolean nextWeek = (nextDay == 1);
             try {
                 Schedule curSchedule = scheduleRepository.getCurSchedule();
-                courseList = courseRepository.getTodayCourseListByScheduleId(day, curSchedule.curWeek(), curSchedule.roomId);
+                courseList = courseRepository.getTodayCourseListByScheduleId(day, nextWeek ? curSchedule.curWeek() : curSchedule.curWeek() + 1, curSchedule.roomId);
                 timeTable = DataMaps.dataMappingTimeTableToBTimeTable(timeTableRepository.getTimeTableById(curSchedule.timeTableId));
 
             } catch (Exception e) {

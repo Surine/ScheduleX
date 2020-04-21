@@ -35,7 +35,7 @@ public class CourseRepository extends BaseRepository {
     void saveCourseByDb(List<Course> courseList) {
         for (Course course : courseList) {
             //如果已插入course id 的数据，则失败
-             appDatabase.courseDao().insert(course);
+            appDatabase.courseDao().insert(course);
         }
     }
 
@@ -93,10 +93,14 @@ public class CourseRepository extends BaseRepository {
     public List<Course> getTodayCourseListByScheduleId(int day, int curWeek, int roomId) {
         List<Course> courseList = appDatabase.courseDao().getTodayCourse(day, roomId);
         List<Course> handleList = new ArrayList<>();
-        for (int i = 0; i < courseList.size(); i++) {
-            if(courseList.get(i).classWeek.charAt(curWeek - 1) == '1'){
-                handleList.add(courseList.get(i));
+        try {
+            for (int i = 0; i < courseList.size(); i++) {
+                if (courseList.get(i).classWeek.charAt(curWeek - 1) == '1') {
+                    handleList.add(courseList.get(i));
+                }
             }
+        } catch (Exception e) {
+            handleList.clear();
         }
         return handleList;
     }
