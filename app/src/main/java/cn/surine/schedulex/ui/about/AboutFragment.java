@@ -1,10 +1,16 @@
 package cn.surine.schedulex.ui.about;
 
 
+import android.util.Log;
+
 import androidx.dynamicanimation.animation.SpringAnimation;
 import androidx.dynamicanimation.animation.SpringForce;
 
 import com.tencent.bugly.beta.Beta;
+
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+
 import cn.surine.schedulex.R;
 import cn.surine.schedulex.base.controller.BaseBindingFragment;
 import cn.surine.schedulex.base.utils.Others;
@@ -42,7 +48,24 @@ public class AboutFragment extends BaseBindingFragment<FragmentAboutBinding> {
         t.jetpack.setOnClickListener(v -> {
             Beta.checkUpgrade(true, false);
             loadAnimation(t);
+//            loadJsoup();
         });
+    }
+
+    private void loadJsoup() {
+        String str =  "<html><head><title>learn jsoup</title></head>"
+                + "<body id='body'><p>Parse and traverse an HTML document.</p> <tr>\n" +
+                "                            <td colspan=\"2\" rowspan=\"1\" width=\"2%\">时间</td>\n" +
+                "                            <td align=\"Center\" width=\"14%\">星期一</td>\n" +
+                "                            <td align=\"Center\" width=\"14%\">星期二</td>\n" +
+                "                            <td align=\"Center\" width=\"14%\">星期三</td>\n" +
+                "                            <td align=\"Center\" width=\"14%\">星期四</td>\n" +
+                "                            <td align=\"Center\" width=\"14%\">星期五</td>\n" +
+                "                            <td class=\"noprint\" align=\"Center\" width=\"14%\">星期六</td>\n" +
+                "                            <td class=\"noprint\" align=\"Center\" width=\"14%\">星期日</td>\n" +
+                "                        </tr></body></html>";
+        Document document = Jsoup.parse(str);
+        Log.d("slw", "loadJsoup: "+document.text());
     }
 
     private void loadAnimation(FragmentAboutBinding t) {
