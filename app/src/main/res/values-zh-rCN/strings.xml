@@ -143,7 +143,7 @@
     <string name="min">分钟</string>
     <string name="setting_one_session_time">设置一节课的时长(分钟)</string>
     <string name="delete_timetable_session_note">此操作将会删除本节及之后的所有节次，请确认选择无误后操作,如操作失误，请直接退出放弃保存!</string>
-    <string name="delete_rule">只允许删除自定义(12节之后)的节次，1-12节多余的可忽略</string>
+    <string name="delete_rule">至少保留6节课程</string>
     <string name="max_support">最多支持%s节</string>
     <string name="time_rule">本节上课时间不得比上一节下课时间早</string>
     <string name="please_choose_time">请选择本节课上课时间</string>

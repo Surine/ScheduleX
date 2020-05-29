@@ -28,6 +28,7 @@ import cn.surine.schedulex.base.controller.BaseBindingFragment;
 import cn.surine.schedulex.base.utils.Dates;
 import cn.surine.schedulex.base.utils.InstanceFactory;
 import cn.surine.schedulex.base.utils.Navigations;
+import cn.surine.schedulex.base.utils.Prefs;
 import cn.surine.schedulex.base.utils.Toasts;
 import cn.surine.schedulex.base.utils.Uis;
 import cn.surine.schedulex.data.entity.TimeTable;
@@ -37,6 +38,9 @@ import cn.surine.schedulex.ui.timetable_list.TimeTableListFragment;
 import cn.surine.schedulex.ui.timetable_list.TimeTableRepository;
 import cn.surine.schedulex.ui.timetable_list.TimeTableViewModel;
 import cn.surine.schedulex.ui.view.custom.helper.CommonDialogs;
+import co.mobiwise.materialintro.shape.Focus;
+import co.mobiwise.materialintro.shape.FocusGravity;
+import co.mobiwise.materialintro.view.MaterialIntroView;
 
 /**
  * Intro：
@@ -133,12 +137,12 @@ public class AddTimeTableFragment extends BaseBindingFragment<FragmentAddTimetab
 
 
         adapter.setOnItemLongClickListener(position -> {
-            if (position < 12) {
+            if (position < 6) {
                 Toasts.toast(getString(R.string.delete_rule));
             } else {
                 CommonDialogs.getCommonDialog(activity(), getString(R.string.warning), getString(R.string.delete_timetable_session_note), () -> {
-                    for (int i = data.size() - 1; i >= position; i--) {
-                        data.remove(i);
+                    if (data.size() > position) {
+                        data.subList(position, data.size()).clear();
                     }
                     adapter.notifyDataSetChanged();
                     Toasts.toast(getString(R.string.delete));
@@ -168,6 +172,7 @@ public class AddTimeTableFragment extends BaseBindingFragment<FragmentAddTimetab
             Navigations.close(AddTimeTableFragment.this);
         });
     }
+
 
     //展示
     @SuppressLint("SetTextI18n")

@@ -23,6 +23,7 @@ public class Constants {
     public static final String TOTAL_WEEK = "TOTAL_WEEK";
 
     public static final String IS_FIRST = "is_first";
+    public static final String TIMETABLE_IS_FIRST = "timetable_is_first";
     public static final String CUR_SCHEDULE = "cur_schedule";
     public static final String CONTENT = "content";
     public static final String FILE = "file";
