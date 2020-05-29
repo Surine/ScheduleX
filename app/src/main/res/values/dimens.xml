@@ -57,4 +57,7 @@
     <dimen name="dp320">320dp</dimen>
     <dimen name="dp110">110dp</dimen>
     <dimen name="dp70">70dp</dimen>
+    <dimen name="dp60">60dp</dimen>
+    <dimen name="t15">15sp</dimen>
+    <dimen name="dp35">35dp</dimen>
 </resources>

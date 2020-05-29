@@ -1,6 +1,5 @@
 package cn.surine.schedulex.ui.view.custom.helper;
 
-import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.TimePickerDialog;
@@ -65,49 +64,6 @@ public class CommonDialogs {
     }
 
 
-    @SuppressLint("SetTextI18n")
-    public static Dialog getSuperListDialog(Context context, int startYear, OnSuperListItem onSuperListItem) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(context);
-        View view = LayoutInflater.from(context).inflate(R.layout.view_super_course_list,
-                null);
-        builder.setView(view);
-
-        Dialog dialog = builder.create();
-        dialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
-        dialog.getWindow().setWindowAnimations(R.style.DialogAnimations);
-
-        TextView item1 = view.findViewById(R.id.item1);
-        TextView item2 = view.findViewById(R.id.item2);
-        TextView item3 = view.findViewById(R.id.item3);
-        TextView item4 = view.findViewById(R.id.item4);
-
-        item1.setText((startYear - 1) + "-" + startYear + context.getString(R.string.year_term1));
-        item2.setText((startYear - 1) + "-" + startYear + context.getString(R.string.year_term2));
-        item3.setText(startYear + "-" + (startYear + 1) + context.getString(R.string.year_term1));
-        item4.setText(startYear + "-" + (startYear + 1) + context.getString(R.string.year_term2));
-
-        if (onSuperListItem != null) {
-            item1.setOnClickListener(v -> onSuperListItem.onClick(startYear - 1, 1));
-            item2.setOnClickListener(v -> onSuperListItem.onClick(startYear - 1, 2));
-            item3.setOnClickListener(v -> onSuperListItem.onClick(startYear, 1));
-            item4.setOnClickListener(v -> onSuperListItem.onClick(startYear, 2));
-        }
-
-        return dialog;
-    }
-
-
-    public interface OnSuperListItem {
-        /**
-         * 点击事件
-         *
-         * @param startYear 起始年份
-         * @param term      学期
-         */
-        void onClick(int startYear, int term);
-    }
-
-
     /**
      * 修改框
      *
@@ -158,5 +114,27 @@ public class CommonDialogs {
         TimePickerDialog dialog = new TimePickerDialog(context, onTimeSetListener, hour, minute, true);
         dialog.setTitle(title);
         return dialog;
+    }
+
+
+    /**
+     * 基础自定义对话框
+     * */
+    public static Dialog getBaseConfig(Context context, View view, DialogCall dialogCall) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        builder.setView(view);
+        Dialog dialog = builder.create();
+        dialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
+        dialog.getWindow().setWindowAnimations(R.style.DialogAnimations);
+        if (dialogCall != null) {
+            dialogCall.onDialogCall(view, dialog);
+        }
+        dialog.show();
+        return dialog;
+    }
+
+
+    public interface DialogCall {
+        void onDialogCall(View view, Dialog dialog);
     }
 }

@@ -40,6 +40,7 @@ public class Course extends BaseVm {
 
     //position
     public String campusName = "";
+    //主内容
     public String teachingBuildingName = "";
     public String classroomName = "";
 

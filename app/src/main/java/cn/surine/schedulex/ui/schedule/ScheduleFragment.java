@@ -206,9 +206,9 @@ public class ScheduleFragment extends BaseBindingFragment<FragmentScheduleBindin
             }
         });
         if (!TextUtils.isEmpty(curSchedule.imageUrl)) {
-            if(curSchedule.imageUrl.endsWith("gif")){
+            if (curSchedule.imageUrl.endsWith("gif")) {
                 Glide.with(activity()).load(new File(curSchedule.imageUrl)).asGif().diskCacheStrategy(DiskCacheStrategy.SOURCE).crossFade().into(t.background);
-            }else{
+            } else {
                 Glide.with(activity()).load(new File(curSchedule.imageUrl)).crossFade().into(t.background);
             }
         }
@@ -248,7 +248,7 @@ public class ScheduleFragment extends BaseBindingFragment<FragmentScheduleBindin
     public void onResume() {
         super.onResume();
         //回到当前周，有个小bug可以临时通过这个解决一下
-        globalT.viewpager.setCurrentItem(curSchedule.curWeek() - 1);
+        globalT.viewpager.setCurrentItem(curSchedule.curWeek() - 1, false);
     }
 
 

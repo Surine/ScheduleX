@@ -70,7 +70,6 @@ public class Files {
      * @param path 文件路径
      */
     public static String getFileContent(String path) {
-        Log.d("slw", "getFileContent: " + path);
         File file = new File(path);
         FileReader fileReader = null;
         BufferedReader bufferedReader = null;
@@ -80,7 +79,7 @@ public class Files {
             bufferedReader = new BufferedReader(fileReader);
             String s;
             while ((s = bufferedReader.readLine()) != null) {
-                stringBuilder.append(s);
+                stringBuilder.append(s).append(System.getProperty("line.separator"));
             }
         } catch (IOException e) {
             e.printStackTrace();
