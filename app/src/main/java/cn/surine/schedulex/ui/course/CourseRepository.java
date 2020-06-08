@@ -104,4 +104,23 @@ public class CourseRepository extends BaseRepository {
         }
         return handleList;
     }
+
+
+    /**
+     * 获取某课表的某周课程
+     * */
+    public List<Course> getWeekCourseListByScheduleId(int curWeek,int roomId){
+        List<Course> courseList = appDatabase.courseDao().getByScheduleId(roomId);
+        List<Course> handleList = new ArrayList<>();
+        try {
+            for (int i = 0; i < courseList.size(); i++) {
+                if (courseList.get(i).classWeek.charAt(curWeek - 1) == '1') {
+                    handleList.add(courseList.get(i));
+                }
+            }
+        } catch (Exception e) {
+            handleList.clear();
+        }
+        return handleList;
+    }
 }

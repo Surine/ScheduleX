@@ -4,7 +4,6 @@ import android.app.Service;
 import android.content.Intent;
 import android.os.IBinder;
 
-import cn.surine.schedulex.app_widget.BoardCastSender;
 import cn.surine.schedulex.base.utils.Logs;
 import cn.surine.schedulex.base.utils.Toasts;
 

@@ -23,7 +23,7 @@ import java.util.List;
 import cn.surine.coursetableview.entity.BCourse;
 import cn.surine.coursetableview.entity.BTimeTable;
 import cn.surine.schedulex.R;
-import cn.surine.schedulex.app_widget.BoardCastSender;
+import cn.surine.schedulex.app_widget.core.BoardCastSender;
 import cn.surine.schedulex.base.Constants;
 import cn.surine.schedulex.base.controller.App;
 import cn.surine.schedulex.base.controller.BaseBindingFragment;

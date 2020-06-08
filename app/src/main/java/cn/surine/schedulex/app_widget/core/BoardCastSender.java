@@ -1,4 +1,4 @@
-package cn.surine.schedulex.app_widget;
+package cn.surine.schedulex.app_widget.core;
 
 import android.content.Context;
 import android.content.Intent;
