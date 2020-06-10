@@ -8,9 +8,11 @@ import java.util.List;
 import cn.surine.coursetableview.entity.BTimeTable;
 import cn.surine.schedulex.R;
 import cn.surine.schedulex.app_widget.core.WeekRemoteViewService;
-import cn.surine.schedulex.data.helper.DataHandler;
+import cn.surine.schedulex.base.Constants;
 import cn.surine.schedulex.base.interfaces.DCall;
+import cn.surine.schedulex.base.utils.Prefs;
 import cn.surine.schedulex.data.entity.Course;
+import cn.surine.schedulex.data.helper.DataHandler;
 
 /**
  * Intro：
@@ -25,10 +27,11 @@ public class NormalWeekService extends WeekRemoteViewService {
     protected void dataSetChanged(int mAppWidgetId, DCall<List<Course>> courseCall, DCall<BTimeTable> bTimeTableDCall) {
         try {
             maxSession = DataHandler.abt.getInstance().getCurMaxSession();
-            if(courseCall != null){
-                courseCall.back(DataHandler.abt.getInstance().getWeekCourse(false));
+            if (courseCall != null) {
+                String sb = Constants.NEXT_DAY_STATUS + mAppWidgetId;
+                courseCall.back(DataHandler.abt.getInstance().getWeekCourse(Prefs.getBoolean(sb, false)));
             }
-            if(bTimeTableDCall != null){
+            if (bTimeTableDCall != null) {
                 bTimeTableDCall.back(DataHandler.abt.getInstance().getCurTimeTable());
             }
         } catch (Exception e) {
@@ -39,7 +42,7 @@ public class NormalWeekService extends WeekRemoteViewService {
     @Override
     protected RemoteViews onBindView(Context mContext, List<Course> courseList, BTimeTable timeTable) {
         RemoteViews remoteViews = new RemoteViews(mContext.getPackageName(), R.layout.item_week_widget_img);
-        remoteViews.setImageViewBitmap(R.id.bg_iv, BitmapMaker.createWeekBitmap(new PaintConfig(),courseList,timeTable,maxSession));
+        remoteViews.setImageViewBitmap(R.id.bg_iv, BitmapMaker.createWeekBitmap(new PaintConfig(), courseList, timeTable, maxSession));
         return remoteViews;
     }
 }
