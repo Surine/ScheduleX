@@ -24,7 +24,7 @@ public class CsvParser implements FileParser {
     @Override
     public List<Course> parse(String path) {
         List<Course> courses = new ArrayList<>();
-        CSVFormat format = CSVFormat.DEFAULT.withSkipHeaderRecord();
+        CSVFormat format = CSVFormat.DEFAULT.withHeader();
         Reader reader = new BufferedReader(new InputStreamReader(new ByteArrayInputStream(Files.getFileContent(path).getBytes())));
         try {
             Iterable<CSVRecord> records = format.parse(reader);

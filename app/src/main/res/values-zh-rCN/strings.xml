@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">ScheduleX</string>
-    <string name="et_hint_account">TUST学号</string>
-    <string name="et_hint_password">TUST密码</string>
+    <string name="et_hint_account">学号(仅支持天津科技大学)</string>
+    <string name="et_hint_password">密码</string>
     <string name="login">登录</string>
     <string name="param_empty">存在空输入，请检查!</string>
     <string name="skip">跳过</string>
@@ -120,7 +120,7 @@
     <string name="year_term2">年 第二学期</string>
     <string name="no_permission_to_add">您没有权限添加更多课程表!</string>
     <string name="login_jw_introduce">登录教务说明</string>
-    <string name="welcome_to_use">1.通过这种方式，你可以登录天津科技大学教务处获取课表，无需链接校园网络 \n2.账号为你的学号，密码为教务处查询课程的密码，如果验证失败请检查是否输入正确！</string>
+    <string name="welcome_to_use">1.通过这种方式，你可以登录天津科技大学教务处获取课表，需链接校园网络或使用代理 \n2.账号为你的学号，密码为教务处查询课程的密码，如果验证失败请检查是否输入正确！</string>
     <string name="show_weekend">当前展示周末</string>
     <string name="not_show_weekend">当前不展示周末</string>
     <string name="is_show_week">是否显示周末</string>

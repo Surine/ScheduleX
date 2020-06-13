@@ -5,6 +5,7 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.TextView;
@@ -17,6 +18,7 @@ import com.tbruyelle.rxpermissions2.RxPermissions;
 import com.tencent.bugly.crashreport.CrashReport;
 
 import java.util.List;
+import java.util.UUID;
 
 import cn.surine.schedulex.R;
 import cn.surine.schedulex.base.Constants;
@@ -123,7 +125,15 @@ public class ScheduleDataFetchFragment extends BaseBindingFragment<FragmentDataF
             String sCsv = tCsv.getText().toString() + "\n点击下载模板";
             tCsv.setText(Spans.with(sCsv).size(13, tCsv.getText().toString().length(), sCsv.length()).color(App.context.getResources().getColor(R.color.blue), tCsv.getText().toString().length(), sCsv.length()).toSpannable());
 
-            tJson.setOnClickListener(v -> Toasts.toast("test"));
+            tJson.setOnClickListener(v -> {
+                Toasts.toast("请在本页面查看Json格式");
+                Others.openUrl("https://github.com/surine/ScheduleX");
+            });
+            tCsv.setOnClickListener(v -> {
+                Toasts.toast("请在本页面查看Csv格式");
+                Others.openUrl("https://github.com/surine/ScheduleX");
+            });
+            tExcel.setOnClickListener(v -> Toasts.toast("难产啦！再等等吧。"));
 
             vBok.setOnClickListener(v -> {
                 if (vDontTip.isChecked()) {
@@ -186,7 +196,7 @@ public class ScheduleDataFetchFragment extends BaseBindingFragment<FragmentDataF
         for (int i = 0; i < list.size(); i++) {
             Course course = list.get(i);
             course.scheduleId = id;
-            course.id = course.scheduleId + course.id.split("@")[1];
+            course.id = course.scheduleId + "@"+ UUID.randomUUID()+System.currentTimeMillis();
             courses[i] = course;
         }
         courseViewModel.insert(courses);
