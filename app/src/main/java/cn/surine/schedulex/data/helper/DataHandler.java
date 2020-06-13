@@ -81,7 +81,7 @@ public class DataHandler {
     /**
      * 根据提供的课程数据获取某一天的课程
      */
-    public static List<Course> getOneDayCourse(int day, List<Course> courses) {
+    public List<Course> getOneDayCourse(int day, List<Course> courses) {
         List<Course> handlers = new ArrayList<>();
         for (int i = 0; i < courses.size(); i++) {
             Course course = courses.get(i);
@@ -90,5 +90,10 @@ public class DataHandler {
             }
         }
         return handlers;
+    }
+
+
+    public Schedule getCurSchedule() {
+        return scheduleRepository.getCurSchedule();
     }
 }

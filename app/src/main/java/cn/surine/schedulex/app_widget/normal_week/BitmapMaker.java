@@ -75,7 +75,7 @@ public class BitmapMaker {
         int slotWidth = (bitmap.getWidth() - leftPadding - rightPadding - slideWidth - (gapSlotWidth * 6)) / 7;
         int lastIndexWidth = slideWidth + leftPadding + 6; //微调起始
         for (int i = 1; i <= 7; i++) {
-            List<Course> courses = DataHandler.getOneDayCourse(i, courseList);
+            List<Course> courses = DataHandler.abt.getInstance().getOneDayCourse(i, courseList);
             for (int j = 0; j < courses.size(); j++) {
                 Course course = courses.get(j);
                 //背景框

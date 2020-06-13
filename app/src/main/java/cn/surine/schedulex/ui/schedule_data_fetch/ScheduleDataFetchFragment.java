@@ -5,7 +5,6 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.TextView;
@@ -196,7 +195,7 @@ public class ScheduleDataFetchFragment extends BaseBindingFragment<FragmentDataF
         for (int i = 0; i < list.size(); i++) {
             Course course = list.get(i);
             course.scheduleId = id;
-            course.id = course.scheduleId + "@"+ UUID.randomUUID()+System.currentTimeMillis();
+            course.id = course.scheduleId + "@" + UUID.randomUUID() + System.currentTimeMillis();
             courses[i] = course;
         }
         courseViewModel.insert(courses);
