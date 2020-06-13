@@ -52,8 +52,9 @@ public class WidgetUtil {
     /**
      * 添加列表
      */
-    public static void addList(Class cls,Context context, AppWidgetManager appWidgetManager, RemoteViews remoteViews, int listId, int appId) {
+    public static void addList(Class cls, Context context, AppWidgetManager appWidgetManager, RemoteViews remoteViews, int listId, int appId) {
         Intent intent = new Intent(context, cls);
+        context.stopService(intent);
         intent.putExtra(Constants.APP_WIDGET_ID, appId);
         remoteViews.setRemoteAdapter(listId, intent);
         appWidgetManager.notifyAppWidgetViewDataChanged(appId, listId);
@@ -63,7 +64,8 @@ public class WidgetUtil {
      * 配置next按钮事假
      */
     static int cur = 0;
-    public static void setDay(Class target,Context context, RemoteViews remoteViews, int appId, int layoutId, int[] icons) {
+
+    public static void setDay(Class target, Context context, RemoteViews remoteViews, int appId, int layoutId, int[] icons) {
         if (icons == null || icons.length < 2)
             throw new IllegalArgumentException("icons length is not match, must be two");
         boolean isNextDay = Prefs.getBoolean(Constants.NEXT_DAY_STATUS + appId, false);
@@ -80,7 +82,7 @@ public class WidgetUtil {
     }
 
 
-    public static void setDay(Class target,Context context, RemoteViews remoteViews, int appId, int layoutId){
+    public static void setDay(Class target, Context context, RemoteViews remoteViews, int appId, int layoutId) {
         boolean isNextDay = Prefs.getBoolean(Constants.NEXT_DAY_STATUS + appId, false);
         Intent intent = new Intent(context, target);
         if (!isNextDay) {

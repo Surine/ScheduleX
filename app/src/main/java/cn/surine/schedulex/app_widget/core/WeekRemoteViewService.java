@@ -21,7 +21,7 @@ import cn.surine.schedulex.data.entity.Course;
  */
 public abstract class WeekRemoteViewService extends RemoteViewsService {
 
-    public List<Course> courseList = new ArrayList();
+    public List<List<Course>> courseList = new ArrayList();
     private BTimeTable timeTable;
 
 
@@ -43,22 +43,23 @@ public abstract class WeekRemoteViewService extends RemoteViewsService {
 
         @Override
         public void onDataSetChanged() {
-            dataSetChanged(mAppWidgetId, courses -> courseList = courses, bTimeTable -> timeTable = bTimeTable);
+            courseList.clear();
+            dataSetChanged(mAppWidgetId, courses -> courseList.add(courses), bTimeTable -> timeTable = bTimeTable);
         }
 
         @Override
         public void onDestroy() {
-            courseList.clear();
+            courseList = null;
         }
 
         @Override
         public int getCount() {
-            return 1;
+            return courseList.size();
         }
 
         @Override
         public RemoteViews getViewAt(int position) {
-            return onBindView(mContext, courseList, timeTable);
+            return onBindView(mContext, courseList.get(0), timeTable);
         }
 
         @Override
@@ -94,7 +95,7 @@ public abstract class WeekRemoteViewService extends RemoteViewsService {
     protected abstract RemoteViews onBindView(Context mContext, List<Course> courseList, BTimeTable timeTable);
 
     @Override
-    public WeekRemoteViewService.RemoteViewsFactory onGetViewFactory(Intent intent) {
-        return new WeekRemoteViewService.RemoteViewsFactory(this, intent);
+    public RemoteViewsFactory onGetViewFactory(Intent intent) {
+        return new RemoteViewsFactory(this, intent);
     }
 }

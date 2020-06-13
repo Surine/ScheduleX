@@ -38,7 +38,6 @@ public class DataHandler {
     private ScheduleRepository scheduleRepository = ScheduleRepository.abt.getInstance();
     private TimeTableRepository timeTableRepository = TimeTableRepository.abt.getInstance();
 
-    private Schedule curSchedule = scheduleRepository.getCurSchedule();
 
     /**
      * 获取某天的课程
@@ -47,6 +46,7 @@ public class DataHandler {
      * @param nextWeek 是否下周？
      */
     public List<Course> getCourseList(int day, boolean nextWeek) {
+        Schedule curSchedule = scheduleRepository.getCurSchedule();
         return courseRepository.getTodayCourseListByScheduleId(day, nextWeek ? curSchedule.curWeek() + 1 : curSchedule.curWeek(), curSchedule.roomId);
     }
 
@@ -54,6 +54,7 @@ public class DataHandler {
      * 获取当前课表的时间表
      */
     public BTimeTable getCurTimeTable() {
+        Schedule curSchedule = scheduleRepository.getCurSchedule();
         return DataMaps.dataMappingTimeTableToBTimeTable(timeTableRepository.getTimeTableById(curSchedule.timeTableId));
     }
 
@@ -65,7 +66,7 @@ public class DataHandler {
     public List<Course> getWeekCourse(boolean nextWeek) {
         Schedule schedule = scheduleRepository.getCurSchedule();
         int curWeek = schedule.curWeek();
-        return courseRepository.getWeekCourseListByScheduleId(nextWeek ? curWeek + 1 : curWeek, curSchedule.roomId);
+        return courseRepository.getWeekCourseListByScheduleId(nextWeek ? curWeek + 1 : curWeek, schedule.roomId);
     }
 
 

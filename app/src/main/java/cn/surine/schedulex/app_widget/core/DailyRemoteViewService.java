@@ -87,7 +87,7 @@ public abstract class DailyRemoteViewService extends RemoteViewsService {
     /**
      * 更新数据
      */
-    protected abstract void dataSetChanged(int mAppWidgetId, DCall<List<Course>> courseCall,DCall<BTimeTable> bTimeTableDCall);
+    protected abstract void dataSetChanged(int mAppWidgetId, DCall<List<Course>> courseCall, DCall<BTimeTable> bTimeTableDCall);
 
     /**
      * 绑定视图

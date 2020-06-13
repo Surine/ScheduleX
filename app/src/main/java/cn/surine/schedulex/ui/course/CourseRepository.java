@@ -108,8 +108,8 @@ public class CourseRepository extends BaseRepository {
 
     /**
      * 获取某课表的某周课程
-     * */
-    public List<Course> getWeekCourseListByScheduleId(int curWeek,int roomId){
+     */
+    public List<Course> getWeekCourseListByScheduleId(int curWeek, int roomId) {
         List<Course> courseList = appDatabase.courseDao().getByScheduleId(roomId);
         List<Course> handleList = new ArrayList<>();
         try {

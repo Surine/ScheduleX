@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/root"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/root"
     android:background="@drawable/week_widget_background">
 
     <RelativeLayout
@@ -21,6 +21,7 @@
             android:gravity="center"
             android:text="本周课程"
             android:textColor="@android:color/black"
+            android:textSize="@dimen/t14"
             android:textStyle="bold" />
 
         <TextView
@@ -31,16 +32,19 @@
             android:layout_marginStart="@dimen/dp10"
             android:gravity="center"
             android:text="6月2日 周三"
-            android:textColor="#4C4C4C" />
+            android:textColor="@android:color/black"
+            android:textSize="@dimen/t10"
+            android:textStyle="bold" />
 
 
         <ImageView
             android:id="@+id/widget_day_class_next_day"
-            android:layout_width="@dimen/dp20"
-            android:layout_height="@dimen/dp20"
+            android:layout_width="@dimen/dp40"
+            android:layout_height="@dimen/dp40"
             android:layout_alignParentEnd="true"
             android:layout_centerVertical="true"
-            android:layout_marginEnd="@dimen/dp10"
+            android:layout_marginEnd="@dimen/dp5"
+            android:padding="@dimen/dp7"
             android:src="@drawable/ic_keyboard_arrow_right_black_24dp" />
     </RelativeLayout>
 
@@ -57,6 +61,7 @@
             android:layout_height="match_parent"
             android:gravity="center"
             android:text="6月"
+            android:textColor="@android:color/black"
             android:textSize="@dimen/t13" />
 
         <TextView
@@ -64,49 +69,56 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="一" />
+            android:text="一"
+            android:textColor="@android:color/black" />
 
         <TextView
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="二" />
+            android:text="二"
+            android:textColor="@android:color/black" />
 
         <TextView
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="三" />
+            android:text="三"
+            android:textColor="@android:color/black" />
 
         <TextView
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="四" />
+            android:text="四"
+            android:textColor="@android:color/black" />
 
         <TextView
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="五" />
+            android:text="五"
+            android:textColor="@android:color/black" />
 
         <TextView
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="六" />
+            android:text="六"
+            android:textColor="@android:color/black" />
 
         <TextView
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="日" />
+            android:text="日"
+            android:textColor="@android:color/black" />
     </LinearLayout>
 
     <ListView
@@ -114,8 +126,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@id/week_bar"
-        android:scrollbars="none"
         android:layout_marginTop="@dimen/dp5"
-        android:divider="@null" />
+        android:divider="@null"
+        android:scrollbars="none" />
 
 </RelativeLayout>

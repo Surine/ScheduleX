@@ -26,6 +26,7 @@ public class NormalDailyProvider extends CoreWidgetProvider {
         //配置今日明日
         WidgetUtil.setDay(this.getClass(), context, remoteViews, appId, R.id.widget_day_class_next_day, new int[]{R.drawable.ic_keyboard_arrow_right_black_24dp, R.drawable.ic_keyboard_arrow_left_black_24dp});
         WidgetUtil.setDay(this.getClass(), context, remoteViews, appId, R.id.widget_day_class_title);
+        WidgetUtil.setDay(this.getClass(), context, remoteViews, appId, R.id.widget_day_class_subtitle);
         //点击打开主界面
         WidgetUtil.toMain(remoteViews, context, R.id.root);
         //配置列表

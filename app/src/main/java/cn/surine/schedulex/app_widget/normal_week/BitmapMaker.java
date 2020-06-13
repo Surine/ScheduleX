@@ -51,7 +51,7 @@ public class BitmapMaker {
         for (int i = 0; i < maxSession; i++) {
             //测量节次文字，并绘制
             float textWidth = pSlide.measureText(String.valueOf(i + 1));
-            float offSet = pSlide.getFontSpacing() / 2 - (fontMetrics.descent - fontMetrics.leading);
+            float offSet = pSlide.getFontSpacing() / 2 - (fontMetrics.descent - fontMetrics.leading) - 10;
             canvas.drawText(String.valueOf(i + 1), leftPadding + (endX - leftPadding) / 2F - textWidth / 2F, slotHeight / 2F - offSet + slotHeight * i, pSlide);
             pSlide.setTextSize(Uis.sp2px(9));
             try {
@@ -69,8 +69,9 @@ public class BitmapMaker {
         //课程
         Paint pCourse = new Paint(Paint.ANTI_ALIAS_FLAG);
         TextPaint textPaint = new TextPaint(Paint.ANTI_ALIAS_FLAG);
-        textPaint.setTextSize(Uis.sp2px(12));
+        textPaint.setTextSize(Uis.sp2px(11.3F));
         textPaint.setFakeBoldText(true);
+        textPaint.setColor(Color.WHITE);
         int slotWidth = (bitmap.getWidth() - leftPadding - rightPadding - slideWidth - (gapSlotWidth * 6)) / 7;
         int lastIndexWidth = slideWidth + leftPadding + 6; //微调起始
         for (int i = 1; i <= 7; i++) {
@@ -90,13 +91,13 @@ public class BitmapMaker {
                 //文字
                 canvas.save();
                 //间距将微调
-                int offset = 6;
+                int offset = 10;
                 //下面是一个防止文本内容溢出的写法
                 StaticLayout sl = null;
                 int len = 6;
                 do {
                     String data = course.coureName.substring(0, Math.min(course.coureName.length(), len--)) + "..@" + course.teachingBuildingName + course.classroomName;
-                    sl = new StaticLayout(data, textPaint, slotWidth - itemStroke - offset, Layout.Alignment.ALIGN_NORMAL, 1.0f, 0.0f, true);
+                    sl = new StaticLayout(data, textPaint, slotWidth - 2 * itemStroke - offset, Layout.Alignment.ALIGN_NORMAL, 1.0f, 0.0f, true);
                 } while (sl.getHeight() > rectFWidth.height() && len >= 2);
                 canvas.translate(lastIndexWidth + itemStroke + offset, (Integer.parseInt(course.classSessions) - 1) * slotHeight + itemStroke + offset);
                 sl.draw(canvas);

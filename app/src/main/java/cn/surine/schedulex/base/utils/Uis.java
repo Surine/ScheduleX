@@ -1,6 +1,5 @@
 package cn.surine.schedulex.base.utils;
 
-import android.animation.ObjectAnimator;
 import android.content.Context;
 import android.content.res.Configuration;
 import android.content.res.Resources;
@@ -38,7 +37,7 @@ public class Uis {
 
     /**
      * 是否是暗黑模式
-     * */
+     */
     public static boolean getDarkModeStatus(Context context) {
         int mode = context.getResources().getConfiguration().uiMode & Configuration.UI_MODE_NIGHT_MASK;
         return mode == Configuration.UI_MODE_NIGHT_YES;
@@ -93,19 +92,20 @@ public class Uis {
 
     /**
      * 获取推荐课程高度
+     *
      * @return dp
-     * */
-    public static int getRecommendHeightItem(){
+     */
+    public static int getRecommendHeightItem() {
         return (int) (48 * 421 / densityDpi);
     }
 
 
     /**
      * 显示元素
-     * */
-    public static void show(View ... views) {
-        for (View view :views) {
-            if(view != null){
+     */
+    public static void show(View... views) {
+        for (View view : views) {
+            if (view != null) {
                 view.setVisibility(View.VISIBLE);
             }
         }
@@ -114,17 +114,17 @@ public class Uis {
 
     /**
      * 隐藏元素
-     * */
-    public static void hide(View ... views){
-        for (View view :views) {
-            if(view != null){
+     */
+    public static void hide(View... views) {
+        for (View view : views) {
+            if (view != null) {
                 view.setVisibility(View.GONE);
             }
         }
     }
 
 
-    public static int sp2px(int sp) {
-        return (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, sp, Resources.getSystem().getDisplayMetrics());
+    public static float sp2px(float sp) {
+        return TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, sp, Resources.getSystem().getDisplayMetrics());
     }
 }

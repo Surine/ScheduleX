@@ -10,10 +10,10 @@ import android.graphics.Color;
  * @date 2020/6/8 17:32
  */
 public class PaintConfig {
-    public int slotHeight = 86;
+    public int slotHeight = 87;
     public int itemRadius = 3;
     public int gapHeight = 3;
     public int gapWidth = 3;
     public int courseTextColor = Color.WHITE;
-    public float itemStroke = 2.1F;
+    public float itemStroke = 1.2F;
 }
