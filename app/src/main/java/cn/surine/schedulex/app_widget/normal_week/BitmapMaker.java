@@ -72,9 +72,9 @@ public class BitmapMaker {
         textPaint.setTextSize(Uis.sp2px(11.3F));
         textPaint.setFakeBoldText(true);
         textPaint.setColor(Color.WHITE);
-        int slotWidth = (bitmap.getWidth() - leftPadding - rightPadding - slideWidth - (gapSlotWidth * 6)) / 7;
+        int slotWidth = (bitmap.getWidth() - leftPadding - rightPadding - slideWidth - (gapSlotWidth * 6)) / (pc.isShowWeek ? 7 : 5);
         int lastIndexWidth = slideWidth + leftPadding + 6; //微调起始
-        for (int i = 1; i <= 7; i++) {
+        for (int i = 1; i <= (pc.isShowWeek ? 7 : 5); i++) {
             List<Course> courses = DataHandler.abt.getInstance().getOneDayCourse(i, courseList);
             for (int j = 0; j < courses.size(); j++) {
                 Course course = courses.get(j);

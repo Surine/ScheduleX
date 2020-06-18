@@ -107,6 +107,11 @@
             app:destination="@id/timeTableListFragment"
             app:enterAnim="@anim/fragment_open_enter"
             app:popEnterAnim="@anim/fragment_open_enter" />
+        <action
+            android:id="@+id/action_scheduleConfigFragment_to_paletteFragment"
+            app:destination="@id/paletteFragment"
+            app:enterAnim="@anim/fragment_open_enter"
+            app:popEnterAnim="@anim/fragment_open_enter" />
     </fragment>
     <fragment
         android:id="@+id/aboutFragment"
@@ -170,4 +175,8 @@
             app:enterAnim="@anim/fragment_open_enter"
             app:popEnterAnim="@anim/fragment_open_enter" />
     </fragment>
+    <fragment
+        android:id="@+id/paletteFragment"
+        android:name="cn.surine.schedulex.ui.theme.PaletteFragment"
+        android:label="PaletteFragment" />
 </navigation>

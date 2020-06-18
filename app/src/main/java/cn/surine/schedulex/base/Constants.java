@@ -1,5 +1,7 @@
 package cn.surine.schedulex.base;
 
+import cn.surine.schedulex.data.entity.Palette;
+
 /**
  * Intro：
  * 静态常量
@@ -52,6 +54,84 @@ public class Constants {
             "#96C487",
             "#87C2C4"
     };
+
+
+    public static final String[] GRASS = new String[]{
+            "#8ACF7E",
+            "#B4D32D",
+            "#7ABF10",
+            "#88B846",
+            "#6C9431",
+            "#BCD085",
+            "#305418",
+    };
+
+    public static final String[] DIOR = new String[]{
+            "#FC0404",
+            "#AC1C34",
+            "#DC0404",
+            "#C4211B",
+            "#D71F24",
+            "#AC1C2C",
+            "#FC3C04",
+    };
+
+    public static final String[] DARK_SKY = new String[]{
+        "#182020",
+        "#202828",
+        "#101818",
+        "#203028",
+        "#000000",
+        "#606868",
+        "#384848",
+    };
+
+    public static final String[] CYBER = new String[]{
+         "#783860",
+         "#40A0D8",
+         "#1068A8",
+         "#58D0F0",
+         "#A03880",
+         "#D89898",
+         "#B86080",
+         "#183050",
+    };
+
+    public static final String[] COLD = new String[]{
+          "#CFD8DC",
+          "#90AEA4",
+          "#78909C",
+          "#455A64",
+          "#263238",
+          "#607E8B",
+          "#416F78",
+          "#245A64",
+    };
+
+
+    public static final String[] GIRL = new String[]{
+        "#FCE4EC",
+        "#F8BBD0",
+        "#F06292",
+        "#EC407A",
+        "#D81B60",
+        "#880E4F",
+        "#FF4081",
+        "#FF80AB",
+        "#C51162",
+    };
+
+    private static final String[] RAINBOW = new String[]{
+           "#E95759",
+           "#FC9638",
+           "#F8D62F",
+           "#61BF5C",
+           "#27E8BF",
+           "#70A9FE",
+           "#B36EFE",
+           "#EFAB26",
+    };
+
     public static final String ACCOUNT = "ACCOUNT";
     public static final String PASSWORD = "PASSWORD";
 
@@ -68,4 +148,14 @@ public class Constants {
 
 
     public static final String FILE_SELECTOR_DONT_TIP = "file_selector_dont_tip";
+
+    public static final Palette p1 = new Palette(0, "", COLOR_1, "默认");
+    public static final Palette p2 = new Palette(1, "", GRASS, "草地");
+    public static final Palette p3 = new Palette(2, "", DIOR, "口红");
+    public static final Palette p4 = new Palette(3, "", DARK_SKY, "深夜");
+    public static final Palette p5 = new Palette(4, "", CYBER, "CyberPunk");
+    public static final Palette p6 = new Palette(5, "", COLD, "冷淡");
+    public static final Palette p7 = new Palette(6, "", GIRL, "少女");
+    public static final Palette p8 = new Palette(7, "", RAINBOW, "彩虹");
+
 }

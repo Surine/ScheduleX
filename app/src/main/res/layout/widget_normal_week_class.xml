@@ -110,12 +110,14 @@
             android:layout_weight="1"
             android:gravity="center"
             android:text="六"
+            android:id="@+id/_sat"
             android:textColor="@android:color/black" />
 
         <TextView
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
+            android:id="@+id/_sun"
             android:gravity="center"
             android:text="日"
             android:textColor="@android:color/black" />

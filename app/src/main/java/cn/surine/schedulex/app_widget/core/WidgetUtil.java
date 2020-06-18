@@ -29,18 +29,6 @@ public class WidgetUtil {
 
 
     /**
-     * 下一天
-     */
-    public static void nextDay() {
-
-    }
-
-
-    public static void preDay() {
-
-    }
-
-    /**
      * 打开App
      */
     public static void toMain(RemoteViews remoteViews, Context context, int id) {
@@ -92,5 +80,9 @@ public class WidgetUtil {
         }
         intent.putExtra(Constants.APP_WIDGET_ID, appId);
         remoteViews.setOnClickPendingIntent(layoutId, PendingIntent.getBroadcast(context, cur++, intent, PendingIntent.FLAG_UPDATE_CURRENT));
+    }
+
+    public static void showOrHide(RemoteViews remoteViews, int dayView,int status) {
+        remoteViews.setViewVisibility(dayView,status);
     }
 }

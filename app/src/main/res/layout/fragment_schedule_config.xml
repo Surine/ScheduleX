@@ -604,6 +604,36 @@
                             app:layout_constraintTop_toTopOf="@+id/scheduleShowTimeItemTitle" />
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/change_course_card_ui"
+                        style="@style/setting_item_ui">
+
+                        <TextView
+                            android:id="@+id/change_course_card_ui_title"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/dp8"
+                            android:layout_marginTop="@dimen/dp8"
+                            android:text="更换课程卡片主题色"
+                            android:textColor="@android:color/black"
+                            android:textSize="18sp"
+                            android:textStyle="bold"
+                            app:layout_constraintLeft_toLeftOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+
+                        <TextView
+                            android:id="@+id/change_course_card_ui_subtitle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/dp8"
+                            android:layout_marginBottom="@dimen/dp16"
+                            android:text="配置后将影响当前课表全部课程卡片"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toStartOf="@+id/change_course_card_ui_title"
+                            app:layout_constraintTop_toBottomOf="@+id/change_course_card_ui_title" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
 
                 </LinearLayout>
             </androidx.constraintlayout.widget.ConstraintLayout>

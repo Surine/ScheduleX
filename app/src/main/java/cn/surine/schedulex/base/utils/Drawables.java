@@ -36,9 +36,9 @@ public class Drawables {
      * @param corner 圆角
      * @param strokeWidth 描边宽度
      */
-    public static Drawable getDrawable(GradientDrawable.Orientation orientation,int[] colors, int corner, int strokeWidth, int strokeColor){
+    public static Drawable getDrawable(GradientDrawable.Orientation orientation,int[] colors, float[] corner, int strokeWidth, int strokeColor){
         GradientDrawable gradientDrawable = new GradientDrawable(orientation,colors);
-        gradientDrawable.setCornerRadius(corner);
+        gradientDrawable.setCornerRadii(corner);
         gradientDrawable.setStroke(strokeWidth, strokeColor);
         return gradientDrawable;
     }

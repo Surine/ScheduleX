@@ -147,10 +147,7 @@ public class ScheduleConfigFragment extends BaseBindingFragment<FragmentSchedule
 
 
         t.scheduleNameItem.setOnClickListener(v -> modifyScheduleName());
-
-
         t.scheduleWeekInfoItem.setOnClickListener(v -> showTimeConfigDialog());
-
         t.scheduleTimeTableItem.setOnClickListener(v -> {
             Bundle bundle = new Bundle();
             bundle.putLong(ScheduleConfigFragment.SCHEDULE_ID, scheduleId);
@@ -206,6 +203,12 @@ public class ScheduleConfigFragment extends BaseBindingFragment<FragmentSchedule
             scheduleViewModel.updateSchedule(schedule);
             t.showTimesSwitch.setChecked(schedule.isShowTime);
             t.scheduleShowTimeItemSubTitle.setText(schedule.isShowTime ? R.string.show_time : R.string.not_show_timetable);
+        });
+
+        t.changeCourseCardUi.setOnClickListener(v -> {
+            Bundle bundle = new Bundle();
+            bundle.putInt(SCHEDULE_ID,scheduleId);
+            Navigations.open(ScheduleConfigFragment.this,R.id.action_scheduleConfigFragment_to_paletteFragment,bundle);
         });
 
         Bundle bundle = new Bundle();

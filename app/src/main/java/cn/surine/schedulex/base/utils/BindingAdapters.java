@@ -2,6 +2,7 @@ package cn.surine.schedulex.base.utils;
 
 import android.annotation.SuppressLint;
 import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
@@ -9,8 +10,6 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
-
-import androidx.cardview.widget.CardView;
 
 import com.bumptech.glide.Glide;
 
@@ -54,23 +53,6 @@ public class BindingAdapters {
 
 
     /**
-     * 给schedule 卡片添加背景
-     */
-    @androidx.databinding.BindingAdapter("scheduleCardMainBackground")
-    public static void scheduleCardMainBackground(CardView cardView, String color) {
-        if (color == null || TextUtils.isEmpty(color)) {
-            color = Constants.NORMAL_COLOR;
-        }
-        try {
-            int[] gradientColor = new int[]{Color.parseColor(color), Color.parseColor("#BEF5F2F2")};
-            cardView.setBackground(Drawables.getDrawable(GradientDrawable.Orientation.LEFT_RIGHT, gradientColor, 20, 0, Color.parseColor(color)));
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-
-    /**
      * 控制当前选中课表的一些元素显示与隐藏
      */
     @androidx.databinding.BindingAdapter("ctrlScheduleCardHelperElement")
@@ -91,6 +73,16 @@ public class BindingAdapters {
     public static void glideToImage(ImageView imageView, String s) {
         if (s != null) {
             Glide.with(App.context).load(new File(s)).into(imageView);
+        }
+    }
+
+    /**
+     * 给image设置背景（使用glide）
+     */
+    @androidx.databinding.BindingAdapter("glideToImageUrl")
+    public static void glideToImageUrl(ImageView imageView, String s) {
+        if (s != null) {
+            Glide.with(App.context).load(s).into(imageView);
         }
     }
 
@@ -117,6 +109,23 @@ public class BindingAdapters {
         if (view instanceof TextView) {
             ((TextView) view).setText("周" + Dates.getWeekInChi(Integer.parseInt(dayId)));
         }
+    }
+
+    @androidx.databinding.BindingAdapter("loadPaletteDrawable")
+    public static void loadPaletteDrawable(ImageView view, String[] data) {
+        int[] colors = new int[Math.min(2, data.length)];
+        for (int i = 0; i < colors.length; i++) {
+            colors[i] = Color.parseColor(data[i]);
+        }
+        float[] radius = new float[]{
+                40, 40, 0, 0, 0, 0, 40, 40
+        };
+        Drawable curDrawable = Drawables.getDrawable(GradientDrawable.Orientation.TL_BR,
+                colors,
+                radius,
+                0, Color.TRANSPARENT
+        );
+        view.setImageDrawable(curDrawable);
     }
 
 }

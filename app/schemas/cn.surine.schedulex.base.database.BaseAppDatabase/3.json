@@ -2,7 +2,7 @@
   "formatVersion": 1,
   "database": {
     "version": 3,
-    "identityHash": "0d642eab46be03ddd57dc139c535993c",
+    "identityHash": "8b1cf5c7d61b39d3930e7c0bc32dd8f4",
     "entities": [
       {
         "tableName": "Course",
@@ -116,7 +116,7 @@
       },
       {
         "tableName": "Schedule",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`roomId` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `name` TEXT, `totalWeek` INTEGER NOT NULL, `termStartDate` TEXT, `color` TEXT, `imageUrl` TEXT, `lightText` INTEGER NOT NULL, `isShowWeekend` INTEGER NOT NULL, `alphaForCourseItem` INTEGER NOT NULL, `maxSession` INTEGER NOT NULL, `itemHeight` INTEGER NOT NULL, `importWay` INTEGER NOT NULL, `timeTableId` INTEGER NOT NULL, `isShowTime` INTEGER NOT NULL)",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`roomId` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `name` TEXT, `totalWeek` INTEGER NOT NULL, `termStartDate` TEXT, `color` TEXT, `imageUrl` TEXT, `lightText` INTEGER NOT NULL, `isShowWeekend` INTEGER NOT NULL, `alphaForCourseItem` INTEGER NOT NULL, `maxSession` INTEGER NOT NULL, `itemHeight` INTEGER NOT NULL, `importWay` INTEGER NOT NULL, `timeTableId` INTEGER NOT NULL, `isShowTime` INTEGER NOT NULL, `courseThemeId` INTEGER NOT NULL)",
         "fields": [
           {
             "fieldPath": "roomId",
@@ -201,6 +201,12 @@
             "columnName": "isShowTime",
             "affinity": "INTEGER",
             "notNull": true
+          },
+          {
+            "fieldPath": "courseThemeId",
+            "columnName": "courseThemeId",
+            "affinity": "INTEGER",
+            "notNull": true
           }
         ],
         "primaryKey": {
@@ -253,7 +259,7 @@
     ],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, \"0d642eab46be03ddd57dc139c535993c\")"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, \"8b1cf5c7d61b39d3930e7c0bc32dd8f4\")"
     ]
   }
 }

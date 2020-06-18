@@ -99,6 +99,12 @@ public class Schedule extends BaseVm {
      */
     public boolean isShowTime = true;
 
+    /**
+     * 课程主题
+     * */
+    public long courseThemeId;
+
+
     @SuppressLint("StringFormatMatches")
     public String getTotalWeekStr() {
         return App.context.getString(R.string.total_week, totalWeek);

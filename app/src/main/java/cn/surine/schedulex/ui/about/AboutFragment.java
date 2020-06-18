@@ -1,7 +1,6 @@
 package cn.surine.schedulex.ui.about;
 
 
-import android.util.Log;
 
 import androidx.dynamicanimation.animation.SpringAnimation;
 import androidx.dynamicanimation.animation.SpringForce;
@@ -13,6 +12,7 @@ import org.jsoup.nodes.Document;
 
 import cn.surine.schedulex.R;
 import cn.surine.schedulex.base.controller.BaseBindingFragment;
+import cn.surine.schedulex.base.utils.Navigations;
 import cn.surine.schedulex.base.utils.Others;
 import cn.surine.schedulex.base.utils.Toasts;
 import cn.surine.schedulex.databinding.FragmentAboutBinding;
@@ -65,7 +65,7 @@ public class AboutFragment extends BaseBindingFragment<FragmentAboutBinding> {
                 "                            <td class=\"noprint\" align=\"Center\" width=\"14%\">星期日</td>\n" +
                 "                        </tr></body></html>";
         Document document = Jsoup.parse(str);
-        Log.d("slw", "loadJsoup: "+document.text());
+//        Log.d("slw", "loadJsoup: "+document.text());
     }
 
     private void loadAnimation(FragmentAboutBinding t) {

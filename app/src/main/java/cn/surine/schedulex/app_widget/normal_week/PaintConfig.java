@@ -18,4 +18,5 @@ public class PaintConfig {
     public int gapWidth = 3;
     public int courseTextColor = Color.WHITE;
     public float itemStroke = 1.2F;
+    public boolean isShowWeek = DataHandler.abt.getInstance().getCurSchedule().isShowWeekend;
 }

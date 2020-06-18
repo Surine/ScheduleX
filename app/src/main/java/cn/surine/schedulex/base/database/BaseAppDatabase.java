@@ -23,7 +23,7 @@ import cn.surine.schedulex.data.entity.TimeTable;
  * @author sunliwei
  * @date 2020-01-16 20:53
  */
-@Database(entities = {Course.class, Schedule.class, TimeTable.class}, version = 3)
+@Database(entities = {Course.class, Schedule.class, TimeTable.class}, version = 4)
 public abstract class BaseAppDatabase extends RoomDatabase {
     private volatile static BaseAppDatabase instance;
 
@@ -33,7 +33,7 @@ public abstract class BaseAppDatabase extends RoomDatabase {
                 if (instance == null) {
                     instance = Room.databaseBuilder(context.getApplicationContext(), BaseAppDatabase.class, Constants.DB_NAME)
                             .allowMainThreadQueries()  //TODO：slw 主线程访问，不安全
-                            .addMigrations(mg_1_2, mg_2_3)
+                            .addMigrations(mg_1_2, mg_2_3, mg_3_4)
                             .build();
                 }
             }
@@ -69,6 +69,16 @@ public abstract class BaseAppDatabase extends RoomDatabase {
             database.execSQL("CREATE TABLE IF NOT EXISTS timetable (roomId INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, name TEXT,startTime INTEGER NOT NULL DEFAULT 0,rule TEXT)");
             database.execSQL("ALTER TABLE schedule ADD COLUMN timeTableId INTEGER NOT NULL DEFAULT 1");
             database.execSQL("ALTER TABLE schedule ADD COLUMN isShowTime INTEGER NOT NULL DEFAULT 1 ");
+        }
+    };
+
+    /**
+     * 加入课程主题
+     */
+    static final Migration mg_3_4 = new Migration(3, 4) {
+        @Override
+        public void migrate(@NonNull SupportSQLiteDatabase database) {
+            database.execSQL("ALTER TABLE schedule ADD COLUMN courseThemeId INTEGER NOT NULL DEFAULT 0");
         }
     };
 

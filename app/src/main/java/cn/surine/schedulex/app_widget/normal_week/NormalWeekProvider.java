@@ -2,6 +2,7 @@ package cn.surine.schedulex.app_widget.normal_week;
 
 import android.appwidget.AppWidgetManager;
 import android.content.Context;
+import android.view.View;
 import android.widget.RemoteViews;
 
 import cn.surine.schedulex.R;
@@ -9,6 +10,7 @@ import cn.surine.schedulex.app_widget.core.CoreWidgetProvider;
 import cn.surine.schedulex.app_widget.core.WidgetUtil;
 import cn.surine.schedulex.base.Constants;
 import cn.surine.schedulex.base.utils.Prefs;
+import cn.surine.schedulex.data.helper.DataHandler;
 
 import static cn.surine.schedulex.base.utils.Dates.getDate;
 import static cn.surine.schedulex.base.utils.Dates.getDateBeforeOfAfter;
@@ -32,6 +34,14 @@ public class NormalWeekProvider extends CoreWidgetProvider {
         WidgetUtil.setDay(this.getClass(), context, remoteViews, id, R.id.widget_day_class_next_day, new int[]{R.drawable.ic_keyboard_arrow_right_black_24dp, R.drawable.ic_keyboard_arrow_left_black_24dp});
         WidgetUtil.setDay(this.getClass(), context, remoteViews, id, R.id.widget_day_class_title);
         WidgetUtil.setDay(this.getClass(), context, remoteViews, id, R.id.widget_day_class_subtitle);
+        //显示与隐藏周末
+        if (DataHandler.abt.getInstance().getCurSchedule().isShowWeekend) {
+            WidgetUtil.showOrHide(remoteViews, R.id._sat, View.VISIBLE);
+            WidgetUtil.showOrHide(remoteViews, R.id._sun, View.VISIBLE);
+        } else {
+            WidgetUtil.showOrHide(remoteViews, R.id._sat, View.GONE);
+            WidgetUtil.showOrHide(remoteViews, R.id._sun, View.GONE);
+        }
         //点击打开主界面
         WidgetUtil.toMain(remoteViews, context, R.id.root);
         WidgetUtil.addList(NormalWeekService.class, context, appWidgetManager, remoteViews, R.id.listview, id);
