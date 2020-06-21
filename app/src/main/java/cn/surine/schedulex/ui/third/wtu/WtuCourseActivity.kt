@@ -2,11 +2,10 @@ package cn.surine.schedulex.ui.third.wtu
 
 import android.annotation.SuppressLint
 import android.os.Bundle
-import android.util.Log
-import android.webkit.WebView
-import android.webkit.WebViewClient
+import android.webkit.*
 import androidx.appcompat.app.AppCompatActivity
 import cn.surine.schedulex.R
+import cn.surine.schedulex.ui.third.wtu.ParserEngine.newZenFang
 import kotlinx.android.synthetic.main.activity_wtu_course.*
 
 class WtuCourseActivity : AppCompatActivity() {
@@ -23,33 +22,46 @@ class WtuCourseActivity : AppCompatActivity() {
         webView.settings.domStorageEnabled = true
         webView.settings.useWideViewPort = true
         webView.settings.setGeolocationEnabled(true)
+        webView.settings.loadWithOverviewMode = true
+        webView.settings.displayZoomControls = false
+        webView.addJavascriptInterface(InJavaScriptLocalObj(), "local_obj")
         webView.settings.javaScriptCanOpenWindowsAutomatically=true
-//        webView.settings.setSupportMultipleWindows(true)
-        webView.webViewClient = object : WebViewClient() {
-
-            override fun shouldOverrideUrlLoading(view: WebView, url: String): Boolean {
-                // 拦截 url 跳转,在里边添加点击链接跳转或者操作
-                Log.v("url",url)
-                if (url.contains("http://jwglxt.wtu.edu.cn/kbcx/xskbcx_cxXskbcxIndex.html"))
-                    ;
-                view.loadUrl(url)
-                return true
-            }
-
-            override fun onPageFinished(view: WebView, url: String) {
-                // 在结束加载网页时会回调
-
-                // 获取页面内容
-                view.loadUrl("javascript:window.java_obj.showSource("
-                        + "document.getElementsByTagName('html')[0].innerHTML);")
-
-                // 获取解析<meta name="share-description" content="获取到的值">
-                view.loadUrl("javascript:window.java_obj.showDescription("
-                        + "document.querySelector('meta[name=\"share-description\"]').getAttribute('content')"
-                        + ");")
-                super.onPageFinished(view, url)
-            }
-
+        webView.settings.mixedContentMode = WebSettings.MIXED_CONTENT_ALWAYS_ALLOW
+        webView.settings.userAgentString = webView.settings.userAgentString.replace("Mobile", "eliboM").replace("Android", "diordnA")
+        webView.webViewClient = object : WebViewClient() {}
+        webView.webChromeClient = object:WebChromeClient(){}
+        floatingActionButton.setOnClickListener {
+            val js = "javascript:var ifrs=document.getElementsByTagName(\"iframe\");" +
+                    "var iframeContent=\"\";" +
+                    "for(var i=0;i<ifrs.length;i++){" +
+                    "iframeContent=iframeContent+ifrs[i].contentDocument.body.parentElement.outerHTML;" +
+                    "}\n" +
+                    "var frs=document.getElementsByTagName(\"frame\");" +
+                    "var frameContent=\"\";" +
+                    "for(var i=0;i<frs.length;i++){" +
+                    "frameContent=frameContent+frs[i].contentDocument.body.parentElement.outerHTML;" +
+                    "}\n" +
+                    "window.local_obj.showSource(document.getElementsByTagName('html')[0].innerHTML + iframeContent + frameContent);"
+            webView.loadUrl(js)
         }
+    }
+
+    internal inner class InJavaScriptLocalObj {
+
+        @JavascriptInterface
+        fun showSource(html: String) {
+            Parser().parse(engine = ::newZenFang,html = html)
+        }
+
+    }
+
+    override fun onDestroy() {
+        webView.webViewClient = null
+        webView.webChromeClient = null
+        webView.clearCache(true)
+        webView.clearHistory()
+        webView.removeAllViews()
+        webView.destroy()
+        super.onDestroy()
     }
 }
