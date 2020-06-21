@@ -26,17 +26,17 @@
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning"
         tools:replace="android:allowBackup">
+        <activity android:name=".ui.third.wtu.WtuCourseActivity"></activity>
         <activity
             android:name=".ui.MainActivity"
             android:screenOrientation="fullSensor"
             android:windowSoftInputMode="adjustPan">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
-
-        <!-- bugly-->
+        </activity> <!-- bugly -->
         <activity
             android:name="com.tencent.bugly.beta.ui.BetaActivity"
             android:configChanges="keyboardHidden|orientation|screenSize|locale"
@@ -52,7 +52,6 @@
                 android:resource="@xml/filepaths" />
         </provider>
 
-
         <receiver
             android:name=".app_widget.normal_daily.NormalDailyProvider"
             android:label="每日课程-默认">
@@ -60,20 +59,17 @@
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE_OPTIONS" />
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE_MY" />
-                <!--唤醒小部件-->
+                <!-- 唤醒小部件 -->
                 <action android:name="android.appwidget.action.WAKE_UP" />
-                <!--切换天用的广播-->
+                <!-- 切换天用的广播 -->
                 <action android:name="android.appwidget.action.NEXT_DAY" />
                 <action android:name="android.appwidget.action.PREVIOUS_DAY" />
-
             </intent-filter>
 
             <meta-data
                 android:name="android.appwidget.provider"
                 android:resource="@xml/widget_4_4" />
         </receiver>
-
-
         <receiver
             android:name=".app_widget.normal_week.NormalWeekProvider"
             android:label="每周课程-默认">
@@ -81,45 +77,36 @@
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE_OPTIONS" />
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE_MY" />
-                <!--唤醒小部件-->
+                <!-- 唤醒小部件 -->
                 <action android:name="android.appwidget.action.WAKE_UP" />
-                <!--切换天用的广播-->
+                <!-- 切换天用的广播 -->
                 <action android:name="android.appwidget.action.NEXT_DAY" />
                 <action android:name="android.appwidget.action.PREVIOUS_DAY" />
-
             </intent-filter>
 
             <meta-data
                 android:name="android.appwidget.provider"
                 android:resource="@xml/normal_week_4_4" />
-        </receiver>
-
-        <!-- 小部件保活服务 -->
+        </receiver> <!-- 小部件保活服务 -->
         <service
             android:name=".app_widget.core.KeepService"
             android:enabled="true"
             android:exported="true" />
-
         <service
             android:name=".app_widget.normal_daily.NormalDailyService"
             android:enabled="true"
             android:exported="true"
             android:permission="android.permission.BIND_REMOTEVIEWS" />
-
-
         <service
             android:name=".app_widget.normal_week.NormalWeekService"
             android:enabled="true"
             android:exported="true"
             android:permission="android.permission.BIND_REMOTEVIEWS" />
-
         <service
             android:name=".app_widget.core.DailyRemoteViewService"
             android:enabled="true"
             android:exported="true"
             android:permission="android.permission.BIND_REMOTEVIEWS" />
-
-
         <service
             android:name=".app_widget.core.WeekRemoteViewService"
             android:enabled="true"
