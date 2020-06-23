@@ -71,10 +71,18 @@ public abstract class BaseFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(layoutId(), container, false);
+        return inflater.inflate(layoutId(), container, false);
+    }
 
+    /**
+     * 6月22 遇到一个问题 就是使用kotlin资源id生成器返回的资源为null
+     * 应该是在资源变量还没完全创建好的时候就调用了onInit方法，这里改动为
+     * 在onViewCreated生命周期下调用，以确保使用时资源都已经加载完成
+     * */
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
         onInit(view);
-        return view;
     }
 
     @Override
@@ -103,4 +111,5 @@ public abstract class BaseFragment extends Fragment {
     public BaseFragment fragment() {
         return this;
     }
+
 }

@@ -72,6 +72,9 @@
             app:destination="@id/scheduleFragment"
             app:enterAnim="@anim/fragment_open_enter"
             app:popEnterAnim="@anim/fragment_open_enter" />
+        <action
+            android:id="@+id/action_dataFetchFragment_to_scheduleSchoolListFragment"
+            app:destination="@id/scheduleSchoolListFragment" />
     </fragment>
     <fragment
         android:id="@+id/splashFragment"
@@ -179,4 +182,25 @@
         android:id="@+id/paletteFragment"
         android:name="cn.surine.schedulex.ui.theme.PaletteFragment"
         android:label="PaletteFragment" />
+    <fragment
+        android:id="@+id/scheduleSchoolListFragment"
+        android:name="cn.surine.schedulex.ui.schedule_data_fetch.ScheduleSchoolListFragment"
+        android:label="scheduleSchoolListFragment"
+        >
+        <action
+            android:id="@+id/action_scheduleSchoolListFragment_to_scheduleThirdFetchFragment"
+            app:destination="@id/scheduleThirdFetchFragment" />
+        <action
+            android:id="@+id/action_scheduleSchoolListFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/scheduleThirdFetchFragment"
+        android:name="cn.surine.schedulex.ui.schedule_data_fetch.ScheduleThirdFetchFragment"
+        android:label="scheduleThirdFetchFragment"
+        >
+        <action
+            android:id="@+id/action_scheduleThirdFetchFragment_to_scheduleFragment"
+            app:destination="@id/scheduleFragment" />
+    </fragment>
 </navigation>

@@ -78,7 +78,7 @@ public class ScheduleDataFetchFragment extends BaseBindingFragment<FragmentDataF
         Bundle bundle = new Bundle();
         scheduleName = Objs.notNull(getArguments()) ? getArguments().getString(ScheduleInitFragment.SCHEDULE_NAME) : "UNKNOWN";
         bundle.putString(ScheduleInitFragment.SCHEDULE_NAME, scheduleName);
-        t.loginJw.setOnClickListener(v -> Navigations.open(ScheduleDataFetchFragment.this, R.id.action_dataFetchFragment_to_loginFragment, bundle));
+        t.loginJw.setOnClickListener(v -> Navigations.open(ScheduleDataFetchFragment.this, R.id.action_dataFetchFragment_to_scheduleSchoolListFragment, bundle));
         t.fromSuperCn.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.action_dataFetchFragment_to_superLoginFragment, bundle));
         t.skip.setOnClickListener(v -> {
             Prefs.save(Constants.CUR_SCHEDULE, scheduleViewModel.addSchedule(scheduleName, 24, 1, Schedule.IMPORT_WAY.ADD));

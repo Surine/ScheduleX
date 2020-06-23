@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white">
+
+    <LinearLayout
+        android:id="@+id/topbar"
+        android:gravity="bottom"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp70"
+        android:background="@android:color/white"
+        android:orientation="horizontal"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <EditText
+            android:layout_width="0dp"
+            android:layout_height="@dimen/dp50"
+            android:layout_marginStart="@dimen/dp20"
+            android:layout_weight="1"
+            android:background="@null" />
+
+        <ImageView
+            android:layout_width="@dimen/dp50"
+            android:layout_height="@dimen/dp50"
+            android:padding="@dimen/dp5"
+            android:src="@drawable/ic_add_black_24dp" />
+    </LinearLayout>
+
+    <WebView
+        android:id="@+id/thirdPageWebView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/topbar" />
+
+    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+        android:id="@+id/importThirdHtml"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/dp16"
+        android:layout_marginBottom="@dimen/dp16"
+        android:backgroundTint="@color/colorPrimary"
+        android:text="导入"
+        android:textColor="@android:color/white"
+        app:icon="@drawable/ic_add_black_24dp"
+        app:iconTint="@android:color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintRight_toRightOf="parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -158,4 +158,6 @@ public class Constants {
     public static final Palette p7 = new Palette(6, "", GIRL, "少女");
     public static final Palette p8 = new Palette(7, "", RAINBOW, "彩虹");
 
+
+    public static final String JW_NORMAL = "JW_NORMAL";
 }
