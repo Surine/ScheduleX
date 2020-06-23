@@ -174,7 +174,6 @@ public class ScheduleDataFetchFragment extends BaseBindingFragment<FragmentDataF
         }
 
     }
-
     /**
      * 加载数据
      *

@@ -14,7 +14,7 @@ object AdapterList {
      * */
     val schoolList = mutableListOf<JwInfo>().apply {
         add(JwInfo("天津科技大学", jwType = JwInfo.TUST, author = "Surine"))
-        add(JwInfo("武汉纺织大学", "http://ehall.wtu.edu.cn/new/index.html", JwInfo.NEW_ZF, "花生酱啊"))
+        add(JwInfo("武汉纺织大学", "http://ehall.wtu.edu.cn/new/index.html", "newZenFang", "花生酱啊"))
     }
 
     /**

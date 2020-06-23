@@ -1,6 +1,7 @@
 package cn.surine.schedulex.ui.schedule_data_fetch
 
 import android.annotation.SuppressLint
+import android.util.Log
 import android.view.View
 import android.webkit.JavascriptInterface
 import android.webkit.WebChromeClient
@@ -38,7 +39,7 @@ class ScheduleThirdFetchFragment : BaseFragment() {
                     "for(var i=0;i<frs.length;i++){" +
                     "frameContent=frameContent+frs[i].contentDocument.body.parentElement.outerHTML;" +
                     "}\n" +
-                    "window.local_obj.showSource(document.getElementsByTagName('html')[0].innerHTML + iframeContent + frameContent,$type);"
+                    "window.local_obj.showSource(document.getElementsByTagName('html')[0].innerHTML + iframeContent + frameContent,'$type');"
             thirdPageWebView.loadUrl(js)
         }
     }
@@ -63,7 +64,7 @@ class ScheduleThirdFetchFragment : BaseFragment() {
 
     internal inner class InJavaScriptLocalObj {
         @JavascriptInterface
-        fun showSource(html: String, system:String) {
+        fun showSource(html: String,system: String) {
             val engineFunction = when(system){
                 "newZenFang"-> ::newZenFang
                 else -> ::default
