@@ -143,6 +143,7 @@ public class Constants {
 
     //强制最大周
     public static int MAX_WEEK = 30;
+    public static int STAND_WEEK = 24;
     public static int STAND_SESSION = 12;
     public static int MAX_SESSION = 20;
 

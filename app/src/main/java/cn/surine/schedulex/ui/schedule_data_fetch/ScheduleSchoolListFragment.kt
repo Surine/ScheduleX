@@ -9,6 +9,7 @@ import cn.surine.schedulex.base.controller.BaseFragment
 import cn.surine.schedulex.base.utils.Navigations
 import cn.surine.schedulex.third_parse.AdapterList
 import cn.surine.schedulex.third_parse.JwInfo
+import cn.surine.schedulex.ui.schedule_init.ScheduleInitFragment
 import kotlinx.android.synthetic.main.fragment_schedule_school_list.*
 
 /**
@@ -35,7 +36,7 @@ class ScheduleSchoolListFragment : BaseFragment() {
         systemList.adapter?.notifyDataSetChanged()
         val systemAdapter = systemList.adapter as BaseAdapter<*>
         systemAdapter.setOnItemClickListener {
-            Navigations.open(this,R.id.action_scheduleSchoolListFragment_to_scheduleThirdFetchFragment, Bundle().apply {
+            Navigations.open(this,R.id.action_scheduleSchoolListFragment_to_scheduleThirdFetchFragment, arguments?:Bundle().apply {
                 putString(TYPE,mJwSystemDatas[it].jwType)
             })
         }
@@ -52,12 +53,11 @@ class ScheduleSchoolListFragment : BaseFragment() {
             when(mSchoolDatas[it].jwType){
                 JwInfo.TUST -> Navigations.open(this,R.id.action_scheduleSchoolListFragment_to_loginFragment)
                 else -> {
-                    val bundle = Bundle().apply {
+                    Navigations.open(this,R.id.action_scheduleSchoolListFragment_to_scheduleThirdFetchFragment,arguments?:Bundle().apply {
                         val data = mSchoolDatas[it]
                         putString(TYPE,data.jwType)
                         putString(URL,data.jwUrl)
-                    }
-                    Navigations.open(this,R.id.action_scheduleSchoolListFragment_to_scheduleThirdFetchFragment,bundle)
+                    })
                 }
             }
         }
