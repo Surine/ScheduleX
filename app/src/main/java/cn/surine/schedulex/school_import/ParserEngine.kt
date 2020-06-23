@@ -1,8 +1,12 @@
-package cn.surine.schedulex.ui.third.wtu
+package cn.surine.schedulex.school_import
 
 import org.jsoup.Jsoup
 
 object ParserEngine {
+    /**
+     * 默认解析器
+     */
+    fun default(html: String):String = "no suitable parser found!"
     /**
      * 新正方系统解析器
      */
