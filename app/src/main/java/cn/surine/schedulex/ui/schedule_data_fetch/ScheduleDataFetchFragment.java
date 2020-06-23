@@ -42,7 +42,7 @@ import cn.surine.schedulex.ui.schedule.ScheduleViewModel;
 import cn.surine.schedulex.ui.schedule_data_fetch.file.FileParser;
 import cn.surine.schedulex.ui.schedule_data_fetch.file.FileParserFactory;
 import cn.surine.schedulex.ui.schedule_init.ScheduleInitFragment;
-import cn.surine.schedulex.ui.third.wtu.WtuCourseActivity;
+import cn.surine.schedulex.school_import.WtuCourseActivity;
 import cn.surine.schedulex.ui.view.custom.helper.CommonDialogs;
 
 /**

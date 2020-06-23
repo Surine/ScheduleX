@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<!-- saved from url=(0099)http://jwglxt.wtu.edu.cn/kbcx/xskbcx_cxXskbcxIndex.html?gnmkdm=N253508&layout=default&su=1602280328 -->
+<html lang="zh-CN"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<title>学生课表查询</title>
+	
+
+
+
+
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<meta name="Copyright" content="zfsoft">	
+<link rel="icon" href="http://jwglxt.wtu.edu.cn/logo/favicon.ico" type="image/x-icon">
+<link rel="shortcut icon" href="http://jwglxt.wtu.edu.cn/logo/favicon.ico" type="image/x-icon">
+<style type="text/css">	
+	.active{font-weight: bolder;}
+	#navbar-tabs li{ margin-top: 2px;}
+	#navbar-tabs li a{ border-top: 2px solid transparent;}
+	#navbar-tabs li.active a{border-top: 2px solid #0770cd;}
+</style>	
+<!--jQuery核心框架库 -->
+<script type="text/javascript" src="./学生课表查询_files/jquery.min.js.下载"></script>
+<script type="text/javascript" src="./学生课表查询_files/jquery-migrate.min.js.下载"></script>
+<!--jQuery浏览器检测 -->
+<script type="text/javascript" src="./学生课表查询_files/browse-judge.js.下载"></script>
+<script type="text/javascript">
+	//浏览器版本验证
+	var broswer = broswer();
+	if(broswer.msie==true||broswer.safari==true||broswer.mozilla==true||broswer.chrome==true){
+		if(broswer.msie==true&&broswer.version<9){
+		   window.location.href = _path+"/xtgl/init_cxBrowser.html";
+		}
+	}else{
+		 window.location.href = _path+"/xtgl/init_cxBrowser.html";
+	}
+</script>
+<script type="text/javascript">
+var _path 				= "";
+var _systemPath 		= "";
+var _stylePath 			= "/zftal-ui-v5-1.0.2";
+var _reportPath 		= "http://jwxtbb.wtu.edu.cn/WebReport";
+var _refreshInterval	= "10";
+var _localeKey 			= "zh_CN";
+</script>
+<!--
+jquery.ui 需要在bootstrap之前加载，解决冲突问题
+http://blog.csdn.net/remote_roamer/article/details/14105999
+-->
+<script type="text/javascript" src="./学生课表查询_files/jquery-ui-custom.contact-1.0.0.js.下载"></script>
+<!--Bootstrap布局框架-->
+<link rel="stylesheet" type="text/css" href="./学生课表查询_files/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="./学生课表查询_files/error.css">
+<link rel="stylesheet" type="text/css" href="./学生课表查询_files/zftal-ui.css">
+<script type="text/javascript" src="./学生课表查询_files/bootstrap.min.js.下载" charset="utf-8"></script>
+<!--jQuery常用工具扩展库：基础工具,资源加载工具,元素尺寸相关工具 -->
+<script type="text/javascript" src="./学生课表查询_files/jquery.utils.contact-min.js.下载" charset="utf-8"></script>
+<!--jQuery基础工具库：$.browser,$.cookie,$.actual等 -->
+<script type="text/javascript" src="./学生课表查询_files/jquery.plugins.contact-min.js.下载" charset="utf-8"></script>
+<!--jQuery自定义event事件库 -->
+<script type="text/javascript" src="./学生课表查询_files/jquery.events.contact-min.js.下载" charset="utf-8"></script>
+<!--JavaScript对象扩展库：Array,Date,Number,String -->
+<script type="text/javascript" src="./学生课表查询_files/jquery.extends.contact-min.js.下载" charset="utf-8"></script>
+<!--Bootbox弹窗插件-->
+<link rel="stylesheet" type="text/css" href="./学生课表查询_files/bootbox.css">
+<script src="./学生课表查询_files/bootbox.concat-min.js.下载" type="text/javascript" charset="utf-8"></script>
+<script src="./学生课表查询_files/zh_CN.js.下载" type="text/javascript" charset="utf-8"></script>
+
+<!--jQuery模拟滚动条库-->
+<link rel="stylesheet" type="text/css" href="./学生课表查询_files/jquery.mCustomScrollbar.min.css">
+<script type="text/javascript" src="./学生课表查询_files/jquery.mCustomScrollbar.min.js.下载" charset="utf-8"></script>
+<!--jQuery.chosen美化插件-->
+<link rel="stylesheet" type="text/css" href="./学生课表查询_files/chosen-min.css">
+<script type="text/javascript" src="./学生课表查询_files/jquery.choosen.concat-min.js.下载" charset="utf-8"></script>
+<script type="text/javascript" src="./学生课表查询_files/zh_CN-min.js.下载" charset="utf-8"></script>
+<script type="text/javascript" src="./学生课表查询_files/jquery.utils.pinyin.min.js.下载" charset="utf-8"></script>
+<!--[if lt IE 9]>
+<script type="text/javascript" src="/zftal-ui-v5-1.0.2/assets/js/html5shiv.min.js?ver=20170713" charset="utf-8"></script>
+<script type="text/javascript" src="/zftal-ui-v5-1.0.2/assets/js/respond.min.js?ver=20170713" charset="utf-8"></script>
+<![endif]-->
+<!--业务框架jQuery全局设置和通用函数库-->
+<script type="text/javascript" src="./学生课表查询_files/jquery.zftal.contact-min.js.下载"></script>
+<!--国际化js库 -->
+<script type="text/javascript" src="./学生课表查询_files/jquery.i18n-min.js.下载" charset="utf-8"></script>
+<!--全局国际化js. -->
+<script type="text/javascript" src="./学生课表查询_files/i18n-global_zh_CN.js.下载" charset="utf-8"></script>
+<!--业务框架前端脚本国际化库-->
+<script type="text/javascript" src="./学生课表查询_files/jquery.zftal_zh_CN-min.js.下载"></script>
+<!--密码强弱判断-->
+<script type="text/javascript" src="./学生课表查询_files/jquery.utils.strength.min.js.下载"></script>
+
+	
+	
+
+
+
+
+	
+<script type="text/javascript">
+
+	var _path 		= "";
+	var _systemPath = "";
+	var _stylePath  = "/zftal-ui-v5-1.0.2";
+	var _reportPath = "http://jwxtbb.wtu.edu.cn/WebReport";
+	var _localeKey 			= "zh_CN";
+	
+	jQuery(function($){
+		$('[data-toggle*="validation"]').trigger("validation");
+		$('[data-toggle*="fixed"]').trigger("fixed");
+		if($.fn.tooltip){
+			$('[data-toggle*="tooltip"]').tooltip({container:'body'});
+		}
+	});
+	
+</script>
+<!--教务系统通用业务js引用:比如学年，学期等公共的信息会放在这里-->
+<script type="text/javascript" src="./学生课表查询_files/jwglxt-common_zh_CN.js.下载"></script>
+<!--业务模块的properties初始化-->
+<!--国际化js库 -->
+
+	<style type="text/css">
+		td.td_wrap {word-wrap: break-word; word-break: break-all;}
+		#gbox_sycjlrtabGrid {display:none}
+	</style>
+	<script type="text/javascript">
+		var language=localStorage.getItem('language');
+		console.log(language);//zh_CN  en_US
+		var kbylmrxsfs = $.founded('0') ? '0':'0';
+		var kbjcxfsfxsqsjssj = $.founded('0') ? '0':'0';
+	</script>
+	
+</head>
+<body>
+<input type="hidden" id="pkey" name="pkey" value="">
+<input type="hidden" id="localeKey" name="localeKey" value="zh_CN">
+	<!-- 头部 开始 -->
+	<header class="navbar-inverse top2">
+		<div class="container" id="navbar_container">
+					<div class="container">
+			<div class="navbar-header">
+				<button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".bs-navbar-collapse">
+					<span class="sr-only"> 学生课表查询</span> 
+					<span class="icon-bar"></span> 
+					<span class="icon-bar"></span> 
+					<span class="icon-bar"></span>
+				</button>
+				<a href="http://jwglxt.wtu.edu.cn/kbcx/xskbcx_cxXskbcxIndex.html?gnmkdm=N253508&amp;layout=default&amp;su=1602280328#" id="topButton" class="navbar-brand" onclick="onClickMenu(&#39;/kbcx/xskbcx_cxXskbcxIndex.html&#39;,&#39;N253508&#39;)">
+					学生课表查询
+				</a>
+				<script type="text/javascript">
+					document.title="学生课表查询";
+				</script>
+			</div>
+		</div>
+<!-- navbar-end  -->
+		</div>
+	</header>
+	
+	<!--头部 结束 -->
+	<div style="width: 100%; padding: 0px; margin: 0px;" id="bodyContainer">
+		<!-- requestMap中的参数为系统级别控制参数，请勿删除 -->
+		<form id="requestMap">
+			 <input type="hidden" id="sessionUserKey" value=""> 
+			 
+			 	<input type="hidden" id="gnmkdmKey" value="N253508">
+			 
+			 
+		</form>
+		<div class="container container-func sl_all_bg" id="yhgnPage" style="min-height: 1820px;">
+			<div id="innerContainer">
+				<!-- 放置页面显示内容 -->
+				
+<input type="hidden" id="dcclbh" name="dcclbh" value="JW_N2151_XSKBCX">
+        
+<form id="ajaxForm" name="form" onsubmit="return false;" action="http://jwglxt.wtu.edu.cn/kbcx/xskbcx_cxXskbcxIndex.html" method="post" class="form-horizontal sl_all_form sl_all_bg" style="margin-bottom:12px;" data-toggle="validation" role="form" novalidate="novalidate">
+<div class="row">
+	<div class="col-md-4 col-sm-5">
+		<div class="form-group">
+			<label for="" class="col-sm-4 control-label" id="xn"><span style="color:red;">*</span>学年</label>
+			<div class="col-sm-8">
+				<select name="xnm" id="xnm" class="form-control chosen-select success" validate="{required:true}" style="display: none;" aria-required="true" aria-invalid="false">
+    <option value="">---请选择---</option>
+    <option value="2030">2030-2031</option>
+    <option value="2029">2029-2030</option>
+    <option value="2028">2028-2029</option>
+    <option value="2027">2027-2028</option>
+    <option value="2026">2026-2027</option>
+    <option value="2025">2025-2026</option>
+    <option value="2024">2024-2025</option>
+    <option value="2023">2023-2024</option>
+    <option value="2022">2022-2023</option>
+    <option value="2021">2021-2022</option>
+    <option value="2020">2020-2021</option>
+    <option value="2019" selected="selected">2019-2020</option>
+    <option value="2018">2018-2019</option>
+    <option value="2017">2017-2018</option>
+    <option value="2016">2016-2017</option>
+    <option value="2015">2015-2016</option>
+    <option value="2014">2014-2015</option>
+    <option value="2013">2013-2014</option>
+    <option value="2012">2012-2013</option>
+    <option value="2011">2011-2012</option>
+    <option value="2010">2010-2011</option>
+    <option value="2009">2009-2010</option>
+    <option value="2008">2008-2009</option>
+    <option value="2007">2007-2008</option>
+    <option value="2006">2006-2007</option>
+    <option value="2005">2005-2006</option>
+
+
+</select><div class="chosen-container chosen-container-single" style="width: 100%; z-index: 1009;" id="xnm_chosen" data-original-title=""><a class="chosen-single" tabindex="-1"><span>2019-2020</span><div><b></b></div></a><div class="chosen-drop"><div class="chosen-search"><input type="text" autocomplete="off" name="autocomplete" aria-invalid="false" class="success"></div><ul class="chosen-results"></ul></div></div>
+
+
+			</div>
+		</div>
+	</div>
+	<div class="col-md-4 col-sm-5">
+		<div class="form-group">
+			<label for="" class="col-sm-4 control-label" id="xq"><span style="color:red;">*</span>学期</label>
+			<div class="col-sm-8">
+				<select name="xqm" id="xqm" class="form-control chosen-select success" validate="{required:true}" style="display: none;" aria-required="true" aria-invalid="false">
+    <option value="">---请选择---</option>
+    <option value="3">1</option>
+    <option value="12" selected="selected">2</option>
+
+
+</select><div class="chosen-container chosen-container-single chosen-container-single-nosearch" style="width: 100%; z-index: 1010;" id="xqm_chosen" data-original-title="" title=""><a class="chosen-single" tabindex="-1"><span>1</span><div><b></b></div></a><div class="chosen-drop"><div class="chosen-search"><input type="text" autocomplete="off" name="autocomplete" readonly="" aria-invalid="false" class="success"></div><ul class="chosen-results"><li class="active-result" data-option-array-index="0" style="">---请选择---</li><li class="active-result" data-option-array-index="1" style="">1</li><li class="active-result result-selected" data-option-array-index="2" style="">2</li></ul></div></div>
+
+
+			</div>
+		</div>
+	</div>
+	<div class="col-md-4 col-sm-2"><div class="form-group"><div class="col-sm-12">
+		<button type="button" class="btn btn-primary btn-sm pull-right success" id="search_go" onclick="searchResult()" aria-invalid="false"><span class="bigger-120 glyphicon glyphicon-search"></span> 查询</button>
+	</div></div></div>
+</div>
+<script type="text/javascript">
+	$("#xnm,#xqm").find("option:eq(0)").text("---"+$.i18n.jwglxt["choose"]+"---");
+	$('.chosen-select').trigger("chosen");
+</script>
+</form>
+
+
+
+
+<div class="row sl_add_btn">
+	<div class="col-sm-12">
+		<div class="pull-left" style="margin-left: 10px; margin-top: 10px;">
+			<i class="blue bigger-150 glyphicon glyphicon-cog" style="cursor:pointer" id="kbcong" data-original-title="" title=""></i>
+		</div>
+		<div class="btn-toolbar pull-right" role="toolbar" id="tb" style="z-index: auto; position: static; top: auto;">
+		 
+				<button type="button" class="btn btn-default" id="shcPDF" data-type="table"><span class="bigger-120 glyphicon glyphicon-print"> 输出PDF</span></button>
+				<button type="button" class="btn btn-default btn-primary" href="#table1" role="tab" data-toggle="tab" data-type="table"><span class="bigger-120 glyphicon glyphicon-th-large"></span> 表格</button>
+				<button type="button" class="btn btn-default" href="#table2" role="tab" data-toggle="tab" data-type="list"><span class="bigger-120 glyphicon glyphicon-align-justify"></span> 列表</button>
+			
+			
+		</div><div style="height: 36px; display: none; width: 264.547px; float: right;"></div>
+	</div>
+</div>
+<div class="tab-content" id="ylkbTable">
+	
+		<div class="tab-pane fade active in" id="table1" "=""><table id="kbgrid_table_0" class="table table-hover table-bordered text-center timetable1" style="width:98%;margin-left:10px"><tbody><tr><td colspan="9"><div class="timetable_title"><h6 class="pull-left">2019-2020学年第1学期</h6>ScheduleX测试课表<h6 class="pull-right">　学号：XXXXXXX</h6></div><div><span class="pull-left">★-讲课○-实验◆-讨论◇-上机●-实践</span><span class="pull-right"><font color="red" size="3"><b>注：</b></font><font color="red" size="3"><i>红色斜体为待筛选</i></font>，<font color="blue" size="3">蓝色为已选上</font></span></div></td></tr><tr><td width="7.5%"><span class="time">时间段</span></td><td width="5%"><span class="time">节次</span></td><td width="12.5%"><span class="time">星期一</span></td><td width="12.5%"><span class="time">星期二</span></td><td width="12.5%"><span class="time">星期三</span></td><td width="12.5%"><span class="time">星期四</span></td><td width="12.5%"><span class="time">星期五</span></td><td width="12.5%"><span class="time">星期六</span></td><td width="12.5%"><span class="time">星期日</span></td></tr><tr><td rowspan="5"><span class="time">上午</span></td><td><span class="festival">1</span></td><td rowspan="2" id="1-1" class="td_wrap"><div class="timetable_con text-left"><span class="title"><font color="blue">数控技术与数控机床★</font></span><p><span data-toggle="tooltip" data-placement="top" title="节/周"><font color="blue"><span class="glyphicon glyphicon-time"></span></font></span><font color="blue"> (1-2节)1-14周</font></p><p><span data-toggle="tooltip" data-placement="top" title="上课地点"><font color="blue"><span class="glyphicon glyphicon-map-marker"></span></font></span><font color="blue"> 阳光校区 YG03-110</font></p><p><span data-toggle="tooltip" data-placement="top" title="教师"><font color="blue"><span class="glyphicon glyphicon-user"></span></font></span><font color="blue"> 胡峰</font></p><p><span data-toggle="tooltip" data-placement="top" title="教学班名称"><font color="blue"><span class="glyphicon glyphicon-home"></span></font></span><font color="blue"> 数控技术与数控机床-0002</font></p><p><span data-toggle="tooltip" data-placement="top" title="考核方式"><font color="blue"><span class="glyphicon glyphicon-tower"></span></font></span><font color="blue"> 考查</font></p><p><span data-toggle="tooltip" data-placement="top" title="选课备注"><font color="blue"><span class="glyphicon glyphicon-tower"></span></font></span><font color="blue"> 无</font></p><p><span data-toggle="tooltip" data-placement="top" title="课程学时组成"><font color="blue"><span class="glyphicon glyphicon-tower"></span></font></span><font color="blue"> 讲课:28,实践:28</font></p><p><span data-toggle="tooltip" data-placement="top" title="周学时"><font color="blue"><span class="glyphicon glyphicon-tower"></span></font></span><font color="blue"> 4</font></p><p><span data-toggle="tooltip" data-placement="top" title="总学时"><font color="blue"><span class="glyphicon glyphicon-tower"></span></font></span><font color="blue"> 56</font></p><p><span data-toggle="tooltip" data-placement="top" title="学分"><font color="blue"><span class="glyphicon glyphicon-tower"></span></font></span><font color="blue"> 2.0</font></p></div></td><td rowspan="1" id="2-1" class="td_wrap"></td><td rowspan="1" id="3-1" class="td_wrap"></td><td rowspan="1" id="4-1" class="td_wrap"></td><td rowspan="1" id="5-1" class="td_wrap"></td><td rowspan="1" id="6-1" class="td_wrap"></td><td rowspan="1" id="7-1" class="td_wrap"></td></tr><tr><td><span class="festival">2</span></td><td rowspan="1" id="2-2" class="td_wrap"></td><td rowspan="1" id="3-2" class="td_wrap"></td><td rowspan="1" id="4-2" class="td_wrap"></td><td rowspan="1" id="5-2" class="td_wrap"></td><td rowspan="1" id="6-2" class="td_wrap"></td><td rowspan="1" id="7-2" class="td_wrap"></td></tr><tr><td><span class="festival">3</span></td><td rowspan="2" id="1-3" class="td_wrap"><div class="timetable_con text-left"><span class="title"><font color="blue">机电一体化产品设计★</font></span><p><span data-toggle="tooltip" data-placement="top" title="节/周"><font color="blue"><span class="glyphicon glyphicon-time"></span></font></span><font color="blue"> (3-4节)1-10周</font></p><p><span data-toggle="tooltip" data-placement="top" title="上课地点"><font color="blue"><span class="glyphicon glyphicon-map-marker"></span></font></span><font color="blue"> 阳光校区 YG03-402</font></p><p><span data-toggle="tooltip" data-placement="top" title="教师"><font color="blue"><span class="glyphicon glyphicon-user"></span></font></span><font color="blue"> 祖耀</font></p><p><span data-toggle="tooltip" data-placement="top" title="教学班名称"><font color="blue"><span class="glyphicon glyphicon-home"></span></font></span><font color="blue"> 机电一体化产品设计-0001</font></p><p><span data-toggle="tooltip" data-placement="top" title="考核方式"><font color="blue"><span class="glyphicon glyphicon-tower"></span></font></span><font color="blue"> 考查</font></p><p><span data-toggle="tooltip" data-placement="top" title="选课备注"><font color="blue"><span class="glyphicon glyphicon-tower"></span></font></span><font color="blue"> 无</font></p><p><span data-toggle="tooltip" data-placement="top" title="课程学时组成"><font color="blue"><span class="glyphicon glyphicon-tower"></span></font></span><font color="blue"> 讲课:40</font></p><p><span data-toggle="tooltip" data-placement="top" title="周学时"><font color="blue"><span class="glyphicon glyphicon-tower"></span></font></span><font color="blue"> 4</font></p><p><span data-toggle="tooltip" data-placement="top" title="总学时"><font color="blue"><span class="glyphicon glyphicon-tower"></span></font></span><font color="blue"> 40</font></p><p><span data-toggle="tooltip" data-placement="top" title="学分"><font color="blue"><span class="glyphicon glyphicon-tower"></span></font></span><font color="blue"> 2.5</font></p></div></td><td rowspan="1" id="2-3" class="td_wrap"></td><td rowspan="2" id="3-3" class="td_wrap"><div class="timetable_con text-left"><span class="title"><font color="blue">机电一体化产品设计★</font></span><p><span data-toggle="tooltip" data-placement="top" title="节/周"><font color="blue"><span class="glyphicon glyphicon-time"></span></font></span><font color="blue"> (3-4节)1-11周</font></p><p><span data-toggle="tooltip" data-placement="top" title="上课地点"><font color="blue"><span class="glyphicon glyphicon-map-marker"></span></font></span><font color="blue"> 阳光校区 YG06-403</font></p><p><span data-toggle="tooltip" data-placement="top" title="教师"><font color="blue"><span class="glyphicon glyphicon-user"></span></font></span><font color="blue"> 祖耀</font></p><p><span data-toggle="tooltip" data-placement="top" title="教学班名称"><font color="blue"><span class="glyphicon glyphicon-home"></span></font></span><font color="blue"> 机电一体化产品设计-0001</font></p><p><span data-toggle="tooltip" data-placement="top" title="考核方式"><font color="blue"><span class="glyphicon glyphicon-tower"></span></font></span><font color="blue"> 考查</font></p><p><span data-toggle="tooltip" data-placement="top" title="选课备注"><font color="blue"><span class="glyphicon glyphicon-tower"></span></font></span><font color="blue"> 无</font></p><p><span data-toggle="tooltip" data-placement="top" title="课程学时组成"><font color="blue"><span class="glyphicon glyphicon-tower"></span></font></span><font color="blue"> 讲课:40</font></p><p><span data-toggle="tooltip" data-placement="top" title="周学时"><font color="blue"><span class="glyphicon glyphicon-tower"></span></font></span><font color="blue"> 4</font></p><p><span data-toggle="tooltip" data-placement="top" title="总学时"><font color="blue"><span class="glyphicon glyphicon-tower"></span></font></span><font color="blue"> 40</font></p><p><span data-toggle="tooltip" data-placement="top" title="学分"><font color="blue"><span class="glyphicon glyphicon-tower"></span></font></span><font color="blue"> 2.5</font></p></div></td><td rowspan="2" id="4-3" class="td_wrap"><div class="timetable_con text-left"><span class="title"><font color="blue">单片机原理及应用A★</font></span><p><span data-toggle="tooltip" data-placement="top" title="节/周"><font color="blue"><span class="glyphicon glyphicon-time"></span></font></span><font color="blue"> (3-4节)1-11周</font></p><p><span data-toggle="tooltip" data-placement="top" title="上课地点"><font color="blue"><span class="glyphicon glyphicon-map-marker"></span></font></span><font color="blue"> 阳光校区 YG03-511</font></p><p><span data-toggle="tooltip" data-placement="top" title="教师"><font color="blue"><span class="glyphicon glyphicon-user"></span></font></span><font color="blue"> 乔桥</font></p><p><span data-toggle="tooltip" data-placement="top" title="教学班名称"><font color="blue"><span class="glyphicon glyphicon-home"></span></font></span><font color="blue"> 单片机原理及应用A-0004</font></p><p><span data-toggle="tooltip" data-placement="top" title="考核方式"><font color="blue"><span class="glyphicon glyphicon-tower"></span></font></span><font color="blue"> 考查</font></p><p><span data-toggle="tooltip" data-placement="top" title="选课备注"><font color="blue"><span class="glyphicon glyphicon-tower"></span></font></span><font color="blue"> 无</font></p><p><span data-toggle="tooltip" data-placement="top" title="课程学时组成"><font color="blue"><span class="glyphicon glyphicon-tower"></span></font></span><font color="blue"> 讲课:24,实验:16</font></p><p><span data-toggle="tooltip" data-placement="top" title="周学时"><font color="blue"><span class="glyphicon glyphicon-tower"></span></font></span><font color="blue"> 4</font></p><p><span data-toggle="tooltip" data-placement="top" title="总学时"><font color="blue"><span class="glyphicon glyphicon-tower"></span></font></span><font color="blue"> 40</font></p><p><span data-toggle="tooltip" data-placement="top" title="学分"><font color="blue"><span class="glyphicon glyphicon-tower"></span></font></span><font color="blue"> 2.5</font></p></div></td><td rowspan="1" id="5-3" class="td_wrap"></td><td rowspan="1" id="6-3" class="td_wrap"></td><td rowspan="1" id="7-3" class="td_wrap"></td></tr><tr><td><span class="festival">4</span></td><td rowspan="1" id="2-4" class="td_wrap"></td><td rowspan="1" id="5-4" class="td_wrap"></td><td rowspan="1" id="6-4" class="td_wrap"></td><td rowspan="1" id="7-4" class="td_wrap"></td></tr><tr><td><span class="festival">5</span></td><td rowspan="1" id="1-5" class="td_wrap"></td><td rowspan="1" id="2-5" class="td_wrap"></td><td rowspan="1" id="3-5" class="td_wrap"></td><td rowspan="1" id="4-5" class="td_wrap"></td><td rowspan="1" id="5-5" class="td_wrap"></td><td rowspan="1" id="6-5" class="td_wrap"></td><td rowspan="1" id="7-5" class="td_wrap"></td></tr><tr><td rowspan="4"><span class="time">下午</span></td><td><span class="festival">6</span></td><td rowspan="2" id="1-6" class="td_wrap"><div class="timetable_con text-left"><span class="title"><font color="blue">计算机仿真技术与应用○</font></span><p><span data-toggle="tooltip" data-placement="top" title="节/周"><font color="blue"><span class="glyphicon glyphicon-time"></span></font></span><font color="blue"> (6-7节)1-16周</font></p><p><span data-toggle="tooltip" data-placement="top" title="上课地点"><font color="blue"><span class="glyphicon glyphicon-map-marker"></span></font></span><font color="blue"> 阳光校区 未排地点</font></p><p><span data-toggle="tooltip" data-placement="top" title="教师"><font color="blue"><span class="glyphicon glyphicon-user"></span></font></span><font color="blue"> 苏工兵</font></p><p><span data-toggle="tooltip" data-placement="top" title="教学班名称"><font color="blue"><span class="glyphicon glyphicon-home"></span></font></span><font color="blue"> 计算机仿真技术与应用-0001</font></p><p><span data-toggle="tooltip" data-placement="top" title="考核方式"><font color="blue"><span class="glyphicon glyphicon-tower"></span></font></span><font color="blue"> 考查</font></p><p><span data-toggle="tooltip" data-placement="top" title="选课备注"><font color="blue"><span class="glyphicon glyphicon-tower"></span></font></span><font color="blue"> 无</font></p><p><span data-toggle="tooltip" data-placement="top" title="课程学时组成"><font color="blue"><span class="glyphicon glyphicon-tower"></span></font></span><font color="blue"> 实验:32</font></p><p><span data-toggle="tooltip" data-placement="top" title="周学时"><font color="blue"><span class="glyphicon glyphicon-tower"></span></font></span><font color="blue"> 2</font></p><p><span data-toggle="tooltip" data-placement="top" title="总学时"><font color="blue"><span class="glyphicon glyphicon-tower"></span></font></span><font color="blue"> 32</font></p><p><span data-toggle="tooltip" data-placement="top" title="学分"><font color="blue"><span class="glyphicon glyphicon-tower"></span></font></span><font color="blue"> 2.0</font></p></div></td><td rowspan="2" id="2-6" class="td_wrap"><div class="timetable_con text-left"><span class="title"><font color="blue">单片机原理及应用A★</font></span><p><span data-toggle="tooltip" data-placement="top" title="节/周"><font color="blue"><span class="glyphicon glyphicon-time"></span></font></span><font color="blue"> (6-7节)1-11周</font></p><p><span data-toggle="tooltip" data-placement="top" title="上课地点"><font color="blue"><span class="glyphicon glyphicon-map-marker"></span></font></span><font color="blue"> 阳光校区 YG03-208</font></p><p><span data-toggle="tooltip" data-placement="top" title="教师"><font color="blue"><span class="glyphicon glyphicon-user"></span></font></span><font color="blue"> 乔桥</font></p><p><span data-toggle="tooltip" data-placement="top" title="教学班名称"><font color="blue"><span class="glyphicon glyphicon-home"></span></font></span><font color="blue"> 单片机原理及应用A-0004</font></p><p><span data-toggle="tooltip" data-placement="top" title="考核方式"><font color="blue"><span class="glyphicon glyphicon-tower"></span></font></span><font color="blue"> 考查</font></p><p><span data-toggle="tooltip" data-placement="top" title="选课备注"><font color="blue"><span class="glyphicon glyphicon-tower"></span></font></span><font color="blue"> 无</font></p><p><span data-toggle="tooltip" data-placement="top" title="课程学时组成"><font color="blue"><span class="glyphicon glyphicon-tower"></span></font></span><font color="blue"> 讲课:24,实验:16</font></p><p><span data-toggle="tooltip" data-placement="top" title="周学时"><font color="blue"><span class="glyphicon glyphicon-tower"></span></font></span><font color="blue"> 4</font></p><p><span data-toggle="tooltip" data-placement="top" title="总学时"><font color="blue"><span class="glyphicon glyphicon-tower"></span></font></span><font color="blue"> 40</font></p><p><span data-toggle="tooltip" data-placement="top" title="学分"><font color="blue"><span class="glyphicon glyphicon-tower"></span></font></span><font color="blue"> 2.5</font></p></div></td><td rowspan="2" id="3-6" class="td_wrap"><div class="timetable_con text-left"><span class="title"><font color="blue">MATLAB与数字信号处理★</font></span><p><span data-toggle="tooltip" data-placement="top" title="节/周"><font color="blue"><span class="glyphicon glyphicon-time"></span></font></span><font color="blue"> (6-7节)1-17周</font></p><p><span data-toggle="tooltip" data-placement="top" title="上课地点"><font color="blue"><span class="glyphicon glyphicon-map-marker"></span></font></span><font color="blue"> 阳光校区 YG03-512</font></p><p><span data-toggle="tooltip" data-placement="top" title="教师"><font color="blue"><span class="glyphicon glyphicon-user"></span></font></span><font color="blue"> 乔桥</font></p><p><span data-toggle="tooltip" data-placement="top" title="教学班名称"><font color="blue"><span class="glyphicon glyphicon-home"></span></font></span><font color="blue"> MATLAB与数字信号处理-0001</font></p><p><span data-toggle="tooltip" data-placement="top" title="考核方式"><font color="blue"><span class="glyphicon glyphicon-tower"></span></font></span><font color="blue"> 考查</font></p><p><span data-toggle="tooltip" data-placement="top" title="选课备注"><font color="blue"><span class="glyphicon glyphicon-tower"></span></font></span><font color="blue"> 无</font></p><p><span data-toggle="tooltip" data-placement="top" title="课程学时组成"><font color="blue"><span class="glyphicon glyphicon-tower"></span></font></span><font color="blue"> 讲课:16,实验:16</font></p><p><span data-toggle="tooltip" data-placement="top" title="周学时"><font color="blue"><span class="glyphicon glyphicon-tower"></span></font></span><font color="blue"> 2</font></p><p><span data-toggle="tooltip" data-placement="top" title="总学时"><font color="blue"><span class="glyphicon glyphicon-tower"></span></font></span><font color="blue"> 32</font></p><p><span data-toggle="tooltip" data-placement="top" title="学分"><font color="blue"><span class="glyphicon glyphicon-tower"></span></font></span><font color="blue"> 2.0</font></p></div></td><td rowspan="1" id="4-6" class="td_wrap"></td><td rowspan="2" id="5-6" class="td_wrap"><div class="timetable_con text-left"><span class="title"><font color="blue">液压与气动技术★</font></span><p><span data-toggle="tooltip" data-placement="top" title="节/周"><font color="blue"><span class="glyphicon glyphicon-time"></span></font></span><font color="blue"> (6-7节)1-10周</font></p><p><span data-toggle="tooltip" data-placement="top" title="上课地点"><font color="blue"><span class="glyphicon glyphicon-map-marker"></span></font></span><font color="blue"> 阳光校区 YG03-514</font></p><p><span data-toggle="tooltip" data-placement="top" title="教师"><font color="blue"><span class="glyphicon glyphicon-user"></span></font></span><font color="blue"> 徐巧</font></p><p><span data-toggle="tooltip" data-placement="top" title="教学班名称"><font color="blue"><span class="glyphicon glyphicon-home"></span></font></span><font color="blue"> 液压与气动技术-0001</font></p><p><span data-toggle="tooltip" data-placement="top" title="考核方式"><font color="blue"><span class="glyphicon glyphicon-tower"></span></font></span><font color="blue"> 考试</font></p><p><span data-toggle="tooltip" data-placement="top" title="选课备注"><font color="blue"><span class="glyphicon glyphicon-tower"></span></font></span><font color="blue"> 无</font></p><p><span data-toggle="tooltip" data-placement="top" title="课程学时组成"><font color="blue"><span class="glyphicon glyphicon-tower"></span></font></span><font color="blue"> 讲课:32,实验:8</font></p><p><span data-toggle="tooltip" data-placement="top" title="周学时"><font color="blue"><span class="glyphicon glyphicon-tower"></span></font></span><font color="blue"> 4</font></p><p><span data-toggle="tooltip" data-placement="top" title="总学时"><font color="blue"><span class="glyphicon glyphicon-tower"></span></font></span><font color="blue"> 40</font></p><p><span data-toggle="tooltip" data-placement="top" title="学分"><font color="blue"><span class="glyphicon glyphicon-tower"></span></font></span><font color="blue"> 2.5</font></p></div></td><td rowspan="1" id="6-6" class="td_wrap"></td><td rowspan="1" id="7-6" class="td_wrap"></td></tr><tr><td><span class="festival">7</span></td><td rowspan="1" id="4-7" class="td_wrap"></td><td rowspan="1" id="6-7" class="td_wrap"></td><td rowspan="1" id="7-7" class="td_wrap"></td></tr><tr><td><span class="festival">8</span></td><td rowspan="1" id="1-8" class="td_wrap"></td><td rowspan="2" id="2-8" class="td_wrap"><div class="timetable_con text-left"><span class="title"><font color="blue">液压与气动技术★</font></span><p><span data-toggle="tooltip" data-placement="top" title="节/周"><font color="blue"><span class="glyphicon glyphicon-time"></span></font></span><font color="blue"> (8-9节)1-11周</font></p><p><span data-toggle="tooltip" data-placement="top" title="上课地点"><font color="blue"><span class="glyphicon glyphicon-map-marker"></span></font></span><font color="blue"> 阳光校区 YG03-213</font></p><p><span data-toggle="tooltip" data-placement="top" title="教师"><font color="blue"><span class="glyphicon glyphicon-user"></span></font></span><font color="blue"> 徐巧</font></p><p><span data-toggle="tooltip" data-placement="top" title="教学班名称"><font color="blue"><span class="glyphicon glyphicon-home"></span></font></span><font color="blue"> 液压与气动技术-0001</font></p><p><span data-toggle="tooltip" data-placement="top" title="考核方式"><font color="blue"><span class="glyphicon glyphicon-tower"></span></font></span><font color="blue"> 考试</font></p><p><span data-toggle="tooltip" data-placement="top" title="选课备注"><font color="blue"><span class="glyphicon glyphicon-tower"></span></font></span><font color="blue"> 无</font></p><p><span data-toggle="tooltip" data-placement="top" title="课程学时组成"><font color="blue"><span class="glyphicon glyphicon-tower"></span></font></span><font color="blue"> 讲课:32,实验:8</font></p><p><span data-toggle="tooltip" data-placement="top" title="周学时"><font color="blue"><span class="glyphicon glyphicon-tower"></span></font></span><font color="blue"> 4</font></p><p><span data-toggle="tooltip" data-placement="top" title="总学时"><font color="blue"><span class="glyphicon glyphicon-tower"></span></font></span><font color="blue"> 40</font></p><p><span data-toggle="tooltip" data-placement="top" title="学分"><font color="blue"><span class="glyphicon glyphicon-tower"></span></font></span><font color="blue"> 2.5</font></p></div></td><td rowspan="2" id="3-8" class="td_wrap"><div class="timetable_con text-left"><span class="title"><font color="blue">数控技术与数控机床★</font></span><p><span data-toggle="tooltip" data-placement="top" title="节/周"><font color="blue"><span class="glyphicon glyphicon-time"></span></font></span><font color="blue"> (8-9节)1-15周</font></p><p><span data-toggle="tooltip" data-placement="top" title="上课地点"><font color="blue"><span class="glyphicon glyphicon-map-marker"></span></font></span><font color="blue"> 阳光校区 YG03-512</font></p><p><span data-toggle="tooltip" data-placement="top" title="教师"><font color="blue"><span class="glyphicon glyphicon-user"></span></font></span><font color="blue"> 胡峰</font></p><p><span data-toggle="tooltip" data-placement="top" title="教学班名称"><font color="blue"><span class="glyphicon glyphicon-home"></span></font></span><font color="blue"> 数控技术与数控机床-0002</font></p><p><span data-toggle="tooltip" data-placement="top" title="考核方式"><font color="blue"><span class="glyphicon glyphicon-tower"></span></font></span><font color="blue"> 考查</font></p><p><span data-toggle="tooltip" data-placement="top" title="选课备注"><font color="blue"><span class="glyphicon glyphicon-tower"></span></font></span><font color="blue"> 无</font></p><p><span data-toggle="tooltip" data-placement="top" title="课程学时组成"><font color="blue"><span class="glyphicon glyphicon-tower"></span></font></span><font color="blue"> 讲课:28,实践:28</font></p><p><span data-toggle="tooltip" data-placement="top" title="周学时"><font color="blue"><span class="glyphicon glyphicon-tower"></span></font></span><font color="blue"> 4</font></p><p><span data-toggle="tooltip" data-placement="top" title="总学时"><font color="blue"><span class="glyphicon glyphicon-tower"></span></font></span><font color="blue"> 56</font></p><p><span data-toggle="tooltip" data-placement="top" title="学分"><font color="blue"><span class="glyphicon glyphicon-tower"></span></font></span><font color="blue"> 2.0</font></p></div></td><td rowspan="1" id="4-8" class="td_wrap"></td><td rowspan="1" id="5-8" class="td_wrap"></td><td rowspan="1" id="6-8" class="td_wrap"></td><td rowspan="1" id="7-8" class="td_wrap"></td></tr><tr><td><span class="festival">9</span></td><td rowspan="1" id="1-9" class="td_wrap"></td><td rowspan="1" id="4-9" class="td_wrap"></td><td rowspan="1" id="5-9" class="td_wrap"></td><td rowspan="1" id="6-9" class="td_wrap"></td><td rowspan="1" id="7-9" class="td_wrap"></td></tr><tr><td rowspan="3"><span class="time">晚上</span></td><td><span class="festival">10</span></td><td rowspan="1" id="1-10" class="td_wrap"></td><td rowspan="1" id="2-10" class="td_wrap"></td><td rowspan="1" id="3-10" class="td_wrap"></td><td rowspan="1" id="4-10" class="td_wrap"></td><td rowspan="1" id="5-10" class="td_wrap"></td><td rowspan="1" id="6-10" class="td_wrap"></td><td rowspan="1" id="7-10" class="td_wrap"></td></tr><tr><td><span class="festival">11</span></td><td rowspan="1" id="1-11" class="td_wrap"></td><td rowspan="1" id="2-11" class="td_wrap"></td><td rowspan="1" id="3-11" class="td_wrap"></td><td rowspan="1" id="4-11" class="td_wrap"></td><td rowspan="1" id="5-11" class="td_wrap"></td><td rowspan="1" id="6-11" class="td_wrap"></td><td rowspan="1" id="7-11" class="td_wrap"></td></tr><tr><td><span class="festival">12</span></td><td rowspan="1" id="1-12" class="td_wrap"></td><td rowspan="1" id="2-12" class="td_wrap"></td><td rowspan="1" id="3-12" class="td_wrap"></td><td rowspan="1" id="4-12" class="td_wrap"></td><td rowspan="1" id="5-12" class="td_wrap"></td><td rowspan="1" id="6-12" class="td_wrap"></td><td rowspan="1" id="7-12" class="td_wrap"></td></tr><tr><td colspan="9" style="text-align:left;"><div class="timetable_title"><span class="red" style="font: normal 18px/25px microsoft YaHei;">实践课程：</span><span style="font:  18px/25px SimSun;">专业方向课程设计●梅顺齐(2周)/1-2周;液压与气动课程设计●徐巧(1周)/1-1周;</span><br></div></td></tr></tbody></table></div>
+		<div class="tab-pane fade" id="table2"><table id="kblist_table" class="table table-hover table-bordered text-center timetable"><tbody><tr><td colspan="4"><div class="timetable_title"><h6 class="pull-left">2019-2020学年第1学期</h6>潘润秋的课表<h6 class="pull-right">　学号：1602280328</h6></div><div><span class="pull-left">★-讲课○-实验◆-讨论◇-上机●-实践</span><span class="pull-right"><font color="red" size="3"><b>注：</b></font><font color="red" size="3"><i>红色斜体为待筛选</i></font>，<font color="blue" size="3">蓝色为已选上</font></span></div></td></tr><tr class="tbody_head"><td>星期</td><td>节次</td><td>课表信息</td></tr></tbody><tbody id="xq_1" style=""><tr><td id="xq_rowspan_1" rowspan="4" width="50"><span class="week">星期一</span></td></tr><tr><td id="jc_1-1-2" rowspan="1"><span class="festival">1-2</span></td><td><div class="timetable_con text-left"><span class="title"><font color="blue">数控技术与数控机床★</font></span><p><font color="blue"><span class="glyphicon glyphicon-calendar"></span> 周数：1-14周</font><font color="blue"><span class="glyphicon glyphicon-tower"></span> 校区：阳光校区<span class="glyphicon glyphicon-map-marker"></span> 上课地点：YG03-110</font><font color="blue"><span class="glyphicon glyphicon-user"></span> 教师：胡峰</font><font color="blue"><span class="glyphicon glyphicon-home"></span> 教学班：数控技术与数控机床-0002</font><font color="blue"><span class="glyphicon glyphicon-tower"></span> 考核方式：考查</font><font color="blue"><span class="glyphicon glyphicon-tower"></span> 选课备注：无</font><font color="blue"><span class="glyphicon glyphicon-tower"></span> 课程学时组成：讲课:28,实践:28</font><font color="blue"><span class="glyphicon glyphicon-tower"></span> 周学时：4</font><font color="blue"><span class="glyphicon glyphicon-tower"></span> 总学时：56</font><font color="blue"><span class="glyphicon glyphicon-tower"></span> 学分：2.0</font></p></div></td></tr><tr><td id="jc_1-3-4" rowspan="1"><span class="festival">3-4</span></td><td><div class="timetable_con text-left"><span class="title"><font color="blue">机电一体化产品设计★</font></span><p><font color="blue"><span class="glyphicon glyphicon-calendar"></span> 周数：1-10周</font><font color="blue"><span class="glyphicon glyphicon-tower"></span> 校区：阳光校区<span class="glyphicon glyphicon-map-marker"></span> 上课地点：YG03-402</font><font color="blue"><span class="glyphicon glyphicon-user"></span> 教师：祖耀</font><font color="blue"><span class="glyphicon glyphicon-home"></span> 教学班：机电一体化产品设计-0001</font><font color="blue"><span class="glyphicon glyphicon-tower"></span> 考核方式：考查</font><font color="blue"><span class="glyphicon glyphicon-tower"></span> 选课备注：无</font><font color="blue"><span class="glyphicon glyphicon-tower"></span> 课程学时组成：讲课:40</font><font color="blue"><span class="glyphicon glyphicon-tower"></span> 周学时：4</font><font color="blue"><span class="glyphicon glyphicon-tower"></span> 总学时：40</font><font color="blue"><span class="glyphicon glyphicon-tower"></span> 学分：2.5</font></p></div></td></tr><tr><td id="jc_1-6-7" rowspan="1"><span class="festival">6-7</span></td><td><div class="timetable_con text-left"><span class="title"><font color="blue">计算机仿真技术与应用○</font></span><p><font color="blue"><span class="glyphicon glyphicon-calendar"></span> 周数：1-16周</font><font color="blue"><span class="glyphicon glyphicon-tower"></span> 校区：阳光校区<span class="glyphicon glyphicon-map-marker"></span> 上课地点：未排地点</font><font color="blue"><span class="glyphicon glyphicon-user"></span> 教师：苏工兵</font><font color="blue"><span class="glyphicon glyphicon-home"></span> 教学班：计算机仿真技术与应用-0001</font><font color="blue"><span class="glyphicon glyphicon-tower"></span> 考核方式：考查</font><font color="blue"><span class="glyphicon glyphicon-tower"></span> 选课备注：无</font><font color="blue"><span class="glyphicon glyphicon-tower"></span> 课程学时组成：实验:32</font><font color="blue"><span class="glyphicon glyphicon-tower"></span> 周学时：2</font><font color="blue"><span class="glyphicon glyphicon-tower"></span> 总学时：32</font><font color="blue"><span class="glyphicon glyphicon-tower"></span> 学分：2.0</font></p></div></td></tr></tbody><tbody id="xq_2" style=""><tr><td id="xq_rowspan_2" rowspan="3" width="50"><span class="week">星期二</span></td></tr><tr><td id="jc_2-6-7" rowspan="1"><span class="festival">6-7</span></td><td><div class="timetable_con text-left"><span class="title"><font color="blue">单片机原理及应用A★</font></span><p><font color="blue"><span class="glyphicon glyphicon-calendar"></span> 周数：1-11周</font><font color="blue"><span class="glyphicon glyphicon-tower"></span> 校区：阳光校区<span class="glyphicon glyphicon-map-marker"></span> 上课地点：YG03-208</font><font color="blue"><span class="glyphicon glyphicon-user"></span> 教师：乔桥</font><font color="blue"><span class="glyphicon glyphicon-home"></span> 教学班：单片机原理及应用A-0004</font><font color="blue"><span class="glyphicon glyphicon-tower"></span> 考核方式：考查</font><font color="blue"><span class="glyphicon glyphicon-tower"></span> 选课备注：无</font><font color="blue"><span class="glyphicon glyphicon-tower"></span> 课程学时组成：讲课:24,实验:16</font><font color="blue"><span class="glyphicon glyphicon-tower"></span> 周学时：4</font><font color="blue"><span class="glyphicon glyphicon-tower"></span> 总学时：40</font><font color="blue"><span class="glyphicon glyphicon-tower"></span> 学分：2.5</font></p></div></td></tr><tr><td id="jc_2-8-9" rowspan="1"><span class="festival">8-9</span></td><td><div class="timetable_con text-left"><span class="title"><font color="blue">液压与气动技术★</font></span><p><font color="blue"><span class="glyphicon glyphicon-calendar"></span> 周数：1-11周</font><font color="blue"><span class="glyphicon glyphicon-tower"></span> 校区：阳光校区<span class="glyphicon glyphicon-map-marker"></span> 上课地点：YG03-213</font><font color="blue"><span class="glyphicon glyphicon-user"></span> 教师：徐巧</font><font color="blue"><span class="glyphicon glyphicon-home"></span> 教学班：液压与气动技术-0001</font><font color="blue"><span class="glyphicon glyphicon-tower"></span> 考核方式：考试</font><font color="blue"><span class="glyphicon glyphicon-tower"></span> 选课备注：无</font><font color="blue"><span class="glyphicon glyphicon-tower"></span> 课程学时组成：讲课:32,实验:8</font><font color="blue"><span class="glyphicon glyphicon-tower"></span> 周学时：4</font><font color="blue"><span class="glyphicon glyphicon-tower"></span> 总学时：40</font><font color="blue"><span class="glyphicon glyphicon-tower"></span> 学分：2.5</font></p></div></td></tr></tbody><tbody id="xq_3" style=""><tr><td id="xq_rowspan_3" rowspan="4" width="50"><span class="week">星期三</span></td></tr><tr><td id="jc_3-3-4" rowspan="1"><span class="festival">3-4</span></td><td><div class="timetable_con text-left"><span class="title"><font color="blue">机电一体化产品设计★</font></span><p><font color="blue"><span class="glyphicon glyphicon-calendar"></span> 周数：1-11周</font><font color="blue"><span class="glyphicon glyphicon-tower"></span> 校区：阳光校区<span class="glyphicon glyphicon-map-marker"></span> 上课地点：YG06-403</font><font color="blue"><span class="glyphicon glyphicon-user"></span> 教师：祖耀</font><font color="blue"><span class="glyphicon glyphicon-home"></span> 教学班：机电一体化产品设计-0001</font><font color="blue"><span class="glyphicon glyphicon-tower"></span> 考核方式：考查</font><font color="blue"><span class="glyphicon glyphicon-tower"></span> 选课备注：无</font><font color="blue"><span class="glyphicon glyphicon-tower"></span> 课程学时组成：讲课:40</font><font color="blue"><span class="glyphicon glyphicon-tower"></span> 周学时：4</font><font color="blue"><span class="glyphicon glyphicon-tower"></span> 总学时：40</font><font color="blue"><span class="glyphicon glyphicon-tower"></span> 学分：2.5</font></p></div></td></tr><tr><td id="jc_3-6-7" rowspan="1"><span class="festival">6-7</span></td><td><div class="timetable_con text-left"><span class="title"><font color="blue">MATLAB与数字信号处理★</font></span><p><font color="blue"><span class="glyphicon glyphicon-calendar"></span> 周数：1-17周</font><font color="blue"><span class="glyphicon glyphicon-tower"></span> 校区：阳光校区<span class="glyphicon glyphicon-map-marker"></span> 上课地点：YG03-512</font><font color="blue"><span class="glyphicon glyphicon-user"></span> 教师：乔桥</font><font color="blue"><span class="glyphicon glyphicon-home"></span> 教学班：MATLAB与数字信号处理-0001</font><font color="blue"><span class="glyphicon glyphicon-tower"></span> 考核方式：考查</font><font color="blue"><span class="glyphicon glyphicon-tower"></span> 选课备注：无</font><font color="blue"><span class="glyphicon glyphicon-tower"></span> 课程学时组成：讲课:16,实验:16</font><font color="blue"><span class="glyphicon glyphicon-tower"></span> 周学时：2</font><font color="blue"><span class="glyphicon glyphicon-tower"></span> 总学时：32</font><font color="blue"><span class="glyphicon glyphicon-tower"></span> 学分：2.0</font></p></div></td></tr><tr><td id="jc_3-8-9" rowspan="1"><span class="festival">8-9</span></td><td><div class="timetable_con text-left"><span class="title"><font color="blue">数控技术与数控机床★</font></span><p><font color="blue"><span class="glyphicon glyphicon-calendar"></span> 周数：1-15周</font><font color="blue"><span class="glyphicon glyphicon-tower"></span> 校区：阳光校区<span class="glyphicon glyphicon-map-marker"></span> 上课地点：YG03-512</font><font color="blue"><span class="glyphicon glyphicon-user"></span> 教师：胡峰</font><font color="blue"><span class="glyphicon glyphicon-home"></span> 教学班：数控技术与数控机床-0002</font><font color="blue"><span class="glyphicon glyphicon-tower"></span> 考核方式：考查</font><font color="blue"><span class="glyphicon glyphicon-tower"></span> 选课备注：无</font><font color="blue"><span class="glyphicon glyphicon-tower"></span> 课程学时组成：讲课:28,实践:28</font><font color="blue"><span class="glyphicon glyphicon-tower"></span> 周学时：4</font><font color="blue"><span class="glyphicon glyphicon-tower"></span> 总学时：56</font><font color="blue"><span class="glyphicon glyphicon-tower"></span> 学分：2.0</font></p></div></td></tr></tbody><tbody id="xq_4" style=""><tr><td id="xq_rowspan_4" rowspan="2" width="50"><span class="week">星期四</span></td></tr><tr><td id="jc_4-3-4" rowspan="1"><span class="festival">3-4</span></td><td><div class="timetable_con text-left"><span class="title"><font color="blue">单片机原理及应用A★</font></span><p><font color="blue"><span class="glyphicon glyphicon-calendar"></span> 周数：1-11周</font><font color="blue"><span class="glyphicon glyphicon-tower"></span> 校区：阳光校区<span class="glyphicon glyphicon-map-marker"></span> 上课地点：YG03-511</font><font color="blue"><span class="glyphicon glyphicon-user"></span> 教师：乔桥</font><font color="blue"><span class="glyphicon glyphicon-home"></span> 教学班：单片机原理及应用A-0004</font><font color="blue"><span class="glyphicon glyphicon-tower"></span> 考核方式：考查</font><font color="blue"><span class="glyphicon glyphicon-tower"></span> 选课备注：无</font><font color="blue"><span class="glyphicon glyphicon-tower"></span> 课程学时组成：讲课:24,实验:16</font><font color="blue"><span class="glyphicon glyphicon-tower"></span> 周学时：4</font><font color="blue"><span class="glyphicon glyphicon-tower"></span> 总学时：40</font><font color="blue"><span class="glyphicon glyphicon-tower"></span> 学分：2.5</font></p></div></td></tr></tbody><tbody id="xq_5" style=""><tr><td id="xq_rowspan_5" rowspan="2" width="50"><span class="week">星期五</span></td></tr><tr><td id="jc_5-6-7" rowspan="1"><span class="festival">6-7</span></td><td><div class="timetable_con text-left"><span class="title"><font color="blue">液压与气动技术★</font></span><p><font color="blue"><span class="glyphicon glyphicon-calendar"></span> 周数：1-10周</font><font color="blue"><span class="glyphicon glyphicon-tower"></span> 校区：阳光校区<span class="glyphicon glyphicon-map-marker"></span> 上课地点：YG03-514</font><font color="blue"><span class="glyphicon glyphicon-user"></span> 教师：徐巧</font><font color="blue"><span class="glyphicon glyphicon-home"></span> 教学班：液压与气动技术-0001</font><font color="blue"><span class="glyphicon glyphicon-tower"></span> 考核方式：考试</font><font color="blue"><span class="glyphicon glyphicon-tower"></span> 选课备注：无</font><font color="blue"><span class="glyphicon glyphicon-tower"></span> 课程学时组成：讲课:32,实验:8</font><font color="blue"><span class="glyphicon glyphicon-tower"></span> 周学时：4</font><font color="blue"><span class="glyphicon glyphicon-tower"></span> 总学时：40</font><font color="blue"><span class="glyphicon glyphicon-tower"></span> 学分：2.5</font></p></div></td></tr></tbody><tbody id="xq_6" style="display: none"><tr><td id="xq_rowspan_6" rowspan="0" width="50"><span class="week">星期六</span></td></tr></tbody><tbody id="xq_7" style="display: none"><tr><td id="xq_rowspan_7" rowspan="0" width="50"><span class="week">星期日</span></td></tr></tbody><tbody><tr><td colspan="4" style="text-align:left;"><div class="timetable_title"><span class="red" style="font: normal 18px/25px microsoft YaHei;">实践课程：</span><span style="font:  18px/25px SimSun;">专业方向课程设计●梅顺齐(2周)/1-2周;液压与气动课程设计●徐巧(1周)/1-1周;</span><br></div></td></tr></tbody></table></div>
+	
+	
+</div>
+
+<div class="row sl_aff_btn" id="searchBox1" style="display:none;">
+	<div class="col-sm-12">
+		<button type="button" class="btn btn-primary btn-sm" id="btn_dc">导出</button>
+	</div>
+</div>
+<!-- table-start  -->
+<div class="ui-jqgrid ui-widget ui-widget-content ui-corner-all" id="gbox_sycjlrtabGrid" dir="ltr" style="width: 1828px; display: none;"><div class="ui-widget-overlay jqgrid-overlay" id="lui_sycjlrtabGrid"></div><div class="loading ui-state-default ui-state-active" id="load_sycjlrtabGrid" style="display: none; z-index: 101; position: absolute; top: 45%;">正在请求数据...</div><div class="ui-jqgrid-view" id="gview_sycjlrtabGrid" style="width: 1828px;"><div class="ui-jqgrid-titlebar ui-jqgrid-caption ui-widget-header ui-corner-top ui-helper-clearfix"><span class="ui-jqgrid-title">实验课表</span></div><div class="ui-state-default ui-jqgrid-hdiv scroll-to-fixed-fixed" style="z-index: 1000; position: fixed; top: 0px; margin-left: 0px; width: 0px; left: 0px;"><div class="ui-jqgrid-hbox"><table class="ui-jqgrid-htable" style="width:1380px" role="grid" aria-labelledby="gbox_sycjlrtabGrid" cellspacing="0" cellpadding="0" border="0"><thead><tr class="ui-jqgrid-labels ui-sortable" role="rowheader" style=""><th id="sycjlrtabGrid_xmz_id" role="columnheader" class="ui-state-default ui-th-column ui-th-ltr" style="width: 150px; display: none;"><span class="ui-jqgrid-resize ui-jqgrid-resize-ltr" style="cursor: col-resize;">&nbsp;</span><div id="jqgh_sycjlrtabGrid_xmz_id" class="ui-jqgrid-sortable">ID<span class="s-ico" style=""><span sort="asc" class="ui-grid-ico-sort ui-icon-asc ui-icon ui-icon-triangle-1-n ui-sort-ltr"></span><span sort="desc" class="ui-grid-ico-sort ui-icon-desc ui-state-disabled ui-icon ui-icon-triangle-1-s ui-sort-ltr"></span></span></div></th><th id="sycjlrtabGrid_xnm" role="columnheader" class="ui-state-default ui-th-column ui-th-ltr" style="width: 100px;"><span class="ui-jqgrid-resize ui-jqgrid-resize-ltr" style="cursor: col-resize;">&nbsp;</span><div id="jqgh_sycjlrtabGrid_xnm" class="ui-jqgrid-sortable">学年<span class="s-ico" style="display:none"><span sort="asc" class="ui-grid-ico-sort ui-icon-asc ui-state-disabled ui-icon ui-icon-triangle-1-n ui-sort-ltr"></span><span sort="desc" class="ui-grid-ico-sort ui-icon-desc ui-state-disabled ui-icon ui-icon-triangle-1-s ui-sort-ltr"></span></span></div></th><th id="sycjlrtabGrid_xqm" role="columnheader" class="ui-state-default ui-th-column ui-th-ltr" style="width: 80px;"><span class="ui-jqgrid-resize ui-jqgrid-resize-ltr" style="cursor: col-resize;">&nbsp;</span><div id="jqgh_sycjlrtabGrid_xqm" class="ui-jqgrid-sortable">学期<span class="s-ico" style="display:none"><span sort="asc" class="ui-grid-ico-sort ui-icon-asc ui-state-disabled ui-icon ui-icon-triangle-1-n ui-sort-ltr"></span><span sort="desc" class="ui-grid-ico-sort ui-icon-desc ui-state-disabled ui-icon ui-icon-triangle-1-s ui-sort-ltr"></span></span></div></th><th id="sycjlrtabGrid_xh" role="columnheader" class="ui-state-default ui-th-column ui-th-ltr" style="width: 100px;"><span class="ui-jqgrid-resize ui-jqgrid-resize-ltr" style="cursor: col-resize;">&nbsp;</span><div id="jqgh_sycjlrtabGrid_xh" class="ui-jqgrid-sortable">学号<span class="s-ico" style="display:none"><span sort="asc" class="ui-grid-ico-sort ui-icon-asc ui-state-disabled ui-icon ui-icon-triangle-1-n ui-sort-ltr"></span><span sort="desc" class="ui-grid-ico-sort ui-icon-desc ui-state-disabled ui-icon ui-icon-triangle-1-s ui-sort-ltr"></span></span></div></th><th id="sycjlrtabGrid_xm" role="columnheader" class="ui-state-default ui-th-column ui-th-ltr" style="width: 100px;"><span class="ui-jqgrid-resize ui-jqgrid-resize-ltr" style="cursor: col-resize;">&nbsp;</span><div id="jqgh_sycjlrtabGrid_xm" class="ui-jqgrid-sortable">姓名<span class="s-ico" style="display:none"><span sort="asc" class="ui-grid-ico-sort ui-icon-asc ui-state-disabled ui-icon ui-icon-triangle-1-n ui-sort-ltr"></span><span sort="desc" class="ui-grid-ico-sort ui-icon-desc ui-state-disabled ui-icon ui-icon-triangle-1-s ui-sort-ltr"></span></span></div></th><th id="sycjlrtabGrid_kch" role="columnheader" class="ui-state-default ui-th-column ui-th-ltr" style="width: 100px;"><span class="ui-jqgrid-resize ui-jqgrid-resize-ltr" style="cursor: col-resize;">&nbsp;</span><div id="jqgh_sycjlrtabGrid_kch" class="ui-jqgrid-sortable">课程号<span class="s-ico" style="display:none"><span sort="asc" class="ui-grid-ico-sort ui-icon-asc ui-state-disabled ui-icon ui-icon-triangle-1-n ui-sort-ltr"></span><span sort="desc" class="ui-grid-ico-sort ui-icon-desc ui-state-disabled ui-icon ui-icon-triangle-1-s ui-sort-ltr"></span></span></div></th><th id="sycjlrtabGrid_kcmc" role="columnheader" class="ui-state-default ui-th-column ui-th-ltr" style="width: 100px;"><span class="ui-jqgrid-resize ui-jqgrid-resize-ltr" style="cursor: col-resize;">&nbsp;</span><div id="jqgh_sycjlrtabGrid_kcmc" class="ui-jqgrid-sortable">课程名称<span class="s-ico" style="display:none"><span sort="asc" class="ui-grid-ico-sort ui-icon-asc ui-state-disabled ui-icon ui-icon-triangle-1-n ui-sort-ltr"></span><span sort="desc" class="ui-grid-ico-sort ui-icon-desc ui-state-disabled ui-icon ui-icon-triangle-1-s ui-sort-ltr"></span></span></div></th><th id="sycjlrtabGrid_xmmc" role="columnheader" class="ui-state-default ui-th-column ui-th-ltr" style="width: 150px;"><span class="ui-jqgrid-resize ui-jqgrid-resize-ltr" style="cursor: col-resize;">&nbsp;</span><div id="jqgh_sycjlrtabGrid_xmmc" class="ui-jqgrid-sortable">实验项目名称<span class="s-ico" style="display:none"><span sort="asc" class="ui-grid-ico-sort ui-icon-asc ui-state-disabled ui-icon ui-icon-triangle-1-n ui-sort-ltr"></span><span sort="desc" class="ui-grid-ico-sort ui-icon-desc ui-state-disabled ui-icon ui-icon-triangle-1-s ui-sort-ltr"></span></span></div></th><th id="sycjlrtabGrid_syfzmc" role="columnheader" class="ui-state-default ui-th-column ui-th-ltr" style="width: 150px;"><span class="ui-jqgrid-resize ui-jqgrid-resize-ltr" style="cursor: col-resize;">&nbsp;</span><div id="jqgh_sycjlrtabGrid_syfzmc" class="ui-jqgrid-sortable">实验分组名称<span class="s-ico" style="display:none"><span sort="asc" class="ui-grid-ico-sort ui-icon-asc ui-state-disabled ui-icon ui-icon-triangle-1-n ui-sort-ltr"></span><span sort="desc" class="ui-grid-ico-sort ui-icon-desc ui-state-disabled ui-icon ui-icon-triangle-1-s ui-sort-ltr"></span></span></div></th><th id="sycjlrtabGrid_sksjdd" role="columnheader" class="ui-state-default ui-th-column ui-th-ltr" style="width: 200px;"><span class="ui-jqgrid-resize ui-jqgrid-resize-ltr" style="cursor: col-resize;">&nbsp;</span><div id="jqgh_sycjlrtabGrid_sksjdd" class="ui-jqgrid-sortable">上课时间地点<span class="s-ico" style="display:none"><span sort="asc" class="ui-grid-ico-sort ui-icon-asc ui-state-disabled ui-icon ui-icon-triangle-1-n ui-sort-ltr"></span><span sort="desc" class="ui-grid-ico-sort ui-icon-desc ui-state-disabled ui-icon ui-icon-triangle-1-s ui-sort-ltr"></span></span></div></th><th id="sycjlrtabGrid_dycdxq" role="columnheader" class="ui-state-default ui-th-column ui-th-ltr" style="width: 200px;"><span class="ui-jqgrid-resize ui-jqgrid-resize-ltr" style="cursor: col-resize;">&nbsp;</span><div id="jqgh_sycjlrtabGrid_dycdxq" class="ui-jqgrid-sortable">实验房间对应场地校区<span class="s-ico" style="display:none"><span sort="asc" class="ui-grid-ico-sort ui-icon-asc ui-state-disabled ui-icon ui-icon-triangle-1-n ui-sort-ltr"></span><span sort="desc" class="ui-grid-ico-sort ui-icon-desc ui-state-disabled ui-icon ui-icon-triangle-1-s ui-sort-ltr"></span></span></div></th><th id="sycjlrtabGrid_jsxm" role="columnheader" class="ui-state-default ui-th-column ui-th-ltr" style="width: 100px;"><span class="ui-jqgrid-resize ui-jqgrid-resize-ltr" style="cursor: col-resize;">&nbsp;</span><div id="jqgh_sycjlrtabGrid_jsxm" class="ui-jqgrid-sortable">实验人员<span class="s-ico" style="display:none"><span sort="asc" class="ui-grid-ico-sort ui-icon-asc ui-state-disabled ui-icon ui-icon-triangle-1-n ui-sort-ltr"></span><span sort="desc" class="ui-grid-ico-sort ui-icon-desc ui-state-disabled ui-icon ui-icon-triangle-1-s ui-sort-ltr"></span></span></div></th></tr></thead></table></div></div><div class="hide-div" style="display: block; width: 0px; height: 0px; float: none;"></div><div class="ui-jqgrid-bdiv" style="height: auto; width: 1830px;"><div style="position:relative;"><div></div><table id="sycjlrtabGrid" tabindex="0" cellspacing="0" cellpadding="0" border="0" role="grid" aria-multiselectable="false" aria-labelledby="gbox_sycjlrtabGrid" class="ui-jqgrid-btable" style="width: 1380px;"><tbody><tr class="jqgfirstrow" role="row" style="height:auto"><td role="gridcell" style="height:0px;width:150px;display:none;"></td><td role="gridcell" style="height:0px;width:100px;"></td><td role="gridcell" style="height:0px;width:80px;"></td><td role="gridcell" style="height:0px;width:100px;"></td><td role="gridcell" style="height:0px;width:100px;"></td><td role="gridcell" style="height:0px;width:100px;"></td><td role="gridcell" style="height:0px;width:100px;"></td><td role="gridcell" style="height:0px;width:150px;"></td><td role="gridcell" style="height:0px;width:150px;"></td><td role="gridcell" style="height:0px;width:200px;"></td><td role="gridcell" style="height:0px;width:200px;"></td><td role="gridcell" style="height:0px;width:100px;"></td></tr><tr name="norecords" class="emptyrow" align="center" valign="middle" style="height:80px;"><td colspan="12" align="center" valign="middle" style="line-height:80px;text-align: center;font-size:12px;">没有符合条件记录!</td></tr><tr></tr></tbody></table></div></div></div><div class="ui-jqgrid-resize-mark" id="rs_msycjlrtabGrid">&nbsp;</div><div id="sycjlrpager" class="ui-state-default ui-jqgrid-pager ui-corner-bottom scroll-to-fixed-fixed" dir="ltr" style="z-index: 1000; position: fixed; top: 0px; margin-left: 0px; width: 0px; left: 0px;"><div id="pg_sycjlrpager" class="ui-pager-control" role="group"><table cellspacing="0" cellpadding="0" border="0" class="ui-pg-table" style="width:100%;table-layout:fixed;height:100%;" role="row"><tbody><tr><td id="sycjlrpager_left" align="left"><table cellspacing="0" cellpadding="0" border="0" class="ui-pg-table navtable" style="float:left;table-layout:auto;"><tbody><tr></tr></tbody></table></td><td id="sycjlrpager_center" align="center" style="white-space: pre; width: 296px;"><table cellspacing="0" cellpadding="0" border="0" style="table-layout:auto;" class="ui-pg-table"><tbody><tr><td id="first_sycjlrpager" class="ui-pg-button ui-corner-all ui-state-disabled"><span class="ui-icon glyphicon glyphicon-step-backward"></span></td><td id="prev_sycjlrpager" class="ui-pg-button ui-corner-all ui-state-disabled"><span class="ui-icon glyphicon glyphicon-chevron-left"></span></td><td class="ui-pg-button ui-state-disabled" style="width:4px;"><span class="ui-separator"></span></td><td dir="ltr"> <input class="ui-pg-input" name="showCount" type="text" size="2" maxlength="7" value="0" role="textbox"> 共 <span id="sp_1_sycjlrpager">0</span> 页</td><td class="ui-pg-button ui-state-disabled" style="width:4px;"><span class="ui-separator"></span></td><td id="next_sycjlrpager" class="ui-pg-button ui-corner-all"><span class="ui-icon glyphicon glyphicon-chevron-right"></span></td><td id="last_sycjlrpager" class="ui-pg-button ui-corner-all"><span class="ui-icon glyphicon glyphicon-step-forward"></span></td><td dir="ltr"><select class="ui-pg-selbox" name="currentPage" role="listbox"><option role="option" value="15" selected="selected">15</option><option role="option" value="20">20</option><option role="option" value="30">30</option><option role="option" value="50">50</option><option role="option" value="70">70</option><option role="option" value="90">90</option><option role="option" value="100">100</option><option role="option" value="150">150</option><option role="option" value="300">300</option><option role="option" value="500">500</option><option role="option" value="800">800</option><option role="option" value="1000">1000</option><option role="option" value="1500">1500</option><option role="option" value="2000">2000</option><option role="option" value="2500">2500</option><option role="option" value="5000">5000</option></select></td></tr></tbody></table></td><td id="sycjlrpager_right" align="right"><div dir="ltr" style="text-align:right" class="ui-paging-info">无数据显示</div></td></tr></tbody></table></div></div><div class="hide-div" style="display: block; width: 0px; height: 0px; float: none;"></div></div>
+
+<!-- table-end  -->
+
+				
+	
+
+<!--jQuery.jqGrid -->
+<link rel="stylesheet" type="text/css" href="./学生课表查询_files/jquery.jqgrid.css">
+<script type="text/javascript" src="./学生课表查询_files/jquery.jqgrid.src-min.js.下载" charset="utf-8"></script>
+<script type="text/javascript" src="./学生课表查询_files/jquery.jqgrid.contact-min.js.下载" charset="utf-8"></script>
+<script type="text/javascript" src="./学生课表查询_files/zh_CN.js(1).下载" charset="utf-8"></script>
+<script type="text/javascript" src="./学生课表查询_files/jquery.jqgrid.settings.js.下载" charset="utf-8"></script>
+<script type="text/javascript" src="./学生课表查询_files/jquery.jqGrid-min.js.下载" charset="utf-8"></script>
+<!--jQuery.validation -->
+<link rel="stylesheet" type="text/css" href="./学生课表查询_files/jquery.validate-min.css">
+<script type="text/javascript" src="./学生课表查询_files/jquery.validate-min.js.下载" charset="utf-8"></script>
+<script type="text/javascript" src="./学生课表查询_files/jquery.validate.contact-min.js.下载" charset="utf-8"></script>
+<script type="text/javascript" src="./学生课表查询_files/jquery.validate.methods.contact-min.js.下载" charset="utf-8"></script>
+<script type="text/javascript" src="./学生课表查询_files/zh_CN-min.js(1).下载" charset="utf-8"></script>
+<script type="text/javascript">
+	jQuery(function($){
+		$('[data-toggle*="validation"]').trigger("validation");
+	});
+</script>
+
+<link rel="stylesheet" type="text/css" href="./学生课表查询_files/jquery.backdrop-1.0.0.css">
+<script type="text/javascript" src="./学生课表查询_files/jquery.backdrop-min.js.下载" charset="utf-8"></script>
+<script type="text/javascript" src="./学生课表查询_files/xskbcx.js.下载"></script>
+<script type="text/javascript">
+if(language=="en_US"){
+	$("#shcPDF").hide();
+}else{
+	$("#shcPDF").show();
+}
+</script>
+
+			</div>
+		</div>
+	</div><div class="ui-widget ui-widget-content ui-corner-all ui-jqdialog" id="alertmod_sycjlrtabGrid" dir="ltr" tabindex="-1" role="dialog" aria-labelledby="alerthd_sycjlrtabGrid" aria-hidden="true" style="width: 200px; height: auto; z-index: 950; overflow: hidden; top: 464.5px; left: 860px;"><div class="ui-jqdialog-titlebar ui-widget-header ui-corner-all ui-helper-clearfix" id="alerthd_sycjlrtabGrid" style="cursor: move;"><span class="ui-jqdialog-title" style="float: left;">注意</span><a class="ui-jqdialog-titlebar-close ui-corner-all" style="right: 0.3em;"><span class="ui-icon ui-icon-closethick"></span></a></div><div class="ui-jqdialog-content ui-widget-content" id="alertcnt_sycjlrtabGrid"><div>请选择记录</div><span tabindex="0"><span tabindex="-1" id="jqg_alrt"></span></span></div><div class="jqResize ui-resizable-handle ui-resizable-se ui-icon ui-icon-gripsmall-diagonal-se"></div></div>
+	<!-- footer -->
+	
+
+<!-- footer --> 
+<div id="footerID" class="footer">
+	版权所有© Copyright 1999-2020  正方软件股份有限公司　　中国·杭州西湖区紫霞街176号 互联网创新创业园2号301
+</div>
+<script type="text/javascript">
+	//系统中页面底部的时间随系统时间来定
+	var date=new Date;
+	var year=date.getFullYear();
+	var s = $("#footerID").text().indexOf('-'); 
+	var textNr =$("#footerID").text().substr(0,s+1)+year+$("#footerID").text().substr(s+5);
+	$("#footerID").text("");
+	$("#footerID").text(textNr);
+</script>
+<!-- footer-end -->
+	<!-- footer-end -->
+
+<script type="text/javascript">
+	jQuery(function($) {	
+		if ($("#navbar-tabs").length > 0) {
+			$("#navbar-tabs li:eq(0) a").tab('show');
+		}
+		
+		setMinheight();
+		
+		$('#yhgnPage').resize(function(){
+			var minHeight  = $(this).data('min-height');
+			var innerHeight =  $('#innerContainer').outerHeight(true);
+			//console.log("minHeight:" + minHeight + ",innerHeight:" + innerHeight);
+			$(this).css('min-height', Math.max(minHeight,innerHeight));
+		});
+		
+		function setMinheight(){
+			//计算grid页面高度
+			var docuemntHeight = $(document).height();
+			var topHeight = $('header').height();
+			var footerHeight = $('.footer').height();
+			var containerHeight = docuemntHeight-topHeight-footerHeight-60;
+			$('#yhgnPage').css('min-height',containerHeight).data('min-height',containerHeight);
+		}
+		
+	});
+	//加载title名称，根据系统内置表设置，取菜单名称或者系统名称
+	jQuery(document).attr("title",'学生课表查询');
+</script>
+<!-- 设置元素固定位置显示插件  scrolltofixed 相应ini文件引用-->
+<!-- è®¾ç½®åç´ åºå®ä½ç½®æ¾ç¤ºæä»¶  scrolltofixed -->
+<script type="text/javascript" src="./学生课表查询_files/jquery-scrolltofixed-min.js.下载"></script>
+<script>
+	$(document).ready(function() {
+		$("div.sl_add_btn .btn-toolbar").scrollToFixed({
+			marginTop:35,
+			zIndex:1050,
+			fixed:function(){
+				$(this).css("width","auto");
+			}
+		});
+		$("div.ui-state-default").scrollToFixed({
+				//marginTop:3,
+			    spacerClass:'hide-div',
+		});
+	});
+</script>
+<style>
+	.hide-div{
+		display:none; 
+	}
+</style>
+
+<div class="widget-backdrop in" style="display: none; width: 1830px; height: 1699px; top: 206px; left: 36.5px; z-index: 1045;"></div><div class="widget-backdrop-loading" style="display: none; width: 1830px; height: 1699px; top: 206px; left: 36.5px; z-index: 1046;"><div class="image header smaller lighter" style="margin-top: 388px;"><i class="icon-spinner icon-spin orange  bigger-160 "></i></div><div class="msg">加载中...</div></div></body></html>

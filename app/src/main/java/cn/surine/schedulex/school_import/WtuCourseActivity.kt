@@ -1,21 +1,21 @@
-package cn.surine.schedulex.ui.third.wtu
+package cn.surine.schedulex.school_import
 
 import android.annotation.SuppressLint
 import android.os.Bundle
 import android.webkit.*
 import androidx.appcompat.app.AppCompatActivity
 import cn.surine.schedulex.R
-import cn.surine.schedulex.ui.third.wtu.ParserEngine.newZenFang
+import cn.surine.schedulex.school_import.ParserEngine.default
+import cn.surine.schedulex.school_import.ParserEngine.newZenFang
 import kotlinx.android.synthetic.main.activity_wtu_course.*
 
 class WtuCourseActivity : AppCompatActivity() {
-    val web = "http://ehall.wtu.edu.cn/new/index.html"
 
     @SuppressLint("SetJavaScriptEnabled")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_wtu_course)
-        webView.loadUrl(web)
+        webView.loadUrl(intent.getStringExtra("Url"))
         webView.settings.javaScriptEnabled = true
         webView.settings.setSupportZoom(true)
         webView.settings.builtInZoomControls = true
@@ -41,7 +41,7 @@ class WtuCourseActivity : AppCompatActivity() {
                     "for(var i=0;i<frs.length;i++){" +
                     "frameContent=frameContent+frs[i].contentDocument.body.parentElement.outerHTML;" +
                     "}\n" +
-                    "window.local_obj.showSource(document.getElementsByTagName('html')[0].innerHTML + iframeContent + frameContent);"
+                    "window.local_obj.showSource(document.getElementsByTagName('html')[0].innerHTML + iframeContent + frameContent,${intent.getStringExtra("System")});"
             webView.loadUrl(js)
         }
     }
@@ -49,10 +49,13 @@ class WtuCourseActivity : AppCompatActivity() {
     internal inner class InJavaScriptLocalObj {
 
         @JavascriptInterface
-        fun showSource(html: String) {
-            Parser().parse(engine = ::newZenFang,html = html)
+        fun showSource(html: String, system:String) {
+            val engineFunction = when(system){
+                "newZenFang"-> ::newZenFang
+                else -> ::default
+            }
+            Parser().parse(engine = engineFunction,html = html)
         }
-
     }
 
     override fun onDestroy() {

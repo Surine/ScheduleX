@@ -1,4 +1,4 @@
-package cn.surine.schedulex.ui.third.wtu
+package cn.surine.schedulex.school_import
 
 class CourseWrapper {
     /*课程名*/
