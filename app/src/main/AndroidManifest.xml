@@ -36,10 +36,6 @@
             </intent-filter>
         </activity>
 
-        <activity android:name="cn.surine.schedulex.third_parse.WtuCourseActivity">
-
-        </activity>
-
         <!-- bugly-->
         <activity
             android:name="com.tencent.bugly.beta.ui.BetaActivity"

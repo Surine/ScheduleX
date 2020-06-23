@@ -4,6 +4,10 @@ import org.jsoup.Jsoup
 
 object ParserEngine {
     /**
+     * 默认解析器
+     */
+    fun default(html: String):List<CourseWrapper>? = null
+    /**
      * 新正方系统解析器
      */
     fun newZenFang(html: String): List<CourseWrapper> {

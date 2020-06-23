@@ -10,6 +10,7 @@ object AdapterList {
 
     /**
      * 学校列表
+     * from jsonArray
      * */
     val schoolList = mutableListOf<JwInfo>().apply {
         add(JwInfo("天津科技大学", jwType = JwInfo.TUST, author = "Surine"))
