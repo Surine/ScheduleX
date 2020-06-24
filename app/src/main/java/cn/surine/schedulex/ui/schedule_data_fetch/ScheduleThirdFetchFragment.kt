@@ -28,6 +28,8 @@ import cn.surine.schedulex.ui.schedule.ScheduleRepository
 import cn.surine.schedulex.ui.schedule.ScheduleViewModel
 import cn.surine.schedulex.ui.schedule_init.ScheduleInitFragment
 import kotlinx.android.synthetic.main.fragment_third_fetch.*
+import java.net.URLDecoder
+import java.net.URLEncoder
 import java.util.*
 
 /**
@@ -46,9 +48,10 @@ class ScheduleThirdFetchFragment : BaseFragment() {
         scheduleViewModel = ViewModelProviders.of(this, InstanceFactory.getInstance(arrayOf<Class<*>>(ScheduleRepository::class.java), arrayOf<Any>(ScheduleRepository.abt.instance)))[ScheduleViewModel::class.java]
         courseViewModel = ViewModelProviders.of(this, InstanceFactory.getInstance(arrayOf<Class<*>>(CourseRepository::class.java), arrayOf<Any>(CourseRepository.abt.instance)))[CourseViewModel::class.java]
         val url = arguments?.get(ScheduleSchoolListFragment.URL).toString()
+        Log.d("slw", ": $url");
         val type = arguments?.get(ScheduleSchoolListFragment.TYPE).toString()
         loadWebViewConfig()
-        thirdPageWebView.loadUrl(url)
+        thirdPageWebView.loadUrl(URLDecoder.decode(url))
         importThirdHtml.setOnClickListener {
             val js = "javascript:var ifrs=document.getElementsByTagName(\"iframe\");" +
                     "var iframeContent=\"\";" +

@@ -8,7 +8,7 @@ import cn.surine.schedulex.base.Constants
  * @author sunliwei
  * @date 2020/6/22 11:30
  */
-data class JwInfo(val schoolName:String = "", val jwUrl:String = "", val jwType:String = Constants.JW_NORMAL, val author:String = ""){
+data class JwInfo(val school:String = "",val name:String = "", val url:String = "", val system:String = Constants.JW_NORMAL, val author:String = ""){
     companion object{
         const val TUST = "TUST" //科大API
         const val NEW_ZF = "NEW_ZF" //新正方

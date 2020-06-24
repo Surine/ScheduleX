@@ -17,7 +17,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/dp20"
-            android:text="@{school.schoolName}"
+            android:text="@{school.name}"
             app:layout_constraintBottom_toBottomOf="parent"
             android:textColor="@android:color/black"
             android:textSize="@dimen/t15"

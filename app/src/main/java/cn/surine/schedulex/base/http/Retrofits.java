@@ -39,9 +39,10 @@ public class Retrofits {
 
     private Retrofits() {
         retrofit = new Retrofit.Builder()
-                .baseUrl(Domin.DOMIN)
+                .baseUrl("http://59.67.1.54/")
                 .client(new OkNet().getClient())
                 .addConverterFactory(GsonConverterFactory.create())
+                .addCallAdapterFactory(CoroutineCallAdapterFactory.create())
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .build();
     }
