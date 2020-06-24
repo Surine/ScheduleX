@@ -17,6 +17,7 @@ import androidx.databinding.library.baseAdapters.BR;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.tencent.bugly.crashreport.CrashReport;
 
 import java.util.ArrayList;
@@ -38,6 +39,7 @@ import cn.surine.schedulex.base.controller.BaseFragment;
 import cn.surine.schedulex.base.interfaces.Call;
 import cn.surine.schedulex.base.utils.DataMaps;
 import cn.surine.schedulex.base.utils.Dates;
+import cn.surine.schedulex.base.utils.Imgs;
 import cn.surine.schedulex.base.utils.Navigations;
 import cn.surine.schedulex.base.utils.Prefs;
 import cn.surine.schedulex.base.utils.Toasts;
@@ -46,6 +48,8 @@ import cn.surine.schedulex.data.entity.Course;
 import cn.surine.schedulex.data.entity.Schedule;
 import cn.surine.schedulex.ui.course.CourseViewModel;
 import cn.surine.schedulex.ui.view.custom.helper.BtmDialogs;
+import kotlin.Unit;
+import kotlin.jvm.functions.Function2;
 
 import static cn.surine.schedulex.ui.view.custom.helper.BtmDialogs.COURSE_ID;
 
@@ -144,7 +148,7 @@ public class ScheduleViewPagerAdapter extends RecyclerView.Adapter<ScheduleViewP
                 if (course == null) {
                     return;
                 }
-                BtmDialogs.showCourseInfoBtmDialog(baseFragment, course, schedule.alphaForCourseItem);
+                BtmDialogs.INSTANCE.showCourseInfoBtmDialog(baseFragment, course, schedule.alphaForCourseItem);
             } else {
                 MediaPlayer mp = MediaPlayer.create(baseFragment.activity(), raws[new Random().nextInt(12)]);
                 mp.start();
@@ -192,7 +196,7 @@ public class ScheduleViewPagerAdapter extends RecyclerView.Adapter<ScheduleViewP
      */
     private void showSelectCourseDialog(int position) {
         View view = Uis.inflate(baseFragment.activity(), R.layout.view_select_course_op);
-        BtmDialogs.getBaseConfig(baseFragment.activity(), view, (targetView, bottomSheetDialog) -> {
+        BtmDialogs.INSTANCE.getBaseConfig(baseFragment.activity(), view, (targetView, bottomSheetDialog) -> {
             RecyclerView recyclerView = targetView.findViewById(R.id.recyclerview);
             List<BCourse> bCourses = new ArrayList<>();
             for (String key : selectCourse.keySet()) {
@@ -203,9 +207,9 @@ public class ScheduleViewPagerAdapter extends RecyclerView.Adapter<ScheduleViewP
             recyclerView.setAdapter(adapter);
             adapter.setOnItemElementClickListener(new BaseAdapter.OnItemElementClickListener(R.id.copy_course) {
                 @Override
-                public void onClick(View v, int position) {
+                public void onClick(View v, int position1) {
                     Bundle bundle = new Bundle();
-                    bundle.putString(COURSE_ID, bCourses.get(position).getId());
+                    bundle.putString(BtmDialogs.COURSE_ID, bCourses.get(position1).getId());
                     bundle.putBoolean(IS_COPY, true);
                     Navigations.open(baseFragment, R.id.action_scheduleFragment_to_addCourseFragment, bundle);
                     bottomSheetDialog.dismiss();
@@ -281,6 +285,7 @@ public class ScheduleViewPagerAdapter extends RecyclerView.Adapter<ScheduleViewP
                 Uis.hide(((ScheduleFragment) baseFragment).getDataBinding().courseOp);
                 return true;
             });
+            return Unit.INSTANCE;
         });
     }
 

@@ -1,7 +1,7 @@
 package cn.surine.schedulex.ui.schedule_data_fetch
 
 import androidx.lifecycle.MutableLiveData
-import cn.surine.schedulex.base.manager.BaseViewModel
+import cn.surine.schedulex.base.controller.BaseViewModel
 import cn.surine.schedulex.third_parse.JwInfo
 
 /**

@@ -69,7 +69,7 @@ class ScheduleSchoolListFragment : BaseFragment() {
         val schoolAdapter = schoolList.adapter as BaseAdapter<*>
         schoolAdapter.setOnItemClickListener {
             when(mSchoolDatas[it].system){
-                JwInfo.TUST -> Navigations.open(this,R.id.action_scheduleSchoolListFragment_to_loginFragment)
+                JwInfo.TUST -> Navigations.open(this,R.id.action_scheduleSchoolListFragment_to_loginFragment,(arguments?:Bundle()))
                 else -> {
                     Navigations.open(this,R.id.action_scheduleSchoolListFragment_to_scheduleThirdFetchFragment,(arguments?:Bundle()).apply {
                         val data = mSchoolDatas[it]

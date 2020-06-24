@@ -35,6 +35,7 @@ import cn.surine.schedulex.ui.schedule.ScheduleRepository;
 import cn.surine.schedulex.ui.schedule.ScheduleViewModel;
 import cn.surine.schedulex.ui.schedule_init.ScheduleInitFragment;
 import cn.surine.schedulex.ui.view.custom.helper.CommonDialogs;
+import kotlin.Unit;
 
 /**
  * Intro：
@@ -82,11 +83,13 @@ public class SuperCourseFetchFragment extends BaseBindingFragment<FragmentSuperC
                             List<Course> courseList = new ArrayList();
                             List<SuperCourse> superCourseData = superViewModel.getSuperCourseList().lessonList;
                             if (superCourseData.size() == 0) {
-                                Dialog warnDialog = CommonDialogs.getCommonDialog(activity(), getString(R.string.warning), "没有检测到该学期的课程,确定继续导入么？", () -> {
+                                Dialog warnDialog = CommonDialogs.INSTANCE.getCommonDialog(activity(), getString(R.string.warning), "没有检测到该学期的课程,确定继续导入么？", () -> {
                                     parseCourse(scheduleName, courseList, superCourseData);
+                                    return Unit.INSTANCE;
                                 }, () -> {
                                     Toasts.toast("请重新登录获取最新数据！");
                                     Navigations.close(SuperCourseFetchFragment.this);
+                                    return Unit.INSTANCE;
                                 });
                                 warnDialog.setCancelable(false);
                                 warnDialog.show();

@@ -17,6 +17,6 @@ object AdapterListRepository : BaseRepository() {
      * 获取适配列表
      * */
     fun getAdapterListAsync(): Deferred<MutableList<JwInfo>>? {
-        return Loader.getInstance().service.adapterList
+        return Loader.mService.adapterList
     }
 }

@@ -14,7 +14,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <cn.surine.schedulex.ui.view.custom.helper.TopBar
+            <cn.surine.schedulex.ui.view.custom.helper.Topbar
                 android:id="@+id/topbar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -52,7 +52,7 @@
 
 
                 <LinearLayout
-                    android:id="@+id/setting_item_every_session_time"
+                    android:id="@+id/settingItemEverySessionTime"
                     android:layout_width="0dp"
                     android:layout_height="@dimen/dp50"
                     android:layout_marginTop="@dimen/dp24"
@@ -73,7 +73,7 @@
                         android:textSize="@dimen/t17" />
 
                     <TextView
-                        android:id="@+id/tv_session_text"
+                        android:id="@+id/tvSessionText"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:layout_marginEnd="@dimen/dp16"
@@ -82,7 +82,7 @@
                 </LinearLayout>
 
                 <com.google.android.material.button.MaterialButton
-                    android:id="@+id/add_session"
+                    android:id="@+id/addSession"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dp20"
@@ -98,7 +98,7 @@
                     app:cornerRadius="@dimen/dp180"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintRight_toRightOf="@id/textInputLayout"
-                    app:layout_constraintTop_toBottomOf="@id/setting_item_every_session_time" />
+                    app:layout_constraintTop_toBottomOf="@id/settingItemEverySessionTime" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 

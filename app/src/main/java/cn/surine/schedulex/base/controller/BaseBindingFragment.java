@@ -32,11 +32,15 @@ public abstract class BaseBindingFragment<D> extends BaseFragment {
         } else {
             throw new ClassCastException("Hosting Activity must implement BackHandledInterface");
         }
-        onInit(d);
         dataBind.setLifecycleOwner(this);
         return dataBind.getRoot();
     }
 
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        onInit(d);
+    }
 
     /**
      * 获取databinding

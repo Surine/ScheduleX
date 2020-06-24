@@ -64,7 +64,7 @@ public class SuperLoginFragment extends BaseBindingFragment<FragmentLoginSuperBi
             }
         });
 
-        fragmentLoginSuperBinding.superTip.setOnClickListener(view -> CommonDialogs.getCommonDialog(activity(), getString(R.string.warning), getString(R.string.super_tip), null, null).show());
+        fragmentLoginSuperBinding.superTip.setOnClickListener(view -> CommonDialogs.INSTANCE.getCommonDialog(activity(), getString(R.string.warning), getString(R.string.super_tip),null,null).show());
     }
 
 

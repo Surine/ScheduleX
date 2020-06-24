@@ -68,9 +68,7 @@ public class UIConfig {
      * @return UIConfig
      */
     public UIConfig setColorUI(int colorUI) {
-        if (colorUI == DARK || colorUI == LIGHT) {
-            this.colorUI = colorUI;
-        }
+        this.colorUI = colorUI;
         return this;
     }
 

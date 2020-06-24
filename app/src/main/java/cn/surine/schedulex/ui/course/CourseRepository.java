@@ -29,7 +29,7 @@ public class CourseRepository extends BaseRepository {
 
 
     Flowable<CourseList> getCourseByNet(int week) {
-        return Loader.getInstance().getService().getSchedule(week).compose(schedulerHelper());
+        return Loader.INSTANCE.getMService().getSchedule(week).compose(schedulerHelper());
     }
 
     void saveCourseByDb(List<Course> courseList) {

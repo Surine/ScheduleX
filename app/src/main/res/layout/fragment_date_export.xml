@@ -31,7 +31,7 @@
             app:layout_constraintStart_toStartOf="@+id/other" />
 
         <TextView
-            android:id="@+id/schedule_title"
+            android:id="@+id/scheduleTitle"
             style="@style/textview_title_style"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -60,8 +60,8 @@
             android:layout_marginStart="@dimen/dp2"
             android:text="@string/please_select_a_data_export_method"
             android:textSize="@dimen/t17"
-            app:layout_constraintStart_toStartOf="@+id/schedule_title"
-            app:layout_constraintTop_toBottomOf="@+id/schedule_title" />
+            app:layout_constraintStart_toStartOf="@+id/scheduleTitle"
+            app:layout_constraintTop_toBottomOf="@+id/scheduleTitle" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline26"

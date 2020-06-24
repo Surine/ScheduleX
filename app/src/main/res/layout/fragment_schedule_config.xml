@@ -65,7 +65,7 @@
             app:layout_constraintTop_toTopOf="@+id/guideline23" />
 
         <TextView
-            android:id="@+id/version_slogan"
+            android:id="@+id/versionSlogan"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:lineSpacingExtra="@dimen/t2"
@@ -234,7 +234,7 @@
 
 
                         <TextView
-                            android:id="@+id/textView_time_table_subtitle"
+                            android:id="@+id/timeTableSubtitle"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/dp8"
@@ -247,7 +247,7 @@
                             android:layout_width="20dp"
                             android:layout_height="20dp"
                             android:layout_marginEnd="8dp"
-                            app:layout_constraintBottom_toBottomOf="@+id/textView_time_table_subtitle"
+                            app:layout_constraintBottom_toBottomOf="@+id/timeTableSubtitle"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintTop_toTopOf="@+id/textView_time_table_title"
                             app:srcCompat="@mipmap/ic_more" />
@@ -345,7 +345,7 @@
                             app:layout_constraintTop_toBottomOf="@+id/textView37" />
 
                         <ImageView
-                            android:id="@+id/background_pic"
+                            android:id="@+id/backgroundPic"
                             android:layout_width="20dp"
                             android:layout_height="20dp"
                             android:layout_marginEnd="8dp"
@@ -589,7 +589,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/dp8"
                             android:layout_marginBottom="@dimen/dp16"
-                            android:text="@{data.getIsShowTimeTableStr()}"
+                            android:text="@{data.isShowTimeTableStr}"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintStart_toStartOf="@+id/scheduleShowTimeItemTitle"
                             app:layout_constraintTop_toBottomOf="@+id/scheduleShowTimeItemTitle" />
@@ -605,7 +605,7 @@
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
                     <androidx.constraintlayout.widget.ConstraintLayout
-                        android:id="@+id/change_course_card_ui"
+                        android:id="@+id/changeCourseCardUi"
                         style="@style/setting_item_ui">
 
                         <TextView

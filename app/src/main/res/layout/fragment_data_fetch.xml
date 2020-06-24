@@ -7,7 +7,7 @@
         android:layout_height="match_parent">
 
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/login_jw"
+            android:id="@+id/loginJw"
             android:layout_width="@dimen/dp280"
             android:layout_height="@dimen/dp60"
             android:text="登录教务处"
@@ -22,21 +22,21 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/from_file"
+            android:id="@+id/fromFile"
             android:layout_width="@dimen/dp100"
             android:layout_height="@dimen/dp100"
             android:drawableTop="@mipmap/floder"
             android:text="从文件导入"
-            app:layout_constraintRight_toLeftOf="@id/from_super_cn"
+            app:layout_constraintRight_toLeftOf="@id/fromSuperCn"
             android:gravity="center"
             app:layout_constraintLeft_toLeftOf="parent"
             android:textColor="@android:color/black"
-            app:layout_constraintBottom_toBottomOf="@+id/from_super_cn"
-            app:layout_constraintTop_toTopOf="@+id/from_super_cn"
+            app:layout_constraintBottom_toBottomOf="@+id/fromSuperCn"
+            app:layout_constraintTop_toTopOf="@+id/fromSuperCn"
             tools:layout_editor_absoluteX="54dp" />
 
         <TextView
-            android:id="@+id/from_super_cn"
+            android:id="@+id/fromSuperCn"
             android:layout_width="@dimen/dp100"
             android:layout_height="@dimen/dp100"
             android:drawableTop="@mipmap/super_class"
@@ -45,20 +45,21 @@
             android:layout_marginBottom="@dimen/dp40"
             android:textColor="@android:color/black"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintLeft_toRightOf="@id/from_file"
+            app:layout_constraintLeft_toRightOf="@id/fromFile"
             app:layout_constraintRight_toRightOf="parent" />
 
         <TextView
-            android:id="@+id/adaptation_plan"
+            android:id="@+id/adaptationPlan"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/dp20"
             android:text="适配计划？"
             android:textSize="@dimen/t15"
+            android:visibility="gone"
             android:textColor="@color/colorPrimary"
             android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="@+id/login_jw"
-            app:layout_constraintTop_toBottomOf="@+id/login_jw" />
+            app:layout_constraintEnd_toEndOf="@+id/loginJw"
+            app:layout_constraintTop_toBottomOf="@+id/loginJw" />
 
         <TextView
             android:id="@+id/skip"

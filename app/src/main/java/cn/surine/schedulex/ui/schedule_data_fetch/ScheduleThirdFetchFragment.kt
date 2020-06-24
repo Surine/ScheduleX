@@ -48,7 +48,6 @@ class ScheduleThirdFetchFragment : BaseFragment() {
         scheduleViewModel = ViewModelProviders.of(this, InstanceFactory.getInstance(arrayOf<Class<*>>(ScheduleRepository::class.java), arrayOf<Any>(ScheduleRepository.abt.instance)))[ScheduleViewModel::class.java]
         courseViewModel = ViewModelProviders.of(this, InstanceFactory.getInstance(arrayOf<Class<*>>(CourseRepository::class.java), arrayOf<Any>(CourseRepository.abt.instance)))[CourseViewModel::class.java]
         val url = arguments?.get(ScheduleSchoolListFragment.URL).toString()
-        Log.d("slw", ": $url");
         val type = arguments?.get(ScheduleSchoolListFragment.TYPE).toString()
         loadWebViewConfig()
         thirdPageWebView.loadUrl(URLDecoder.decode(url))

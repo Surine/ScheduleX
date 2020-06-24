@@ -99,7 +99,7 @@ public class ScheduleFragment extends BaseBindingFragment<FragmentScheduleBindin
         courseViewModel = ViewModelProviders.of(this, InstanceFactory.getInstance(classesForCourse, argsForCourse)).get(CourseViewModel.class);
 
         Class[] classesForTimer = new Class[]{TimerRepository.class};
-        Object[] argsForTimer = new Object[]{TimerRepository.abt.getInstance()};
+        Object[] argsForTimer = new Object[]{TimerRepository.INSTANCE};
         TimerViewModel timerViewModel = ViewModelProviders.of(this, InstanceFactory.getInstance(classesForTimer, argsForTimer)).get(TimerViewModel.class);
         t.setTimer(timerViewModel);
 
@@ -109,7 +109,7 @@ public class ScheduleFragment extends BaseBindingFragment<FragmentScheduleBindin
 
 
         Class[] classesForTimeTable = new Class[]{TimeTableRepository.class};
-        Object[] argsForTimeTable = new Object[]{TimeTableRepository.abt.getInstance()};
+        Object[] argsForTimeTable = new Object[]{TimeTableRepository.INSTANCE};
         TimeTableViewModel timeTableViewModel = ViewModelProviders.of(this, InstanceFactory.getInstance(classesForTimeTable, argsForTimeTable)).get(TimeTableViewModel.class);
 
 
@@ -213,7 +213,7 @@ public class ScheduleFragment extends BaseBindingFragment<FragmentScheduleBindin
             }
         }
 
-        BoardCastSender.notifyWidget(activity());
+        BoardCastSender.INSTANCE.notifyWidget(getContext());
     }
 
     private void initData(boolean b) {
