@@ -30,13 +30,7 @@
     <fragment
         android:id="@+id/ScheduleListFragment"
         android:name="cn.surine.schedulex.ui.schedule_list.ScheduleListFragment"
-        android:label="fragment_schedule_list"
-        tools:layout="@layout/fragment_schedule_list">
-        <action
-            android:id="@+id/action_ScheduleListFragment_to_scheduleConfigFragment"
-            app:destination="@id/scheduleConfigFragment"
-            app:enterAnim="@anim/fragment_open_enter"
-            app:popEnterAnim="@anim/fragment_open_enter" />
+        android:label="fragment_schedule_list">
         <action
             android:id="@+id/action_ScheduleListFragment_to_scheduleInitFragment"
             app:destination="@id/scheduleInitFragment"
@@ -52,6 +46,11 @@
             app:destination="@id/scheduleDataExport"
             app:enterAnim="@anim/fragment_open_enter"
             app:popEnterAnim="@anim/fragment_fade_enter" />
+        <action
+            android:id="@+id/action_ScheduleListFragment_to_scheduleConfigFragment"
+            app:destination="@id/scheduleConfigFragment"
+            app:enterAnim="@anim/fragment_open_enter"
+            app:popEnterAnim="@anim/fragment_open_enter" />
     </fragment>
     <fragment
         android:id="@+id/dataFetchFragment"
@@ -97,11 +96,6 @@
         android:id="@+id/scheduleConfigFragment"
         android:name="cn.surine.schedulex.ui.schedule_config.ScheduleConfigFragment"
         android:label="ScheduleConfigFragment">
-        <action
-            android:id="@+id/action_scheduleConfigFragment_to_ScheduleListFragment"
-            app:destination="@id/ScheduleListFragment"
-            app:enterAnim="@anim/fragment_open_enter"
-            app:popEnterAnim="@anim/fragment_open_enter" />
         <action
             android:id="@+id/action_scheduleConfigFragment_to_scheduleDataExport"
             app:destination="@id/scheduleDataExport"

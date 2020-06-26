@@ -10,6 +10,7 @@ import cn.surine.schedulex.data.entity.Schedule
 import cn.surine.schedulex.ui.course.CourseViewModel
 import cn.surine.schedulex.ui.schedule.ScheduleViewModel
 import cn.surine.schedulex.ui.schedule_config.ScheduleConfigFragment
+import cn.surine.schedulex.ui.schedule_list.ScheduleListFragment.Companion.SCHEDULE_ID
 import com.google.android.material.snackbar.Snackbar
 import com.tbruyelle.rxpermissions2.RxPermissions
 import kotlinx.android.synthetic.main.fragment_date_export.*
@@ -33,7 +34,7 @@ class ScheduleDataExport : BaseFragment() {
             scheduleViewModel = vmSchedule
             courseViewModel = vmCourse
         }
-        val scheduleId = requireArguments().getInt(ScheduleConfigFragment.SCHEDULE_ID)
+        val scheduleId = requireArguments().getInt(SCHEDULE_ID)
         schedule = scheduleViewModel.getScheduleById(scheduleId.toLong())
         scheduleTitle.text = schedule.name
 

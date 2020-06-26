@@ -9,12 +9,14 @@ import android.graphics.drawable.ColorDrawable
 import android.os.Build
 import android.os.Bundle
 import android.provider.MediaStore
+import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.SeekBar
 import android.widget.TextView
 import androidx.lifecycle.ViewModelProviders
 import cn.surine.schedulex.R
+import cn.surine.schedulex.app_base.VmManager
 import cn.surine.schedulex.base.Constants
 import cn.surine.schedulex.base.controller.BaseBindingFragment
 import cn.surine.schedulex.base.utils.*
@@ -25,6 +27,12 @@ import cn.surine.schedulex.ui.course.CourseViewModel
 import cn.surine.schedulex.ui.schedule.ScheduleRepository
 import cn.surine.schedulex.ui.schedule.ScheduleViewModel
 import cn.surine.schedulex.ui.schedule_list.ScheduleListFragment
+import cn.surine.schedulex.ui.schedule_list.ScheduleListFragment.Companion.CHANGE_BACKGROUND
+import cn.surine.schedulex.ui.schedule_list.ScheduleListFragment.Companion.CHANGE_COURSE_ITEM_HEIGHT
+import cn.surine.schedulex.ui.schedule_list.ScheduleListFragment.Companion.CHANGE_SCHEDULE_NAME
+import cn.surine.schedulex.ui.schedule_list.ScheduleListFragment.Companion.CHANGE_WEEK_INFO
+import cn.surine.schedulex.ui.schedule_list.ScheduleListFragment.Companion.PICK_PHOTO
+import cn.surine.schedulex.ui.schedule_list.ScheduleListFragment.Companion.SCHEDULE_ID
 import cn.surine.schedulex.ui.timetable_list.TimeTableRepository
 import cn.surine.schedulex.ui.timetable_list.TimeTableViewModel
 import cn.surine.schedulex.ui.view.custom.helper.CommonDialogs
@@ -42,15 +50,6 @@ import java.io.File
  */
 class ScheduleConfigFragment : BaseBindingFragment<FragmentScheduleConfigBinding>() {
 
-    companion object {
-        const val CHANGE_SCHEDULE_NAME = 100
-        const val CHANGE_WEEK_INFO = 101
-        const val CHANGE_BACKGROUND = 102
-        const val CHANGE_COURSE_ITEM_HEIGHT = 103
-        const val PICK_PHOTO = 1
-        const val SCHEDULE_ID = "SCHEDULE_ID"
-    }
-
     private lateinit var scheduleViewModel: ScheduleViewModel
     private lateinit var courseViewModel: CourseViewModel
     private lateinit var timetableViewModel: TimeTableViewModel
@@ -61,31 +60,36 @@ class ScheduleConfigFragment : BaseBindingFragment<FragmentScheduleConfigBinding
 
     override fun layoutId(): Int = R.layout.fragment_schedule_config
     override fun onInit(t: FragmentScheduleConfigBinding) {
-        scheduleViewModel = ViewModelProviders.of(this, InstanceFactory.getInstance(arrayOf<Class<*>>(ScheduleRepository::class.java), arrayOf<Any>(ScheduleRepository.abt.instance)))[ScheduleViewModel::class.java]
-        courseViewModel = ViewModelProviders.of(this, InstanceFactory.getInstance(arrayOf<Class<*>>(CourseRepository::class.java), arrayOf<Any>(CourseRepository.abt.instance)))[CourseViewModel::class.java]
-        timetableViewModel = ViewModelProviders.of(this, InstanceFactory.getInstance(arrayOf<Class<*>>(TimeTableRepository::class.java), arrayOf<Any>(TimeTableRepository)))[TimeTableViewModel::class.java]
+        VmManager(this).apply {
+            scheduleViewModel = vmSchedule
+            courseViewModel = vmCourse
+            timetableViewModel = vmTimetable
+        }
         scheduleId = arguments?.getInt(SCHEDULE_ID) ?: -1
         if (scheduleId.toLong() == Prefs.getLong(Constants.CUR_SCHEDULE, -1)) {
             deleteSchedule.visibility = View.GONE
         }
         schedule = scheduleViewModel.getScheduleById(scheduleId.toLong())
         t.data = schedule
-
         //捷径
         mSettingItemTag = arguments?.getInt(ScheduleListFragment.FUNCTION_TAG, -1) ?: -1
-        when (mSettingItemTag) {
-            CHANGE_WEEK_INFO -> showTimeConfigDialog()
-            CHANGE_COURSE_ITEM_HEIGHT -> showItemHeightDialog()
-            CHANGE_BACKGROUND -> chooseBackgroundPicture()
-            CHANGE_SCHEDULE_NAME -> modifyScheduleName()
+        if(mSettingItemTag != -1){
+            when (mSettingItemTag) {
+                CHANGE_WEEK_INFO -> showTimeConfigDialog()
+                CHANGE_COURSE_ITEM_HEIGHT -> showItemHeightDialog()
+                CHANGE_BACKGROUND -> chooseBackgroundPicture()
+                CHANGE_SCHEDULE_NAME -> modifyScheduleName()
+            }
+            mSettingItemTag = -1
         }
+
 
         //删除
         deleteSchedule.setOnClickListener {
             CommonDialogs.getCommonDialog(activity(), getString(R.string.warning), getString(R.string.delete_schedule_dialog_msg), okCall = {
                 scheduleViewModel.deleteScheduleById(scheduleId.toLong())
                 courseViewModel.deleteCourseByScheduleId(scheduleId.toLong())
-                Toasts.toast(getString(R.string.schedule_is_delete));
+                Toasts.toast(getString(R.string.schedule_is_delete))
                 Navigations.close(this@ScheduleConfigFragment)
             }).show()
         }
@@ -97,7 +101,7 @@ class ScheduleConfigFragment : BaseBindingFragment<FragmentScheduleConfigBinding
         //时间表
         scheduleTimeTableItem.setOnClickListener {
             Navigations.open(this, R.id.action_scheduleConfigFragment_to_timeTableListFragment, Bundle().apply {
-                putLong(ScheduleConfigFragment.SCHEDULE_ID, scheduleId.toLong())
+                putLong(SCHEDULE_ID, scheduleId.toLong())
             })
         }
         timeTableSubtitle.text = timetableViewModel.getTimTableById(schedule.timeTableId)?.name
@@ -122,7 +126,7 @@ class ScheduleConfigFragment : BaseBindingFragment<FragmentScheduleConfigBinding
         //设置是否展示周末开关
         showWeekSwitchs.isChecked = schedule.isShowWeekend
         scheduleShowWeekItem.setOnClickListener {
-            schedule.isShowWeekend = !schedule.isShowWeekend;
+            schedule.isShowWeekend = !schedule.isShowWeekend
             scheduleViewModel.updateSchedule(schedule)
             showWeekSwitchs.isChecked = schedule.isShowWeekend
             showWeekSubTitle.setText(if (schedule.isShowWeekend) R.string.show_weekend else R.string.not_show_weekend)
@@ -139,7 +143,7 @@ class ScheduleConfigFragment : BaseBindingFragment<FragmentScheduleConfigBinding
             schedule.isShowTime = !schedule.isShowTime
             scheduleViewModel.updateSchedule(schedule)
             showTimesSwitch.isChecked = schedule.isShowTime
-            scheduleShowTimeItemSubTitle.setText(if (schedule.isShowTime) R.string.show_time else R.string.not_show_timetable);
+            scheduleShowTimeItemSubTitle.setText(if (schedule.isShowTime) R.string.show_time else R.string.not_show_timetable)
         }
         //课程卡片主题
         changeCourseCardUi.setOnClickListener {
@@ -250,7 +254,7 @@ class ScheduleConfigFragment : BaseBindingFragment<FragmentScheduleConfigBinding
                     schedule.maxSession = s1.progress
                     this@ScheduleConfigFragment.scheduleMaxSessionSubtitle.text = "${s1.progress} 节"
                     scheduleViewModel.updateSchedule(schedule)
-                    dismiss();
+                    dismiss()
                 }
             }
         }

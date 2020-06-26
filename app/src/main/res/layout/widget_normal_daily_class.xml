@@ -37,6 +37,7 @@
             android:id="@+id/widget_day_class_next_day"
             android:layout_width="@dimen/dp40"
             android:layout_height="@dimen/dp40"
+            android:tint="@android:color/black"
             android:layout_alignParentEnd="true"
             android:layout_centerVertical="true"
             android:layout_marginEnd="@dimen/dp10"

@@ -35,7 +35,6 @@ public class Files {
      */
     public static boolean saveAsJson(String fileName, String json) {
         File file = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS).getAbsolutePath() + "/" + fileName + ".json");
-        Log.d("slw", "saveAsJson: " + file.getAbsolutePath());
         FileWriter writer = null;
         try {
             if (file.exists()) {

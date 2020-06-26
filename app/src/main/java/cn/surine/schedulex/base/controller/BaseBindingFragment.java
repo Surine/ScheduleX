@@ -1,6 +1,7 @@
 package cn.surine.schedulex.base.controller;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -49,13 +50,13 @@ public abstract class BaseBindingFragment<D> extends BaseFragment {
         return d;
     }
 
-    @CallSuper
-    @Override
-    public void onInit(View parent) {
-        onInit(d);
-    }
 
     protected abstract void onInit(D t);
+
+    @Override
+    public void onInit(View parent) {
+
+    }
 
     @Override
     public void onStart() {

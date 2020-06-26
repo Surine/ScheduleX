@@ -3,6 +3,7 @@ package cn.surine.schedulex.ui.add_course
 import android.annotation.SuppressLint
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
+import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.DatePicker
@@ -94,7 +95,7 @@ class AddCourseFragment : BaseFragment() {
                 if (hasCourseData) {
                     course.classroomName = ""
                 }
-                courseScoreSubtitle.text = t
+                coursePositionSubtitle.text = t
             }).show()
         }
 
@@ -173,7 +174,7 @@ class AddCourseFragment : BaseFragment() {
                 isCheckable = true
                 isCheckedIconVisible = true
                 if (hasCourseData && course.classWeek.isNotEmpty() && course.classWeek[i] == '1') {
-                    isCheckable = true
+                    isChecked = true
                 }
                 chipGroup.addView(this)
             }
@@ -197,7 +198,7 @@ class AddCourseFragment : BaseFragment() {
             }
         }
         weekView.findViewById<Button>(R.id.button).setOnClickListener {
-            StringBuilder().apply {
+             StringBuilder().apply {
                 (0 until schedule.totalWeek).forEach {
                     if ((chipGroup[it] as Chip).isChecked) append(1) else append(0)
                 }
@@ -214,7 +215,7 @@ class AddCourseFragment : BaseFragment() {
     private fun getDayView(frameLayout: FrameLayout, bt: BottomSheetDialog): View? {
         val dayView = Uis.inflate(activity(), R.layout.view_number_picker)
         val weeks = arrayOf("星期一", "星期二", "星期三", "星期四", "星期五", "星期六", "星期日")
-        dayView.findViewById<NumberPicker>(R.id.number_picker).apply {
+        val picker = dayView.findViewById<NumberPicker>(R.id.number_picker).apply {
             displayedValues = weeks
             minValue = 0
             maxValue = weeks.size - 1
@@ -222,11 +223,11 @@ class AddCourseFragment : BaseFragment() {
                 value = course.classDay.toInt() - 1
             }
             descendantFocusability = DatePicker.FOCUS_BLOCK_DESCENDANTS
-            dayView.findViewById<Button>(R.id.button).apply {
-                course.classDay = "${value + 1}"
-                frameLayout.removeAllViews()
-                frameLayout.addView(getSessionView(frameLayout, bt))
-            }
+        }
+        dayView.findViewById<Button>(R.id.button).setOnClickListener {
+            course.classDay = "${picker.value + 1}"
+            frameLayout.removeAllViews()
+            frameLayout.addView(getSessionView(frameLayout, bt))
         }
         return dayView
     }
@@ -253,7 +254,7 @@ class AddCourseFragment : BaseFragment() {
                 value = course.continuingSession.toInt() - 1
             }
         }
-        sessionView.findViewById<Button>(R.id.button).apply {
+        sessionView.findViewById<Button>(R.id.button).setOnClickListener {
             val r1 = s[p1.value]
             val r2 = s[p2.value]
             if (r1.toInt() + r2.toInt() - 1 <= schedule.maxSession) {

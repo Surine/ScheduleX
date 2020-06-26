@@ -143,7 +143,7 @@ class AddTimeTableFragment : BaseFragment() {
             }
             view.findViewById<Button>(R.id.button).setOnClickListener {
                 mSessionTime = Integer.parseInt(times[numberPicker.value])
-                tvSessionText.text = "${mSessionTime}分钟"
+                this@AddTimeTableFragment.tvSessionText.text = "${mSessionTime}分钟"
                 changeSessionTime(0)
                 dismiss()
             }
@@ -167,7 +167,7 @@ class AddTimeTableFragment : BaseFragment() {
         //然后更新一下第一节的终止时间，然后继续更新后面的内容
         val curStartTime = Dates.getTransformTimeString(data[0].startTime)
         data[0].endTime = Dates.getTransformTimeNumber(curStartTime + mSessionTime)
-        systemList.adapter!!.notifyItemChanged(0)
+        timetableList.adapter!!.notifyItemChanged(0)
         ((position + 1) until data.size).forEach {
             //从第2个开始
             //计算起始时间 = 新的上一节终止时间 + 课间时间（旧的本节开始时间 - 旧的上节终止时间）

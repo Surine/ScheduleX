@@ -18,7 +18,7 @@ import cn.surine.schedulex.ui.course.CourseRepository
 import cn.surine.schedulex.ui.course.CourseViewModel
 import cn.surine.schedulex.ui.schedule.ScheduleRepository
 import cn.surine.schedulex.ui.schedule.ScheduleViewModel
-import cn.surine.schedulex.ui.schedule_config.ScheduleConfigFragment.Companion.SCHEDULE_ID
+import cn.surine.schedulex.ui.schedule_list.ScheduleListFragment.Companion.SCHEDULE_ID
 import kotlinx.android.synthetic.main.fragment_palette.*
 
 /**
@@ -74,7 +74,6 @@ class PaletteFragment : BaseFragment() {
         mDatas.add(Constants.p7)
         mDatas.add(Constants.p8)
         recyclerview.adapter?.notifyDataSetChanged()
-        Log.d("slw", "$mDatas: ");
     }
 
     private fun updateCourses(palette: Palette) {

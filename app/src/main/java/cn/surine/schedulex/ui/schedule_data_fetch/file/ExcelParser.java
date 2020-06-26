@@ -44,7 +44,6 @@ public class ExcelParser implements FileParser {
                 for (int c = 0; c < cellsCount; c++) {
                     String value = getCellAsString(row, c, formulaEvaluator);
                     String cellInfo = "r:" + r + "; c:" + c + "; v:" + value;
-                    Log.d("slw", "parseExcel: " + cellInfo);
                 }
             }
         } catch (Exception ignored) {

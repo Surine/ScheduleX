@@ -20,6 +20,7 @@ import cn.surine.schedulex.data.entity.TimeTable
 import cn.surine.schedulex.ui.schedule.ScheduleRepository
 import cn.surine.schedulex.ui.schedule.ScheduleViewModel
 import cn.surine.schedulex.ui.schedule_config.ScheduleConfigFragment
+import cn.surine.schedulex.ui.schedule_list.ScheduleListFragment.Companion.SCHEDULE_ID
 import cn.surine.schedulex.ui.view.custom.helper.CommonDialogs
 import kotlinx.android.synthetic.main.fragment_timetable_list.*
 
@@ -47,7 +48,7 @@ class TimeTableListFragment : BaseFragment() {
         if (!::timetableViewModel.isInitialized) {
             timetableViewModel = ViewModelProviders.of(this, InstanceFactory.getInstance(arrayOf<Class<*>>(TimeTableRepository::class.java), arrayOf<Any>(TimeTableRepository)))[TimeTableViewModel::class.java]
         }
-        if (arguments == null || requireArguments().getLong(ScheduleConfigFragment.SCHEDULE_ID, -1) == -1L) {
+        if (arguments == null || requireArguments().getLong(SCHEDULE_ID, -1) == -1L) {
             Toasts.toast(getString(R.string.app_error))
             Navigations.close(this)
         }
@@ -58,7 +59,7 @@ class TimeTableListFragment : BaseFragment() {
         viewRecycler.load(LinearLayoutManager(activity()), BaseAdapter<TimeTable>(data, R.layout.item_time_table_list, BR.timetable)) {
             it.setOnItemClickListener { position ->
                 val timeTable = data[position]
-                val scheduleId = requireArguments().getLong(ScheduleConfigFragment.SCHEDULE_ID, -1)
+                val scheduleId = requireArguments().getLong(SCHEDULE_ID, -1)
                 val schedule = scheduleViewModel.getScheduleById(scheduleId)
                 if (schedule != null) {
                     if (schedule.maxSession > timeTable.sessionNum) {

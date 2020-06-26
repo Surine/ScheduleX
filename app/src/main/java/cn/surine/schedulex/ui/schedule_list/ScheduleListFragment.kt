@@ -1,25 +1,26 @@
 package cn.surine.schedulex.ui.schedule_list
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.PopupMenu
-import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.NavHostFragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import cn.surine.schedulex.BR
 import cn.surine.schedulex.R
+import cn.surine.schedulex.app_base.VmManager
 import cn.surine.schedulex.base.Constants
 import cn.surine.schedulex.base.controller.BaseAdapter
 import cn.surine.schedulex.base.controller.BaseFragment
-import cn.surine.schedulex.base.utils.*
+import cn.surine.schedulex.base.utils.Navigations
+import cn.surine.schedulex.base.utils.Prefs
+import cn.surine.schedulex.base.utils.Toasts
+import cn.surine.schedulex.base.utils.load
 import cn.surine.schedulex.data.entity.Schedule
-import cn.surine.schedulex.ui.course.CourseRepository
 import cn.surine.schedulex.ui.course.CourseViewModel
-import cn.surine.schedulex.ui.schedule.ScheduleRepository
 import cn.surine.schedulex.ui.schedule.ScheduleViewModel
 import cn.surine.schedulex.ui.schedule_config.ScheduleConfigFragment
-import cn.surine.schedulex.ui.schedule_config.ScheduleConfigFragment.Companion.SCHEDULE_ID
 import cn.surine.schedulex.ui.view.custom.helper.CommonDialogs
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.fragment_schedule_manager.*
@@ -37,13 +38,21 @@ class ScheduleListFragment : BaseFragment() {
 
     companion object {
         const val FUNCTION_TAG = "function_tag"
+        const val CHANGE_SCHEDULE_NAME = 100
+        const val CHANGE_WEEK_INFO = 101
+        const val CHANGE_BACKGROUND = 102
+        const val CHANGE_COURSE_ITEM_HEIGHT = 103
+        const val PICK_PHOTO = 1
+        const val SCHEDULE_ID = "SCHEDULE_ID"
     }
 
     override fun layoutId() = R.layout.fragment_schedule_manager
 
     override fun onInit(parent: View?) {
-        scheduleViewModel = ViewModelProviders.of(this, InstanceFactory.getInstance(arrayOf<Class<*>>(ScheduleRepository::class.java), arrayOf<Any>(ScheduleRepository.abt.instance)))[ScheduleViewModel::class.java]
-        courseViewModel = ViewModelProviders.of(this, InstanceFactory.getInstance(arrayOf<Class<*>>(CourseRepository::class.java), arrayOf<Any>(CourseRepository.abt.instance)))[CourseViewModel::class.java]
+        VmManager(this).apply {
+            scheduleViewModel = vmSchedule
+            courseViewModel = vmCourse
+        }
         data = scheduleViewModel.schedules
         viewRecycler.load(LinearLayoutManager(activity()), BaseAdapter(data, R.layout.item_schedule_list, BR.schedule)) {
             it.setOnItemClickListener { position ->
@@ -55,7 +64,7 @@ class ScheduleListFragment : BaseFragment() {
                 }
             }
             it.setOnItemLongClickListener { position ->
-                openScheduleSetting(position);
+                openScheduleSetting(position)
                 true
             }
 
@@ -78,25 +87,25 @@ class ScheduleListFragment : BaseFragment() {
 
             it.setOnItemElementClickListener(object : BaseAdapter.OnItemElementClickListener((R.id.chip_config_name)) {
                 override fun onClick(v: View?, position: Int) {
-                    openScheduleSetting(position, ScheduleConfigFragment.CHANGE_SCHEDULE_NAME)
+                    openScheduleSetting(position, CHANGE_SCHEDULE_NAME)
                 }
             })
 
             it.setOnItemElementClickListener(object : BaseAdapter.OnItemElementClickListener((R.id.chip_config_week)) {
                 override fun onClick(v: View?, position: Int) {
-                    openScheduleSetting(position, ScheduleConfigFragment.CHANGE_WEEK_INFO)
+                    openScheduleSetting(position, CHANGE_WEEK_INFO)
                 }
             })
 
             it.setOnItemElementClickListener(object : BaseAdapter.OnItemElementClickListener((R.id.chip_change_background)) {
                 override fun onClick(v: View?, position: Int) {
-                    openScheduleSetting(position, ScheduleConfigFragment.CHANGE_BACKGROUND)
+                    openScheduleSetting(position, CHANGE_BACKGROUND)
                 }
             })
 
             it.setOnItemElementClickListener(object : BaseAdapter.OnItemElementClickListener((R.id.chip_course_item_height)) {
                 override fun onClick(v: View?, position: Int) {
-                    openScheduleSetting(position, ScheduleConfigFragment.CHANGE_COURSE_ITEM_HEIGHT)
+                    openScheduleSetting(position, CHANGE_COURSE_ITEM_HEIGHT)
                 }
             })
 
@@ -109,10 +118,8 @@ class ScheduleListFragment : BaseFragment() {
         viewRecycler.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
                 super.onScrolled(recyclerView, dx, dy)
-                if (dy > 0) {
-                    addSchedule.shrink()
-                } else {
-                    addSchedule.extend()
+                addSchedule.apply {
+                    if (dy > 0) shrink() else extend()
                 }
             }
         })
@@ -125,25 +132,26 @@ class ScheduleListFragment : BaseFragment() {
 
         addSchedule.setOnClickListener {
             if (scheduleViewModel.schedulesNumber < Constants.MAX_SCHEDULE_LIMIT) {
-                Navigations.open(this, R.id.action_ScheduleListFragment_to_scheduleInitFragment);
+                Navigations.open(this, R.id.action_ScheduleListFragment_to_scheduleInitFragment)
             } else {
-                Toasts.toast(getString(R.string.no_permission_to_add));
+                Toasts.toast(getString(R.string.no_permission_to_add))
             }
         }
 
     }
 
     private fun openScheduleSetting(position: Int, tag: Int? = null) {
-        Navigations.open(this, R.id.action_ScheduleListFragment_to_scheduleConfigFragment, Bundle().apply {
+        val bundle = Bundle().apply {
             putInt(SCHEDULE_ID, data[position].roomId)
             tag?.let { putInt(FUNCTION_TAG, it) }
-        })
+        }
+        Navigations.open(this,R.id.action_ScheduleListFragment_to_scheduleConfigFragment,bundle)
     }
 
 
     private fun deleteSchedule(position: Int) {
         if (scheduleViewModel.curSchedule.roomId == data[position].roomId) {
-            Toasts.toast("不允许删除正在使用的课表");
+            Toasts.toast("不允许删除正在使用的课表")
         } else {
             CommonDialogs.getCommonDialog(activity(), getString(R.string.warning), getString(R.string.delete_schedule_dialog_msg), okCall = {
                 scheduleViewModel.deleteScheduleById(data[position].roomId.toLong())
