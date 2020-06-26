@@ -50,7 +50,7 @@ class ScheduleDataFetchFragment : BaseFragment() {
             Navigations.open(this, R.id.action_dataFetchFragment_to_scheduleSchoolListFragment, arguments)
         }
         fromSuperCn.setOnClickListener {
-            Navigations.open(this, R.id.action_dataFetchFragment_to_scheduleSchoolListFragment, arguments)
+            Navigations.open(this, R.id.action_dataFetchFragment_to_superLoginFragment, arguments)
         }
         skip.setOnClickListener {
             Prefs.save(Constants.CUR_SCHEDULE, scheduleViewModel.addSchedule(scheduleName, 24, 1, Schedule.IMPORT_WAY.ADD))

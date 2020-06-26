@@ -1,0 +1,178 @@
+<resources>
+    <string name="open_source_license" translatable="false">
+        本应用的诞生离不开下面的开源库的支持，感谢！\n\n
+        架构：Jetpack framework\n
+        https://developer.android.google.cn/jetpack/\n\n
+        网络：Retrofit\n
+        https://github.com/square/retrofit\n\n
+        网络：Okhttp3\n
+        https://github.com/square/okhttp\n\n
+        Json解析：Gson\n
+        https://github.com/google/gson\n\n
+        图像：Glide\n
+        https://github.com/bumptech/glide\n\n
+        Rx：Rxjava\n
+        https://github.com/ReactiveX/RxJava\n\n
+        权限：Rxpermissions\n
+        https://github.com/tbruyelle/RxPermissions\n\n
+        捐助：AndroidDonate\n
+        https://github.com/didikee/AndroidDonate\n\n
+        引导库：MaterialIntroView\n
+        https://github.com/xiangzhihong/MaterialIntroView-master\n\n
+        课程解析：CourseAdapter\n
+        https://github.com/YZune/CourseAdapter\n\n
+    </string>
+    <string name="version_slogan" translatable="false">v%s Build On JetPack</string>
+    <string name="please_select_term">请选择学期</string>
+    <string name="app_name">ScheduleX</string>
+    <string name="et_hint_account">学号(仅支持天津科技大学)</string>
+    <string name="et_hint_password">密码</string>
+    <string name="login">登录</string>
+    <string name="param_empty">存在空输入，请检查!</string>
+    <string name="skip">跳过</string>
+    <string name="tv_login_title">嗨，登录吗？</string>
+    <string name="welcome">欢迎</string>
+    <string name="ready_to_login_tust">正在登录教务处……</string>
+    <string name="warning">提示</string>
+    <string name="ready_to_get_schedule_list">准备获取课程表,这可能需要半分钟的时间……</string>
+    <string name="login_fail">验证失败，请稍后再试！</string>
+    <string name="handle_success">处理成功！</string>
+    <string name="get_fail">获取失败，请稍后再试</string>
+    <string name="named_schedule">给课表取个名字吧！</string>
+    <string name="data_fetch_subtitle">请选择数据获取方式</string>
+    <string name="login_tust">登录tust</string>
+    <string name="import_excel">导入Excel</string>
+    <string name="import_json">导入Json</string>
+    <string name="scan_qrcode">扫描二维码</string>
+    <string name="from_other">其他方式</string>
+    <string name="arg_exception">参数异常，请退出重试</string>
+    <string name="add_course">添加</string>
+    <string name="unknown">未知</string>
+    <string name="score_2_0">%s学分</string>
+    <string name="config">配置</string>
+    <string name="schedules">课表</string>
+    <string name="add_schedule">添加课表</string>
+    <string name="schedule_config_subtitle">点击切换课表，\n长按进行课表编辑</string>
+    <string name="theme">主题</string>
+    <string name="theme_list_subtitle">包含课表背景和课程随机颜色</string>
+    <string name="week">%s周</string>
+    <string name="config_schedule_subtitle">你可以配置你的课表属性</string>
+    <string name="delete">删除</string>
+    <string name="export">导出</string>
+    <string name="delete_schedule_dialog_msg">确定删除该课表吗？所有的课程信息都会丢失，请您谨慎操作！</string>
+    <string name="delete_course_dialog_msg">确定删除该课程吗？请您谨慎操作！</string>
+    <string name="btn_cancel">取消</string>
+    <string name="btn_ok">确定</string>
+    <string name="schedule_is_delete">课表已删除！</string>
+    <string name="course_is_delete">课程已删除！</string>
+    <string name="background">背景图</string>
+    <string name="palette_color">文本颜色兼容</string>
+    <string name="schedule_name">课表名称</string>
+    <string name="week_info">时间信息</string>
+    <string name="_1">1</string>
+    <string name="_2">2</string>
+    <string name="_3">3</string>
+    <string name="_4">4</string>
+    <string name="_5">5</string>
+    <string name="_6">6</string>
+    <string name="_7">7</string>
+    <string name="_8">8</string>
+    <string name="current_week">当前 %s 周</string>
+    <string name="total_week">共 %s 周</string>
+    <string name="add_your_custom_course">在本页面可以添加自定义课程</string>
+    <string name="save">保存</string>
+    <string name="course_name">课程名</string>
+    <string name="course_name_subtitle">请输入课程名</string>
+    <string name="position">上课地点</string>
+    <string name="permission_is_denied">权限被禁止！</string>
+    <string name="update_success">更新成功！</string>
+    <string name="pic_choose_fail">图片选择失败</string>
+    <string name="choose_schedule_background">选择课表背景图,长按恢复默认</string>
+    <string name="star_on_github">Github Star</string>
+    <string name="donate_me_with_alipay">使用支付宝支持开发者</string>
+    <string name="qq_copy">QQ号已复制到剪贴板</string>
+    <string name="developer_subtitle">Android/UI ：Surine</string>
+    <string name="developers">开发者</string>
+    <string name="material_subtitle">图标来自于Iconfont，\n插图来自unDraw</string>
+    <string name="materials">素材</string>
+    <string name="no_coolapk">未安装酷安</string>
+    <string name="osl">开源许可</string>
+    <string name="please_input_content">请输入内容</string>
+    <string name="course_plan">时间计划</string>
+    <string name="course_position">请输入你的上课地点</string>
+    <string name="class_time">请选择课程时间</string>
+    <string name="overlimit">超过节次限制 (最大为12)</string>
+    <string name="course_null">课程信息为空，请重新填写</string>
+    <string name="teacher">教师</string>
+    <string name="please_input_teacher">请输入教师姓名</string>
+    <string name="please_enter_course_credits">请输入课程学分</string>
+    <string name="score">学分</string>
+    <string name="weekday">星期 %s</string>
+    <string name="session">节</string>
+    <string name="choose_session">开始节次</string>
+    <string name="cotinue_session">持续节次</string>
+    <string name="param_is_illgal">参数不合法</string>
+    <string name="coolapk_follow">点击关注我</string>
+    <string name="coolapk_id">酷安ID</string>
+    <string name="qq_group">QQ群</string>
+    <string name="qq">点击复制QQ:635622188</string>
+    <string name="get_course_fail">获取课程信息失败,请退出重试!</string>
+    <string name="snack_course_edit">您还没有保存，确定退出么？</string>
+    <string name="import_course_data_subtitle">点此重新导入课表数据</string>
+    <string name="import_course_data">导入课程数据</string>
+    <string name="please_select_a_data_export_method">请选择数据导出方式</string>
+    <string name="export_excel">导出Excel</string>
+    <string name="export_ics">导出ICS</string>
+    <string name="my_qrcode">我的二维码</string>
+    <string name="export_json">导出Json</string>
+    <string name="parse_fail">解析失败,请选择课程文件</string>
+    <string name="first_toast">主界面左右滑动或者点击周显示文字都可以快速切换周哦！</string>
+    <string name="black_txt">黑色文字</string>
+    <string name="white_txt">白色文字</string>
+    <string name="ready_to_fetch_course">正在获取课表……</string>
+    <string name="fetch_fail_please_retry">获取失败，请重试!</string>
+    <string name="import_super_class">导入超表数据</string>
+    <string name="ready_to_login_super_class">正在请求超级课程表登录……</string>
+    <string name="login_super_cn">登录超表</string>
+    <string name="how_to_fetch_super_data">如何使用超表获取数据?</string>
+    <string name="Super_Password">超级课程表密码</string>
+    <string name="Super_Account">超级课程表账号</string>
+    <string name="super_tip"> "1.使用您的超级课程表账号登录获取最近学期的课表；\n2.点击选择您要导入的课表即可成功导入，如果此课表没有数据，导入的数据也将为空。\n\n注意：如果您没有超表账号或者没有密码，可查阅超级课程表使用方法！"</string>
+    <string name="login_success">登录成功</string>
+    <string name="please_choose_one_term">请选择一个学期课表</string>
+    <string name="year_term1">年 第一学期</string>
+    <string name="year_term2">年 第二学期</string>
+    <string name="no_permission_to_add">您没有权限添加更多课程表!</string>
+    <string name="login_jw_introduce">登录教务说明</string>
+    <string name="welcome_to_use">1.通过这种方式，你可以登录天津科技大学教务处获取课表，需链接校园网络或使用代理 \n2.账号为你的学号，密码为教务处查询课程的密码，如果验证失败请检查是否输入正确！</string>
+    <string name="show_weekend">当前展示周末</string>
+    <string name="not_show_weekend">当前不展示周末</string>
+    <string name="is_show_week">是否显示周末</string>
+    <string name="nothing_to_show">你这个样子，啥也看不见啊！o(。﹏ 。)o</string>
+    <string name="course_card_alpha">课程卡片透明度</string>
+    <string name="course_item_height">课程格子高度</string>
+    <string name="max_session">最大节次</string>
+    <string name="cant_small_than_30">不得小于30</string>
+    <string name="not_cur_week">非本周</string>
+    <string name="timetable_switched_successfully">切换课表成功</string>
+    <string name="timetable_info">时间表信息</string>
+    <string name="time_table_has_been_deleted">时间表已删除</string>
+    <string name="are_you_sure_to_delete_timetable">确定删除该时间表吗？删除后选择该时间表的课程表将不会显示时间</string>
+    <string name="is_ban_to_delete">默认时间表不允许删除</string>
+    <string name="app_error">系统故障，请退出重新尝试</string>
+    <string name="session_is_not_match">时间表最大支持%s节，但是当前课程表需要%s节</string>
+    <string name="add_timetable">添加时间表</string>
+    <string name="choose_timetable">选择一个时间表</string>
+    <string name="need_today">时间不允许跨越今天</string>
+    <string name="min">分钟</string>
+    <string name="setting_one_session_time">设置一节课的时长(分钟)</string>
+    <string name="delete_timetable_session_note">此操作将会删除本节及之后的所有节次，请确认选择无误后操作,如操作失误，请直接退出放弃保存!</string>
+    <string name="delete_rule">至少保留6节课程</string>
+    <string name="max_support">最多支持%s节</string>
+    <string name="time_rule">本节上课时间不得比上一节下课时间早</string>
+    <string name="please_choose_time">请选择本节课上课时间</string>
+    <string name="timetable_is_selected">时间表选择成功!</string>
+    <string name="not_show_timetable">当前不展示时间表</string>
+    <string name="show_time">当前展示时间表</string>
+    <string name="whether_to_show_time">是否显示时间表</string>
+</resources>
