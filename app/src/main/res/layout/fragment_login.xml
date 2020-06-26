@@ -138,7 +138,7 @@
             app:layout_constraintVertical_bias="0.165" />
 
         <TextView
-            android:id="@+id/login_tip"
+            android:id="@+id/loginTip"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"

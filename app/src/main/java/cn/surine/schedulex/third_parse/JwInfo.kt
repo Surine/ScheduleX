@@ -12,7 +12,7 @@ import cn.surine.schedulex.data.entity.BaseVm
 data class JwInfo(val school:String = "",val name:String = "", val url:String = "", val system:String = Constants.JW_NORMAL, val author:String = ""):BaseVm(){
     companion object{
         const val TUST = "tust" //科大API
-        const val NEW_ZF = "NEW_ZF" //新正方
-        const val NEW_URP = "NEW_URP" //新URP
+        const val NEW_ZF = "newZenFang" //新正方
+        const val NEW_URP = "newUrp" //新URP
     }
 }

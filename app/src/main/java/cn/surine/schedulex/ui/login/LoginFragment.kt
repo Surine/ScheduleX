@@ -14,6 +14,9 @@ import cn.surine.schedulex.databinding.FragmentLoginBinding
 import cn.surine.schedulex.ui.course.CourseViewModel
 import cn.surine.schedulex.ui.schedule.ScheduleViewModel
 import cn.surine.schedulex.ui.schedule_init.ScheduleInitFragment
+import cn.surine.schedulex.ui.view.custom.helper.CommonDialogs.getCommonDialog
+import kotlinx.android.synthetic.main.fragment_login.*
+
 
 /**
  * Intro：
@@ -82,6 +85,7 @@ class LoginFragment : BaseBindingFragment<FragmentLoginBinding>() {
                 }
             }
         })
+        loginTip.setOnClickListener { getCommonDialog(activity(), getString(R.string.warning), getString(R.string.welcome_to_use)).show() }
     }
 
 }

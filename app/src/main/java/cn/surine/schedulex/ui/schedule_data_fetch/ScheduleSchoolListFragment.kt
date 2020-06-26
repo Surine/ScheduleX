@@ -36,11 +36,14 @@ class ScheduleSchoolListFragment : BaseFragment() {
     var mJwSystemDatas = ArrayList<JwInfo>()
     var mSchoolDatas =  ArrayList<JwInfo>()
     override fun onInit(parent: View?) {
-
         adapterListViewModel = ViewModelProviders.of(this, InstanceFactory.getInstance(arrayOf<Class<*>>(AdapterListRepository::class.java), arrayOf<Any>(AdapterListRepository)))[AdapterListViewModel::class.java]
+        schoolTopbar.setFunctionIcon(R.drawable.ic_help_outline_black_24dp)
+        schoolTopbar.getFunctionView().setOnClickListener {
+            Toasts.toast("帮助")
+        }
         //教务列表
         systemList.layoutManager = LinearLayoutManager(activity(), LinearLayoutManager.HORIZONTAL, false)
-        systemList.adapter = BaseAdapter<JwInfo>(mJwSystemDatas, R.layout.item_jw_system, cn.surine.schedulex.BR.system)
+        systemList.adapter = BaseAdapter(mJwSystemDatas, R.layout.item_jw_system, cn.surine.schedulex.BR.system)
         mJwSystemDatas.apply {
             clear()
             addAll(AdapterList.systemlist)
@@ -59,7 +62,7 @@ class ScheduleSchoolListFragment : BaseFragment() {
 
 
         adapterListViewModel.getAdapterList()
-        adapterListViewModel.adapterListData.observe(this, Observer<List<JwInfo>> {
+        adapterListViewModel.adapterListData.observe(this, Observer {
             mSchoolDatas.apply {
                 clear()
                 addAll(it)

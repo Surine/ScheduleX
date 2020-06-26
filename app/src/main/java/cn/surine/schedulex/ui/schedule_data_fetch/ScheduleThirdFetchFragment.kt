@@ -2,18 +2,17 @@ package cn.surine.schedulex.ui.schedule_data_fetch
 
 import android.annotation.SuppressLint
 import android.util.Log
+import android.view.KeyEvent
 import android.view.View
-import android.webkit.JavascriptInterface
-import android.webkit.WebChromeClient
-import android.webkit.WebSettings
-import android.webkit.WebViewClient
+import android.view.inputmethod.EditorInfo
+import android.webkit.*
 import androidx.lifecycle.ViewModelProviders
 import cn.surine.schedulex.R
 import cn.surine.schedulex.base.Constants
 import cn.surine.schedulex.base.controller.BaseFragment
 import cn.surine.schedulex.base.utils.InstanceFactory
 import cn.surine.schedulex.base.utils.Navigations
-import cn.surine.schedulex.base.utils.Toasts
+import cn.surine.schedulex.base.utils.Prefs
 import cn.surine.schedulex.base.utils.Toasts.toast
 import cn.surine.schedulex.base.utils.bitCount
 import cn.surine.schedulex.data.entity.Course
@@ -29,7 +28,6 @@ import cn.surine.schedulex.ui.schedule.ScheduleViewModel
 import cn.surine.schedulex.ui.schedule_init.ScheduleInitFragment
 import kotlinx.android.synthetic.main.fragment_third_fetch.*
 import java.net.URLDecoder
-import java.net.URLEncoder
 import java.util.*
 
 /**
@@ -47,10 +45,16 @@ class ScheduleThirdFetchFragment : BaseFragment() {
     override fun onInit(parent: View?) {
         scheduleViewModel = ViewModelProviders.of(this, InstanceFactory.getInstance(arrayOf<Class<*>>(ScheduleRepository::class.java), arrayOf<Any>(ScheduleRepository.abt.instance)))[ScheduleViewModel::class.java]
         courseViewModel = ViewModelProviders.of(this, InstanceFactory.getInstance(arrayOf<Class<*>>(CourseRepository::class.java), arrayOf<Any>(CourseRepository.abt.instance)))[CourseViewModel::class.java]
-        val url = arguments?.get(ScheduleSchoolListFragment.URL).toString()
+        var url: String = arguments?.get(ScheduleSchoolListFragment.URL).toString()
         val type = arguments?.get(ScheduleSchoolListFragment.TYPE).toString()
         loadWebViewConfig()
         thirdPageWebView.loadUrl(URLDecoder.decode(url))
+        addressBox.setText(URLDecoder.decode(url))
+        imgGo.setOnClickListener {
+            if (addressBox.text.toString().isNotEmpty()) {
+                thirdPageWebView.loadUrl(addressBox.text.toString())
+            }
+        }
         importThirdHtml.setOnClickListener {
             val js = "javascript:var ifrs=document.getElementsByTagName(\"iframe\");" +
                     "var iframeContent=\"\";" +
@@ -81,8 +85,38 @@ class ScheduleThirdFetchFragment : BaseFragment() {
         thirdPageWebView.settings.javaScriptCanOpenWindowsAutomatically = true
         thirdPageWebView.settings.mixedContentMode = WebSettings.MIXED_CONTENT_ALWAYS_ALLOW
         thirdPageWebView.settings.userAgentString = thirdPageWebView.settings.userAgentString.replace("Mobile", "Web").replace("Android", "MacOs")
-        thirdPageWebView.webViewClient = object : WebViewClient() {}
+        thirdPageWebView.webViewClient = object : WebViewClient() {
+            override fun shouldOverrideUrlLoading(view: WebView?, request: WebResourceRequest?): Boolean {
+                val text = request?.url.toString()
+                addressBox.setText(text)
+                return super.shouldOverrideUrlLoading(view, request)
+            }
+
+
+        }
+        thirdPageWebView.setOnKeyListener { _, keyCode, event ->
+            if (event.action == KeyEvent.ACTION_DOWN) {
+                if (keyCode == KeyEvent.KEYCODE_BACK && thirdPageWebView.canGoBack()) {
+                    thirdPageWebView.goBack()
+                    return@setOnKeyListener true
+                }
+            }
+            false
+        }
         thirdPageWebView.webChromeClient = object : WebChromeClient() {}
+        imgBack.setOnClickListener {
+            if (thirdPageWebView.canGoBack()) {
+                thirdPageWebView.goBack()
+            }
+        }
+        addressBox.setOnEditorActionListener { _, actionId, _ ->
+            if (actionId == EditorInfo.IME_ACTION_SEARCH) {
+                if (addressBox.text.toString().isNotEmpty()) {
+                    thirdPageWebView.loadUrl(addressBox.text.toString())
+                }
+            }
+            false
+        }
     }
 
     internal inner class InJavaScriptLocalObj {
@@ -92,8 +126,9 @@ class ScheduleThirdFetchFragment : BaseFragment() {
                 "newZenFang"-> ::newZenFang
                 else -> ::default
             }
-            val list = Parser().parse(engine = engineFunction, html = html)//list<CourseWrapper>
-            parseData(list)
+            Parser().parse(engine = engineFunction, html = html) { list ->
+                parseData(list)
+            }
         }
     }
 
@@ -103,7 +138,8 @@ class ScheduleThirdFetchFragment : BaseFragment() {
             toast("未检测到课程！")
             return
         } else {
-            val scheduleId = scheduleViewModel.addSchedule(arguments?.getString(ScheduleInitFragment.SCHEDULE_NAME) ?: "UnKnow", 24, 1, Schedule.IMPORT_WAY.JW)
+            val scheduleId = scheduleViewModel.addSchedule(arguments?.getString(ScheduleInitFragment.SCHEDULE_NAME)
+                    ?: "UnKnow", 24, 1, Schedule.IMPORT_WAY.JW)
             val targetList = mutableListOf<Course>()
             list.forEach {
                 val course = Course()
@@ -126,8 +162,9 @@ class ScheduleThirdFetchFragment : BaseFragment() {
                 course.classWeek = it.week.bitCount(Constants.STAND_WEEK)
                 targetList.add(course)
             }
-            courseViewModel.saveCourseByDb(targetList,scheduleId)
+            courseViewModel.saveCourseByDb(targetList, scheduleId)
             toast("导入成功")
+            Prefs.save(Constants.CUR_SCHEDULE, scheduleId)
             Navigations.open(this, R.id.action_scheduleThirdFetchFragment_to_scheduleFragment)
         }
     }

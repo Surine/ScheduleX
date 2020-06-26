@@ -14,7 +14,9 @@ import cn.surine.schedulex.R
  * @author sunliwei
  * @date 2020/6/26 13:20
  */
-class Topbar(context: Context, attrs: AttributeSet?, defStyleAttr: Int) : LinearLayout(context, attrs, defStyleAttr) {
+
+//自定义view需要使用@JvmOverloads constructor修饰构造方法，否则找不到构造方法
+class Topbar @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = -1) : LinearLayout(context, attrs, defStyleAttr) {
 
     private var titleStr = ""
     private var vTitle: TextView

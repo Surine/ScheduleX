@@ -1,14 +1,12 @@
 package cn.surine.schedulex.third_parse
 
+import android.util.Log
 import cn.surine.schedulex.third_parse.bean.Course
 import cn.surine.schedulex.third_parse.bean.NewUrpCourseInfo
 import com.google.gson.Gson
 import com.google.gson.JsonParser
 import org.jsoup.Jsoup
 
-/**
- * Powered by YZune@CourseAdapter
- */
 object Shell {
 
     fun NewZFParser(html: String): List<Course> {
@@ -133,10 +131,10 @@ object Shell {
         return courseList
     }
 
-//    fun NewUrpParser(): List<Course> {
+//    fun NewUrpParser(html: String): List<Course> {
 //        val result = arrayListOf<Course>()
 //        val gson = Gson()
-//        val json = JsonParser.parseString(source)
+//        val json = JsonParser.parseString(html)
 //                .asJsonObject
 //                .getAsJsonArray("dateList")[0].asJsonObject
 //                .getAsJsonArray("selectCourseList").toString()

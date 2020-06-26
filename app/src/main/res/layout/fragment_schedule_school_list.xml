@@ -3,12 +3,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto">
-    <cn.surine.schedulex.ui.view.custom.helper.TopBar
+    <cn.surine.schedulex.ui.view.custom.helper.Topbar
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toTopOf="parent"
         app:title="选择系统"
-        android:id="@+id/topbar"
+        android:id="@+id/schoolTopbar"
         />
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
@@ -16,7 +16,7 @@
         android:id="@+id/systemList"
         android:layout_marginStart="@dimen/dp10"
         android:layout_marginEnd="@dimen/dp10"
-        app:layout_constraintTop_toBottomOf="@id/topbar"
+        app:layout_constraintTop_toBottomOf="@id/schoolTopbar"
         />
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"

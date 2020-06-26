@@ -42,24 +42,28 @@
     <string name="btn_cancel">@android:string/cancel</string>
     <string name="schedule_is_delete">Schedule has been deleted!</string>
     <string name="course_is_delete">Course has been deleted!</string>
-    <string name="open_source_license" translatable="false">Jetpack framework &amp; AndroidX\nViewModel,Navigation,DataBinding,Room,ViewPager2,Dynamicanimation,Palette\n
+    <string name="open_source_license" translatable="false">
+        本应用的诞生离不开下面的开源库的支持，感谢！\n\n
+        架构：Jetpack framework\n
         https://developer.android.google.cn/jetpack/\n\n
-        Retrofit\n
+        网络：Retrofit\n
         https://github.com/square/retrofit\n\n
-        Okhttp3\n
+        网络：Okhttp3\n
         https://github.com/square/okhttp\n\n
-        Gson\n
+        Json解析：Gson\n
         https://github.com/google/gson\n\n
-        Glide\n
+        图像：Glide\n
         https://github.com/bumptech/glide\n\n
-        Rxjava\n
+        Rx：Rxjava\n
         https://github.com/ReactiveX/RxJava\n\n
-        Rxpermissions\n
+        权限：Rxpermissions\n
         https://github.com/tbruyelle/RxPermissions\n\n
-        AndroidDonate\n
+        捐助：AndroidDonate\n
         https://github.com/didikee/AndroidDonate\n\n
-        MaterialIntroView\n
+        引导库：MaterialIntroView\n
         https://github.com/xiangzhihong/MaterialIntroView-master\n\n
+        课程解析：CourseAdapter\n
+        https://github.com/YZune/CourseAdapter\n\n
     </string>
     <string name="week_info">Week Info</string>
     <string name="background">Background</string>

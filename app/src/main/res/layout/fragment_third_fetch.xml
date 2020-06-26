@@ -7,31 +7,62 @@
 
     <LinearLayout
         android:id="@+id/topbar"
-        android:gravity="bottom"
+        android:gravity="center"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/dp70"
+        android:layout_height="@dimen/dp90"
+        android:paddingTop="@dimen/dp20"
         android:background="@android:color/white"
         android:orientation="horizontal"
         app:layout_constraintTop_toTopOf="parent">
 
-        <EditText
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/textInputLayout"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="0dp"
-            android:layout_height="@dimen/dp50"
-            android:layout_marginStart="@dimen/dp20"
+            android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:background="@null" />
+            android:layout_marginStart="@dimen/dp10">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/addressBox"
+                android:layout_width="match_parent"
+                android:textSize="@dimen/t12"
+                android:singleLine="true"
+                android:ellipsize="end"
+                android:maxEms="50"
+                android:imeOptions="actionSearch"
+                android:layout_height="@dimen/dp46"
+                android:hint="请输入教务处网址"
+                />
+        </com.google.android.material.textfield.TextInputLayout>
 
         <ImageView
-            android:layout_width="@dimen/dp50"
-            android:layout_height="@dimen/dp50"
+            android:layout_width="@dimen/dp42"
+            android:layout_height="@dimen/dp42"
             android:padding="@dimen/dp5"
-            android:src="@drawable/ic_add_black_24dp" />
+            android:id="@+id/imgBack"
+            android:layout_marginTop="@dimen/dp3"
+            android:background="@drawable/web_back"
+            android:layout_marginStart="@dimen/dp10"
+            android:src="@drawable/ic_keyboard_arrow_left_black_24dp" />
+        <ImageView
+            android:layout_width="@dimen/dp42"
+            android:layout_height="@dimen/dp42"
+            android:background="@drawable/web_go"
+            android:padding="@dimen/dp5"
+            android:id="@+id/imgGo"
+            android:layout_marginTop="@dimen/dp3"
+            android:layout_marginStart="@dimen/dp8"
+            android:layout_marginEnd="@dimen/dp10"
+            android:src="@drawable/ic_keyboard_arrow_right_black_24dp" />
     </LinearLayout>
 
     <WebView
         android:id="@+id/thirdPageWebView"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:layout_marginBottom="0dp"
+        android:layout_margin="@dimen/dp10"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@id/topbar" />
 
