@@ -9,6 +9,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import cn.surine.schedulex.R
+import cn.surine.schedulex.app_base.VmManager
 import cn.surine.schedulex.base.controller.BaseAdapter
 import cn.surine.schedulex.base.controller.BaseFragment
 import cn.surine.schedulex.base.utils.InstanceFactory
@@ -33,14 +34,18 @@ class ScheduleSchoolListFragment : BaseFragment() {
         const val TYPE = "TYPE"
     }
     private lateinit var adapterListViewModel:AdapterListViewModel
-    var mJwSystemDatas = ArrayList<JwInfo>()
-    var mSchoolDatas =  ArrayList<JwInfo>()
+    private var mJwSystemDatas = ArrayList<JwInfo>()
+    private var mSchoolDatas =  ArrayList<JwInfo>()
+    override fun layoutId(): Int = R.layout.fragment_schedule_school_list
+
     override fun onInit(parent: View?) {
-        adapterListViewModel = ViewModelProviders.of(this, InstanceFactory.getInstance(arrayOf<Class<*>>(AdapterListRepository::class.java), arrayOf<Any>(AdapterListRepository)))[AdapterListViewModel::class.java]
-        schoolTopbar.setFunctionIcon(R.drawable.ic_help_outline_black_24dp)
-        schoolTopbar.getFunctionView().setOnClickListener {
-            Toasts.toast("帮助")
+        VmManager(this).apply {
+            adapterListViewModel = vmAdapterList
         }
+//        schoolTopbar.setFunctionIcon(R.drawable.ic_help_outline_black_24dp)
+//        schoolTopbar.getFunctionView().setOnClickListener {
+//            Toasts.toast("帮助")
+//        }
         //教务列表
         systemList.layoutManager = LinearLayoutManager(activity(), LinearLayoutManager.HORIZONTAL, false)
         systemList.adapter = BaseAdapter(mJwSystemDatas, R.layout.item_jw_system, cn.surine.schedulex.BR.system)
@@ -83,8 +88,4 @@ class ScheduleSchoolListFragment : BaseFragment() {
             }
         }
     }
-
-
-    override fun layoutId(): Int = R.layout.fragment_schedule_school_list
-
 }
