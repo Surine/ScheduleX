@@ -31,7 +31,7 @@ class LoginFragment : BaseBindingFragment<FragmentLoginBinding>() {
     private lateinit var dialog: ProgressDialog
     override fun layoutId(): Int = R.layout.fragment_login
 
-    override fun onInit(t: FragmentLoginBinding?) {
+    override fun onInit(t: FragmentLoginBinding) {
         VmManager(this).apply {
             loginViewModel = vmLogin
             scheduleViewModel = vmSchedule
@@ -40,7 +40,8 @@ class LoginFragment : BaseBindingFragment<FragmentLoginBinding>() {
         dialog = ProgressDialog(activity()).apply {
             setCancelable(false)
         }
-        loginViewModel.loginStatus.observe(this, Observer<Int> {
+        t.data = loginViewModel
+        loginViewModel.loginStatus.observe(this, Observer {
             when (it) {
                 LoginViewModel.START_LOGIN -> {
                     dialog.apply {
@@ -58,7 +59,7 @@ class LoginFragment : BaseBindingFragment<FragmentLoginBinding>() {
                 }
             }
         })
-        courseViewModel.getCourseStatus.observe(this, Observer<Int> {
+        courseViewModel.getCourseStatus.observe(this, Observer {
             when (it) {
                 CourseViewModel.START -> dialog.setMessage(getString(R.string.ready_to_get_schedule_list))
                 CourseViewModel.SUCCESS -> {
