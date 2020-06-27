@@ -10,9 +10,9 @@ import android.net.Uri;
 
 import cn.surine.schedulex.BuildConfig;
 import cn.surine.schedulex.R;
-import cn.surine.schedulex.base.controller.App;
 
 import static android.content.Context.CLIPBOARD_SERVICE;
+import static cn.surine.schedulex.base.controller.App.context;
 
 /**
  * Intro：
@@ -46,7 +46,7 @@ public class Others {
         Intent i = new Intent(Intent.ACTION_VIEW);
         i.setData(Uri.parse(url));
         i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        App.context.startActivity(i);
+        context.startActivity(i);
     }
 
 
@@ -84,9 +84,9 @@ public class Others {
             intent.setAction("android.intent.action.VIEW");
             intent.setData(Uri.parse("coolmarket://u/" + str));
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            App.context.startActivity(intent);
+            context.startActivity(intent);
         } catch (Exception e) {
-            Toasts.toast(App.context.getString(R.string.no_coolapk));
+            Toasts.toast(context.getString(R.string.no_coolapk));
             e.printStackTrace();
         }
     }
@@ -97,6 +97,22 @@ public class Others {
      */
     public static String getAppVersion() {
         return BuildConfig.VERSION_NAME;
+    }
+
+
+    /**
+     * 发邮件
+     * */
+    public static void sendEmail(String msg) {
+        // 必须明确使用mailto前缀来修饰邮件地址
+        Uri uri = Uri.parse("mailto:surinex@163.com");
+        Intent intent = new Intent(Intent.ACTION_SENDTO, uri);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        intent.putExtra(Intent.EXTRA_CC, "2234503567@qq.com"); // 抄送人
+        intent.putExtra(Intent.EXTRA_SUBJECT,"解析错误，请输入您的学校"); // 主题
+        intent.putExtra(Intent.EXTRA_TEXT, msg);// 正文
+//        context.startActivity(Intent.createChooser(intent, "欢迎反馈~"));
+        context.startActivity(intent);
     }
 
 }
