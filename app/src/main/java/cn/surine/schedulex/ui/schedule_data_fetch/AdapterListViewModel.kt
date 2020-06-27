@@ -1,5 +1,6 @@
 package cn.surine.schedulex.ui.schedule_data_fetch
 
+import androidx.annotation.Keep
 import androidx.lifecycle.MutableLiveData
 import cn.surine.schedulex.base.controller.BaseViewModel
 import cn.surine.schedulex.third_parse.JwInfo
@@ -10,6 +11,7 @@ import cn.surine.schedulex.third_parse.JwInfo
  * @author sunliwei
  * @date 2020/6/23 18:19
  */
+@Keep
 class AdapterListViewModel(private val adapterListRepository: AdapterListRepository) : BaseViewModel() {
     val adapterListData: MutableLiveData<List<JwInfo>> by lazy {
         MutableLiveData<List<JwInfo>>()
