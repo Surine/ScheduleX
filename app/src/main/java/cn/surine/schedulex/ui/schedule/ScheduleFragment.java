@@ -127,7 +127,7 @@ public class ScheduleFragment extends BaseBindingFragment<FragmentScheduleBindin
         //当前周
         int currentWeek = curSchedule.curWeek();
         handleCourseList = new ArrayList<>();
-
+        initData(false);
         BTimeTable timeTable = DataMaps.dataMappingTimeTableToBTimeTable(timeTableViewModel.getTimTableById(curSchedule.timeTableId));
         scheduleViewPagerAdapter = new ScheduleViewPagerAdapter(handleCourseList, timeTable, ScheduleFragment.this, curSchedule, currentWeek, courseViewModel);
         t.viewpager.setAdapter(scheduleViewPagerAdapter);
@@ -135,7 +135,6 @@ public class ScheduleFragment extends BaseBindingFragment<FragmentScheduleBindin
         t.viewpager.setOrientation(ViewPager2.ORIENTATION_HORIZONTAL);
         t.viewpager.setCurrentItem(currentWeek - 1, true);
         t.viewpager.setPageTransformer(new ZoomOutPageTransformer());
-        t.viewpager.post(() -> initData(true));
         scheduleViewPagerAdapter.setDataSetUpdateCall(() -> initData(true));
         t.curWeekTv.setOnClickListener(v -> {
             View view = Uis.inflate(activity(), R.layout.view_change_week_quickly);
@@ -165,12 +164,12 @@ public class ScheduleFragment extends BaseBindingFragment<FragmentScheduleBindin
         });
 
         timerViewModel.curWeekStr.setValue(getString(R.string.week, currentWeek));
-//        //显示空视图
-//        if (TextUtils.isEmpty(curSchedule.imageUrl)) {
-//            if (currentWeek > 0) {
-//                t.emptyView.setVisibility(handleCourseList.get(currentWeek - 1).size() != 0 ? View.GONE : View.VISIBLE);
-//            }
-//        }
+        //显示空视图
+        if (TextUtils.isEmpty(curSchedule.imageUrl)) {
+            if (currentWeek > 0) {
+                t.emptyView.setVisibility(handleCourseList.get(currentWeek - 1).size() != 0 ? View.GONE : View.VISIBLE);
+            }
+        }
         t.viewpager.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
             @SuppressLint("StringFormatMatches")
             @Override
@@ -178,7 +177,7 @@ public class ScheduleFragment extends BaseBindingFragment<FragmentScheduleBindin
                 curViewPagerPosition = position;
                 timerViewModel.curWeekStr.setValue(getString(R.string.week, (position + 1)) + ((currentWeek == position + 1) ? "" : (" [" + getString(R.string.not_cur_week)) + "]"));
                 scheduleViewPagerAdapter.setWeek(position + 1);
-//                scheduleViewPagerAdapter.notifyItemChanged(position);
+                scheduleViewPagerAdapter.notifyItemChanged(position);
                 if (TextUtils.isEmpty(curSchedule.imageUrl)) {
                     t.emptyView.setVisibility(handleCourseList.get(position).size() != 0 ? View.GONE : View.VISIBLE);
                 }
@@ -213,7 +212,7 @@ public class ScheduleFragment extends BaseBindingFragment<FragmentScheduleBindin
     }
 
     /**
-     * 目前init参数全为true
+     * 目前init参数全初始化为true，批量操作为false
      * */
     private void initData(boolean init) {
         handleCourseList.clear();
