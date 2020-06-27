@@ -54,6 +54,7 @@ class ScheduleThirdFetchFragment : BaseFragment() {
         helperUrl = url
         helperType = type
         loadWebViewConfig()
+        loadTip()
         thirdPageWebView.loadUrl(URLDecoder.decode(url))
         addressBox.setText(URLDecoder.decode(url))
         imgGo.setOnClickListener {
@@ -76,6 +77,10 @@ class ScheduleThirdFetchFragment : BaseFragment() {
             toast("开始解析，请稍后~")
             thirdPageWebView.loadUrl(js)
         }
+    }
+
+    private fun loadTip() {
+        CommonDialogs.getCommonDialog(activity(),"教务导入","仅需两步即可导入您的课程\n\n1.在地址栏输入您的教务处网址，点击右上角蓝色按钮访问并定位到课表页面\n2.点击右下角导入按钮进行课程导入").show()
     }
 
     @SuppressLint("SetJavaScriptEnabled")
