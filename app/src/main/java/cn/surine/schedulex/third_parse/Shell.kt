@@ -1,10 +1,6 @@
 package cn.surine.schedulex.third_parse
 
-import android.util.Log
 import cn.surine.schedulex.third_parse.bean.Course
-import cn.surine.schedulex.third_parse.bean.NewUrpCourseInfo
-import com.google.gson.Gson
-import com.google.gson.JsonParser
 import org.jsoup.Jsoup
 
 object Shell {

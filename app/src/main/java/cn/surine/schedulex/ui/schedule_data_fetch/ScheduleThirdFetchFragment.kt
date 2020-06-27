@@ -18,6 +18,7 @@ import cn.surine.schedulex.base.utils.bitCount
 import cn.surine.schedulex.data.entity.Course
 import cn.surine.schedulex.data.entity.Schedule
 import cn.surine.schedulex.third_parse.CourseWrapper
+import cn.surine.schedulex.third_parse.JwInfo
 import cn.surine.schedulex.third_parse.Parser
 import cn.surine.schedulex.third_parse.ParserEngine.default
 import cn.surine.schedulex.third_parse.ParserEngine.newZenFang
@@ -45,7 +46,7 @@ class ScheduleThirdFetchFragment : BaseFragment() {
     override fun onInit(parent: View?) {
         scheduleViewModel = ViewModelProviders.of(this, InstanceFactory.getInstance(arrayOf<Class<*>>(ScheduleRepository::class.java), arrayOf<Any>(ScheduleRepository.abt.instance)))[ScheduleViewModel::class.java]
         courseViewModel = ViewModelProviders.of(this, InstanceFactory.getInstance(arrayOf<Class<*>>(CourseRepository::class.java), arrayOf<Any>(CourseRepository.abt.instance)))[CourseViewModel::class.java]
-        var url: String = arguments?.get(ScheduleSchoolListFragment.URL).toString()
+        val url: String = arguments?.get(ScheduleSchoolListFragment.URL).toString()
         val type = arguments?.get(ScheduleSchoolListFragment.TYPE).toString()
         loadWebViewConfig()
         thirdPageWebView.loadUrl(URLDecoder.decode(url))
@@ -123,7 +124,7 @@ class ScheduleThirdFetchFragment : BaseFragment() {
         @JavascriptInterface
         fun showSource(html: String,system: String) {
             val engineFunction = when(system){
-                "newZenFang"-> ::newZenFang
+                JwInfo.NEW_ZF-> ::newZenFang
                 else -> ::default
             }
             Parser().parse(engine = engineFunction, html = html) { list ->
@@ -142,6 +143,7 @@ class ScheduleThirdFetchFragment : BaseFragment() {
                     ?: "UnKnow", 24, 1, Schedule.IMPORT_WAY.JW)
             val targetList = mutableListOf<Course>()
             list.forEach {
+                Log.v("wrapper",it.toString())
                 val course = Course()
                 course.scheduleId = scheduleId
                 course.id = StringBuilder().run {
@@ -154,12 +156,13 @@ class ScheduleThirdFetchFragment : BaseFragment() {
                 course.classDay = it.day.toString()
                 course.color = Constants.COLOR_1[Random().nextInt(Constants.COLOR_1.size)]
                 course.classSessions = it.sectionStart.toString()
-                var maxSession = it.sectionStart + it.sectionContinue
+                var maxSession = it.sectionContinue
                 if (maxSession > Constants.MAX_SESSION) {
                     maxSession = Constants.MAX_SESSION
                 }
                 course.continuingSession = maxSession.toString()
                 course.classWeek = it.week.bitCount(Constants.STAND_WEEK)
+                Log.v("course",course.toString())
                 targetList.add(course)
             }
             courseViewModel.saveCourseByDb(targetList, scheduleId)

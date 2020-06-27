@@ -22,8 +22,8 @@ fun List<Int>.bitCount(maxLen: Int): String {
         repeat(maxLen) { append("0") }
     }
     this.forEach {
-        if (it < sb.length) {
-            sb[it] = '1'
+        if (it <= sb.length) {
+            sb[it - 1] = '1'
         }
     }
     return sb.toString()

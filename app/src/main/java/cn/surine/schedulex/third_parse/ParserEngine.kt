@@ -1,5 +1,6 @@
 package cn.surine.schedulex.third_parse
 
+import android.util.Log
 import cn.surine.schedulex.third_parse.Shell.NewZFParser
 import cn.surine.schedulex.third_parse.bean.Course
 
