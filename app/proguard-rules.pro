@@ -83,3 +83,5 @@
 -keep class com.google.gson.stream.** { *; }
 -keepattributes EnclosingMethod
 -keep class cn.surine.schedulex.data.entity.**{*;}
+
+-keep class cn.surine.schedulex.**{*;}

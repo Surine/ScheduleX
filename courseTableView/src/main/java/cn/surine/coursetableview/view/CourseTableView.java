@@ -369,10 +369,10 @@ public class CourseTableView extends LinearLayout {
             //course height = class continue * little section height + gap * padding
             int bCourseHeight = bCourse.getSectionContinue() * mUiConfig.getSectionHeight()
                     + (bCourse.getSectionContinue() - 1) * mUiConfig.getItemTopMargin();
-            LinearLayout.LayoutParams flp = new LinearLayout.LayoutParams(
+            RelativeLayout.LayoutParams flp = new RelativeLayout.LayoutParams(
                     LinearLayout.LayoutParams.MATCH_PARENT,
                     bCourseHeight);
-
+            flp.addRule(RelativeLayout.ALIGN_PARENT_TOP);
             LinearLayout.LayoutParams tlp = new LinearLayout.LayoutParams(
                     LinearLayout.LayoutParams.MATCH_PARENT,
                     LinearLayout.LayoutParams.MATCH_PARENT);
@@ -396,7 +396,6 @@ public class CourseTableView extends LinearLayout {
 
             frameLayout.setLayoutParams(flp);
             frameLayout.addView(tv);
-
             frameLayout.setPadding(2, 2, 2, 2);
             curDayLayout.setPadding(mUiConfig.getItemSideMargin(), 0, mUiConfig.getItemSideMargin(), 0);
             //add to current day view
@@ -462,14 +461,15 @@ public class CourseTableView extends LinearLayout {
                 continue;
             }
 
-            FrameLayout frameLayout = new FrameLayout(getContext());
+            RelativeLayout frameLayout = new RelativeLayout(getContext());
             TextView tv = new TextView(mContext);
             //course height = class continue * little section height + gap * padding
             int bCourseHeight = bCourse.getSectionContinue() * mUiConfig.getSectionHeight()
                     + (bCourse.getSectionContinue() - 1) * mUiConfig.getItemTopMargin();
-            LinearLayout.LayoutParams flp = new LinearLayout.LayoutParams(
+            RelativeLayout.LayoutParams flp = new RelativeLayout.LayoutParams(
                     LinearLayout.LayoutParams.MATCH_PARENT,
                     bCourseHeight);
+            flp.addRule(RelativeLayout.ALIGN_PARENT_TOP);
 
             LinearLayout.LayoutParams tlp = new LinearLayout.LayoutParams(
                     LinearLayout.LayoutParams.MATCH_PARENT,
