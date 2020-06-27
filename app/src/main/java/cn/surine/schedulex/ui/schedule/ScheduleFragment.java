@@ -112,7 +112,6 @@ public class ScheduleFragment extends BaseBindingFragment<FragmentScheduleBindin
         Object[] argsForTimeTable = new Object[]{TimeTableRepository.INSTANCE};
         TimeTableViewModel timeTableViewModel = ViewModelProviders.of(this, InstanceFactory.getInstance(classesForTimeTable, argsForTimeTable)).get(TimeTableViewModel.class);
 
-
         //初始化的时候添加时间表，但是不会重复添加
         if (!Prefs.getBoolean(Constants.ADD_NORMAL_TIMETABLE, false)) {
             timeTableViewModel.addTimeTable(TimeTable.tedaNormal());
@@ -128,16 +127,15 @@ public class ScheduleFragment extends BaseBindingFragment<FragmentScheduleBindin
         //当前周
         int currentWeek = curSchedule.curWeek();
         handleCourseList = new ArrayList<>();
-        initData(false);
 
         BTimeTable timeTable = DataMaps.dataMappingTimeTableToBTimeTable(timeTableViewModel.getTimTableById(curSchedule.timeTableId));
         scheduleViewPagerAdapter = new ScheduleViewPagerAdapter(handleCourseList, timeTable, ScheduleFragment.this, curSchedule, currentWeek, courseViewModel);
-
         t.viewpager.setAdapter(scheduleViewPagerAdapter);
         t.viewpager.setOffscreenPageLimit(1);
         t.viewpager.setOrientation(ViewPager2.ORIENTATION_HORIZONTAL);
         t.viewpager.setCurrentItem(currentWeek - 1, true);
         t.viewpager.setPageTransformer(new ZoomOutPageTransformer());
+        t.viewpager.post(() -> initData(true));
         scheduleViewPagerAdapter.setDataSetUpdateCall(() -> initData(true));
         t.curWeekTv.setOnClickListener(v -> {
             View view = Uis.inflate(activity(), R.layout.view_change_week_quickly);
@@ -167,14 +165,12 @@ public class ScheduleFragment extends BaseBindingFragment<FragmentScheduleBindin
         });
 
         timerViewModel.curWeekStr.setValue(getString(R.string.week, currentWeek));
-
-
-        //显示空视图
-        if (TextUtils.isEmpty(curSchedule.imageUrl)) {
-            if (currentWeek > 0) {
-                t.emptyView.setVisibility(handleCourseList.get(currentWeek - 1).size() != 0 ? View.GONE : View.VISIBLE);
-            }
-        }
+//        //显示空视图
+//        if (TextUtils.isEmpty(curSchedule.imageUrl)) {
+//            if (currentWeek > 0) {
+//                t.emptyView.setVisibility(handleCourseList.get(currentWeek - 1).size() != 0 ? View.GONE : View.VISIBLE);
+//            }
+//        }
         t.viewpager.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
             @SuppressLint("StringFormatMatches")
             @Override
@@ -217,7 +213,7 @@ public class ScheduleFragment extends BaseBindingFragment<FragmentScheduleBindin
     }
 
     /**
-     * b为true时候为需要notify（批量操作场景），false为首次初始化
+     * 目前init参数全为true
      * */
     private void initData(boolean init) {
         handleCourseList.clear();
@@ -234,9 +230,9 @@ public class ScheduleFragment extends BaseBindingFragment<FragmentScheduleBindin
                 bCourseList.add(bCourse);
             }
             handleCourseList.add(bCourseList);
-            if (init) {
-                scheduleViewPagerAdapter.notifyItemChanged(i);
-            }
+        }
+        if (init) {
+            scheduleViewPagerAdapter.notifyDataSetChanged();
         }
     }
 
