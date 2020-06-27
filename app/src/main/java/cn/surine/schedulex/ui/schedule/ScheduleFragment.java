@@ -182,7 +182,7 @@ public class ScheduleFragment extends BaseBindingFragment<FragmentScheduleBindin
                 curViewPagerPosition = position;
                 timerViewModel.curWeekStr.setValue(getString(R.string.week, (position + 1)) + ((currentWeek == position + 1) ? "" : (" [" + getString(R.string.not_cur_week)) + "]"));
                 scheduleViewPagerAdapter.setWeek(position + 1);
-                scheduleViewPagerAdapter.notifyItemChanged(position);
+//                scheduleViewPagerAdapter.notifyItemChanged(position);
                 if (TextUtils.isEmpty(curSchedule.imageUrl)) {
                     t.emptyView.setVisibility(handleCourseList.get(position).size() != 0 ? View.GONE : View.VISIBLE);
                 }
@@ -216,7 +216,10 @@ public class ScheduleFragment extends BaseBindingFragment<FragmentScheduleBindin
         BoardCastSender.INSTANCE.notifyWidget(getContext());
     }
 
-    private void initData(boolean b) {
+    /**
+     * b为true时候为需要notify（批量操作场景），false为首次初始化
+     * */
+    private void initData(boolean init) {
         handleCourseList.clear();
         for (int i = 0; i < curSchedule.totalWeek; i++) {
             List<Course> dbData = courseViewModel.queryCourseByWeek(i + 1, curSchedule.roomId);
@@ -231,7 +234,7 @@ public class ScheduleFragment extends BaseBindingFragment<FragmentScheduleBindin
                 bCourseList.add(bCourse);
             }
             handleCourseList.add(bCourseList);
-            if (b) {
+            if (init) {
                 scheduleViewPagerAdapter.notifyItemChanged(i);
             }
         }
