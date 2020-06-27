@@ -63,6 +63,7 @@ class LoginFragment : BaseBindingFragment<FragmentLoginBinding>() {
             when (it) {
                 CourseViewModel.START -> dialog.setMessage(getString(R.string.ready_to_get_schedule_list))
                 CourseViewModel.SUCCESS -> {
+                    dialog.dismiss()
                     if (arguments == null || requireArguments().getString(ScheduleInitFragment.SCHEDULE_NAME)?.isEmpty() != false) {
                         Toasts.toast(getString(R.string.arg_exception))
                     } else {
