@@ -24,10 +24,10 @@ android {
             }
         }
 
-        ndk {
-            //兼容armeabi
-            abiFilters 'armeabi-v7a' //, 'x86', 'armeabi-v7a', 'x86_64', 'arm64-v8a'
-        }
+//        ndk {
+//            //兼容armeabi
+//            abiFilters 'armeabi-v7a' //, 'x86', 'armeabi-v7a', 'x86_64', 'arm64-v8a'
+//        }
     }
     buildTypes {
         release {
