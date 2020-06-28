@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
         <variable
             name="data"
             type="cn.surine.schedulex.ui.login.LoginViewModel" />
@@ -93,7 +92,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <EditText
+        <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/editText"
             style="@style/edit_text_style"
             android:drawableLeft="@drawable/ic_person_black_24dp"
@@ -108,7 +107,7 @@
             app:layout_constraintTop_toTopOf="@+id/guideline4"
             app:textWatcher="@{data.accountWatcher}" />
 
-        <EditText
+        <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/editText2"
             style="@style/edit_text_style"
             android:drawableStart="@drawable/ic_remove_red_eye_black_24dp"

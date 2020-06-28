@@ -36,13 +36,15 @@ class LoginViewModel(val mLoginRepository: LoginRepository) : BaseViewModel() {
     }
 
 
-    var accountWatcher: TextWatcher = object : SimpleTextWatcher() {
-        override fun afterTextChanged(s: Editable) {
+    var accountWatcher = object : SimpleTextWatcher() {
+        override fun afterTextChanged(s: Editable?) {
+            super.afterTextChanged(s)
             account.value = s.toString()
         }
     }
-    var passwordWatcher: TextWatcher = object : SimpleTextWatcher() {
-        override fun afterTextChanged(s: Editable) {
+    var passwordWatcher = object : SimpleTextWatcher() {
+        override fun afterTextChanged(s: Editable?) {
+            super.afterTextChanged(s)
             password.value = s.toString()
         }
     }
