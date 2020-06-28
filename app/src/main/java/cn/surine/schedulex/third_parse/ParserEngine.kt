@@ -2,6 +2,8 @@ package cn.surine.schedulex.third_parse
 
 import android.util.Log
 import cn.surine.schedulex.third_parse.Shell.NewZFParser
+import cn.surine.schedulex.third_parse.Shell.maintaining
+import cn.surine.schedulex.third_parse.Shell.pku
 import cn.surine.schedulex.third_parse.bean.Course
 
 object ParserEngine {
@@ -45,8 +47,24 @@ object ParserEngine {
 
     /**
      * 新正方系统解析器
+     *      武汉纺织大学、
      */
     fun newZenFang(html: String): List<CourseWrapper> = wrap(::NewZFParser,html)
+
+    /**
+     * 北京大学系统解析器
+     */
+    fun PKU(html: String): List<CourseWrapper> = wrap(::pku,html)
+
+    /**
+     * 华中科技大学系统解析器
+     */
+    fun HUST(html: String): List<CourseWrapper> = wrap(::maintaining,html)
+
+    /**
+     * 武汉大学系统解析器
+     */
+    fun WHU(html: String): List<CourseWrapper> = wrap(::maintaining,html)
 
     /**
      * 其他教务系统解析器

@@ -13,6 +13,7 @@ data class JwInfo(val school:String = "",val name:String = "", val url:String = 
     companion object{
         const val TUST = "tust" //科大API
         const val NEW_ZF = "newZenFang" //新正方
+        const val PKU = "pku" //北京大学
         const val NEW_URP = "newUrp" //新URP
         const val NORMAL = "normal" //默认
     }

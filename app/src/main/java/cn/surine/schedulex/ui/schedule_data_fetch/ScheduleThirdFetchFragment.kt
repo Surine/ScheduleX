@@ -20,6 +20,7 @@ import cn.surine.schedulex.data.entity.Schedule
 import cn.surine.schedulex.third_parse.CourseWrapper
 import cn.surine.schedulex.third_parse.JwInfo
 import cn.surine.schedulex.third_parse.Parser
+import cn.surine.schedulex.third_parse.ParserEngine.PKU
 import cn.surine.schedulex.third_parse.ParserEngine.default
 import cn.surine.schedulex.third_parse.ParserEngine.newZenFang
 import cn.surine.schedulex.ui.course.CourseRepository
@@ -136,6 +137,7 @@ class ScheduleThirdFetchFragment : BaseFragment() {
         fun showSource(html: String, system: String) {
             val engineFunction = when (system) {
                 JwInfo.NEW_ZF -> ::newZenFang
+                JwInfo.PKU -> ::PKU
                 else -> ::default
             }
             Parser().parse(engine = engineFunction, html = html) { list, e ->
