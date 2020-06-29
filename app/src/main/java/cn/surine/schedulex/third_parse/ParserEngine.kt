@@ -1,6 +1,6 @@
 package cn.surine.schedulex.third_parse
 
-import android.util.Log
+import cn.surine.schedulex.base.utils.Toasts
 import cn.surine.schedulex.third_parse.Shell.NewZFParser
 import cn.surine.schedulex.third_parse.Shell.maintaining
 import cn.surine.schedulex.third_parse.Shell.pku
@@ -43,11 +43,14 @@ object ParserEngine {
     /**
      * 默认解析器
      */
-    fun default(html: String):List<CourseWrapper>? = null
+    fun default(html: String):List<CourseWrapper>?{
+        Toasts.toast("提交课表网页,我们100%适配")
+        return null
+    }
 
     /**
      * 新正方系统解析器
-     *      武汉纺织大学、
+     *      武汉纺织大学、华南理工大学
      */
     fun newZenFang(html: String): List<CourseWrapper> = wrap(::NewZFParser,html)
 
@@ -66,9 +69,4 @@ object ParserEngine {
      */
     fun WHU(html: String): List<CourseWrapper> = wrap(::maintaining,html)
 
-    /**
-     * 其他教务系统解析器
-     * 也不知道啥学校用的啥系统，知道了就把对应的解析器复制过来
-     * 替换wrap(::NewZFParser,html)里面的NewZFParser就应该ok
-     */
 }
