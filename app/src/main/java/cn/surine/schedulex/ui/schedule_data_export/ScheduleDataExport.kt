@@ -102,9 +102,9 @@ class ScheduleDataExport : BaseFragment() {
                 Log.d("slw", "$v: ");
                 try {
 //                    Calendars.removeAllEvent(activity(), v.toLong())
-                    Calendars.removeAllEvent(activity(), "睡觉觉")
-                    Calendars.removeAllEvent(activity(), "这是")
-                    Calendars.removeAllEvent(activity(), "再来一个")
+                    Calendars.removeAllEvent(activity(), activity().packageName)
+//                    Calendars.removeAllEvent(activity(), "这是")
+//                    Calendars.removeAllEvent(activity(), "再来一个")
                 } catch (e: Exception) {
 
                 }

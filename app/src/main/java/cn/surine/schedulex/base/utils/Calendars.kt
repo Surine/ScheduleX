@@ -6,8 +6,10 @@ import android.content.ContentValues
 import android.content.Context
 import android.graphics.Color
 import android.provider.CalendarContract
+import android.util.Log
 import cn.surine.schedulex.R
 import java.util.*
+
 
 /**
  * Intro：
@@ -28,10 +30,11 @@ object Calendars {
     fun checkCalendarAccount(context: Context): Int {
         val cursor = context.contentResolver.query(calendarUri, null, null, null, null)
         return cursor.use {
-            it?.moveToFirst()
+            if (it?.moveToFirst() == true)
             //下面会分别对应账户名和id，这里获取第一个
 //           it?.getInt(it.getColumnIndex(CalendarContract.Calendars.NAME))
-            it?.getInt(it.getColumnIndex(CalendarContract.Calendars._ID)) ?: -1
+                it.getInt(it.getColumnIndex(CalendarContract.Calendars._ID))
+            else -1
         }
     }
 
@@ -154,7 +157,8 @@ object Calendars {
             if (cursor.count > 0) {
                 cursor.moveToFirst()
                 while (!cursor.isAfterLast) {
-                    val mt = cursor.getString(cursor.getColumnIndex("title"))
+                    val mt = cursor.getString(cursor.getColumnIndex("mutators"))
+                    Log.v("mutators",mt)
                     if (title == mt) {
                         //查询到一致的话， 就拼接id后进行删除
                         val id = cursor.getInt(cursor.getColumnIndex(CalendarContract.Calendars._ID))
