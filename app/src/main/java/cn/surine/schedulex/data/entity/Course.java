@@ -33,6 +33,7 @@ public class Course extends BaseVm {
     public String classWeek = "";
 
     //day time
+    //ex : classDay的范围 1 2 3 4 5 6 7
     public String classDay = "";
     public String classSessions = "";
     public String continuingSession = "";
@@ -69,11 +70,11 @@ public class Course extends BaseVm {
     public String getWeekDescription() {
         StringBuilder stringBuilder = new StringBuilder();
         for (int i = 0; i < classWeek.length(); i++) {
-        if (classWeek.charAt(i) == '1') {
-            stringBuilder.append(i + 1);
-            stringBuilder.append(" ");
+            if (classWeek.charAt(i) == '1') {
+                stringBuilder.append(i + 1);
+                stringBuilder.append(" ");
+            }
         }
-    }
         return stringBuilder.append(App.context.getString(R.string.week, "")).toString();
     }
 

@@ -19,6 +19,7 @@ public class Dates {
     public static final String HHmm = "HH:mm";
     public static final String yyyyMMddHHmmss = "yyyy-MM-dd HH:mm:ss";
     public static final long ONE_DAY = 24 * 60 * 60 * 1000;
+    public static final long ONE_WEEK = 24 * 60 * 60 * 1000 * 7;
     public static final long ONE_MIN = 60 * 1000;
     public static final long ONE_HOUR = ONE_MIN * 60;
 

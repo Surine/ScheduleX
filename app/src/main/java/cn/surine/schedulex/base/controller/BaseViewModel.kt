@@ -7,6 +7,7 @@ import cn.surine.schedulex.base.utils.Toasts
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 /**
  * Intro：
@@ -17,7 +18,7 @@ import kotlinx.coroutines.launch
 @Keep
 open class BaseViewModel : ViewModel() {
 
-    companion object{
+    companion object {
         const val START_LOAD = 1
         const val LOADING = 2
         const val LOAD_FAIL = 3
@@ -25,11 +26,13 @@ open class BaseViewModel : ViewModel() {
     }
 
     fun request(block: suspend CoroutineScope.() -> Unit, errorCall: (String?) -> Unit = {}) {
-        viewModelScope.launch(Dispatchers.Main) {
+        viewModelScope.launch(Dispatchers.IO) {
             try {
                 block()
             } catch (e: Exception) {
-                Toasts.toast("请求出现异常：${e.localizedMessage}")
+                withContext(Dispatchers.Main) {
+                    Toasts.toast("请求出现异常：${e.localizedMessage}")
+                }
                 errorCall(e.localizedMessage)
             }
         }
