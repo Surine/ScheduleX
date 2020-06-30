@@ -12,6 +12,7 @@ import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
+import retrofit2.http.Url;
 
 public interface Api {
     @FormUrlEncoded
@@ -29,7 +30,7 @@ public interface Api {
     /**
      * 获取适配列表
      * */
-    @GET("https://surinex.coding.net/p/schedulex/d/schedulex/git/raw/master/schools.json")
-    Deferred<List<JwInfo>> getAdapterList();
+    @GET
+    Deferred<List<JwInfo>> getAdapterList(@Url String url);
 
 }

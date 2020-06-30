@@ -46,7 +46,7 @@ class ScheduleDataExport : BaseFragment() {
                     if (it) {
                         exportIcs()
                     } else {
-                        Toasts.toast(getString(R.string.permission_is_denied));
+                        Toasts.toast(getString(R.string.permission_is_denied))
                     }
                 }
             }
@@ -111,29 +111,28 @@ class ScheduleDataExport : BaseFragment() {
         }
     }
 
-    private fun getCalendarTime(week:Int, classDay:String):Long {
-        return Dates.getDate(schedule.termStartDate,Dates.yyyyMMdd).time + (7 * (week - 1) + Integer.parseInt(classDay) - 1) * Dates.ONE_DAY
+    private fun getCalendarTime(week: Int, classDay: String): Long {
+        return Dates.getDate(schedule.termStartDate, Dates.yyyyMMdd).time + (7 * (week - 1) + Integer.parseInt(classDay) - 1) * Dates.ONE_DAY
     }
 
-    private fun exportIcs(){
+    private fun exportIcs() {
         val data = courseViewModel.getCourseByScheduleId(schedule.roomId)
         (data.indices).forEach {
             val course = data[it]
-            val weeks= ArrayList<Int>()
-            (course.classWeek.indices).forEach {
-                j->
-                if(course.classWeek[j] == '1'){
+            val weeks = ArrayList<Int>()
+            (course.classWeek.indices).forEach { j ->
+                if (course.classWeek[j] == '1') {
                     weeks.add(j + 1)
                 }
             }
             (weeks.indices).forEach {
                 //只记录比当前周大的数据
-                k->
-                if(weeks[k] >= schedule.curWeek()){
-                    val startTime = getCalendarTime(weeks[k],course.classDay)
+                k ->
+                if (weeks[k] >= schedule.curWeek()) {
+                    val startTime = getCalendarTime(weeks[k], course.classDay)
                     val endTime = startTime + 45 * 60 * 1000
-                    CalendarProviders.addEvent(activity(),course.coureName,course.teachingBuildingName + course.classroomName,startTime,endTime)
-                    CalendarProviders.deleteCalendarEvent(activity(),course.coureName)
+                    CalendarProviders.addEvent(activity(), course.coureName, course.teachingBuildingName + course.classroomName, startTime, endTime)
+                    CalendarProviders.deleteCalendarEvent(activity(), course.coureName)
                 }
             }
         }
