@@ -1,7 +1,6 @@
 package cn.surine.schedulex.ui.schedule_data_fetch
 
 import android.annotation.SuppressLint
-import android.util.Log
 import android.view.KeyEvent
 import android.view.View
 import android.view.inputmethod.EditorInfo
@@ -98,7 +97,7 @@ class ScheduleThirdFetchFragment : BaseFragment() {
         thirdPageWebView.addJavascriptInterface(InJavaScriptLocalObj(), "local_obj")
         thirdPageWebView.settings.javaScriptCanOpenWindowsAutomatically = true
         thirdPageWebView.settings.mixedContentMode = WebSettings.MIXED_CONTENT_ALWAYS_ALLOW
-        thirdPageWebView.settings.userAgentString = thirdPageWebView.settings.userAgentString.replace("Mobile", "Web").replace("Android", "MacOs")
+//        thirdPageWebView.settings.userAgentString = "Mozilla/5.0 (Linux; Android 7.0; Nexus 5X Build/NRD90M; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/54.0.2840.85 Mobile Safari/537.36"
         thirdPageWebView.webViewClient = object : WebViewClient() {
             override fun shouldOverrideUrlLoading(view: WebView?, request: WebResourceRequest?): Boolean {
                 val text = request?.url.toString()
@@ -171,7 +170,6 @@ class ScheduleThirdFetchFragment : BaseFragment() {
                     ?: "UnKnow", 24, 1, Schedule.IMPORT_WAY.JW)
             val targetList = mutableListOf<Course>()
             list.forEach {
-                Log.v("wrapper", it.toString())
                 val course = Course()
                 course.scheduleId = scheduleId
                 course.id = StringBuilder().run {
@@ -190,7 +188,6 @@ class ScheduleThirdFetchFragment : BaseFragment() {
                 }
                 course.continuingSession = maxSession.toString()
                 course.classWeek = it.week.bitCount(Constants.STAND_WEEK)
-                Log.v("course", course.toString())
                 targetList.add(course)
             }
             courseViewModel.saveCourseByDb(targetList, scheduleId)

@@ -91,18 +91,18 @@ public class Course extends BaseVm {
     @Override
     public String toString() {
         return "Course{" +
-                ", courseName='" + coureName + '\'' +
-                ", teacherName='" + teacherName + '\'' +
-                ", classWeek='" + classWeek + '\'' +
-                ", classDay='" + classDay + '\'' +
-                ", classSessions='" + classSessions + '\'' +
-                ", continuingSession='" + continuingSession + '\'' +
-                ", weekDescription='" + weekDescription + '\'' +
-                ", campusName='" + campusName + '\'' +
-                ", teachingBuildingName='" + teachingBuildingName + '\'' +
-                ", classroomName='" + classroomName + '\'' +
-                ", coursePropertiesName='" + coursePropertiesName + '\'' +
-                ", xf='" + xf + '\'' +
+                ", courseName=" + coureName + '\n' +
+                ", teacherName=" + teacherName + '\n' +
+                ", classWeek=" + classWeek + '\n' +
+                ", classDay=" + classDay + '\n' +
+                ", classSessions=" + classSessions + '\n' +
+                ", continuingSession=" + continuingSession + '\n' +
+                ", weekDescription=" + weekDescription + '\n' +
+                ", campusName=" + campusName + '\n' +
+                ", teachingBuildingName=" + teachingBuildingName + '\n' +
+                ", classroomName=" + classroomName + '\n' +
+                ", coursePropertiesName=" + coursePropertiesName + '\n' +
+                ", xf=" + xf + '\n' +
                 ", scheduleId=" + scheduleId +
                 '}';
     }

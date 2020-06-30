@@ -44,7 +44,7 @@
     <string name="import_excel">导入Excel</string>
     <string name="import_json">导入Json</string>
     <string name="scan_qrcode">扫描二维码</string>
-    <string name="from_other">其他方式</string>
+    <string name="from_other">日历事件</string>
     <string name="arg_exception">参数异常，请退出重试</string>
     <string name="add_course">添加</string>
     <string name="unknown">未知</string>

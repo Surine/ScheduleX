@@ -102,9 +102,9 @@
             android:id="@+id/exportIcs"
             android:layout_width="@dimen/dp90"
             android:layout_height="@dimen/dp90"
+            android:background="?selectableItemBackgroundBorderless"
             android:src="@mipmap/i1"
             android:visibility="gone"
-            android:background="?selectableItemBackgroundBorderless"
             app:layout_constraintStart_toStartOf="@+id/guideline25"
             app:layout_constraintTop_toTopOf="@+id/guideline27" />
 
@@ -123,6 +123,7 @@
             android:layout_height="@dimen/dp90"
             android:background="?selectableItemBackgroundBorderless"
             android:src="@mipmap/i5"
+            android:visibility="visible"
             app:layout_constraintStart_toStartOf="@+id/guideline25"
             app:layout_constraintTop_toTopOf="@+id/guideline27" />
 
