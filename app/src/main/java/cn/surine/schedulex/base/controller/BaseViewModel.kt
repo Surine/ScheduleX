@@ -28,7 +28,9 @@ open class BaseViewModel : ViewModel() {
     fun request(block: suspend CoroutineScope.() -> Unit, errorCall: (String?) -> Unit = {}) {
         viewModelScope.launch(Dispatchers.IO) {
             try {
-                block()
+                withContext(Dispatchers.Main) {
+                    block()
+                }
             } catch (e: Exception) {
                 withContext(Dispatchers.Main) {
                     Toasts.toast("请求出现异常：${e.localizedMessage}")

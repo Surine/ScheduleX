@@ -77,8 +77,11 @@ class ScheduleDataExport : BaseFragment() {
             RxPermissions(activity()).apply {
                 request(Manifest.permission.READ_CALENDAR, Manifest.permission.WRITE_CALENDAR).subscribe {
                     if (it) {
-                        val dialog = ProgressDialog(activity()).apply { setMessage("正在导出至日历，请勿退出~")}
-                        dialog.show()
+                        val dialog = ProgressDialog(activity()).apply {
+                            setMessage("正在导出至日历，请勿退出~")
+                            setTitle("提醒")
+                            show()
+                        }
                         CoroutineScope(Dispatchers.IO).launch {
                             addCourseTask(scheduleId,dialog)
                         }
