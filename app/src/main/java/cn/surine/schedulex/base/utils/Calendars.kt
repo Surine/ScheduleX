@@ -7,6 +7,7 @@ import android.content.Context
 import android.graphics.Color
 import android.provider.CalendarContract
 import android.util.Log
+import cn.surine.schedulex.BuildConfig
 import cn.surine.schedulex.R
 import java.util.*
 
@@ -79,11 +80,13 @@ object Calendars {
     @SuppressLint("MissingPermission")
     fun addCalendarEvent(context: Context, title: String, description: String, startTime: Long, endTime: Long, remindTime: Int = 15): Long {
         //首先检查日历账户是否存在
-        var calendarId = checkCalendarAccount(context)
+        val calendarId = checkCalendarAccount(context)
+
         //不存在的话需要添加一个并重新获取账号id
         if (calendarId == -1) {
-            addCalendar(context)
-            calendarId = checkCalendarAccount(context)
+//            addCalendar(context)
+//            calendarId = checkCalendarAccount(context)
+            return -1
         }
 
 
@@ -104,6 +107,8 @@ object Calendars {
             put(CalendarContract.Events.CALENDAR_ID, calendarId)  //日历id
             put(CalendarContract.Events.EVENT_TIMEZONE, "Asia/Shanghai") //时区
             put(CalendarContract.Events.HAS_ALARM, 1) //闹钟提醒
+            put(CalendarContract.Events.CUSTOM_APP_PACKAGE,BuildConfig.APPLICATION_ID)
+//            put(CalendarContract.Events.MUTATORS,BuildConfig.APPLICATION_ID)
         }
 
         // 添加event
@@ -157,9 +162,10 @@ object Calendars {
             if (cursor.count > 0) {
                 cursor.moveToFirst()
                 while (!cursor.isAfterLast) {
-                    val mt = cursor.getString(cursor.getColumnIndex("mutators"))
-                    Log.v("mutators",mt)
+//                    val mt = cursor.getString(cursor.getColumnIndex("title"))
+                    val mt = cursor.getString(cursor.getColumnIndex("customAppPackage"))
                     if (title == mt) {
+                        Log.d("slw", "进来了: $mt");
                         //查询到一致的话， 就拼接id后进行删除
                         val id = cursor.getInt(cursor.getColumnIndex(CalendarContract.Calendars._ID))
                         val deleteUri = ContentUris.withAppendedId(eventUri, id.toLong())

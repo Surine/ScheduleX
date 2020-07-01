@@ -100,19 +100,10 @@ class ScheduleDataExport : BaseFragment() {
      * */
     private suspend fun deleteCourseTask() {
         withContext(Dispatchers.Default) {
-            val list = Prefs.getString("calendar_ids")
-            list?.split(" ")?.forEach { v ->
-                Log.d("slw", "$v: ");
-                try {
-//                    Calendars.removeAllEvent(activity(), v.toLong())
-                    Calendars.removeAllEvent(activity(), activity().packageName)
+            Calendars.removeAllEvent(activity(), activity().packageName)
 //                    Calendars.removeAllEvent(activity(), "这是")
+//                    Calendars.removeAllEvent(activity(), "睡觉觉")
 //                    Calendars.removeAllEvent(activity(), "再来一个")
-                } catch (e: Exception) {
-
-                }
-            }
-            Prefs.save("calendar_ids", "")
         }
         withContext(Dispatchers.Main){
             Toasts.toast("删除成功！")
@@ -123,7 +114,7 @@ class ScheduleDataExport : BaseFragment() {
      * 添加日程
      * */
     private suspend fun addCourseTask(scheduleId: Int, dialog: ProgressDialog) {
-        val block = GlobalScope.async {
+       withContext(Dispatchers.Default) {
             val list: List<Course> = courseViewModel.getCourseByScheduleId(scheduleId)
             val c: Calendar = Calendar.getInstance()
             c.timeInMillis = System.currentTimeMillis()
@@ -153,13 +144,6 @@ class ScheduleDataExport : BaseFragment() {
                 }
             }
         }
-        block.await()
-//        Prefs.save("calendar_ids", StringBuilder().apply {
-//            calendarIds.forEach { v ->
-//                append(v).append(" ")
-//            }
-//            trim()
-//        })
         withContext(Dispatchers.Main){
             dialog.dismiss()
             Toasts.toast("添加成功！")
