@@ -1,5 +1,6 @@
 package cn.surine.schedulex.base.controller
 
+import cn.surine.schedulex.base.database.BaseAppDatabase
 import cn.surine.schedulex.base.database.BaseAppDatabase.Companion.getInstance
 import io.reactivex.Flowable
 import io.reactivex.FlowableTransformer
@@ -26,6 +27,15 @@ open class BaseRepository {
     @JvmField
     protected var appDatabase = getInstance(App.context)
 
+
+    //对db进行操作
+    protected suspend fun <T : Any> db(call: suspend (baseDb:BaseAppDatabase) -> T): T {
+        return withContext(Dispatchers.IO){
+            return@withContext call.invoke(appDatabase!!)
+        }
+    }
+
+
     /**
      * Rx线程控制工具
      */
@@ -40,8 +50,8 @@ open class BaseRepository {
     /**
      * 远程请求
      * */
-    protected suspend fun <T:Any> remote(call:suspend ()->T):T{
-        return withContext(Dispatchers.IO){
+    protected suspend fun <T : Any> remote(call: suspend () -> T): T {
+        return withContext(Dispatchers.IO) {
             call.invoke()
         }
     }

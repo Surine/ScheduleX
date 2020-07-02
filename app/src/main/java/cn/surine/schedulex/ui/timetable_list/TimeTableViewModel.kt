@@ -1,7 +1,7 @@
 package cn.surine.schedulex.ui.timetable_list
 
 import androidx.annotation.Keep
-import androidx.lifecycle.ViewModel
+import cn.surine.schedulex.base.controller.BaseViewModel
 import cn.surine.schedulex.data.entity.TimeTable
 
 /**
@@ -11,7 +11,7 @@ import cn.surine.schedulex.data.entity.TimeTable
  * @date 2020-03-05 21:16
  */
 @Keep
-class TimeTableViewModel(private val timeTableRepository: TimeTableRepository) : ViewModel() {
+class TimeTableViewModel(private val timeTableRepository: TimeTableRepository) : BaseViewModel() {
     val allTimeTables: List<TimeTable>
         get() = timeTableRepository.getAllTimeTables()
 
