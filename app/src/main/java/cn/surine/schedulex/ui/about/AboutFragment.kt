@@ -42,7 +42,18 @@ class AboutFragment : BaseFragment() {
         jetpack.setOnClickListener {
             Beta.checkUpgrade(true, false)
             loadAnimation()
+            loadTest()
         }
+    }
+
+    private fun loadTest() {
+//        dialog(title = "提示",message = "文本内容") {
+//        }
+//        editDialog(title = "消息"){
+//            positive("记录"){
+//                _, value -> toast(value)
+//            }
+//        }
     }
 
     private fun loadAnimation() {

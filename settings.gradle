@@ -1,2 +1,3 @@
+include ':ui_lib'
 include ':app', ':courseTableView'
 rootProject.name='ScheduleX'
