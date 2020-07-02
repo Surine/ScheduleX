@@ -107,8 +107,7 @@ object Calendars {
             put(CalendarContract.Events.CALENDAR_ID, calendarId)  //日历id
             put(CalendarContract.Events.EVENT_TIMEZONE, "Asia/Shanghai") //时区
             put(CalendarContract.Events.HAS_ALARM, 1) //闹钟提醒
-            put(CalendarContract.Events.CUSTOM_APP_PACKAGE,BuildConfig.APPLICATION_ID)
-//            put(CalendarContract.Events.MUTATORS,BuildConfig.APPLICATION_ID)
+            put(CalendarContract.Events.CUSTOM_APP_PACKAGE, BuildConfig.APPLICATION_ID)
         }
 
         // 添加event

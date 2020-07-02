@@ -7,6 +7,7 @@ import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.text.TextUtils
 import android.view.View
+import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import cn.surine.schedulex.R
@@ -87,6 +88,11 @@ object BtmDialogs {
         edit.setOnClickListener {
             open(baseFragment, R.id.action_scheduleFragment_to_addCourseFragment, bundle)
             bt.dismiss()
+        }
+        view.findViewById<Button>(R.id.button3).setOnClickListener {
+            getBaseConfig(context = baseFragment.activity(),view = Uis.inflate(baseFragment.activity(),R.layout.view_exam_plan)){
+                view, bt ->
+            }
         }
     }
 

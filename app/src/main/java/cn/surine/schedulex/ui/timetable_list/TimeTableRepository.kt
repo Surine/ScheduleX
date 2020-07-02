@@ -14,7 +14,7 @@ object TimeTableRepository : BaseRepository() {
      * 获取所有时间表
      */
     fun getAllTimeTables(): List<TimeTable> {
-        return appDatabase.timeTableDao()!!.all ?: ArrayList()
+        return appDatabase?.timeTableDao()!!.all ?: ArrayList()
     }
 
 
@@ -22,24 +22,24 @@ object TimeTableRepository : BaseRepository() {
      * 插入一份时间表
      */
     fun insertTimeTable(timeTable: TimeTable?) {
-        appDatabase.timeTableDao()!!.insert(timeTable)
+        appDatabase?.timeTableDao()!!.insert(timeTable)
     }
 
     /**
      * 通过id查询时间表
      */
     fun getTimeTableById(id: Long): TimeTable? {
-        return appDatabase.timeTableDao()!!.getById(id)
+        return appDatabase?.timeTableDao()!!.getById(id)
     }
 
     /**
      * 更新时间表
      */
     fun updateTimeTable(timeTable: TimeTable?) {
-        appDatabase.timeTableDao()!!.update(timeTable)
+        appDatabase?.timeTableDao()!!.update(timeTable)
     }
 
     fun deleteTimeTableById(roomId: Int) {
-        appDatabase.timeTableDao()!!.delete(roomId.toLong())
+        appDatabase?.timeTableDao()!!.delete(roomId.toLong())
     }
 }

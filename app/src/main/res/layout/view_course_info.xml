@@ -62,11 +62,10 @@
         android:layout_width="@dimen/dp25"
         android:layout_height="@dimen/dp25"
         android:layout_marginTop="56dp"
+        android:src="@mipmap/ic_teacher"
         android:tint="@android:color/holo_orange_dark"
         app:layout_constraintStart_toStartOf="@+id/courseClassDay"
-        app:layout_constraintTop_toBottomOf="@+id/courseClassDay"
-        android:src="@mipmap/ic_teacher"
-        />
+        app:layout_constraintTop_toBottomOf="@+id/courseClassDay" />
 
     <TextView
         android:id="@+id/courseTeacher"
@@ -88,10 +87,10 @@
         android:layout_width="@dimen/dp25"
         android:layout_height="@dimen/dp25"
         android:layout_marginTop="40dp"
+        android:src="@mipmap/ic_score"
         android:tint="@android:color/holo_red_dark"
         app:layout_constraintStart_toStartOf="@+id/imageView4"
-        app:layout_constraintTop_toBottomOf="@+id/imageView4"
-        android:src="@mipmap/ic_score" />
+        app:layout_constraintTop_toBottomOf="@+id/imageView4" />
 
     <TextView
         android:id="@+id/courseScore"
@@ -122,21 +121,21 @@
         android:id="@+id/courseEdit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:src="@drawable/ic_create_black_24dp"
         app:layout_constraintBottom_toBottomOf="@+id/courseName"
         app:layout_constraintEnd_toStartOf="@+id/guideline40"
-        app:layout_constraintTop_toTopOf="@+id/courseName"
-        android:src="@drawable/ic_create_black_24dp" />
+        app:layout_constraintTop_toTopOf="@+id/courseName" />
 
     <ImageView
         android:id="@+id/imageView2"
         android:layout_width="@dimen/dp25"
         android:layout_height="@dimen/dp25"
         android:layout_marginTop="40dp"
+        android:src="@mipmap/ic_more"
         android:tint="@android:color/holo_blue_dark"
         app:layout_constraintEnd_toEndOf="@+id/imageView5"
         app:layout_constraintStart_toStartOf="@+id/imageView5"
-        app:layout_constraintTop_toBottomOf="@+id/imageView5"
-        android:src="@mipmap/ic_more" />
+        app:layout_constraintTop_toBottomOf="@+id/imageView5" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline40"
@@ -144,5 +143,15 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         app:layout_constraintGuide_percent="0.93430656" />
+
+    <Button
+        android:id="@+id/button3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dp16"
+        android:text="考试安排"
+        app:layout_constraintBottom_toBottomOf="@+id/courseSession"
+        app:layout_constraintStart_toEndOf="@+id/courseSession"
+        app:layout_constraintTop_toTopOf="@+id/courseSession" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

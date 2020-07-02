@@ -2,7 +2,6 @@ package cn.surine.schedulex.ui.schedule_data_export
 
 import android.Manifest
 import android.app.ProgressDialog
-import android.util.Log
 import android.view.View
 import cn.surine.schedulex.R
 import cn.surine.schedulex.app_base.VmManager
@@ -17,7 +16,10 @@ import cn.surine.schedulex.ui.timetable_list.TimeTableViewModel
 import com.google.android.material.snackbar.Snackbar
 import com.tbruyelle.rxpermissions2.RxPermissions
 import kotlinx.android.synthetic.main.fragment_date_export.*
-import kotlinx.coroutines.*
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import java.util.*
 import kotlin.collections.ArrayList
 
@@ -63,9 +65,9 @@ class ScheduleDataExport : BaseFragment() {
             RxPermissions(activity()).apply {
                 request(Manifest.permission.READ_CALENDAR, Manifest.permission.WRITE_CALENDAR).subscribe {
                     if (it) {
-                       CoroutineScope(Dispatchers.IO).launch {
-                           deleteCourseTask()
-                       }
+                        CoroutineScope(Dispatchers.IO).launch {
+                            deleteCourseTask()
+                        }
                     } else {
                         Toasts.toast(getString(R.string.permission_is_denied))
                     }
@@ -80,10 +82,11 @@ class ScheduleDataExport : BaseFragment() {
                         val dialog = ProgressDialog(activity()).apply {
                             setMessage("正在导出至日历，请勿退出~")
                             setTitle("提醒")
+                            setCancelable(false)
                             show()
                         }
                         CoroutineScope(Dispatchers.IO).launch {
-                            addCourseTask(scheduleId,dialog)
+                            addCourseTask(scheduleId, dialog)
                         }
                     } else {
                         Toasts.toast(getString(R.string.permission_is_denied))
@@ -101,11 +104,8 @@ class ScheduleDataExport : BaseFragment() {
     private suspend fun deleteCourseTask() {
         withContext(Dispatchers.Default) {
             Calendars.removeAllEvent(activity(), activity().packageName)
-//                    Calendars.removeAllEvent(activity(), "这是")
-//                    Calendars.removeAllEvent(activity(), "睡觉觉")
-//                    Calendars.removeAllEvent(activity(), "再来一个")
         }
-        withContext(Dispatchers.Main){
+        withContext(Dispatchers.Main) {
             Toasts.toast("删除成功！")
         }
     }
@@ -114,7 +114,7 @@ class ScheduleDataExport : BaseFragment() {
      * 添加日程
      * */
     private suspend fun addCourseTask(scheduleId: Int, dialog: ProgressDialog) {
-       withContext(Dispatchers.Default) {
+        withContext(Dispatchers.Default) {
             val list: List<Course> = courseViewModel.getCourseByScheduleId(scheduleId)
             val c: Calendar = Calendar.getInstance()
             c.timeInMillis = System.currentTimeMillis()
@@ -131,11 +131,9 @@ class ScheduleDataExport : BaseFragment() {
                     //历史的周不会再添加
                     if (index + 1 < currentWeek || week == '0')
                         continue
-                    //周和日的偏差
-                    val startWeekOffsetTime = (index + 1 - currentWeek) * Dates.ONE_WEEK
-                    val startDayOffsetTime = (course.classDay.toInt() - weekday) * Dates.ONE_DAY
-                    val eventStartTime = termStartTime + startWeekOffsetTime + startDayOffsetTime + getCourseTime(course.classSessions.toInt())
-                    val eventEndTime = termStartTime + startWeekOffsetTime + startDayOffsetTime + getCourseTime(course.classSessions.toInt() + course.continuingSession.toInt())
+                    val dateOffSet = termStartTime + Dates.ONE_DAY * (index * 7 + course.classDay.toInt() - 1)
+                    val eventStartTime = dateOffSet + getCourseTime(course.classSessions.toInt(), true)
+                    val eventEndTime = dateOffSet + getCourseTime(course.classSessions.toInt() + course.continuingSession.toInt() - 1, false)
                     //insert into calendar
                     val result = Calendars.addCalendarEvent(activity(), eventTitle, eventMsg, eventStartTime, eventEndTime)
                     if (result != -1L) {
@@ -144,7 +142,7 @@ class ScheduleDataExport : BaseFragment() {
                 }
             }
         }
-        withContext(Dispatchers.Main){
+        withContext(Dispatchers.Main) {
             dialog.dismiss()
             Toasts.toast("添加成功！")
         }
@@ -154,12 +152,13 @@ class ScheduleDataExport : BaseFragment() {
     /**
      * 获取上课时间
      * */
-    private fun getCourseTime(classSessions: Int): Long {
+    private fun getCourseTime(classSessions: Int, start: Boolean): Long {
         val timeTable = timeTableViewModel.getTimTableById(scheduleViewModel.curSchedule.timeTableId)
         timeTable ?: return 0
         val bTimeTable = DataMaps.dataMappingTimeTableToBTimeTable(timeTable)
         if (classSessions >= bTimeTable.timeInfoList.size) return 0
-        return Dates.getTransformTimeString(bTimeTable.timeInfoList[classSessions - 1].startTime) * 60 * 1000
+        val time = if (start) bTimeTable.timeInfoList[classSessions - 1].startTime else bTimeTable.timeInfoList[classSessions - 1].endTime
+        return Dates.getTransformTimeString(time) * 60 * 1000
     }
 
 

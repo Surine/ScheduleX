@@ -17,9 +17,13 @@ class AdapterListViewModel(private val adapterListRepository: AdapterListReposit
         MutableLiveData<List<JwInfo>>()
     }
 
-    //初版
+
+    //请求适配列表优化版
     fun getAdapterList() = request({
-        adapterListData.value = adapterListRepository.getAdapterListAsync()?.await()
+        //IO线程
+        val data = adapterListRepository.getAdapterListAsync()
+        //主线程
+        adapterListData.value = data
     })
 
 }
