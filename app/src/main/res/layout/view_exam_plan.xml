@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-    <androidx.constraintlayout.widget.ConstraintLayout xmlns:app="http://schemas.android.com/apk/res-auto"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/top_left_right_radius_white"
@@ -31,7 +32,7 @@
             app:layout_constraintTop_toBottomOf="@id/title">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/editText"
+                android:id="@+id/examName"
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
                 android:ems="10"
@@ -53,11 +54,11 @@
             app:layout_constraintTop_toBottomOf="@id/textInputLayout">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/editText2"
+                android:id="@+id/examPosition"
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
                 android:ems="10"
-                android:hint="考试地点"
+                android:hint="地点与备注"
                 android:maxLength="14"
                 android:maxLines="1" />
         </com.google.android.material.textfield.TextInputLayout>
@@ -74,7 +75,7 @@
             app:layout_constraintTop_toBottomOf="@id/textInputLayout2">
 
             <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/scheduleNameItem"
+                android:id="@+id/examItem"
                 style="@style/setting_item_ui">
 
                 <TextView
@@ -87,18 +88,18 @@
                     android:textColor="@android:color/black"
                     android:textSize="@dimen/t18"
                     android:textStyle="bold"
-                    app:layout_constraintBottom_toTopOf="@id/courseNameSubTitle"
+                    app:layout_constraintBottom_toTopOf="@id/settingItemSubtitle"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
 
                 <TextView
-                    android:id="@+id/courseNameSubTitle"
+                    android:id="@+id/settingItemSubtitle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dp8"
                     android:layout_marginBottom="@dimen/dp16"
-                    android:text="15天后 上午8点"
+                    android:text="点击配置时间"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="@+id/textView33"
                     app:layout_constraintTop_toBottomOf="@+id/textView33" />
@@ -108,7 +109,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="8dp"
-                    app:layout_constraintBottom_toBottomOf="@+id/courseNameSubTitle"
+                    app:layout_constraintBottom_toBottomOf="@+id/settingItemSubtitle"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="@+id/textView33"
                     app:srcCompat="@drawable/ic_access_alarms_black_24dp" />
@@ -116,30 +117,59 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
         </LinearLayout>
 
-        <com.google.android.material.slider.Slider
-            android:id="@+id/sliderbar"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:id="@+id/timers"
+            android:visibility="gone"
+            android:animateLayoutChanges="true"
             android:layout_marginTop="@dimen/dp20"
             app:layout_constraintTop_toBottomOf="@id/setting_item"
-            app:trackHeight="@dimen/dp30" />
+            android:background="@drawable/config_card_background"
+            >
+            <com.google.android.material.slider.Slider
+                android:id="@+id/sliderbar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp20"
+                app:layout_constraintTop_toBottomOf="@id/setting_item"
+                app:trackHeight="@dimen/p28"
+                android:valueFrom="1"
+                android:valueTo="30"
+                android:stepSize="1"
+                app:tickColor="@android:color/transparent"
+                android:layout_marginStart="@dimen/dp20"
+                android:layout_marginEnd="@dimen/dp20"
+                app:thumbColor="@android:color/white"
+                />
 
-        <TimePicker
-            android:id="@+id/timerpicker"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/dp20"
-            app:layout_constraintTop_toBottomOf="@id/sliderbar" />
+            <TimePicker
+                android:id="@+id/timerpicker"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp20"
+                android:alwaysDrawnWithCache="false"
+                android:timePickerMode = "spinner"
+                android:amPmBackgroundColor="#62D3C8"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/sliderbar" />
+
+        </LinearLayout>
 
         <com.google.android.material.button.MaterialButton
-            android:layout_width="wrap_content"
-            android:layout_height="@dimen/dp56"
+            android:layout_width="match_parent"
+            android:layout_height="67dp"
             android:layout_marginTop="@dimen/dp15"
             android:layout_marginBottom="@dimen/dp10"
             android:text="添加至系统日历"
+            android:textSize="19sp"
+            android:id="@+id/examButton"
+            app:cornerRadius="@dimen/dp180"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintRight_toRightOf="@id/timerpicker"
-            app:layout_constraintTop_toBottomOf="@id/timerpicker" />
+            app:layout_constraintRight_toRightOf="@id/timers"
+            app:layout_constraintTop_toBottomOf="@id/timers" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

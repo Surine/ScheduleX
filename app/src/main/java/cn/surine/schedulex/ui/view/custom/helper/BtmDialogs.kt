@@ -7,18 +7,22 @@ import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.text.TextUtils
 import android.view.View
-import android.widget.Button
-import android.widget.ImageView
-import android.widget.TextView
+import android.view.View.GONE
+import android.view.View.VISIBLE
+import android.widget.*
+import androidx.constraintlayout.widget.ConstraintLayout
 import cn.surine.schedulex.R
 import cn.surine.schedulex.base.controller.App
 import cn.surine.schedulex.base.controller.BaseFragment
 import cn.surine.schedulex.base.utils.Dates
+import cn.surine.schedulex.base.utils.Dates.*
 import cn.surine.schedulex.base.utils.Drawables
 import cn.surine.schedulex.base.utils.Navigations.open
 import cn.surine.schedulex.base.utils.Uis
 import cn.surine.schedulex.data.entity.Course
 import com.google.android.material.bottomsheet.BottomSheetDialog
+import com.google.android.material.button.MaterialButton
+import com.google.android.material.slider.Slider
 
 /**
  * Intro：
@@ -92,6 +96,28 @@ object BtmDialogs {
         view.findViewById<Button>(R.id.button3).setOnClickListener {
             getBaseConfig(context = baseFragment.activity(),view = Uis.inflate(baseFragment.activity(),R.layout.view_exam_plan)){
                 view, bt ->
+                val examName:EditText= view.findViewById(R.id.examName)
+                val examPos:EditText= view.findViewById(R.id.examPosition)
+                val examSetting:ConstraintLayout = view.findViewById(R.id.examItem)
+                val examButton:MaterialButton = view.findViewById(R.id.examButton)
+                val timers:LinearLayout = view.findViewById(R.id.timers)
+                val settingItemSubtitle:TextView = view.findViewById(R.id.settingItemSubtitle)
+                val slider:Slider = view.findViewById(R.id.sliderbar)
+                val picker:TimePicker = view.findViewById(R.id.timerpicker)
+                examName.setText(course.coureName)
+                examSetting.setOnClickListener {
+                    timers.visibility = if(timers.visibility == GONE) VISIBLE else GONE
+                }
+                var sliderValue = 0
+                var timerPickerValue = getDate(HHmm)
+                slider.addOnChangeListener { _, value, _ ->
+                    sliderValue = value.toInt()
+                    settingItemSubtitle.text = "$sliderValue 天后 [${getDateFormat(getDateBeforeOfAfter(getDate(yyyyMMdd),sliderValue),yyyyMMdd)}] $timerPickerValue"
+                }
+                picker.setOnTimeChangedListener { _, hourOfDay, minute ->
+                    timerPickerValue = "$hourOfDay:$minute"
+                    settingItemSubtitle.text = "$sliderValue 天后 [${getDateFormat(getDateBeforeOfAfter(getDate(yyyyMMdd),sliderValue),yyyyMMdd)}] $timerPickerValue"
+                }
             }
         }
     }
