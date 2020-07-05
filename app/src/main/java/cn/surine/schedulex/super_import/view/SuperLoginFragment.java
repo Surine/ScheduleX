@@ -20,6 +20,7 @@ import cn.surine.schedulex.ui.course.CourseViewModel;
 import cn.surine.schedulex.ui.schedule.ScheduleRepository;
 import cn.surine.schedulex.ui.schedule.ScheduleViewModel;
 import cn.surine.schedulex.ui.view.custom.helper.CommonDialogs;
+import kotlin.Unit;
 
 import static cn.surine.schedulex.ui.schedule_init.ScheduleInitFragment.SCHEDULE_NAME;
 
@@ -64,7 +65,7 @@ public class SuperLoginFragment extends BaseBindingFragment<FragmentLoginSuperBi
             }
         });
 
-        fragmentLoginSuperBinding.superTip.setOnClickListener(view -> CommonDialogs.INSTANCE.getCommonDialog(activity(), getString(R.string.warning), getString(R.string.super_tip),null,null).show());
+        fragmentLoginSuperBinding.superTip.setOnClickListener(view -> CommonDialogs.INSTANCE.getCommonDialog(activity(), getString(R.string.warning), getString(R.string.super_tip),()-> Unit.INSTANCE,()-> Unit.INSTANCE).show());
     }
 
 
