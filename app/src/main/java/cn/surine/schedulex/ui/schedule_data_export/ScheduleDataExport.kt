@@ -118,7 +118,6 @@ class ScheduleDataExport : BaseFragment() {
             val list: List<Course> = courseViewModel.getCourseByScheduleId(scheduleId)
             val c: Calendar = Calendar.getInstance()
             c.timeInMillis = System.currentTimeMillis()
-            val weekday = listOf(-1, 7, 1, 2, 3, 4, 5, 6)[c.get(Calendar.DAY_OF_WEEK)]
             for (course in list) {
                 //事件名称和提示信息
                 val eventTitle = course.coureName

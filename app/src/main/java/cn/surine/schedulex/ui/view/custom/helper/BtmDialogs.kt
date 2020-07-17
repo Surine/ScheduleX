@@ -14,15 +14,17 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import cn.surine.schedulex.R
 import cn.surine.schedulex.base.controller.App
 import cn.surine.schedulex.base.controller.BaseFragment
-import cn.surine.schedulex.base.utils.Dates
+import cn.surine.schedulex.base.utils.*
 import cn.surine.schedulex.base.utils.Dates.*
-import cn.surine.schedulex.base.utils.Drawables
 import cn.surine.schedulex.base.utils.Navigations.open
-import cn.surine.schedulex.base.utils.Uis
 import cn.surine.schedulex.data.entity.Course
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.slider.Slider
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 /**
  * Intro：
@@ -108,15 +110,26 @@ object BtmDialogs {
                 examSetting.setOnClickListener {
                     timers.visibility = if(timers.visibility == GONE) VISIBLE else GONE
                 }
-                var sliderValue = 0
+                var sliderValue = 1
                 var timerPickerValue = getDate(HHmm)
                 slider.addOnChangeListener { _, value, _ ->
                     sliderValue = value.toInt()
                     settingItemSubtitle.text = "$sliderValue 天后 [${getDateFormat(getDateBeforeOfAfter(getDate(yyyyMMdd),sliderValue),yyyyMMdd)}] $timerPickerValue"
                 }
                 picker.setOnTimeChangedListener { _, hourOfDay, minute ->
-                    timerPickerValue = "$hourOfDay:$minute"
+                    timerPickerValue = "$hourOfDay:${minute.supplyZero()}"
                     settingItemSubtitle.text = "$sliderValue 天后 [${getDateFormat(getDateBeforeOfAfter(getDate(yyyyMMdd),sliderValue),yyyyMMdd)}] $timerPickerValue"
+                }
+                examButton.setOnClickListener {
+                    val startTime = getDate("${getDateFormat(getDateBeforeOfAfter(getDate(yyyyMMdd),sliderValue),yyyyMMdd)} $timerPickerValue", yyyyMMddHHmm).time
+                    CoroutineScope(Dispatchers.IO).launch{
+                        Calendars.addCalendarEvent(baseFragment.activity(),"${examName.text}考试",examPos.text.toString()
+                                ,startTime,startTime + 2 * ONE_HOUR
+                        )
+                        withContext(Dispatchers.Main){
+                            Toasts.toast("添加成功！")
+                        }
+                    }
                 }
             }
         }
