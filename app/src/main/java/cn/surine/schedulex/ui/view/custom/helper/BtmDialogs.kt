@@ -1,5 +1,6 @@
 package cn.surine.schedulex.ui.view.custom.helper
 
+import android.Manifest
 import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.Color
@@ -21,6 +22,7 @@ import cn.surine.schedulex.data.entity.Course
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.slider.Slider
+import com.tbruyelle.rxpermissions2.RxPermissions
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -96,38 +98,45 @@ object BtmDialogs {
             bt.dismiss()
         }
         view.findViewById<TextView>(R.id.exam_plan).setOnClickListener {
-            getBaseConfig(context = baseFragment.activity(),view = Uis.inflate(baseFragment.activity(),R.layout.view_exam_plan)){
-                view, _ ->
-                val examName:EditText= view.findViewById(R.id.examName)
-                val examPos:EditText= view.findViewById(R.id.examPosition)
-                val examSetting:ConstraintLayout = view.findViewById(R.id.examItem)
-                val examButton:MaterialButton = view.findViewById(R.id.examButton)
-                val timers:LinearLayout = view.findViewById(R.id.timers)
-                val settingItemSubtitle:TextView = view.findViewById(R.id.settingItemSubtitle)
-                val slider:Slider = view.findViewById(R.id.sliderbar)
-                val picker:TimePicker = view.findViewById(R.id.timerpicker)
+            getBaseConfig(context = baseFragment.activity(), view = Uis.inflate(baseFragment.activity(), R.layout.view_exam_plan)) { view, _ ->
+                val examName: EditText = view.findViewById(R.id.examName)
+                val examPos: EditText = view.findViewById(R.id.examPosition)
+                val examSetting: ConstraintLayout = view.findViewById(R.id.examItem)
+                val examButton: MaterialButton = view.findViewById(R.id.examButton)
+                val timers: LinearLayout = view.findViewById(R.id.timers)
+                val settingItemSubtitle: TextView = view.findViewById(R.id.settingItemSubtitle)
+                val slider: Slider = view.findViewById(R.id.sliderbar)
+                val picker: TimePicker = view.findViewById(R.id.timerpicker)
                 examName.setText(course.coureName)
                 examSetting.setOnClickListener {
-                    timers.visibility = if(timers.visibility == GONE) VISIBLE else GONE
+                    timers.visibility = if (timers.visibility == GONE) VISIBLE else GONE
                 }
                 var sliderValue = 1
                 var timerPickerValue = getDate(HHmm)
                 slider.addOnChangeListener { _, value, _ ->
                     sliderValue = value.toInt()
-                    settingItemSubtitle.text = "$sliderValue 天后 [${getDateFormat(getDateBeforeOfAfter(getDate(yyyyMMdd),sliderValue),yyyyMMdd)}] $timerPickerValue"
+                    settingItemSubtitle.text = "$sliderValue 天后 [${getDateFormat(getDateBeforeOfAfter(getDate(yyyyMMdd), sliderValue), yyyyMMdd)}] $timerPickerValue"
                 }
                 picker.setOnTimeChangedListener { _, hourOfDay, minute ->
                     timerPickerValue = "$hourOfDay:${minute.supplyZero()}"
-                    settingItemSubtitle.text = "$sliderValue 天后 [${getDateFormat(getDateBeforeOfAfter(getDate(yyyyMMdd),sliderValue),yyyyMMdd)}] $timerPickerValue"
+                    settingItemSubtitle.text = "$sliderValue 天后 [${getDateFormat(getDateBeforeOfAfter(getDate(yyyyMMdd), sliderValue), yyyyMMdd)}] $timerPickerValue"
                 }
                 examButton.setOnClickListener {
-                    val startTime = getDate("${getDateFormat(getDateBeforeOfAfter(getDate(yyyyMMdd),sliderValue),yyyyMMdd)} $timerPickerValue", yyyyMMddHHmm).time
-                    CoroutineScope(Dispatchers.IO).launch{
-                        Calendars.addCalendarEvent(baseFragment.activity(),"${examName.text}考试",examPos.text.toString()
-                                ,startTime,startTime + 2 * ONE_HOUR
-                        )
-                        withContext(Dispatchers.Main){
-                            Toasts.toast("添加成功！")
+                    RxPermissions(baseFragment.activity()).apply {
+                        request(Manifest.permission.READ_CALENDAR, Manifest.permission.WRITE_CALENDAR).subscribe {
+                            if (it) {
+                                val startTime = getDate("${getDateFormat(getDateBeforeOfAfter(getDate(yyyyMMdd), sliderValue), yyyyMMdd)} $timerPickerValue", yyyyMMddHHmm).time
+                                CoroutineScope(Dispatchers.IO).launch {
+                                    Calendars.addCalendarEvent(baseFragment.activity(), "${examName.text}考试", examPos.text.toString()
+                                            , startTime, startTime + 2 * ONE_HOUR
+                                    )
+                                    withContext(Dispatchers.Main) {
+                                        Toasts.toast("添加成功！")
+                                    }
+                                }
+                            } else {
+                                Toasts.toast(baseFragment.activity().getString(R.string.permission_is_denied))
+                            }
                         }
                     }
                 }
