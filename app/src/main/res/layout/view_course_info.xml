@@ -33,7 +33,7 @@
     <TextView
         android:id="@+id/courseClassDay"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="@dimen/dp30"
         android:layout_marginTop="24dp"
         android:background="@color/colorPrimary"
         android:padding="@dimen/dp5"
@@ -45,7 +45,7 @@
     <TextView
         android:id="@+id/courseSession"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="@dimen/dp30"
         android:layout_marginStart="16dp"
         android:background="@color/colorAccent"
         android:padding="@dimen/dp5"
@@ -143,12 +143,16 @@
         android:orientation="vertical"
         app:layout_constraintGuide_percent="0.93430656" />
 
-    <Button
-        android:id="@+id/button3"
+    <TextView
+        android:id="@+id/exam_plan"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="@dimen/dp30"
         android:layout_marginStart="@dimen/dp16"
         android:text="考试安排"
+        android:padding="@dimen/dp5"
+        android:gravity="center"
+        android:textColor="@android:color/white"
+        android:background="@drawable/shape_full_radius_light_blue"
         app:layout_constraintBottom_toBottomOf="@+id/courseSession"
         app:layout_constraintStart_toEndOf="@+id/courseSession"
         app:layout_constraintTop_toTopOf="@+id/courseSession" />

@@ -88,7 +88,7 @@ public abstract class BaseFragment extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
-        if (getActivity() instanceof IBack) {
+            if (getActivity() instanceof IBack) {
             this.iBack = (IBack) getActivity();
             //此时将返回键任务交给fragment
             iBack.onBackKeyClick(this);

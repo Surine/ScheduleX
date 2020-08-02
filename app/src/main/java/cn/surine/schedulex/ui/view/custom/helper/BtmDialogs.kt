@@ -95,9 +95,9 @@ object BtmDialogs {
             open(baseFragment, R.id.action_scheduleFragment_to_addCourseFragment, bundle)
             bt.dismiss()
         }
-        view.findViewById<Button>(R.id.button3).setOnClickListener {
+        view.findViewById<TextView>(R.id.exam_plan).setOnClickListener {
             getBaseConfig(context = baseFragment.activity(),view = Uis.inflate(baseFragment.activity(),R.layout.view_exam_plan)){
-                view, bt ->
+                view, _ ->
                 val examName:EditText= view.findViewById(R.id.examName)
                 val examPos:EditText= view.findViewById(R.id.examPosition)
                 val examSetting:ConstraintLayout = view.findViewById(R.id.examItem)

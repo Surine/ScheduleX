@@ -8,6 +8,7 @@
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
         <item name="chipIconTint">@color/chipIconTint</item>
+        <item name="android:textColor">@android:color/darker_gray</item>
     </style>
 
 

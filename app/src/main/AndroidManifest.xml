@@ -28,7 +28,6 @@
         tools:replace="android:allowBackup">
         <activity
             android:name=".ui.MainActivity"
-            android:screenOrientation="fullSensor"
             android:windowSoftInputMode="adjustPan">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
