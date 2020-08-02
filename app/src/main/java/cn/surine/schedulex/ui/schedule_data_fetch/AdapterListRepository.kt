@@ -21,7 +21,7 @@ object AdapterListRepository : BaseRepository() {
         val url: String = if (BuildConfig.DEBUG) {
             "https://surinex.coding.net/p/schedulex/d/schedulex/git/raw/dev/schools.json"
         } else {
-            "https://surinex.coding.net/p/schedulex/d/schedulex/git/raw/master/schools.json"
+            "https://surinex.coding.net/p/schedulex/d/schedulex/git/raw/master/schools_"+BuildConfig.VERSION_CODE+".json"
         }
         Loader.mService.getAdapterList(url).await()
     }
