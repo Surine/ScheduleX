@@ -29,7 +29,7 @@ class NormalWeekProvider : CoreWidgetProvider() {
         WidgetUtil.setDay(this.javaClass, context, remoteViews, id, R.id.widget_day_class_title)
         WidgetUtil.setDay(this.javaClass, context, remoteViews, id, R.id.widget_day_class_subtitle)
         //显示与隐藏周末
-        if (DataHandler.getCurSchedule().isShowWeekend) {
+        if (DataHandler.getCurSchedule()?.isShowWeekend == true) {
             WidgetUtil.showOrHide(remoteViews, R.id._sat, View.VISIBLE)
             WidgetUtil.showOrHide(remoteViews, R.id._sun, View.VISIBLE)
         } else {

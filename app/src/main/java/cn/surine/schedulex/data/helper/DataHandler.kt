@@ -73,7 +73,7 @@ object DataHandler {
     }
 
 
-    fun getCurSchedule(): Schedule {
+    fun getCurSchedule(): Schedule? {
         return scheduleRepository.curSchedule
     }
 }

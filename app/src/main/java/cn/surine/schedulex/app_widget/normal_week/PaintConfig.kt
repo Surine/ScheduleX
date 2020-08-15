@@ -11,11 +11,11 @@ import cn.surine.schedulex.data.helper.DataHandler
  * @date 2020/6/8 17:32
  */
 class PaintConfig {
-    var slotHeight: Int = DataHandler.getCurSchedule().itemHeight
+    var slotHeight: Int = DataHandler.getCurSchedule()?.itemHeight ?: 80
     var itemRadius = 3
     var gapHeight = 3
     var gapWidth = 3
     var courseTextColor = Color.WHITE
     var itemStroke = 1.2f
-    var isShowWeek: Boolean = DataHandler.getCurSchedule().isShowWeekend
+    var isShowWeek: Boolean = DataHandler.getCurSchedule()?.isShowWeekend ?: false
 }

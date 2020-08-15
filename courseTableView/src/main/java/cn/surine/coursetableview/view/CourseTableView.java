@@ -320,7 +320,7 @@ public class CourseTableView extends LinearLayout {
 
         //再次判断当前周不合法
         if (mDataConfig.getCurrentWeek() > mDataConfig.getMaxWeek()) {
-            throw new IllegalArgumentException("currentWeek is greater than maxweek");
+            mDataConfig.setCurrentWeek(mDataConfig.getMaxWeek());
         }
 
         loadData(mBcourses);

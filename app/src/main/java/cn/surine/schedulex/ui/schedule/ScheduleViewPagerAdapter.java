@@ -17,7 +17,6 @@ import androidx.databinding.library.baseAdapters.BR;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.tencent.bugly.crashreport.CrashReport;
 
 import java.util.ArrayList;
@@ -39,7 +38,6 @@ import cn.surine.schedulex.base.controller.BaseFragment;
 import cn.surine.schedulex.base.interfaces.Call;
 import cn.surine.schedulex.base.utils.DataMaps;
 import cn.surine.schedulex.base.utils.Dates;
-import cn.surine.schedulex.base.utils.Imgs;
 import cn.surine.schedulex.base.utils.Navigations;
 import cn.surine.schedulex.base.utils.Prefs;
 import cn.surine.schedulex.base.utils.Toasts;
@@ -49,7 +47,6 @@ import cn.surine.schedulex.data.entity.Schedule;
 import cn.surine.schedulex.ui.course.CourseViewModel;
 import cn.surine.schedulex.ui.view.custom.helper.BtmDialogs;
 import kotlin.Unit;
-import kotlin.jvm.functions.Function2;
 
 import static cn.surine.schedulex.ui.view.custom.helper.BtmDialogs.COURSE_ID;
 
