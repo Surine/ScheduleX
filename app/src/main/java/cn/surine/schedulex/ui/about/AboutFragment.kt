@@ -8,6 +8,9 @@ import cn.surine.schedulex.R
 import cn.surine.schedulex.base.controller.BaseFragment
 import cn.surine.schedulex.base.utils.Others
 import cn.surine.schedulex.base.utils.Toasts.toast
+import cn.surine.schedulex.base.utils.click
+import cn.surine.schedulex.base.utils.init
+import cn.surine.schedulex.base.utils.ui
 import com.tencent.bugly.beta.Beta
 import kotlinx.android.synthetic.main.fragment_about.*
 
@@ -22,41 +25,45 @@ class AboutFragment : BaseFragment() {
     override fun layoutId(): Int = R.layout.fragment_about
 
     override fun onInit(parent: View?) {
-        aboutItemQQ.setOnClickListener {
-            Others.startQQ(activity(), "686976115")
-            toast(getString(R.string.qq_copy))
-        }
-        github.setOnClickListener {
-            toast("求个star，感谢啦！")
-            Others.openUrl("https://github.com/surine/ScheduleX")
-        }
-        alipay.setOnClickListener {
-            toast("开心到飞起~~~")
-            Others.donateAlipay(activity(), "fkx00798tue4qrncwkknh09")
-        }
-        aboutItemCoolApk.setOnClickListener {
-            Others.startCoolApk("667393")
-        }
-        versionSlogan.text = getString(R.string.version_slogan, Others.getAppVersion())
-        loadAnimation()
-        jetpack.setOnClickListener {
-            Beta.checkUpgrade(true, false)
+        init {
             loadAnimation()
+        }
+
+        ui {
+            versionSlogan.text = getString(R.string.version_slogan, Others.getAppVersion())
+        }
+
+        click {
+            aboutItemQQ.setOnClickListener {
+                Others.startQQ(activity(), "686976115")
+                toast(getString(R.string.qq_copy))
+            }
+            github.setOnClickListener {
+                toast("求个star，感谢啦！")
+                Others.openUrl("https://github.com/surine/ScheduleX")
+            }
+            alipay.setOnClickListener {
+                toast("开心到飞起~~~")
+                Others.donateAlipay(activity(), "fkx00798tue4qrncwkknh09")
+            }
+            aboutItemCoolApk.setOnClickListener {
+                Others.startCoolApk("667393")
+            }
+            jetpack.setOnClickListener {
+                Beta.checkUpgrade(true, false)
+                loadAnimation()
+            }
         }
     }
 
 
     private fun loadAnimation() {
-        rotate = if (rotate == 0F) {
-            360F
-        } else {
-            0F
+        SpringAnimation(jetpack, SpringAnimation.ROTATION_Y).apply {
+            spring = SpringForce(if (rotate == 0F) 360F else 0F).apply {
+                dampingRatio = SpringForce.DAMPING_RATIO_MEDIUM_BOUNCY
+                stiffness = SpringForce.STIFFNESS_VERY_LOW
+            }
+            start()
         }
-        val springForce = SpringForce(rotate)
-        springForce.dampingRatio = SpringForce.DAMPING_RATIO_MEDIUM_BOUNCY
-        springForce.stiffness = SpringForce.STIFFNESS_VERY_LOW
-        val animation = SpringAnimation(jetpack, SpringAnimation.ROTATION_Y)
-        animation.spring = springForce
-        animation.start()
     }
 }
