@@ -101,9 +101,11 @@
 
             <TextView
                 android:id="@+id/curTimeInfo"
-                android:layout_width="@dimen/dp300"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dp10"
+                android:layout_marginEnd="@dimen/dp10"
+                app:layout_constraintRight_toLeftOf="@id/chooseDate"
                 android:text="选中的课程(当天)将移动至目标日期对应节次"
                 android:textSize="@dimen/t12"
                 app:layout_constraintLeft_toLeftOf="@id/textView6"

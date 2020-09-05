@@ -45,7 +45,7 @@ object WidgetUtil {
     }
 
     /**
-     * 配置next按钮事假
+     * 配置next按钮事件
      */
     private var cur = 0
     fun setDay(target: Class<*>?, context: Context?, remoteViews: RemoteViews, appId: Int, layoutId: Int, icons: IntArray?) {
@@ -53,10 +53,10 @@ object WidgetUtil {
         val isNextDay = getBoolean(Constants.NEXT_DAY_STATUS + appId, false)
         val intent = Intent(context, target)
         if (!isNextDay) {
-            remoteViews.setImageViewResource(layoutId, icons[0])
+//            remoteViews.setImageViewResource(layoutId, icons[0])
             intent.action = Actions.NEXT_DAY
         } else {
-            remoteViews.setImageViewResource(layoutId, icons[1])
+//            remoteViews.setImageViewResource(layoutId, icons[1])
             intent.action = Actions.PREVIOUS_DAY
         }
         intent.putExtra(Constants.APP_WIDGET_ID, appId)

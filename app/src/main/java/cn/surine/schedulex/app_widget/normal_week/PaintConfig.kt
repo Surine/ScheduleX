@@ -16,6 +16,7 @@ class PaintConfig {
     var gapHeight = 3
     var gapWidth = 3
     var courseTextColor = Color.WHITE
+    var mainUiColor = DataHandler.getCurSchedule()?.lightText ?: false
     var itemStroke = 1.2f
     var isShowWeek: Boolean = DataHandler.getCurSchedule()?.isShowWeekend ?: false
 }

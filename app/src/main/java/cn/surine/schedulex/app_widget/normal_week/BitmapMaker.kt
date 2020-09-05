@@ -39,6 +39,7 @@ object BitmapMaker {
         //绘制侧边栏
         val pSlide = Paint(Paint.ANTI_ALIAS_FLAG)
         pSlide.textSize = Uis.sp2px(15f)
+        pSlide.color = if (pc.mainUiColor) Color.WHITE else Color.BLACK
         val endX = leftPadding + slideWidth
         val fontMetrics = pSlide.fontMetrics
         for (i in 0 until maxSession) { //测量节次文字，并绘制

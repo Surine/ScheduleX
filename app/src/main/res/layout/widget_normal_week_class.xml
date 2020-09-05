@@ -45,7 +45,6 @@
             android:layout_centerVertical="true"
             android:layout_marginEnd="@dimen/dp5"
             android:padding="@dimen/dp7"
-            android:tint="@android:color/black"
             android:src="@drawable/ic_keyboard_arrow_right_black_24dp" />
     </RelativeLayout>
 
@@ -62,6 +61,7 @@
             android:layout_height="match_parent"
             android:gravity="center"
             android:text="6月"
+            android:id="@+id/_m1"
             android:textColor="@android:color/black"
             android:textSize="@dimen/t13" />
 
@@ -71,6 +71,7 @@
             android:layout_weight="1"
             android:gravity="center"
             android:text="一"
+            android:id="@+id/_m2"
             android:textColor="@android:color/black" />
 
         <TextView
@@ -79,6 +80,7 @@
             android:layout_weight="1"
             android:gravity="center"
             android:text="二"
+            android:id="@+id/_m3"
             android:textColor="@android:color/black" />
 
         <TextView
@@ -87,6 +89,7 @@
             android:layout_weight="1"
             android:gravity="center"
             android:text="三"
+            android:id="@+id/_m4"
             android:textColor="@android:color/black" />
 
         <TextView
@@ -95,6 +98,7 @@
             android:layout_weight="1"
             android:gravity="center"
             android:text="四"
+            android:id="@+id/_m5"
             android:textColor="@android:color/black" />
 
         <TextView
@@ -103,6 +107,7 @@
             android:layout_weight="1"
             android:gravity="center"
             android:text="五"
+            android:id="@+id/_m6"
             android:textColor="@android:color/black" />
 
         <TextView
