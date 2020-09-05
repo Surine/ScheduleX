@@ -9,6 +9,9 @@
         <item name="colorAccent">@color/colorAccent</item>
         <item name="chipIconTint">@color/chipIconTint</item>
         <item name="android:textColor">@android:color/darker_gray</item>
+
+        <item name="md_corner_radius">@dimen/dp15</item>
+        <item name="md_button_casing">@android:color/white</item>
     </style>
 
 

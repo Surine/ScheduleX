@@ -12,7 +12,9 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import android.widget.TimePicker
+import androidx.fragment.app.Fragment
 import cn.surine.schedulex.R
+import com.peanut.sdk.miuidialog.MIUIDialog
 
 /**
  * Intro：
@@ -55,6 +57,23 @@ object CommonDialogs {
             dialog.dismiss()
         }
         return dialog
+    }
+
+
+    /**
+     * 新版本兼容
+     * */
+    fun miuiDialog(context: Context,title: String, msg: String,okCall: () -> Unit = {}, cancelCall: () -> Unit = {}) {
+        MIUIDialog(context).show {
+            title(text = title)
+            message(text = msg)
+            positiveButton(text = "确定"){
+                okCall()
+            }
+            negativeButton(text = "取消"){
+                cancelCall()
+            }
+        }
     }
 
 

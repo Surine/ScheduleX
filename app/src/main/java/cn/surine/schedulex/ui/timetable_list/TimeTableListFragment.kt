@@ -104,11 +104,14 @@ class TimeTableListFragment : BaseFragment() {
             Toasts.toast(getString(R.string.is_ban_to_delete))
             return
         }
-        CommonDialogs.getCommonDialog(activity(), getString(R.string.warning), getString(R.string.are_you_sure_to_delete_timetable), okCall = {
+        CommonDialogs.miuiDialog(activity(),getString(R.string.warning), getString(R.string.are_you_sure_to_delete_timetable),okCall = {
             timetableViewModel.deleteTimeTableById(data[position].roomId)
             Toasts.toast(getString(R.string.time_table_has_been_deleted))
             data.removeAt(position)
             viewRecycler.adapter!!.notifyDataSetChanged()
-        }).show()
+        })
+//        CommonDialogs.getCommonDialog(activity(), getString(R.string.warning), getString(R.string.are_you_sure_to_delete_timetable), okCall = {
+//
+//        }).show()
     }
 }
