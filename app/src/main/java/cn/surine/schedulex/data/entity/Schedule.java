@@ -157,6 +157,8 @@ public class Schedule extends BaseVm {
         public static final int EXCEL = 3;
         //超表
         public static final int SUPER_CN = 4;
+        //小爱
+        public static final int MI_AI = 5;
     }
 
 

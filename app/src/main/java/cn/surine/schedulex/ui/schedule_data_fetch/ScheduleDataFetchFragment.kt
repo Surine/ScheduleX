@@ -65,6 +65,10 @@ class ScheduleDataFetchFragment : BaseFragment() {
                 }
             }
         }
+
+        button3.setOnClickListener {
+            Navigations.open(this,R.id.action_dataFetchFragment_to_miAiFetchFragment)
+        }
     }
 
     /**

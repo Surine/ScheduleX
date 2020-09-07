@@ -76,6 +76,9 @@
             app:destination="@id/scheduleSchoolListFragment"
             app:enterAnim="@anim/fragment_open_enter"
             app:popEnterAnim="@anim/fragment_open_enter" />
+        <action
+            android:id="@+id/action_dataFetchFragment_to_miAiFetchFragment"
+            app:destination="@id/miAiFetchFragment" />
     </fragment>
     <fragment
         android:id="@+id/splashFragment"
@@ -204,5 +207,13 @@
             app:destination="@id/scheduleFragment"
             app:enterAnim="@anim/fragment_open_enter"
             app:popEnterAnim="@anim/fragment_open_enter" />
+    </fragment>
+    <fragment
+        android:id="@+id/miAiFetchFragment"
+        android:name="cn.surine.schedulex.ui.schedule_data_fetch.MiAiFetchFragment"
+        android:label="MiAiFetchFragment" >
+        <action
+            android:id="@+id/action_miAiFetchFragment_to_scheduleFragment"
+            app:destination="@id/scheduleFragment" />
     </fragment>
 </navigation>
