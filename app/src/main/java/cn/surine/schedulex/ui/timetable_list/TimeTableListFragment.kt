@@ -109,6 +109,6 @@ class TimeTableListFragment : BaseFragment() {
             Toasts.toast(getString(R.string.time_table_has_been_deleted))
             data.removeAt(position)
             viewRecycler.adapter!!.notifyDataSetChanged()
-        }).show()
+        })
     }
 }

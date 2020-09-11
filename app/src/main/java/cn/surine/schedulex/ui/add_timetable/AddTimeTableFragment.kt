@@ -83,7 +83,7 @@ class AddTimeTableFragment : BaseFragment() {
                         }
                         it.notifyDataSetChanged()
                         Toasts.toast(getString(R.string.delete))
-                    }).show()
+                    })
                 }
                 true
             }

@@ -3,7 +3,6 @@ package cn.surine.schedulex.ui.add_course
 import android.annotation.SuppressLint
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
-import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.DatePicker
@@ -28,6 +27,7 @@ import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.chip.Chip
 import com.google.android.material.chip.ChipGroup
 import com.google.android.material.snackbar.Snackbar
+import com.peanut.sdk.miuidialog.MIUIDialog
 import kotlinx.android.synthetic.main.fragment_add_course.*
 import java.util.*
 
@@ -82,35 +82,55 @@ class AddCourseFragment : BaseFragment() {
         }
 
         editCourseName.setOnClickListener {
-            CommonDialogs.getEditDialog(activity(), if (hasCourseData) course.coureName else courseNameSubTitle.text.toString(), hasCourseData, okCall = {
-                course.coureName = it
-                courseNameSubTitle.text = it
-            }).show()
+            MIUIDialog(activity()).show {
+                title(text = "编辑课程名称")
+                input(prefill = if (hasCourseData) course.coureName else "", hint = if (!hasCourseData) courseNameSubTitle.text.toString() else "") { it, _ ->
+                    course.coureName = it.toString()
+                    courseNameSubTitle.text = it
+                }
+                positiveButton(text = "保存") { }
+                negativeButton(text = "取消") { }
+            }
         }
 
         editCoursePosition.setOnClickListener {
-            CommonDialogs.getEditDialog(activity(), if (hasCourseData) "${course.teachingBuildingName}${course.classroomName}" else coursePositionSubtitle.text.toString(), hasCourseData, okCall = { t ->
-                course.teachingBuildingName = t
-                //如果是修改，直接保存building就可
-                if (hasCourseData) {
-                    course.classroomName = ""
+            MIUIDialog(activity()).show {
+                title(text = "编辑上课地点")
+                input(prefill = if (hasCourseData) "${course.teachingBuildingName}${course.classroomName}" else "", hint = coursePositionSubtitle.text.toString()) { it, _ ->
+                    course.teachingBuildingName = it.toString()
+                    //如果是修改，直接保存building就可
+                    if (hasCourseData) {
+                        course.classroomName = ""
+                    }
+                    coursePositionSubtitle.text = it
                 }
-                coursePositionSubtitle.text = t
-            }).show()
+                positiveButton(text = "保存") { }
+                negativeButton(text = "取消") { }
+            }
         }
 
         editCourseTeacher.setOnClickListener {
-            CommonDialogs.getEditDialog(activity(), if (hasCourseData) course.teacherName else courseTeacherSubtitle.text.toString(), hasCourseData, okCall = { t ->
-                course.teacherName = t
-                courseTeacherSubtitle.text = t
-            }).show()
+            MIUIDialog(activity()).show {
+                title(text = "编辑教师")
+                input(prefill = if (hasCourseData) course.teacherName else "", hint = courseTeacherSubtitle.text.toString()) { it, _ ->
+                    course.teacherName = it.toString()
+                    courseTeacherSubtitle.text = it
+                }
+                positiveButton(text = "保存") { }
+                negativeButton(text = "取消") { }
+            }
         }
 
         editCourseScore.setOnClickListener {
-            CommonDialogs.getEditDialog(activity(), if (hasCourseData) course.xf else courseScoreSubtitle.text.toString(), hasCourseData, okCall = { t ->
-                course.xf = t
-                courseScoreSubtitle.text = getString(R.string.score_2_0, t)
-            }).show()
+            MIUIDialog(activity()).show {
+                title(text = "编辑学分")
+                input(prefill = if (hasCourseData) course.xf else "", hint = courseScoreSubtitle.text.toString()) { it, _ ->
+                    course.xf = it.toString()
+                    courseScoreSubtitle.text = getString(R.string.score_2_0, it)
+                }
+                positiveButton(text = "保存") { }
+                negativeButton(text = "取消") { }
+            }
         }
 
         editCoursePlan.setOnClickListener { showPlanTime() }
@@ -141,11 +161,11 @@ class AddCourseFragment : BaseFragment() {
     }
 
     private fun deleteCourse() {
-        CommonDialogs.getCommonDialog(activity(), getString(R.string.warning), getString(R.string.delete_schedule_dialog_msg), okCall =  {
-                courseViewModel.deleteByCourseId(course.id)
-                Toasts.toast(getString(R.string.handle_success))
-                Navigations.close(this@AddCourseFragment)
-        }).show()
+        CommonDialogs.getCommonDialog(activity(), getString(R.string.warning), getString(R.string.delete_schedule_dialog_msg), okCall = {
+            courseViewModel.deleteByCourseId(course.id)
+            Toasts.toast(getString(R.string.handle_success))
+            Navigations.close(this@AddCourseFragment)
+        })
     }
 
     private fun showPlanTime() {
@@ -198,7 +218,7 @@ class AddCourseFragment : BaseFragment() {
             }
         }
         weekView.findViewById<Button>(R.id.button).setOnClickListener {
-             StringBuilder().apply {
+            StringBuilder().apply {
                 (0 until schedule.totalWeek).forEach {
                     if ((chipGroup[it] as Chip).isChecked) append(1) else append(0)
                 }

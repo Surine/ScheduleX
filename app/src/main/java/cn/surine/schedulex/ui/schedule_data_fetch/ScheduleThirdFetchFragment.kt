@@ -9,11 +9,8 @@ import androidx.lifecycle.ViewModelProviders
 import cn.surine.schedulex.R
 import cn.surine.schedulex.base.Constants
 import cn.surine.schedulex.base.controller.BaseFragment
-import cn.surine.schedulex.base.utils.InstanceFactory
-import cn.surine.schedulex.base.utils.Navigations
-import cn.surine.schedulex.base.utils.Prefs
+import cn.surine.schedulex.base.utils.*
 import cn.surine.schedulex.base.utils.Toasts.toast
-import cn.surine.schedulex.base.utils.bitCount
 import cn.surine.schedulex.data.entity.Course
 import cn.surine.schedulex.data.entity.Schedule
 import cn.surine.schedulex.third_parse.CourseWrapper
@@ -28,6 +25,8 @@ import cn.surine.schedulex.ui.schedule.ScheduleRepository
 import cn.surine.schedulex.ui.schedule.ScheduleViewModel
 import cn.surine.schedulex.ui.schedule_init.ScheduleInitFragment
 import cn.surine.schedulex.ui.view.custom.helper.CommonDialogs
+import com.peanut.sdk.miuidialog.MIUIDialog
+import com.peanut.sdk.miuidialog.content_wrapper.MessageSetting
 import com.tencent.bugly.crashreport.CrashReport
 import kotlinx.android.synthetic.main.fragment_third_fetch.*
 import java.net.URLDecoder
@@ -80,7 +79,12 @@ class ScheduleThirdFetchFragment : BaseFragment() {
     }
 
     private fun loadTip() {
-        CommonDialogs.getCommonDialog(activity(),"教务导入","仅需两步即可导入您的课程\n\n1.在地址栏输入您的教务处网址，点击右上角蓝色按钮访问并定位到课表页面\n2.点击右下角导入按钮进行课程导入").show()
+        MIUIDialog(activity()).show {
+            title(text = "教务导入")
+            message(text = "仅需两步即可导入您的课程\n\n1.在地址栏输入您的教务处网址，点击右上角蓝色按钮访问并定位到课表页面\n2.点击右下角导入按钮进行课程导入")
+            positiveButton(text = "确定") { this.cancel() }
+            negativeButton(text = "取消") { this.cancel()  }
+        }
     }
 
     @SuppressLint("SetJavaScriptEnabled")
@@ -145,15 +149,16 @@ class ScheduleThirdFetchFragment : BaseFragment() {
                         parseData(list)
                     }
                     if (e != null) {
-                        CommonDialogs.getCommonDialog(activity(), "解析失败", "堆栈信息：$e.localizedMessage\n\n地址：$helperUrl\n\n系统：$helperType\n\n请点击确定按钮上报网页源码到服务器以帮助排查问题~", okCall = {
-                            CrashReport.postCatchedException(RuntimeException(
-                                    //这边网页源码太长，暂时先不上报了。
-                                    "[${e.localizedMessage}][url:$helperUrl][type:$helperType]"
-                            ))
-                            toast("感谢您的支持!")
-                        }, cancelCall = {
-                            toast("您也可以点击 App -> 设置 -> QQ群 加群反馈问题")
-                        }).show()
+                        MIUIDialog(activity()).show {
+                            title(text = "解析失败")
+                            message(text = "<html>请尝试定位到课表页面再进行解析，如果还是无法导入，请您加QQ群<a href='https://www.baidu.com'>686976115</a>进行反馈；同时，如果您有适配您的学校的想法也可以直接在群里联系开发者。</html>"){
+                                html {
+                                    Others.openUrl("https://jq.qq.com/?_wv=1027&k=SmyNDbv6")
+                                }
+                            }
+                            positiveButton(text = "确定") { this.cancel() }
+                            negativeButton(text = "取消") { this.cancel()  }
+                        }
                     }
                 }
             }

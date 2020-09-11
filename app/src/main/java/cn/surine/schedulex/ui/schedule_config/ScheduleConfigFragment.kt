@@ -38,6 +38,7 @@ import cn.surine.schedulex.ui.timetable_list.TimeTableViewModel
 import cn.surine.schedulex.ui.view.custom.helper.CommonDialogs
 import com.bumptech.glide.Glide
 import com.google.android.material.bottomsheet.BottomSheetDialog
+import com.peanut.sdk.miuidialog.MIUIDialog
 import com.tbruyelle.rxpermissions2.RxPermissions
 import kotlinx.android.synthetic.main.fragment_schedule_config.*
 import java.io.File
@@ -91,7 +92,7 @@ class ScheduleConfigFragment : BaseBindingFragment<FragmentScheduleConfigBinding
                 courseViewModel.deleteCourseByScheduleId(scheduleId.toLong())
                 Toasts.toast(getString(R.string.schedule_is_delete))
                 Navigations.close(this@ScheduleConfigFragment)
-            }).show()
+            })
         }
 
         //课表名
@@ -160,12 +161,17 @@ class ScheduleConfigFragment : BaseBindingFragment<FragmentScheduleConfigBinding
     }
 
     private fun modifyScheduleName() {
-        CommonDialogs.getEditDialog(activity(), schedule.name, true, okCall = { s ->
-            schedule.name = s
-            this@ScheduleConfigFragment.courseNameSubTitle.text = s
-            Toasts.toast(getString(R.string.update_success))
-            scheduleViewModel.updateSchedule(schedule)
-        })
+        MIUIDialog(activity()).show {
+            title(text = "编辑课表名称")
+            input(prefill = schedule.name){ text, _ ->
+                schedule.name = text.toString()
+                this@ScheduleConfigFragment.courseNameSubTitle.text = text
+                Toasts.toast(getString(R.string.update_success))
+                scheduleViewModel.updateSchedule(schedule)
+            }
+            positiveButton(text = "保存") {  }
+            negativeButton (text = "取消") {  }
+        }
     }
 
     @SuppressLint("CheckResult")

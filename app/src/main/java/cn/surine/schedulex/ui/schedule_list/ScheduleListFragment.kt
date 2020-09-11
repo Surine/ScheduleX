@@ -162,7 +162,7 @@ class ScheduleListFragment : BaseFragment() {
                 Toasts.toast(getString(R.string.schedule_is_delete))
                 data.removeAt(position)
                 viewRecycler.adapter?.notifyDataSetChanged()
-            }).show()
+            })
         }
     }
 

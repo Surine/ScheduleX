@@ -83,7 +83,7 @@ public class SuperCourseFetchFragment extends BaseBindingFragment<FragmentSuperC
                             List<Course> courseList = new ArrayList();
                             List<SuperCourse> superCourseData = superViewModel.getSuperCourseList().lessonList;
                             if (superCourseData.size() == 0) {
-                                Dialog warnDialog = CommonDialogs.INSTANCE.getCommonDialog(activity(), getString(R.string.warning), "没有检测到该学期的课程,确定继续导入么？", () -> {
+                                CommonDialogs.INSTANCE.getCommonDialog(activity(), getString(R.string.warning), "没有检测到该学期的课程,确定继续导入么？", () -> {
                                     parseCourse(scheduleName, courseList, superCourseData);
                                     return Unit.INSTANCE;
                                 }, () -> {
@@ -91,8 +91,6 @@ public class SuperCourseFetchFragment extends BaseBindingFragment<FragmentSuperC
                                     Navigations.close(SuperCourseFetchFragment.this);
                                     return Unit.INSTANCE;
                                 });
-                                warnDialog.setCancelable(false);
-                                warnDialog.show();
                             } else {
                                 parseCourse(scheduleName, courseList, superCourseData);
                             }

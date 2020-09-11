@@ -1,6 +1,7 @@
 package cn.surine.schedulex.ui.view.custom.helper
 
 import android.annotation.SuppressLint
+import android.app.Activity
 import android.app.AlertDialog
 import android.app.Dialog
 import android.app.TimePickerDialog
@@ -13,6 +14,7 @@ import android.widget.EditText
 import android.widget.TextView
 import android.widget.TimePicker
 import cn.surine.schedulex.R
+import com.peanut.sdk.miuidialog.MIUIDialog
 
 /**
  * Intro：
@@ -116,4 +118,15 @@ object CommonDialogs {
         dialog.show()
         return dialog
     }
+
+
+    fun getCommonDialog(activity: Activity, title: String, msg: String, okCall: () -> Unit = {}, cancelCall: () -> Unit = {}) {
+        MIUIDialog(activity).show {
+            title(text = title)
+            message(text = msg)
+            positiveButton(text = "确定") { okCall() }
+            negativeButton(text = "取消") { cancelCall() }
+        }
+    }
+
 }
