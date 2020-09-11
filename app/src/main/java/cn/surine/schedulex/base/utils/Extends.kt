@@ -4,8 +4,6 @@ import android.view.LayoutInflater
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
-import cn.surine.schedulex.R
-import cn.surine.schedulex.base.Constants
 import cn.surine.schedulex.base.controller.App
 import cn.surine.schedulex.base.controller.BaseAdapter
 import cn.surine.schedulex.ui.view.custom.helper.CommonDialogs
@@ -97,6 +95,12 @@ fun once(key: String, block: () -> Unit) {
 }
 
 //解析布局
-fun Int.parseUi():View{
+fun Int.parseUi(): View {
     return LayoutInflater.from(App.context).inflate(this, null)
 }
+
+fun <T> ifValue(t1: T, t2: T, block: (t1: T, t2: T) -> Boolean) = if (block(t1, t2)) t1 else t2
+fun ifGreater(t1: Int, t2: Int) = ifValue(t1, t2) { i1, i2 -> i1 > i2 }
+fun ifLess(t1: Int, t2: Int) = ifValue(t1, t2) { i1, i2 -> i1 < i2 }
+fun ifGreaterEqual(t1: Int, t2: Int) = ifValue(t1, t2) { i1, i2 -> i1 >= i2 }
+fun ifLessEqual(t1: Int, t2: Int) = ifValue(t1, t2) { i1, i2 -> i1 <= i2 }

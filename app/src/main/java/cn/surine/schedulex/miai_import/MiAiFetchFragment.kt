@@ -1,7 +1,6 @@
 package cn.surine.schedulex.miai_import
 
 import android.annotation.SuppressLint
-import android.util.Log
 import android.view.View
 import android.webkit.*
 import cn.surine.schedulex.R
@@ -12,16 +11,17 @@ import cn.surine.schedulex.base.utils.Jsons
 import cn.surine.schedulex.base.utils.Navigations.open
 import cn.surine.schedulex.base.utils.Prefs.save
 import cn.surine.schedulex.base.utils.Toasts.toast
-import cn.surine.schedulex.base.utils.bitCount
 import cn.surine.schedulex.data.entity.Course
 import cn.surine.schedulex.data.entity.Schedule
+import cn.surine.schedulex.data.helper.ParserManager
+import cn.surine.schedulex.miai_import.model.MiAiBean
+import cn.surine.schedulex.miai_import.model.MiAiCourseInfo
 import cn.surine.schedulex.ui.course.CourseViewModel
 import cn.surine.schedulex.ui.schedule.ScheduleViewModel
 import kotlinx.android.synthetic.main.view_webview.*
 import okhttp3.*
 import java.io.IOException
 import java.net.URLDecoder
-import java.util.*
 
 
 /**
@@ -40,7 +40,7 @@ class MiAiFetchFragment : BaseFragment() {
             scheduleViewModel = this.vmSchedule
             courseViewModel = this.vmCourse
         }
-        val url = "https://i.ai.mi.com/h5/precache/ai-schedule/#/import_schedule?token=9ee57bb5-43c8-4f71-8c05-7f4868b8272e&expireTime=1599483791000"
+        val url = arguments?.getString(MiAiInitFragment.MI_AI_SHARE_URL) ?: return
         web.loadUrl(url)
         webSetting()
     }
@@ -93,7 +93,9 @@ class MiAiFetchFragment : BaseFragment() {
                 val text = response.body?.string() ?: ""
                 if (text.isNotEmpty()) {
                     val data = Jsons.parseJsonWithGson(text, MiAiBean::class.java)
-                    parseCourse("小爱", data.data)
+                    if (data.data.courseInfos.isNotEmpty()) {
+                        parseCourse("小爱", data.data)
+                    }
                 }
             }
 
@@ -102,36 +104,15 @@ class MiAiFetchFragment : BaseFragment() {
 
 
     private fun parseCourse(str: String, miAiCourseInfo: MiAiCourseInfo) {
-        val courseList = mutableListOf<Course>()
         val scheduleId = scheduleViewModel.addSchedule(str, miAiCourseInfo.totalWeek, miAiCourseInfo.presentWeek, Schedule.IMPORT_WAY.MI_AI)
         save(Constants.CUR_SCHEDULE, scheduleId)
-        for (info in miAiCourseInfo.courseInfos) {
-            val course = Course()
-            course.scheduleId = scheduleId
-            val sb = StringBuilder()
-            sb.append(course.scheduleId)
-            sb.append("@")
-            sb.append(UUID.randomUUID())
-            sb.append(System.currentTimeMillis())
-            course.id = sb.toString()
-            course.coureName = info.name
-            course.teacherName = info.teacher
-            course.teachingBuildingName = info.position
-            course.classDay = info.day.toString()
-            course.color = Constants.COLOR_1[Random().nextInt(Constants.COLOR_1.size)]
-            //TODO 这里周处理还有问题
-            course.classSessions = info.sections.first().section.toString()
-            var i = info.sections.last().section - info.sections.first().section + 1
-            if (i > Constants.STAND_SESSION) {
-                i = Constants.STAND_SESSION
+        ParserManager.aiParser(scheduleId, miAiCourseInfo) {
+            courseViewModel.saveCourseByDb(it, scheduleId)
+            activity().runOnUiThread {
+                toast("导入成功")
+                open(this, R.id.action_miAiFetchFragment_to_scheduleFragment)
             }
-            course.continuingSession = i.toString()
-            course.classWeek = info.weeks.bitCount(miAiCourseInfo.totalWeek)
-            courseList.add(course)
         }
-        courseViewModel.saveCourseByDb(courseList, scheduleId)
-        toast("导入成功")
-        open(this, R.id.action_miAiFetchFragment_to_scheduleFragment)
     }
 
 }

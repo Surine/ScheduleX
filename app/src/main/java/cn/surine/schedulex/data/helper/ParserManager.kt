@@ -2,9 +2,11 @@ package cn.surine.schedulex.data.helper
 
 import cn.surine.schedulex.base.Constants
 import cn.surine.schedulex.base.utils.bitCount
+import cn.surine.schedulex.base.utils.ifGreater
 import cn.surine.schedulex.data.entity.Course
-import cn.surine.schedulex.miai_import.MiAiCourseInfo
+import cn.surine.schedulex.miai_import.model.MiAiCourseInfo
 import java.util.*
+import kotlin.math.abs
 
 /**
  * Intro：
@@ -17,7 +19,9 @@ object ParserManager {
     fun aiParser(scheduleId: Long, miAiCourseInfo: MiAiCourseInfo, block: (List<Course>) -> Unit) {
         val courseList = mutableListOf<Course>()
         while (miAiCourseInfo.courseInfos.isNotEmpty()) {
-            for (info in miAiCourseInfo.courseInfos) {
+            val deleteTag = mutableListOf<Int>()
+            for (index in miAiCourseInfo.courseInfos.indices) {
+                val info = miAiCourseInfo.courseInfos[index]
                 courseList.add(Course().apply {
                     this.scheduleId = scheduleId
                     id = generateId(scheduleId)
@@ -30,23 +34,24 @@ object ParserManager {
                     //区间合并
                     val start = info.sections[0]
                     var end = start
+                    start.section *= -1  //标记位
                     for (i in 1 until info.sections.size) {
-                        val sec = info.sections[i]
-                        if (i + 1 < info.sections.size && info.sections[i + 1].section - 1 == sec.section) {
-                            end = info.sections[i + 1]
+                        if (i < info.sections.size && info.sections[i].section - 1 == abs(end.section)) {
+                            end = info.sections[i]
                             end.section *= -1
                         } else {
                             break
                         }
                     }
-                    classSessions = start.toString()
-                    continuingSession = (if (start.section - end.section + 1 > Constants.STAND_SESSION) Constants.STAND_SESSION else start.section - end.section + 1).toString()
+                    classSessions = start.section.toString()
+                    continuingSession = ifGreater(abs(end.section) - abs(start.section) + 1,Constants.STAND_SESSION).toString()
                     info.sections = info.sections.filter { it.section > 0 }.toMutableList()
                     if (info.sections.isEmpty()) {
-                        miAiCourseInfo.courseInfos.remove(info)
+                        info.tag = true
                     }
                 })
             }
+            miAiCourseInfo.courseInfos = miAiCourseInfo.courseInfos.filter { !it.tag }.toMutableList()
         }
         block(courseList)
     }

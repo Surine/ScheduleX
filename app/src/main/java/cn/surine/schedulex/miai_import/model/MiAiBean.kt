@@ -1,4 +1,4 @@
-package cn.surine.schedulex.miai_import
+package cn.surine.schedulex.miai_import.model
 
 /**
  * Intro：
@@ -7,8 +7,8 @@ package cn.surine.schedulex.miai_import
  * @date 9/6/20 23:15
  */
 data class MiAiBean(
-        val status:Int,
-        val data:MiAiCourseInfo
+        val status: Int,
+        val data: MiAiCourseInfo
 )
 
 data class MiAiCourseInfo(
@@ -16,7 +16,7 @@ data class MiAiCourseInfo(
         val presentWeek: Int,
         //总共周
         val totalWeek: Int,
-        val courseInfos: MutableList<CourseInfo>
+        var courseInfos: MutableList<CourseInfo>
 )
 
 data class CourseInfo(
@@ -32,7 +32,9 @@ data class CourseInfo(
         val day: Int,
         //节次
         var sections: MutableList<Section>
-)
+) {
+    var tag: Boolean = false
+}
 
 data class Section(
         var section: Int

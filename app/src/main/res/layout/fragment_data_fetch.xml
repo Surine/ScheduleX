@@ -21,32 +21,50 @@
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:id="@+id/fromFile"
-            android:layout_width="@dimen/dp100"
-            android:layout_height="@dimen/dp100"
-            android:drawableTop="@mipmap/floder"
-            android:text="从文件导入"
-            app:layout_constraintRight_toLeftOf="@id/fromSuperCn"
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
             android:gravity="center"
-            app:layout_constraintLeft_toLeftOf="parent"
-            android:textColor="@android:color/black"
-            app:layout_constraintBottom_toBottomOf="@+id/fromSuperCn"
-            app:layout_constraintTop_toTopOf="@+id/fromSuperCn"
-            tools:layout_editor_absoluteX="54dp" />
-
-        <TextView
-            android:id="@+id/fromSuperCn"
-            android:layout_width="@dimen/dp100"
-            android:layout_height="@dimen/dp100"
-            android:drawableTop="@mipmap/super_class"
-            android:gravity="center"
-            android:text="超级课程表导入"
-            android:layout_marginBottom="@dimen/dp40"
-            android:textColor="@android:color/black"
+            android:layout_marginBottom="@dimen/dp30"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintLeft_toRightOf="@id/fromFile"
-            app:layout_constraintRight_toRightOf="parent" />
+            >
+            <TextView
+                android:id="@+id/fromFile"
+                android:layout_width="@dimen/dp80"
+                android:layout_height="@dimen/dp100"
+                android:drawableTop="@mipmap/floder"
+                android:text="从文件导入"
+                android:drawablePadding="@dimen/dp5"
+                android:gravity="center"
+                android:textColor="@android:color/black"
+                />
+
+            <TextView
+                android:id="@+id/fromSuperCn"
+                android:layout_width="@dimen/dp80"
+                android:layout_height="@dimen/dp100"
+                android:drawableTop="@mipmap/super_class"
+                android:gravity="center"
+                android:drawablePadding="@dimen/dp5"
+                android:layout_marginStart="@dimen/dp40"
+                android:text="从超表导入"
+                android:textColor="@android:color/black"
+                />
+
+            <TextView
+                android:id="@+id/fromMiai"
+                android:layout_width="@dimen/dp80"
+                android:layout_height="@dimen/dp100"
+                android:drawableTop="@mipmap/mi_ai"
+                android:gravity="center"
+                android:layout_marginStart="@dimen/dp40"
+                android:text="从小爱导入"
+                android:drawablePadding="@dimen/dp5"
+                android:textColor="@android:color/black"
+                />
+        </LinearLayout>
+
 
         <TextView
             android:id="@+id/adaptationPlan"
@@ -73,13 +91,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <Button
-            android:id="@+id/button3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Button"
-            tools:layout_editor_absoluteX="159dp"
-            tools:layout_editor_absoluteY="479dp" />
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

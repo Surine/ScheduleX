@@ -77,8 +77,8 @@
             app:enterAnim="@anim/fragment_open_enter"
             app:popEnterAnim="@anim/fragment_open_enter" />
         <action
-            android:id="@+id/action_dataFetchFragment_to_miAiFetchFragment"
-            app:destination="@id/miAiFetchFragment" />
+            android:id="@+id/action_dataFetchFragment_to_miAiInitFragment"
+            app:destination="@id/miAiInitFragment" />
     </fragment>
     <fragment
         android:id="@+id/splashFragment"
@@ -215,5 +215,13 @@
         <action
             android:id="@+id/action_miAiFetchFragment_to_scheduleFragment"
             app:destination="@id/scheduleFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/miAiInitFragment"
+        android:name="cn.surine.schedulex.miai_import.MiAiInitFragment"
+        android:label="MiAiInitFragment" >
+        <action
+            android:id="@+id/action_miAiInitFragment_to_miAiFetchFragment"
+            app:destination="@id/miAiFetchFragment" />
     </fragment>
 </navigation>
