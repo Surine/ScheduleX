@@ -210,7 +210,7 @@
     </fragment>
     <fragment
         android:id="@+id/miAiFetchFragment"
-        android:name="cn.surine.schedulex.ui.schedule_data_fetch.MiAiFetchFragment"
+        android:name="cn.surine.schedulex.miai_import.MiAiFetchFragment"
         android:label="MiAiFetchFragment" >
         <action
             android:id="@+id/action_miAiFetchFragment_to_scheduleFragment"

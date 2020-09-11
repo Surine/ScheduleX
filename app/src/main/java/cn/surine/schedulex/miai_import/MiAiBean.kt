@@ -16,7 +16,7 @@ data class MiAiCourseInfo(
         val presentWeek: Int,
         //总共周
         val totalWeek: Int,
-        val courseInfos: List<CourseInfo>
+        val courseInfos: MutableList<CourseInfo>
 )
 
 data class CourseInfo(
@@ -31,9 +31,9 @@ data class CourseInfo(
         //星期x
         val day: Int,
         //节次
-        val sections: List<Section>
+        var sections: MutableList<Section>
 )
 
 data class Section(
-        val section: Int
+        var section: Int
 )

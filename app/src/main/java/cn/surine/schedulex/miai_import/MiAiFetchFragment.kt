@@ -1,4 +1,4 @@
-package cn.surine.schedulex.ui.schedule_data_fetch
+package cn.surine.schedulex.miai_import
 
 import android.annotation.SuppressLint
 import android.util.Log
@@ -15,8 +15,6 @@ import cn.surine.schedulex.base.utils.Toasts.toast
 import cn.surine.schedulex.base.utils.bitCount
 import cn.surine.schedulex.data.entity.Course
 import cn.surine.schedulex.data.entity.Schedule
-import cn.surine.schedulex.miai_import.MiAiBean
-import cn.surine.schedulex.miai_import.MiAiCourseInfo
 import cn.surine.schedulex.ui.course.CourseViewModel
 import cn.surine.schedulex.ui.schedule.ScheduleViewModel
 import kotlinx.android.synthetic.main.view_webview.*
@@ -93,10 +91,9 @@ class MiAiFetchFragment : BaseFragment() {
 
             override fun onResponse(call: Call, response: Response) {
                 val text = response.body?.string() ?: ""
-                Log.d("slw", "$text: ");
                 if (text.isNotEmpty()) {
                     val data = Jsons.parseJsonWithGson(text, MiAiBean::class.java)
-                    parseCourse("默认", data.data)
+                    parseCourse("小爱", data.data)
                 }
             }
 
