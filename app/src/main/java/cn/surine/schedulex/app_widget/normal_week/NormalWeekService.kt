@@ -33,9 +33,7 @@ class NormalWeekService : WeekRemoteViewService() {
 
     override fun onBindView(mContext: Context, courseList: List<Course>, timeTable: BTimeTable): RemoteViews {
         val remoteViews = RemoteViews(mContext.packageName, R.layout.item_week_widget_img)
-        try {
-            remoteViews.setImageViewBitmap(R.id.bg_iv, createWeekBitmap(PaintConfig(), courseList, timeTable, maxSession))
-        }catch (e:Exception){}
+        remoteViews.setImageViewBitmap(R.id.bg_iv, createWeekBitmap(PaintConfig(), courseList, timeTable, maxSession))
         return remoteViews
     }
 }

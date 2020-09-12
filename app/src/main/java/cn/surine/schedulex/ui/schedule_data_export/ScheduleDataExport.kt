@@ -80,7 +80,7 @@ class ScheduleDataExport : BaseFragment() {
                 request(Manifest.permission.READ_CALENDAR, Manifest.permission.WRITE_CALENDAR).subscribe {
                     if (it) {
                         val dialog = ProgressDialog(activity()).apply {
-                            setMessage("正在导出至日历，请勿退出~")
+                            setMessage("正在导出至日历，请勿退出~ (如需删除，请长按导出按钮)")
                             setTitle("提醒")
                             setCancelable(false)
                             show()
