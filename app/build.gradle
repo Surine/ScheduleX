@@ -10,8 +10,8 @@ android {
         applicationId "cn.surine.schedulex"
         minSdkVersion 21
         targetSdkVersion 29
-        versionCode 106
-        versionName "1.0.6"
+        versionCode 1061
+        versionName "1.0.6.1"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         buildFeatures {
             dataBinding true
