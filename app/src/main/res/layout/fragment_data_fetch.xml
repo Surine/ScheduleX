@@ -60,6 +60,7 @@
                 android:gravity="center"
                 android:layout_marginStart="@dimen/dp40"
                 android:text="从小爱导入"
+                android:visibility="gone"
                 android:drawablePadding="@dimen/dp5"
                 android:textColor="@android:color/black"
                 />

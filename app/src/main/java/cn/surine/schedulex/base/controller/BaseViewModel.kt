@@ -24,7 +24,7 @@ open class BaseViewModel : ViewModel() {
         const val LOAD_SUCCESS = 4
     }
 
-    fun request(block: suspend CoroutineScope.() -> Unit, errorCall: (String?) -> Unit = {}) {
+     fun request(block: suspend CoroutineScope.() -> Unit, errorCall: (String?) -> Unit = {}) {
         viewModelScope.launch(Dispatchers.Main) {
             try {
                 block()

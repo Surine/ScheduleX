@@ -6,6 +6,7 @@ import android.view.View
 import android.widget.Button
 import android.widget.CheckBox
 import android.widget.TextView
+import androidx.lifecycle.Observer
 import cn.surine.schedulex.R
 import cn.surine.schedulex.app_base.VmManager
 import cn.surine.schedulex.base.Constants
@@ -33,6 +34,7 @@ class ScheduleDataFetchFragment : BaseFragment() {
 
     lateinit var scheduleViewModel: ScheduleViewModel
     lateinit var courseViewModel: CourseViewModel
+    lateinit var scheduleDataFetchViewModel: ScheduleDataFetchViewModel
     var scheduleName = ""
 
     companion object {
@@ -45,6 +47,7 @@ class ScheduleDataFetchFragment : BaseFragment() {
         VmManager(this).apply {
             scheduleViewModel = vmSchedule
             courseViewModel = vmCourse
+            scheduleDataFetchViewModel = vmScheduleFetch
         }
         loginJw.setOnClickListener {
             Navigations.open(this, R.id.action_dataFetchFragment_to_scheduleSchoolListFragment, arguments)
@@ -66,9 +69,16 @@ class ScheduleDataFetchFragment : BaseFragment() {
             }
         }
 
-        fromMiai.setOnClickListener {
-            Navigations.open(this,R.id.action_dataFetchFragment_to_miAiInitFragment)
-        }
+        scheduleDataFetchViewModel.getCommon()
+        scheduleDataFetchViewModel.mCommons.observe(this, Observer{
+            if(it.isShowMiAi){
+                fromMiai.show()
+                fromMiai.setOnClickListener {
+                    Navigations.open(this, R.id.action_dataFetchFragment_to_miAiInitFragment)
+                }
+            }
+        })
+
     }
 
     /**

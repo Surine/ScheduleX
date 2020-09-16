@@ -2,6 +2,7 @@ package cn.surine.schedulex.data.network;
 
 import java.util.List;
 
+import cn.surine.schedulex.data.entity.Commons;
 import cn.surine.schedulex.data.entity.CourseList;
 import cn.surine.schedulex.data.entity.VmResultString;
 import cn.surine.schedulex.third_parse.JwInfo;
@@ -32,5 +33,12 @@ public interface Api {
      * */
     @GET
     Deferred<List<JwInfo>> getAdapterList(@Url String url);
+
+
+    /**
+     * 公共参数
+     * */
+    @GET
+    Deferred<Commons> getCommon(@Url String url);
 
 }
