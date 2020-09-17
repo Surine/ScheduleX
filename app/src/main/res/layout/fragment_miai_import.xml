@@ -23,7 +23,7 @@
         android:layout_marginTop="@dimen/dp20"
         android:textColor="@color/text"
         android:gravity="center"
-        android:text="正在分析数据，请等待3s~ \n 如果解析失败，请退出该页面重试！"
+        android:text="正在分析数据，请等待3s~ \n 如果长时间未响应或解析失败，请退出该页面重试！"
         />
 
     <WebView
