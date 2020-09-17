@@ -69,4 +69,8 @@ object ParserEngine {
      */
     fun WHU(html: String): List<CourseWrapper> = wrap(::maintaining,html)
 
+    /**
+     * 北方工业大学
+     * */
+    fun NCUT(html: String): List<CourseWrapper> = Shell.ncut(html)
 }

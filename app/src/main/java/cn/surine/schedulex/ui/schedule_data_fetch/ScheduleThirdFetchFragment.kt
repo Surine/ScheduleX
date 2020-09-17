@@ -16,6 +16,7 @@ import cn.surine.schedulex.data.entity.Schedule
 import cn.surine.schedulex.third_parse.CourseWrapper
 import cn.surine.schedulex.third_parse.JwInfo
 import cn.surine.schedulex.third_parse.Parser
+import cn.surine.schedulex.third_parse.ParserEngine.NCUT
 import cn.surine.schedulex.third_parse.ParserEngine.PKU
 import cn.surine.schedulex.third_parse.ParserEngine.default
 import cn.surine.schedulex.third_parse.ParserEngine.newZenFang
@@ -39,7 +40,6 @@ import java.util.*
  * @date 2020/6/21 22:25
  */
 class ScheduleThirdFetchFragment : BaseFragment() {
-
     lateinit var scheduleViewModel: ScheduleViewModel
     lateinit var courseViewModel: CourseViewModel
     var helperUrl = ""
@@ -141,6 +141,7 @@ class ScheduleThirdFetchFragment : BaseFragment() {
             val engineFunction = when (system) {
                 JwInfo.NEW_ZF -> ::newZenFang
                 JwInfo.PKU -> ::PKU
+                JwInfo.NCUT -> ::NCUT
                 else -> ::default
             }
             Parser().parse(engine = engineFunction, html = html) { list, e ->

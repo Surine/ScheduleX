@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
+import cn.surine.schedulex.base.Constants
 import cn.surine.schedulex.base.controller.App
 import cn.surine.schedulex.base.controller.BaseAdapter
 import cn.surine.schedulex.ui.view.custom.helper.CommonDialogs
@@ -22,7 +23,7 @@ import cn.surine.schedulex.ui.view.custom.helper.CommonDialogs
  * 1,2,4 -> 1001
  * @param maxLen 最大长度
  * */
-fun List<Int>.bitCount(maxLen: Int): String {
+fun List<Int>.bitCount(maxLen: Int = Constants.MAX_WEEK): String {
     val sb = StringBuilder().apply {
         repeat(maxLen) { append("0") }
     }

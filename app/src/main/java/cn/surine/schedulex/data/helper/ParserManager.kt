@@ -20,7 +20,6 @@ object ParserManager {
     fun aiParser(scheduleId: Long, miAiCourseInfo: MiAiCourseInfo, block: (List<Course>) -> Unit) {
         val courseList = mutableListOf<Course>()
         while (miAiCourseInfo.courseInfos.isNotEmpty()) {
-            val deleteTag = mutableListOf<Int>()
             for (index in miAiCourseInfo.courseInfos.indices) {
                 val info = miAiCourseInfo.courseInfos[index]
                 courseList.add(Course().apply {
@@ -56,6 +55,10 @@ object ParserManager {
         }
         block(courseList)
     }
+
+
+    //TODO:super.cn adapter
+
 
     private fun generateBitWeek(weeks: List<Int>, totalWeek: Int) = weeks.bitCount(totalWeek)
 
