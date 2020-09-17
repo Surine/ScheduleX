@@ -74,7 +74,7 @@ class ScheduleDataFetchFragment : BaseFragment() {
             if(it.isShowMiAi){
                 fromMiai.show()
                 fromMiai.setOnClickListener {
-                    Navigations.open(this, R.id.action_dataFetchFragment_to_miAiInitFragment)
+                    Navigations.open(this, R.id.action_dataFetchFragment_to_miAiInitFragment,arguments)
                 }
             }
         })

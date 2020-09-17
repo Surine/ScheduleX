@@ -22,10 +22,10 @@
         app:layout_constraintTop_toBottomOf="@id/topbar">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/message"
             android:layout_width="match_parent"
             android:layout_height="@dimen/dp200"
             android:gravity="top"
-            android:id="@+id/message"
             android:hint="请在此粘贴小米课程表分享链接" />
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -40,4 +40,15 @@
         android:textSize="@dimen/t17"
         app:cornerRadius="@dimen/dp30"
         app:layout_constraintBottom_toBottomOf="parent" />
+
+    <TextView
+        android:id="@+id/importMiaiHelp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp15"
+        android:text="不会操作？点我查看教程"
+        android:textColor="@color/colorPrimary"
+        app:layout_constraintRight_toRightOf="@id/textInputLayout"
+        app:layout_constraintTop_toBottomOf="@id/textInputLayout" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

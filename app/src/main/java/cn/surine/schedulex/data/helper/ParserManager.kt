@@ -3,6 +3,7 @@ package cn.surine.schedulex.data.helper
 import cn.surine.schedulex.base.Constants
 import cn.surine.schedulex.base.utils.bitCount
 import cn.surine.schedulex.base.utils.ifGreater
+import cn.surine.schedulex.base.utils.ifLess
 import cn.surine.schedulex.data.entity.Course
 import cn.surine.schedulex.miai_import.model.MiAiCourseInfo
 import java.util.*
@@ -43,8 +44,8 @@ object ParserManager {
                             break
                         }
                     }
-                    classSessions = start.section.toString()
-                    continuingSession = ifGreater(abs(end.section) - abs(start.section) + 1,Constants.STAND_SESSION).toString()
+                    classSessions = abs(start.section).toString()
+                    continuingSession = ifLess(abs(end.section) - abs(start.section) + 1,Constants.STAND_SESSION).toString()
                     info.sections = info.sections.filter { it.section > 0 }.toMutableList()
                     if (info.sections.isEmpty()) {
                         info.tag = true

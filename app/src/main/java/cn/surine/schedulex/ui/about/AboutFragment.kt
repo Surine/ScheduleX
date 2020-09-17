@@ -53,6 +53,9 @@ class AboutFragment : BaseFragment() {
                 Beta.checkUpgrade(true, false)
                 loadAnimation()
             }
+            aboutItemFeedBack.setOnClickListener {
+                Others.openUrl("https://support.qq.com/product/282532?d-wx-push=1")
+            }
         }
     }
 
