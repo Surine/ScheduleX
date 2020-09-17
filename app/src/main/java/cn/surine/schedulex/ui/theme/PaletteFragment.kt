@@ -1,8 +1,6 @@
 package cn.surine.schedulex.ui.theme
 
-import android.util.Log
 import android.view.View
-import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import cn.surine.schedulex.BR
 import cn.surine.schedulex.R
@@ -12,9 +10,7 @@ import cn.surine.schedulex.base.controller.BaseAdapter
 import cn.surine.schedulex.base.controller.BaseFragment
 import cn.surine.schedulex.base.utils.*
 import cn.surine.schedulex.data.entity.Palette
-import cn.surine.schedulex.ui.course.CourseRepository
 import cn.surine.schedulex.ui.course.CourseViewModel
-import cn.surine.schedulex.ui.schedule.ScheduleRepository
 import cn.surine.schedulex.ui.schedule.ScheduleViewModel
 import cn.surine.schedulex.ui.schedule_list.ScheduleListFragment.Companion.SCHEDULE_ID
 import kotlinx.android.synthetic.main.fragment_palette.*
@@ -75,11 +71,17 @@ class PaletteFragment : BaseFragment() {
     }
 
     private fun updateCourses(palette: Palette) {
+        val colorMap = HashMap<String, String>()
         val set = palette.colors
         val courseList = courseViewModel.getCourseByScheduleId(scheduleId!!)
         for (i in courseList.indices) {
             val course = courseList[i]
-            course.color = set[i % set.size]
+            if (colorMap.containsKey(course.coureName)) {
+                course.color = colorMap[course.coureName]
+            } else {
+                course.color = set[i % set.size]
+                colorMap[course.coureName] = course.color
+            }
             courseViewModel.update(course)
         }
     }
