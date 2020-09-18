@@ -2,11 +2,11 @@
   "formatVersion": 1,
   "database": {
     "version": 5,
-    "identityHash": "0d642eab46be03ddd57dc139c535993c",
+    "identityHash": "b3fcc9dd17435aee1e97dc1833f54f0f",
     "entities": [
       {
         "tableName": "Course",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` TEXT NOT NULL, `coureNumber` TEXT, `coureName` TEXT, `teacherName` TEXT, `classWeek` TEXT, `classDay` TEXT, `classSessions` TEXT, `continuingSession` TEXT, `weekDescription` TEXT, `campusName` TEXT, `teachingBuildingName` TEXT, `classroomName` TEXT, `coursePropertiesName` TEXT, `xf` TEXT, `scheduleId` INTEGER NOT NULL, `color` TEXT, PRIMARY KEY(`id`))",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` TEXT NOT NULL, `coureNumber` TEXT, `coureName` TEXT, `teacherName` TEXT, `classWeek` TEXT, `classDay` TEXT, `classSessions` TEXT, `continuingSession` TEXT, `weekDescription` TEXT, `campusName` TEXT, `teachingBuildingName` TEXT, `classroomName` TEXT, `coursePropertiesName` TEXT, `xf` TEXT, `scheduleId` INTEGER NOT NULL, `color` TEXT, `memo` TEXT, PRIMARY KEY(`id`))",
         "fields": [
           {
             "fieldPath": "id",
@@ -103,6 +103,12 @@
             "columnName": "color",
             "affinity": "TEXT",
             "notNull": false
+          },
+          {
+            "fieldPath": "memo",
+            "columnName": "memo",
+            "affinity": "TEXT",
+            "notNull": false
           }
         ],
         "primaryKey": {
@@ -116,7 +122,7 @@
       },
       {
         "tableName": "Schedule",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`roomId` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `name` TEXT, `totalWeek` INTEGER NOT NULL, `termStartDate` TEXT, `color` TEXT, `imageUrl` TEXT, `lightText` INTEGER NOT NULL, `isShowWeekend` INTEGER NOT NULL, `alphaForCourseItem` INTEGER NOT NULL, `maxSession` INTEGER NOT NULL, `itemHeight` INTEGER NOT NULL, `importWay` INTEGER NOT NULL, `timeTableId` INTEGER NOT NULL, `isShowTime` INTEGER NOT NULL)",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`roomId` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `name` TEXT, `totalWeek` INTEGER NOT NULL, `termStartDate` TEXT, `color` TEXT, `imageUrl` TEXT, `lightText` INTEGER NOT NULL, `isShowWeekend` INTEGER NOT NULL, `alphaForCourseItem` INTEGER NOT NULL, `maxSession` INTEGER NOT NULL, `itemHeight` INTEGER NOT NULL, `importWay` INTEGER NOT NULL, `timeTableId` INTEGER NOT NULL, `isShowTime` INTEGER NOT NULL, `courseThemeId` INTEGER NOT NULL)",
         "fields": [
           {
             "fieldPath": "roomId",
@@ -201,6 +207,12 @@
             "columnName": "isShowTime",
             "affinity": "INTEGER",
             "notNull": true
+          },
+          {
+            "fieldPath": "courseThemeId",
+            "columnName": "courseThemeId",
+            "affinity": "INTEGER",
+            "notNull": true
           }
         ],
         "primaryKey": {
@@ -253,7 +265,7 @@
     ],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, \"0d642eab46be03ddd57dc139c535993c\")"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, \"b3fcc9dd17435aee1e97dc1833f54f0f\")"
     ]
   }
 }

@@ -18,7 +18,7 @@ interface CourseDao {
     fun insert(vararg course: Course?)
 
     @Update
-    fun update(vararg courses: Course?)
+    fun update(vararg courses: Course?):Int
 
     @Delete
     fun delete(vararg courses: Course?)

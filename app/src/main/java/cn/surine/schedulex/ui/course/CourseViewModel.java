@@ -1,5 +1,7 @@
 package cn.surine.schedulex.ui.course;
 
+import android.util.Log;
+
 import androidx.annotation.Keep;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;

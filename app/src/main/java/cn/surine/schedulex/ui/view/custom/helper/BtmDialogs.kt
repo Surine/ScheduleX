@@ -15,18 +15,22 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import cn.surine.schedulex.R
 import cn.surine.schedulex.base.controller.App
 import cn.surine.schedulex.base.controller.BaseFragment
+import cn.surine.schedulex.base.interfaces.Call
 import cn.surine.schedulex.base.utils.*
 import cn.surine.schedulex.base.utils.Dates.*
 import cn.surine.schedulex.base.utils.Navigations.open
 import cn.surine.schedulex.data.entity.Course
+import cn.surine.schedulex.ui.course.CourseViewModel
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.slider.Slider
+import com.peanut.sdk.miuidialog.MIUIDialog
 import com.tbruyelle.rxpermissions2.RxPermissions
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import org.jetbrains.annotations.NotNull
 
 /**
  * Intro：
@@ -60,7 +64,7 @@ object BtmDialogs {
      * @param alphaForCourseItem
      */
     @SuppressLint("SetTextI18n")
-    fun showCourseInfoBtmDialog(baseFragment: BaseFragment, course: Course, alphaForCourseItem: Int) {
+    fun showCourseInfoBtmDialog(baseFragment: @NotNull BaseFragment, course: @NotNull Course, alphaForCourseItem: Int, courseViewModel: CourseViewModel, call: Call) {
         val bt = BottomSheetDialog(baseFragment.activity(), R.style.BottomSheetDialogTheme)
         var view: View
         bt.setContentView(Uis.inflate(baseFragment.activity(), R.layout.view_course_info).also { view = it })
@@ -141,6 +145,20 @@ object BtmDialogs {
                     }
                 }
             }
+        }
+        view.findViewById<TextView>(R.id.memo).setOnClickListener {
+            MIUIDialog(baseFragment.activity()).show {
+                title(text = "记录点什么吧~")
+                input(prefill = course.memo, multiLines = true) { charSequence, _ ->
+                    course.memo = charSequence.toString()
+                    courseViewModel.insert(course)
+                }
+                positiveButton(text = "保存")
+                negativeButton(text = "取消")
+            }
+        }
+        bt.setOnDismissListener {
+            call.back()
         }
     }
 

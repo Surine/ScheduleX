@@ -157,4 +157,20 @@
         app:layout_constraintStart_toEndOf="@+id/courseSession"
         app:layout_constraintTop_toTopOf="@+id/courseSession" />
 
+    <TextView
+        android:id="@+id/memo"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/dp30"
+        android:layout_marginStart="@dimen/dp16"
+        android:text="备忘录"
+        android:padding="@dimen/dp5"
+        android:gravity="center"
+        android:textColor="@android:color/white"
+        android:background="@drawable/shape_full_radius_orange"
+        app:layout_constraintBottom_toBottomOf="@+id/exam_plan"
+        app:layout_constraintStart_toEndOf="@+id/exam_plan"
+        app:layout_constraintTop_toTopOf="@+id/exam_plan" />
+
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>

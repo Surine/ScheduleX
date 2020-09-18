@@ -77,8 +77,9 @@ public class CourseRepository extends BaseRepository {
         return appDatabase.courseDao().getByCourseId(id);
     }
 
-    public void update(Course course) {
-        appDatabase.courseDao().update(course);
+    public int update(Course course) {
+        int result = appDatabase.courseDao().update(course);
+        return result;
     }
 
     public void deleteByCourseId(String id) {

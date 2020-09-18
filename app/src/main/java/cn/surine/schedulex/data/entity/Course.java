@@ -1,6 +1,7 @@
 package cn.surine.schedulex.data.entity;
 
 import androidx.annotation.NonNull;
+import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
@@ -58,6 +59,9 @@ public class Course extends BaseVm {
     //色值
     public String color;
 
+    //备忘录
+    public String memo = "";
+
 
     /**
      * item数据
@@ -92,20 +96,23 @@ public class Course extends BaseVm {
     @Override
     public String toString() {
         return "Course{" +
-                ", courseName=" + coureName + '\n' +
-                ", teacherName=" + teacherName + '\n' +
-                ", classWeek=" + classWeek + '\n' +
-                ", classDay=" + classDay + '\n' +
-                ", classSessions=" + classSessions + '\n' +
-                ", continuingSession=" + continuingSession + '\n' +
-                ", weekDescription=" + weekDescription + '\n' +
-                ", campusName=" + campusName + '\n' +
-                ", teachingBuildingName=" + teachingBuildingName + '\n' +
-                ", classroomName=" + classroomName + '\n' +
-                ", coursePropertiesName=" + coursePropertiesName + '\n' +
-                ", xf=" + xf + '\n' +
+                "id='" + id + '\'' +
+                ", coureNumber='" + coureNumber + '\'' +
+                ", coureName='" + coureName + '\'' +
+                ", teacherName='" + teacherName + '\'' +
+                ", classWeek='" + classWeek + '\'' +
+                ", classDay='" + classDay + '\'' +
+                ", classSessions='" + classSessions + '\'' +
+                ", continuingSession='" + continuingSession + '\'' +
+                ", weekDescription='" + weekDescription + '\'' +
+                ", campusName='" + campusName + '\'' +
+                ", teachingBuildingName='" + teachingBuildingName + '\'' +
+                ", classroomName='" + classroomName + '\'' +
+                ", coursePropertiesName='" + coursePropertiesName + '\'' +
+                ", xf='" + xf + '\'' +
                 ", scheduleId=" + scheduleId +
+                ", color='" + color + '\'' +
+                ", memo='" + memo + '\'' +
                 '}';
     }
-
 }

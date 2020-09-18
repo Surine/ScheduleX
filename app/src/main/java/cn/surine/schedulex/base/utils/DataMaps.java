@@ -35,6 +35,7 @@ public class DataMaps {
         course.continuingSession = String.valueOf(bCourse.getSectionContinue());
         course.color = bCourse.getColor();
         course.xf = bCourse.getScore();
+        course.memo = bCourse.memo;
         StringBuilder stringBuilder = new StringBuilder();
         for (int i = 0; i < Constants.MAX_WEEK; i++) {
             stringBuilder.append(0);
@@ -67,6 +68,7 @@ public class DataMaps {
         bCourse.setSectionContinue(Integer.parseInt(course.continuingSession));
         bCourse.setColor(course.color);
         bCourse.setScore(course.xf);
+        bCourse.memo = course.memo;
         List<Integer> list = new ArrayList<>();
         for (int i = 0; i < course.classWeek.length(); i++) {
             if (course.classWeek.charAt(i) == '1') {

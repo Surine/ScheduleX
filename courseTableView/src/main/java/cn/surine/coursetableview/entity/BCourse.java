@@ -36,6 +36,8 @@ public class BCourse implements Serializable {
      */
     public String score;
 
+    public String memo;
+
     public String getName() {
         return name;
     }

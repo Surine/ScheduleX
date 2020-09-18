@@ -192,7 +192,10 @@ class ScheduleFragment : BaseBindingFragment<FragmentScheduleBinding>() {
                     timerViewModel.curWeekStr.value = getString(R.string.week, position + 1) + if (currentWeek == position + 1) "" else " [" + getString(R.string.not_cur_week) + "]"
                     scheduleViewPagerAdapter.apply {
                         setWeek(position + 1)
-                        notifyItemChanged(position)
+                        //2020.9.18：滑动过程中，数据更新可能被打断，所以需要在绘制完成再更新数据
+                        viewpager.post {
+                            notifyItemChanged(position)
+                        }
                     }
                     if (TextUtils.isEmpty(curSchedule.imageUrl) && position < handleCourseList.size) {
                         emptyView.visibility = if (handleCourseList[position].size != 0) View.GONE else View.VISIBLE

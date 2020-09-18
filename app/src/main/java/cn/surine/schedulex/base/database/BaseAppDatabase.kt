@@ -20,7 +20,7 @@ import cn.surine.schedulex.data.entity.TimeTable
  * @author sunliwei
  * @date 2020-01-16 20:53
  */
-@Database(entities = [Course::class, Schedule::class, TimeTable::class], version = 4)
+@Database(entities = [Course::class, Schedule::class, TimeTable::class], version = 5)
 abstract class BaseAppDatabase : RoomDatabase() {
     /**
      * 获取课表数据DAO
@@ -41,7 +41,7 @@ abstract class BaseAppDatabase : RoomDatabase() {
                     if (instance == null) {
                         instance = Room.databaseBuilder(context.applicationContext, BaseAppDatabase::class.java, Constants.DB_NAME)
                                 .allowMainThreadQueries() //TODO：slw 主线程访问，不安全
-                                .addMigrations(mg_1_2, mg_2_3, mg_3_4)
+                                .addMigrations(mg_1_2, mg_2_3, mg_3_4, mg_4_5)
                                 .build()
                     }
                 }
@@ -58,6 +58,7 @@ abstract class BaseAppDatabase : RoomDatabase() {
                 database.execSQL("ALTER TABLE schedule ADD COLUMN alphaForCourseItem INTEGER NOT NULL DEFAULT 10 ")
             }
         }
+
         /**
          * 课程表支持设置最大节次和item高度
          * 课程表支持显示导入方式
@@ -74,12 +75,22 @@ abstract class BaseAppDatabase : RoomDatabase() {
                 database.execSQL("ALTER TABLE schedule ADD COLUMN isShowTime INTEGER NOT NULL DEFAULT 1 ")
             }
         }
+
         /**
          * 加入课程主题
          */
         val mg_3_4: Migration = object : Migration(3, 4) {
             override fun migrate(database: SupportSQLiteDatabase) {
                 database.execSQL("ALTER TABLE schedule ADD COLUMN courseThemeId INTEGER NOT NULL DEFAULT 0")
+            }
+        }
+
+        /**
+         * 备忘录
+         * */
+        val mg_4_5: Migration = object : Migration(4, 5) {
+            override fun migrate(database: SupportSQLiteDatabase) {
+                database.execSQL("ALTER TABLE course ADD COLUMN memo TEXT")
             }
         }
     }

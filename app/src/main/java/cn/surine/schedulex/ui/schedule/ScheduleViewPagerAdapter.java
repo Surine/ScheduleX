@@ -142,10 +142,11 @@ public class ScheduleViewPagerAdapter extends RecyclerView.Adapter<ScheduleViewP
         holder.courseTableView.setmClickCourseItemListener((view, list, itemPosition, isThisWeek) -> {
             if (!Prefs.getBoolean(Constants.EGG, false)) {
                 Course course = DataMaps.dataMappingByBCourse(courseList.get(position).get(itemPosition));
-                if (course == null) {
-                    return;
-                }
-                BtmDialogs.INSTANCE.showCourseInfoBtmDialog(baseFragment, course, schedule.alphaForCourseItem);
+                BtmDialogs.INSTANCE.showCourseInfoBtmDialog(baseFragment, course, schedule.alphaForCourseItem, courseViewModel, () -> {
+                    if (dataSetUpdateCall != null) {
+                        dataSetUpdateCall.back();
+                    }
+                });
             } else {
                 MediaPlayer mp = MediaPlayer.create(baseFragment.activity(), raws[new Random().nextInt(12)]);
                 mp.start();

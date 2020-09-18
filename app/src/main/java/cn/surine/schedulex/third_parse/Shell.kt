@@ -201,6 +201,7 @@ object Shell {
     }
 
 
+    //北方工业大学
     fun ncut(html: String): List<CourseWrapper> {
         val courseList = arrayListOf<CourseWrapper>()
         val element = Jsoup.parse(html).getElementById("Table6")
