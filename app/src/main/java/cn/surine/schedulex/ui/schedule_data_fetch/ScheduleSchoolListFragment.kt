@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
+import cn.surine.schedulex.BuildConfig
 import cn.surine.schedulex.R
 import cn.surine.schedulex.app_base.VmManager
 import cn.surine.schedulex.base.controller.BaseAdapter
@@ -80,7 +81,9 @@ class ScheduleSchoolListFragment : BaseFragment() {
             adapterListData.observe(this@ScheduleSchoolListFragment, Observer {
                 mSchoolDatas.apply {
                     clear()
-                    addAll(it)
+                    addAll(it.filter {
+                        it.version <= BuildConfig.VERSION_CODE
+                    })
                 }
                 schoolList.adapter?.notifyDataSetChanged()
             })
