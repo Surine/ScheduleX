@@ -7,6 +7,7 @@ import cn.surine.schedulex.data.entity.Schedule
 import cn.surine.schedulex.ui.course.CourseRepository
 import cn.surine.schedulex.ui.schedule.ScheduleRepository
 import cn.surine.schedulex.ui.timetable_list.TimeTableRepository
+import java.lang.Exception
 import java.util.*
 
 /**
@@ -28,7 +29,14 @@ object DataHandler {
      */
     fun getCourseList(day: Int, nextWeek: Boolean): List<Course> {
         val curSchedule = scheduleRepository.curSchedule
-        return courseRepository.getTodayCourseListByScheduleId(day, if (nextWeek) curSchedule.curWeek() + 1 else curSchedule.curWeek(), curSchedule.roomId)
+        try {
+            return courseRepository.getTodayCourseListByScheduleId(day, if (nextWeek) curSchedule.curWeek() + 1 else curSchedule.curWeek(), curSchedule.roomId).sortedWith(kotlin.Comparator { o1, o2 ->
+                o1.classSessions.toInt() - o2.classSessions.toInt()
+            })
+        }catch (e:Exception){
+
+        }
+        return emptyList()
     }
 
     /**

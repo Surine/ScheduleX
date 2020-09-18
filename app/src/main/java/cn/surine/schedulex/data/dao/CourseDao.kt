@@ -41,6 +41,6 @@ interface CourseDao {
     @Query("delete from Course where id = :id")
     fun deleteByCourseId(id: String?)
 
-    @Query("select * from course where classDay = :day and scheduleId = :roomId order by classSessions")
+    @Query("select * from course where classDay = :day and scheduleId = :roomId")
     fun getTodayCourse(day: Int, roomId: Int): List<Course?>?
 }

@@ -39,6 +39,7 @@ class NormalDailyService : DailyRemoteViewService() {
     //这里绑定视图
     override fun onBindView(mContext: Context, course: Course, data: BTimeInfo): RemoteViews {
         val remoteViews = RemoteViews(mContext.packageName, R.layout.item_widget_day_class)
+        //此处不能删除，会出复用问题
         if (course != null) {
             remoteViews.setTextViewText(R.id.day_class_title, course.coureName)
             val sb = course.teachingBuildingName + course.classroomName
