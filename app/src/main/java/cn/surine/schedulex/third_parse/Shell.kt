@@ -1,9 +1,8 @@
 package cn.surine.schedulex.third_parse
 
-import android.util.Log
 import cn.surine.schedulex.base.utils.Toasts
 import cn.surine.schedulex.third_parse.bean.Course
-import cn.surine.schedulex.third_parse.new_version.ParseUtil
+import cn.surine.schedulex.third_parse.new_version.helper.ParseUtil
 import org.jsoup.Jsoup
 
 object Shell {

@@ -1,6 +1,5 @@
-package cn.surine.schedulex.third_parse.new_version
+package cn.surine.schedulex.third_parse.new_version.helper
 
-import android.util.Log
 import cn.surine.schedulex.base.Constants
 
 /**
@@ -19,8 +18,10 @@ object ParseUtil {
      * */
     fun getDayInfoByStr(target: String, baseData: Map<String, Int> = commonMap) = commonMap[target] ?: 1
 
+
     /**
      * 根据模板来返回解析出来的周信息
+     * 适用于 区间范围 形式的字符串
      * @param rules 字符串模板(str数组，需要按照单，双，全周来传递模板)
      * @param target 待解析字符串
      * */
