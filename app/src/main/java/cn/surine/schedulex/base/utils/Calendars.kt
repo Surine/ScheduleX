@@ -164,7 +164,6 @@ object Calendars {
 //                    val mt = cursor.getString(cursor.getColumnIndex("title"))
                     val mt = cursor.getString(cursor.getColumnIndex("customAppPackage"))
                     if (title == mt) {
-                        Log.d("slw", "进来了: $mt");
                         //查询到一致的话， 就拼接id后进行删除
                         val id = cursor.getInt(cursor.getColumnIndex(CalendarContract.Calendars._ID))
                         val deleteUri = ContentUris.withAppendedId(eventUri, id.toLong())

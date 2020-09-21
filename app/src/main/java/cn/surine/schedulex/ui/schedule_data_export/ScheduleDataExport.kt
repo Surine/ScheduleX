@@ -2,6 +2,7 @@ package cn.surine.schedulex.ui.schedule_data_export
 
 import android.Manifest
 import android.app.ProgressDialog
+import android.util.Log
 import android.view.View
 import cn.surine.schedulex.R
 import cn.surine.schedulex.app_base.VmManager
@@ -155,7 +156,7 @@ class ScheduleDataExport : BaseFragment() {
         val timeTable = timeTableViewModel.getTimTableById(scheduleViewModel.curSchedule.timeTableId)
         timeTable ?: return 0
         val bTimeTable = DataMaps.dataMappingTimeTableToBTimeTable(timeTable)
-        if (classSessions >= bTimeTable.timeInfoList.size) return 0
+        if (classSessions > bTimeTable.timeInfoList.size) return 0
         val time = if (start) bTimeTable.timeInfoList[classSessions - 1].startTime else bTimeTable.timeInfoList[classSessions - 1].endTime
         return Dates.getTransformTimeString(time) * 60 * 1000
     }
