@@ -25,6 +25,7 @@ class NormalWeekProvider : CoreWidgetProvider() {
         //标题配置
         remoteViews.setTextViewText(R.id.widget_day_class_title, if (getBoolean(Constants.NEXT_DAY_STATUS + id, false)) "下周课程" else "本周课程")
         remoteViews.setTextViewText(R.id.widget_day_class_subtitle, if (getBoolean(Constants.NEXT_DAY_STATUS + id, false)) Dates.getDateFormat(Dates.getDateBeforeOfAfter(Dates.getDate(Dates.yyyyMMdd), 7), "MM月dd E") else Dates.getDate("MM月dd E"))
+        remoteViews.setTextViewText(R.id._m1, if (getBoolean(Constants.NEXT_DAY_STATUS + id, false)) "${(DataHandler.getCurSchedule()?.curWeek() ?: 1) + 1}周" else "${DataHandler.getCurSchedule()?.curWeek()}周")
         //配置
         WidgetUtil.setDay(this.javaClass, context, remoteViews, id, R.id.widget_day_class_next_day, intArrayOf(R.drawable.ic_action_refresh, R.drawable.ic_action_refresh))
         WidgetUtil.setDay(this.javaClass, context, remoteViews, id, R.id.widget_day_class_title)
