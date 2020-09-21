@@ -1,6 +1,7 @@
 package cn.surine.schedulex.ui.schedule_data_fetch
 
 import android.annotation.SuppressLint
+import android.util.Log
 import android.view.KeyEvent
 import android.view.View
 import android.view.inputmethod.EditorInfo
@@ -18,6 +19,7 @@ import cn.surine.schedulex.third_parse.JwInfo
 import cn.surine.schedulex.third_parse.Parser
 import cn.surine.schedulex.third_parse.ParserEngine.NCUT
 import cn.surine.schedulex.third_parse.ParserEngine.PKU
+import cn.surine.schedulex.third_parse.ParserEngine.ZF
 import cn.surine.schedulex.third_parse.ParserEngine.default
 import cn.surine.schedulex.third_parse.ParserEngine.newZenFang
 import cn.surine.schedulex.ui.course.CourseRepository
@@ -142,6 +144,7 @@ class ScheduleThirdFetchFragment : BaseFragment() {
                 JwInfo.NEW_ZF -> ::newZenFang
                 JwInfo.PKU -> ::PKU
                 JwInfo.NCUT -> ::NCUT
+                JwInfo.ZF -> ::ZF
                 else -> ::default
             }
             Parser().parse(engine = engineFunction, html = html) { list, e ->

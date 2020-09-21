@@ -45,5 +45,4 @@ class ScheduleInitFragment : BaseBindingFragment<FragmentScheduleInitBinding>() 
     override fun onBackPressed() {
         activity().finish()
     }
-
 }

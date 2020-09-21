@@ -73,4 +73,9 @@ object ParserEngine {
      * 北方工业大学
      * */
     fun NCUT(html: String): List<CourseWrapper> = Shell.ncut(html)
+
+    /**
+     * 正方教务
+     * */
+    fun ZF(html: String):List<CourseWrapper> = Shell.zf(html)
 }
