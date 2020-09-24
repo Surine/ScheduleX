@@ -18,5 +18,6 @@ data class JwInfo(val school:String = "",val name:String = "", val url:String = 
         const val NORMAL = "normal" //默认
         const val NCUT = "ncut" //北方工业
         const val ZF = "zf" //正方
+        const val SW = "sw" //树维
     }
 }

@@ -146,19 +146,21 @@ object BtmDialogs {
                 }
             }
         }
+        var modifyTag = false
         view.findViewById<TextView>(R.id.memo).setOnClickListener {
             MIUIDialog(baseFragment.activity()).show {
                 title(text = "记录点什么吧~")
                 input(prefill = course.memo, multiLines = true) { charSequence, _ ->
                     course.memo = charSequence.toString()
                     courseViewModel.insert(course)
+                    modifyTag = true
                 }
                 positiveButton(text = "保存")
                 negativeButton(text = "取消")
             }
         }
         bt.setOnDismissListener {
-            call.back()
+            if (modifyTag) call.back()
         }
     }
 

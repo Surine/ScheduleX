@@ -13,4 +13,9 @@ object Toasts {
     fun toast(s: String?) {
         Toast.makeText(App.context, s, Toast.LENGTH_SHORT).show()
     }
+
+    @JvmStatic
+    fun toastLong(s: String?) {
+        Toast.makeText(App.context, s, Toast.LENGTH_LONG).show()
+    }
 }

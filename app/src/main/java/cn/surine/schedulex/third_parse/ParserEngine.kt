@@ -78,4 +78,9 @@ object ParserEngine {
      * 正方教务
      * */
     fun ZF(html: String):List<CourseWrapper> = Shell.zf(html)
+
+    /**
+     * 树维教务
+     * */
+    fun SW(html: String):List<CourseWrapper> = Shell.sw(html)
 }

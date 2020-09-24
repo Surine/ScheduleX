@@ -1,7 +1,7 @@
 package cn.surine.schedulex.ui.schedule_data_fetch
 
+import android.Manifest
 import android.annotation.SuppressLint
-import android.util.Log
 import android.view.KeyEvent
 import android.view.View
 import android.view.inputmethod.EditorInfo
@@ -12,6 +12,7 @@ import cn.surine.schedulex.base.Constants
 import cn.surine.schedulex.base.controller.BaseFragment
 import cn.surine.schedulex.base.utils.*
 import cn.surine.schedulex.base.utils.Toasts.toast
+import cn.surine.schedulex.base.utils.Toasts.toastLong
 import cn.surine.schedulex.data.entity.Course
 import cn.surine.schedulex.data.entity.Schedule
 import cn.surine.schedulex.third_parse.CourseWrapper
@@ -19,6 +20,7 @@ import cn.surine.schedulex.third_parse.JwInfo
 import cn.surine.schedulex.third_parse.Parser
 import cn.surine.schedulex.third_parse.ParserEngine.NCUT
 import cn.surine.schedulex.third_parse.ParserEngine.PKU
+import cn.surine.schedulex.third_parse.ParserEngine.SW
 import cn.surine.schedulex.third_parse.ParserEngine.ZF
 import cn.surine.schedulex.third_parse.ParserEngine.default
 import cn.surine.schedulex.third_parse.ParserEngine.newZenFang
@@ -27,10 +29,10 @@ import cn.surine.schedulex.ui.course.CourseViewModel
 import cn.surine.schedulex.ui.schedule.ScheduleRepository
 import cn.surine.schedulex.ui.schedule.ScheduleViewModel
 import cn.surine.schedulex.ui.schedule_init.ScheduleInitFragment
-import cn.surine.schedulex.ui.view.custom.helper.CommonDialogs
+import com.google.android.material.snackbar.Snackbar
 import com.peanut.sdk.miuidialog.MIUIDialog
-import com.peanut.sdk.miuidialog.content_wrapper.MessageSetting
-import com.tencent.bugly.crashreport.CrashReport
+import com.tbruyelle.rxpermissions2.RxPermissions
+import kotlinx.android.synthetic.main.fragment_date_export.*
 import kotlinx.android.synthetic.main.fragment_third_fetch.*
 import java.net.URLDecoder
 import java.util.*
@@ -85,7 +87,7 @@ class ScheduleThirdFetchFragment : BaseFragment() {
             title(text = "教务导入")
             message(text = "仅需两步即可导入您的课程\n\n1.在地址栏输入您的教务处网址，点击右上角蓝色按钮访问并定位到课表页面\n2.点击右下角导入按钮进行课程导入")
             positiveButton(text = "确定") { this.cancel() }
-            negativeButton(text = "取消") { this.cancel()  }
+            negativeButton(text = "取消") { this.cancel() }
         }
     }
 
@@ -145,9 +147,10 @@ class ScheduleThirdFetchFragment : BaseFragment() {
                 JwInfo.PKU -> ::PKU
                 JwInfo.NCUT -> ::NCUT
                 JwInfo.ZF -> ::ZF
+                JwInfo.SW -> ::SW
                 else -> ::default
             }
-            Parser().parse(engine = engineFunction, html = html) { list, e ->
+            Parser().parse(engine = engineFunction, html = if (testHtml.isEmpty()) html else testHtml) { list, e ->
                 activity().runOnUiThread {
                     if (list != null) {
                         parseData(list)
@@ -155,13 +158,28 @@ class ScheduleThirdFetchFragment : BaseFragment() {
                     if (e != null) {
                         MIUIDialog(activity()).show {
                             title(text = "解析失败")
-                            message(text = "<html>请尝试定位到课表页面再进行解析，如果还是无法导入，请您加QQ群<a href='https://www.baidu.com'>686976115</a>进行反馈；同时，如果您有适配您的学校的想法也可以直接在群里联系开发者。</html>"){
+                            message(text = "<html>请尝试定位到课表页面再进行解析，如果还是无法导入，请您加QQ群<a href='https://www.baidu.com'>686976115</a>进行反馈；同时，如果您有适配您的学校的想法也可以直接在群里联系开发者。<br><b>如果学校已经适配，但依然解析失败，可能是源码获取异常，请尝试反馈</b></html>") {
                                 html {
                                     Others.openUrl("https://jq.qq.com/?_wv=1027&k=SmyNDbv6")
                                 }
                             }
                             positiveButton(text = "确定") { this.cancel() }
-                            negativeButton(text = "取消") { this.cancel()  }
+                            negativeButton(text = "反馈源码") {
+                                RxPermissions(activity()).apply {
+                                    request(Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE).subscribe {
+                                        if (it) {
+                                            val name = "${system}系统源码-${System.currentTimeMillis()}"
+                                            if (Files.save(name, html, "html")) {
+                                                toastLong("源码保存成功,路径 /Download/${name}，请尝试发送给开发者进行反馈~")
+                                            } else {
+                                                toast("保存失败！")
+                                            }
+                                        } else {
+                                            toast(getString(R.string.permission_is_denied))
+                                        }
+                                    }
+                                }
+                            }
                         }
                     }
                 }
@@ -215,4 +233,6 @@ class ScheduleThirdFetchFragment : BaseFragment() {
         thirdPageWebView.destroy()
         super.onDestroyView()
     }
+
+    val testHtml = """"""
 }

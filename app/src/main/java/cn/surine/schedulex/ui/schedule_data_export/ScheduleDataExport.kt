@@ -2,7 +2,6 @@ package cn.surine.schedulex.ui.schedule_data_export
 
 import android.Manifest
 import android.app.ProgressDialog
-import android.util.Log
 import android.view.View
 import cn.surine.schedulex.R
 import cn.surine.schedulex.app_base.VmManager

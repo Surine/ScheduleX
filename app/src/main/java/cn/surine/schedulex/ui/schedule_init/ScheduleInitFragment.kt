@@ -39,10 +39,12 @@ class ScheduleInitFragment : BaseBindingFragment<FragmentScheduleInitBinding>() 
                 toast(getString(R.string.param_empty))
             }
         }
+
     }
 
     @SuppressLint("MissingSuperCall")
     override fun onBackPressed() {
         activity().finish()
     }
+
 }

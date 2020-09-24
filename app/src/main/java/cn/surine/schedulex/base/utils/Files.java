@@ -7,7 +7,6 @@ import android.net.Uri;
 import android.os.Environment;
 import android.provider.DocumentsContract;
 import android.provider.MediaStore;
-import android.util.Log;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -34,7 +33,12 @@ public class Files {
      * @return
      */
     public static boolean saveAsJson(String fileName, String json) {
-        File file = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS).getAbsolutePath() + "/" + fileName + ".json");
+        return save(fileName, json, "json");
+    }
+
+
+    public static boolean save(String fileName, String data, String type) {
+        File file = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS).getAbsolutePath() + "/" + fileName + "." + type);
         FileWriter writer = null;
         try {
             if (file.exists()) {
@@ -43,8 +47,8 @@ public class Files {
             file.createNewFile();
 
             writer = new FileWriter(file);
-            if (null != json) {
-                writer.write(json);
+            if (null != data) {
+                writer.write(data);
             }
             writer.flush();
             return true;
@@ -61,7 +65,6 @@ public class Files {
             }
         }
     }
-
 
     /**
      * 读取文件内容

@@ -1,12 +1,8 @@
 package cn.surine.schedulex.miai_import
 
 import android.annotation.SuppressLint
-import android.util.Log
 import android.view.View
 import android.webkit.*
-import androidx.dynamicanimation.animation.DynamicAnimation
-import androidx.dynamicanimation.animation.SpringAnimation
-import androidx.dynamicanimation.animation.SpringForce
 import cn.surine.schedulex.R
 import cn.surine.schedulex.app_base.VmManager
 import cn.surine.schedulex.base.Constants
@@ -22,9 +18,7 @@ import cn.surine.schedulex.miai_import.model.MiAiBean
 import cn.surine.schedulex.miai_import.model.MiAiCourseInfo
 import cn.surine.schedulex.ui.course.CourseViewModel
 import cn.surine.schedulex.ui.schedule.ScheduleViewModel
-import cn.surine.schedulex.ui.schedule_data_fetch.ScheduleDataFetchFragment
 import cn.surine.schedulex.ui.schedule_init.ScheduleInitFragment
-import kotlinx.android.synthetic.main.fragment_about.*
 import kotlinx.android.synthetic.main.fragment_miai_import.*
 import okhttp3.*
 import java.io.IOException
@@ -41,11 +35,12 @@ class MiAiFetchFragment : BaseFragment() {
     private lateinit var intentUrl: String
     lateinit var scheduleViewModel: ScheduleViewModel
     lateinit var courseViewModel: CourseViewModel
-    private var targetText:String = ""
+    private var targetText: String = ""
     override fun layoutId(): Int = R.layout.fragment_miai_import
 
     companion object {
-        const val DEEPLINK_PREFIX = "voiceassist://aiweb"
+        const val DEEPLINK_PREFIX = "voiceassist:"
+        const val DEEPLINK_PREFIX2 = "xiaoailite:"
         const val COURSE_INFO_URL = "https://i.ai.mi.com/course/courseInfo?"
     }
 
@@ -75,7 +70,7 @@ class MiAiFetchFragment : BaseFragment() {
         web.webViewClient = object : WebViewClient() {
             override fun shouldOverrideUrlLoading(view: WebView?, request: WebResourceRequest?): Boolean {
                 val text = request?.url.toString()
-                if (text.startsWith(DEEPLINK_PREFIX)) {
+                if (text.startsWith(DEEPLINK_PREFIX) || text.startsWith(DEEPLINK_PREFIX2)) {
                     val parse = text.split("?")[1].removePrefix("url=")
                     web.loadUrl(URLDecoder.decode(parse, "UTF-8"))
                     return true
@@ -101,10 +96,10 @@ class MiAiFetchFragment : BaseFragment() {
             web.loadUrl(intentUrl)
             toast("正在分析数据，请等待3s~")
             web.postDelayed({
-                if(targetText.isNotEmpty()){
+                if (targetText.isNotEmpty()) {
                     loadUrl(targetText)
                 }
-            },3000)
+            }, 3000)
         }
     }
 
@@ -122,7 +117,8 @@ class MiAiFetchFragment : BaseFragment() {
                 if (text.isNotEmpty()) {
                     val data = Jsons.parseJsonWithGson(text, MiAiBean::class.java)
                     if (data.data.courseInfos.isNotEmpty()) {
-                        parseCourse(arguments?.getString(ScheduleInitFragment.SCHEDULE_NAME)?:"MI_AI", data.data)
+                        parseCourse(arguments?.getString(ScheduleInitFragment.SCHEDULE_NAME)
+                                ?: "MI_AI", data.data)
                     }
                 }
             }
