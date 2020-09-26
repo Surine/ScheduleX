@@ -2,6 +2,7 @@ package cn.surine.schedulex.ui.schedule_data_fetch
 
 import android.Manifest
 import android.annotation.SuppressLint
+import android.util.Log
 import android.view.KeyEvent
 import android.view.View
 import android.view.inputmethod.EditorInfo
@@ -19,6 +20,7 @@ import cn.surine.schedulex.third_parse.CourseWrapper
 import cn.surine.schedulex.third_parse.JwInfo
 import cn.surine.schedulex.third_parse.Parser
 import cn.surine.schedulex.third_parse.ParserEngine.NCUT
+import cn.surine.schedulex.third_parse.ParserEngine.OLD_QZ
 import cn.surine.schedulex.third_parse.ParserEngine.PKU
 import cn.surine.schedulex.third_parse.ParserEngine.SW
 import cn.surine.schedulex.third_parse.ParserEngine.ZF
@@ -29,10 +31,8 @@ import cn.surine.schedulex.ui.course.CourseViewModel
 import cn.surine.schedulex.ui.schedule.ScheduleRepository
 import cn.surine.schedulex.ui.schedule.ScheduleViewModel
 import cn.surine.schedulex.ui.schedule_init.ScheduleInitFragment
-import com.google.android.material.snackbar.Snackbar
 import com.peanut.sdk.miuidialog.MIUIDialog
 import com.tbruyelle.rxpermissions2.RxPermissions
-import kotlinx.android.synthetic.main.fragment_date_export.*
 import kotlinx.android.synthetic.main.fragment_third_fetch.*
 import java.net.URLDecoder
 import java.util.*
@@ -142,12 +142,15 @@ class ScheduleThirdFetchFragment : BaseFragment() {
     internal inner class InJavaScriptLocalObj {
         @JavascriptInterface
         fun showSource(html: String, system: String) {
+            Log.d("slw", "system:$system ");
+            Log.d("slw", "html: $html");
             val engineFunction = when (system) {
                 JwInfo.NEW_ZF -> ::newZenFang
                 JwInfo.PKU -> ::PKU
                 JwInfo.NCUT -> ::NCUT
                 JwInfo.ZF -> ::ZF
                 JwInfo.SW -> ::SW
+                JwInfo.OLD_QZ -> ::OLD_QZ
                 else -> ::default
             }
             Parser().parse(engine = engineFunction, html = if (testHtml.isEmpty()) html else testHtml) { list, e ->

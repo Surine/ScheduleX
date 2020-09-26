@@ -19,5 +19,6 @@ data class JwInfo(val school:String = "",val name:String = "", val url:String = 
         const val NCUT = "ncut" //北方工业
         const val ZF = "zf" //正方
         const val SW = "sw" //树维
+        const val OLD_QZ = "old_qz" //旧强智
     }
 }

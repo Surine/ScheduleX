@@ -83,4 +83,7 @@ object ParserEngine {
      * 树维教务
      * */
     fun SW(html: String):List<CourseWrapper> = Shell.sw(html)
+
+    /**旧版强智*/
+    fun OLD_QZ(html: String):List<CourseWrapper> = Shell.old_qz(html)
 }

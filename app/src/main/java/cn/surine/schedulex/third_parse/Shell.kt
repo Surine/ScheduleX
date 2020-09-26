@@ -338,6 +338,49 @@ object Shell {
         }
         return courseList
     }
+
+
+    fun old_qz(html: String): MutableList<CourseWrapper> {
+        val courseList = mutableListOf<CourseWrapper>()
+        val target = Jsoup.parse(html).getElementById("kbtable")
+        val trs = target.getElementsByTag("tr")
+        for (trIndex in trs.indices) {
+            if (trIndex < 1 || trIndex == trs.size - 1) continue  //清除表头和表尾
+            val tr = trs[trIndex]
+            val tds = tr.getElementsByTag("td")
+            for (tdIndex in tds.indices) {
+                if (tdIndex < 1) continue  //清除时间列
+                val targetDiv = tds[tdIndex].getElementsByTag("div")[1]
+                if (targetDiv.textNodes().size == 1) continue
+                val courseInfo = targetDiv.text().split(" ")
+                courseList.add(CourseWrapper().apply {
+                    name = courseInfo[0]
+                    teacher = courseInfo[2]
+                    position = courseInfo[4]
+                    day = tdIndex
+                    //session 信息
+                    val sessionStr = courseInfo[3].substringAfter("[").substringBefore("节")
+                    val sessionInfo = sessionStr.split("-")
+                    sectionStart = sessionInfo[0].toInt()
+                    sectionContinue = sessionInfo[1].toInt() - sessionInfo[0].toInt() + 1
+                    //week 信息
+                    val weekInfo = courseInfo[3].substringBefore("周").split(",")
+                    val tmpWeek = mutableListOf<Int>()
+                    for (i in weekInfo){
+                        if (i.contains("-")) {
+                            tmpWeek.addAll(ParseUtil.getWeekInfoByStr(arrayOf("%d-%d", "%d-%d", "%d-%d"), i))
+                        } else {
+                            tmpWeek.add(i.toInt())
+                        }
+                    }
+                    week = tmpWeek
+                })
+            }
+        }
+        return courseList
+    }
+
+
 //    fun NewUrpParser(html: String): List<Course> {
 //        val result = arrayListOf<Course>()
 //        val gson = Gson()
