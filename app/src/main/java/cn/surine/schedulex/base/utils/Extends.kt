@@ -100,7 +100,7 @@ fun Int.parseUi(): View {
     return LayoutInflater.from(App.context).inflate(this, null)
 }
 
-fun <T> ifValue(t1: T, t2: T, block: (t1: T, t2: T) -> Boolean) = if (block(t1, t2)) t1 else t2
+inline fun <T> ifValue(t1: T, t2: T, block: (t1: T, t2: T) -> Boolean) = if (block(t1, t2)) t1 else t2
 fun ifGreater(t1: Int, t2: Int) = ifValue(t1, t2) { i1, i2 -> i1 > i2 }
 fun ifLess(t1: Int, t2: Int) = ifValue(t1, t2) { i1, i2 -> i1 < i2 }
 fun ifGreaterEqual(t1: Int, t2: Int) = ifValue(t1, t2) { i1, i2 -> i1 >= i2 }
