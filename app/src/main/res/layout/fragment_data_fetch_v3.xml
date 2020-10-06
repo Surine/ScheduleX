@@ -90,11 +90,9 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_marginTop="@dimen/dp10"
-            android:layout_weight="1"
-            android:background="@drawable/shape_radius_card_4">
+            android:layout_weight="1">
 
             <include
-                android:id="@+id/fromSuperCn"
                 layout="@layout/view_super_import"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" />

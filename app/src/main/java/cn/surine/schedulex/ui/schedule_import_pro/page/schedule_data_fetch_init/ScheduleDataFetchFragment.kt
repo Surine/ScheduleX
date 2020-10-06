@@ -1,10 +1,14 @@
 package cn.surine.schedulex.ui.schedule_import_pro.page.schedule_data_fetch_init
 
 import android.content.Intent
+import android.os.Bundle
 import android.view.View
 import android.widget.Button
 import android.widget.CheckBox
 import android.widget.TextView
+import androidx.navigation.Navigation
+import androidx.navigation.fragment.FragmentNavigator
+import androidx.transition.TransitionInflater
 import cn.surine.schedulex.R
 import cn.surine.schedulex.app_base.VmManager
 import cn.surine.schedulex.base.Constants
@@ -19,8 +23,9 @@ import cn.surine.schedulex.ui.schedule_data_fetch.ScheduleDataFetchViewModel
 import cn.surine.schedulex.ui.schedule_data_fetch.file.FileParserFactory
 import cn.surine.schedulex.ui.view.custom.helper.CommonDialogs
 import com.tencent.bugly.crashreport.CrashReport
-import kotlinx.android.synthetic.main.fragment_data_fetch_v3.*
+import kotlinx.android.synthetic.main.view_super_import.*
 import java.util.*
+
 
 /**
  * Intro：
@@ -39,6 +44,14 @@ class ScheduleDataFetchFragment : BaseFragment() {
         const val JSON_REQUEST_CODE = 1001
     }
 
+
+//    override fun onCreate(savedInstanceState: Bundle?) {
+//        super.onCreate(savedInstanceState)
+//        //设置共享动画
+//        sharedElementEnterTransition = TransitionInflater.from(context).inflateTransition(android.R.transition.fade)
+//    }
+
+
     override fun layoutId(): Int = R.layout.fragment_data_fetch_v3
 
     override fun onInit(parent: View?) {
@@ -53,7 +66,16 @@ class ScheduleDataFetchFragment : BaseFragment() {
 
         //超表导入
         fromSuperCn.setOnClickListener {
-            Navigations.open(this, R.id.action_dataFetchFragment_to_superLoginFragment, arguments)
+            // 添加共享元素动画
+            // 添加共享元素动画
+            val extras = FragmentNavigator.Extras.Builder()
+                    .addSharedElement(fromSuperCn,getString(R.string.transition_super))
+                    .addSharedElement(super_logo,getString(R.string.transition_super3))
+                    .addSharedElement(superTitle,getString(R.string.transition_super2))
+                    .build()
+            val directions = ScheduleDataFetchFragmentDirections.actionDataFetchFragmentToSuperLoginFragment()
+            Navigation.findNavController(it).navigate(directions,extras)
+//            Navigations.open(this, R.id.action_dataFetchFragment_to_superLoginFragment, arguments)
         }
 //        skip.setOnClickListener {
 //            Prefs.save(Constants.CUR_SCHEDULE, scheduleViewModel.addSchedule(scheduleName, 24, 1, Schedule.IMPORT_WAY.ADD))

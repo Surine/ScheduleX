@@ -10,6 +10,7 @@
         <item name="chipIconTint">@color/chipIconTint</item>
         <item name="android:textColor">@android:color/darker_gray</item>
         <item name="md_corner_radius">25dp</item>
+        <item name="android:windowContentTransitions">true</item>
     </style>
 
 

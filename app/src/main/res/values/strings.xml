@@ -134,7 +134,7 @@
     <string name="import_super_class">导入超表数据</string>
     <string name="ready_to_login_super_class">正在请求超级课程表登录……</string>
     <string name="login_super_cn">登录超表</string>
-    <string name="how_to_fetch_super_data">如何使用超表获取数据?</string>
+    <string name="how_to_fetch_super_data">戳我:如何使用超表获取数据?</string>
     <string name="Super_Password">超级课程表密码</string>
     <string name="Super_Account">超级课程表账号</string>
     <string name="super_tip"> "1.使用您的超级课程表账号登录获取最近学期的课表；\n2.点击选择您要导入的课表即可成功导入，如果此课表没有数据，导入的数据也将为空。\n\n注意：如果您没有超表账号或者没有密码，可查阅超级课程表使用方法！"</string>
@@ -175,4 +175,7 @@
     <string name="not_show_timetable">当前不展示时间表</string>
     <string name="show_time">当前展示时间表</string>
     <string name="whether_to_show_time">是否显示时间表</string>
+    <string name="transition_super">transition_super</string>
+    <string name="transition_super2">transition_super2</string>
+    <string name="transition_super3">transition_super3</string>
 </resources>

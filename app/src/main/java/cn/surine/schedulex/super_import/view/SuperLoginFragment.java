@@ -2,8 +2,12 @@ package cn.surine.schedulex.super_import.view;
 
 import android.app.ProgressDialog;
 import android.os.Bundle;
+import android.view.View;
 
+import androidx.annotation.Nullable;
 import androidx.lifecycle.ViewModelProviders;
+import androidx.navigation.Navigation;
+import androidx.transition.TransitionInflater;
 
 import java.io.Serializable;
 
@@ -32,6 +36,13 @@ public class SuperLoginFragment extends BaseBindingFragment<FragmentLoginSuperBi
     private SuperViewModel superViewModel;
 
     public static final String TERM_DATA = "term_data";
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        //设置共享动画
+        setSharedElementEnterTransition(TransitionInflater.from(getContext()).inflateTransition(android.R.transition.move));
+    }
 
     @Override
     public int layoutId() {
@@ -65,11 +76,9 @@ public class SuperLoginFragment extends BaseBindingFragment<FragmentLoginSuperBi
             }
         });
 
-        fragmentLoginSuperBinding.superTip.setOnClickListener(view -> {
-            CommonDialogs.INSTANCE.getCommonDialog(activity(), getString(R.string.warning), getString(R.string.super_tip),()-> Unit.INSTANCE,()-> Unit.INSTANCE);
-        });
+        fragmentLoginSuperBinding.superTip.setOnClickListener(view -> CommonDialogs.INSTANCE.getCommonDialog(activity(), getString(R.string.warning), getString(R.string.super_tip),()-> Unit.INSTANCE,()-> Unit.INSTANCE));
+        fragmentLoginSuperBinding.superTipLogo.setOnClickListener(v -> fragmentLoginSuperBinding.superTip.performClick());
 
     }
-
 
 }
