@@ -1,17 +1,18 @@
-package cn.surine.schedulex.third_parse.new_version.parses
+package cn.surine.schedulex.ui.schedule_import_pro.core.shell
 
-import cn.surine.schedulex.third_parse.new_version.bean.CourseWrapper
-import cn.surine.schedulex.third_parse.new_version.helper.ParseUtil
+import cn.surine.schedulex.ui.schedule_import_pro.core.IJWParse
+import cn.surine.schedulex.ui.schedule_import_pro.data.CourseWrapper
+import cn.surine.schedulex.ui.schedule_import_pro.util.ParseUtil
 import org.jsoup.Jsoup
 import org.jsoup.nodes.Element
 
 /**
  * Intro：
- * 默认正方解析器
+ * 正方教务-基于浙江大学宁波理工学院
  * @author sunliwei
  * @date 9/21/20 15:26
  */
-open class Zf : IParse {
+open class Zf : IJWParse {
     override fun parse(html: String): List<CourseWrapper> {
         val courseList = mutableListOf<CourseWrapper>()
         val target = Jsoup.parse(html).getElementById("Table1")
@@ -22,13 +23,13 @@ open class Zf : IParse {
             val tr = trs[trIndex]
             val tds = tr.getElementsByTag("td")
             for (tdIndex in tds.indices) {
-                parseInfo(tds[tdIndex], courseList)
+                parseInfo(tds[tdIndex], courseList, trIndex, tdIndex)
             }
         }
         return courseList
     }
 
-    open fun parseInfo(element: Element, courseList: MutableList<CourseWrapper>) {
+    override fun parseInfo(element: Element, courseList: MutableList<CourseWrapper>, trIndex: Int, tdIndex: Int) {
         var nodes = element.textNodes()
         if (nodes.size % 4 == 0) {
             while (nodes.size != 0) {
@@ -37,7 +38,11 @@ open class Zf : IParse {
                     position = nodes[3].text()
                     teacher = nodes[2].text()
                     day = ParseUtil.getDayInfoByStr(nodes[1].text().substring(0, 2))
-                    week = ParseUtil.getWeekInfoByStr(arrayOf("第%d-%d周|单周}", "第%d-%d周|双周}", "第%d-%d周}"), nodes[1].text().substringAfter("{"))
+                    week = ParseUtil.getWeekInfoByStr(nodes[1].text().substringAfter("{"),
+                            singleRules = "第%d-%d周|单周}",
+                            doubleRules = "第%d-%d周|双周}",
+                            commonRules = "第%d-%d周}"
+                    )
                     val sessionInfo = nodes[1].text().substring(2, nodes[1].text().indexOf("{")).removePrefix("第").removeSuffix("节").split(",")
                     sectionStart = sessionInfo[0].toInt()
                     sectionContinue = sessionInfo.size

@@ -1,8 +1,6 @@
 package cn.surine.schedulex.ui.schedule_data_fetch
 
-import android.Manifest
 import android.annotation.SuppressLint
-import android.util.Log
 import android.view.KeyEvent
 import android.view.View
 import android.view.inputmethod.EditorInfo
@@ -11,28 +9,20 @@ import androidx.lifecycle.ViewModelProviders
 import cn.surine.schedulex.R
 import cn.surine.schedulex.base.Constants
 import cn.surine.schedulex.base.controller.BaseFragment
-import cn.surine.schedulex.base.utils.*
+import cn.surine.schedulex.base.utils.InstanceFactory
+import cn.surine.schedulex.base.utils.Navigations
+import cn.surine.schedulex.base.utils.Prefs
 import cn.surine.schedulex.base.utils.Toasts.toast
-import cn.surine.schedulex.base.utils.Toasts.toastLong
+import cn.surine.schedulex.base.utils.bitCount
 import cn.surine.schedulex.data.entity.Course
 import cn.surine.schedulex.data.entity.Schedule
-import cn.surine.schedulex.third_parse.CourseWrapper
-import cn.surine.schedulex.third_parse.JwInfo
-import cn.surine.schedulex.third_parse.Parser
-import cn.surine.schedulex.third_parse.ParserEngine.NCUT
-import cn.surine.schedulex.third_parse.ParserEngine.OLD_QZ
-import cn.surine.schedulex.third_parse.ParserEngine.PKU
-import cn.surine.schedulex.third_parse.ParserEngine.SW
-import cn.surine.schedulex.third_parse.ParserEngine.ZF
-import cn.surine.schedulex.third_parse.ParserEngine.default
-import cn.surine.schedulex.third_parse.ParserEngine.newZenFang
 import cn.surine.schedulex.ui.course.CourseRepository
 import cn.surine.schedulex.ui.course.CourseViewModel
 import cn.surine.schedulex.ui.schedule.ScheduleRepository
 import cn.surine.schedulex.ui.schedule.ScheduleViewModel
+import cn.surine.schedulex.ui.schedule_import_pro.data.CourseWrapper
 import cn.surine.schedulex.ui.schedule_init.ScheduleInitFragment
 import com.peanut.sdk.miuidialog.MIUIDialog
-import com.tbruyelle.rxpermissions2.RxPermissions
 import kotlinx.android.synthetic.main.fragment_third_fetch.*
 import java.net.URLDecoder
 import java.util.*
@@ -142,51 +132,50 @@ class ScheduleThirdFetchFragment : BaseFragment() {
     internal inner class InJavaScriptLocalObj {
         @JavascriptInterface
         fun showSource(html: String, system: String) {
-            Log.d("slw", "system:$system ");
-            Log.d("slw", "html: $html");
-            val engineFunction = when (system) {
-                JwInfo.NEW_ZF -> ::newZenFang
-                JwInfo.PKU -> ::PKU
-                JwInfo.NCUT -> ::NCUT
-                JwInfo.ZF -> ::ZF
-                JwInfo.SW -> ::SW
-                JwInfo.OLD_QZ -> ::OLD_QZ
-                else -> ::default
-            }
-            Parser().parse(engine = engineFunction, html = if (testHtml.isEmpty()) html else testHtml) { list, e ->
-                activity().runOnUiThread {
-                    if (list != null) {
-                        parseData(list)
-                    }
-                    if (e != null) {
-                        MIUIDialog(activity()).show {
-                            title(text = "解析失败")
-                            message(text = "<html>请尝试定位到课表页面再进行解析，如果还是无法导入，请您加QQ群<a href='https://www.baidu.com'>686976115</a>进行反馈；同时，如果您有适配您的学校的想法也可以直接在群里联系开发者。<br><b>如果学校已经适配，但依然解析失败，可能是源码获取异常，请尝试反馈</b></html>") {
-                                html {
-                                    Others.openUrl("https://jq.qq.com/?_wv=1027&k=SmyNDbv6")
-                                }
-                            }
-                            positiveButton(text = "确定") { this.cancel() }
-                            negativeButton(text = "反馈源码") {
-                                RxPermissions(activity()).apply {
-                                    request(Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE).subscribe {
-                                        if (it) {
-                                            val name = "${system}系统源码-${System.currentTimeMillis()}"
-                                            if (Files.save(name, html, "html")) {
-                                                toastLong("源码保存成功,路径 /Download/${name}，请尝试发送给开发者进行反馈~")
-                                            } else {
-                                                toast("保存失败！")
-                                            }
-                                        } else {
-                                            toast(getString(R.string.permission_is_denied))
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
+//            val engineFunction = when (system) {
+////                JwInfo.NEW_ZF -> ::newZenFang
+//                PKU -> ::PKU
+////                NCUT -> ::NCUT
+////                ZF -> ::ZF
+////                SW -> ::SW
+////                OLD_QZ -> ::OLD_QZ
+////                SWUST -> ::SWUST
+//                else -> ::PKU
+//            }
+//            Parser().parse(engine = engineFunction, html = if (testHtml.isEmpty()) html else testHtml) { list, e ->
+//                activity().runOnUiThread {
+//                    if (list != null) {
+//                        parseData(list)
+//                    }
+//                    if (e != null) {
+//                        MIUIDialog(activity()).show {
+//                            title(text = "解析失败")
+//                            message(text = "<html>请尝试定位到课表页面再进行解析，如果还是无法导入，请您加QQ群<a href='https://www.baidu.com'>686976115</a>进行反馈；同时，如果您有适配您的学校的想法也可以直接在群里联系开发者。<br><b>如果学校已经适配，但依然解析失败，可能是源码获取异常，请尝试反馈</b></html>") {
+//                                html {
+//                                    Others.openUrl("https://jq.qq.com/?_wv=1027&k=SmyNDbv6")
+//                                }
+//                            }
+//                            positiveButton(text = "确定") { this.cancel() }
+//                            negativeButton(text = "反馈源码") {
+//                                RxPermissions(activity()).apply {
+//                                    request(Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE).subscribe {
+//                                        if (it) {
+//                                            val name = "${system}系统源码-${System.currentTimeMillis()}"
+//                                            if (Files.save(name, html, "html")) {
+//                                                toastLong("源码保存成功,路径 /Download/${name}，请尝试发送给开发者进行反馈~")
+//                                            } else {
+//                                                toast("保存失败！")
+//                                            }
+//                                        } else {
+//                                            toast(getString(R.string.permission_is_denied))
+//                                        }
+//                                    }
+//                                }
+//                            }
+//                        }
+//                    }
+//                }
+//            }
         }
     }
 

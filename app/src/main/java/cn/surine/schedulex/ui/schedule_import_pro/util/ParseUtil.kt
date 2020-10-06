@@ -1,4 +1,4 @@
-package cn.surine.schedulex.third_parse.new_version.helper
+package cn.surine.schedulex.ui.schedule_import_pro.util
 
 import cn.surine.schedulex.base.Constants
 
@@ -22,16 +22,18 @@ object ParseUtil {
     /**
      * 根据模板来返回解析出来的周信息
      * 适用于 区间范围 形式的字符串
-     * @param rules 字符串模板(str数组，需要按照单，双，全周来传递模板)
      * @param target 待解析字符串
+     * @param singleRules 单周模板
+     * @param doubleRules 双周模板
+     * @param commonRules 默认模板（全周）
+     * 如果对应的三种情况是一样的，（也就是不存在xxx单周或者xxx双周类似的信息，可以直接忽略传递参数，仅传递commonRules）
      * */
-    fun getWeekInfoByStr(rules: Array<String>, target: String): List<Int> {
-        if (rules.size != 3) return emptyList()
+    fun getWeekInfoByStr(target: String,singleRules:String = "",doubleRules:String = "",commonRules:String): List<Int> {
         when {
             '单' in target -> {
                 for (i in 1 until Constants.MAX_SESSION) {
                     for (j in i until Constants.MAX_SESSION) {
-                        if (String.format(rules[0],i,j) == target) {
+                        if (String.format(singleRules,i,j) == target) {
                             return (i..j).toList().filter { it % 2 != 0 }
                         }
                     }
@@ -40,7 +42,7 @@ object ParseUtil {
             '双' in target -> {
                 for (i in 1 until Constants.MAX_SESSION) {
                     for (j in i until Constants.MAX_SESSION) {
-                        if (String.format(rules[1],i,j) == target) {
+                        if (String.format(doubleRules,i,j) == target) {
                             return (i..j).toList().filter { it % 2 == 0 }
                         }
                     }
@@ -49,7 +51,7 @@ object ParseUtil {
             else -> {
                 for (i in 1 until Constants.MAX_SESSION) {
                     for (j in i until Constants.MAX_SESSION) {
-                        if (String.format(rules[2],i,j) == target) {
+                        if (String.format(commonRules,i,j) == target) {
                             return (i..j).toList()
                         }
                     }

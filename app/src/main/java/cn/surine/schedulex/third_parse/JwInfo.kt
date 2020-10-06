@@ -20,5 +20,7 @@ data class JwInfo(val school:String = "",val name:String = "", val url:String = 
         const val ZF = "zf" //正方
         const val SW = "sw" //树维
         const val OLD_QZ = "old_qz" //旧强智
+        const val NEW_QZ = "new_qz" //新强智
+        const val SWUST = "swust" //西南科技大学
     }
 }

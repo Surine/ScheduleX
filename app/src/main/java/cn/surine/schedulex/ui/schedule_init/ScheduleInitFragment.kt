@@ -2,10 +2,10 @@ package cn.surine.schedulex.ui.schedule_init
 
 import android.annotation.SuppressLint
 import android.os.Bundle
-import android.util.Log
 import androidx.lifecycle.ViewModelProviders
 import cn.surine.schedulex.R
 import cn.surine.schedulex.base.controller.BaseBindingFragment
+import cn.surine.schedulex.base.utils.Navigations
 import cn.surine.schedulex.base.utils.Navigations.open
 import cn.surine.schedulex.base.utils.Toasts.toast
 import cn.surine.schedulex.databinding.FragmentScheduleInitBinding
@@ -22,7 +22,8 @@ class ScheduleInitFragment : BaseBindingFragment<FragmentScheduleInitBinding>() 
     private lateinit var scheduleInitViewModel: ScheduleInitViewModel
 
     companion object {
-        const val SCHEDULE_NAME: String = "SCHEDULE_NAME"
+        const val SCHEDULE_NAME = "SCHEDULE_NAME"
+        const val PAGE_FLAG = "PAGE_FLAG"
     }
 
     override fun layoutId(): Int = R.layout.fragment_schedule_init
@@ -43,7 +44,11 @@ class ScheduleInitFragment : BaseBindingFragment<FragmentScheduleInitBinding>() 
 
     @SuppressLint("MissingSuperCall")
     override fun onBackPressed() {
-        activity().finish()
+        if (arguments?.getBoolean(PAGE_FLAG, false) == true) {
+            Navigations.close(this)
+        } else {
+            activity().finish()
+        }
     }
 
 }

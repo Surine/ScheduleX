@@ -36,7 +36,7 @@
 
 
     <style name="textview_title_style">
-        <item name="android:textSize">@dimen/t22</item>
+        <item name="android:textSize">@dimen/t24</item>
         <item name="android:textColor">@android:color/black</item>
     </style>
 

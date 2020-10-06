@@ -54,7 +54,7 @@
     </fragment>
     <fragment
         android:id="@+id/dataFetchFragment"
-        android:name="cn.surine.schedulex.ui.schedule_data_fetch.ScheduleDataFetchFragment"
+        android:name="cn.surine.schedulex.ui.schedule_import_pro.page.schedule_data_fetch_init.ScheduleDataFetchFragment"
         android:label="DataFetchFragment">
         <action
             android:id="@+id/action_dataFetchFragment_to_loginFragment"

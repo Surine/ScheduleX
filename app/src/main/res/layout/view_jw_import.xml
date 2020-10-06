@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="@dimen/dp200"
+    android:layout_height="290dp">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@mipmap/ic_school"
+        android:scaleType="fitStart"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:tint="#0FFFFFFF" />
+
+    <TextView
+        android:id="@+id/textView26"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp10"
+        android:layout_marginEnd="@dimen/dp16"
+        android:text="更换学校"
+        android:drawablePadding="@dimen/dp4"
+        android:textSize="@dimen/t12"
+        android:textColor="@android:color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:drawableLeftCompat="@mipmap/ic_change"
+        app:drawableTint="@android:color/white" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/button3"
+        android:layout_width="@dimen/dp80"
+        android:layout_height="@dimen/dp40"
+        android:layout_marginBottom="@dimen/dp10"
+        android:text="申请适配"
+        android:visibility="gone"
+        app:cornerRadius="@dimen/dp30"
+        android:textColor="@android:color/black"
+        android:backgroundTint="@android:color/white"
+        android:textSize="@dimen/t10"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/textView26" />
+
+    <TextView
+        android:id="@+id/textView27"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/t10"
+        android:lineSpacingExtra="@dimen/dp5"
+        app:layout_constraintRight_toRightOf="@id/textView26"
+        android:layout_marginStart="@dimen/dp20"
+        android:layout_marginBottom="@dimen/dp15"
+        android:text="Surine/新URP教务\n已成功导入100次"
+        android:textColor="@android:color/white"
+        app:layout_constraintBottom_toTopOf="@+id/button3"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/textView28"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="北京邮电大学"
+        android:textSize="20sp"
+        android:textColor="@android:color/white"
+        android:layout_marginBottom="@dimen/dp10"
+        app:layout_constraintBottom_toTopOf="@+id/textView27"
+        app:layout_constraintStart_toStartOf="@+id/textView27" />
+</androidx.constraintlayout.widget.ConstraintLayout>

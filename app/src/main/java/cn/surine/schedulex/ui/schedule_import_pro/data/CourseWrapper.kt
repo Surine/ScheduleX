@@ -1,4 +1,4 @@
-package cn.surine.schedulex.third_parse.new_version.bean
+package cn.surine.schedulex.ui.schedule_import_pro.data
 
 /**
  * schedulex解析器通用适配实体类

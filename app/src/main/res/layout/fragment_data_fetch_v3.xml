@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/textView20"
+        style="@style/textview_title_style"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dp20"
+        android:layout_marginTop="@dimen/dp100"
+        android:paddingStart="@dimen/dp3"
+        android:text="导入课程"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView24"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp10"
+        android:paddingStart="@dimen/dp3"
+        android:text="哪里最快点哪里~"
+        android:textSize="@dimen/t17"
+        app:layout_constraintStart_toStartOf="@+id/textView20"
+        app:layout_constraintTop_toBottomOf="@+id/textView20" />
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="480dp"
+        android:layout_marginEnd="@dimen/dp20"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="@id/textView24"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/textView24">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="290dp">
+
+            <LinearLayout
+                android:layout_width="@dimen/dp200"
+                android:layout_height="match_parent"
+                android:layout_marginEnd="@dimen/dp10"
+                android:background="@drawable/shape_radius_card_1">
+
+                <include
+                    layout="@layout/view_jw_import"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_marginBottom="@dimen/dp5"
+                    android:layout_weight="1"
+                    android:background="@drawable/shape_radius_card_2">
+
+                    <include
+                        layout="@layout/view_file_import"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_marginTop="@dimen/dp5"
+                    android:layout_weight="1"
+                    android:background="@drawable/shape_radius_card_3">
+
+                    <include
+                        layout="@layout/view_miai_import"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent" />
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="@dimen/dp10"
+            android:layout_weight="1"
+            android:background="@drawable/shape_radius_card_4">
+
+            <include
+                android:id="@+id/fromSuperCn"
+                layout="@layout/view_super_import"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/dp40"
+        android:layout_marginEnd="@dimen/dp20"
+        android:background="@drawable/ic_program_bar_background"
+        android:paddingStart="@dimen/dp10"
+        android:paddingEnd="@dimen/dp10"
+        app:layout_constraintBottom_toBottomOf="@id/textView24"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="@id/textView20">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginStart="@dimen/dp5"
+            android:layout_marginEnd="@dimen/dp10"
+            android:layout_weight="1"
+            android:drawableLeft="@mipmap/ic_skip"
+            android:drawablePadding="@dimen/dp4"
+            android:gravity="center"
+            android:text="跳过"
+            android:textColor="@android:color/black" />
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:layout_marginTop="@dimen/dp15"
+            android:layout_marginBottom="@dimen/dp15"
+            android:alpha="0.4"
+            android:background="@color/gray" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginStart="@dimen/dp10"
+            android:layout_marginEnd="@dimen/dp5"
+            android:layout_weight="1"
+            android:drawableLeft="@mipmap/ic_help"
+            android:drawablePadding="@dimen/dp4"
+            android:gravity="center"
+            android:text="帮助"
+            android:textColor="@android:color/black" />
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

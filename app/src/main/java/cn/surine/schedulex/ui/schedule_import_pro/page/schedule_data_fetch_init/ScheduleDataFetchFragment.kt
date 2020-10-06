@@ -1,12 +1,10 @@
-package cn.surine.schedulex.ui.schedule_data_fetch
+package cn.surine.schedulex.ui.schedule_import_pro.page.schedule_data_fetch_init
 
-import android.Manifest
 import android.content.Intent
 import android.view.View
 import android.widget.Button
 import android.widget.CheckBox
 import android.widget.TextView
-import androidx.lifecycle.Observer
 import cn.surine.schedulex.R
 import cn.surine.schedulex.app_base.VmManager
 import cn.surine.schedulex.base.Constants
@@ -17,11 +15,11 @@ import cn.surine.schedulex.data.entity.Course
 import cn.surine.schedulex.data.entity.Schedule
 import cn.surine.schedulex.ui.course.CourseViewModel
 import cn.surine.schedulex.ui.schedule.ScheduleViewModel
+import cn.surine.schedulex.ui.schedule_data_fetch.ScheduleDataFetchViewModel
 import cn.surine.schedulex.ui.schedule_data_fetch.file.FileParserFactory
 import cn.surine.schedulex.ui.view.custom.helper.CommonDialogs
-import com.tbruyelle.rxpermissions2.RxPermissions
 import com.tencent.bugly.crashreport.CrashReport
-import kotlinx.android.synthetic.main.fragment_data_fetch.*
+import kotlinx.android.synthetic.main.fragment_data_fetch_v3.*
 import java.util.*
 
 /**
@@ -41,7 +39,7 @@ class ScheduleDataFetchFragment : BaseFragment() {
         const val JSON_REQUEST_CODE = 1001
     }
 
-    override fun layoutId(): Int = R.layout.fragment_data_fetch
+    override fun layoutId(): Int = R.layout.fragment_data_fetch_v3
 
     override fun onInit(parent: View?) {
         VmManager(this).apply {
@@ -49,35 +47,37 @@ class ScheduleDataFetchFragment : BaseFragment() {
             courseViewModel = vmCourse
             scheduleDataFetchViewModel = vmScheduleFetch
         }
-        loginJw.setOnClickListener {
-            Navigations.open(this, R.id.action_dataFetchFragment_to_scheduleSchoolListFragment, arguments)
-        }
+//        loginJw.setOnClickListener {
+//            Navigations.open(this, R.id.action_dataFetchFragment_to_scheduleSchoolListFragment, arguments)
+//        }
+
+        //超表导入
         fromSuperCn.setOnClickListener {
             Navigations.open(this, R.id.action_dataFetchFragment_to_superLoginFragment, arguments)
         }
-        skip.setOnClickListener {
-            Prefs.save(Constants.CUR_SCHEDULE, scheduleViewModel.addSchedule(scheduleName, 24, 1, Schedule.IMPORT_WAY.ADD))
-            Navigations.open(this, R.id.action_dataFetchFragment_to_scheduleFragment)
-        }
-        fromFile.setOnClickListener {
-            RxPermissions(activity()).request((Manifest.permission.READ_EXTERNAL_STORAGE)).subscribe {
-                if (it) {
-                    showImportDialog()
-                } else {
-                    Toasts.toast(getString(R.string.permission_is_denied))
-                }
-            }
-        }
-
-        scheduleDataFetchViewModel.getCommon()
-        scheduleDataFetchViewModel.mCommons.observe(this, Observer{
-            if(it.isShowMiAi){
-                fromMiai.show()
-                fromMiai.setOnClickListener {
-                    Navigations.open(this, R.id.action_dataFetchFragment_to_miAiInitFragment,arguments)
-                }
-            }
-        })
+//        skip.setOnClickListener {
+//            Prefs.save(Constants.CUR_SCHEDULE, scheduleViewModel.addSchedule(scheduleName, 24, 1, Schedule.IMPORT_WAY.ADD))
+//            Navigations.open(this, R.id.action_dataFetchFragment_to_scheduleFragment)
+//        }
+//        fromFile.setOnClickListener {
+//            RxPermissions(activity()).request((Manifest.permission.READ_EXTERNAL_STORAGE)).subscribe {
+//                if (it) {
+//                    showImportDialog()
+//                } else {
+//                    Toasts.toast(getString(R.string.permission_is_denied))
+//                }
+//            }
+//        }
+//
+//        scheduleDataFetchViewModel.getCommon()
+//        scheduleDataFetchViewModel.mCommons.observe(this, Observer{
+//            if(it.isShowMiAi){
+//                fromMiai.show()
+//                fromMiai.setOnClickListener {
+//                    Navigations.open(this, R.id.action_dataFetchFragment_to_miAiInitFragment,arguments)
+//                }
+//            }
+//        })
 
     }
 

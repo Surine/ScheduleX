@@ -17,6 +17,7 @@
     <dimen name="dp2">2dp</dimen>
     <dimen name="dp90">90dp</dimen>
     <dimen name="t22">22sp</dimen>
+    <dimen name="t24">24sp</dimen>
     <dimen name="dp45">45dp</dimen>
     <dimen name="dp12">12dp</dimen>
     <dimen name="dp5">5dp</dimen>

@@ -1,9 +1,9 @@
 package cn.surine.schedulex.third_parse
 
-import android.util.Log
 import cn.surine.schedulex.base.utils.Toasts
 import cn.surine.schedulex.third_parse.bean.Course
-import cn.surine.schedulex.third_parse.new_version.helper.ParseUtil
+import cn.surine.schedulex.ui.schedule_import_pro.data.CourseWrapper
+import cn.surine.schedulex.ui.schedule_import_pro.util.ParseUtil
 import org.jsoup.Jsoup
 
 object Shell {
@@ -272,7 +272,11 @@ object Shell {
                             position = nodes[3].text()
                             teacher = nodes[2].text()
                             day = ParseUtil.getDayInfoByStr(nodes[1].text().substring(0, 2))
-                            week = ParseUtil.getWeekInfoByStr(arrayOf("第%d-%d周|单周}", "第%d-%d周|双周}", "第%d-%d周}"), nodes[1].text().substringAfter("{"))
+                            week = ParseUtil.getWeekInfoByStr(nodes[1].text().substringAfter("{"),
+                                    singleRules = "第%d-%d周|单周}",
+                                    doubleRules = "第%d-%d周|双周}",
+                                    commonRules = "第%d-%d周}"
+                            )
                             val sessionInfo = nodes[1].text().substring(2, nodes[1].text().indexOf("{")).removePrefix("第").removeSuffix("节").split(",")
                             sectionStart = sessionInfo[0].toInt()
                             sectionContinue = sessionInfo.size
@@ -323,7 +327,9 @@ object Shell {
                                         }
                                 for (i in weekInfo) {
                                     if (i.contains("-")) {
-                                        tmpWeek.addAll(ParseUtil.getWeekInfoByStr(arrayOf("%d-%d", "%d-%d", "%d-%d"), i))
+                                        tmpWeek.addAll(ParseUtil.getWeekInfoByStr(i,
+                                                commonRules = "%d-%d"
+                                        ))
                                     } else {
                                         tmpWeek.add(i.toInt())
                                     }
@@ -366,9 +372,9 @@ object Shell {
                     //week 信息
                     val weekInfo = courseInfo[3].substringBefore("周").split(",")
                     val tmpWeek = mutableListOf<Int>()
-                    for (i in weekInfo){
+                    for (i in weekInfo) {
                         if (i.contains("-")) {
-                            tmpWeek.addAll(ParseUtil.getWeekInfoByStr(arrayOf("%d-%d", "%d-%d", "%d-%d"), i))
+                            tmpWeek.addAll(ParseUtil.getWeekInfoByStr(i, commonRules = "%d-%d"))
                         } else {
                             tmpWeek.add(i.toInt())
                         }
@@ -381,39 +387,42 @@ object Shell {
     }
 
 
-//    fun NewUrpParser(html: String): List<Course> {
-//        val result = arrayListOf<Course>()
-//        val gson = Gson()
-//        val json = JsonParser.parseString(html)
-//                .asJsonObject
-//                .getAsJsonArray("dateList")[0].asJsonObject
-//                .getAsJsonArray("selectCourseList").toString()
-//        val list = gson.fromJson(json, Array<NewUrpCourseInfo>::class.java)
-//        val weekIntList = arrayListOf<Int>()
-//        list.forEach { info ->
-//            info.timeAndPlaceList?.forEach { detail ->
-//                weekIntList.clear()
-//                detail.classWeek.forEachIndexed { index, c ->
-//                    if (c == '1') {
-//                        weekIntList.add(index + 1)
-//                    }
-//                }
-//                Common.weekIntList2WeekBeanList(weekIntList).forEach { week ->
-//                    result.add(
-//                            Course(
-//                                    name = info.courseName, day = detail.classDay,
-//                                    room = (detail.campusName ?: "") + (detail.teachingBuildingName
-//                                            ?: "") + detail.classroomName,
-//                                    teacher = info.attendClassTeacher,
-//                                    startNode = detail.classSessions,
-//                                    endNode = detail.classSessions + detail.continuingSession - 1,
-//                                    startWeek = week.start, endWeek = week.end,
-//                                    type = week.type
-//                            )
-//                    )
-//                }
-//            }
-//        }
-//        return result
-//    }
+    /**
+     * 西南科技大学
+     * */
+    fun swust(html: String): List<CourseWrapper> {
+        val courseList = mutableListOf<CourseWrapper>()
+        val target = Jsoup.parse(html).getElementsByClass("UICourseTable").first()
+        val tbody = target.getElementsByTag("tbody").first()
+        val trs = tbody.getElementsByTag("tr")
+        for (i in trs.indices) {
+            val tr = trs[i]
+            val tds = tr.getElementsByTag("td")
+            for (j in tds.indices) {
+                val td = tds[j]
+                if (td.text().isEmpty() || arrayOf("上午", "下午", "晚上").contains(td.text()) ||
+                        (td.text().startsWith("第") && td.text().endsWith("讲"))) {
+                    continue
+                }
+                val div = td.getElementsByClass("lecture").first()
+                courseList.add(CourseWrapper().apply {
+                    name = div.getElementsByClass("course").text()
+                    teacher = div.getElementsByClass("teacher").text()
+                    position = div.getElementsByClass("place").text()
+                    sectionContinue = 2
+                    day = if (tds.size == 9) j - 1 else j
+                    sectionStart = (i + 1) * 2 - 1
+                    val weekText = div.getElementsByClass("week").text()
+                    week = if (weekText.contains("(1)")) {
+                        val d1 = weekText.substringBefore("(").split("-").map { it.toInt() }
+                        (d1[0]..d1[1]).filterIndexed { index, _ -> index % 2 == 0 }
+                    } else {
+                        val d1 = weekText.substringBefore("(").split("-").map { it.toInt() }
+                        (d1[0]..d1[1]).toList()
+                    }
+                })
+            }
+        }
+        return courseList
+    }
 }
