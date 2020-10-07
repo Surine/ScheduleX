@@ -4,5 +4,6 @@
     <!--标题-->
     <declare-styleable name="TopBar">
         <attr name="title" format="string" />
+        <attr name="titleColor" format="color" />
     </declare-styleable>
 </resources>

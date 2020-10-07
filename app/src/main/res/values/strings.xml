@@ -176,6 +176,7 @@
     <string name="show_time">当前展示时间表</string>
     <string name="whether_to_show_time">是否显示时间表</string>
     <string name="transition_super">transition_super</string>
-    <string name="transition_super2">transition_super2</string>
     <string name="transition_super3">transition_super3</string>
+    <string name="transition_mi">transition_mi</string>
+    <string name="transition_mi3">transition_mi3</string>
 </resources>

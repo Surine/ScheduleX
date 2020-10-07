@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/loginJw"
     android:layout_width="@dimen/dp200"
     android:layout_height="290dp">
 
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:src="@mipmap/ic_school"
         android:scaleType="fitStart"
+        android:src="@mipmap/ic_school"
         app:layout_constraintBottom_toBottomOf="parent"
         app:tint="#0FFFFFFF" />
 
@@ -18,26 +19,26 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/dp10"
         android:layout_marginEnd="@dimen/dp16"
-        android:text="更换学校"
         android:drawablePadding="@dimen/dp4"
-        android:textSize="@dimen/t12"
+        android:text="更换学校"
         android:textColor="@android:color/white"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        android:textSize="@dimen/t12"
         app:drawableLeftCompat="@mipmap/ic_change"
-        app:drawableTint="@android:color/white" />
+        app:drawableTint="@android:color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/button3"
         android:layout_width="@dimen/dp80"
         android:layout_height="@dimen/dp40"
         android:layout_marginBottom="@dimen/dp10"
+        android:backgroundTint="@android:color/white"
         android:text="申请适配"
+        android:textColor="@android:color/black"
+        android:textSize="@dimen/t10"
         android:visibility="gone"
         app:cornerRadius="@dimen/dp30"
-        android:textColor="@android:color/black"
-        android:backgroundTint="@android:color/white"
-        android:textSize="@dimen/t10"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/textView26" />
 
@@ -45,24 +46,24 @@
         android:id="@+id/textView27"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:textSize="@dimen/t10"
-        android:lineSpacingExtra="@dimen/dp5"
-        app:layout_constraintEnd_toEndOf="@id/textView26"
         android:layout_marginStart="@dimen/dp20"
         android:layout_marginBottom="@dimen/dp15"
+        android:lineSpacingExtra="@dimen/dp5"
         android:text="点击右上角选择您的学校，只需一次即可记住哦~"
         android:textColor="@android:color/white"
+        android:textSize="@dimen/t10"
         app:layout_constraintBottom_toTopOf="@+id/button3"
+        app:layout_constraintEnd_toEndOf="@id/textView26"
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/textView28"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="教务导入"
-        android:textSize="20sp"
-        android:textColor="@android:color/white"
         android:layout_marginBottom="@dimen/dp10"
+        android:text="教务导入"
+        android:textColor="@android:color/white"
+        android:textSize="20sp"
         app:layout_constraintBottom_toTopOf="@+id/textView27"
         app:layout_constraintStart_toStartOf="@+id/textView27" />
 </androidx.constraintlayout.widget.ConstraintLayout>

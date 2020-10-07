@@ -20,5 +20,9 @@
     <color name="main_bg_color_dark">#000000</color>
     <color name="white_transparent">#D6FFFFFF</color>
     <color name="text">#333333</color>
+    <color name="shape_jw_color">#CC0091FF</color>
+    <color name="shape_file_color">#CC73B9C4</color>
+    <color name="shape_mi_color">#CCF16609</color>
+    <color name="shape_super_color">#CC98A8F6</color>
 
 </resources>

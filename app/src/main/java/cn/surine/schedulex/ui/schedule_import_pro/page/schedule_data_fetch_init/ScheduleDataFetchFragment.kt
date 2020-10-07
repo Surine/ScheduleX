@@ -1,14 +1,14 @@
 package cn.surine.schedulex.ui.schedule_import_pro.page.schedule_data_fetch_init
 
+import android.Manifest
 import android.content.Intent
-import android.os.Bundle
 import android.view.View
 import android.widget.Button
 import android.widget.CheckBox
 import android.widget.TextView
+import androidx.lifecycle.Observer
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.FragmentNavigator
-import androidx.transition.TransitionInflater
 import cn.surine.schedulex.R
 import cn.surine.schedulex.app_base.VmManager
 import cn.surine.schedulex.base.Constants
@@ -22,7 +22,12 @@ import cn.surine.schedulex.ui.schedule.ScheduleViewModel
 import cn.surine.schedulex.ui.schedule_data_fetch.ScheduleDataFetchViewModel
 import cn.surine.schedulex.ui.schedule_data_fetch.file.FileParserFactory
 import cn.surine.schedulex.ui.view.custom.helper.CommonDialogs
+import com.tbruyelle.rxpermissions2.RxPermissions
 import com.tencent.bugly.crashreport.CrashReport
+import kotlinx.android.synthetic.main.fragment_data_fetch_v3.*
+import kotlinx.android.synthetic.main.view_file_import.*
+import kotlinx.android.synthetic.main.view_jw_import.*
+import kotlinx.android.synthetic.main.view_miai_import.*
 import kotlinx.android.synthetic.main.view_super_import.*
 import java.util.*
 
@@ -44,14 +49,6 @@ class ScheduleDataFetchFragment : BaseFragment() {
         const val JSON_REQUEST_CODE = 1001
     }
 
-
-//    override fun onCreate(savedInstanceState: Bundle?) {
-//        super.onCreate(savedInstanceState)
-//        //设置共享动画
-//        sharedElementEnterTransition = TransitionInflater.from(context).inflateTransition(android.R.transition.fade)
-//    }
-
-
     override fun layoutId(): Int = R.layout.fragment_data_fetch_v3
 
     override fun onInit(parent: View?) {
@@ -60,46 +57,53 @@ class ScheduleDataFetchFragment : BaseFragment() {
             courseViewModel = vmCourse
             scheduleDataFetchViewModel = vmScheduleFetch
         }
-//        loginJw.setOnClickListener {
-//            Navigations.open(this, R.id.action_dataFetchFragment_to_scheduleSchoolListFragment, arguments)
-//        }
+        loginJw.setOnClickListener {
+            Navigations.open(this, R.id.action_dataFetchFragment_to_scheduleSchoolListFragment, arguments)
+        }
 
         //超表导入
         fromSuperCn.setOnClickListener {
             // 添加共享元素动画
-            // 添加共享元素动画
             val extras = FragmentNavigator.Extras.Builder()
-                    .addSharedElement(fromSuperCn,getString(R.string.transition_super))
-                    .addSharedElement(super_logo,getString(R.string.transition_super3))
-                    .addSharedElement(superTitle,getString(R.string.transition_super2))
+                    .addSharedElement(fromSuperCn, getString(R.string.transition_super))
+                    .addSharedElement(super_logo, getString(R.string.transition_super3))
                     .build()
             val directions = ScheduleDataFetchFragmentDirections.actionDataFetchFragmentToSuperLoginFragment()
-            Navigation.findNavController(it).navigate(directions,extras)
-//            Navigations.open(this, R.id.action_dataFetchFragment_to_superLoginFragment, arguments)
+            Navigation.findNavController(it).navigate(directions, extras)
         }
-//        skip.setOnClickListener {
-//            Prefs.save(Constants.CUR_SCHEDULE, scheduleViewModel.addSchedule(scheduleName, 24, 1, Schedule.IMPORT_WAY.ADD))
-//            Navigations.open(this, R.id.action_dataFetchFragment_to_scheduleFragment)
-//        }
-//        fromFile.setOnClickListener {
-//            RxPermissions(activity()).request((Manifest.permission.READ_EXTERNAL_STORAGE)).subscribe {
-//                if (it) {
-//                    showImportDialog()
-//                } else {
-//                    Toasts.toast(getString(R.string.permission_is_denied))
-//                }
-//            }
-//        }
-//
-//        scheduleDataFetchViewModel.getCommon()
-//        scheduleDataFetchViewModel.mCommons.observe(this, Observer{
-//            if(it.isShowMiAi){
-//                fromMiai.show()
-//                fromMiai.setOnClickListener {
-//                    Navigations.open(this, R.id.action_dataFetchFragment_to_miAiInitFragment,arguments)
-//                }
-//            }
-//        })
+        skip.setOnClickListener {
+            Prefs.save(Constants.CUR_SCHEDULE, scheduleViewModel.addSchedule(scheduleName, 24, 1, Schedule.IMPORT_WAY.ADD))
+            Navigations.open(this, R.id.action_dataFetchFragment_to_scheduleFragment)
+        }
+        help.setOnClickListener {
+            Others.openUrl("https://support.qq.com/products/282532")
+        }
+
+        fromFile.setOnClickListener {
+            RxPermissions(activity()).request((Manifest.permission.READ_EXTERNAL_STORAGE)).subscribe {
+                if (it) {
+                    showImportDialog()
+                } else {
+                    Toasts.toast(getString(R.string.permission_is_denied))
+                }
+            }
+        }
+
+        scheduleDataFetchViewModel.getCommon()
+        scheduleDataFetchViewModel.mCommons.observe(this, Observer {
+            if (it.isShowMiAi) {
+                fromMiai.setOnClickListener {
+                    val extras = FragmentNavigator.Extras.Builder()
+                            .addSharedElement(fromMiai, getString(R.string.transition_mi))
+                            .addSharedElement(miai_logo, getString(R.string.transition_mi3))
+                            .build()
+                    val directions = ScheduleDataFetchFragmentDirections.actionDataFetchFragmentToMiAiInitFragment()
+                    Navigation.findNavController(fromMiai).navigate(directions, extras)
+                }
+            } else {
+                Toasts.toast("因官方限制，小爱导入已不可用，感谢支持")
+            }
+        })
 
     }
 

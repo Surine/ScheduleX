@@ -78,7 +78,9 @@
             app:popEnterAnim="@anim/fragment_open_enter" />
         <action
             android:id="@+id/action_dataFetchFragment_to_miAiInitFragment"
-            app:destination="@id/miAiInitFragment" />
+            app:destination="@id/miAiInitFragment"
+            app:enterAnim="@anim/fragment_open_enter"
+            app:popEnterAnim="@anim/fragment_open_enter" />
     </fragment>
     <fragment
         android:id="@+id/splashFragment"
@@ -222,6 +224,8 @@
         android:label="MiAiInitFragment" >
         <action
             android:id="@+id/action_miAiInitFragment_to_miAiFetchFragment"
-            app:destination="@id/miAiFetchFragment" />
+            app:destination="@id/miAiFetchFragment"
+            app:enterAnim="@anim/fragment_open_enter"
+            app:popEnterAnim="@anim/fragment_open_enter" />
     </fragment>
 </navigation>

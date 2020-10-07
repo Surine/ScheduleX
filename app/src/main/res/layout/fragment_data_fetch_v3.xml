@@ -74,9 +74,9 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
-                    android:layout_marginTop="@dimen/dp5"
+                    android:layout_marginTop="@dimen/dp10"
                     android:layout_weight="1"
-                    android:background="@drawable/shape_radius_card_3">
+                    >
 
                     <include
                         layout="@layout/view_miai_import"
@@ -116,6 +116,7 @@
             android:layout_marginStart="@dimen/dp5"
             android:layout_marginEnd="@dimen/dp10"
             android:layout_weight="1"
+            android:id="@+id/skip"
             android:drawableLeft="@mipmap/ic_skip"
             android:drawablePadding="@dimen/dp4"
             android:gravity="center"
@@ -131,6 +132,7 @@
             android:background="@color/gray" />
 
         <TextView
+            android:id="@+id/help"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_marginStart="@dimen/dp10"

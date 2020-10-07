@@ -26,7 +26,6 @@
         android:layout_marginBottom="@dimen/dp10"
         android:text="超级课程表导入"
         android:id="@+id/superTitle"
-        android:transitionName="@string/transition_super2"
         android:textColor="@android:color/white"
         android:textSize="@dimen/t20"
         app:layout_constraintBottom_toTopOf="@id/textView29"

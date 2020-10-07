@@ -1,6 +1,7 @@
 package cn.surine.schedulex.ui.view.custom.helper
 
 import android.content.Context
+import android.graphics.Color
 import android.util.AttributeSet
 import android.view.View
 import android.widget.ImageView
@@ -21,14 +22,17 @@ class Topbar @JvmOverloads constructor(context: Context, attrs: AttributeSet? = 
     private var titleStr = ""
     private var vTitle: TextView
     private val vFunctionIcon: ImageView
+    private var titleColor = Color.BLACK
 
     init {
         val ta = getContext().obtainStyledAttributes(attrs, R.styleable.TopBar)
         titleStr = ta.getString(R.styleable.TopBar_title)?:""
+        titleColor = ta.getColor(R.styleable.TopBar_titleColor, Color.BLACK)
         ta.recycle()
         View.inflate(context, R.layout.view_header, this)
         vTitle = findViewById(R.id.title)
         vTitle.text = titleStr
+        vTitle.setTextColor(titleColor)
         vFunctionIcon = findViewById(R.id.function)
     }
 
