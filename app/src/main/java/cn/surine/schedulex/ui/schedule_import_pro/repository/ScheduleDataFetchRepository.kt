@@ -1,9 +1,10 @@
-package cn.surine.schedulex.ui.schedule_data_fetch
+package cn.surine.schedulex.ui.schedule_import_pro.repository
 
 import cn.surine.schedulex.BuildConfig
 import cn.surine.schedulex.base.controller.BaseRepository
 import cn.surine.schedulex.data.entity.Commons
 import cn.surine.schedulex.data.network.Loader
+import cn.surine.schedulex.ui.schedule_import_pro.data.RemoteUniversity
 
 /**
  * Intro：
@@ -19,5 +20,9 @@ object ScheduleDataFetchRepository :BaseRepository(){
             "https://surinex.coding.net/p/schedulex/d/schedulex/git/raw/master/common.json"
         }
         Loader.mService.getCommon(url).await()
+    }
+
+    suspend fun getUniversityInfo(name: String, code: String) = remote {
+        Loader.mService.getUniversityInfo(name,code).await()
     }
 }

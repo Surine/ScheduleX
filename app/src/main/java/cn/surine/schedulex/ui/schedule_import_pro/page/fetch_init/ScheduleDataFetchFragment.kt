@@ -1,6 +1,7 @@
-package cn.surine.schedulex.ui.schedule_import_pro.page.schedule_data_fetch_init
+package cn.surine.schedulex.ui.schedule_import_pro.page.fetch_init
 
 import android.Manifest
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.view.View
 import android.widget.Button
@@ -19,8 +20,11 @@ import cn.surine.schedulex.data.entity.Course
 import cn.surine.schedulex.data.entity.Schedule
 import cn.surine.schedulex.ui.course.CourseViewModel
 import cn.surine.schedulex.ui.schedule.ScheduleViewModel
-import cn.surine.schedulex.ui.schedule_data_fetch.ScheduleDataFetchViewModel
 import cn.surine.schedulex.ui.schedule_data_fetch.file.FileParserFactory
+import cn.surine.schedulex.ui.schedule_import_pro.core.ParseDispatcher
+import cn.surine.schedulex.ui.schedule_import_pro.data.RemoteUniversity
+import cn.surine.schedulex.ui.schedule_import_pro.page.change_school.SelectSchoolFragment
+import cn.surine.schedulex.ui.schedule_import_pro.viewmodel.ScheduleDataFetchViewModel
 import cn.surine.schedulex.ui.view.custom.helper.CommonDialogs
 import com.tbruyelle.rxpermissions2.RxPermissions
 import com.tencent.bugly.crashreport.CrashReport
@@ -45,21 +49,46 @@ class ScheduleDataFetchFragment : BaseFragment() {
     lateinit var scheduleDataFetchViewModel: ScheduleDataFetchViewModel
     var scheduleName = ""
 
+    var mRemoteUniversity: RemoteUniversity? = null
+
     companion object {
         const val JSON_REQUEST_CODE = 1001
     }
 
     override fun layoutId(): Int = R.layout.fragment_data_fetch_v3
 
+    @SuppressLint("SetTextI18n")
     override fun onInit(parent: View?) {
         VmManager(this).apply {
             scheduleViewModel = vmSchedule
             courseViewModel = vmCourse
             scheduleDataFetchViewModel = vmScheduleFetch
         }
-        loginJw.setOnClickListener {
-            Navigations.open(this, R.id.action_dataFetchFragment_to_scheduleSchoolListFragment, arguments)
+        changeSchool.setOnClickListener {
+            Navigations.open(this, R.id.action_dataFetchFragment_to_selectSchoolFragment, arguments)
         }
+
+        val curSchoolNameStr = Prefs.getString(SelectSchoolFragment.CUR_SCHOOL_NAME, "教务导入")
+        val curSchoolCode = Prefs.getString(SelectSchoolFragment.CUR_SCHOOL_CODE, "")
+
+        curSchoolName.text = curSchoolNameStr
+        curSchoolNameStr?.let {
+            scheduleDataFetchViewModel.getUniversityInfo(curSchoolNameStr, curSchoolCode ?: "")
+            scheduleDataFetchViewModel.mUniversityInfo.observe(this, Observer {
+                mRemoteUniversity = it
+                curSchoolInfo.text = "${it.jwSystemName}教务/${it.author}\n已成功导入${it.useTimes}次"
+            })
+        }
+
+
+        loginJw.setOnClickListener {
+            if (mRemoteUniversity != null) {
+                ParseDispatcher.dispatch(this, mRemoteUniversity!!)
+            }else{
+                Toasts.toast("着呢")
+            }
+        }
+
 
         //超表导入
         fromSuperCn.setOnClickListener {

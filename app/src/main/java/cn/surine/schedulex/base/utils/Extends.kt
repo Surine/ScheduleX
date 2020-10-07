@@ -40,7 +40,7 @@ fun List<Int>.bitCount(maxLen: Int = Constants.MAX_WEEK): String {
  * @param layoutManager 布局
  * @param adapter 适配器
  * */
-fun <T> RecyclerView.load(mLayoutManager: RecyclerView.LayoutManager, mAdapter: BaseAdapter<T>, adapterOp: (adapter: BaseAdapter<T>) -> Unit) {
+fun <T> RecyclerView.load(mLayoutManager: RecyclerView.LayoutManager, mAdapter: BaseAdapter<T>, adapterOp: (adapter: BaseAdapter<T>) -> Unit = {}) {
     layoutManager = mLayoutManager
     adapter = mAdapter
     adapterOp(mAdapter)

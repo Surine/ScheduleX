@@ -54,7 +54,7 @@
     </fragment>
     <fragment
         android:id="@+id/dataFetchFragment"
-        android:name="cn.surine.schedulex.ui.schedule_import_pro.page.schedule_data_fetch_init.ScheduleDataFetchFragment"
+        android:name="cn.surine.schedulex.ui.schedule_import_pro.page.fetch_init.ScheduleDataFetchFragment"
         android:label="DataFetchFragment">
         <action
             android:id="@+id/action_dataFetchFragment_to_loginFragment"
@@ -81,6 +81,14 @@
             app:destination="@id/miAiInitFragment"
             app:enterAnim="@anim/fragment_open_enter"
             app:popEnterAnim="@anim/fragment_open_enter" />
+        <action
+            android:id="@+id/action_dataFetchFragment_to_selectSchoolFragment"
+            app:destination="@id/selectSchoolFragment"
+            app:enterAnim="@anim/fragment_open_enter"
+            app:popEnterAnim="@anim/fragment_open_enter" />
+        <action
+            android:id="@+id/action_dataFetchFragment_to_scheduleThirdFetchFragment"
+            app:destination="@id/scheduleThirdFetchFragment" />
     </fragment>
     <fragment
         android:id="@+id/splashFragment"
@@ -228,4 +236,8 @@
             app:enterAnim="@anim/fragment_open_enter"
             app:popEnterAnim="@anim/fragment_open_enter" />
     </fragment>
+    <fragment
+        android:id="@+id/selectSchoolFragment"
+        android:name="cn.surine.schedulex.ui.schedule_import_pro.page.change_school.SelectSchoolFragment"
+        android:label="SelectSchoolFragment" />
 </navigation>

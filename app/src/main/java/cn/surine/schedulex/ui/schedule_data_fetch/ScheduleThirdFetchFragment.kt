@@ -20,6 +20,10 @@ import cn.surine.schedulex.ui.course.CourseRepository
 import cn.surine.schedulex.ui.course.CourseViewModel
 import cn.surine.schedulex.ui.schedule.ScheduleRepository
 import cn.surine.schedulex.ui.schedule.ScheduleViewModel
+import cn.surine.schedulex.ui.schedule_import_pro.core.ParseDispatcher.IS_HTML
+import cn.surine.schedulex.ui.schedule_import_pro.core.ParseDispatcher.JW_SYSTEM
+import cn.surine.schedulex.ui.schedule_import_pro.core.ParseDispatcher.JW_URL
+import cn.surine.schedulex.ui.schedule_import_pro.core.ParseDispatcher.OP_INFO
 import cn.surine.schedulex.ui.schedule_import_pro.data.CourseWrapper
 import cn.surine.schedulex.ui.schedule_init.ScheduleInitFragment
 import com.peanut.sdk.miuidialog.MIUIDialog
@@ -34,6 +38,7 @@ import java.util.*
  * @date 2020/6/21 22:25
  */
 class ScheduleThirdFetchFragment : BaseFragment() {
+    private lateinit var opInfo: String
     lateinit var scheduleViewModel: ScheduleViewModel
     lateinit var courseViewModel: CourseViewModel
     var helperUrl = ""
@@ -42,8 +47,10 @@ class ScheduleThirdFetchFragment : BaseFragment() {
     override fun onInit(parent: View?) {
         scheduleViewModel = ViewModelProviders.of(this, InstanceFactory.getInstance(arrayOf<Class<*>>(ScheduleRepository::class.java), arrayOf<Any>(ScheduleRepository.abt.instance)))[ScheduleViewModel::class.java]
         courseViewModel = ViewModelProviders.of(this, InstanceFactory.getInstance(arrayOf<Class<*>>(CourseRepository::class.java), arrayOf<Any>(CourseRepository.abt.instance)))[CourseViewModel::class.java]
-        val url = arguments?.get(ScheduleSchoolListFragment.URL).toString()
-        val type = arguments?.get(ScheduleSchoolListFragment.TYPE).toString()
+        val url = arguments?.get(JW_URL).toString()
+        val type = arguments?.get(JW_SYSTEM).toString()
+        opInfo = arguments?.get(OP_INFO).toString()
+        var isHtml = arguments?.getBoolean(IS_HTML) ?: false
         helperUrl = url
         helperType = type
         loadWebViewConfig()
@@ -75,7 +82,7 @@ class ScheduleThirdFetchFragment : BaseFragment() {
     private fun loadTip() {
         MIUIDialog(activity()).show {
             title(text = "教务导入")
-            message(text = "仅需两步即可导入您的课程\n\n1.在地址栏输入您的教务处网址，点击右上角蓝色按钮访问并定位到课表页面\n2.点击右下角导入按钮进行课程导入")
+            message(text = if (opInfo.isEmpty()) "暂无说明" else opInfo)
             positiveButton(text = "确定") { this.cancel() }
             negativeButton(text = "取消") { this.cancel() }
         }

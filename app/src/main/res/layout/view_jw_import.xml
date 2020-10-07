@@ -14,7 +14,7 @@
         app:tint="#0FFFFFFF" />
 
     <TextView
-        android:id="@+id/textView26"
+        android:id="@+id/changeSchool"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/dp10"
@@ -40,10 +40,10 @@
         android:visibility="gone"
         app:cornerRadius="@dimen/dp30"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/textView26" />
+        app:layout_constraintEnd_toEndOf="@+id/changeSchool" />
 
     <TextView
-        android:id="@+id/textView27"
+        android:id="@+id/curSchoolInfo"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/dp20"
@@ -53,17 +53,20 @@
         android:textColor="@android:color/white"
         android:textSize="@dimen/t10"
         app:layout_constraintBottom_toTopOf="@+id/button3"
-        app:layout_constraintEnd_toEndOf="@id/textView26"
+        app:layout_constraintEnd_toEndOf="@id/changeSchool"
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
-        android:id="@+id/textView28"
-        android:layout_width="wrap_content"
+        android:id="@+id/curSchoolName"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/dp10"
+        android:layout_marginStart="@dimen/dp20"
         android:text="教务导入"
+        app:layout_constraintRight_toRightOf="parent"
         android:textColor="@android:color/white"
         android:textSize="20sp"
-        app:layout_constraintBottom_toTopOf="@+id/textView27"
-        app:layout_constraintStart_toStartOf="@+id/textView27" />
+        android:layout_marginEnd="@dimen/dp20"
+        app:layout_constraintBottom_toTopOf="@+id/curSchoolInfo"
+        app:layout_constraintStart_toStartOf="@+id/curSchoolInfo" />
 </androidx.constraintlayout.widget.ConstraintLayout>

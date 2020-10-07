@@ -11,8 +11,8 @@ import cn.surine.schedulex.ui.schedule.ScheduleRepository
 import cn.surine.schedulex.ui.schedule.ScheduleViewModel
 import cn.surine.schedulex.ui.schedule_data_fetch.AdapterListRepository
 import cn.surine.schedulex.ui.schedule_data_fetch.AdapterListViewModel
-import cn.surine.schedulex.ui.schedule_data_fetch.ScheduleDataFetchRepository
-import cn.surine.schedulex.ui.schedule_data_fetch.ScheduleDataFetchViewModel
+import cn.surine.schedulex.ui.schedule_import_pro.repository.ScheduleDataFetchRepository
+import cn.surine.schedulex.ui.schedule_import_pro.viewmodel.ScheduleDataFetchViewModel
 import cn.surine.schedulex.ui.timer.TimerRepository
 import cn.surine.schedulex.ui.timer.TimerViewModel
 import cn.surine.schedulex.ui.timetable_list.TimeTableRepository
