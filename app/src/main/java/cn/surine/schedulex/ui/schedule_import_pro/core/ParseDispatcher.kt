@@ -25,21 +25,30 @@ object ParseDispatcher {
     const val OP_INFO = "OP_INFO"
     const val JW_URL = "JW_URL"
     const val JW_SYSTEM = "JW_SYSTEM"
+    const val UNIVERSITY_NAME = "UNIVERSITY_NAME"
+    const val UNIVERSITY_CODE = "UNIVERSITY_CODE"
+    const val UNIVERSITY = "UNIVERSITY"
 
     fun dispatch(fragment: BaseFragment, mRemoteUniversity: RemoteUniversity) {
         when (mRemoteUniversity.importType) {
             JSOUP -> {
                 Navigations.open(fragment, R.id.action_dataFetchFragment_to_scheduleThirdFetchFragment, Bundle().apply {
-                    putString(JW_URL, mRemoteUniversity.jwUrl)
-                    putString(JW_SYSTEM, mRemoteUniversity.jwSystem)
-                    putString(OP_INFO, mRemoteUniversity.opInfo)
+                    putSerializable(UNIVERSITY, mRemoteUniversity)
+//                    putString(UNIVERSITY_NAME,mRemoteUniversity.name)
+//                    putString(UNIVERSITY_CODE,mRemoteUniversity.code)
+//                    putString(JW_URL, mRemoteUniversity.jwUrl)
+//                    putString(JW_SYSTEM, mRemoteUniversity.jwSystem)
+//                    putString(OP_INFO, mRemoteUniversity.opInfo)
                     putBoolean(IS_HTML, false)
                 })
             }
             HTML -> Navigations.open(fragment, R.id.action_dataFetchFragment_to_scheduleThirdFetchFragment, Bundle().apply {
-                putString(JW_URL, mRemoteUniversity.jwUrl)
-                putString(JW_SYSTEM, mRemoteUniversity.jwSystem)
-                putString(OP_INFO, mRemoteUniversity.opInfo)
+                putSerializable(UNIVERSITY, mRemoteUniversity)
+//                putString(UNIVERSITY_NAME,mRemoteUniversity.name)
+//                putString(UNIVERSITY_CODE,mRemoteUniversity.code)
+//                putString(JW_URL, mRemoteUniversity.jwUrl)
+//                putString(JW_SYSTEM, mRemoteUniversity.jwSystem)
+//                putString(OP_INFO, mRemoteUniversity.opInfo)
                 putBoolean(IS_HTML, true)
             })
             API -> {

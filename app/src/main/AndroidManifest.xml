@@ -124,6 +124,11 @@
             android:enabled="true"
             android:exported="true"
             android:permission="android.permission.BIND_REMOTEVIEWS" />
+
+        <provider
+            android:name="cn.bmob.v3.util.BmobContentProvider"
+            android:authorities="cn.surine.schedulex.BmobContentProvider">
+        </provider>
     </application>
 
 </manifest>

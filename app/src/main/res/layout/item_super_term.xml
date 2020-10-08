@@ -6,7 +6,7 @@
 
         <variable
             name="term"
-            type="cn.surine.schedulex.super_import.model.Term" />
+            type="cn.surine.schedulex.ui.schedule_import_pro.model.super_model.Term" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

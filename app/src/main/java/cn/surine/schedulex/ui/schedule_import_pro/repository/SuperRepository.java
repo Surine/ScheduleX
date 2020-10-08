@@ -9,11 +9,11 @@ import java.util.Map;
 
 import cn.surine.schedulex.base.controller.AbstractSingleTon;
 import cn.surine.schedulex.base.controller.BaseRepository;
-import cn.surine.schedulex.ui.schedule_import_pro.super_import.SuperUtil;
 import cn.surine.schedulex.ui.schedule_import_pro.model.super_model.SuperBaseModel;
 import cn.surine.schedulex.ui.schedule_import_pro.model.super_model.SuperCourseList;
 import cn.surine.schedulex.ui.schedule_import_pro.model.super_model.SuperLoader;
 import cn.surine.schedulex.ui.schedule_import_pro.model.super_model.User;
+import cn.surine.schedulex.ui.schedule_import_pro.util.SuperUtil;
 import io.reactivex.Flowable;
 
 public class SuperRepository extends BaseRepository {

@@ -6,26 +6,32 @@ import android.view.KeyEvent
 import android.view.View
 import android.view.inputmethod.EditorInfo
 import android.webkit.*
-import androidx.lifecycle.ViewModelProviders
 import cn.surine.schedulex.R
+import cn.surine.schedulex.app_base.VmManager
 import cn.surine.schedulex.base.Constants
 import cn.surine.schedulex.base.controller.BaseFragment
-import cn.surine.schedulex.base.utils.*
+import cn.surine.schedulex.base.utils.Files
+import cn.surine.schedulex.base.utils.Navigations
+import cn.surine.schedulex.base.utils.Others
+import cn.surine.schedulex.base.utils.Prefs
 import cn.surine.schedulex.base.utils.Toasts.toast
 import cn.surine.schedulex.base.utils.Toasts.toastLong
 import cn.surine.schedulex.data.entity.Course
 import cn.surine.schedulex.data.entity.Schedule
 import cn.surine.schedulex.data.helper.ParserManager
-import cn.surine.schedulex.ui.course.CourseRepository
 import cn.surine.schedulex.ui.course.CourseViewModel
-import cn.surine.schedulex.ui.schedule.ScheduleRepository
 import cn.surine.schedulex.ui.schedule.ScheduleViewModel
 import cn.surine.schedulex.ui.schedule_import_pro.core.JwParserDispatcher
 import cn.surine.schedulex.ui.schedule_import_pro.core.ParseDispatcher.IS_HTML
 import cn.surine.schedulex.ui.schedule_import_pro.core.ParseDispatcher.JW_SYSTEM
 import cn.surine.schedulex.ui.schedule_import_pro.core.ParseDispatcher.JW_URL
 import cn.surine.schedulex.ui.schedule_import_pro.core.ParseDispatcher.OP_INFO
+import cn.surine.schedulex.ui.schedule_import_pro.core.ParseDispatcher.UNIVERSITY
+import cn.surine.schedulex.ui.schedule_import_pro.core.ParseDispatcher.UNIVERSITY_CODE
+import cn.surine.schedulex.ui.schedule_import_pro.core.ParseDispatcher.UNIVERSITY_NAME
 import cn.surine.schedulex.ui.schedule_import_pro.model.CourseWrapper
+import cn.surine.schedulex.ui.schedule_import_pro.model.RemoteUniversity
+import cn.surine.schedulex.ui.schedule_import_pro.viewmodel.ScheduleDataFetchViewModel
 import cn.surine.schedulex.ui.schedule_init.ScheduleInitFragment
 import com.peanut.sdk.miuidialog.MIUIDialog
 import com.tbruyelle.rxpermissions2.RxPermissions
@@ -39,18 +45,25 @@ import java.net.URLDecoder
  * @date 2020/6/21 22:25
  */
 class ScheduleThirdFetchFragment : BaseFragment() {
+    private lateinit var mUniversity: RemoteUniversity
     private lateinit var opInfo: String
     lateinit var scheduleViewModel: ScheduleViewModel
     lateinit var courseViewModel: CourseViewModel
+    lateinit var dataFetchViewModel: ScheduleDataFetchViewModel
     var helperUrl = ""
     var helperType = ""
     override fun layoutId(): Int = R.layout.fragment_third_fetch
     override fun onInit(parent: View?) {
-        scheduleViewModel = ViewModelProviders.of(this, InstanceFactory.getInstance(arrayOf<Class<*>>(ScheduleRepository::class.java), arrayOf<Any>(ScheduleRepository.abt.instance)))[ScheduleViewModel::class.java]
-        courseViewModel = ViewModelProviders.of(this, InstanceFactory.getInstance(arrayOf<Class<*>>(CourseRepository::class.java), arrayOf<Any>(CourseRepository.abt.instance)))[CourseViewModel::class.java]
-        val url = arguments?.get(JW_URL).toString()
-        val type = arguments?.get(JW_SYSTEM).toString()
-        opInfo = arguments?.get(OP_INFO).toString()
+        VmManager(this).apply {
+            scheduleViewModel = vmSchedule
+            courseViewModel = vmCourse
+            dataFetchViewModel = vmScheduleFetch
+        }
+
+        mUniversity = arguments?.get(UNIVERSITY) as RemoteUniversity
+        val url = mUniversity.jwUrl
+        val type = mUniversity.jwSystem
+        opInfo = mUniversity.opInfo
         var isHtml = arguments?.getBoolean(IS_HTML) ?: false
         helperUrl = url
         helperType = type
@@ -186,8 +199,9 @@ class ScheduleThirdFetchFragment : BaseFragment() {
             val scheduleId = scheduleViewModel.addSchedule(arguments?.getString(ScheduleInitFragment.SCHEDULE_NAME)
                     ?: "UnKnow", 24, 1, Schedule.IMPORT_WAY.JW)
             val targetList = mutableListOf<Course>()
-            ParserManager.wrapper2course(list,scheduleId)
+            ParserManager.wrapper2course(list, scheduleId)
             courseViewModel.saveCourseByDb(targetList, scheduleId)
+            dataFetchViewModel.uploadFetchSuccess(mUniversity)
             toast("导入成功")
             Prefs.save(Constants.CUR_SCHEDULE, scheduleId)
             Navigations.open(this, R.id.action_scheduleThirdFetchFragment_to_scheduleFragment)

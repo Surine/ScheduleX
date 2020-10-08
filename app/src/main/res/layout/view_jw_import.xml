@@ -29,7 +29,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/button3"
+        android:id="@+id/reqeustAdapter"
         android:layout_width="@dimen/dp80"
         android:layout_height="@dimen/dp40"
         android:layout_marginBottom="@dimen/dp10"
@@ -52,7 +52,7 @@
         android:text="点击右上角选择您的学校，只需一次即可记住哦~"
         android:textColor="@android:color/white"
         android:textSize="@dimen/t10"
-        app:layout_constraintBottom_toTopOf="@+id/button3"
+        app:layout_constraintBottom_toTopOf="@+id/reqeustAdapter"
         app:layout_constraintEnd_toEndOf="@id/changeSchool"
         app:layout_constraintStart_toStartOf="parent" />
 

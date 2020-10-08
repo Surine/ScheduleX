@@ -1,13 +1,16 @@
 package cn.surine.schedulex.ui.schedule_import_pro.viewmodel
 
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
+import cn.bmob.v3.BmobQuery
+import cn.bmob.v3.exception.BmobException
+import cn.bmob.v3.listener.FindListener
+import cn.bmob.v3.listener.UpdateListener
 import cn.surine.schedulex.base.controller.BaseViewModel
+import cn.surine.schedulex.base.utils.Toasts
 import cn.surine.schedulex.data.entity.Commons
 import cn.surine.schedulex.ui.schedule_import_pro.model.RemoteUniversity
 import cn.surine.schedulex.ui.schedule_import_pro.repository.ScheduleDataFetchRepository
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.withContext
 
 /**
  * Intro：
@@ -24,6 +27,10 @@ class ScheduleDataFetchViewModel(val repository: ScheduleDataFetchRepository) : 
         MutableLiveData<RemoteUniversity>()
     }
 
+    val loadUniversityStatus: MutableLiveData<Int> by lazy {
+        MutableLiveData<Int>()
+    }
+
     /**
      * 获取公共配置参数
      * */
@@ -32,31 +39,37 @@ class ScheduleDataFetchViewModel(val repository: ScheduleDataFetchRepository) : 
         mCommons.value = data
     })
 
-    fun getUniversityInfo(name: String, code: String) = request({
-//        val data = ScheduleDataFetchRepository.getUniversityInfo(name,code)
-        withContext(Dispatchers.IO) {
-            delay(1000)
-        }
-        mUniversityInfo.value = RemoteUniversity(
-                code = "1111",
-                name = "武汉纺织大学",
-                eng = "WTU",
-                importType = 1,
-                opInfo = "登录至大厅后找到教务系统应用->进入后点击下方的学生课表查询->允许页面跳转->填写好想要导入的学年与学期，点击下方导入即可。",
-                jwUrl =  "https://auth.wtu.edu.cn/authserver/login?service=http%3A%2F%2Fehall.wtu.edu.cn%2Flogin%3Fservice%3Dhttp%3A%2F%2Fehall.wtu.edu.cn%2Fnew%2Findex.html",
-                author = "花生酱啊",
-                useTimes = 30,
-                jwSystemName = "新正方",
-                jwSystem = "new_zf"
-        )
 
-//        "school": "WTU",
-//        "system": "newZenFang",
-//        "name": "武汉纺织大学",
-//        "url":
-//        "author":
-//        "belong":"",
-//        "doc":
-//        "version":104
+    /**
+     * 临时使用bmob查询数据
+     * */
+    fun getUniversityInfo(name: String, code: String) = request({
+        loadUniversityStatus.value = START_LOAD
+        val query = BmobQuery<RemoteUniversity>()
+        query.apply {
+            addWhereEqualTo("name", name)
+            addWhereEqualTo("code", code)
+        }
+        query.setLimit(1)
+        query.findObjects(object : FindListener<RemoteUniversity>() {
+            override fun done(p0: MutableList<RemoteUniversity>?, p1: BmobException?) {
+                if (p1 != null || p0 == null) {
+                    loadUniversityStatus.value = LOAD_FAIL
+                    return
+                }
+                mUniversityInfo.value = p0[0]
+                loadUniversityStatus.value = LOAD_SUCCESS
+            }
+        })
     })
+
+
+    fun uploadFetchSuccess(mUniversity: RemoteUniversity) {
+        val remoteUniversity = mUniversity.copy()
+        remoteUniversity.useTimes++
+        remoteUniversity.update(mUniversity.objectId, object : UpdateListener() {
+            override fun done(p0: BmobException?) {
+            }
+        })
+    }
 }

@@ -7,6 +7,7 @@ import android.content.Context;
 import com.tencent.bugly.Bugly;
 import com.tencent.bugly.beta.Beta;
 
+import cn.bmob.v3.Bmob;
 import cn.surine.schedulex.BuildConfig;
 import cn.surine.schedulex.R;
 
@@ -28,6 +29,8 @@ public class App extends Application {
         //初始化bugly
         Beta.upgradeDialogLayoutId = R.layout.view_upgrade_dialog;
         Bugly.init(getApplicationContext(), "2d69e03a71", BuildConfig.DEBUG);
+
+        Bmob.initialize(this, "dacda5b9e1bf28816c68b55c80813f83");
     }
 
 

@@ -15,6 +15,7 @@ import cn.surine.schedulex.app_base.VmManager
 import cn.surine.schedulex.base.Constants
 import cn.surine.schedulex.base.controller.App
 import cn.surine.schedulex.base.controller.BaseFragment
+import cn.surine.schedulex.base.controller.BaseViewModel
 import cn.surine.schedulex.base.utils.*
 import cn.surine.schedulex.data.entity.Schedule
 import cn.surine.schedulex.data.helper.ParserManager
@@ -26,6 +27,7 @@ import cn.surine.schedulex.ui.schedule_import_pro.model.RemoteUniversity
 import cn.surine.schedulex.ui.schedule_import_pro.page.change_school.SelectSchoolFragment
 import cn.surine.schedulex.ui.schedule_import_pro.viewmodel.ScheduleDataFetchViewModel
 import cn.surine.schedulex.ui.view.custom.helper.CommonDialogs
+import com.google.android.material.snackbar.Snackbar
 import com.tbruyelle.rxpermissions2.RxPermissions
 import com.tencent.bugly.crashreport.CrashReport
 import kotlinx.android.synthetic.main.fragment_data_fetch_v3.*
@@ -63,30 +65,48 @@ class ScheduleDataFetchFragment : BaseFragment() {
             courseViewModel = vmCourse
             scheduleDataFetchViewModel = vmScheduleFetch
         }
+
+        //更换学校
         changeSchool.setOnClickListener {
             Navigations.open(this, R.id.action_dataFetchFragment_to_selectSchoolFragment, arguments)
         }
 
+        //加载数据
         val curSchoolNameStr = Prefs.getString(SelectSchoolFragment.CUR_SCHOOL_NAME, "教务导入")
         val curSchoolCode = Prefs.getString(SelectSchoolFragment.CUR_SCHOOL_CODE, "")
-
         curSchoolName.text = curSchoolNameStr
         curSchoolNameStr?.let {
             scheduleDataFetchViewModel.getUniversityInfo(curSchoolNameStr, curSchoolCode ?: "")
             scheduleDataFetchViewModel.mUniversityInfo.observe(this, Observer {
                 mRemoteUniversity = it
                 curSchoolInfo.text = "${it.jwSystemName}教务/${it.author}\n已成功导入${it.useTimes}次"
+                reqeustAdapter.hide()
             })
         }
 
-
-        loginJw.setOnClickListener {
-            if (mRemoteUniversity != null) {
-                ParseDispatcher.dispatch(this, mRemoteUniversity!!)
-            } else {
-                Toasts.toast("着呢")
+        //元素的控制
+        scheduleDataFetchViewModel.loadUniversityStatus.observe(this, Observer {
+            when (it) {
+                BaseViewModel.START_LOAD, BaseViewModel.LOADING -> {
+                    loginJw.setOnClickListener {
+                        Snackbar.make(parent!!, "正在加载数据哦,客官请稍后~", Snackbar.LENGTH_SHORT).show()
+                    }
+                }
+                BaseViewModel.LOAD_FAIL -> {
+                    val str = "咱还没适配您学校哦~如果您愿意帮助适配，麻烦申请下吧~ (暂时只支持联系开发者申请)"
+                    curSchoolInfo.text = str
+                    reqeustAdapter.show()
+                    reqeustAdapter.setOnClickListener {
+                        Others.openUrl("https://support.qq.com/products/282532/faqs/79948")
+                    }
+                }
+                BaseViewModel.LOAD_SUCCESS -> {
+                    loginJw.setOnClickListener {
+                        ParseDispatcher.dispatch(this, mRemoteUniversity!!)
+                    }
+                }
             }
-        }
+        })
 
 
         //超表导入
@@ -122,7 +142,7 @@ class ScheduleDataFetchFragment : BaseFragment() {
             if (it.isShowMiAi) {
                 fromMiai.setOnClickListener {
                     val extras = FragmentNavigator.Extras.Builder()
-                            .addSharedElement(fromMiai, getString(R.string.transition_mi))
+//                            .addSharedElement(fromMiai, getString(R.string.transition_mi))
                             .addSharedElement(miai_logo, getString(R.string.transition_mi3))
                             .build()
                     val directions = ScheduleDataFetchFragmentDirections.actionDataFetchFragmentToMiAiInitFragment()
