@@ -24,10 +24,15 @@ import cn.surine.schedulex.ui.schedule_import_pro.core.ParseDispatcher.UNIVERSIT
 import cn.surine.schedulex.ui.schedule_import_pro.model.CourseWrapper
 import cn.surine.schedulex.ui.schedule_import_pro.model.RemoteUniversity
 import cn.surine.schedulex.ui.schedule_import_pro.viewmodel.ScheduleDataFetchViewModel
+import cn.surine.ui_lib.setting
+import com.afollestad.materialdialogs.MaterialDialog
+import com.afollestad.materialdialogs.bottomsheets.BottomSheet
+import com.afollestad.materialdialogs.customview.customView
 import com.peanut.sdk.miuidialog.MIUIDialog
 import com.tbruyelle.rxpermissions2.RxPermissions
 import com.tencent.bugly.crashreport.CrashReport
 import kotlinx.android.synthetic.main.fragment_third_fetch.*
+import kotlinx.android.synthetic.main.view_ua_config.*
 import java.net.URLDecoder
 
 /**
@@ -164,7 +169,11 @@ class ScheduleThirdFetchFragment : BaseFragment() {
         thirdPageWebView.addJavascriptInterface(InJavaScriptLocalObj(), "local_obj")
         thirdPageWebView.settings.javaScriptCanOpenWindowsAutomatically = true
         thirdPageWebView.settings.mixedContentMode = WebSettings.MIXED_CONTENT_ALWAYS_ALLOW
-//        thirdPageWebView.settings.userAgentString = "Mozilla/5.0 (Linux; Android 7.0; Nexus 5X Build/NRD90M; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/54.0.2840.85 Mobile Safari/537.36"
+        if (Prefs.getBoolean("ua", false)) {
+            thirdPageWebView.settings.userAgentString = "Mozilla/5.0 (Linux; Android 7.0; Nexus 5X Build/NRD90M; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/54.0.2840.85 Mobile Safari/537.36"
+        } else {
+            thirdPageWebView.settings.userAgentString = "Mozilla/5.0 (Linux; Windows 10; Nexus 5X Build/NRD90M; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/54.0.2840.85 Mobile Safari/537.36"
+        }
         thirdPageWebView.webViewClient = object : WebViewClient() {
             override fun shouldOverrideUrlLoading(view: WebView?, request: WebResourceRequest?): Boolean {
                 val text = request?.url.toString()
@@ -195,6 +204,23 @@ class ScheduleThirdFetchFragment : BaseFragment() {
                 }
             }
             false
+        }
+        tool.setOnClickListener {
+            MaterialDialog(activity(), BottomSheet()).show {
+                customView(R.layout.view_ua_config)
+                setting(rootView) {
+                    group {
+                        switchItem("设置UA", openSubTitle = "Android UA", closeSubTitle = "桌面 UA", initValue = false, tag = "ua") { view, isChecked ->
+                            if (isChecked) {
+                                thirdPageWebView.settings.userAgentString = "Mozilla/5.0 (Linux; Android 7.0; Nexus 5X Build/NRD90M; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/54.0.2840.85 Mobile Safari/537.36"
+                            } else {
+                                thirdPageWebView.settings.userAgentString = "Mozilla/5.0 (Linux; Windows 10; Nexus 5X Build/NRD90M; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/54.0.2840.85 Mobile Safari/537.36"
+                            }
+                            thirdPageWebView.reload()
+                        }
+                    }
+                }
+            }
         }
     }
 
@@ -263,6 +289,4 @@ class ScheduleThirdFetchFragment : BaseFragment() {
         thirdPageWebView.destroy()
         super.onDestroyView()
     }
-
-    val testHtml = """"""
 }

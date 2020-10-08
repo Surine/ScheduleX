@@ -63,7 +63,6 @@ class LoginFragment : BaseBindingFragment<FragmentLoginBinding>() {
                 CourseViewModel.START -> dialog.setMessage(getString(R.string.ready_to_get_schedule_list))
                 CourseViewModel.SUCCESS -> {
                     dialog.dismiss()
-
                     val scheduleId = scheduleViewModel.addSchedule("我的课程表", courseViewModel.totalWeek.value
                             ?: 24, courseViewModel.nowWeek.value ?: 1, Schedule.IMPORT_WAY.JW)
                     Prefs.save(Constants.CUR_SCHEDULE, scheduleId)
