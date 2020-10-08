@@ -7,7 +7,7 @@ import org.jsoup.Jsoup
 
 /**
  * Intro：
- *
+ * 以湖南工学院首次解析 -旧版强智
  * @author sunliwei
  * @date 10/7/20 22:40
  */

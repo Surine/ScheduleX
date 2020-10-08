@@ -53,13 +53,13 @@ object LocalUniversityManager {
      * v1-模糊搜索
      * 自动过滤无code码的学校
      * */
-    fun search(keyword: String): List<LocalUniversity> {
-        if (localNameMap.containsKey(keyword)) return listOf(localCodeMap[keyword]!!)
+    fun search(keyword: String): List<LocalUniversity?> {
+        if (localNameMap.containsKey(keyword)) return listOf(localNameMap[keyword])
         val resultList = mutableListOf<LocalUniversity>()
         localNameMap.keys.forEach {
             if (it.contains(keyword)) {
-                val data = localNameMap[it]!!
-                if (data.code.isNotEmpty()) {
+                val data = localNameMap[it]
+                if (data?.code?.isNotEmpty() == true) {
                     resultList.add(data)
                 }
             }

@@ -45,7 +45,10 @@ class SelectSchoolFragment : BaseFragment() {
                     return
                 }
                 data.clear()
-                data.addAll(LocalUniversityManager.search(s.toString()))
+                for (i in LocalUniversityManager.search(s.toString())) {
+                    i ?: continue
+                    data.add(i)
+                }
                 searchResult.adapter?.notifyDataSetChanged()
             }
         })

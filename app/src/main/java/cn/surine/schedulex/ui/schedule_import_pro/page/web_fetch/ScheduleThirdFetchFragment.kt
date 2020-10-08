@@ -2,6 +2,7 @@ package cn.surine.schedulex.ui.schedule_import_pro.page.web_fetch
 
 import android.Manifest
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.view.KeyEvent
 import android.view.View
 import android.view.inputmethod.EditorInfo
@@ -10,31 +11,23 @@ import cn.surine.schedulex.R
 import cn.surine.schedulex.app_base.VmManager
 import cn.surine.schedulex.base.Constants
 import cn.surine.schedulex.base.controller.BaseFragment
-import cn.surine.schedulex.base.utils.Files
-import cn.surine.schedulex.base.utils.Navigations
-import cn.surine.schedulex.base.utils.Others
-import cn.surine.schedulex.base.utils.Prefs
+import cn.surine.schedulex.base.utils.*
 import cn.surine.schedulex.base.utils.Toasts.toast
 import cn.surine.schedulex.base.utils.Toasts.toastLong
-import cn.surine.schedulex.data.entity.Course
 import cn.surine.schedulex.data.entity.Schedule
 import cn.surine.schedulex.data.helper.ParserManager
 import cn.surine.schedulex.ui.course.CourseViewModel
 import cn.surine.schedulex.ui.schedule.ScheduleViewModel
 import cn.surine.schedulex.ui.schedule_import_pro.core.JwParserDispatcher
 import cn.surine.schedulex.ui.schedule_import_pro.core.ParseDispatcher.IS_HTML
-import cn.surine.schedulex.ui.schedule_import_pro.core.ParseDispatcher.JW_SYSTEM
-import cn.surine.schedulex.ui.schedule_import_pro.core.ParseDispatcher.JW_URL
-import cn.surine.schedulex.ui.schedule_import_pro.core.ParseDispatcher.OP_INFO
 import cn.surine.schedulex.ui.schedule_import_pro.core.ParseDispatcher.UNIVERSITY
-import cn.surine.schedulex.ui.schedule_import_pro.core.ParseDispatcher.UNIVERSITY_CODE
-import cn.surine.schedulex.ui.schedule_import_pro.core.ParseDispatcher.UNIVERSITY_NAME
 import cn.surine.schedulex.ui.schedule_import_pro.model.CourseWrapper
 import cn.surine.schedulex.ui.schedule_import_pro.model.RemoteUniversity
 import cn.surine.schedulex.ui.schedule_import_pro.viewmodel.ScheduleDataFetchViewModel
 import cn.surine.schedulex.ui.schedule_init.ScheduleInitFragment
 import com.peanut.sdk.miuidialog.MIUIDialog
 import com.tbruyelle.rxpermissions2.RxPermissions
+import com.tencent.bugly.crashreport.CrashReport
 import kotlinx.android.synthetic.main.fragment_third_fetch.*
 import java.net.URLDecoder
 
@@ -45,6 +38,12 @@ import java.net.URLDecoder
  * @date 2020/6/21 22:25
  */
 class ScheduleThirdFetchFragment : BaseFragment() {
+    companion object {
+        const val FOR_HTML = 1001
+    }
+
+    private var localHtml: String? = null
+    private var isHtml: Boolean = false
     private lateinit var mUniversity: RemoteUniversity
     private lateinit var opInfo: String
     lateinit var scheduleViewModel: ScheduleViewModel
@@ -64,7 +63,7 @@ class ScheduleThirdFetchFragment : BaseFragment() {
         val url = mUniversity.jwUrl
         val type = mUniversity.jwSystem
         opInfo = mUniversity.opInfo
-        var isHtml = arguments?.getBoolean(IS_HTML) ?: false
+        isHtml = arguments?.getBoolean(IS_HTML) ?: false
         helperUrl = url
         helperType = type
         loadWebViewConfig()
@@ -76,6 +75,7 @@ class ScheduleThirdFetchFragment : BaseFragment() {
                 thirdPageWebView.loadUrl(addressBox.text.toString())
             }
         }
+        parseName.text = "${mUniversity.jwSystemName}解析器"
         importThirdHtml.setOnClickListener {
             val js = "javascript:var ifrs=document.getElementsByTagName(\"iframe\");" +
                     "var iframeContent=\"\";" +
@@ -91,14 +91,63 @@ class ScheduleThirdFetchFragment : BaseFragment() {
             toast("开始解析，请稍后~")
             thirdPageWebView.loadUrl(js)
         }
+
     }
 
     private fun loadTip() {
-        MIUIDialog(activity()).show {
-            title(text = "教务导入")
-            message(text = if (opInfo.isEmpty()) "暂无说明" else opInfo)
-            positiveButton(text = "确定") { this.cancel() }
-            negativeButton(text = "取消") { this.cancel() }
+        if (isHtml) {
+            MIUIDialog(activity()).show {
+                title(text = "教务导入")
+                message(text = "<html>非常抱歉，当前浏览器无法兼容您的教务系统访问。因此您无法继续使用教务自动导入。不过您仍可以通过以下几种方式尝试：<br>" +
+                        "<br>1.使用超级课程表导入<br> " +
+                        "<br>2.使用网页源码（html）导入，可参照<a href='#'>适配教程</a>中第一步获取源代码文件</html>，然后重新从本页面选择文件，系统会加载本文件，您不必在意显示的内容，直接点击导入按钮即可~") {
+                    html {
+                        Others.openUrl("https://support.qq.com/products/282532/faqs/79948")
+                    }
+                }
+                positiveButton(text = "选择文件") {
+                    RxPermissions(activity()).request(Manifest.permission.READ_EXTERNAL_STORAGE).subscribe {
+                        if (it) {
+                            importFile()
+                        } else {
+                            Toasts.toast("请授予读写文件权限")
+                        }
+                    }
+                }
+                negativeButton(text = "取消") { this.cancel() }
+            }
+        } else {
+            MIUIDialog(activity()).show {
+                title(text = "教务导入")
+                message(text = if (opInfo.isEmpty()) "1.首先登录账号并定位到课表页面\n2.然后点击右下角导入按钮导入课程" else opInfo)
+                positiveButton(text = "确定") { this.cancel() }
+                negativeButton(text = "取消") { this.cancel() }
+            }
+        }
+    }
+
+
+    /**
+     * 导入
+     */
+    private fun importFile() {
+        val intent = Intent(Intent.ACTION_GET_CONTENT)
+        intent.addCategory(Intent.CATEGORY_OPENABLE)
+        intent.type = "*/*"
+        this.startActivityForResult(intent, FOR_HTML)
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        data ?: return
+        if (requestCode == FOR_HTML) {
+            try {
+                val uri = data.data
+                localHtml = Files.getFileContent(Files.getFilePath(activity(), uri))
+                thirdPageWebView.loadData(localHtml, "text/html; charset=UTF-8", null)
+            } catch (e: Exception) {
+                CrashReport.postCatchedException(e)
+            }
         }
     }
 
@@ -153,7 +202,7 @@ class ScheduleThirdFetchFragment : BaseFragment() {
     internal inner class InJavaScriptLocalObj {
         @JavascriptInterface
         fun showSource(html: String, system: String) {
-            JwParserDispatcher.parse(system, html) { list, e ->
+            JwParserDispatcher.parse(system, if (localHtml != null) localHtml!! else html) { list, e ->
                 activity().runOnUiThread {
                     if (list != null) {
                         parseData(list)
@@ -197,9 +246,8 @@ class ScheduleThirdFetchFragment : BaseFragment() {
             return
         } else {
             val scheduleId = scheduleViewModel.addSchedule(arguments?.getString(ScheduleInitFragment.SCHEDULE_NAME)
-                    ?: "UnKnow", 24, 1, Schedule.IMPORT_WAY.JW)
-            val targetList = mutableListOf<Course>()
-            ParserManager.wrapper2course(list, scheduleId)
+                    ?: "我的课程表", 24, 1, Schedule.IMPORT_WAY.JW)
+            val targetList = ParserManager.wrapper2course(list, scheduleId)
             courseViewModel.saveCourseByDb(targetList, scheduleId)
             dataFetchViewModel.uploadFetchSuccess(mUniversity)
             toast("导入成功")
