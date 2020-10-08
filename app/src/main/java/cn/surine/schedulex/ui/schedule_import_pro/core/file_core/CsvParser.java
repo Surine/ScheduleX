@@ -31,10 +31,10 @@ public class CsvParser implements IFileParser {
             Iterable<CSVRecord> records = format.parse(reader);
             CourseWrapper course = new CourseWrapper();
             for (CSVRecord record : records) {
-                course.setName(record.get("courseName"));
-                course.setTeacher(record.get("teacherName"));
-                course.setWeek(getWeekList(record.get("classWeek")));
-                course.setDay(Integer.parseInt(record.get("classDay")));
+                course.setName(record.get("name"));
+                course.setTeacher(record.get("teacher"));
+                course.setWeek(getWeekList(record.get("week")));
+                course.setDay(Integer.parseInt(record.get("day")));
                 course.setSectionStart(Integer.parseInt(record.get("sectionStart")));
                 course.setSectionContinue(Integer.parseInt(record.get("sectionContinue")));
                 course.setPosition(record.get("position"));
@@ -51,11 +51,10 @@ public class CsvParser implements IFileParser {
     }
 
     private List<Integer> getWeekList(String classWeek) {
+        String[] weeks = classWeek.split(" ");
         List<Integer> list = new ArrayList<>();
-        for (int i = 0; i < classWeek.length(); i++) {
-            if (i == '1') {
-                list.add(i + 1);
-            }
+        for (int i = 0; i < weeks.length; i++) {
+            list.add(Integer.valueOf(weeks[i]));
         }
         return list;
     }

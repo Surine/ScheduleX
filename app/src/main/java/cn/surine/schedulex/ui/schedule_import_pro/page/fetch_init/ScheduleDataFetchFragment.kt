@@ -23,6 +23,7 @@ import cn.surine.schedulex.ui.course.CourseViewModel
 import cn.surine.schedulex.ui.schedule.ScheduleViewModel
 import cn.surine.schedulex.ui.schedule_import_pro.core.FileParserDispatcher
 import cn.surine.schedulex.ui.schedule_import_pro.core.ParseDispatcher
+import cn.surine.schedulex.ui.schedule_import_pro.model.CourseWrapper
 import cn.surine.schedulex.ui.schedule_import_pro.model.RemoteUniversity
 import cn.surine.schedulex.ui.schedule_import_pro.page.change_school.SelectSchoolFragment
 import cn.surine.schedulex.ui.schedule_import_pro.viewmodel.ScheduleDataFetchViewModel
@@ -90,7 +91,7 @@ class ScheduleDataFetchFragment : BaseFragment() {
                 when (it) {
                     BaseViewModel.START_LOAD, BaseViewModel.LOADING -> {
                         loginJw.setOnClickListener {
-                            Snackbar.make(parent!!, "正在加载数据哦,客官请稍后~", Snackbar.LENGTH_SHORT).show()
+                            Snackbar.make(parent!!, "没有啥数据哦,客官请稍后~", Snackbar.LENGTH_SHORT).show()
                         }
                     }
                     BaseViewModel.LOAD_FAIL -> {
@@ -184,8 +185,8 @@ class ScheduleDataFetchFragment : BaseFragment() {
     }
 
     private fun loadData(path: String?) {
-        val data = path?.split("\\.") ?: return
-        val list = FileParserDispatcher[data[data.size - 1]].parse(path)
+        path ?: return
+        val list = FileParserDispatcher.get(path).parse(path)
         if (list.isNullOrEmpty()) {
             Toasts.toast("无数据，请检查资源格式是否正确")
             return
@@ -224,13 +225,24 @@ class ScheduleDataFetchFragment : BaseFragment() {
             tCsv.text = Spans.with(sCsv).size(13, tCsv.text.toString().length, sCsv.length).color(App.context.resources.getColor(R.color.blue), tCsv.getText().toString().length, sCsv.length).toSpannable()
 
             tJson.setOnClickListener {
-                Toasts.toast("请在本页面查看Json格式")
-                Others.openUrl("https://github.com/surine/ScheduleX")
+                Files.saveAsJson("Json模板", Jsons.entityToJson(mutableListOf(CourseWrapper().apply {
+                    name = "课程名"
+                    teacher = "教师名"
+                    position = "上课地点"
+                    sectionStart = 1
+                    sectionContinue = 2
+                    day = 1
+                    week = mutableListOf(1, 3, 5, 7, 9)
+                })))
+                Snackbar.make(it, "保存成功,路径 /Download/Json模板.json", Snackbar.LENGTH_SHORT).show();
             }
 
             tCsv.setOnClickListener {
-                Toasts.toast("请在本页面查看Csv格式")
-                Others.openUrl("https://github.com/surine/ScheduleX")
+//                Toasts.toast("请在本页面下载Csv格式")
+//                Others.openUrl("https://github.com/surine/ScheduleX")
+                val str = "name,teacher,position,sectionStart,sectionContinue,day,week\n课程名,教师,地点,1,2,1,1 3 5 7 8 9 10"
+                Files.save("Csv模板", str, "csv");
+                Snackbar.make(it, "保存成功,路径 /Download/Csv模板.csv", Snackbar.LENGTH_SHORT).show();
             }
 
             tExcel.setOnClickListener {
@@ -245,5 +257,13 @@ class ScheduleDataFetchFragment : BaseFragment() {
                 dialog.dismiss()
             }
         })
+    }
+
+    override fun onBackPressed() {
+        if (arguments != null) {
+            activity().finish()
+        } else {
+            super.onBackPressed()
+        }
     }
 }

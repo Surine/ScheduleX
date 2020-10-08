@@ -17,11 +17,12 @@ object FileParserDispatcher {
     const val EXCEL_XLSX = "xlsx"
     const val CSV = "csv"
 
-    operator fun get(suffix: String?): IFileParser {
-        return when (suffix) {
-            JSON -> JsonParser()
-            EXCEL_XLS, EXCEL_XLSX -> ExcelParser()
-            CSV -> CsvParser()
+    fun get(suffix: String): IFileParser {
+        return when {
+            suffix.endsWith(JSON) -> JsonParser()
+            suffix.endsWith(EXCEL_XLS) -> ExcelParser()
+            suffix.endsWith(EXCEL_XLSX) -> ExcelParser()
+            suffix.endsWith(CSV) -> CsvParser()
             else -> JsonParser()
         }
     }

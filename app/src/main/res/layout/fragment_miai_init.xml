@@ -59,29 +59,29 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dp15"
-                android:text="不会操作？点我查看教程"
-                android:paddingStart="@dimen/dp10"
-                android:paddingEnd="@dimen/dp10"
-                android:paddingTop="@dimen/dp3"
-                app:layout_constraintBottom_toTopOf="@id/miai_tip_logo"
-                app:layout_constraintLeft_toRightOf="@id/miai_tip_logo"
-                app:layout_constraintRight_toRightOf="@id/miai_tip_logo"
-                android:paddingBottom="@dimen/dp3"
-                app:layout_goneMarginBottom="@dimen/dp5"
+                android:layout_marginBottom="@dimen/dp10"
                 android:background="@drawable/ic_program_bar_background"
+                android:paddingStart="@dimen/dp10"
+                android:paddingTop="@dimen/dp3"
+                android:paddingEnd="@dimen/dp10"
+                android:paddingBottom="@dimen/dp3"
+                android:text="不会操作？点我查看教程"
                 android:textColor="@android:color/black"
-                android:layout_marginBottom="@dimen/dp10" />
+                app:layout_constraintBottom_toTopOf="@id/miai_tip_logo"
+                app:layout_constraintLeft_toLeftOf="@id/miai_tip_logo"
+                app:layout_constraintRight_toLeftOf="@id/miai_tip_logo"
+                app:layout_goneMarginBottom="@dimen/dp5" />
 
             <ImageView
+                android:id="@+id/miai_tip_logo"
                 android:layout_width="@dimen/dp130"
                 android:layout_height="@dimen/dp130"
-                android:src="@mipmap/miai"
                 android:alpha="0.5"
                 android:scaleType="centerCrop"
-                android:id="@+id/miai_tip_logo"
+                android:src="@mipmap/miai"
                 android:transitionName="@string/transition_mi3"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintLeft_toLeftOf="parent" />
+                app:layout_constraintRight_toRightOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
 

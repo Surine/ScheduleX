@@ -37,7 +37,9 @@
             app:popEnterAnim="@anim/fragment_open_enter" />
         <action
             android:id="@+id/action_ScheduleListFragment_to_dataFetchFragment"
-            app:destination="@id/dataFetchFragment" />
+            app:destination="@id/dataFetchFragment"
+            app:enterAnim="@anim/fragment_open_enter"
+            app:popEnterAnim="@anim/fragment_open_enter" />
     </fragment>
     <fragment
         android:id="@+id/dataFetchFragment"

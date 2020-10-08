@@ -29,6 +29,9 @@ public class ExcelParser implements IFileParser {
 
 
     public void parseExcel(String path) {
+        System.setProperty("org.apache.poi.javax.xml.stream.XMLInputFactory", "com.fasterxml.aalto.stax.InputFactoryImpl");
+        System.setProperty("org.apache.poi.javax.xml.stream.XMLOutputFactory", "com.fasterxml.aalto.stax.OutputFactoryImpl");
+        System.setProperty("org.apache.poi.javax.xml.stream.XMLEventFactory", "com.fasterxml.aalto.stax.EventFactoryImpl");
         try {
             XSSFWorkbook workbook = new XSSFWorkbook(path);
             XSSFSheet sheet = workbook.getSheetAt(0);
