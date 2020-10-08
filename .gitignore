@@ -12,3 +12,5 @@
 /captures
 .externalNativeBuild
 .cxx
+
+/app/src/main/java/cn/surine/schedulex/base/PrivateInformation.kt

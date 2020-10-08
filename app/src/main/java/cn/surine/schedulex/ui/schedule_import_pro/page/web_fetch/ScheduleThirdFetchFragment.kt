@@ -25,6 +25,7 @@ import cn.surine.schedulex.ui.schedule_import_pro.model.CourseWrapper
 import cn.surine.schedulex.ui.schedule_import_pro.model.RemoteUniversity
 import cn.surine.schedulex.ui.schedule_import_pro.viewmodel.ScheduleDataFetchViewModel
 import cn.surine.ui_lib.setting
+import com.afollestad.materialdialogs.LayoutMode
 import com.afollestad.materialdialogs.MaterialDialog
 import com.afollestad.materialdialogs.bottomsheets.BottomSheet
 import com.afollestad.materialdialogs.customview.customView
@@ -55,6 +56,7 @@ class ScheduleThirdFetchFragment : BaseFragment() {
     lateinit var dataFetchViewModel: ScheduleDataFetchViewModel
     var helperUrl = ""
     var helperType = ""
+    lateinit var webviewBackup:WebView
     override fun layoutId(): Int = R.layout.fragment_third_fetch
     override fun onInit(parent: View?) {
         VmManager(this).apply {
@@ -70,6 +72,7 @@ class ScheduleThirdFetchFragment : BaseFragment() {
         isHtml = arguments?.getBoolean(IS_HTML) ?: false
         helperUrl = url
         helperType = type
+        webviewBackup = thirdPageWebView
         loadWebViewConfig()
         loadTip()
         thirdPageWebView.loadUrl(URLDecoder.decode(url))
@@ -96,6 +99,23 @@ class ScheduleThirdFetchFragment : BaseFragment() {
             thirdPageWebView.loadUrl(js)
         }
 
+        tool.setOnClickListener {
+            MaterialDialog(activity(), BottomSheet(LayoutMode.WRAP_CONTENT)).show {
+                customView(R.layout.view_ua_config)
+                setting(rootView) {
+                    group {
+                        switchItem("设置UA", openSubTitle = "Android UA", closeSubTitle = "桌面 UA", initValue = false, tag = "ua") { _, isChecked ->
+                            if (isChecked) {
+                                webviewBackup.settings.userAgentString = "Mozilla/5.0 (Linux; Android 7.0; Nexus 5X Build/NRD90M; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/54.0.2840.85 Mobile Safari/537.36"
+                            } else {
+                                webviewBackup.settings.userAgentString = "Mozilla/5.0 (Linux; Windows 10; Nexus 5X Build/NRD90M; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/54.0.2840.85 Mobile Safari/537.36"
+                            }
+                            webviewBackup.reload()
+                        }
+                    }
+                }
+            }
+        }
     }
 
     private fun loadTip() {
@@ -114,7 +134,7 @@ class ScheduleThirdFetchFragment : BaseFragment() {
                         if (it) {
                             importFile()
                         } else {
-                            Toasts.toast("请授予读写文件权限")
+                            toast("请授予读写文件权限")
                         }
                     }
                 }
@@ -204,23 +224,6 @@ class ScheduleThirdFetchFragment : BaseFragment() {
                 }
             }
             false
-        }
-        tool.setOnClickListener {
-            MaterialDialog(activity(), BottomSheet()).show {
-                customView(R.layout.view_ua_config)
-                setting(rootView) {
-                    group {
-                        switchItem("设置UA", openSubTitle = "Android UA", closeSubTitle = "桌面 UA", initValue = false, tag = "ua") { view, isChecked ->
-                            if (isChecked) {
-                                thirdPageWebView.settings.userAgentString = "Mozilla/5.0 (Linux; Android 7.0; Nexus 5X Build/NRD90M; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/54.0.2840.85 Mobile Safari/537.36"
-                            } else {
-                                thirdPageWebView.settings.userAgentString = "Mozilla/5.0 (Linux; Windows 10; Nexus 5X Build/NRD90M; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/54.0.2840.85 Mobile Safari/537.36"
-                            }
-                            thirdPageWebView.reload()
-                        }
-                    }
-                }
-            }
         }
     }
 
