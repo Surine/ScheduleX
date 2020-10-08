@@ -20,7 +20,7 @@ class SplashFragment : BaseFragment() {
     override fun layoutId(): Int = R.layout.fragment_splash
     override fun onInit(parent: View?) {
         runnable = Runnable {
-            open(this, if (!getBoolean(Constants.IS_FIRST, false)) R.id.action_splashFragment_to_scheduleInitFragment else R.id.action_splashFragment_to_scheduleFragment)
+            open(this, if (!getBoolean(Constants.IS_FIRST, false)) R.id.action_splashFragment_to_dataFetchFragment else R.id.action_splashFragment_to_scheduleFragment)
         }
         handler?.postDelayed(runnable, 1200)
     }

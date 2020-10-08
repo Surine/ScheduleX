@@ -53,7 +53,7 @@ object ParseDispatcher {
             })
             API -> {
                 when (mRemoteUniversity.jwSystem) {
-                    ParseData.tust -> Navigations.open(fragment, R.id.action_scheduleSchoolListFragment_to_loginFragment)
+                    ParseData.tust -> Navigations.open(fragment, R.id.action_dataFetchFragment_to_loginFragment)
                 }
             }
             OTHER -> Toasts.toast("暂不支持")

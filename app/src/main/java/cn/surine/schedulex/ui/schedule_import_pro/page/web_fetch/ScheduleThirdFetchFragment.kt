@@ -24,7 +24,6 @@ import cn.surine.schedulex.ui.schedule_import_pro.core.ParseDispatcher.UNIVERSIT
 import cn.surine.schedulex.ui.schedule_import_pro.model.CourseWrapper
 import cn.surine.schedulex.ui.schedule_import_pro.model.RemoteUniversity
 import cn.surine.schedulex.ui.schedule_import_pro.viewmodel.ScheduleDataFetchViewModel
-import cn.surine.schedulex.ui.schedule_init.ScheduleInitFragment
 import com.peanut.sdk.miuidialog.MIUIDialog
 import com.tbruyelle.rxpermissions2.RxPermissions
 import com.tencent.bugly.crashreport.CrashReport
@@ -245,8 +244,7 @@ class ScheduleThirdFetchFragment : BaseFragment() {
             toast("未检测到课程！")
             return
         } else {
-            val scheduleId = scheduleViewModel.addSchedule(arguments?.getString(ScheduleInitFragment.SCHEDULE_NAME)
-                    ?: "我的课程表", 24, 1, Schedule.IMPORT_WAY.JW)
+            val scheduleId = scheduleViewModel.addSchedule("我的课程表", 24, 1, Schedule.IMPORT_WAY.JW)
             val targetList = ParserManager.wrapper2course(list, scheduleId)
             courseViewModel.saveCourseByDb(targetList, scheduleId)
             dataFetchViewModel.uploadFetchSuccess(mUniversity)

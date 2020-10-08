@@ -14,12 +14,10 @@ import cn.surine.schedulex.base.utils.Toasts.toast
 import cn.surine.schedulex.base.utils.hide
 import cn.surine.schedulex.data.entity.Schedule
 import cn.surine.schedulex.data.helper.ParserManager
-import cn.surine.schedulex.ui.schedule_import_pro.model.mi_model.MiAiBean
-import cn.surine.schedulex.ui.schedule_import_pro.model.mi_model.MiAiCourseInfo
 import cn.surine.schedulex.ui.course.CourseViewModel
 import cn.surine.schedulex.ui.schedule.ScheduleViewModel
-import cn.surine.schedulex.ui.schedule_import_pro.page.mi_fetch.MiAiInitFragment
-import cn.surine.schedulex.ui.schedule_init.ScheduleInitFragment
+import cn.surine.schedulex.ui.schedule_import_pro.model.mi_model.MiAiBean
+import cn.surine.schedulex.ui.schedule_import_pro.model.mi_model.MiAiCourseInfo
 import kotlinx.android.synthetic.main.fragment_miai_import.*
 import okhttp3.*
 import java.io.IOException
@@ -32,7 +30,7 @@ import java.net.URLDecoder
  * @author sunliwei
  * @date 9/6/20 15:03
  */
-class MiAiFetchFragment :BaseFragment(){
+class MiAiFetchFragment : BaseFragment() {
     private lateinit var intentUrl: String
     lateinit var scheduleViewModel: ScheduleViewModel
     lateinit var courseViewModel: CourseViewModel
@@ -118,8 +116,7 @@ class MiAiFetchFragment :BaseFragment(){
                 if (text.isNotEmpty()) {
                     val data = Jsons.parseJsonWithGson(text, MiAiBean::class.java)
                     if (data.data.courseInfos.isNotEmpty()) {
-                        parseCourse(arguments?.getString(ScheduleInitFragment.SCHEDULE_NAME)
-                                ?: "MI_AI", data.data)
+                        parseCourse("我的小爱课表", data.data)
                     }
                 }
             }

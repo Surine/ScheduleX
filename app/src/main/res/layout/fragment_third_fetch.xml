@@ -81,6 +81,7 @@
             android:layout_weight="1"
             android:gravity="center"
             android:maxEms="10"
+            android:maxLines="1"
             android:id="@+id/parseName"
             android:ellipsize="end"
             android:text="新正方解析器" />

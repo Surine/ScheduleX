@@ -68,46 +68,51 @@ class ScheduleDataFetchFragment : BaseFragment() {
 
         //更换学校
         changeSchool.setOnClickListener {
-            Navigations.open(this, R.id.action_dataFetchFragment_to_selectSchoolFragment, arguments)
+            Navigations.open(this, R.id.action_dataFetchFragment_to_selectSchoolFragment)
         }
 
         //加载数据
-        val curSchoolNameStr = Prefs.getString(SelectSchoolFragment.CUR_SCHOOL_NAME, "教务导入")
-        val curSchoolCode = Prefs.getString(SelectSchoolFragment.CUR_SCHOOL_CODE, "")
-        curSchoolName.text = curSchoolNameStr
-        curSchoolNameStr?.let {
-            scheduleDataFetchViewModel.getUniversityInfo(curSchoolNameStr, curSchoolCode ?: "")
-            scheduleDataFetchViewModel.mUniversityInfo.observe(this, Observer {
-                mRemoteUniversity = it
-                curSchoolInfo.text = "${it.jwSystemName}教务/${it.author}\n已成功导入${it.useTimes}次"
-                reqeustAdapter.hide()
-            })
-        }
-
-        //元素的控制
-        scheduleDataFetchViewModel.loadUniversityStatus.observe(this, Observer {
-            when (it) {
-                BaseViewModel.START_LOAD, BaseViewModel.LOADING -> {
-                    loginJw.setOnClickListener {
-                        Snackbar.make(parent!!, "正在加载数据哦,客官请稍后~", Snackbar.LENGTH_SHORT).show()
-                    }
-                }
-                BaseViewModel.LOAD_FAIL -> {
-                    val str = "咱还没适配您学校哦~如果您愿意帮助适配，麻烦申请下吧~ (暂时只支持联系开发者申请)"
-                    curSchoolInfo.text = str
-                    reqeustAdapter.show()
-                    reqeustAdapter.setOnClickListener {
-                        Others.openUrl("https://support.qq.com/products/282532/faqs/79948")
-                    }
-                }
-                BaseViewModel.LOAD_SUCCESS -> {
-                    loginJw.setOnClickListener {
-                        ParseDispatcher.dispatch(this, mRemoteUniversity!!)
-                    }
-                }
+        val curSchoolNameStr = Prefs.getString(SelectSchoolFragment.CUR_SCHOOL_NAME, "")!!
+        val curSchoolCode = Prefs.getString(SelectSchoolFragment.CUR_SCHOOL_CODE, "")!!
+        if (curSchoolNameStr.isNotEmpty()) {
+            curSchoolName.text = curSchoolNameStr
+            curSchoolNameStr.let {
+                scheduleDataFetchViewModel.getUniversityInfo(curSchoolNameStr, curSchoolCode ?: "")
+                scheduleDataFetchViewModel.mUniversityInfo.observe(this, Observer {
+                    mRemoteUniversity = it
+                    curSchoolInfo.text = "${it.jwSystemName}教务/${it.author}\n已成功导入${it.useTimes}次"
+                    reqeustAdapter.hide()
+                })
             }
-        })
 
+            //元素的控制
+            scheduleDataFetchViewModel.loadUniversityStatus.observe(this, Observer {
+                when (it) {
+                    BaseViewModel.START_LOAD, BaseViewModel.LOADING -> {
+                        loginJw.setOnClickListener {
+                            Snackbar.make(parent!!, "正在加载数据哦,客官请稍后~", Snackbar.LENGTH_SHORT).show()
+                        }
+                    }
+                    BaseViewModel.LOAD_FAIL -> {
+                        val str = "咱还没适配您学校，或者您的app版本太旧哦~ 如果您愿意帮助适配，麻烦申请下吧~ (暂时只支持联系开发者申请)"
+                        curSchoolInfo.text = str
+                        reqeustAdapter.show()
+                        reqeustAdapter.setOnClickListener {
+                            Others.openUrl("https://support.qq.com/products/282532/faqs/79948")
+                        }
+                    }
+                    BaseViewModel.LOAD_SUCCESS -> {
+                        loginJw.setOnClickListener {
+                            ParseDispatcher.dispatch(this, mRemoteUniversity!!)
+                        }
+                    }
+                }
+            })
+        } else {
+            loginJw.setOnClickListener {
+                Snackbar.make(it, "请先点击卡片右上角选择您的学校哦~", Snackbar.LENGTH_SHORT).show()
+            }
+        }
 
         //超表导入
         fromSuperCn.setOnClickListener {

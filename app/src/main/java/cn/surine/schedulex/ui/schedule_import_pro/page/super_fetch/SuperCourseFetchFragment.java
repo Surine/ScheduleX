@@ -1,8 +1,6 @@
 package cn.surine.schedulex.ui.schedule_import_pro.page.super_fetch;
 
 import android.app.ProgressDialog;
-import android.os.Bundle;
-import android.text.TextUtils;
 
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -24,15 +22,14 @@ import cn.surine.schedulex.base.utils.Toasts;
 import cn.surine.schedulex.data.entity.Course;
 import cn.surine.schedulex.data.entity.Schedule;
 import cn.surine.schedulex.databinding.FragmentSuperCourseTermListBinding;
-import cn.surine.schedulex.ui.schedule_import_pro.model.super_model.SuperCourse;
-import cn.surine.schedulex.ui.schedule_import_pro.model.super_model.Term;
-import cn.surine.schedulex.ui.schedule_import_pro.repository.SuperRepository;
-import cn.surine.schedulex.ui.schedule_import_pro.viewmodel.SuperViewModel;
 import cn.surine.schedulex.ui.course.CourseRepository;
 import cn.surine.schedulex.ui.course.CourseViewModel;
 import cn.surine.schedulex.ui.schedule.ScheduleRepository;
 import cn.surine.schedulex.ui.schedule.ScheduleViewModel;
-import cn.surine.schedulex.ui.schedule_init.ScheduleInitFragment;
+import cn.surine.schedulex.ui.schedule_import_pro.model.super_model.SuperCourse;
+import cn.surine.schedulex.ui.schedule_import_pro.model.super_model.Term;
+import cn.surine.schedulex.ui.schedule_import_pro.repository.SuperRepository;
+import cn.surine.schedulex.ui.schedule_import_pro.viewmodel.SuperViewModel;
 import cn.surine.schedulex.ui.view.custom.helper.CommonDialogs;
 import kotlin.Unit;
 
@@ -75,28 +72,19 @@ public class SuperCourseFetchFragment extends BaseBindingFragment<FragmentSuperC
                     dialog.show();
                 } else if (num == SuperViewModel.FETCH_SUCCESS) {
                     dialog.dismiss();
-                    if (getArguments() != null) {
-                        Bundle arguments = getArguments();
-                        String scheduleName;
-                        if (!TextUtils.isEmpty(scheduleName = arguments.getString(ScheduleInitFragment.SCHEDULE_NAME))) {
-                            List<Course> courseList = new ArrayList();
-                            List<SuperCourse> superCourseData = superViewModel.getSuperCourseList().lessonList;
-                            if (superCourseData.size() == 0) {
-                                CommonDialogs.INSTANCE.getCommonDialog(activity(), getString(R.string.warning), "没有检测到该学期的课程,确定继续导入么？", () -> {
-                                    parseCourse(scheduleName, courseList, superCourseData);
-                                    return Unit.INSTANCE;
-                                }, () -> {
-                                    Toasts.toast("请重新登录获取最新数据！");
-                                    Navigations.close(SuperCourseFetchFragment.this);
-                                    return Unit.INSTANCE;
-                                });
-                            } else {
-                                parseCourse(scheduleName, courseList, superCourseData);
-                            }
-                        }
-                    } else {
-                        Toasts.toast(getString(R.string.arg_exception));
+                    List<Course> courseList = new ArrayList();
+                    List<SuperCourse> superCourseData = superViewModel.getSuperCourseList().lessonList;
+                    if (superCourseData.size() == 0) {
+                        CommonDialogs.INSTANCE.getCommonDialog(activity(), getString(R.string.warning), "没有检测到该学期的课程,确定继续导入么？", () -> {
+                            parseCourse("超课导入", courseList, superCourseData);
+                            return Unit.INSTANCE;
+                        }, () -> {
+                            Toasts.toast("请重新登录获取最新数据！");
+                            Navigations.close(SuperCourseFetchFragment.this);
+                            return Unit.INSTANCE;
+                        });
                     }
+                    parseCourse("超课导入", courseList, superCourseData);
                 } else if (num == SuperViewModel.FETCH_FAIL) {
                     dialog.dismiss();
                     Toasts.toast(getString(R.string.fetch_fail_please_retry));

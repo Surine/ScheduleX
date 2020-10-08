@@ -4,6 +4,17 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/dp20"
+        android:src="@mipmap/_404"
+        android:scaleType="matrix"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:alpha="0.16"
+        />
     <cn.surine.schedulex.ui.view.custom.helper.Topbar
         android:id="@+id/topbar"
         android:layout_width="match_parent"
@@ -32,5 +43,6 @@
         android:layout_marginEnd="@dimen/dp20"
         android:background="@drawable/config_card_background"
         app:layout_constraintTop_toBottomOf="@id/searchEdit" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

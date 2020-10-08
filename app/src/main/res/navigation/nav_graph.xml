@@ -6,17 +6,6 @@
     app:startDestination="@id/splashFragment">
 
     <fragment
-        android:id="@+id/scheduleInitFragment"
-        android:name="cn.surine.schedulex.ui.schedule_init.ScheduleInitFragment"
-        android:label="fragment_schedule_init"
-        tools:layout="@layout/fragment_schedule_init">
-        <action
-            android:id="@+id/action_scheduleInitFragment_to_dataFetchFragment"
-            app:destination="@id/dataFetchFragment"
-            app:enterAnim="@anim/fragment_open_enter"
-            app:popEnterAnim="@anim/fragment_open_enter" />
-    </fragment>
-    <fragment
         android:id="@+id/loginFragment"
         android:name="cn.surine.schedulex.ui.login.LoginFragment"
         android:label="fragment_login"
@@ -32,11 +21,6 @@
         android:name="cn.surine.schedulex.ui.schedule_list.ScheduleListFragment"
         android:label="fragment_schedule_list">
         <action
-            android:id="@+id/action_ScheduleListFragment_to_scheduleInitFragment"
-            app:destination="@id/scheduleInitFragment"
-            app:enterAnim="@anim/fragment_open_enter"
-            app:popEnterAnim="@anim/fragment_open_enter" />
-        <action
             android:id="@+id/action_ScheduleListFragment_to_aboutFragment"
             app:destination="@id/aboutFragment"
             app:enterAnim="@anim/fragment_open_enter"
@@ -51,6 +35,9 @@
             app:destination="@id/scheduleConfigFragment"
             app:enterAnim="@anim/fragment_open_enter"
             app:popEnterAnim="@anim/fragment_open_enter" />
+        <action
+            android:id="@+id/action_ScheduleListFragment_to_dataFetchFragment"
+            app:destination="@id/dataFetchFragment" />
     </fragment>
     <fragment
         android:id="@+id/dataFetchFragment"
@@ -72,11 +59,6 @@
             app:enterAnim="@anim/fragment_open_enter"
             app:popEnterAnim="@anim/fragment_open_enter" />
         <action
-            android:id="@+id/action_dataFetchFragment_to_scheduleSchoolListFragment"
-            app:destination="@id/scheduleSchoolListFragment"
-            app:enterAnim="@anim/fragment_open_enter"
-            app:popEnterAnim="@anim/fragment_open_enter" />
-        <action
             android:id="@+id/action_dataFetchFragment_to_miAiInitFragment"
             app:destination="@id/miAiInitFragment"
             app:enterAnim="@anim/fragment_open_enter"
@@ -95,15 +77,13 @@
         android:name="cn.surine.schedulex.ui.splash.SplashFragment"
         android:label="SplashFragment">
         <action
-            android:id="@+id/action_splashFragment_to_scheduleInitFragment"
-            app:destination="@id/scheduleInitFragment"
-            app:enterAnim="@anim/fragment_open_enter"
-            app:popEnterAnim="@anim/fragment_open_enter" />
-        <action
             android:id="@+id/action_splashFragment_to_scheduleFragment"
             app:destination="@id/scheduleFragment"
             app:enterAnim="@anim/fragment_open_enter"
             app:popEnterAnim="@anim/fragment_open_enter" />
+        <action
+            android:id="@+id/action_splashFragment_to_dataFetchFragment"
+            app:destination="@id/dataFetchFragment" />
     </fragment>
     <fragment
         android:id="@+id/scheduleConfigFragment"
@@ -192,22 +172,6 @@
         android:name="cn.surine.schedulex.ui.theme.PaletteFragment"
         android:label="PaletteFragment" />
     <fragment
-        android:id="@+id/scheduleSchoolListFragment"
-        android:name="cn.surine.schedulex.ui.schedule_data_fetch.ScheduleSchoolListFragment"
-        android:label="scheduleSchoolListFragment"
-        >
-        <action
-            android:id="@+id/action_scheduleSchoolListFragment_to_scheduleThirdFetchFragment"
-            app:destination="@id/scheduleThirdFetchFragment"
-            app:enterAnim="@anim/fragment_open_enter"
-            app:popEnterAnim="@anim/fragment_open_enter" />
-        <action
-            android:id="@+id/action_scheduleSchoolListFragment_to_loginFragment"
-            app:destination="@id/loginFragment"
-            app:enterAnim="@anim/fragment_open_enter"
-            app:popEnterAnim="@anim/fragment_open_enter" />
-    </fragment>
-    <fragment
         android:id="@+id/scheduleThirdFetchFragment"
         android:name="cn.surine.schedulex.ui.schedule_import_pro.page.web_fetch.ScheduleThirdFetchFragment"
         android:label="scheduleThirdFetchFragment"
@@ -220,7 +184,7 @@
     </fragment>
     <fragment
         android:id="@+id/miAiFetchFragment"
-        android:name="cn.surine.schedulex.ui.schedule_import_pro.miai_import.MiAiFetchFragment"
+        android:name="cn.surine.schedulex.ui.schedule_import_pro.page.mi_fetch.MiAiFetchFragment"
         android:label="MiAiFetchFragment" >
         <action
             android:id="@+id/action_miAiFetchFragment_to_scheduleFragment"

@@ -19,7 +19,6 @@ import cn.surine.schedulex.base.utils.load
 import cn.surine.schedulex.data.entity.Schedule
 import cn.surine.schedulex.ui.course.CourseViewModel
 import cn.surine.schedulex.ui.schedule.ScheduleViewModel
-import cn.surine.schedulex.ui.schedule_init.ScheduleInitFragment
 import cn.surine.schedulex.ui.view.custom.helper.CommonDialogs
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.fragment_schedule_manager.*
@@ -132,9 +131,7 @@ class ScheduleListFragment : BaseFragment() {
         }
         addSchedule.setOnClickListener {
             if (scheduleViewModel.schedulesNumber < Constants.MAX_SCHEDULE_LIMIT) {
-                Navigations.open(this, R.id.action_ScheduleListFragment_to_scheduleInitFragment,Bundle().apply {
-                    putBoolean(ScheduleInitFragment.PAGE_FLAG,true)
-                })
+                Navigations.open(this, R.id.action_ScheduleListFragment_to_dataFetchFragment)
             } else {
                 Toasts.toast(getString(R.string.no_permission_to_add))
             }

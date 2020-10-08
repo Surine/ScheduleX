@@ -24,7 +24,6 @@ import cn.surine.schedulex.ui.schedule.ScheduleViewModel;
 import cn.surine.schedulex.ui.view.custom.helper.CommonDialogs;
 import kotlin.Unit;
 
-import static cn.surine.schedulex.ui.schedule_init.ScheduleInitFragment.SCHEDULE_NAME;
 
 public class SuperLoginFragment extends BaseBindingFragment<FragmentLoginSuperBinding> {
     private CourseViewModel courseViewModel;
@@ -64,7 +63,6 @@ public class SuperLoginFragment extends BaseBindingFragment<FragmentLoginSuperBi
                 dialog.dismiss();
                 //跳转学期列表页。
                 Bundle bundle = new Bundle();
-                bundle.putString(SCHEDULE_NAME, getArguments().getString(SCHEDULE_NAME));
                 bundle.putSerializable(TERM_DATA, (Serializable) (superViewModel.userData.getValue().student.attachmentBO.myTermList));
                 Navigations.open(this, R.id.action_superLoginFragment_to_superCourseFetchFragment, bundle);
                 superViewModel.loginStatus.setValue(-1);

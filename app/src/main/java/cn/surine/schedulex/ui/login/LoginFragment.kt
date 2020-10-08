@@ -13,8 +13,6 @@ import cn.surine.schedulex.data.entity.Schedule
 import cn.surine.schedulex.databinding.FragmentLoginBinding
 import cn.surine.schedulex.ui.course.CourseViewModel
 import cn.surine.schedulex.ui.schedule.ScheduleViewModel
-import cn.surine.schedulex.ui.schedule_init.ScheduleInitFragment
-import cn.surine.schedulex.ui.view.custom.helper.CommonDialogs.getCommonDialog
 import com.peanut.sdk.miuidialog.MIUIDialog
 import kotlinx.android.synthetic.main.fragment_login.*
 
@@ -65,21 +63,18 @@ class LoginFragment : BaseBindingFragment<FragmentLoginBinding>() {
                 CourseViewModel.START -> dialog.setMessage(getString(R.string.ready_to_get_schedule_list))
                 CourseViewModel.SUCCESS -> {
                     dialog.dismiss()
-                    if (arguments == null || requireArguments().getString(ScheduleInitFragment.SCHEDULE_NAME)?.isEmpty() != false) {
-                        Toasts.toast(getString(R.string.arg_exception))
-                    } else {
-                        val scheduleId = scheduleViewModel.addSchedule(requireArguments().getString(ScheduleInitFragment.SCHEDULE_NAME), courseViewModel.totalWeek.value
-                                ?: 24, courseViewModel.nowWeek.value ?: 1, Schedule.IMPORT_WAY.JW)
-                        Prefs.save(Constants.CUR_SCHEDULE, scheduleId)
-                        courseViewModel.mMutableCourses.value?.let { courseList ->
-                            courseList.forEach { course ->
-                                course.scheduleId = scheduleId
-                                course.id = "${course.scheduleId}@${course.id}"
-                            }
-                            courseViewModel.saveCourseByDb(courseList, scheduleId)
-                            Navigations.open(this, R.id.scheduleFragment)
-                            Toasts.toast(getString(R.string.handle_success))
+
+                    val scheduleId = scheduleViewModel.addSchedule("我的课程表", courseViewModel.totalWeek.value
+                            ?: 24, courseViewModel.nowWeek.value ?: 1, Schedule.IMPORT_WAY.JW)
+                    Prefs.save(Constants.CUR_SCHEDULE, scheduleId)
+                    courseViewModel.mMutableCourses.value?.let { courseList ->
+                        courseList.forEach { course ->
+                            course.scheduleId = scheduleId
+                            course.id = "${course.scheduleId}@${course.id}"
                         }
+                        courseViewModel.saveCourseByDb(courseList, scheduleId)
+                        Navigations.open(this, R.id.scheduleFragment)
+                        Toasts.toast(getString(R.string.handle_success))
                     }
                 }
                 CourseViewModel.FAIL -> {
@@ -93,7 +88,7 @@ class LoginFragment : BaseBindingFragment<FragmentLoginBinding>() {
                 title(res = R.string.warning)
                 message(res = R.string.welcome_to_use)
                 positiveButton(text = "确定") { this.cancel() }
-                negativeButton(text = "取消") { this.cancel()  }
+                negativeButton(text = "取消") { this.cancel() }
             }
         }
     }

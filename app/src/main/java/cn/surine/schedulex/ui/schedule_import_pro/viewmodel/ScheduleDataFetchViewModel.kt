@@ -7,7 +7,6 @@ import cn.bmob.v3.exception.BmobException
 import cn.bmob.v3.listener.FindListener
 import cn.bmob.v3.listener.UpdateListener
 import cn.surine.schedulex.base.controller.BaseViewModel
-import cn.surine.schedulex.base.utils.Toasts
 import cn.surine.schedulex.data.entity.Commons
 import cn.surine.schedulex.ui.schedule_import_pro.model.RemoteUniversity
 import cn.surine.schedulex.ui.schedule_import_pro.repository.ScheduleDataFetchRepository
@@ -53,7 +52,7 @@ class ScheduleDataFetchViewModel(val repository: ScheduleDataFetchRepository) : 
         query.setLimit(1)
         query.findObjects(object : FindListener<RemoteUniversity>() {
             override fun done(p0: MutableList<RemoteUniversity>?, p1: BmobException?) {
-                if (p1 != null || p0 == null) {
+                if (p1 != null || p0 == null || p0[0].status == -1 || p0[0].version > cn.surine.schedulex.BuildConfig.VERSION_CODE) {
                     loadUniversityStatus.value = LOAD_FAIL
                     return
                 }

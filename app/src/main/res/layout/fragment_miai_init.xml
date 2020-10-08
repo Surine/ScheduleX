@@ -13,7 +13,6 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/shape_mi_color"
             android:transitionName="@string/transition_mi">
 
             <cn.surine.schedulex.ui.view.custom.helper.Topbar
@@ -22,7 +21,7 @@
                 android:layout_height="wrap_content"
                 app:layout_constraintTop_toTopOf="parent"
                 app:title="导入小爱课程表"
-                app:titleColor="@android:color/white" />
+                app:titleColor="@android:color/black" />
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/textInputLayout"
@@ -39,8 +38,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/dp200"
                     android:gravity="top"
-                    android:textColor="@android:color/white"
-                    android:textColorHint="@android:color/white"
                     android:hint="请在此粘贴小米课程表分享链接" />
             </com.google.android.material.textfield.TextInputLayout>
 
