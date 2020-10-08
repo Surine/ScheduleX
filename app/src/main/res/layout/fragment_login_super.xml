@@ -5,7 +5,7 @@
     <data>
         <variable
             name="data"
-            type="cn.surine.schedulex.super_import.viewmodel.SuperViewModel" />
+            type="cn.surine.schedulex.ui.schedule_import_pro.viewmodel.SuperViewModel" />
     </data>
 
     <LinearLayout
@@ -146,22 +146,23 @@
                 app:layout_constraintTop_toTopOf="@+id/guideline5"
                 app:textWatcher="@{data.passwordWatcher}" />
 
-            <com.google.android.material.button.MaterialButton
+            <ImageButton
                 android:id="@+id/login"
-                android:layout_width="0dp"
+                android:layout_width="@dimen/dp60"
                 android:layout_height="@dimen/dp60"
                 android:onClick="@{()->data.login()}"
                 android:text="@string/login"
-                app:elevation="0dp"
-                app:cornerRadius="@dimen/dp30"
-                android:textColor="@android:color/black"
-                android:backgroundTint="@color/main_back_color"
-                app:layout_constraintBottom_toTopOf="@+id/guideline7"
-                app:layout_constraintEnd_toStartOf="@+id/guideline9"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="@+id/guideline3"
-                app:layout_constraintTop_toTopOf="@+id/guideline6"
-                app:layout_constraintVertical_bias="0.165" />
+                android:padding="@dimen/dp10"
+                android:src="@drawable/ic_keyboard_arrow_right_black_24dp"
+                android:layout_marginTop="@dimen/dp40"
+                android:tint="@android:color/black"
+                android:background="@drawable/shape_full_radius_light_grey"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/editText2"
+                />
+
+
 
             <TextView
                 android:id="@+id/super_tip"

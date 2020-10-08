@@ -139,7 +139,7 @@
         android:label="ScheduleDataExport" />
     <fragment
         android:id="@+id/superLoginFragment"
-        android:name="cn.surine.schedulex.super_import.view.SuperLoginFragment"
+        android:name="cn.surine.schedulex.ui.schedule_import_pro.page.super_fetch.SuperLoginFragment"
         android:label="SuperLoginFragment">
         <action
             android:id="@+id/action_superLoginFragment_to_superCourseFetchFragment"
@@ -179,7 +179,7 @@
         android:label="AddTimeTableFragment" />
     <fragment
         android:id="@+id/superCourseFetchFragment"
-        android:name="cn.surine.schedulex.super_import.view.SuperCourseFetchFragment"
+        android:name="cn.surine.schedulex.ui.schedule_import_pro.page.super_fetch.SuperCourseFetchFragment"
         android:label="SuperCourseFetchFragment">
         <action
             android:id="@+id/action_superCourseFetchFragment_to_scheduleFragment"
@@ -209,7 +209,7 @@
     </fragment>
     <fragment
         android:id="@+id/scheduleThirdFetchFragment"
-        android:name="cn.surine.schedulex.ui.schedule_data_fetch.ScheduleThirdFetchFragment"
+        android:name="cn.surine.schedulex.ui.schedule_import_pro.page.web_fetch.ScheduleThirdFetchFragment"
         android:label="scheduleThirdFetchFragment"
         >
         <action
@@ -220,7 +220,7 @@
     </fragment>
     <fragment
         android:id="@+id/miAiFetchFragment"
-        android:name="cn.surine.schedulex.miai_import.MiAiFetchFragment"
+        android:name="cn.surine.schedulex.ui.schedule_import_pro.miai_import.MiAiFetchFragment"
         android:label="MiAiFetchFragment" >
         <action
             android:id="@+id/action_miAiFetchFragment_to_scheduleFragment"
@@ -228,7 +228,7 @@
     </fragment>
     <fragment
         android:id="@+id/miAiInitFragment"
-        android:name="cn.surine.schedulex.miai_import.MiAiInitFragment"
+        android:name="cn.surine.schedulex.ui.schedule_import_pro.page.mi_fetch.MiAiInitFragment"
         android:label="MiAiInitFragment" >
         <action
             android:id="@+id/action_miAiInitFragment_to_miAiFetchFragment"

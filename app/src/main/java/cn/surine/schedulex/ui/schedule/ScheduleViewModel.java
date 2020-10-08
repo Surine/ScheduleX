@@ -33,7 +33,7 @@ public class ScheduleViewModel extends ViewModel {
     /**
      * 添加课表
      */
-    public long addSchedule(String name, int totalWeek, int curWeek, int source) {
+    public long  addSchedule(String name, int totalWeek, int curWeek, int source) {
         Schedule schedule = new Schedule();
         schedule.name = name;
         schedule.totalWeek = totalWeek == 0 ? 24 : totalWeek;

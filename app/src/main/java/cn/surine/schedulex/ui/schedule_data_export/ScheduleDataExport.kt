@@ -11,6 +11,7 @@ import cn.surine.schedulex.data.entity.Course
 import cn.surine.schedulex.data.entity.Schedule
 import cn.surine.schedulex.ui.course.CourseViewModel
 import cn.surine.schedulex.ui.schedule.ScheduleViewModel
+import cn.surine.schedulex.ui.schedule_import_pro.model.CourseWrapper
 import cn.surine.schedulex.ui.schedule_list.ScheduleListFragment.Companion.SCHEDULE_ID
 import cn.surine.schedulex.ui.timetable_list.TimeTableViewModel
 import com.google.android.material.snackbar.Snackbar
@@ -163,7 +164,12 @@ class ScheduleDataExport : BaseFragment() {
 
     private fun saveToJson(scheduleId: Int) {
         val fileName = "${schedule.name}_$scheduleId"
-        if (Files.saveAsJson(fileName, Jsons.entityToJson(courseViewModel.getCourseByScheduleId(scheduleId)))) {
+        val courses = courseViewModel.getCourseByScheduleId(scheduleId)
+        val targetList = mutableListOf<CourseWrapper>()
+        for (i in courses) {
+            targetList.add(DataMaps.dataMappingCourse2CourseWrapper(i))
+        }
+        if (Files.saveAsJson(fileName, Jsons.entityToJson(targetList))) {
             Snackbar.make(exportJson, "保存成功,路径 /Download/$fileName.json", Snackbar.LENGTH_SHORT).show();
         } else {
             Toasts.toast("保存失败！请稍后再试！");

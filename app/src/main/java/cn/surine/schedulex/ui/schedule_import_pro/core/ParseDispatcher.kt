@@ -5,8 +5,8 @@ import cn.surine.schedulex.R
 import cn.surine.schedulex.base.controller.BaseFragment
 import cn.surine.schedulex.base.utils.Navigations
 import cn.surine.schedulex.base.utils.Toasts
-import cn.surine.schedulex.ui.schedule_data_fetch.ScheduleSchoolListFragment
-import cn.surine.schedulex.ui.schedule_import_pro.data.RemoteUniversity
+import cn.surine.schedulex.ui.schedule_import_pro.model.RemoteUniversity
+import cn.surine.schedulex.ui.schedule_import_pro.util.ParseData
 
 /**
  * Intro：
@@ -37,13 +37,14 @@ object ParseDispatcher {
                 })
             }
             HTML -> Navigations.open(fragment, R.id.action_dataFetchFragment_to_scheduleThirdFetchFragment, Bundle().apply {
-                putString(ScheduleSchoolListFragment.URL, mRemoteUniversity.jwUrl)
-                putString(ScheduleSchoolListFragment.TYPE, mRemoteUniversity.jwSystem)
+                putString(JW_URL, mRemoteUniversity.jwUrl)
+                putString(JW_SYSTEM, mRemoteUniversity.jwSystem)
+                putString(OP_INFO, mRemoteUniversity.opInfo)
                 putBoolean(IS_HTML, true)
             })
             API -> {
                 when (mRemoteUniversity.jwSystem) {
-                    //TODO
+                    ParseData.tust -> Navigations.open(fragment, R.id.action_scheduleSchoolListFragment_to_loginFragment)
                 }
             }
             OTHER -> Toasts.toast("暂不支持")

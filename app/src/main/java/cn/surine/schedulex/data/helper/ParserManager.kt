@@ -1,11 +1,12 @@
 package cn.surine.schedulex.data.helper
 
 import cn.surine.schedulex.base.Constants
+import cn.surine.schedulex.base.utils.DataMaps
 import cn.surine.schedulex.base.utils.bitCount
-import cn.surine.schedulex.base.utils.ifGreater
 import cn.surine.schedulex.base.utils.ifLess
 import cn.surine.schedulex.data.entity.Course
-import cn.surine.schedulex.miai_import.model.MiAiCourseInfo
+import cn.surine.schedulex.ui.schedule_import_pro.model.mi_model.MiAiCourseInfo
+import cn.surine.schedulex.ui.schedule_import_pro.model.CourseWrapper
 import java.util.*
 import kotlin.math.abs
 
@@ -44,7 +45,7 @@ object ParserManager {
                         }
                     }
                     classSessions = abs(start.section).toString()
-                    continuingSession = ifLess(abs(end.section) - abs(start.section) + 1,Constants.STAND_SESSION).toString()
+                    continuingSession = ifLess(abs(end.section) - abs(start.section) + 1, Constants.STAND_SESSION).toString()
                     info.sections = info.sections.filter { it.section > 0 }.toMutableList()
                     if (info.sections.isEmpty()) {
                         info.tag = true
@@ -60,13 +61,29 @@ object ParserManager {
     //TODO:super.cn adapter
 
 
-    private fun generateBitWeek(weeks: List<Int>, totalWeek: Int) = weeks.bitCount(totalWeek)
+    fun generateBitWeek(weeks: List<Int>, totalWeek: Int) = weeks.bitCount(totalWeek)
 
     private fun generateColor() = Constants.COLOR_1[Random().nextInt(Constants.COLOR_1.size)]
 
     private fun generateId(scheduleId: Long) = StringBuilder().run {
         append(scheduleId).append("@").append(UUID.randomUUID()).append(System.currentTimeMillis())
         toString()
+    }
+
+
+    /**
+     * 兼容版course -> 存储版course
+     * */
+    fun wrapper2course(list: List<CourseWrapper>, scheduleId: Long): MutableList<Course> {
+        val targetList = mutableListOf<Course>()
+        list.forEach {
+            val course = DataMaps.dataMappingCourseWrapper2Course(it)
+            course.scheduleId = scheduleId
+            course.id = generateId(scheduleId)
+            course.color = generateColor()
+            targetList.add(course)
+        }
+        return targetList
     }
 
 }

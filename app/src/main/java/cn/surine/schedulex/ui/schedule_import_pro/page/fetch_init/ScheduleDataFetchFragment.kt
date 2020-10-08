@@ -16,13 +16,13 @@ import cn.surine.schedulex.base.Constants
 import cn.surine.schedulex.base.controller.App
 import cn.surine.schedulex.base.controller.BaseFragment
 import cn.surine.schedulex.base.utils.*
-import cn.surine.schedulex.data.entity.Course
 import cn.surine.schedulex.data.entity.Schedule
+import cn.surine.schedulex.data.helper.ParserManager
 import cn.surine.schedulex.ui.course.CourseViewModel
 import cn.surine.schedulex.ui.schedule.ScheduleViewModel
-import cn.surine.schedulex.ui.schedule_data_fetch.file.FileParserFactory
+import cn.surine.schedulex.ui.schedule_import_pro.core.FileParserDispatcher
 import cn.surine.schedulex.ui.schedule_import_pro.core.ParseDispatcher
-import cn.surine.schedulex.ui.schedule_import_pro.data.RemoteUniversity
+import cn.surine.schedulex.ui.schedule_import_pro.model.RemoteUniversity
 import cn.surine.schedulex.ui.schedule_import_pro.page.change_school.SelectSchoolFragment
 import cn.surine.schedulex.ui.schedule_import_pro.viewmodel.ScheduleDataFetchViewModel
 import cn.surine.schedulex.ui.view.custom.helper.CommonDialogs
@@ -33,7 +33,6 @@ import kotlinx.android.synthetic.main.view_file_import.*
 import kotlinx.android.synthetic.main.view_jw_import.*
 import kotlinx.android.synthetic.main.view_miai_import.*
 import kotlinx.android.synthetic.main.view_super_import.*
-import java.util.*
 
 
 /**
@@ -84,7 +83,7 @@ class ScheduleDataFetchFragment : BaseFragment() {
         loginJw.setOnClickListener {
             if (mRemoteUniversity != null) {
                 ParseDispatcher.dispatch(this, mRemoteUniversity!!)
-            }else{
+            } else {
                 Toasts.toast("着呢")
             }
         }
@@ -161,25 +160,19 @@ class ScheduleDataFetchFragment : BaseFragment() {
 
     private fun loadData(path: String?) {
         val data = path?.split("\\.") ?: return
-        val parser = FileParserFactory.abt.instance.get(data[data.size - 1])
-        val list = parser.parse(path)
+        val list = FileParserDispatcher[data[data.size - 1]].parse(path)
         if (list.isNullOrEmpty()) {
             Toasts.toast("无数据，请检查资源格式是否正确")
             return
         }
         //开始生成列表
         val id: Long
-        val courses = arrayOfNulls<Course>(list.size)
         Prefs.save(Constants.CUR_SCHEDULE, (scheduleViewModel.addSchedule(scheduleName, 24, 1, Schedule.IMPORT_WAY.JSON)).apply {
             id = this
         })
-        list.indices.forEach { i ->
-            val course = list[i]
-            course.scheduleId = id
-            course.id = "${course.scheduleId}@${UUID.randomUUID()}${System.currentTimeMillis()}"
-            courses[i] = course
+        ParserManager.wrapper2course(list, id).forEach {
+            courseViewModel.insert(it)
         }
-        courses.forEach { courseViewModel.insert(it) }
         Toasts.toast(getString(R.string.handle_success))
         Navigations.open(this, R.id.action_dataFetchFragment_to_scheduleFragment)
     }

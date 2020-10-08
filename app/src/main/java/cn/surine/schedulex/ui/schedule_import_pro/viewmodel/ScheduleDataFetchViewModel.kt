@@ -3,7 +3,7 @@ package cn.surine.schedulex.ui.schedule_import_pro.viewmodel
 import androidx.lifecycle.MutableLiveData
 import cn.surine.schedulex.base.controller.BaseViewModel
 import cn.surine.schedulex.data.entity.Commons
-import cn.surine.schedulex.ui.schedule_import_pro.data.RemoteUniversity
+import cn.surine.schedulex.ui.schedule_import_pro.model.RemoteUniversity
 import cn.surine.schedulex.ui.schedule_import_pro.repository.ScheduleDataFetchRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
@@ -47,7 +47,7 @@ class ScheduleDataFetchViewModel(val repository: ScheduleDataFetchRepository) : 
                 author = "花生酱啊",
                 useTimes = 30,
                 jwSystemName = "新正方",
-                jwSystem = "newZenFang"
+                jwSystem = "new_zf"
         )
 
 //        "school": "WTU",

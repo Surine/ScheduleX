@@ -9,8 +9,6 @@ import cn.surine.schedulex.ui.login.LoginRepository
 import cn.surine.schedulex.ui.login.LoginViewModel
 import cn.surine.schedulex.ui.schedule.ScheduleRepository
 import cn.surine.schedulex.ui.schedule.ScheduleViewModel
-import cn.surine.schedulex.ui.schedule_data_fetch.AdapterListRepository
-import cn.surine.schedulex.ui.schedule_data_fetch.AdapterListViewModel
 import cn.surine.schedulex.ui.schedule_import_pro.repository.ScheduleDataFetchRepository
 import cn.surine.schedulex.ui.schedule_import_pro.viewmodel.ScheduleDataFetchViewModel
 import cn.surine.schedulex.ui.timer.TimerRepository
@@ -35,8 +33,6 @@ class VmManager(private val fragment: Fragment) {
     val vmTimer by lazy { ViewModelProviders.of(fragment, InstanceFactory.getInstance(arrayOf<Class<*>>(TimerRepository::class.java), arrayOf<Any>(TimerRepository)))[TimerViewModel::class.java] }
     //登录vm
     val vmLogin by lazy { ViewModelProviders.of(fragment, InstanceFactory.getInstance(arrayOf<Class<*>>(LoginRepository::class.java), arrayOf<Any>(LoginRepository)))[LoginViewModel::class.java] }
-    //适配列表vm
-    val vmAdapterList by lazy { ViewModelProviders.of(fragment, InstanceFactory.getInstance(arrayOf<Class<*>>(AdapterListRepository::class.java), arrayOf<Any>(AdapterListRepository)))[AdapterListViewModel::class.java] }
     //通用配置
     val vmScheduleFetch by lazy { ViewModelProviders.of(fragment, InstanceFactory.getInstance(arrayOf<Class<*>>(ScheduleDataFetchRepository::class.java), arrayOf<Any>(ScheduleDataFetchRepository)))[ScheduleDataFetchViewModel::class.java] }
 }

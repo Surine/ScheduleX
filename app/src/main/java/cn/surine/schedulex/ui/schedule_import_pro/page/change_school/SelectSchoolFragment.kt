@@ -11,7 +11,7 @@ import cn.surine.schedulex.base.utils.Navigations
 import cn.surine.schedulex.base.utils.Prefs
 import cn.surine.schedulex.base.utils.SimpleTextWatcher
 import cn.surine.schedulex.base.utils.load
-import cn.surine.schedulex.ui.schedule_import_pro.data.LocalUniversity
+import cn.surine.schedulex.ui.schedule_import_pro.model.LocalUniversity
 import cn.surine.schedulex.ui.schedule_import_pro.util.LocalUniversityManager
 import kotlinx.android.synthetic.main.fragment_select_school.*
 

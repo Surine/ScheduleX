@@ -8,6 +8,8 @@ import cn.surine.coursetableview.entity.BTimeTable;
 import cn.surine.schedulex.base.Constants;
 import cn.surine.schedulex.data.entity.Course;
 import cn.surine.schedulex.data.entity.TimeTable;
+import cn.surine.schedulex.data.helper.ParserManager;
+import cn.surine.schedulex.ui.schedule_import_pro.model.CourseWrapper;
 
 /**
  * Intro：
@@ -100,5 +102,41 @@ public class DataMaps {
         }
         bTimeTable.timeInfoList = timeList;
         return bTimeTable;
+    }
+
+
+    public static Course dataMappingCourseWrapper2Course(CourseWrapper courseWrapper) {
+        Course course = new Course();
+        course.coureName = courseWrapper.getName();
+        course.teacherName = courseWrapper.getTeacher();
+        course.teachingBuildingName = courseWrapper.getPosition();
+        course.classDay = String.valueOf(courseWrapper.getDay());
+        course.classSessions = String.valueOf(courseWrapper.getSectionStart());
+        int maxSession = courseWrapper.getSectionContinue();
+        while (maxSession + courseWrapper.getSectionStart() > Constants.MAX_SESSION) {
+            maxSession--;
+        }
+        course.continuingSession = String.valueOf(maxSession);
+        course.classWeek = ParserManager.INSTANCE.generateBitWeek(courseWrapper.getWeek(), Constants.STAND_WEEK);
+        return course;
+    }
+
+
+    public static CourseWrapper dataMappingCourse2CourseWrapper(Course course) {
+        CourseWrapper courseWrapper = new CourseWrapper();
+        courseWrapper.setName(course.coureName);
+        courseWrapper.setTeacher(course.teacherName);
+        courseWrapper.setPosition(course.campusName + course.teachingBuildingName + course.classroomName);
+        courseWrapper.setDay(Integer.parseInt(course.classDay));
+        courseWrapper.setSectionStart(Integer.parseInt(course.classSessions));
+        courseWrapper.setSectionContinue(Integer.parseInt(course.continuingSession));
+        List<Integer> list = new ArrayList<>();
+        for (int i = 0; i < course.classWeek.length(); i++) {
+            if (course.classWeek.charAt(i) == '1') {
+                list.add(i + 1);
+            }
+        }
+        courseWrapper.setWeek(list);
+        return courseWrapper;
     }
 }

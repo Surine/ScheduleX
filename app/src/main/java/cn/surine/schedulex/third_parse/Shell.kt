@@ -2,7 +2,7 @@ package cn.surine.schedulex.third_parse
 
 import cn.surine.schedulex.base.utils.Toasts
 import cn.surine.schedulex.third_parse.bean.Course
-import cn.surine.schedulex.ui.schedule_import_pro.data.CourseWrapper
+import cn.surine.schedulex.ui.schedule_import_pro.model.CourseWrapper
 import cn.surine.schedulex.ui.schedule_import_pro.util.ParseUtil
 import org.jsoup.Jsoup
 

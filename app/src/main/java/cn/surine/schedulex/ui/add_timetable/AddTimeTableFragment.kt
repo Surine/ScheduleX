@@ -22,7 +22,6 @@ import cn.surine.schedulex.ui.view.custom.helper.CommonDialogs
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.fragment_add_timetable.*
-import kotlinx.android.synthetic.main.fragment_schedule_school_list.*
 
 /**
  * Intro：

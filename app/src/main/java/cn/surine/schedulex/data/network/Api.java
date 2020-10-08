@@ -6,7 +6,7 @@ import cn.surine.schedulex.data.entity.Commons;
 import cn.surine.schedulex.data.entity.CourseList;
 import cn.surine.schedulex.data.entity.VmResultString;
 import cn.surine.schedulex.third_parse.JwInfo;
-import cn.surine.schedulex.ui.schedule_import_pro.data.RemoteUniversity;
+import cn.surine.schedulex.ui.schedule_import_pro.model.RemoteUniversity;
 import io.reactivex.Flowable;
 import kotlinx.coroutines.Deferred;
 import retrofit2.Call;

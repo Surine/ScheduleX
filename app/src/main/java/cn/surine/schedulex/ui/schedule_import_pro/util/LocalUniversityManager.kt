@@ -2,8 +2,8 @@ package cn.surine.schedulex.ui.schedule_import_pro.util
 
 import cn.surine.schedulex.base.controller.App
 import cn.surine.schedulex.base.utils.Jsons
-import cn.surine.schedulex.ui.schedule_import_pro.data.LocalUniversity
-import cn.surine.schedulex.ui.schedule_import_pro.data.LocalUniversityInfo
+import cn.surine.schedulex.ui.schedule_import_pro.model.LocalUniversity
+import cn.surine.schedulex.ui.schedule_import_pro.model.LocalUniversityInfo
 import java.io.InputStream
 import java.nio.charset.StandardCharsets
 

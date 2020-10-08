@@ -6,7 +6,7 @@
 
         <variable
             name="university"
-            type="cn.surine.schedulex.ui.schedule_import_pro.data.LocalUniversity" />
+            type="cn.surine.schedulex.ui.schedule_import_pro.model.LocalUniversity" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

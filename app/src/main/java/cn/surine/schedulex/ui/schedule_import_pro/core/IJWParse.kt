@@ -1,6 +1,6 @@
 package cn.surine.schedulex.ui.schedule_import_pro.core
 
-import cn.surine.schedulex.ui.schedule_import_pro.data.CourseWrapper
+import cn.surine.schedulex.ui.schedule_import_pro.model.CourseWrapper
 import org.jsoup.nodes.Element
 
 /**
@@ -9,7 +9,7 @@ import org.jsoup.nodes.Element
  * @author sunliwei
  * @date 9/21/20 15:26
  */
-interface IJWParse {
+interface IJWParse:ICommonParse {
 
     /**
      * 需实现方法

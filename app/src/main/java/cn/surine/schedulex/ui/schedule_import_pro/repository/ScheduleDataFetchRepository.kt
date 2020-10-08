@@ -4,7 +4,6 @@ import cn.surine.schedulex.BuildConfig
 import cn.surine.schedulex.base.controller.BaseRepository
 import cn.surine.schedulex.data.entity.Commons
 import cn.surine.schedulex.data.network.Loader
-import cn.surine.schedulex.ui.schedule_import_pro.data.RemoteUniversity
 
 /**
  * Intro：
