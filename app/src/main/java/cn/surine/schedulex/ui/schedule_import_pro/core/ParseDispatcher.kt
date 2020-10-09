@@ -34,26 +34,18 @@ object ParseDispatcher {
             JSOUP -> {
                 Navigations.open(fragment, R.id.action_dataFetchFragment_to_scheduleThirdFetchFragment, Bundle().apply {
                     putSerializable(UNIVERSITY, mRemoteUniversity)
-//                    putString(UNIVERSITY_NAME,mRemoteUniversity.name)
-//                    putString(UNIVERSITY_CODE,mRemoteUniversity.code)
-//                    putString(JW_URL, mRemoteUniversity.jwUrl)
-//                    putString(JW_SYSTEM, mRemoteUniversity.jwSystem)
-//                    putString(OP_INFO, mRemoteUniversity.opInfo)
                     putBoolean(IS_HTML, false)
                 })
             }
             HTML -> Navigations.open(fragment, R.id.action_dataFetchFragment_to_scheduleThirdFetchFragment, Bundle().apply {
                 putSerializable(UNIVERSITY, mRemoteUniversity)
-//                putString(UNIVERSITY_NAME,mRemoteUniversity.name)
-//                putString(UNIVERSITY_CODE,mRemoteUniversity.code)
-//                putString(JW_URL, mRemoteUniversity.jwUrl)
-//                putString(JW_SYSTEM, mRemoteUniversity.jwSystem)
-//                putString(OP_INFO, mRemoteUniversity.opInfo)
                 putBoolean(IS_HTML, true)
             })
             API -> {
                 when (mRemoteUniversity.jwSystem) {
-                    ParseData.tust -> Navigations.open(fragment, R.id.action_dataFetchFragment_to_loginFragment)
+                    ParseData.tust -> Navigations.open(fragment, R.id.action_dataFetchFragment_to_loginFragment,Bundle().apply {
+                        putSerializable(UNIVERSITY, mRemoteUniversity)
+                    })
                 }
             }
             OTHER -> Toasts.toast("暂不支持")

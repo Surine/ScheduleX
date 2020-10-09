@@ -125,7 +125,7 @@ public class DataMaps {
     public static CourseWrapper dataMappingCourse2CourseWrapper(Course course) {
         CourseWrapper courseWrapper = new CourseWrapper();
         courseWrapper.setName(course.coureName);
-        courseWrapper.setTeacher(course.teacherName);
+        courseWrapper.setTeacher(course.teacherName == null ? "" : course.teacherName);
         courseWrapper.setPosition(course.campusName + course.teachingBuildingName + course.classroomName);
         courseWrapper.setDay(Integer.parseInt(course.classDay));
         courseWrapper.setSectionStart(Integer.parseInt(course.classSessions));

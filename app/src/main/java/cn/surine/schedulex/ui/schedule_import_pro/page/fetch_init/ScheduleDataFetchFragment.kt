@@ -3,6 +3,7 @@ package cn.surine.schedulex.ui.schedule_import_pro.page.fetch_init
 import android.Manifest
 import android.annotation.SuppressLint
 import android.content.Intent
+import android.os.Environment
 import android.view.View
 import android.widget.Button
 import android.widget.CheckBox
@@ -23,6 +24,7 @@ import cn.surine.schedulex.ui.course.CourseViewModel
 import cn.surine.schedulex.ui.schedule.ScheduleViewModel
 import cn.surine.schedulex.ui.schedule_import_pro.core.FileParserDispatcher
 import cn.surine.schedulex.ui.schedule_import_pro.core.ParseDispatcher
+import cn.surine.schedulex.ui.schedule_import_pro.core.file_core.CsvParser
 import cn.surine.schedulex.ui.schedule_import_pro.model.CourseWrapper
 import cn.surine.schedulex.ui.schedule_import_pro.model.RemoteUniversity
 import cn.surine.schedulex.ui.schedule_import_pro.page.change_school.SelectSchoolFragment
@@ -85,7 +87,6 @@ class ScheduleDataFetchFragment : BaseFragment() {
                     reqeustAdapter.hide()
                 })
             }
-
             //元素的控制
             scheduleDataFetchViewModel.loadUniversityStatus.observe(this, Observer {
                 when (it) {
@@ -94,13 +95,23 @@ class ScheduleDataFetchFragment : BaseFragment() {
                             Snackbar.make(parent!!, "没有啥数据哦,客官请稍后~", Snackbar.LENGTH_SHORT).show()
                         }
                     }
-                    BaseViewModel.LOAD_FAIL -> {
-                        val str = "咱还没适配您学校，或者您的app版本太旧哦~ 如果您愿意帮助适配，麻烦申请下吧~ (暂时只支持联系开发者申请)"
+                    ScheduleDataFetchViewModel.LOAD_FAIL_NULL ->{
+                        val str = "咱还没适配您学校哦~ 如果您愿意帮助适配，麻烦申请下吧~ (暂时只支持联系开发者申请)"
                         curSchoolInfo.text = str
                         reqeustAdapter.show()
                         reqeustAdapter.setOnClickListener {
                             Others.openUrl("https://support.qq.com/products/282532/faqs/79948")
                         }
+                    }
+                    ScheduleDataFetchViewModel.LOAD_FAIL_MAINTENANCE ->{
+                        val str = "您的学校解析器正在维护中哦，请过一段时间再试~"
+                        curSchoolInfo.text = str
+                        reqeustAdapter.hide()
+                    }
+                    ScheduleDataFetchViewModel.LOAD_FAIL_VERSION_OLD -> {
+                        val str = "您的app版本太旧啦，新版本已经适配了您的学校~ 请升级看看"
+                        curSchoolInfo.text = str
+                        reqeustAdapter.hide()
                     }
                     BaseViewModel.LOAD_SUCCESS -> {
                         loginJw.setOnClickListener {
@@ -238,10 +249,9 @@ class ScheduleDataFetchFragment : BaseFragment() {
             }
 
             tCsv.setOnClickListener {
-//                Toasts.toast("请在本页面下载Csv格式")
-//                Others.openUrl("https://github.com/surine/ScheduleX")
-                val str = "name,teacher,position,sectionStart,sectionContinue,day,week\n课程名,教师,地点,1,2,1,1 3 5 7 8 9 10"
-                Files.save("Csv模板", str, "csv");
+                CsvParser.writeCsv(listOf(
+                     arrayOf("课程名","教师","位置","1","2","1","1 2 3 4 5")
+                ), "${Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS).absolutePath}/Csv模板.csv")
                 Snackbar.make(it, "保存成功,路径 /Download/Csv模板.csv", Snackbar.LENGTH_SHORT).show();
             }
 

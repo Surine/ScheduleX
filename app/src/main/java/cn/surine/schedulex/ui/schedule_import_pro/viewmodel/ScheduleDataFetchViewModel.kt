@@ -18,6 +18,13 @@ import cn.surine.schedulex.ui.schedule_import_pro.repository.ScheduleDataFetchRe
  * @date 9/16/20 16:10
  */
 class ScheduleDataFetchViewModel(val repository: ScheduleDataFetchRepository) : BaseViewModel() {
+
+    companion object{
+        const val LOAD_FAIL_VERSION_OLD = -1 //版本太旧
+        const val LOAD_FAIL_MAINTENANCE = -2 //维护
+        const val LOAD_FAIL_NULL = -3  //未适配
+    }
+
     val mCommons: MutableLiveData<Commons> by lazy {
         MutableLiveData<Commons>()
     }
@@ -52,8 +59,19 @@ class ScheduleDataFetchViewModel(val repository: ScheduleDataFetchRepository) : 
         query.setLimit(1)
         query.findObjects(object : FindListener<RemoteUniversity>() {
             override fun done(p0: MutableList<RemoteUniversity>?, p1: BmobException?) {
-                if (p1 != null || p0 == null || p0[0].status == -1 || p0[0].version > cn.surine.schedulex.BuildConfig.VERSION_CODE) {
-                    loadUniversityStatus.value = LOAD_FAIL
+                //未适配
+                if(p1!=null || p0 == null){
+                    loadUniversityStatus.value = LOAD_FAIL_NULL
+                    return
+                }
+                //维护中
+                if(p0[0].status == -1){
+                    loadUniversityStatus.value = LOAD_FAIL_MAINTENANCE
+                    return
+                }
+                //版本太旧
+                if(p0[0].version > cn.surine.schedulex.BuildConfig.VERSION_CODE){
+                    loadUniversityStatus.value = LOAD_FAIL_VERSION_OLD
                     return
                 }
                 mUniversityInfo.value = p0[0]

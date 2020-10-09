@@ -13,6 +13,9 @@ import cn.surine.schedulex.data.entity.Schedule
 import cn.surine.schedulex.databinding.FragmentLoginBinding
 import cn.surine.schedulex.ui.course.CourseViewModel
 import cn.surine.schedulex.ui.schedule.ScheduleViewModel
+import cn.surine.schedulex.ui.schedule_import_pro.core.ParseDispatcher.UNIVERSITY
+import cn.surine.schedulex.ui.schedule_import_pro.model.RemoteUniversity
+import cn.surine.schedulex.ui.schedule_import_pro.viewmodel.ScheduleDataFetchViewModel
 import com.peanut.sdk.miuidialog.MIUIDialog
 import kotlinx.android.synthetic.main.fragment_login.*
 
@@ -27,6 +30,7 @@ class LoginFragment : BaseBindingFragment<FragmentLoginBinding>() {
     private lateinit var loginViewModel: LoginViewModel
     private lateinit var scheduleViewModel: ScheduleViewModel
     private lateinit var courseViewModel: CourseViewModel
+    private lateinit var dataFetchViewModel: ScheduleDataFetchViewModel
     private lateinit var dialog: ProgressDialog
     override fun layoutId(): Int = R.layout.fragment_login
 
@@ -35,6 +39,7 @@ class LoginFragment : BaseBindingFragment<FragmentLoginBinding>() {
             loginViewModel = vmLogin
             scheduleViewModel = vmSchedule
             courseViewModel = vmCourse
+            dataFetchViewModel = vmScheduleFetch
         }
         dialog = ProgressDialog(activity()).apply {
             setCancelable(false)
@@ -72,6 +77,9 @@ class LoginFragment : BaseBindingFragment<FragmentLoginBinding>() {
                             course.id = "${course.scheduleId}@${course.id}"
                         }
                         courseViewModel.saveCourseByDb(courseList, scheduleId)
+                        arguments?.let { bundle ->
+                            dataFetchViewModel.uploadFetchSuccess(bundle.getSerializable(UNIVERSITY) as RemoteUniversity)
+                        }
                         Navigations.open(this, R.id.scheduleFragment)
                         Toasts.toast(getString(R.string.handle_success))
                     }
