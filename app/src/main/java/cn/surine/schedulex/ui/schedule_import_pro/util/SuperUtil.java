@@ -7,10 +7,12 @@ import java.security.MessageDigest;
 import javax.crypto.Cipher;
 import javax.crypto.spec.SecretKeySpec;
 
+import cn.surine.schedulex.base.PrivateInformation;
+
 public class SuperUtil {
     public static String encrypt(String str) {
         try {
-            return aes(URLEncoder.encode(str, "utf-8"), md5("friday_syllabus"));
+            return aes(URLEncoder.encode(str, "utf-8"), md5(PrivateInformation.SUPER_CN_KEY));
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
             return null;

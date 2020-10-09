@@ -31,8 +31,7 @@ public class App extends Application {
         context = getApplicationContext();
         //初始化bugly
         Beta.upgradeDialogLayoutId = R.layout.view_upgrade_dialog;
-        Bugly.init(getApplicationContext(), "2d69e03a71", BuildConfig.DEBUG);
-
+        Bugly.init(getApplicationContext(), PrivateInformation.BUGLY_KEY, BuildConfig.DEBUG);
         Bmob.initialize(this, PrivateInformation.BMOB_KEY);
         SettingItemConfig.INSTANCE.setPrimaryColor(getResources().getColor(R.color.colorPrimary));
     }
