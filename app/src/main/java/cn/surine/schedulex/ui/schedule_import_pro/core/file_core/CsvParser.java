@@ -25,7 +25,7 @@ import cn.surine.schedulex.ui.schedule_import_pro.model.CourseWrapper;
  */
 public class CsvParser implements IFileParser {
     static final String[] FILE_HEADER = {"name", "teacher", "position", "sectionStart", "sectionContinue", "day", "week"};
-    private final static String NEW_LINE_SEPARATOR="\n";
+    private final static String NEW_LINE_SEPARATOR = "\n";
 
     @Override
     public List<CourseWrapper> parse(String path) {
@@ -34,8 +34,9 @@ public class CsvParser implements IFileParser {
         Reader reader = new BufferedReader(new InputStreamReader(new ByteArrayInputStream(Files.getFileContent(path).getBytes())));
         try {
             Iterable<CSVRecord> records = format.parse(reader);
-            CourseWrapper course = new CourseWrapper();
+            CourseWrapper course = null;
             for (CSVRecord record : records) {
+                course = new CourseWrapper();
                 course.setName(record.get("name"));
                 course.setTeacher(record.get("teacher"));
                 course.setPosition(record.get("position"));
@@ -67,24 +68,45 @@ public class CsvParser implements IFileParser {
 
     /**
      * 写入csv文件
+     *
      * @param data     数据内容
      * @param filePath 创建的csv文件路径
      * @throws IOException
      **/
-    public static void writeCsv(List<String[]> data, String filePath) throws IOException {
-        //初始化csvformat
-        CSVFormat formator = CSVFormat.DEFAULT.withRecordSeparator(NEW_LINE_SEPARATOR);
-        //创建FileWriter对象
-        FileWriter fileWriter = new FileWriter(filePath);
-        //创建CSVPrinter对象
-        CSVPrinter printer = new CSVPrinter(fileWriter, formator);
-        //写入列头数据
-        printer.printRecord(FILE_HEADER);
-        if (null != data) {
-            //循环写入数据
-            for (String[] lineData : data) {
-                printer.printRecord(lineData);
+    public static void writeCsv(List<String[]> data, String filePath) {
+        FileWriter fileWriter = null;
+        CSVPrinter printer = null;
+        try {
+            //初始化csvformat
+            CSVFormat formator = CSVFormat.DEFAULT.withRecordSeparator(NEW_LINE_SEPARATOR);
+            //创建FileWriter对象
+            fileWriter = new FileWriter(filePath);
+            //创建CSVPrinter对象
+            printer = new CSVPrinter(fileWriter, formator);
+            //写入列头数据
+            //Bugfix: 注意这里需要采用这种字面量形式写入Header，否则会写入失败。
+            printer.printRecord("name", "teacher", "position", "sectionStart", "sectionContinue", "day", "week");
+            if (null != data) {
+                //循环写入数据
+                for (String[] lineData : data) {
+                    printer.printRecord(lineData);
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (fileWriter != null) {
+                    fileWriter.flush();
+                    fileWriter.close();
+                }
+                if (printer != null) {
+                    printer.close();
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
             }
         }
+
     }
 }
