@@ -58,7 +58,12 @@ public abstract class DailyRemoteViewService extends RemoteViewsService {
 
         @Override
         public RemoteViews getViewAt(int position) {
-            Course course = courseList.get(position);
+            Course course = null;
+            try {
+                course = courseList.get(position);
+            } catch (Exception e) {
+                course = new Course();
+            }
             BTimeTable.BTimeInfo data = timeTable.timeInfoList.get(Integer.parseInt(course.classSessions) - 1);
             return onBindView(mContext, course, data);
         }
