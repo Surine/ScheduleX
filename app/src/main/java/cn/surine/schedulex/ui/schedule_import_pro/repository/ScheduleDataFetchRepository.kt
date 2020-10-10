@@ -20,8 +20,4 @@ object ScheduleDataFetchRepository :BaseRepository(){
         }
         Loader.mService.getCommon(url).await()
     }
-
-    suspend fun getUniversityInfo(name: String, code: String) = remote {
-        Loader.mService.getUniversityInfo(name,code).await()
-    }
 }

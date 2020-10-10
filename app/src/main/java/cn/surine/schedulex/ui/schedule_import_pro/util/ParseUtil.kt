@@ -1,6 +1,8 @@
 package cn.surine.schedulex.ui.schedule_import_pro.util
 
 import cn.surine.schedulex.base.Constants
+import cn.surine.schedulex.ui.schedule_import_pro.model.CourseWrapper
+import cn.surine.schedulex.ui.schedule_import_pro.model.compat.Course
 
 /**
  * Intro：
@@ -59,5 +61,31 @@ object ParseUtil {
             }
         }
         return emptyList()
+    }
+
+    //compat version
+    private fun converter(course: Course): CourseWrapper {
+        val courseWrapper = CourseWrapper()
+        courseWrapper.name = course.name
+        courseWrapper.position = course.room
+        courseWrapper.teacher = course.teacher
+        courseWrapper.day = course.day
+        courseWrapper.sectionStart = course.startNode
+        courseWrapper.sectionContinue = course.endNode - course.startNode + 1
+        for (i in course.startWeek..course.endWeek) {
+            when (course.type) {
+                0 -> courseWrapper.week = courseWrapper.week.plus(i)
+                1 -> if (i % 2 == 1) courseWrapper.week = courseWrapper.week.plus(i)
+                2 -> if (i % 2 == 0) courseWrapper.week = courseWrapper.week.plus(i)
+            }
+        }
+        return courseWrapper
+    }
+
+    fun wrap(courseList: ArrayList<Course>): List<CourseWrapper> {
+        val data = mutableListOf<CourseWrapper>()
+        for (course in courseList)
+            data.add(converter(course = course))
+        return data
     }
 }

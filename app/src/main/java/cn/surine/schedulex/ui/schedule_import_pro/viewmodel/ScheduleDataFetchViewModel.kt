@@ -41,7 +41,7 @@ class ScheduleDataFetchViewModel(val repository: ScheduleDataFetchRepository) : 
      * 获取公共配置参数
      * */
     fun getCommon() = request({
-        val data = ScheduleDataFetchRepository.getCommon()
+        val data = repository.getCommon()
         mCommons.value = data
     })
 
