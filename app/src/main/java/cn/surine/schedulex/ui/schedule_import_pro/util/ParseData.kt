@@ -16,6 +16,7 @@ object ParseData {
     const val NEW_ZF = "new_zf" //新正方
     const val QZ = "qz" //强智
     const val NEW_QZ = "new_qz" //新强智
+    const val NEW_QZ_2 = "new_qz_2" //新强智2
     const val SW = "sw" //树维
 
     const val PKU = "pku" //北京大学
@@ -30,7 +31,8 @@ object ParseData {
             NEW_QZ to NewQz(),
             PKU to Pku(),
             NCUT to Ncut(),
-            SWUST to Swust()
+            SWUST to Swust(),
+            NEW_QZ_2 to NewQz2()
     )
 
 }

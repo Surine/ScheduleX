@@ -22,11 +22,6 @@ object ParseDispatcher {
 
     //是否html解析
     const val IS_HTML = "IS_HTML"
-    const val OP_INFO = "OP_INFO"
-    const val JW_URL = "JW_URL"
-    const val JW_SYSTEM = "JW_SYSTEM"
-    const val UNIVERSITY_NAME = "UNIVERSITY_NAME"
-    const val UNIVERSITY_CODE = "UNIVERSITY_CODE"
     const val UNIVERSITY = "UNIVERSITY"
 
     fun dispatch(fragment: BaseFragment, mRemoteUniversity: RemoteUniversity) {
