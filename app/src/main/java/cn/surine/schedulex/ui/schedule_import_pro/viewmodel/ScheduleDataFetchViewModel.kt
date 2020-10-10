@@ -66,11 +66,13 @@ class ScheduleDataFetchViewModel(val repository: ScheduleDataFetchRepository) : 
                 }
                 //维护中
                 if(p0[0].status == -1){
+                    mUniversityInfo.value = p0[0]
                     loadUniversityStatus.value = LOAD_FAIL_MAINTENANCE
                     return
                 }
                 //版本太旧
                 if(p0[0].version > cn.surine.schedulex.BuildConfig.VERSION_CODE){
+                    mUniversityInfo.value = p0[0]
                     loadUniversityStatus.value = LOAD_FAIL_VERSION_OLD
                     return
                 }
