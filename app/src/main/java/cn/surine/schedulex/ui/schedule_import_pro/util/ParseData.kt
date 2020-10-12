@@ -22,6 +22,7 @@ object ParseData {
     const val PKU = "pku" //北京大学
     const val NCUT = "ncut" //北方工业大学
     const val SWUST = "swust" //西南科技大学
+    const val USTC = "ustc" //中国科学技术大学
 
     val jwMap = mapOf(
             ZF to Zf(),
@@ -32,7 +33,8 @@ object ParseData {
             PKU to Pku(),
             NCUT to Ncut(),
             SWUST to Swust(),
-            NEW_QZ_2 to NewQz2()
+            NEW_QZ_2 to NewQz2(),
+            USTC to Ustc()
     )
 
 }
