@@ -11,5 +11,7 @@ import cn.surine.schedulex.ui.schedule_import_pro.model.CourseWrapper
  * @date 9/21/20 17:11
  */
 class Normal : IJWParse {
-    override fun parse(html: String): List<CourseWrapper> = emptyList()
+    override fun parse(html: String): List<CourseWrapper>{
+        throw RuntimeException("normal parse exception")
+    }
 }
