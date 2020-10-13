@@ -60,7 +60,10 @@ object LocalUniversityManager {
             if (it.contains(keyword)) {
                 val data = localNameMap[it]
                 if (data?.code?.isNotEmpty() == true) {
+                    val graduates = data.copy()
+                    graduates.name = "${graduates.name}[研究生院]"
                     resultList.add(data)
+//                    resultList.add(graduates)
                 }
             }
         }

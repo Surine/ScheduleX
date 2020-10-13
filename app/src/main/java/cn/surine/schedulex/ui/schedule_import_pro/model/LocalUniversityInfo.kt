@@ -13,7 +13,7 @@ data class LocalUniversityInfo(
 )
 
 data class LocalUniversity(
-        val name: String,
+        var name: String,
         val code: String,
         val city: String
 )
