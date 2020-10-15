@@ -8,9 +8,11 @@ import cn.surine.schedulex.R
 import cn.surine.schedulex.base.controller.BaseFragment
 import cn.surine.schedulex.base.utils.Others
 import cn.surine.schedulex.base.utils.Toasts.toast
+import cn.surine.schedulex.base.utils.Toasts.toastLong
 import cn.surine.schedulex.base.utils.click
 import cn.surine.schedulex.base.utils.init
 import cn.surine.schedulex.base.utils.ui
+import com.peanut.sdk.miuidialog.MIUIDialog
 import com.tencent.bugly.beta.Beta
 import kotlinx.android.synthetic.main.fragment_about.*
 
@@ -46,15 +48,27 @@ class AboutFragment : BaseFragment() {
                 toast("开心到飞起~~~")
                 Others.donateAlipay(activity(), "fkx00798tue4qrncwkknh09")
             }
+            wechat.setOnClickListener {
+                toastLong("感谢捐赠，请在扫码界面，选择相册里的微信收款码（**伟）进行识别。")
+                Others.donateWeixin(activity)
+            }
+
             aboutItemCoolApk.setOnClickListener {
                 Others.startCoolApk("667393")
             }
-            jetpack.setOnClickListener {
+            settingUpdate.setOnClickListener {
                 Beta.checkUpgrade(true, false)
-                loadAnimation()
             }
             aboutItemFeedBack.setOnClickListener {
                 Others.openUrl("https://support.qq.com/product/282532?d-wx-push=1")
+            }
+            settingShare.setOnClickListener {
+                Others.share(activity, "嗨，这位小伙伴。欢迎使用Schedulex课程表，点击链接 https://www.coolapk.com/apk/cn.surine.schedulex 查看详细信息~")
+            }
+            opensourse.setOnClickListener {
+                MIUIDialog(activity()).show {
+                    message(res = R.string.open_source_license)
+                }
             }
         }
     }

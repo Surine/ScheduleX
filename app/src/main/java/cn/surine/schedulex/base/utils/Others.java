@@ -6,7 +6,13 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.didikee.donate.AlipayDonate;
+import android.didikee.donate.WeiXinDonate;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
+import android.os.Environment;
+
+import java.io.File;
+import java.io.InputStream;
 
 import cn.surine.schedulex.BuildConfig;
 import cn.surine.schedulex.R;
@@ -73,6 +79,18 @@ public class Others {
 
 
     /**
+     * 微信捐赠
+     */
+    public static void donateWeixin(Activity activity) {
+        InputStream weixinQrIs = activity.getResources().openRawResource(R.raw.schedulex_wechat);
+        String qrPath = Environment.getExternalStorageDirectory().getAbsolutePath() + File.separator + "AndroidDonateSample" + File.separator +
+                "schedulex_weixin.png";
+        WeiXinDonate.saveDonateQrImage2SDCard(qrPath, BitmapFactory.decodeStream(weixinQrIs));
+        WeiXinDonate.donateViaWeiXin(activity, qrPath);
+    }
+
+
+    /**
      * 打开coolapk个人主页
      *
      * @param str
@@ -101,15 +119,27 @@ public class Others {
 
 
     /**
+     * 分享
+     */
+    public static void share(Activity activity, String text) {
+        Intent intent = new Intent(Intent.ACTION_SEND);
+        intent.setType("text/plain");
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        intent.putExtra(Intent.EXTRA_TEXT, text);
+        activity.startActivity(Intent.createChooser(intent, "分享"));
+    }
+
+
+    /**
      * 发邮件
-     * */
+     */
     public static void sendEmail(String msg) {
         // 必须明确使用mailto前缀来修饰邮件地址
         Uri uri = Uri.parse("mailto:surinex@163.com");
         Intent intent = new Intent(Intent.ACTION_SENDTO, uri);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         intent.putExtra(Intent.EXTRA_CC, "2234503567@qq.com"); // 抄送人
-        intent.putExtra(Intent.EXTRA_SUBJECT,"解析错误，请输入您的学校"); // 主题
+        intent.putExtra(Intent.EXTRA_SUBJECT, "解析错误，请输入您的学校"); // 主题
         intent.putExtra(Intent.EXTRA_TEXT, msg);// 正文
 //        context.startActivity(Intent.createChooser(intent, "欢迎反馈~"));
         context.startActivity(intent);

@@ -19,14 +19,12 @@
             android:orientation="vertical"
             android:paddingStart="@dimen/dp20"
             android:paddingEnd="@dimen/dp20"
-            android:paddingBottom="@dimen/dp20"
-            >
+            android:paddingBottom="@dimen/dp20">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingBottom="@dimen/dp50"
-                >
+                android:paddingBottom="@dimen/dp50">
 
 
                 <TextView
@@ -34,13 +32,12 @@
                     style="@style/textview_title_style"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/dp12"
                     android:layout_marginTop="@dimen/dp100"
                     android:text="@string/app_name"
                     android:textStyle="bold"
-                    android:layout_marginStart="@dimen/dp12"
-                    app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintLeft_toLeftOf="parent"
-                    />
+                    app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
                     android:id="@+id/versionSlogan"
@@ -48,53 +45,100 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentStart="true"
                     android:layout_alignParentBottom="true"
+                    android:layout_marginStart="@dimen/dp12"
+                    android:layout_marginTop="@dimen/dp16"
                     android:lineSpacingExtra="@dimen/t2"
                     android:text="@string/version_slogan"
                     android:textAlignment="viewStart"
                     android:textSize="@dimen/t18"
-                    android:layout_marginStart="@dimen/dp12"
-                    android:layout_marginTop="@dimen/dp16"
-                    app:layout_constraintTop_toBottomOf="@id/textView17"
                     app:layout_constraintLeft_toLeftOf="parent"
-                    />
+                    app:layout_constraintTop_toBottomOf="@id/textView17" />
 
-                <androidx.appcompat.widget.AppCompatButton
-                    android:id="@+id/github"
-                    style="@style/button_style"
-                    android:layout_width="wrap_content"
-                    android:layout_height="@dimen/dp40"
-                    android:layout_marginTop="@dimen/dp50"
-                    android:layout_marginEnd="@dimen/dp12"
-                    app:layout_constraintTop_toBottomOf="@id/jetpack"
-                    android:paddingStart="@dimen/dp10"
-                    android:paddingEnd="@dimen/dp10"
-                    app:layout_constraintRight_toRightOf="parent"
-                    android:text="@string/star_on_github" />
 
-                <androidx.appcompat.widget.AppCompatButton
-                    android:id="@+id/alipay"
-                    style="@style/button_style"
-                    app:layout_constraintTop_toBottomOf="@id/github"
-                    android:layout_width="wrap_content"
-                    app:layout_constraintRight_toRightOf="parent"
-                    android:layout_height="@dimen/dp40"
-                    android:layout_marginTop="@dimen/dp20"
-                    android:layout_alignParentBottom="true"
-                    android:layout_marginEnd="@dimen/dp12"
-                    android:background="@drawable/button_background_2"
-                    android:paddingStart="@dimen/dp10"
-                    android:paddingEnd="@dimen/dp10"
-                    android:text="@string/donate_me_with_alipay" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp120"
+                    android:orientation="horizontal"
+                    app:layout_constraintTop_toBottomOf="@id/jetpack">
+
+                    <LinearLayout
+                        android:id="@+id/github"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                        <ImageView
+                            android:layout_width="@dimen/dp50"
+                            android:layout_height="@dimen/dp50"
+                            android:src="@mipmap/ic_github" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/dp12"
+                            android:text="Github Star"
+                            android:textColor="@android:color/black"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/alipay"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                        <ImageView
+                            android:layout_width="@dimen/dp50"
+                            android:layout_height="@dimen/dp50"
+                            android:src="@mipmap/ic_alipay" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/dp12"
+                            android:text="支付宝捐赠"
+                            android:textColor="@android:color/black"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/wechat"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                        <ImageView
+                            android:layout_width="@dimen/dp50"
+                            android:layout_height="@dimen/dp50"
+                            android:src="@mipmap/ic_wechat" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/dp12"
+                            android:text="微信捐赠"
+                            android:textColor="@android:color/black"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+                </LinearLayout>
 
                 <ImageView
                     android:id="@+id/jetpack"
                     android:layout_width="@dimen/dp90"
                     android:layout_height="@dimen/dp90"
                     android:padding="@dimen/dp10"
-                    app:layout_constraintRight_toRightOf="parent"
+                    android:src="@mipmap/jetpack_hero"
+                    android:visibility="gone"
                     app:layout_constraintBottom_toBottomOf="@id/versionSlogan"
-                    app:layout_constraintTop_toTopOf="@id/textView17"
-                    android:src="@mipmap/jetpack_hero" />
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/textView17" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -105,77 +149,91 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
                 android:background="@drawable/config_card_background"
+                android:orientation="vertical"
+                android:paddingTop="12dp"
+                android:paddingBottom="@dimen/dp12"
                 app:layout_constraintEnd_toStartOf="@+id/guideline22"
                 app:layout_constraintStart_toStartOf="@+id/guideline21"
                 app:layout_constraintTop_toTopOf="@+id/guideline29">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginTop="@dimen/dp25"
-                    android:layout_marginBottom="@dimen/dp25">
+                    android:id="@+id/settingUpdate"
+                    style="@style/setting_item_ui">
 
                     <TextView
-                        android:id="@+id/textView33"
+                        android:id="@+id/update_a1"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="16dp"
-                        android:text="@string/developers"
-                        android:textColor="@android:color/black"
-                        android:textSize="@dimen/t18"
-                        android:textStyle="bold"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                    <TextView
-                        android:id="@+id/courseNameSubTitle"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
-                        android:text="@string/developer_subtitle"
-                        app:layout_constraintStart_toStartOf="@+id/textView33"
-                        app:layout_constraintTop_toBottomOf="@+id/textView33" />
-
-                    <TextView
-                        android:id="@+id/textView35"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="44dp"
-                        android:text="@string/materials"
+                        android:layout_marginStart="@dimen/dp8"
+                        android:layout_marginTop="@dimen/dp8"
+                        android:text="检查更新"
                         android:textColor="@android:color/black"
                         android:textSize="18sp"
                         android:textStyle="bold"
-                        app:layout_constraintStart_toStartOf="@+id/courseNameSubTitle"
-                        app:layout_constraintTop_toBottomOf="@+id/courseNameSubTitle" />
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
 
                     <TextView
-                        android:id="@+id/coursePositionSubtitle"
+                        android:id="@+id/update_b1"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
-                        android:text="@string/material_subtitle"
-                        app:layout_constraintStart_toStartOf="@+id/textView35"
-                        app:layout_constraintTop_toBottomOf="@+id/textView35" />
+                        android:layout_marginTop="@dimen/dp8"
+                        android:layout_marginBottom="@dimen/dp16"
+                        android:text="今天的新版本是不是又鸽了呢？"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="@+id/update_a1"
+                        app:layout_constraintTop_toBottomOf="@+id/update_a1" />
 
                     <ImageView
-                        android:id="@+id/short_btn_edit"
                         android:layout_width="20dp"
                         android:layout_height="20dp"
-                        android:layout_marginEnd="16dp"
-                        app:layout_constraintBottom_toBottomOf="@+id/courseNameSubTitle"
+                        android:layout_marginEnd="8dp"
+                        android:src="@drawable/ic_action_refresh_black"
+                        app:layout_constraintBottom_toBottomOf="@+id/update_b1"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="@+id/textView33"
-                        app:srcCompat="@drawable/ic_person_black_24dp" />
+                        app:layout_constraintTop_toTopOf="@id/update_a1" />
 
-                    <ImageView
-                        android:id="@+id/imageView10"
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/settingShare"
+                    style="@style/setting_item_ui">
+
+                    <TextView
+                        android:id="@+id/share_a1"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginEnd="16dp"
-                        app:layout_constraintBottom_toBottomOf="@+id/coursePositionSubtitle"
+                        android:layout_marginStart="@dimen/dp8"
+                        android:layout_marginTop="@dimen/dp8"
+                        android:text="分享给朋友"
+                        android:textColor="@android:color/black"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+
+                    <TextView
+                        android:id="@+id/share_b1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dp8"
+                        android:layout_marginBottom="@dimen/dp16"
+                        android:text="好东西就要分享的对吧~"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="@+id/share_a1"
+                        app:layout_constraintTop_toBottomOf="@+id/share_a1" />
+
+                    <ImageView
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:layout_marginEnd="8dp"
+                        android:src="@drawable/ic_share_black_24dp"
+                        app:layout_constraintBottom_toBottomOf="@+id/share_b1"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="@+id/textView35"
-                        app:srcCompat="@drawable/about_material_24dp" />
+                        app:layout_constraintTop_toTopOf="@id/share_a1" />
+
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </LinearLayout>
 
@@ -325,15 +383,18 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="40dp"
                 android:background="@drawable/config_card_background"
+                android:paddingTop="12dp"
+                android:paddingBottom="12dp"
                 app:layout_constraintEnd_toStartOf="@+id/guideline22"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="@+id/guideline21"
                 app:layout_constraintTop_toBottomOf="@+id/linearLayout5">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/opensourse"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_marginTop="@dimen/dp25">
+                    android:layout_marginTop="@dimen/dp20">
 
                     <TextView
                         android:id="@+id/textView33_3"
@@ -353,7 +414,8 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
                         android:layout_marginEnd="@dimen/dp16"
-                        android:text="@string/open_source_license"
+                        android:layout_marginBottom="@dimen/dp16"
+                        android:text="点击查看开源库"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="@+id/textView33_3"

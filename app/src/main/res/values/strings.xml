@@ -1,6 +1,5 @@
 <resources>
     <string name="open_source_license" translatable="false">
-        本应用的诞生离不开下面的开源库的支持，感谢！\n\n
         架构：Jetpack framework\n
         https://developer.android.google.cn/jetpack/\n\n
         网络：Retrofit\n
@@ -21,6 +20,12 @@
         https://github.com/xiangzhihong/MaterialIntroView-master\n\n
         课程解析：CourseAdapter\n
         https://github.com/YZune/CourseAdapter\n\n
+        弹窗：miui-dialogs\n
+        https://github.com/PPeanutButter/miui-dialogs\n\n
+        通用设置UI(欢迎Star)：CommonUi\n
+        https://github.com/Surine/CommonUi\n\n
+        课表(欢迎Star)：CourseTableView_Kt\n
+        https://github.com/Surine/CourseTableView_Kt\n\n
     </string>
     <string name="version_slogan" translatable="false">v%s Build On JetPack</string>
     <string name="please_select_term">请选择学期</string>
