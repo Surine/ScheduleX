@@ -1,8 +1,5 @@
 package cn.surine.schedulex.ui.schedule_import_pro.core.jw_core
 
-import android.util.Log
-import cn.surine.schedulex.base.utils.Files
-import cn.surine.schedulex.base.utils.Jsons
 import cn.surine.schedulex.ui.schedule_import_pro.core.IJWParse
 import cn.surine.schedulex.ui.schedule_import_pro.model.CourseWrapper
 import cn.surine.schedulex.ui.schedule_import_pro.util.ParseUtil
@@ -14,7 +11,7 @@ import org.jsoup.Jsoup
  * @author sunliwei
  * @date 10/10/20 20:24
  */
-class NewQz2 : IJWParse {
+open class NewQz2 : IJWParse {
 
     override fun parse(html: String): List<CourseWrapper> {
         val courseList = mutableListOf<CourseWrapper>()
@@ -35,18 +32,22 @@ class NewQz2 : IJWParse {
                     sectionContinue = 2
                     day = tdIndex + 1
                     val weekInfo = infos[1].text()
-                    week = if (weekInfo.contains("-")) {
-                        //常规解析
-                        ParseUtil.getWeekInfoByStr(weekInfo, commonRules = "%d-%d(周)")
-                    } else {
-                        //非常规解析
-                        weekInfo.substringBefore("(").split(",").map {
-                            it.toInt()
-                        }
-                    }
+                    week = getWeekList(weekInfo)
                 })
             }
         }
         return courseList
+    }
+
+    open fun getWeekList(weekInfo: String): List<Int> {
+        return if (weekInfo.contains("-")) {
+            //常规解析
+            ParseUtil.getWeekInfoByStr(weekInfo, commonRules = "%d-%d(周)")
+        } else {
+            //非常规解析
+            weekInfo.substringBefore("(").split(",").map {
+                it.toInt()
+            }
+        }
     }
 }
