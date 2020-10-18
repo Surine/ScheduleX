@@ -31,7 +31,7 @@ object ParserManager {
                     teachingBuildingName = info.position
                     classDay = info.day.toString()
                     color = generateColor()
-                    classWeek = generateBitWeek(info.weeks, miAiCourseInfo.totalWeek)
+                    classWeek = generateBitWeek(info.weeks, Constants.MAX_WEEK)
                     //区间合并
                     val start = info.sections[0]
                     var end = start
