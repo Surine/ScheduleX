@@ -14,7 +14,6 @@ import java.nio.charset.StandardCharsets
  * @date 10/7/20 17:21
  */
 object LocalUniversityManager {
-    private val localCodeMap = HashMap<String, LocalUniversity>()
     private val localList = mutableListOf<LocalUniversity>()
     private val localNameMap = HashMap<String, LocalUniversity>()
 
@@ -28,24 +27,9 @@ object LocalUniversityManager {
         for (i in data) {
             localList.addAll(i.schools)
             for (j in i.schools) {
-                localCodeMap[j.code] = j
                 localNameMap[j.name] = j
             }
         }
-    }
-
-    /**
-     * 获取某学校 根据code
-     * */
-    fun getSchoolByCode(code: String): LocalUniversity? {
-        return localCodeMap[code]
-    }
-
-    /**
-     * 获取某学校 根据code
-     * */
-    fun getSchoolByName(name: String): LocalUniversity? {
-        return localNameMap[name]
     }
 
 
@@ -60,10 +44,7 @@ object LocalUniversityManager {
             if (it.contains(keyword)) {
                 val data = localNameMap[it]
                 if (data?.code?.isNotEmpty() == true) {
-                    val graduates = data.copy()
-                    graduates.name = "${graduates.name}[研究生院]"
                     resultList.add(data)
-//                    resultList.add(graduates)
                 }
             }
         }
