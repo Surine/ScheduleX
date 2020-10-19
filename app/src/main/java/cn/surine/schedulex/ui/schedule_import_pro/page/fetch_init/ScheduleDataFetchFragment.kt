@@ -25,7 +25,6 @@ import cn.surine.schedulex.ui.schedule.ScheduleViewModel
 import cn.surine.schedulex.ui.schedule_import_pro.core.FileParserDispatcher
 import cn.surine.schedulex.ui.schedule_import_pro.core.ParseDispatcher
 import cn.surine.schedulex.ui.schedule_import_pro.core.file_core.CsvParser
-import cn.surine.schedulex.ui.schedule_import_pro.core.jw_core.NewQz2
 import cn.surine.schedulex.ui.schedule_import_pro.model.CourseWrapper
 import cn.surine.schedulex.ui.schedule_import_pro.model.RemoteUniversity
 import cn.surine.schedulex.ui.schedule_import_pro.page.change_school.SelectSchoolFragment
@@ -39,6 +38,7 @@ import kotlinx.android.synthetic.main.view_file_import.*
 import kotlinx.android.synthetic.main.view_jw_import.*
 import kotlinx.android.synthetic.main.view_miai_import.*
 import kotlinx.android.synthetic.main.view_super_import.*
+import java.io.IOException
 
 
 /**
@@ -257,10 +257,14 @@ class ScheduleDataFetchFragment : BaseFragment() {
             }
 
             tCsv.setOnClickListener {
-                CsvParser.writeCsv(listOf(
-                        arrayOf("课程名", "教师", "位置", "1", "2", "1", "1 2 3 4 5")
-                ), "${Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS).absolutePath}/Csv模板.csv")
-                Snackbar.make(it, "保存成功,路径 /Download/Csv模板.csv", Snackbar.LENGTH_SHORT).show();
+                try {
+                    CsvParser.writeCsv(listOf(
+                            arrayOf("课程名", "教师", "位置", "1", "2", "1", "1 2 3 4 5")
+                    ), "${Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS).absolutePath}/Csv模板.csv")
+                    Snackbar.make(it, "保存成功,路径 /Download/Csv模板.csv", Snackbar.LENGTH_SHORT).show()
+                } catch (e: IOException) {
+                    Toasts.toast("保存失败：" + e.message)
+                }
             }
 
             tExcel.setOnClickListener {

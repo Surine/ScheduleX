@@ -73,7 +73,7 @@ public class CsvParser implements IFileParser {
      * @param filePath 创建的csv文件路径
      * @throws IOException
      **/
-    public static void writeCsv(List<String[]> data, String filePath) {
+    public static void writeCsv(List<String[]> data, String filePath) throws IOException {
         FileWriter fileWriter = null;
         CSVPrinter printer = null;
         try {
@@ -89,11 +89,10 @@ public class CsvParser implements IFileParser {
             if (null != data) {
                 //循环写入数据
                 for (String[] lineData : data) {
-                    printer.printRecord(lineData);
+                    //Bugfix：如果直接传lineData，会报警告
+                    printer.printRecord(lineData[0], lineData[1], lineData[2], lineData[3], lineData[4], lineData[5], lineData[6]);
                 }
             }
-        } catch (Exception e) {
-            e.printStackTrace();
         } finally {
             try {
                 if (fileWriter != null) {
