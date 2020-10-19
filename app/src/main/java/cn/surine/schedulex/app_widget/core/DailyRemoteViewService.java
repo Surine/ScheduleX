@@ -48,7 +48,14 @@ public abstract class DailyRemoteViewService extends RemoteViewsService {
 
         @Override
         public void onDestroy() {
-            courseList.clear();
+            try {
+                courseList.clear();
+            } catch (Exception ignored) {
+                courseList = null;
+                if (courseList == null) {
+                    courseList = new ArrayList<>();
+                }
+            }
         }
 
         @Override
