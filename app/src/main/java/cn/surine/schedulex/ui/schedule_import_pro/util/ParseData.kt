@@ -1,6 +1,7 @@
 package cn.surine.schedulex.ui.schedule_import_pro.util
 
 import cn.surine.schedulex.ui.schedule_import_pro.core.jw_core.*
+import cn.surine.schedulex.ui.schedule_import_pro.model.LocalUniversity
 
 /**
  * Intro：
@@ -43,4 +44,16 @@ object ParseData {
             WHUT_GRA to WhutGraduates()
     )
 
+    val commonHtmlSystem = listOf(QZ, NEW_QZ_2_1,SW)
+
+    val commonJwData = listOf(
+            LocalUniversity("正方教务", "-1001", jwSystem = ZF),
+            LocalUniversity("新正方教务", "-1002", jwSystem = NEW_ZF),
+            LocalUniversity("强智教务", "-1003", jwSystem = QZ),
+            LocalUniversity("新强智教务", "-1004", jwSystem = NEW_QZ),
+            LocalUniversity("新强智教务-2", "-10041", jwSystem = NEW_QZ_2),
+            LocalUniversity("新强智教务-2_1", "-10042", jwSystem = NEW_QZ_2_1),
+            LocalUniversity("新强智教务-3", "-10043", jwSystem = NEW_QZ_3),
+            LocalUniversity("树维教务", "-1005", jwSystem = SW)
+    )
 }

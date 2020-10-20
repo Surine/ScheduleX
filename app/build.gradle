@@ -119,7 +119,7 @@ dependencies {
 
 
     //miui-dialog
-    implementation 'com.peanut.sdk:miui-dialogs:0.2.3'
+    implementation 'com.peanut.sdk:miui-dialogs:0.3.1'
     implementation 'com.afollestad.material-dialogs:core:3.3.0'
     implementation 'com.afollestad.material-dialogs:bottomsheets:3.3.0'
 

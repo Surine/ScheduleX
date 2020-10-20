@@ -11,10 +11,13 @@ import android.widget.TextView
 import androidx.lifecycle.Observer
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.FragmentNavigator
+import androidx.recyclerview.widget.LinearLayoutManager
+import cn.surine.schedulex.BR
 import cn.surine.schedulex.R
 import cn.surine.schedulex.app_base.VmManager
 import cn.surine.schedulex.base.Constants
 import cn.surine.schedulex.base.controller.App
+import cn.surine.schedulex.base.controller.BaseAdapter
 import cn.surine.schedulex.base.controller.BaseFragment
 import cn.surine.schedulex.base.controller.BaseViewModel
 import cn.surine.schedulex.base.utils.*
@@ -28,12 +31,15 @@ import cn.surine.schedulex.ui.schedule_import_pro.core.file_core.CsvParser
 import cn.surine.schedulex.ui.schedule_import_pro.model.CourseWrapper
 import cn.surine.schedulex.ui.schedule_import_pro.model.RemoteUniversity
 import cn.surine.schedulex.ui.schedule_import_pro.page.change_school.SelectSchoolFragment
+import cn.surine.schedulex.ui.schedule_import_pro.util.ParseData
 import cn.surine.schedulex.ui.schedule_import_pro.viewmodel.ScheduleDataFetchViewModel
 import cn.surine.schedulex.ui.view.custom.helper.CommonDialogs
 import com.google.android.material.snackbar.Snackbar
+import com.peanut.sdk.miuidialog.MIUIDialog
 import com.tbruyelle.rxpermissions2.RxPermissions
 import com.tencent.bugly.crashreport.CrashReport
 import kotlinx.android.synthetic.main.fragment_data_fetch_v3.*
+import kotlinx.android.synthetic.main.view_common_jw_system.view.*
 import kotlinx.android.synthetic.main.view_file_import.*
 import kotlinx.android.synthetic.main.view_jw_import.*
 import kotlinx.android.synthetic.main.view_miai_import.*
@@ -84,11 +90,11 @@ class ScheduleDataFetchFragment : BaseFragment() {
         if (curSchoolNameStr.isNotEmpty()) {
             curSchoolName.text = curSchoolNameStr
             curSchoolNameStr.let {
-                scheduleDataFetchViewModel.getUniversityInfo(curSchoolNameStr, curSchoolCode ?: "")
+                scheduleDataFetchViewModel.getUniversityInfo(curSchoolNameStr, curSchoolCode)
                 scheduleDataFetchViewModel.mUniversityInfo.observe(this, Observer {
                     mRemoteUniversity = it
                     curSchoolInfo.text = "${it.jwSystemName}教务/${it.author}\n已成功导入${it.useTimes}次"
-                    reqeustAdapter.hide()
+                    tryCommonJw.hide()
                 })
             }
             //元素的控制
@@ -100,17 +106,20 @@ class ScheduleDataFetchFragment : BaseFragment() {
                         }
                     }
                     ScheduleDataFetchViewModel.LOAD_FAIL_NULL -> {
-                        val str = "咱还没适配您学校哦~ 如果您愿意帮助适配，麻烦申请下吧~ (暂时只支持联系开发者申请)"
+                        val str = "咱还没适配您学校哦！ 如果您愿意帮助适配，点击此卡片查看教程~"
                         curSchoolInfo.text = str
-                        reqeustAdapter.show()
-                        reqeustAdapter.setOnClickListener {
+                        tryCommonJw.show()
+                        tryCommonJw.setOnClickListener {
+                            showCommonJwDialog()
+                        }
+                        loginJw.setOnClickListener {
                             Others.openUrl("https://support.qq.com/products/282532/faqs/79948")
                         }
                     }
                     ScheduleDataFetchViewModel.LOAD_FAIL_MAINTENANCE -> {
                         val str = "您的学校解析器正在维护中哦，请过一段时间再试~"
                         curSchoolInfo.text = str
-                        reqeustAdapter.hide()
+                        tryCommonJw.hide()
                         loginJw.setOnLongClickListener {
                             ParseDispatcher.dispatch(this, mRemoteUniversity!!)
                             true
@@ -119,7 +128,7 @@ class ScheduleDataFetchFragment : BaseFragment() {
                     ScheduleDataFetchViewModel.LOAD_FAIL_VERSION_OLD -> {
                         val str = "您的app版本太旧啦，新版本已经适配了您的学校~ 请升级看看"
                         curSchoolInfo.text = str
-                        reqeustAdapter.hide()
+                        tryCommonJw.hide()
                     }
                     BaseViewModel.LOAD_SUCCESS -> {
                         loginJw.setOnClickListener {
@@ -178,6 +187,29 @@ class ScheduleDataFetchFragment : BaseFragment() {
             }
         })
 
+    }
+
+    private fun showCommonJwDialog() {
+        val data = ParseData.commonJwData
+        MIUIDialog(activity()).show {
+            title(text = "通用系统")
+            customView(R.layout.view_common_jw_system) { view ->
+                view.commonJwList.load(LinearLayoutManager(activity), BaseAdapter(data, R.layout.item_common_jw, BR.university)) {
+                    it.setOnItemClickListener { position ->
+                        val curSelectSystem = data[position]
+                        val mRemoteUniversity = RemoteUniversity(
+                                code = curSelectSystem.code,
+                                name = curSelectSystem.name,
+                                importType = curSelectSystem.isHtmlSystem(),
+                                jwSystemName = curSelectSystem.name,
+                                jwSystem = curSelectSystem.jwSystem
+                        )
+                        ParseDispatcher.dispatch(fragment(), mRemoteUniversity)
+                        cancel()
+                    }
+                }
+            }
+        }
     }
 
     /**

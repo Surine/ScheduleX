@@ -11,7 +11,10 @@ import cn.surine.schedulex.R
 import cn.surine.schedulex.app_base.VmManager
 import cn.surine.schedulex.base.Constants
 import cn.surine.schedulex.base.controller.BaseFragment
-import cn.surine.schedulex.base.utils.*
+import cn.surine.schedulex.base.utils.Files
+import cn.surine.schedulex.base.utils.Navigations
+import cn.surine.schedulex.base.utils.Others
+import cn.surine.schedulex.base.utils.Prefs
 import cn.surine.schedulex.base.utils.Toasts.toast
 import cn.surine.schedulex.base.utils.Toasts.toastLong
 import cn.surine.schedulex.data.entity.Schedule
@@ -56,7 +59,7 @@ class ScheduleThirdFetchFragment : BaseFragment() {
     lateinit var dataFetchViewModel: ScheduleDataFetchViewModel
     var helperUrl = ""
     var helperType = ""
-    lateinit var webviewBackup:WebView
+    lateinit var webviewBackup: WebView
     override fun layoutId(): Int = R.layout.fragment_third_fetch
     override fun onInit(parent: View?) {
         VmManager(this).apply {
@@ -74,7 +77,7 @@ class ScheduleThirdFetchFragment : BaseFragment() {
         helperType = type
         webviewBackup = thirdPageWebView
         loadWebViewConfig()
-        loadTip()
+        thirdPageWebView.postDelayed({ loadTip() }, 500)
         thirdPageWebView.loadUrl(URLDecoder.decode(url))
         addressBox.setText(URLDecoder.decode(url))
         imgGo.setOnClickListener {

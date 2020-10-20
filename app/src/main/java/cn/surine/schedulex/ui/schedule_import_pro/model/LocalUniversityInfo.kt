@@ -1,5 +1,7 @@
 package cn.surine.schedulex.ui.schedule_import_pro.model
 
+import cn.surine.schedulex.ui.schedule_import_pro.util.ParseData
+
 /**
  * Intro：
  *  本地列表实体类
@@ -15,5 +17,8 @@ data class LocalUniversityInfo(
 data class LocalUniversity(
         var name: String,
         val code: String,
-        val city: String
-)
+        val city: String = "",
+        val jwSystem: String = ""
+) {
+    fun isHtmlSystem() = if (ParseData.commonHtmlSystem.contains(jwSystem)) 3 else 1
+}

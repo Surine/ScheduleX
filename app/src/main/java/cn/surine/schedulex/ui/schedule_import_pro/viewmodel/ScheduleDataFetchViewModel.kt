@@ -1,6 +1,5 @@
 package cn.surine.schedulex.ui.schedule_import_pro.viewmodel
 
-import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import cn.bmob.v3.BmobQuery
 import cn.bmob.v3.exception.BmobException
@@ -19,7 +18,7 @@ import cn.surine.schedulex.ui.schedule_import_pro.repository.ScheduleDataFetchRe
  */
 class ScheduleDataFetchViewModel(val repository: ScheduleDataFetchRepository) : BaseViewModel() {
 
-    companion object{
+    companion object {
         const val LOAD_FAIL_VERSION_OLD = -1 //版本太旧
         const val LOAD_FAIL_MAINTENANCE = -2 //维护
         const val LOAD_FAIL_NULL = -3  //未适配
@@ -60,18 +59,18 @@ class ScheduleDataFetchViewModel(val repository: ScheduleDataFetchRepository) : 
         query.findObjects(object : FindListener<RemoteUniversity>() {
             override fun done(p0: MutableList<RemoteUniversity>?, p1: BmobException?) {
                 //未适配
-                if(p1!=null || p0 == null){
+                if (p1 != null || p0 == null) {
                     loadUniversityStatus.value = LOAD_FAIL_NULL
                     return
                 }
                 //维护中
-                if(p0[0].status == -1){
+                if (p0[0].status == -1) {
                     mUniversityInfo.value = p0[0]
                     loadUniversityStatus.value = LOAD_FAIL_MAINTENANCE
                     return
                 }
                 //版本太旧
-                if(p0[0].version > cn.surine.schedulex.BuildConfig.VERSION_CODE){
+                if (p0[0].version > cn.surine.schedulex.BuildConfig.VERSION_CODE) {
                     mUniversityInfo.value = p0[0]
                     loadUniversityStatus.value = LOAD_FAIL_VERSION_OLD
                     return
@@ -84,6 +83,8 @@ class ScheduleDataFetchViewModel(val repository: ScheduleDataFetchRepository) : 
 
 
     fun uploadFetchSuccess(mUniversity: RemoteUniversity) {
+        //通用教务不上报
+        if (mUniversity.code.toInt() < 0) return
         val remoteUniversity = mUniversity.copy()
         remoteUniversity.useTimes++
         remoteUniversity.update(mUniversity.objectId, object : UpdateListener() {
