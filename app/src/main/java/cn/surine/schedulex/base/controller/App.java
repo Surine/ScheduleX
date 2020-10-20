@@ -7,6 +7,8 @@ import android.graphics.Color;
 
 import com.tencent.bugly.Bugly;
 import com.tencent.bugly.beta.Beta;
+import com.umeng.analytics.MobclickAgent;
+import com.umeng.commonsdk.UMConfigure;
 
 import cn.bmob.v3.Bmob;
 import cn.surine.schedulex.BuildConfig;
@@ -34,6 +36,11 @@ public class App extends Application {
         Bugly.init(getApplicationContext(), PrivateInformation.BUGLY_KEY, BuildConfig.DEBUG);
         Bmob.initialize(this, PrivateInformation.BMOB_KEY);
         SettingItemConfig.INSTANCE.setPrimaryColor(getResources().getColor(R.color.colorPrimary));
+
+        //友盟初始化
+        UMConfigure.init(this, PrivateInformation.UMENG_KEY, "Umeng", UMConfigure.DEVICE_TYPE_PHONE, "");
+        //初始化组件化基础库, 所有友盟业务SDK都必须调用此初始化接口。
+        MobclickAgent.setPageCollectionMode(MobclickAgent.PageMode.AUTO);
     }
 
 

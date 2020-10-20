@@ -184,4 +184,7 @@
     <string name="transition_super3">transition_super3</string>
     <string name="transition_mi">transition_mi</string>
     <string name="transition_mi3">transition_mi3</string>
+    <string name="privacy_info">
+        在用户使用本产品及服务过程中，将合法、正当的收集一些列信息来支撑更好的优化和发展。主要包含Bugly和友盟+SDK两部分，其中友盟声明如下：\n我们的产品集成友盟+SDK，友盟+SDK需要收集您的设备Mac地址、唯一设备识别码（IMEI/android ID/IDFA/OPENUDID/GUID、SIM 卡 IMSI 信息）以提供统计分析服务，并通过地理位置校准报表数据准确性，提供基础反作弊能力。
+    </string>
 </resources>

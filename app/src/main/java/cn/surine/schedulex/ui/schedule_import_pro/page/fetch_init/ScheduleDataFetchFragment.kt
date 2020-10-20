@@ -38,6 +38,7 @@ import com.google.android.material.snackbar.Snackbar
 import com.peanut.sdk.miuidialog.MIUIDialog
 import com.tbruyelle.rxpermissions2.RxPermissions
 import com.tencent.bugly.crashreport.CrashReport
+import com.umeng.analytics.MobclickAgent
 import kotlinx.android.synthetic.main.fragment_data_fetch_v3.*
 import kotlinx.android.synthetic.main.view_common_jw_system.view.*
 import kotlinx.android.synthetic.main.view_file_import.*

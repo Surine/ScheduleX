@@ -127,6 +127,11 @@ dependencies {
     implementation 'cn.bmob.android:bmob-sdk:3.7.8'
     //common ui
     implementation 'com.github.Surine:CommonUi:1.0.1'
+
+    //Umeng
+    implementation "com.umeng.umsdk:common:9.1.0"
+    implementation "com.umeng.umsdk:asms:1.1.3"
+    implementation "com.umeng.umsdk:crash:0.0.4"
 }
 repositories {
     mavenCentral()
