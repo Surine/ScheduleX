@@ -1,4 +1,4 @@
-package cn.surine.schedulex.ui.add_timetable
+package cn.surine.schedulex.ui.timetable_list
 
 import android.annotation.SuppressLint
 import android.graphics.Color
@@ -16,8 +16,6 @@ import cn.surine.schedulex.base.controller.BaseFragment
 import cn.surine.schedulex.base.utils.*
 import cn.surine.schedulex.data.entity.TimeTable
 import cn.surine.schedulex.data.entity.TimeTableDisplayEntity
-import cn.surine.schedulex.ui.timetable_list.TimeTableListFragment
-import cn.surine.schedulex.ui.timetable_list.TimeTableViewModel
 import cn.surine.schedulex.ui.view.custom.helper.CommonDialogs
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.snackbar.Snackbar

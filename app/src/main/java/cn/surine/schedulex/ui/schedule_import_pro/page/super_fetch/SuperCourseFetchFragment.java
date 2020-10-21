@@ -6,12 +6,14 @@ import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Random;
 import java.util.UUID;
 
 import cn.surine.schedulex.BR;
 import cn.surine.schedulex.R;
+import cn.surine.schedulex.app_base.UmengHitKt;
 import cn.surine.schedulex.base.Constants;
 import cn.surine.schedulex.base.controller.BaseAdapter;
 import cn.surine.schedulex.base.controller.BaseBindingFragment;
@@ -146,6 +148,7 @@ public class SuperCourseFetchFragment extends BaseBindingFragment<FragmentSuperC
         }
         courseViewModel.saveCourseByDb(courseList, scheduleId);
         Toasts.toast("导入成功");
+        UmengHitKt.hit(fragment(), "super_success", UmengHitKt.DATA, new HashMap());
         Navigations.open(SuperCourseFetchFragment.this, R.id.action_superCourseFetchFragment_to_scheduleFragment);
     }
 }

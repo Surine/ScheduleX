@@ -8,7 +8,9 @@ import android.view.View
 import android.view.inputmethod.EditorInfo
 import android.webkit.*
 import cn.surine.schedulex.R
+import cn.surine.schedulex.app_base.DATA
 import cn.surine.schedulex.app_base.VmManager
+import cn.surine.schedulex.app_base.hit
 import cn.surine.schedulex.base.Constants
 import cn.surine.schedulex.base.controller.BaseFragment
 import cn.surine.schedulex.base.utils.Files
@@ -35,7 +37,6 @@ import com.afollestad.materialdialogs.customview.customView
 import com.peanut.sdk.miuidialog.MIUIDialog
 import com.tbruyelle.rxpermissions2.RxPermissions
 import com.tencent.bugly.crashreport.CrashReport
-import com.umeng.analytics.MobclickAgent
 import kotlinx.android.synthetic.main.fragment_third_fetch.*
 import kotlinx.android.synthetic.main.view_ua_config.*
 import java.net.URLDecoder
@@ -136,6 +137,7 @@ class ScheduleThirdFetchFragment : BaseFragment() {
                 positiveButton(text = "选择文件") {
                     RxPermissions(activity()).request(Manifest.permission.READ_EXTERNAL_STORAGE).subscribe {
                         if (it) {
+                            hit("html_jw_import")
                             importFile()
                         } else {
                             toast("请授予读写文件权限")
@@ -240,7 +242,7 @@ class ScheduleThirdFetchFragment : BaseFragment() {
                         parseData(list)
                     }
                     if (e != null) {
-                        MobclickAgent.onEventObject(activity(), "import_fail", mapOf("jwSystemName" to mUniversity.jwSystemName, "jwSystem" to mUniversity.jwSystem, "inputUrl" to mUniversity.jwUrl))
+                        hit("jw_import_fail", DATA, hashMapOf("name" to mUniversity.name, "jwSystemName" to mUniversity.jwSystemName, "jwSystem" to mUniversity.jwSystem, "inputUrl" to mUniversity.jwUrl))
                         MIUIDialog(activity()).show {
                             title(text = "解析失败")
                             message(text = "<html>请尝试定位到课表页面再进行解析，如果还是无法导入，请您加QQ群<a href='https://www.baidu.com'>686976115</a>进行反馈；同时，如果您有适配您的学校的想法也可以直接在群里联系开发者。<br><b>如果学校已经适配，但依然解析失败，可能是源码获取异常，请尝试反馈</b></html>") {
@@ -285,7 +287,9 @@ class ScheduleThirdFetchFragment : BaseFragment() {
             toast("导入成功")
             Prefs.save(Constants.CUR_SCHEDULE, scheduleId)
             if (helperUrl.isEmpty()) {
-                MobclickAgent.onEventObject(activity(), "common_import", mapOf("jwSystemName" to mUniversity.jwSystemName, "jwSystem" to mUniversity.jwSystem, "inputUrl" to addressBox.text.toString()))
+                hit("common_import_success", DATA, hashMapOf("jwSystemName" to mUniversity.jwSystemName, "jwSystem" to mUniversity.jwSystem, "inputUrl" to addressBox.text.toString()))
+            } else {
+                hit("university_import_success", DATA, hashMapOf("name" to mUniversity.name, "jwSystemName" to mUniversity.jwSystemName, " jwSystem " to mUniversity.jwSystem, " inputUrl " to addressBox.text.toString()))
             }
             Navigations.open(this, R.id.action_scheduleThirdFetchFragment_to_scheduleFragment)
         }

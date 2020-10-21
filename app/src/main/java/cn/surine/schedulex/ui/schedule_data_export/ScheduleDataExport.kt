@@ -5,6 +5,7 @@ import android.app.ProgressDialog
 import android.view.View
 import cn.surine.schedulex.R
 import cn.surine.schedulex.app_base.VmManager
+import cn.surine.schedulex.app_base.hit
 import cn.surine.schedulex.base.controller.BaseFragment
 import cn.surine.schedulex.base.utils.*
 import cn.surine.schedulex.data.entity.Course
@@ -54,6 +55,7 @@ class ScheduleDataExport : BaseFragment() {
             RxPermissions(activity()).apply {
                 request(Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE).subscribe {
                     if (it) {
+                        hit("save_json")
                         saveToJson(scheduleId);
                     } else {
                         Toasts.toast(getString(R.string.permission_is_denied))
@@ -66,6 +68,7 @@ class ScheduleDataExport : BaseFragment() {
             RxPermissions(activity()).apply {
                 request(Manifest.permission.READ_CALENDAR, Manifest.permission.WRITE_CALENDAR).subscribe {
                     if (it) {
+                        hit("delete_calendar")
                         CoroutineScope(Dispatchers.IO).launch {
                             deleteCourseTask()
                         }
@@ -80,6 +83,7 @@ class ScheduleDataExport : BaseFragment() {
             RxPermissions(activity()).apply {
                 request(Manifest.permission.READ_CALENDAR, Manifest.permission.WRITE_CALENDAR).subscribe {
                     if (it) {
+                        hit("add_calendar")
                         val dialog = ProgressDialog(activity()).apply {
                             setMessage("正在导出至日历，请勿退出~ (如需删除，请长按导出按钮)")
                             setTitle("提醒")

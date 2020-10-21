@@ -4,7 +4,9 @@ import android.annotation.SuppressLint
 import android.view.View
 import android.webkit.*
 import cn.surine.schedulex.R
+import cn.surine.schedulex.app_base.DATA
 import cn.surine.schedulex.app_base.VmManager
+import cn.surine.schedulex.app_base.hit
 import cn.surine.schedulex.base.Constants
 import cn.surine.schedulex.base.controller.BaseFragment
 import cn.surine.schedulex.base.utils.Jsons
@@ -130,6 +132,7 @@ class MiAiFetchFragment : BaseFragment() {
         ParserManager.aiParser(scheduleId, miAiCourseInfo) {
             courseViewModel.saveCourseByDb(it, scheduleId)
             activity().runOnUiThread {
+                hit("mi_success", func = DATA)
                 toast("导入成功")
                 open(this, R.id.action_miAiFetchFragment_to_scheduleFragment)
             }

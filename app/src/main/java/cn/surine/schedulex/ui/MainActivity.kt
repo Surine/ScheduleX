@@ -6,6 +6,7 @@ import cn.surine.schedulex.R
 import cn.surine.schedulex.base.controller.BaseFragment
 import cn.surine.schedulex.base.interfaces.IBack
 import cn.surine.schedulex.base.utils.StatusBars
+import com.umeng.analytics.MobclickAgent
 
 /**
  * Intro：
@@ -13,7 +14,7 @@ import cn.surine.schedulex.base.utils.StatusBars
  * @author sunliwei
  * @date 2020/6/24 14:36
  */
-class MainActivity:AppCompatActivity(),IBack {
+class MainActivity : AppCompatActivity(), IBack {
     private var curFragment: BaseFragment? = null
 
     override fun onBackKeyClick(baseFragment: BaseFragment?) {

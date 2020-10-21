@@ -113,7 +113,7 @@
         android:label="AboutFragment" />
     <fragment
         android:id="@+id/addCourseFragment"
-        android:name="cn.surine.schedulex.ui.add_course.AddCourseFragment"
+        android:name="cn.surine.schedulex.ui.course.AddCourseFragment"
         android:label="AddCourseFragment" />
     <fragment
         android:id="@+id/scheduleDataExport"
@@ -157,7 +157,7 @@
     </fragment>
     <fragment
         android:id="@+id/addTimeTableFragment"
-        android:name="cn.surine.schedulex.ui.add_timetable.AddTimeTableFragment"
+        android:name="cn.surine.schedulex.ui.timetable_list.AddTimeTableFragment"
         android:label="AddTimeTableFragment" />
     <fragment
         android:id="@+id/superCourseFetchFragment"

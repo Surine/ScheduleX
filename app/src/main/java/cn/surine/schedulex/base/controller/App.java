@@ -39,6 +39,7 @@ public class App extends Application {
 
         //友盟初始化
         UMConfigure.init(this, PrivateInformation.UMENG_KEY, "Umeng", UMConfigure.DEVICE_TYPE_PHONE, "");
+        UMConfigure.setLogEnabled(BuildConfig.DEBUG);
         //初始化组件化基础库, 所有友盟业务SDK都必须调用此初始化接口。
         MobclickAgent.setPageCollectionMode(MobclickAgent.PageMode.AUTO);
     }

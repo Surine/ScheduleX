@@ -1,4 +1,4 @@
-package cn.surine.schedulex.ui.add_course
+package cn.surine.schedulex.ui.course
 
 import android.annotation.SuppressLint
 import android.graphics.Color
@@ -18,7 +18,6 @@ import cn.surine.schedulex.base.utils.Toasts
 import cn.surine.schedulex.base.utils.Uis
 import cn.surine.schedulex.data.entity.Course
 import cn.surine.schedulex.data.entity.Schedule
-import cn.surine.schedulex.ui.course.CourseViewModel
 import cn.surine.schedulex.ui.schedule.ScheduleViewModel
 import cn.surine.schedulex.ui.schedule.ScheduleViewPagerAdapter
 import cn.surine.schedulex.ui.view.custom.helper.BtmDialogs

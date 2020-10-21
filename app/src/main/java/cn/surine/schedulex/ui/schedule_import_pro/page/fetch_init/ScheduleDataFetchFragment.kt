@@ -14,7 +14,9 @@ import androidx.navigation.fragment.FragmentNavigator
 import androidx.recyclerview.widget.LinearLayoutManager
 import cn.surine.schedulex.BR
 import cn.surine.schedulex.R
+import cn.surine.schedulex.app_base.DATA
 import cn.surine.schedulex.app_base.VmManager
+import cn.surine.schedulex.app_base.hit
 import cn.surine.schedulex.base.Constants
 import cn.surine.schedulex.base.controller.App
 import cn.surine.schedulex.base.controller.BaseAdapter
@@ -38,7 +40,6 @@ import com.google.android.material.snackbar.Snackbar
 import com.peanut.sdk.miuidialog.MIUIDialog
 import com.tbruyelle.rxpermissions2.RxPermissions
 import com.tencent.bugly.crashreport.CrashReport
-import com.umeng.analytics.MobclickAgent
 import kotlinx.android.synthetic.main.fragment_data_fetch_v3.*
 import kotlinx.android.synthetic.main.view_common_jw_system.view.*
 import kotlinx.android.synthetic.main.view_file_import.*
@@ -114,6 +115,7 @@ class ScheduleDataFetchFragment : BaseFragment() {
                             showCommonJwDialog()
                         }
                         loginJw.setOnClickListener {
+                            hit("adapter")
                             Others.openUrl("https://support.qq.com/products/282532/faqs/79948")
                         }
                     }
@@ -127,7 +129,7 @@ class ScheduleDataFetchFragment : BaseFragment() {
                         }
                     }
                     ScheduleDataFetchViewModel.LOAD_FAIL_VERSION_OLD -> {
-                        val str = "您的app版本太旧啦，新版本已经适配了您的学校~ 请升级看看"
+                        val str = "新版本已经适配了您的学校~ 请升级或者关注未来发版消息"
                         curSchoolInfo.text = str
                         tryCommonJw.hide()
                     }
@@ -146,6 +148,7 @@ class ScheduleDataFetchFragment : BaseFragment() {
 
         //超表导入
         fromSuperCn.setOnClickListener {
+            hit("from_super_cn")
             // 添加共享元素动画
             val extras = FragmentNavigator.Extras.Builder()
                     .addSharedElement(fromSuperCn, getString(R.string.transition_super))
@@ -155,16 +158,19 @@ class ScheduleDataFetchFragment : BaseFragment() {
             Navigation.findNavController(it).navigate(directions, extras)
         }
         skip.setOnClickListener {
+            hit("skip")
             Prefs.save(Constants.CUR_SCHEDULE, scheduleViewModel.addSchedule(scheduleName, 24, 1, Schedule.IMPORT_WAY.ADD))
             Navigations.open(this, R.id.action_dataFetchFragment_to_scheduleFragment)
         }
         help.setOnClickListener {
+            hit("help")
             Others.openUrl("https://support.qq.com/products/282532")
         }
 
         fromFile.setOnClickListener {
             RxPermissions(activity()).request((Manifest.permission.READ_EXTERNAL_STORAGE)).subscribe {
                 if (it) {
+                    hit("from_file")
                     showImportDialog()
                 } else {
                     Toasts.toast(getString(R.string.permission_is_denied))
@@ -176,6 +182,7 @@ class ScheduleDataFetchFragment : BaseFragment() {
         scheduleDataFetchViewModel.mCommons.observe(this, Observer {
             if (it.isShowMiAi) {
                 fromMiai.setOnClickListener {
+                    hit("from_mi")
                     val extras = FragmentNavigator.Extras.Builder()
 //                            .addSharedElement(fromMiai, getString(R.string.transition_mi))
                             .addSharedElement(miai_logo, getString(R.string.transition_mi3))
@@ -198,6 +205,7 @@ class ScheduleDataFetchFragment : BaseFragment() {
                 view.commonJwList.load(LinearLayoutManager(activity), BaseAdapter(data, R.layout.item_common_jw, BR.university)) {
                     it.setOnItemClickListener { position ->
                         val curSelectSystem = data[position]
+                        hit("common_system", func = DATA, map = hashMapOf("system" to curSelectSystem.name))
                         val mRemoteUniversity = RemoteUniversity(
                                 code = curSelectSystem.code,
                                 name = curSelectSystem.name,
@@ -251,6 +259,7 @@ class ScheduleDataFetchFragment : BaseFragment() {
         ParserManager.wrapper2course(list, id).forEach {
             courseViewModel.insert(it)
         }
+        hit("json_success",func = DATA)
         Toasts.toast(getString(R.string.handle_success))
         Navigations.open(this, R.id.action_dataFetchFragment_to_scheduleFragment)
     }
@@ -277,6 +286,7 @@ class ScheduleDataFetchFragment : BaseFragment() {
             tCsv.text = Spans.with(sCsv).size(13, tCsv.text.toString().length, sCsv.length).color(App.context.resources.getColor(R.color.blue), tCsv.getText().toString().length, sCsv.length).toSpannable()
 
             tJson.setOnClickListener {
+                hit("download_json_demo")
                 Files.saveAsJson("Json模板", Jsons.entityToJson(mutableListOf(CourseWrapper().apply {
                     name = "课程名"
                     teacher = "教师名"
@@ -290,6 +300,7 @@ class ScheduleDataFetchFragment : BaseFragment() {
             }
 
             tCsv.setOnClickListener {
+                hit("download_csv_demo")
                 try {
                     CsvParser.writeCsv(listOf(
                             arrayOf("课程名", "教师", "位置", "1", "2", "1", "1 2 3 4 5")

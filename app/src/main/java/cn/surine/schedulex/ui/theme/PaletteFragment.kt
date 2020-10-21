@@ -4,11 +4,15 @@ import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
 import cn.surine.schedulex.BR
 import cn.surine.schedulex.R
+import cn.surine.schedulex.app_base.DATA
 import cn.surine.schedulex.app_base.VmManager
+import cn.surine.schedulex.app_base.hit
 import cn.surine.schedulex.base.Constants
 import cn.surine.schedulex.base.controller.BaseAdapter
 import cn.surine.schedulex.base.controller.BaseFragment
-import cn.surine.schedulex.base.utils.*
+import cn.surine.schedulex.base.utils.Navigations
+import cn.surine.schedulex.base.utils.Toasts
+import cn.surine.schedulex.base.utils.load
 import cn.surine.schedulex.data.entity.Palette
 import cn.surine.schedulex.ui.course.CourseViewModel
 import cn.surine.schedulex.ui.schedule.ScheduleViewModel
@@ -35,25 +39,22 @@ class PaletteFragment : BaseFragment() {
             courseViewModel = vmCourse
         }
 
-        init {
-            scheduleId = arguments?.getInt(SCHEDULE_ID)
-            if (scheduleId == -1) {
-                Toasts.toast("无此课表")
-                Navigations.close(this)
-            }
-            loadData()
+        scheduleId = arguments?.getInt(SCHEDULE_ID)
+        if (scheduleId == -1) {
+            Toasts.toast("无此课表")
+            Navigations.close(this)
         }
+        loadData()
 
-        ui {
-            recyclerview.load(LinearLayoutManager(activity()), BaseAdapter(mDatas, R.layout.item_palette, BR.palette)) {
-                it.setOnItemClickListener { position ->
-                    val schedule = scheduleViewModel.getScheduleById(scheduleId!!.toLong())
-                    schedule.courseThemeId = mDatas[position].id
-                    scheduleViewModel.updateSchedule(schedule)
-                    updateCourses(mDatas[position])
-                    Toasts.toast("更新成功！")
-                    Navigations.close(this)
-                }
+        recyclerview.load(LinearLayoutManager(activity()), BaseAdapter(mDatas, R.layout.item_palette, BR.palette)) {
+            it.setOnItemClickListener { position ->
+                val schedule = scheduleViewModel.getScheduleById(scheduleId!!.toLong())
+                schedule.courseThemeId = mDatas[position].id
+                hit("theme", DATA, hashMapOf("name" to mDatas[position].title))
+                scheduleViewModel.updateSchedule(schedule)
+                updateCourses(mDatas[position])
+                Toasts.toast("更新成功！")
+                Navigations.close(this)
             }
         }
     }

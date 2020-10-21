@@ -65,28 +65,6 @@ fun Fragment.alert(s: String) {
 fun Int.supplyZero(): String = if (this < 10) "0$this" else this.toString()
 
 
-/**对视图进行分类管理*/
-
-//用于渲染数据
-inline fun Fragment.ui(block: () -> Unit) {
-    block()
-}
-
-//用于处理监听
-inline fun Fragment.click(block: () -> Unit) {
-    block()
-}
-
-//用于初始化
-inline fun Fragment.init(block: () -> Unit) {
-    block()
-}
-
-//用于数据驱动
-inline fun Fragment.dataDriver(block: () -> Unit) {
-    block()
-}
-
 //此生仅进行一次的操作
 fun once(key: String, block: () -> Unit) {
     if (!Prefs.getBoolean(key, false)) {

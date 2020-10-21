@@ -8,7 +8,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import cn.surine.schedulex.BR
 import cn.surine.schedulex.R
+import cn.surine.schedulex.app_base.DATA
 import cn.surine.schedulex.app_base.VmManager
+import cn.surine.schedulex.app_base.hit
 import cn.surine.schedulex.base.Constants
 import cn.surine.schedulex.base.controller.BaseAdapter
 import cn.surine.schedulex.base.controller.BaseFragment
@@ -133,6 +135,7 @@ class ScheduleListFragment : BaseFragment() {
             if (scheduleViewModel.schedulesNumber < Constants.MAX_SCHEDULE_LIMIT) {
                 Navigations.open(this, R.id.action_ScheduleListFragment_to_dataFetchFragment)
             } else {
+                hit("add_schedule", DATA, hashMapOf("add_max_limit" to true))
                 Toasts.toast(getString(R.string.no_permission_to_add))
             }
         }
