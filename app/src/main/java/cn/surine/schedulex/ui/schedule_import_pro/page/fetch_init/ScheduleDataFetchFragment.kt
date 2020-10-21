@@ -79,6 +79,7 @@ class ScheduleDataFetchFragment : BaseFragment() {
         }
 
         textView20.setOnClickListener {
+
         }
 
         //更换学校
@@ -259,7 +260,7 @@ class ScheduleDataFetchFragment : BaseFragment() {
         ParserManager.wrapper2course(list, id).forEach {
             courseViewModel.insert(it)
         }
-        hit("json_success",func = DATA)
+        hit("json_success", func = DATA)
         Toasts.toast(getString(R.string.handle_success))
         Navigations.open(this, R.id.action_dataFetchFragment_to_scheduleFragment)
     }
@@ -307,12 +308,10 @@ class ScheduleDataFetchFragment : BaseFragment() {
                     ), "${Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS).absolutePath}/Csv模板.csv")
                     Snackbar.make(it, "保存成功,路径 /Download/Csv模板.csv", Snackbar.LENGTH_SHORT).show()
                 } catch (e: IOException) {
+                    CrashReport.postCatchedException(RuntimeException("csv save error:" + e.message))
                     Toasts.toast("保存失败：" + e.message)
+                    Files.save("CSV备份模板",StringBuilder("name,teacher,position,sectionStart,sectionContinue,day,week").append("\n").append("课程名,教师,位置,1,2,1,1 2 3 4 5").toString(),"csv")
                 }
-            }
-
-            tExcel.setOnClickListener {
-                Toasts.toast("难产啦！再等等吧。")
             }
 
             vBok.setOnClickListener {

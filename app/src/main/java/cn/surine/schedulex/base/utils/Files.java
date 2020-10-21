@@ -45,7 +45,6 @@ public class Files {
                 file.delete();
             }
             file.createNewFile();
-
             writer = new FileWriter(file);
             if (null != data) {
                 writer.write(data);
