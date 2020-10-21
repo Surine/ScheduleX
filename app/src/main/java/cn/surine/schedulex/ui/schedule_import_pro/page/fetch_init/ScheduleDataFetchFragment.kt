@@ -288,7 +288,7 @@ class ScheduleDataFetchFragment : BaseFragment() {
 
             tJson.setOnClickListener {
                 hit("download_json_demo")
-                Files.saveAsJson("Json模板", Jsons.entityToJson(mutableListOf(CourseWrapper().apply {
+                if(Files.saveAsJson("Json模板", Jsons.entityToJson(mutableListOf(CourseWrapper().apply {
                     name = "课程名"
                     teacher = "教师名"
                     position = "上课地点"
@@ -296,8 +296,11 @@ class ScheduleDataFetchFragment : BaseFragment() {
                     sectionContinue = 2
                     day = 1
                     week = mutableListOf(1, 3, 5, 7, 9)
-                })))
-                Snackbar.make(it, "保存成功,路径 /Download/Json模板.json", Snackbar.LENGTH_SHORT).show();
+                })))){
+                    Snackbar.make(it, "保存成功,路径 /Download/Json模板.json", Snackbar.LENGTH_SHORT).show();
+                }else{
+                    Toasts.toast("保存失败~")
+                }
             }
 
             tCsv.setOnClickListener {
