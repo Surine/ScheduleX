@@ -71,7 +71,7 @@ class AddTimeTableFragment : BaseFragment() {
             }
 
             it.setOnItemLongClickListener { position ->
-                if (position < 6) {
+                if (position < 4) {
                     Toasts.toast(getString(R.string.delete_rule))
                 } else {
                     CommonDialogs.getCommonDialog(activity(), getString(R.string.warning), getString(R.string.delete_timetable_session_note), okCall = {
