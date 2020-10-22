@@ -40,10 +40,10 @@ import com.peanut.sdk.miuidialog.MIUIDialog
 import com.tbruyelle.rxpermissions2.RxPermissions
 import com.tencent.bugly.crashreport.CrashReport
 import kotlinx.android.synthetic.main.fragment_data_fetch_v3.*
-import kotlinx.android.synthetic.main.view_common_jw_system.view.*
 import kotlinx.android.synthetic.main.view_file_import.*
 import kotlinx.android.synthetic.main.view_jw_import.*
 import kotlinx.android.synthetic.main.view_miai_import.*
+import kotlinx.android.synthetic.main.view_recycle_list.view.*
 import kotlinx.android.synthetic.main.view_super_import.*
 import java.io.File
 
@@ -195,8 +195,8 @@ class ScheduleDataFetchFragment : BaseFragment() {
         val data = ParseData.commonJwData
         MIUIDialog(activity()).show {
             title(text = "通用系统")
-            customView(R.layout.view_common_jw_system) { view ->
-                view.commonJwList.load(LinearLayoutManager(activity), BaseAdapter(data, R.layout.item_common_jw, BR.university)) {
+            customView(R.layout.view_recycle_list) { view ->
+                view.recyclerview.load(LinearLayoutManager(activity), BaseAdapter(data, R.layout.item_common_jw, BR.university)) {
                     it.setOnItemClickListener { position ->
                         val curSelectSystem = data[position]
                         hit("common_system", func = DATA, map = hashMapOf("system" to curSelectSystem.name))

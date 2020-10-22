@@ -1,6 +1,7 @@
 package cn.surine.coursetableview.view;
 
 import android.graphics.Color;
+import android.view.Gravity;
 
 /**
  * Created by Surine on 2019/2/26.
@@ -58,6 +59,20 @@ public class UIConfig {
     private boolean isShowTimeTable = true;
 
     private int maxHideCharLimit = 6;
+
+
+    public static final int[] POSITION = new int[]{
+            Gravity.START | Gravity.TOP,
+            Gravity.TOP,
+            Gravity.END | Gravity.TOP,
+            Gravity.CENTER | Gravity.START,
+            Gravity.CENTER,
+            Gravity.CENTER | Gravity.END,
+            Gravity.BOTTOM | Gravity.START,
+            Gravity.BOTTOM | Gravity.CENTER,
+            Gravity.BOTTOM | Gravity.END
+    };
+    private int textAlignFlag = 0;
 
     public int getColorUI() {
         return colorUI;
@@ -273,6 +288,14 @@ public class UIConfig {
 
     public float getItemCornerRadius() {
         return itemCornerRadius;
+    }
+
+    public int getTextAlignFlag() {
+        return textAlignFlag;
+    }
+
+    public void setTextAlignFlag(int textAlignFlag) {
+        this.textAlignFlag = textAlignFlag;
     }
 
     /**

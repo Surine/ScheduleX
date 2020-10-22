@@ -7,7 +7,7 @@
 
     <include
         android:id="@+id/schedule_view"
-        layout="@layout/view_recycler"
+        layout="@layout/view_recycle_list"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:background="@android:color/transparent"

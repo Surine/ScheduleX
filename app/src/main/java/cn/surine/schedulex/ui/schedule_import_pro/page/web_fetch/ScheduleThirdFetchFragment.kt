@@ -38,7 +38,7 @@ import com.peanut.sdk.miuidialog.MIUIDialog
 import com.tbruyelle.rxpermissions2.RxPermissions
 import com.tencent.bugly.crashreport.CrashReport
 import kotlinx.android.synthetic.main.fragment_third_fetch.*
-import kotlinx.android.synthetic.main.view_ua_config.*
+import kotlinx.android.synthetic.main.view_dsl_setting.*
 import java.net.URLDecoder
 
 /**
@@ -106,7 +106,7 @@ class ScheduleThirdFetchFragment : BaseFragment() {
 
         tool.setOnClickListener {
             MaterialDialog(activity(), BottomSheet(LayoutMode.WRAP_CONTENT)).show {
-                customView(R.layout.view_ua_config)
+                customView(R.layout.view_dsl_setting)
                 setting(rootView) {
                     group {
                         switchItem("设置UA", openSubTitle = "Android UA", closeSubTitle = "桌面 UA", initValue = false, tag = "ua") { _, isChecked ->

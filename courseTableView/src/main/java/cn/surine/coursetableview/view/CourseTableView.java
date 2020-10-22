@@ -392,7 +392,7 @@ public class CourseTableView extends LinearLayout {
             tv.setLayoutParams(tlp);
             tv.setPadding(10, 10, 10, 10);
             tv.getPaint().setFakeBoldText(true);
-            tv.setGravity(Gravity.START);
+            tv.setGravity(UIConfig.POSITION[mUiConfig.getTextAlignFlag()]);
             tv.setTextSize(mUiConfig.getItemTextSize());
 
             frameLayout.setLayoutParams(flp);
@@ -485,7 +485,7 @@ public class CourseTableView extends LinearLayout {
             tv.setText(bCourse.getSimpleName(mUiConfig.getMaxHideCharLimit()) + "@" + bCourse.getPosition() + "[非本周]");
             tv.setLayoutParams(tlp);
             tv.setPadding(10, 10, 10, 10);
-            tv.setGravity(Gravity.CENTER);
+            tv.setGravity(UIConfig.POSITION[mUiConfig.getTextAlignFlag()]);
             tv.getPaint().setFakeBoldText(true);
             tv.setTextSize(mUiConfig.getItemTextSize());
             frameLayout.setLayoutParams(flp);

@@ -111,6 +111,7 @@ public class ScheduleViewPagerAdapter extends RecyclerView.Adapter<ScheduleViewP
         uiConfig.setChooseWeekColor(App.context.getResources().getColor(R.color.colorPrimary));
         uiConfig.setColorUI(schedule.lightText ? UIConfig.LIGHT : UIConfig.DARK);
         uiConfig.setMaxHideCharLimit(schedule.maxHideCharLimit);
+        uiConfig.setTextAlignFlag(schedule.textAlignFlag);
     }
 
     public void setWeek(int week) {

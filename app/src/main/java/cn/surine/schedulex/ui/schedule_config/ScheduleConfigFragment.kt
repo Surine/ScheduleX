@@ -13,9 +13,12 @@ import android.view.View
 import android.widget.Button
 import android.widget.SeekBar
 import android.widget.TextView
+import androidx.recyclerview.widget.LinearLayoutManager
+import cn.surine.schedulex.BR
 import cn.surine.schedulex.R
 import cn.surine.schedulex.app_base.VmManager
 import cn.surine.schedulex.base.Constants
+import cn.surine.schedulex.base.controller.BaseAdapter
 import cn.surine.schedulex.base.controller.BaseBindingFragment
 import cn.surine.schedulex.base.utils.*
 import cn.surine.schedulex.data.entity.Schedule
@@ -36,6 +39,7 @@ import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.peanut.sdk.miuidialog.MIUIDialog
 import com.tbruyelle.rxpermissions2.RxPermissions
 import kotlinx.android.synthetic.main.fragment_schedule_config.*
+import kotlinx.android.synthetic.main.view_recycle_list.view.*
 import kotlinx.android.synthetic.main.view_single_slider_ui.view.*
 import java.io.File
 
@@ -157,6 +161,25 @@ class ScheduleConfigFragment : BaseBindingFragment<FragmentScheduleConfigBinding
                 putInt(SCHEDULE_ID, scheduleId)
             })
         }
+        changeTextAligin.setOnClickListener {
+            showTextAlignDialog()
+        }
+    }
+
+    private fun showTextAlignDialog() {
+        MIUIDialog(activity()).show {
+            customView(R.layout.view_recycle_list) {
+                val data = mutableListOf("左上", "中上", "右上", "左中", "中", "右中", "左下", "中下", "右下")
+                it.recyclerview.load(LinearLayoutManager(activity), BaseAdapter(data, R.layout.item_singleline, BR.name)) { adapter ->
+                    adapter.setOnItemClickListener { pos ->
+                        schedule.textAlignFlag = pos
+                        scheduleViewModel.updateSchedule(schedule)
+                        Toasts.toast("更新成功~")
+                        cancel()
+                    }
+                }
+            }
+        }
     }
 
     private fun showChangeCharLimitDialog() {
@@ -174,7 +197,7 @@ class ScheduleConfigFragment : BaseBindingFragment<FragmentScheduleConfigBinding
                         it.singleText.text = "$progress"
                     }
                 })
-                it.button.setOnClickListener { _->
+                it.button.setOnClickListener { _ ->
                     schedule.maxHideCharLimit = it.singleSeekBar.progress
                     scheduleViewModel.updateSchedule(schedule)
                     dismiss()
