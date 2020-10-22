@@ -336,6 +336,7 @@ public class CourseTableView extends LinearLayout {
         }
     }
 
+    @SuppressLint("SetTextI18n")
     private void loadData(List<BCourse> mBcourses) {
         int itemPosition;
 
@@ -387,7 +388,7 @@ public class CourseTableView extends LinearLayout {
                 frameLayout.setBackground(Drawables.getDrawable(Color.TRANSPARENT, 20, 3, Color.WHITE));
             }
             tv.setTextColor(Color.WHITE);
-            tv.setText(bCourse.getSimpleName() + "@" + bCourse.getPosition());
+            tv.setText(bCourse.getSimpleName(mUiConfig.getMaxHideCharLimit()) + "@" + bCourse.getPosition());
             tv.setLayoutParams(tlp);
             tv.setPadding(10, 10, 10, 10);
             tv.getPaint().setFakeBoldText(true);
@@ -481,7 +482,7 @@ public class CourseTableView extends LinearLayout {
             //is non cur week
             frameLayout.setBackground(Drawables.getDrawable(mUiConfig.getItemNotCurWeekCourseColor(), 20, 3, mUiConfig.getColorUI()));
             tv.setTextColor(Color.BLACK);
-            tv.setText(bCourse.getSimpleName() + "@" + bCourse.getPosition() + "[非本周]");
+            tv.setText(bCourse.getSimpleName(mUiConfig.getMaxHideCharLimit()) + "@" + bCourse.getPosition() + "[非本周]");
             tv.setLayoutParams(tlp);
             tv.setPadding(10, 10, 10, 10);
             tv.setGravity(Gravity.CENTER);

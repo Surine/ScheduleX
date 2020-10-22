@@ -20,7 +20,7 @@ import cn.surine.schedulex.data.entity.TimeTable
  * @author sunliwei
  * @date 2020-01-16 20:53
  */
-@Database(entities = [Course::class, Schedule::class, TimeTable::class], version = 5)
+@Database(entities = [Course::class, Schedule::class, TimeTable::class], version = 6)
 abstract class BaseAppDatabase : RoomDatabase() {
     /**
      * 获取课表数据DAO
@@ -41,7 +41,7 @@ abstract class BaseAppDatabase : RoomDatabase() {
                     if (instance == null) {
                         instance = Room.databaseBuilder(context.applicationContext, BaseAppDatabase::class.java, Constants.DB_NAME)
                                 .allowMainThreadQueries() //TODO：slw 主线程访问，不安全
-                                .addMigrations(mg_1_2, mg_2_3, mg_3_4, mg_4_5)
+                                .addMigrations(mg_1_2, mg_2_3, mg_3_4, mg_4_5, mg_5_6)
                                 .build()
                     }
                 }
@@ -93,5 +93,17 @@ abstract class BaseAppDatabase : RoomDatabase() {
                 database.execSQL("ALTER TABLE course ADD COLUMN memo TEXT")
             }
         }
+
+        /**
+         * 文本
+         * */
+        val mg_5_6: Migration = object : Migration(5, 6) {
+            override fun migrate(database: SupportSQLiteDatabase) {
+                database.execSQL("ALTER TABLE schedule ADD COLUMN textAlignFlag INTEGER NOT NULL DEFAULT 0")
+                database.execSQL("ALTER TABLE schedule ADD COLUMN maxHideCharLimit INTEGER NOT NULL DEFAULT 6")
+            }
+        }
+
+
     }
 }

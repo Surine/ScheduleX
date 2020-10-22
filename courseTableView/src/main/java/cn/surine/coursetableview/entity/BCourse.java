@@ -42,11 +42,15 @@ public class BCourse implements Serializable {
         return name;
     }
 
-    public String getSimpleName() {
-        if (name.length() > 6) {
-            return name.substring(0, 6) + "...";
+    public String getSimpleName(int limit) {
+        if (name.length() > limit) {
+            return name.substring(0, limit) + "...";
         }
         return name;
+    }
+
+    public String getSimpleName() {
+        return getSimpleName(6);
     }
 
 

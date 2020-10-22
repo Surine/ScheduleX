@@ -101,8 +101,20 @@ public class Schedule extends BaseVm {
 
     /**
      * 课程主题
-     * */
+     */
     public long courseThemeId;
+
+
+    /**
+     * 文本位置标识
+     */
+    public int textAlignFlag;
+
+
+    /**
+     * 最大字符隐藏限制
+     */
+    public int maxHideCharLimit;
 
     @SuppressLint("StringFormatMatches")
     public String getTotalWeekStr() {
@@ -166,23 +178,23 @@ public class Schedule extends BaseVm {
         int d;
         switch (importWay) {
             case IMPORT_WAY.ADD:
-            d = R.mipmap.other;
-            break;
+                d = R.mipmap.other;
+                break;
             case IMPORT_WAY.JW:
-            d = R.mipmap.way_jw;
-            break;
+                d = R.mipmap.way_jw;
+                break;
             case IMPORT_WAY.JSON:
-            d = R.mipmap.way_json;
-            break;
+                d = R.mipmap.way_json;
+                break;
             case IMPORT_WAY.EXCEL:
-            d = R.mipmap.way_excel;
-            break;
+                d = R.mipmap.way_excel;
+                break;
             case IMPORT_WAY.SUPER_CN:
-            d = R.mipmap.super_class;
-            break;
+                d = R.mipmap.super_class;
+                break;
             default:
-            d = R.mipmap.other;
-            break;
+                d = R.mipmap.other;
+                break;
         }
         return App.context.getDrawable(d);
     }

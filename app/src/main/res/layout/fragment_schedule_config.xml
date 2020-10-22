@@ -428,7 +428,7 @@
                             app:layout_constraintStart_toStartOf="@+id/showWeek"
                             app:layout_constraintTop_toBottomOf="@+id/showWeek" />
 
-                        <Switch
+                        <com.google.android.material.switchmaterial.SwitchMaterial
                             android:id="@+id/showWeekSwitchs"
                             android:layout_width="wrap_content"
                             android:layout_height="@dimen/dp20"
@@ -594,7 +594,7 @@
                             app:layout_constraintStart_toStartOf="@+id/scheduleShowTimeItemTitle"
                             app:layout_constraintTop_toBottomOf="@+id/scheduleShowTimeItemTitle" />
 
-                        <Switch
+                        <com.google.android.material.switchmaterial.SwitchMaterial
                             android:id="@+id/showTimesSwitch"
                             android:layout_width="wrap_content"
                             android:layout_height="@dimen/dp20"
@@ -632,6 +632,37 @@
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintStart_toStartOf="@+id/change_course_card_ui_title"
                             app:layout_constraintTop_toBottomOf="@+id/change_course_card_ui_title" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/changeCharLimit"
+                        style="@style/setting_item_ui">
+
+                        <TextView
+                            android:id="@+id/changeCharLimit_title"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/dp8"
+                            android:layout_marginTop="@dimen/dp8"
+                            android:text="课程字数省略号限制"
+                            android:textColor="@android:color/black"
+                            android:textSize="18sp"
+                            android:textStyle="bold"
+                            app:layout_constraintLeft_toLeftOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+
+                        <TextView
+                            android:id="@+id/changeCharLimit_subtitle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/dp8"
+                            android:layout_marginBottom="@dimen/dp16"
+                            android:text="课程名超过此限制后将显示省略号"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toStartOf="@+id/changeCharLimit_title"
+                            app:layout_constraintTop_toBottomOf="@+id/changeCharLimit_title" />
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
 

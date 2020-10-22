@@ -9,12 +9,10 @@ import android.graphics.drawable.ColorDrawable
 import android.os.Build
 import android.os.Bundle
 import android.provider.MediaStore
-import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.SeekBar
 import android.widget.TextView
-import androidx.lifecycle.ViewModelProviders
 import cn.surine.schedulex.R
 import cn.surine.schedulex.app_base.VmManager
 import cn.surine.schedulex.base.Constants
@@ -22,9 +20,7 @@ import cn.surine.schedulex.base.controller.BaseBindingFragment
 import cn.surine.schedulex.base.utils.*
 import cn.surine.schedulex.data.entity.Schedule
 import cn.surine.schedulex.databinding.FragmentScheduleConfigBinding
-import cn.surine.schedulex.ui.course.CourseRepository
 import cn.surine.schedulex.ui.course.CourseViewModel
-import cn.surine.schedulex.ui.schedule.ScheduleRepository
 import cn.surine.schedulex.ui.schedule.ScheduleViewModel
 import cn.surine.schedulex.ui.schedule_list.ScheduleListFragment
 import cn.surine.schedulex.ui.schedule_list.ScheduleListFragment.Companion.CHANGE_BACKGROUND
@@ -33,7 +29,6 @@ import cn.surine.schedulex.ui.schedule_list.ScheduleListFragment.Companion.CHANG
 import cn.surine.schedulex.ui.schedule_list.ScheduleListFragment.Companion.CHANGE_WEEK_INFO
 import cn.surine.schedulex.ui.schedule_list.ScheduleListFragment.Companion.PICK_PHOTO
 import cn.surine.schedulex.ui.schedule_list.ScheduleListFragment.Companion.SCHEDULE_ID
-import cn.surine.schedulex.ui.timetable_list.TimeTableRepository
 import cn.surine.schedulex.ui.timetable_list.TimeTableViewModel
 import cn.surine.schedulex.ui.view.custom.helper.CommonDialogs
 import com.bumptech.glide.Glide
@@ -41,6 +36,7 @@ import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.peanut.sdk.miuidialog.MIUIDialog
 import com.tbruyelle.rxpermissions2.RxPermissions
 import kotlinx.android.synthetic.main.fragment_schedule_config.*
+import kotlinx.android.synthetic.main.view_single_slider_ui.view.*
 import java.io.File
 
 /**
@@ -74,7 +70,7 @@ class ScheduleConfigFragment : BaseBindingFragment<FragmentScheduleConfigBinding
         t.data = schedule
         //捷径
         mSettingItemTag = arguments?.getInt(ScheduleListFragment.FUNCTION_TAG, -1) ?: -1
-        if(mSettingItemTag != -1){
+        if (mSettingItemTag != -1) {
             when (mSettingItemTag) {
                 CHANGE_WEEK_INFO -> showTimeConfigDialog()
                 CHANGE_COURSE_ITEM_HEIGHT -> showItemHeightDialog()
@@ -152,6 +148,9 @@ class ScheduleConfigFragment : BaseBindingFragment<FragmentScheduleConfigBinding
                 putInt(SCHEDULE_ID, scheduleId)
             })
         }
+        changeCharLimit.setOnClickListener {
+            showChangeCharLimitDialog()
+        }
         //导出
         export.setOnClickListener {
             Navigations.open(this, R.id.action_scheduleConfigFragment_to_scheduleDataExport, Bundle().apply {
@@ -160,17 +159,41 @@ class ScheduleConfigFragment : BaseBindingFragment<FragmentScheduleConfigBinding
         }
     }
 
+    private fun showChangeCharLimitDialog() {
+        MIUIDialog(activity()).show {
+            customView(R.layout.view_single_slider_ui) {
+                it.single_slider_view_title.text = "调整数值"
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                    it.singleSeekBar.min = 1
+                }
+                it.singleSeekBar.max = 20
+                it.singleSeekBar.progress = schedule.maxHideCharLimit
+                it.singleText.text = "${schedule.maxHideCharLimit}"
+                it.singleSeekBar.setOnSeekBarChangeListener(object : MySeekBarChangeListener() {
+                    override fun onProgressChanged(seekBar: SeekBar, progress: Int, fromUser: Boolean) {
+                        it.singleText.text = "$progress"
+                    }
+                })
+                it.button.setOnClickListener { _->
+                    schedule.maxHideCharLimit = it.singleSeekBar.progress
+                    scheduleViewModel.updateSchedule(schedule)
+                    dismiss()
+                }
+            }
+        }
+    }
+
     private fun modifyScheduleName() {
         MIUIDialog(activity()).show {
             title(text = "编辑课表名称")
-            input(prefill = schedule.name){ text, _ ->
+            input(prefill = schedule.name) { text, _ ->
                 schedule.name = text.toString()
                 this@ScheduleConfigFragment.courseNameSubTitle.text = text
                 Toasts.toast(getString(R.string.update_success))
                 scheduleViewModel.updateSchedule(schedule)
             }
-            positiveButton(text = "保存") {  }
-            negativeButton (text = "取消") {  }
+            positiveButton(text = "保存") { }
+            negativeButton(text = "取消") { }
         }
     }
 

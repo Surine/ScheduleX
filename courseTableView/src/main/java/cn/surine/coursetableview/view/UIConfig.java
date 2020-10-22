@@ -57,6 +57,8 @@ public class UIConfig {
      */
     private boolean isShowTimeTable = true;
 
+    private int maxHideCharLimit = 6;
+
     public int getColorUI() {
         return colorUI;
     }
@@ -244,6 +246,15 @@ public class UIConfig {
         return this;
     }
 
+    public int getMaxHideCharLimit() {
+        return maxHideCharLimit;
+    }
+
+    public UIConfig setMaxHideCharLimit(int maxHideCharLimit) {
+        if (maxHideCharLimit <= 0) maxHideCharLimit = 1;
+        this.maxHideCharLimit = maxHideCharLimit;
+        return this;
+    }
 
     public int getChooseWeekColor() {
         return chooseWeekColor;
