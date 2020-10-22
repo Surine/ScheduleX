@@ -199,7 +199,6 @@ class ScheduleDataFetchFragment : BaseFragment() {
                 view.recyclerview.load(LinearLayoutManager(activity), BaseAdapter(data, R.layout.item_common_jw, BR.university)) {
                     it.setOnItemClickListener { position ->
                         val curSelectSystem = data[position]
-                        hit("common_system", func = DATA, map = hashMapOf("system" to curSelectSystem.name))
                         val mRemoteUniversity = RemoteUniversity(
                                 code = curSelectSystem.code,
                                 name = curSelectSystem.name,
@@ -253,7 +252,7 @@ class ScheduleDataFetchFragment : BaseFragment() {
         ParserManager.wrapper2course(list, id).forEach {
             courseViewModel.insert(it)
         }
-        hit("json_success", func = DATA)
+        hit("result_json_success")
         Toasts.toast(getString(R.string.handle_success))
         Navigations.open(this, R.id.action_dataFetchFragment_to_scheduleFragment)
     }

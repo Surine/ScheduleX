@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import cn.surine.schedulex.BR
 import cn.surine.schedulex.R
 import cn.surine.schedulex.app_base.DATA
+import cn.surine.schedulex.app_base.SELECT_SCHOOL
 import cn.surine.schedulex.app_base.hit
 import cn.surine.schedulex.base.controller.BaseAdapter
 import cn.surine.schedulex.base.controller.BaseFragment
@@ -34,7 +35,7 @@ class SelectSchoolFragment : BaseFragment() {
     override fun onInit(parent: View?) {
         searchResult.load(LinearLayoutManager(activity), BaseAdapter(data, R.layout.item_local_university, BR.university)) {
             it.setOnItemClickListener { pos ->
-                hit(func = DATA, position = "select_school", map = hashMapOf("school_name" to data[pos].name))
+                hit(SELECT_SCHOOL,"school_name" to data[pos].name)
                 Prefs.save(CUR_SCHOOL_CODE, data[pos].code)
                 Prefs.save(CUR_SCHOOL_NAME, data[pos].name)
                 Navigations.close(this)

@@ -135,7 +135,7 @@ class ScheduleListFragment : BaseFragment() {
             if (scheduleViewModel.schedulesNumber < Constants.MAX_SCHEDULE_LIMIT) {
                 Navigations.open(this, R.id.action_ScheduleListFragment_to_dataFetchFragment)
             } else {
-                hit("add_schedule", DATA, hashMapOf("add_max_limit" to true))
+                hit("add_schedule_limit")
                 Toasts.toast(getString(R.string.no_permission_to_add))
             }
         }

@@ -148,7 +148,7 @@ public class SuperCourseFetchFragment extends BaseBindingFragment<FragmentSuperC
         }
         courseViewModel.saveCourseByDb(courseList, scheduleId);
         Toasts.toast("导入成功");
-        UmengHitKt.hit(fragment(), "super_success", UmengHitKt.DATA, new HashMap());
+        UmengHitKt.hit(fragment(), "result_super_success", UmengHitKt.CLICK, new HashMap());
         Navigations.open(SuperCourseFetchFragment.this, R.id.action_superCourseFetchFragment_to_scheduleFragment);
     }
 }

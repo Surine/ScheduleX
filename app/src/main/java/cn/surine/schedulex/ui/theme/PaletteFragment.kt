@@ -50,7 +50,7 @@ class PaletteFragment : BaseFragment() {
             it.setOnItemClickListener { position ->
                 val schedule = scheduleViewModel.getScheduleById(scheduleId!!.toLong())
                 schedule.courseThemeId = mDatas[position].id
-                hit("theme", DATA, hashMapOf("name" to mDatas[position].title))
+                hit("theme-${mDatas[position].title}")
                 scheduleViewModel.updateSchedule(schedule)
                 updateCourses(mDatas[position])
                 Toasts.toast("更新成功！")

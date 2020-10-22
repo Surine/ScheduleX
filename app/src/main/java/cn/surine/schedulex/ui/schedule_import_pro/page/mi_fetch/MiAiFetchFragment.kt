@@ -132,7 +132,7 @@ class MiAiFetchFragment : BaseFragment() {
         ParserManager.aiParser(scheduleId, miAiCourseInfo) {
             courseViewModel.saveCourseByDb(it, scheduleId)
             activity().runOnUiThread {
-                hit("mi_success", func = DATA)
+                hit("result_mi_success")
                 toast("导入成功")
                 open(this, R.id.action_miAiFetchFragment_to_scheduleFragment)
             }
