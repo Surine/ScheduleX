@@ -29,7 +29,6 @@ import cn.surine.schedulex.ui.course.CourseViewModel
 import cn.surine.schedulex.ui.schedule.ScheduleViewModel
 import cn.surine.schedulex.ui.schedule_import_pro.core.FileParserDispatcher
 import cn.surine.schedulex.ui.schedule_import_pro.core.ParseDispatcher
-import cn.surine.schedulex.ui.schedule_import_pro.core.file_core.CsvParser
 import cn.surine.schedulex.ui.schedule_import_pro.model.CourseWrapper
 import cn.surine.schedulex.ui.schedule_import_pro.model.RemoteUniversity
 import cn.surine.schedulex.ui.schedule_import_pro.page.change_school.SelectSchoolFragment
@@ -46,7 +45,7 @@ import kotlinx.android.synthetic.main.view_file_import.*
 import kotlinx.android.synthetic.main.view_jw_import.*
 import kotlinx.android.synthetic.main.view_miai_import.*
 import kotlinx.android.synthetic.main.view_super_import.*
-import java.io.IOException
+import java.io.File
 
 
 /**
@@ -169,14 +168,8 @@ class ScheduleDataFetchFragment : BaseFragment() {
         }
 
         fromFile.setOnClickListener {
-            RxPermissions(activity()).request((Manifest.permission.READ_EXTERNAL_STORAGE)).subscribe {
-                if (it) {
-                    hit("from_file")
-                    showImportDialog()
-                } else {
-                    Toasts.toast(getString(R.string.permission_is_denied))
-                }
-            }
+            hit("from_file")
+            showImportDialog()
         }
 
         scheduleDataFetchViewModel.getCommon()
@@ -287,33 +280,36 @@ class ScheduleDataFetchFragment : BaseFragment() {
             tCsv.text = Spans.with(sCsv).size(13, tCsv.text.toString().length, sCsv.length).color(App.context.resources.getColor(R.color.blue), tCsv.getText().toString().length, sCsv.length).toSpannable()
 
             tJson.setOnClickListener {
-                hit("download_json_demo")
-                if(Files.saveAsJson("Json模板", Jsons.entityToJson(mutableListOf(CourseWrapper().apply {
-                    name = "课程名"
-                    teacher = "教师名"
-                    position = "上课地点"
-                    sectionStart = 1
-                    sectionContinue = 2
-                    day = 1
-                    week = mutableListOf(1, 3, 5, 7, 9)
-                })))){
-                    Snackbar.make(it, "保存成功,路径 /Download/Json模板.json", Snackbar.LENGTH_SHORT).show();
-                }else{
-                    Toasts.toast("保存失败~")
+                RxPermissions(activity()).request((Manifest.permission.READ_EXTERNAL_STORAGE)).subscribe { status ->
+                    if (status) {
+                        hit("download_json_demo")
+                        val file = File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS).absolutePath + "/json模板.json")
+                        file.writeText(Jsons.entityToJson(mutableListOf(CourseWrapper().apply {
+                            name = "课程名"
+                            teacher = "教师名"
+                            position = "上课地点"
+                            sectionStart = 1
+                            sectionContinue = 2
+                            day = 1
+                            week = mutableListOf(1, 3, 5, 7, 9)
+                        })))
+                        Snackbar.make(it, "保存成功,路径 /Download/Json模板.json", Snackbar.LENGTH_SHORT).show();
+                    } else {
+                        Toasts.toast(getString(R.string.permission_is_denied))
+                    }
                 }
             }
 
             tCsv.setOnClickListener {
-                hit("download_csv_demo")
-                try {
-                    CsvParser.writeCsv(listOf(
-                            arrayOf("课程名", "教师", "位置", "1", "2", "1", "1 2 3 4 5")
-                    ), "${Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS).absolutePath}/Csv模板.csv")
-                    Snackbar.make(it, "保存成功,路径 /Download/Csv模板.csv", Snackbar.LENGTH_SHORT).show()
-                } catch (e: IOException) {
-                    CrashReport.postCatchedException(RuntimeException("csv save error:" + e.message))
-                    Toasts.toast("保存失败：" + e.message)
-                    Files.save("CSV备份模板",StringBuilder("name,teacher,position,sectionStart,sectionContinue,day,week").append("\n").append("课程名,教师,位置,1,2,1,1 2 3 4 5").toString(),"csv")
+                RxPermissions(activity()).request((Manifest.permission.READ_EXTERNAL_STORAGE)).subscribe { status ->
+                    if (status) {
+                        hit("download_csv_demo")
+                        val file = File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS).absolutePath + "/csv模板备份.csv")
+                        file.writeText(StringBuilder("name,teacher,position,sectionStart,sectionContinue,day,week").append("\n").append("课程名,教师,位置,1,2,1,1 2 3 4 5").toString())
+                        Snackbar.make(it, "保存成功,路径 /Download/csv模板备份.csv", Snackbar.LENGTH_SHORT).show()
+                    } else {
+                        Toasts.toast(getString(R.string.permission_is_denied))
+                    }
                 }
             }
 
