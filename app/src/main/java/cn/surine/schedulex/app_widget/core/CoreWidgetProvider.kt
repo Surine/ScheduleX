@@ -32,10 +32,6 @@ abstract class CoreWidgetProvider : AppWidgetProvider() {
         appWidgetManager.updateAppWidget(i, updateUi(context, appWidgetManager, i, bundle))
     }
 
-    override fun onDeleted(context: Context, iArr: IntArray) {
-        super.onDeleted(context, iArr)
-    }
-
     override fun onUpdate(context: Context, appWidgetManager: AppWidgetManager, iArr: IntArray) {
         super.onUpdate(context, appWidgetManager, iArr)
         for (id in iArr) {

@@ -43,6 +43,4 @@ public class App extends Application {
         //初始化组件化基础库, 所有友盟业务SDK都必须调用此初始化接口。
         MobclickAgent.setPageCollectionMode(MobclickAgent.PageMode.AUTO);
     }
-
-
 }

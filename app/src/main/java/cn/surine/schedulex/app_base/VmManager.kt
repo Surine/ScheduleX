@@ -1,6 +1,7 @@
 package cn.surine.schedulex.app_base
 
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import cn.surine.schedulex.base.utils.InstanceFactory
 import cn.surine.schedulex.ui.course.CourseRepository
@@ -24,15 +25,15 @@ import cn.surine.schedulex.ui.timetable_list.TimeTableViewModel
  */
 class VmManager(private val fragment: Fragment) {
     //课表vm
-    val vmSchedule by lazy { ViewModelProviders.of(fragment, InstanceFactory.getInstance(arrayOf<Class<*>>(ScheduleRepository::class.java), arrayOf<Any>(ScheduleRepository.abt.instance)))[ScheduleViewModel::class.java] }
+    val vmSchedule by lazy { ViewModelProvider(fragment, InstanceFactory.getInstance(arrayOf<Class<*>>(ScheduleRepository::class.java), arrayOf<Any>(ScheduleRepository.abt.instance)))[ScheduleViewModel::class.java] }
     //时间表vm
-    val vmTimetable by lazy { ViewModelProviders.of(fragment, InstanceFactory.getInstance(arrayOf<Class<*>>(TimeTableRepository::class.java), arrayOf<Any>(TimeTableRepository)))[TimeTableViewModel::class.java] }
+    val vmTimetable by lazy { ViewModelProvider(fragment, InstanceFactory.getInstance(arrayOf<Class<*>>(TimeTableRepository::class.java), arrayOf<Any>(TimeTableRepository)))[TimeTableViewModel::class.java] }
     //课程vm
-    val vmCourse by lazy { ViewModelProviders.of(fragment, InstanceFactory.getInstance(arrayOf<Class<*>>(CourseRepository::class.java), arrayOf<Any>(CourseRepository.abt.instance)))[CourseViewModel::class.java] }
+    val vmCourse by lazy { ViewModelProvider(fragment, InstanceFactory.getInstance(arrayOf<Class<*>>(CourseRepository::class.java), arrayOf<Any>(CourseRepository.abt.instance)))[CourseViewModel::class.java] }
     //时间信息vm
-    val vmTimer by lazy { ViewModelProviders.of(fragment, InstanceFactory.getInstance(arrayOf<Class<*>>(TimerRepository::class.java), arrayOf<Any>(TimerRepository)))[TimerViewModel::class.java] }
+    val vmTimer by lazy { ViewModelProvider(fragment, InstanceFactory.getInstance(arrayOf<Class<*>>(TimerRepository::class.java), arrayOf<Any>(TimerRepository)))[TimerViewModel::class.java] }
     //登录vm
-    val vmLogin by lazy { ViewModelProviders.of(fragment, InstanceFactory.getInstance(arrayOf<Class<*>>(LoginRepository::class.java), arrayOf<Any>(LoginRepository)))[LoginViewModel::class.java] }
+    val vmLogin by lazy { ViewModelProvider(fragment, InstanceFactory.getInstance(arrayOf<Class<*>>(LoginRepository::class.java), arrayOf<Any>(LoginRepository)))[LoginViewModel::class.java] }
     //通用配置
-    val vmScheduleFetch by lazy { ViewModelProviders.of(fragment, InstanceFactory.getInstance(arrayOf<Class<*>>(ScheduleDataFetchRepository::class.java), arrayOf<Any>(ScheduleDataFetchRepository)))[ScheduleDataFetchViewModel::class.java] }
+    val vmScheduleFetch by lazy { ViewModelProvider(fragment, InstanceFactory.getInstance(arrayOf<Class<*>>(ScheduleDataFetchRepository::class.java), arrayOf<Any>(ScheduleDataFetchRepository)))[ScheduleDataFetchViewModel::class.java] }
 }
