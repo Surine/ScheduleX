@@ -19,12 +19,10 @@ import kotlinx.android.synthetic.main.fragment_about.*
  * @date 2020/6/25 12:06
  */
 class AboutFragment : BaseFragment() {
-    private var rotate = 0F
     override fun layoutId(): Int = R.layout.fragment_about
 
     override fun onInit(parent: View?) {
         versionSlogan.text = getString(R.string.version_slogan, Others.getAppVersion())
-
         aboutItemQQ.setOnClickListener {
             hit("qq")
             Others.startQQ(activity(), "686976115")

@@ -8,7 +8,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import cn.surine.schedulex.BR
 import cn.surine.schedulex.R
-import cn.surine.schedulex.app_base.DATA
 import cn.surine.schedulex.app_base.VmManager
 import cn.surine.schedulex.app_base.hit
 import cn.surine.schedulex.base.Constants
@@ -69,7 +68,6 @@ class ScheduleListFragment : BaseFragment() {
                 openScheduleSetting(position)
                 true
             }
-
             it.setOnItemElementClickListener(object : BaseAdapter.OnItemElementClickListener(R.id.more_function) {
                 override fun onClick(v: View?, position: Int) {
                     with(PopupMenu(context, v)) {

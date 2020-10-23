@@ -22,14 +22,13 @@ class SplashFragment : BaseFragment() {
     override fun layoutId(): Int = R.layout.fragment_splash
     override fun onInit(parent: View?) {
         runnable = Runnable {
-            open(this, if (!getBoolean(Constants.IS_FIRST, false)) R.id.action_splashFragment_to_dataFetchFragment else R.id.action_splashFragment_to_scheduleFragment, Bundle())
+            open(this, if (!getBoolean(Constants.IS_FIRST, false)) R.id.action_splashFragment_to_dataFetchFragment else R.id.action_splashFragment_to_scheduleFragment)
         }
-        handler?.postDelayed(runnable, 1200)
+        handler?.postDelayed(runnable, 1000)
     }
 
     override fun onStop() {
         super.onStop()
         handler?.removeCallbacks(runnable)
     }
-
 }
