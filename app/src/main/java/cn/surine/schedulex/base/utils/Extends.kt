@@ -1,13 +1,22 @@
 package cn.surine.schedulex.base.utils
 
+import android.Manifest
+import android.app.Activity
 import android.view.LayoutInflater
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
+import cn.surine.schedulex.R
+import cn.surine.schedulex.app_base.hit
 import cn.surine.schedulex.base.Constants
 import cn.surine.schedulex.base.controller.App
 import cn.surine.schedulex.base.controller.BaseAdapter
 import cn.surine.schedulex.ui.view.custom.helper.CommonDialogs
+import com.tbruyelle.rxpermissions2.RxPermissions
+import com.tbruyelle.rxpermissions2.RxPermissionsFragment
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 /**
  * Intro：
@@ -83,3 +92,4 @@ fun ifGreater(t1: Int, t2: Int) = ifValue(t1, t2) { i1, i2 -> i1 > i2 }
 fun ifLess(t1: Int, t2: Int) = ifValue(t1, t2) { i1, i2 -> i1 < i2 }
 fun ifGreaterEqual(t1: Int, t2: Int) = ifValue(t1, t2) { i1, i2 -> i1 >= i2 }
 fun ifLessEqual(t1: Int, t2: Int) = ifValue(t1, t2) { i1, i2 -> i1 <= i2 }
+

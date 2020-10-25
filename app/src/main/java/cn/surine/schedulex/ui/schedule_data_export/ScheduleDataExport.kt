@@ -56,7 +56,7 @@ class ScheduleDataExport : BaseFragment() {
                 request(Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE).subscribe {
                     if (it) {
                         hit("save_json")
-                        saveToJson(scheduleId);
+                        saveToJson(scheduleId)
                     } else {
                         Toasts.toast(getString(R.string.permission_is_denied))
                     }

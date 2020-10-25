@@ -23,8 +23,8 @@ object LocalUniversityManager {
         val buffer = ByteArray(length)
         stream.read(buffer)
         val result = String(buffer, StandardCharsets.UTF_8)
-        val data = Jsons.parseJsonWithGsonToList(result, LocalUniversityInfo::class.java)
-        for (i in data) {
+        val data = Jsons.parseJsonWithGsonToList<LocalUniversityInfo>(result)
+        for (i in data ?: emptyList()) {
             localList.addAll(i.schools)
             for (j in i.schools) {
                 localNameMap[j.name] = j

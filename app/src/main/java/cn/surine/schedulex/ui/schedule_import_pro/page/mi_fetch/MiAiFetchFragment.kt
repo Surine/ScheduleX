@@ -116,7 +116,7 @@ class MiAiFetchFragment : BaseFragment() {
             override fun onResponse(call: Call, response: Response) {
                 val text = response.body?.string() ?: ""
                 if (text.isNotEmpty()) {
-                    val data = Jsons.parseJsonWithGson(text, MiAiBean::class.java)
+                    val data = Jsons.parseJsonWithGson<MiAiBean>(text)
                     if (data.data.courseInfos.isNotEmpty()) {
                         parseCourse("我的小爱课表", data.data)
                     }
