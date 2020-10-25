@@ -251,7 +251,10 @@ class ScheduleDataFetchFragment : BaseFragment() {
         ParserManager.wrapper2course(list, id).forEach {
             courseViewModel.insert(it)
         }
-        hit("result_json_success")
+        try {
+            hit("result_${path.split(".").last()}_success")
+        } catch (e: Exception) {
+        }
         Toasts.toast(getString(R.string.handle_success))
         Navigations.open(this, R.id.action_dataFetchFragment_to_scheduleFragment)
     }
