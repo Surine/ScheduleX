@@ -8,7 +8,10 @@ import android.view.View
 import android.view.inputmethod.EditorInfo
 import android.webkit.*
 import cn.surine.schedulex.R
-import cn.surine.schedulex.app_base.*
+import cn.surine.schedulex.app_base.IMPORT_FAIL
+import cn.surine.schedulex.app_base.UNIVERSITY_IMPORT_SUCCESS
+import cn.surine.schedulex.app_base.VmManager
+import cn.surine.schedulex.app_base.hit
 import cn.surine.schedulex.base.Constants
 import cn.surine.schedulex.base.controller.BaseFragment
 import cn.surine.schedulex.base.utils.Files
@@ -240,7 +243,7 @@ class ScheduleThirdFetchFragment : BaseFragment() {
                         parseData(list)
                     }
                     if (e != null) {
-                        hit(IMPORT_FAIL,"data" to "name:${mUniversity.name},jwSystemName:${mUniversity.jwSystemName},jwSystem:${mUniversity.jwSystem},inputUrl:${mUniversity.jwUrl}")
+                        hit(IMPORT_FAIL, "data" to "name:${mUniversity.name},jwSystemName:${mUniversity.jwSystemName},jwSystem:${mUniversity.jwSystem},inputUrl:${mUniversity.jwUrl}")
                         MIUIDialog(activity()).show {
                             title(text = "解析失败")
                             message(text = "<html>请尝试定位到课表页面再进行解析，如果还是无法导入，请您加QQ群<a href='https://www.baidu.com'>686976115</a>进行反馈；同时，如果您有适配您的学校的想法也可以直接在群里联系开发者。<br><b>如果学校已经适配，但依然解析失败，可能是源码获取异常，请尝试反馈</b></html>") {
@@ -284,11 +287,7 @@ class ScheduleThirdFetchFragment : BaseFragment() {
             dataFetchViewModel.uploadFetchSuccess(mUniversity)
             toast("导入成功")
             Prefs.save(Constants.CUR_SCHEDULE, scheduleId)
-            if (helperUrl.isEmpty()) {
-                hit(COMMON_IMPORT_SUCCESS,"data" to "jwSystemName:${mUniversity.jwSystemName},jwSystem:${mUniversity.jwSystem},inputUrl:${addressBox.text.toString()}")
-            } else {
-                hit(UNIVERSITY_IMPORT_SUCCESS,"data" to "name:${mUniversity.name},jwSystemName:${mUniversity.jwSystemName},jwSystem:${mUniversity.jwSystem},inputUrl:${addressBox.text.toString()}")
-            }
+            hit(UNIVERSITY_IMPORT_SUCCESS, "data" to "name:${mUniversity.name},jwSystemName:${mUniversity.jwSystemName},jwSystem:${mUniversity.jwSystem},inputUrl:${addressBox.text.toString()}")
             Navigations.open(this, R.id.action_scheduleThirdFetchFragment_to_scheduleFragment)
         }
     }

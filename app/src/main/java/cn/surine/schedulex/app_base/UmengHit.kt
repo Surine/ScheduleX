@@ -11,10 +11,8 @@ import com.umeng.analytics.MobclickAgent
  */
 
 const val CLICK = "click"
-const val DATA = "data"
 const val SELECT_SCHOOL = "select_school"
 const val IMPORT_FAIL = "import_fail"
-const val COMMON_IMPORT_SUCCESS = "common_import_success"
 const val UNIVERSITY_IMPORT_SUCCESS = "university_import_success"
 
 fun Fragment.hit(position: String, func: String = CLICK, map: HashMap<String, Any> = HashMap()) {
