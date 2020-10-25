@@ -296,7 +296,7 @@ class ScheduleDataFetchFragment : BaseFragment() {
                             Snackbar.make(it, "保存成功,路径 /Download/Json模板.json", Snackbar.LENGTH_SHORT).show();
                         } catch (e: Exception) {
                             hit("download_json_demo_fail")
-                            Toasts.toast("保存失败，您可以尝试先点击课表导出里的导出为json按钮再来尝试此操作，或者直接在关于页面点击github查看模板")
+                            Toasts.toastLong("保存失败，您可以尝试先点击课表导出里的导出为json按钮再来尝试此操作，或者直接在关于页面点击github查看模板")
                         }
                     } else {
                         Toasts.toast(getString(R.string.permission_is_denied))
@@ -315,7 +315,7 @@ class ScheduleDataFetchFragment : BaseFragment() {
                             hit("download_csv_demo_success")
                         } catch (e: Exception) {
                             hit("download_csv_demo_fail")
-                            Toasts.toast("保存失败，您可以尝试先点击课表导出里的导出为json按钮再来尝试此操作，或者直接在关于页面点击github查看模板")
+                            Toasts.toastLong("保存失败，您可以尝试先点击课表导出里的导出为json按钮再来尝试此操作，或者直接在关于页面点击github查看模板")
                         }
                     } else {
                         Toasts.toast(getString(R.string.permission_is_denied))

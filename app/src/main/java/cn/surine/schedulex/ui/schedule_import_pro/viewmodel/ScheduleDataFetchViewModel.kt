@@ -84,7 +84,7 @@ class ScheduleDataFetchViewModel(val repository: ScheduleDataFetchRepository) : 
 
     fun uploadFetchSuccess(mUniversity: RemoteUniversity) {
         //通用教务不上报
-        if (mUniversity.code.toInt() < 0) return
+        if (mUniversity.code.contains("-")) return
         val remoteUniversity = mUniversity.copy()
         remoteUniversity.useTimes++
         remoteUniversity.update(mUniversity.objectId, object : UpdateListener() {
