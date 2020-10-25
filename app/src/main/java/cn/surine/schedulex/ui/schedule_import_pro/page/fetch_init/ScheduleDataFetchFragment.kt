@@ -14,7 +14,6 @@ import androidx.navigation.fragment.FragmentNavigator
 import androidx.recyclerview.widget.LinearLayoutManager
 import cn.surine.schedulex.BR
 import cn.surine.schedulex.R
-import cn.surine.schedulex.app_base.DATA
 import cn.surine.schedulex.app_base.VmManager
 import cn.surine.schedulex.app_base.hit
 import cn.surine.schedulex.base.Constants
@@ -283,16 +282,22 @@ class ScheduleDataFetchFragment : BaseFragment() {
                     if (status) {
                         hit("download_json_demo")
                         val file = File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS).absolutePath + "/json模板.json")
-                        file.writeText(Jsons.entityToJson(mutableListOf(CourseWrapper().apply {
-                            name = "课程名"
-                            teacher = "教师名"
-                            position = "上课地点"
-                            sectionStart = 1
-                            sectionContinue = 2
-                            day = 1
-                            week = mutableListOf(1, 3, 5, 7, 9)
-                        })))
-                        Snackbar.make(it, "保存成功,路径 /Download/Json模板.json", Snackbar.LENGTH_SHORT).show();
+                        try {
+                            file.writeText(Jsons.entityToJson(mutableListOf(CourseWrapper().apply {
+                                name = "课程名"
+                                teacher = "教师名"
+                                position = "上课地点"
+                                sectionStart = 1
+                                sectionContinue = 2
+                                day = 1
+                                week = mutableListOf(1, 3, 5, 7, 9)
+                            })))
+                            hit("download_json_demo_success")
+                            Snackbar.make(it, "保存成功,路径 /Download/Json模板.json", Snackbar.LENGTH_SHORT).show();
+                        } catch (e: Exception) {
+                            hit("download_json_demo_fail")
+                            Toasts.toast("保存失败，您可以尝试先点击课表导出里的导出为json按钮再来尝试此操作，或者直接在关于页面点击github查看模板")
+                        }
                     } else {
                         Toasts.toast(getString(R.string.permission_is_denied))
                     }
@@ -303,9 +308,15 @@ class ScheduleDataFetchFragment : BaseFragment() {
                 RxPermissions(activity()).request((Manifest.permission.READ_EXTERNAL_STORAGE)).subscribe { status ->
                     if (status) {
                         hit("download_csv_demo")
-                        val file = File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS).absolutePath + "/csv模板备份.csv")
-                        file.writeText(StringBuilder("name,teacher,position,sectionStart,sectionContinue,day,week").append("\n").append("课程名,教师,位置,1,2,1,1 2 3 4 5").toString())
-                        Snackbar.make(it, "保存成功,路径 /Download/csv模板备份.csv", Snackbar.LENGTH_SHORT).show()
+                        try {
+                            val file = File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS).absolutePath + "/csv模板备份.csv")
+                            file.writeText(StringBuilder("name,teacher,position,sectionStart,sectionContinue,day,week").append("\n").append("课程名,教师,位置,1,2,1,1 2 3 4 5").toString())
+                            Snackbar.make(it, "保存成功,路径 /Download/csv模板备份.csv", Snackbar.LENGTH_SHORT).show()
+                            hit("download_csv_demo_success")
+                        } catch (e: Exception) {
+                            hit("download_csv_demo_fail")
+                            Toasts.toast("保存失败，您可以尝试先点击课表导出里的导出为json按钮再来尝试此操作，或者直接在关于页面点击github查看模板")
+                        }
                     } else {
                         Toasts.toast(getString(R.string.permission_is_denied))
                     }
