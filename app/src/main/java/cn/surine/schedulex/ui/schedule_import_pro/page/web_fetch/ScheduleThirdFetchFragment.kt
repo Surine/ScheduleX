@@ -177,7 +177,9 @@ class ScheduleThirdFetchFragment : BaseFragment() {
                 val uri = data.data
                 localHtml = Files.getFileContent(Files.getFilePath(activity(), uri))
                 thirdPageWebView.loadData(localHtml, "text/html; charset=UTF-8", null)
+                toast("加载成功，您可以直接点击导入按钮。")
             } catch (e: Exception) {
+                toast("加载失败:${e.message}")
                 CrashReport.postCatchedException(e)
             }
         }
