@@ -11,6 +11,7 @@ import org.jsoup.nodes.Element
  * @date 10/19/20 15:17
  */
 abstract class TableParser : IJWParse {
+
     override fun parse(html: String): List<CourseWrapper> {
         val courseList = mutableListOf<CourseWrapper>()
         val target = getTargetInitFunc(html)
@@ -20,13 +21,13 @@ abstract class TableParser : IJWParse {
             val tds = trs[trIndex].getElementsByTag("td")
             for (tdIndex in tds.indices) {
                 if (trIndex < skipCol()) continue
-                courseList.add(itemParse(tds[tdIndex]))
+                courseList.addAll(itemParse(tds[tdIndex], trIndex, tdIndex))
             }
         }
         return courseList
     }
 
-    abstract fun itemParse(element: Element?): CourseWrapper
+    abstract fun itemParse(element: Element?, trIndex: Int, tdIndex: Int): List<CourseWrapper>
     abstract fun getTargetInitFunc(html: String): Element
     abstract fun skipRow(): Int
     abstract fun skipCol(): Int

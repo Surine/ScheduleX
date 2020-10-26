@@ -28,6 +28,8 @@ import cn.surine.schedulex.ui.course.CourseViewModel
 import cn.surine.schedulex.ui.schedule.ScheduleViewModel
 import cn.surine.schedulex.ui.schedule_import_pro.core.FileParserDispatcher
 import cn.surine.schedulex.ui.schedule_import_pro.core.ParseDispatcher
+import cn.surine.schedulex.ui.schedule_import_pro.core.jw_core.NewUrp
+import cn.surine.schedulex.ui.schedule_import_pro.core.jw_core.func_parser.TableParser
 import cn.surine.schedulex.ui.schedule_import_pro.model.CourseWrapper
 import cn.surine.schedulex.ui.schedule_import_pro.model.RemoteUniversity
 import cn.surine.schedulex.ui.schedule_import_pro.page.change_school.SelectSchoolFragment
@@ -77,7 +79,6 @@ class ScheduleDataFetchFragment : BaseFragment() {
         }
 
         textView20.setOnClickListener {
-
         }
 
         //更换学校
