@@ -2,6 +2,10 @@
 
 ScheduleX Build On JetPack 更优雅的使用课程表
 
+![](https://img.shields.io/github/issues/Surine/ScheduleX)
+![](https://img.shields.io/github/forks/Surine/ScheduleX)
+![](https://img.shields.io/github/stars/Surine/ScheduleX)
+![](https://img.shields.io/badge/lang-Kotln%20%26Java-green)
 
 ## 什么东西？
 
