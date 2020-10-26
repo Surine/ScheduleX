@@ -4,7 +4,6 @@ import android.annotation.SuppressLint
 import android.view.View
 import android.webkit.*
 import cn.surine.schedulex.R
-import cn.surine.schedulex.app_base.DATA
 import cn.surine.schedulex.app_base.VmManager
 import cn.surine.schedulex.app_base.hit
 import cn.surine.schedulex.base.Constants

@@ -114,7 +114,7 @@ public class Schedule extends BaseVm {
     /**
      * 最大字符隐藏限制
      */
-    public int maxHideCharLimit;
+    public int maxHideCharLimit = 6;
 
     @SuppressLint("StringFormatMatches")
     public String getTotalWeekStr() {

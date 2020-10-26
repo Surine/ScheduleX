@@ -29,6 +29,7 @@ import cn.surine.schedulex.ui.schedule_import_pro.core.ParseDispatcher.IS_HTML
 import cn.surine.schedulex.ui.schedule_import_pro.core.ParseDispatcher.UNIVERSITY
 import cn.surine.schedulex.ui.schedule_import_pro.model.CourseWrapper
 import cn.surine.schedulex.ui.schedule_import_pro.model.RemoteUniversity
+import cn.surine.schedulex.ui.schedule_import_pro.page.change_school.SelectSchoolFragment
 import cn.surine.schedulex.ui.schedule_import_pro.viewmodel.ScheduleDataFetchViewModel
 import cn.surine.ui_lib.setting
 import com.afollestad.materialdialogs.LayoutMode
@@ -287,7 +288,7 @@ class ScheduleThirdFetchFragment : BaseFragment() {
             dataFetchViewModel.uploadFetchSuccess(mUniversity)
             toast("导入成功")
             Prefs.save(Constants.CUR_SCHEDULE, scheduleId)
-            hit(UNIVERSITY_IMPORT_SUCCESS, "data" to "name:${mUniversity.name},jwSystemName:${mUniversity.jwSystemName},jwSystem:${mUniversity.jwSystem},inputUrl:${addressBox.text.toString()}")
+            hit(UNIVERSITY_IMPORT_SUCCESS, "data" to "name:${Prefs.getString(SelectSchoolFragment.CUR_SCHOOL_NAME, "*" + mUniversity.name)},jw:${mUniversity.jwSystem},url:${addressBox.text.toString()}")
             Navigations.open(this, R.id.action_scheduleThirdFetchFragment_to_scheduleFragment)
         }
     }

@@ -5,7 +5,6 @@ import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
 import cn.surine.schedulex.BR
 import cn.surine.schedulex.R
-import cn.surine.schedulex.app_base.DATA
 import cn.surine.schedulex.app_base.SELECT_SCHOOL
 import cn.surine.schedulex.app_base.hit
 import cn.surine.schedulex.base.controller.BaseAdapter
