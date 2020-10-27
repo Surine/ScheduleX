@@ -1,5 +1,6 @@
 package cn.surine.schedulex.ui.schedule_import_pro.core.jw_core
 
+import android.util.Log
 import cn.surine.schedulex.ui.schedule_import_pro.core.IJWParse
 import cn.surine.schedulex.ui.schedule_import_pro.model.CourseWrapper
 import cn.surine.schedulex.ui.schedule_import_pro.util.ParseUtil
@@ -12,10 +13,13 @@ import org.jsoup.nodes.Element
  * @author sunliwei
  * @date 9/21/20 15:26
  */
-open class Zf : IJWParse {
+open class Zf() : IJWParse {
+
+    open fun targetId() = "Table1"
+
     override fun parse(html: String): List<CourseWrapper> {
         val courseList = mutableListOf<CourseWrapper>()
-        val target = Jsoup.parse(html).getElementById("Table1")
+        val target = Jsoup.parse(html).getElementById(targetId())
         //表格行
         val trs = target.getElementsByTag("tr")
         for (trIndex in trs.indices) {
@@ -23,13 +27,13 @@ open class Zf : IJWParse {
             val tr = trs[trIndex]
             val tds = tr.getElementsByTag("td")
             for (tdIndex in tds.indices) {
-                parseInfo(tds[tdIndex], courseList, trIndex, tdIndex)
+                parseInfo(tds[tdIndex], courseList, trIndex, tdIndex, tds.size)
             }
         }
         return courseList
     }
 
-    override fun parseInfo(element: Element, courseList: MutableList<CourseWrapper>, trIndex: Int, tdIndex: Int) {
+    override fun parseInfo(element: Element, courseList: MutableList<CourseWrapper>, trIndex: Int, tdIndex: Int, size: Int) {
         var nodes = element.textNodes()
         if (nodes.size % 4 == 0) {
             while (nodes.size != 0) {

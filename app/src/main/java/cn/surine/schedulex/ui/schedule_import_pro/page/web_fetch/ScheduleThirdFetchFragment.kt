@@ -284,13 +284,15 @@ class ScheduleThirdFetchFragment : BaseFragment() {
             toast("未检测到课程！")
             return
         } else {
-            val scheduleId = scheduleViewModel.addSchedule("我的课程表", 24, 1, Schedule.IMPORT_WAY.JW)
+            val scheduleId = scheduleViewModel.addSchedule("我的课程表", 24, 1, 1)
             val targetList = ParserManager.wrapper2course(list, scheduleId)
             courseViewModel.saveCourseByDb(targetList, scheduleId)
             dataFetchViewModel.uploadFetchSuccess(mUniversity)
             toast("导入成功")
             Prefs.save(Constants.CUR_SCHEDULE, scheduleId)
-            hit(UNIVERSITY_IMPORT_SUCCESS, "data" to "name:${Prefs.getString(SelectSchoolFragment.CUR_SCHOOL_NAME, "*" + mUniversity.name)},jw:${mUniversity.jwSystem},url:${addressBox.text.toString()}")
+            if(list.isNotEmpty()){
+                hit(UNIVERSITY_IMPORT_SUCCESS, "data" to "name:${Prefs.getString(SelectSchoolFragment.CUR_SCHOOL_NAME, "*" + mUniversity.name)},jw:${mUniversity.jwSystem},url:${addressBox.text.toString()}")
+            }
             Navigations.open(this, R.id.action_scheduleThirdFetchFragment_to_scheduleFragment)
         }
     }

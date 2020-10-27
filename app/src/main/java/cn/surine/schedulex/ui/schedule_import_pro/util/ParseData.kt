@@ -14,6 +14,7 @@ object ParseData {
     const val tust = "tust" //天津科技大学api
 
     const val ZF = "zf" //正方
+    const val ZF_T6 = "zf_t6" //正方
     const val NEW_ZF = "new_zf" //新正方
     const val QZ = "qz" //强智
     const val NEW_QZ = "new_qz" //新强智
@@ -31,6 +32,7 @@ object ParseData {
 
     val jwMap = mapOf(
             ZF to Zf(),
+            ZF_T6 to Zf_T6(),
             NEW_ZF to NewZf(),
             SW to Sw(),
             QZ to Qz(),
@@ -50,6 +52,7 @@ object ParseData {
 
     val commonJwData = listOf(
             LocalUniversity("正方教务", "-1001", jwSystem = ZF),
+            LocalUniversity("正方教务-T6", "-1001", jwSystem = ZF_T6),
             LocalUniversity("新正方教务", "-1002", jwSystem = NEW_ZF),
             LocalUniversity("强智教务", "-1003", jwSystem = QZ),
             LocalUniversity("新强智教务", "-1004", jwSystem = NEW_QZ),

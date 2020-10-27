@@ -28,6 +28,6 @@ interface IJWParse:ICommonParse {
      * @param trIndex 横向坐标
      * @param tdIndex 纵向坐标
      * */
-    fun parseInfo(element: Element, courseList: MutableList<CourseWrapper>, trIndex: Int, tdIndex: Int) {
+    fun parseInfo(element: Element, courseList: MutableList<CourseWrapper>, trIndex: Int, tdIndex: Int, size: Int) {
     }
 }

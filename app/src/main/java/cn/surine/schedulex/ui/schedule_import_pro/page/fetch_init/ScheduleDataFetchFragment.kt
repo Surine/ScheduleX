@@ -159,7 +159,7 @@ class ScheduleDataFetchFragment : BaseFragment() {
         }
         skip.setOnClickListener {
             hit("skip")
-            Prefs.save(Constants.CUR_SCHEDULE, scheduleViewModel.addSchedule(scheduleName, 24, 1, Schedule.IMPORT_WAY.ADD))
+            Prefs.save(Constants.CUR_SCHEDULE, scheduleViewModel.addSchedule(scheduleName, 24, 1,0))
             Navigations.open(this, R.id.action_dataFetchFragment_to_scheduleFragment)
         }
         help.setOnClickListener {
@@ -246,7 +246,7 @@ class ScheduleDataFetchFragment : BaseFragment() {
         }
         //开始生成列表
         val id: Long
-        Prefs.save(Constants.CUR_SCHEDULE, (scheduleViewModel.addSchedule(scheduleName, 24, 1, Schedule.IMPORT_WAY.JSON)).apply {
+        Prefs.save(Constants.CUR_SCHEDULE, (scheduleViewModel.addSchedule(scheduleName, 24, 1, 2)).apply {
             id = this
         })
         ParserManager.wrapper2course(list, id).forEach {

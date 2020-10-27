@@ -147,7 +147,7 @@ public class NewQz implements IJWParse {
     }
 
     @Override
-    public void parseInfo(@NotNull Element element, @NotNull List<CourseWrapper> courseList, int trIndex, int tdIndex) {
+    public void parseInfo(@NotNull Element element, @NotNull List<CourseWrapper> courseList, int trIndex, int tdIndex, int size) {
         //un use
     }
 }

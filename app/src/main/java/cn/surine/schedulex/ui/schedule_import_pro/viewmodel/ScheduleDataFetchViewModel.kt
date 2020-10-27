@@ -19,6 +19,7 @@ import cn.surine.schedulex.ui.schedule_import_pro.repository.ScheduleDataFetchRe
 class ScheduleDataFetchViewModel(val repository: ScheduleDataFetchRepository) : BaseViewModel() {
 
     companion object {
+        //数据库status = -1为维护
         const val LOAD_FAIL_VERSION_OLD = -1 //版本太旧
         const val LOAD_FAIL_MAINTENANCE = -2 //维护
         const val LOAD_FAIL_NULL = -3  //未适配
