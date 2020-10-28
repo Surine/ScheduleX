@@ -75,7 +75,7 @@
 
         <receiver
             android:name=".app_widget.little_daily.LittleDailyProvider"
-            android:label="每日课程(小)">
+            android:label="彩虹">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE_OPTIONS" />
@@ -90,7 +90,7 @@
 
             <meta-data
                 android:name="android.appwidget.provider"
-                android:resource="@xml/widget_3_2" />
+                android:resource="@xml/widget_4_2" />
         </receiver>
 
 
@@ -181,8 +181,7 @@
 
         <provider
             android:name="cn.bmob.v3.util.BmobContentProvider"
-            android:authorities="cn.surine.schedulex.BmobContentProvider">
-        </provider>
+            android:authorities="cn.surine.schedulex.BmobContentProvider"></provider>
     </application>
 
 </manifest>

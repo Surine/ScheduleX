@@ -1,6 +1,7 @@
 package cn.surine.schedulex.app_widget.little_daily
 
 import android.content.Context
+import android.graphics.Color
 import android.widget.RemoteViews
 import cn.surine.coursetableview.entity.BTimeTable
 import cn.surine.coursetableview.entity.BTimeTable.BTimeInfo
@@ -41,12 +42,14 @@ class LittleDailyService : DailyRemoteViewService() {
         val remoteViews = RemoteViews(mContext.packageName, R.layout.item_widget_day_class_little)
         //此处不能删除，会出复用问题
         if (course != null) {
+            remoteViews.setInt(R.id.itemRoot, "setBackgroundColor", Color.parseColor(course.color))
             remoteViews.setTextViewText(R.id.day_class_title, course.coureName)
             val sb = course.teachingBuildingName + course.classroomName
-            remoteViews.setTextViewText(R.id.day_class_subtitle, sb)
+            remoteViews.setTextViewText(R.id.day_class_subtitle, sb.takeIf { sb.isNotEmpty() || sb == " " }
+                    ?: "无位置")
             val sb2 = course.classSessions + "-" + (course.classSessions.toInt() + course.continuingSession.toInt() - 1)
             remoteViews.setTextViewText(R.id.day_class_session, sb2)
-            remoteViews.setTextViewText(R.id.widget_day_class_course_time, data.startTime)
+            remoteViews.setTextViewText(R.id.widget_day_class_course_time, data.startTime + "-" + data.endTime)
         } else {
             val str = ""
             remoteViews.setTextViewText(R.id.day_class_title, str)
