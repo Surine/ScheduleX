@@ -1,4 +1,4 @@
-package cn.surine.schedulex.app_widget.normal_daily
+package cn.surine.schedulex.app_widget.little_daily
 
 import android.appwidget.AppWidgetManager
 import android.content.Context
@@ -10,7 +10,7 @@ import cn.surine.schedulex.base.Constants
 import cn.surine.schedulex.base.utils.Dates
 import cn.surine.schedulex.base.utils.Prefs.getBoolean
 
-class NormalDailyProvider : CoreWidgetProvider() {
+class LittleDailyProvider : CoreWidgetProvider() {
 
     //这里更新UI
     public override fun updateUi(context: Context, appWidgetManager: AppWidgetManager, appId: Int): RemoteViews {
@@ -25,7 +25,7 @@ class NormalDailyProvider : CoreWidgetProvider() {
         //点击打开主界面
         WidgetUtil.toMain(remoteViews, context, R.id.root)
         //配置列表
-        WidgetUtil.addList(NormalDailyService::class.java, context, appWidgetManager, remoteViews, R.id.listview, appId)
+        WidgetUtil.addList(LittleDailyService::class.java, context, appWidgetManager, remoteViews, R.id.listview, appId)
         return remoteViews
     }
 }

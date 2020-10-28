@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/dp70">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_marginTop="@dimen/dp5"
+        android:layout_marginBottom="@dimen/dp5"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/day_class_session"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="1-2"
+            android:textSize="@dimen/t20"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/widget_day_class_course_info"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_marginEnd="@dimen/dp20"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/day_class_title"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:ellipsize="end"
+            android:gravity="bottom"
+            android:maxEms="12"
+            android:maxLines="1"
+            android:paddingStart="@dimen/dp10"
+            android:text="Android"
+            android:textColor="@android:color/black"
+            android:textSize="@dimen/t14" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:orientation="horizontal"
+            android:layout_weight="1">
+
+            <TextView
+                android:id="@+id/day_class_subtitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp8"
+                android:drawableStart="@drawable/course_position_24dp"
+                android:drawablePadding="@dimen/dp10"
+                android:drawableTint="@color/colorPrimary"
+                android:gravity="center_vertical"
+                android:paddingStart="@dimen/dp10"
+                android:text="8-210(d)" />
+
+            <TextView
+                android:id="@+id/widget_day_class_course_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp8"
+                android:gravity="center"
+                android:layout_marginStart="@dimen/dp20"
+                android:drawablePadding="@dimen/dp10"
+                android:drawableTint="@color/colorPrimary"
+                android:drawableLeft="@drawable/course_time_black_24dp"
+                android:text="8:00" />
+        </LinearLayout>
+
+    </LinearLayout>
+</LinearLayout>

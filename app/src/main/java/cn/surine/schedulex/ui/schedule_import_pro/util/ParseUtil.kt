@@ -19,7 +19,8 @@ object ParseUtil {
      * @param target 字符串
      * @param baseData 基础模板
      * */
-    fun getDayInfoByStr(target: String, baseData: Map<String, Int> = commonMap) = commonMap[target] ?: 1
+    fun getDayInfoByStr(target: String, baseData: Map<String, Int> = commonMap) = commonMap[target]
+            ?: 1
 
 
     /**
@@ -31,12 +32,12 @@ object ParseUtil {
      * @param commonRules 默认模板（全周）
      * 如果对应的三种情况是一样的，（也就是不存在xxx单周或者xxx双周类似的信息，可以直接忽略传递参数，仅传递commonRules）
      * */
-    fun getWeekInfoByStr(target: String,singleRules:String = "",doubleRules:String = "",commonRules:String): List<Int> {
+    fun getWeekInfoByStr(target: String, singleRules: String = "", doubleRules: String = "", commonRules: String): List<Int> {
         when {
             '单' in target -> {
                 for (i in 1 until Constants.MAX_SESSION) {
                     for (j in i until Constants.MAX_SESSION) {
-                        if (String.format(singleRules,i,j) == target) {
+                        if (String.format(singleRules, i, j) == target) {
                             return (i..j).toList().filter { it % 2 != 0 }
                         }
                     }
@@ -45,7 +46,7 @@ object ParseUtil {
             '双' in target -> {
                 for (i in 1 until Constants.MAX_SESSION) {
                     for (j in i until Constants.MAX_SESSION) {
-                        if (String.format(doubleRules,i,j) == target) {
+                        if (String.format(doubleRules, i, j) == target) {
                             return (i..j).toList().filter { it % 2 == 0 }
                         }
                     }
@@ -54,7 +55,7 @@ object ParseUtil {
             else -> {
                 for (i in 1 until Constants.MAX_SESSION) {
                     for (j in i until Constants.MAX_SESSION) {
-                        if (String.format(commonRules,i,j) == target) {
+                        if (String.format(commonRules, i, j) == target) {
                             return (i..j).toList()
                         }
                     }
@@ -89,4 +90,5 @@ object ParseUtil {
             data.add(converter(course = course))
         return data
     }
+
 }

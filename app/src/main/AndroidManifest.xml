@@ -74,6 +74,47 @@
 
 
         <receiver
+            android:name=".app_widget.little_daily.LittleDailyProvider"
+            android:label="每日课程(小)">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE_OPTIONS" />
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE_MY" />
+                <!--唤醒小部件-->
+                <action android:name="android.appwidget.action.WAKE_UP" />
+                <!--切换天用的广播-->
+                <action android:name="android.appwidget.action.NEXT_DAY" />
+                <action android:name="android.appwidget.action.PREVIOUS_DAY" />
+
+            </intent-filter>
+
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/widget_3_2" />
+        </receiver>
+
+
+        <receiver
+            android:name=".app_widget.terminal_ui.TerminalUiDailyProvider"
+            android:label="终端">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE_OPTIONS" />
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE_MY" />
+                <!--唤醒小部件-->
+                <action android:name="android.appwidget.action.WAKE_UP" />
+                <!--切换天用的广播-->
+                <action android:name="android.appwidget.action.NEXT_DAY" />
+                <action android:name="android.appwidget.action.PREVIOUS_DAY" />
+
+            </intent-filter>
+
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/terminal_ui_3_2" />
+        </receiver>
+
+        <receiver
             android:name=".app_widget.normal_week.NormalWeekProvider"
             android:label="每周课程-默认">
             <intent-filter>
@@ -121,6 +162,19 @@
 
         <service
             android:name=".app_widget.core.WeekRemoteViewService"
+            android:enabled="true"
+            android:exported="true"
+            android:permission="android.permission.BIND_REMOTEVIEWS" />
+
+        <service
+            android:name=".app_widget.terminal_ui.TerminalUiDailyService"
+            android:enabled="true"
+            android:exported="true"
+            android:permission="android.permission.BIND_REMOTEVIEWS" />
+
+
+        <service
+            android:name=".app_widget.little_daily.LittleDailyService"
             android:enabled="true"
             android:exported="true"
             android:permission="android.permission.BIND_REMOTEVIEWS" />

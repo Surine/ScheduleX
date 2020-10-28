@@ -104,14 +104,14 @@
         android:layout_height="@dimen/dp40"
         android:layout_marginEnd="@dimen/dp20"
         android:background="@drawable/ic_program_bar_background"
-        android:paddingStart="@dimen/dp10"
-        android:paddingEnd="@dimen/dp10"
+        android:paddingStart="@dimen/dp6"
+        android:paddingEnd="@dimen/dp6"
         app:layout_constraintBottom_toBottomOf="@id/textView24"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="@id/textView20">
 
         <TextView
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_marginStart="@dimen/dp5"
             android:layout_marginEnd="@dimen/dp10"
@@ -120,7 +120,7 @@
             android:drawableLeft="@mipmap/ic_skip"
             android:drawablePadding="@dimen/dp4"
             android:gravity="center"
-            android:text="跳过"
+            android:text="稍后添加"
             android:textColor="@android:color/black" />
 
         <View
@@ -133,7 +133,7 @@
 
         <TextView
             android:id="@+id/help"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_marginStart="@dimen/dp10"
             android:layout_marginEnd="@dimen/dp5"
