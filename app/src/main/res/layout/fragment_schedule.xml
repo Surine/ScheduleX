@@ -153,6 +153,20 @@
             app:srcCompat="@drawable/ic_add_circle_black_24dp" />
 
 
+        <ImageView
+            android:id="@+id/programEntry"
+            android:layout_width="@dimen/dp40"
+            android:layout_height="@dimen/dp40"
+            android:layout_marginEnd="@dimen/dp32"
+            android:background="?selectableItemBackgroundBorderless"
+            android:padding="@dimen/dp8"
+            android:tint="@{schedule.lightTextColor()}"
+            app:layout_constraintBottom_toBottomOf="@+id/funcBtn"
+            app:layout_constraintEnd_toStartOf="@+id/addCourse"
+            app:layout_constraintTop_toTopOf="@+id/funcBtn"
+            app:srcCompat="@drawable/ic_baseline_eco_24" />
+
+
         <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
             android:id="@+id/courseOp"
             android:layout_width="wrap_content"

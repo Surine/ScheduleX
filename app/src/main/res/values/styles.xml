@@ -114,4 +114,10 @@
         <item name="tickColorActive">@android:color/transparent</item>
         <item name="tickColorInactive">@android:color/transparent</item>
     </style>
+
+    <style name="setting_title_style" parent="AppTheme">
+        <item name="android:textColor">@android:color/black</item>
+        <item name="android:textSize">@dimen/t18</item>
+        <item name="android:textStyle">bold</item>
+    </style>
 </resources>

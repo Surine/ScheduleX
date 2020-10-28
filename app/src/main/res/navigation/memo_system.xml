@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/memo_system"
+    app:startDestination="@id/memoFragment">
+
+    <fragment
+        android:id="@+id/memoFragment"
+        android:name="cn.surine.schedulex.ui.memo_pro.MemoFragment"
+        android:label="MemoFragment"
+        >
+        <action
+            android:id="@+id/action_memoFragment_to_addMemoFragment2"
+            app:destination="@id/addMemoFragment" />
+        <action
+            android:id="@+id/action_memoFragment_to_memoInfoFragment2"
+            app:destination="@id/memoInfoFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/memoInfoFragment"
+        android:name="cn.surine.schedulex.ui.memo_pro.MemoInfoFragment"
+        android:label="MemoInfoFragment" />
+    <fragment
+        android:id="@+id/addMemoFragment"
+        android:name="cn.surine.schedulex.ui.memo_pro.AddMemoFragment"
+        android:label="AddMemoFragment" />
+</navigation>

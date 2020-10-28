@@ -8,9 +8,11 @@ import androidx.room.migration.Migration
 import androidx.sqlite.db.SupportSQLiteDatabase
 import cn.surine.schedulex.base.Constants
 import cn.surine.schedulex.data.dao.CourseDao
+import cn.surine.schedulex.data.dao.MemoDao
 import cn.surine.schedulex.data.dao.ScheduleDao
 import cn.surine.schedulex.data.dao.TimeTableDao
 import cn.surine.schedulex.data.entity.Course
+import cn.surine.schedulex.data.entity.Memo
 import cn.surine.schedulex.data.entity.Schedule
 import cn.surine.schedulex.data.entity.TimeTable
 
@@ -20,7 +22,7 @@ import cn.surine.schedulex.data.entity.TimeTable
  * @author sunliwei
  * @date 2020-01-16 20:53
  */
-@Database(entities = [Course::class, Schedule::class, TimeTable::class], version = 6)
+@Database(entities = [Course::class, Schedule::class, TimeTable::class,Memo::class], version = 6)
 abstract class BaseAppDatabase : RoomDatabase() {
     /**
      * 获取课表数据DAO
@@ -29,6 +31,7 @@ abstract class BaseAppDatabase : RoomDatabase() {
 
     abstract fun scheduleDao(): ScheduleDao?
     abstract fun timeTableDao(): TimeTableDao?
+    abstract fun memoDao():MemoDao
 
     companion object {
         @Volatile
