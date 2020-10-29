@@ -1,6 +1,7 @@
 package cn.surine.schedulex.base.controller
 
 import androidx.annotation.Keep
+import androidx.databinding.BaseObservable
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import cn.surine.schedulex.base.utils.Toasts
@@ -15,7 +16,7 @@ import kotlinx.coroutines.launch
  * @date 2020/6/24 10:27
  */
 @Keep
-open class BaseViewModel : ViewModel() {
+open class BaseViewModel : ViewModel(){
 
     companion object {
         const val START_LOAD = 1

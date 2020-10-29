@@ -152,21 +152,3 @@ public class BaseAdapter<T> extends RecyclerView.Adapter<ViewHolder> {
     }
 }
 
-/**
- * ViewHolder
- */
-class ViewHolder extends RecyclerView.ViewHolder {
-    private ViewDataBinding binding;
-
-    ViewDataBinding getBinding() {
-        return binding;
-    }
-
-    void setBinding(ViewDataBinding binding) {
-        this.binding = binding;
-    }
-
-    ViewHolder(@NonNull View itemView) {
-        super(itemView);
-    }
-}

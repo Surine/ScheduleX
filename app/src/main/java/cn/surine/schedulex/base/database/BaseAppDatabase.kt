@@ -7,10 +7,7 @@ import androidx.room.RoomDatabase
 import androidx.room.migration.Migration
 import androidx.sqlite.db.SupportSQLiteDatabase
 import cn.surine.schedulex.base.Constants
-import cn.surine.schedulex.data.dao.CourseDao
-import cn.surine.schedulex.data.dao.MemoDao
-import cn.surine.schedulex.data.dao.ScheduleDao
-import cn.surine.schedulex.data.dao.TimeTableDao
+import cn.surine.schedulex.data.dao.*
 import cn.surine.schedulex.data.entity.*
 
 /**
@@ -29,6 +26,7 @@ abstract class BaseAppDatabase : RoomDatabase() {
     abstract fun scheduleDao(): ScheduleDao?
     abstract fun timeTableDao(): TimeTableDao?
     abstract fun memoDao(): MemoDao
+    abstract fun eventDao():EventDao
 
     companion object {
         @Volatile

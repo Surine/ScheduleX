@@ -1,9 +1,6 @@
 package cn.surine.schedulex.data.entity
 
-import androidx.room.Embedded
-import androidx.room.Entity
-import androidx.room.PrimaryKey
-import androidx.room.Relation
+import androidx.room.*
 
 /**
  * Intro：
@@ -13,13 +10,14 @@ import androidx.room.Relation
  */
 @Entity
 data class Memo(
-        @PrimaryKey(autoGenerate = true) var id: Int = 0,
+        @PrimaryKey(autoGenerate = true) var id: Long = 0,
         var text: String = "",
         var position: String = "",
         var time: Long = 0,
         var type: Int = 0,
         var color: String = "",
-        var extra: String = ""
+        var extra: String = "",
+        @Ignore var childEvent: MutableList<Event> = mutableListOf()
 )
 
 @Entity
@@ -27,15 +25,15 @@ data class Event(
         @PrimaryKey(autoGenerate = true) var id: Int = 0,
         var done: Boolean = false,
         var content: String = "",
-        var parentId: Long = 0
+        var parentId: Long
 )
 
 
 //fix: There is a problem with the query: [SQLITE_ERROR] SQL error or missing database (no such table: Event)
 //不要忘记在AppDatabase注册类（table）
 data class MemoWithEvent(
-        @Embedded var memo: Memo,
+        @Embedded val memo: Memo,
         @Relation(
                 parentColumn = "id",
-                entityColumn = "parentId") var events: List<Event>
+                entityColumn = "parentId") val events: List<Event>
 )

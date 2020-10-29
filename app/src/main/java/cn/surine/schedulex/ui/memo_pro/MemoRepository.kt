@@ -1,7 +1,9 @@
 package cn.surine.schedulex.ui.memo_pro
 
 import cn.surine.schedulex.base.controller.BaseRepository
+import cn.surine.schedulex.data.entity.Event
 import cn.surine.schedulex.data.entity.Memo
+import cn.surine.schedulex.data.entity.MemoWithEvent
 
 /**
  * Intro：
@@ -15,7 +17,17 @@ object MemoRepository : BaseRepository() {
      * add a memo to memo table
      * */
     fun addMemo(memo: Memo): Long {
-        return appDatabase!!.memoDao().insert(memo)
+        val id = appDatabase!!.memoDao().insert(memo)
+        memo.childEvent.forEach {
+            addMemoChild(it.apply {
+                parentId = id
+            })
+        }
+        return id
+    }
+
+    private fun addMemoChild(event: Event): Long {
+        return appDatabase!!.eventDao().insert(event)
     }
 
     /**
@@ -29,8 +41,7 @@ object MemoRepository : BaseRepository() {
     /**
      * get all memos in the table
      * */
-    fun getMemos(): List<Memo> {
-        return emptyList()
-//        return appDatabase!!.memoDao().getAll()
+    fun getMemos(): List<MemoWithEvent> {
+        return appDatabase!!.memoDao().getAll()
     }
 }

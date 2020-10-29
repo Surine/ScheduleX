@@ -6,7 +6,10 @@ import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -14,9 +17,12 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 
 import java.io.File;
+import java.util.List;
 
+import cn.surine.schedulex.R;
 import cn.surine.schedulex.base.Constants;
 import cn.surine.schedulex.base.controller.App;
+import cn.surine.schedulex.data.entity.Event;
 
 /**
  * Intro：自定义绑定
@@ -50,6 +56,18 @@ public class BindingAdapters {
 
         textView.setBackground(Drawables.getDrawable(Color.parseColor(color), 180, 10, Color.WHITE));
     }
+
+
+//    @androidx.databinding.BindingAdapter("bindChildTask")
+//    public static void bindChildTask(ViewGroup viewGroup, List<Event> tasks) {
+//        for (int i = 0; i < tasks.size(); i++) {
+//            View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.item_child_event_display, null);
+//            CheckBox checkBox = view.findViewById(R.id.taskInfo);
+//            checkBox.setChecked(tasks.get(i).getDone());
+//            checkBox.setText(tasks.get(i).getContent());
+//            viewGroup.addView(view);
+//        }
+//    }
 
 
     /**

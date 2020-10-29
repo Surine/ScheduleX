@@ -7,12 +7,12 @@
 
         <variable
             name="memo"
-            type="cn.surine.schedulex.data.entity.Memo" />
+            type="cn.surine.schedulex.data.entity.MemoWithEvent" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content">
 
         <ImageView
             android:id="@+id/imageView"
@@ -29,7 +29,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/dp20"
-            android:text="@{memo.text}"
+            android:text="@{memo.memo.text}"
             android:textColor="@android:color/black"
             android:textSize="@dimen/t17"
             app:layout_constraintBottom_toBottomOf="@+id/imageView"
@@ -43,7 +43,7 @@
             android:layout_marginEnd="@dimen/dp20"
             android:gravity="center"
             android:lineSpacingExtra="@dimen/dp5"
-            android:text="@{String.valueOf(memo.time)}"
+            android:text="@{String.valueOf(memo.memo.time)}"
             app:layout_constraintBottom_toBottomOf="@+id/textView26"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@+id/textView14" />
@@ -53,31 +53,22 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/dp5"
-            android:text="@{memo.position}"
+            android:text="@{memo.memo.position}"
             app:layout_constraintStart_toStartOf="@+id/textView14"
             app:layout_constraintTop_toBottomOf="@+id/textView14" />
 
         <LinearLayout
             android:id="@+id/childEvent"
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dp50"
             android:layout_marginTop="@dimen/dp20"
+            android:layout_marginEnd="@dimen/dp20"
             android:background="@drawable/config_card_background"
             android:orientation="vertical"
+            app:layout_constraintRight_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintStart_toStartOf="@+id/textView26"
             app:layout_constraintTop_toBottomOf="@+id/textView26">
-
-            <CheckBox
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="bring the laptop"
-                android:textSize="@dimen/t12" />
-
-            <CheckBox
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="take your mobile phone" />
 
         </LinearLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>

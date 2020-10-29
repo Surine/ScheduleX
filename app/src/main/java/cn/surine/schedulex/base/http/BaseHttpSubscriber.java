@@ -6,7 +6,6 @@ import androidx.lifecycle.MutableLiveData;
 import org.reactivestreams.Subscriber;
 import org.reactivestreams.Subscription;
 
-import cn.surine.schedulex.base.utils.Exceptions;
 import cn.surine.schedulex.data.entity.BaseVm;
 
 /**
