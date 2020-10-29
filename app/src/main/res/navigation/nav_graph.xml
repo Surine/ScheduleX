@@ -144,6 +144,12 @@
             app:destination="@id/ScheduleListFragment"
             app:enterAnim="@anim/fragment_open_enter"
             app:popEnterAnim="@anim/fragment_open_enter" />
+
+        <action
+            android:id="@+id/action_scheduleFragment_to_MemoFragment"
+            app:destination="@id/memo_system"
+            app:enterAnim="@anim/fragment_open_enter"
+            app:popEnterAnim="@anim/fragment_open_enter" />
     </fragment>
     <fragment
         android:id="@+id/timeTableListFragment"
@@ -206,4 +212,6 @@
         android:id="@+id/selectSchoolFragment"
         android:name="cn.surine.schedulex.ui.schedule_import_pro.page.change_school.SelectSchoolFragment"
         android:label="SelectSchoolFragment" />
+
+    <include app:graph="@navigation/memo_system" />
 </navigation>

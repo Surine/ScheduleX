@@ -2,6 +2,7 @@ package cn.surine.schedulex.data.dao
 
 import androidx.room.*
 import cn.surine.schedulex.data.entity.Memo
+import cn.surine.schedulex.data.entity.MemoWithEvent
 
 /**
  * Intro：
@@ -11,6 +12,10 @@ import cn.surine.schedulex.data.entity.Memo
  */
 @Dao
 interface MemoDao {
+    /**
+     * insert a memo
+     * @param memos Memo
+     * */
     @Insert
     fun insert(memos: Memo?): Long
 
@@ -26,11 +31,12 @@ interface MemoDao {
     @Query("delete from Memo")
     fun deleteAll()
 
-    @Transaction
-    @Query("select * from Memo")
-    fun getAll(): List<Memo>
 
-    @Query("select * from Memo where id = :id")
-    fun getById(id: Long): Memo?
+    @Transaction    //原子性操作注解
+    @Query("select * from Memo")
+    fun getAll(): List<MemoWithEvent>
+
+//    @Query("select * from Memo where id = :id")
+//    fun getById(id: Long): Memo?
 
 }

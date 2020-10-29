@@ -14,7 +14,6 @@ import java.util.Random;
 
 import cn.surine.schedulex.base.Constants;
 import cn.surine.schedulex.base.utils.Dates;
-import cn.surine.schedulex.base.utils.Strs;
 import cn.surine.schedulex.base.utils.Uis;
 import cn.surine.schedulex.data.entity.Course;
 import cn.surine.schedulex.data.entity.Schedule;
@@ -33,7 +32,7 @@ public class ScheduleViewModel extends ViewModel {
     /**
      * 添加课表
      */
-    public long  addSchedule(String name, int totalWeek, int curWeek, int source) {
+    public long addSchedule(String name, int totalWeek, int curWeek, int source) {
         Schedule schedule = new Schedule();
         schedule.name = name;
         schedule.totalWeek = totalWeek == 0 ? 24 : totalWeek;
@@ -90,7 +89,7 @@ public class ScheduleViewModel extends ViewModel {
                 if (TextUtils.isEmpty(course.classDay)) {
                     continue;
                 }
-                if (!(Strs.equals(course.classDay, "6") || Strs.equals(course.classDay, "7"))) {
+                if (!("6".equals(course.classDay) || "7".equals(course.classDay))) {
                     //持续2节的添加1个空格，持续4节的添加2个空格
                     if (Integer.parseInt(course.continuingSession) == 4) {
                         handleData.set(divide(course.classSessions) * 5 + (Integer.parseInt(course.classDay) - 1), course);

@@ -11,10 +11,7 @@ import cn.surine.schedulex.data.dao.CourseDao
 import cn.surine.schedulex.data.dao.MemoDao
 import cn.surine.schedulex.data.dao.ScheduleDao
 import cn.surine.schedulex.data.dao.TimeTableDao
-import cn.surine.schedulex.data.entity.Course
-import cn.surine.schedulex.data.entity.Memo
-import cn.surine.schedulex.data.entity.Schedule
-import cn.surine.schedulex.data.entity.TimeTable
+import cn.surine.schedulex.data.entity.*
 
 /**
  * Intro：
@@ -22,7 +19,7 @@ import cn.surine.schedulex.data.entity.TimeTable
  * @author sunliwei
  * @date 2020-01-16 20:53
  */
-@Database(entities = [Course::class, Schedule::class, TimeTable::class,Memo::class], version = 6)
+@Database(entities = [Course::class, Schedule::class, TimeTable::class, Memo::class,Event::class], version = 7)
 abstract class BaseAppDatabase : RoomDatabase() {
     /**
      * 获取课表数据DAO
@@ -31,7 +28,7 @@ abstract class BaseAppDatabase : RoomDatabase() {
 
     abstract fun scheduleDao(): ScheduleDao?
     abstract fun timeTableDao(): TimeTableDao?
-    abstract fun memoDao():MemoDao
+    abstract fun memoDao(): MemoDao
 
     companion object {
         @Volatile
@@ -44,7 +41,7 @@ abstract class BaseAppDatabase : RoomDatabase() {
                     if (instance == null) {
                         instance = Room.databaseBuilder(context.applicationContext, BaseAppDatabase::class.java, Constants.DB_NAME)
                                 .allowMainThreadQueries() //TODO：slw 主线程访问，不安全
-                                .addMigrations(mg_1_2, mg_2_3, mg_3_4, mg_4_5, mg_5_6)
+                                .addMigrations(mg_1_2, mg_2_3, mg_3_4, mg_4_5, mg_5_6, mg_6_7)
                                 .build()
                     }
                 }
@@ -55,7 +52,7 @@ abstract class BaseAppDatabase : RoomDatabase() {
         /**
          * 课程表支持显示周末和课程格子透明度
          */
-        val mg_1_2: Migration = object : Migration(1, 2) {
+        private val mg_1_2: Migration = object : Migration(1, 2) {
             override fun migrate(database: SupportSQLiteDatabase) {
                 database.execSQL("ALTER TABLE schedule ADD COLUMN isShowWeekend INTEGER NOT NULL DEFAULT 0 ")
                 database.execSQL("ALTER TABLE schedule ADD COLUMN alphaForCourseItem INTEGER NOT NULL DEFAULT 10 ")
@@ -68,7 +65,7 @@ abstract class BaseAppDatabase : RoomDatabase() {
          * 新加入时间表
          * 课表支持时间显示
          */
-        val mg_2_3: Migration = object : Migration(2, 3) {
+        private val mg_2_3: Migration = object : Migration(2, 3) {
             override fun migrate(database: SupportSQLiteDatabase) {
                 database.execSQL("ALTER TABLE schedule ADD COLUMN maxSession INTEGER NOT NULL DEFAULT 12")
                 database.execSQL("ALTER TABLE schedule ADD COLUMN itemHeight INTEGER NOT NULL DEFAULT 60 ")
@@ -82,7 +79,7 @@ abstract class BaseAppDatabase : RoomDatabase() {
         /**
          * 加入课程主题
          */
-        val mg_3_4: Migration = object : Migration(3, 4) {
+        private val mg_3_4: Migration = object : Migration(3, 4) {
             override fun migrate(database: SupportSQLiteDatabase) {
                 database.execSQL("ALTER TABLE schedule ADD COLUMN courseThemeId INTEGER NOT NULL DEFAULT 0")
             }
@@ -91,7 +88,7 @@ abstract class BaseAppDatabase : RoomDatabase() {
         /**
          * 备忘录
          * */
-        val mg_4_5: Migration = object : Migration(4, 5) {
+        private val mg_4_5: Migration = object : Migration(4, 5) {
             override fun migrate(database: SupportSQLiteDatabase) {
                 database.execSQL("ALTER TABLE course ADD COLUMN memo TEXT")
             }
@@ -100,13 +97,20 @@ abstract class BaseAppDatabase : RoomDatabase() {
         /**
          * 文本
          * */
-        val mg_5_6: Migration = object : Migration(5, 6) {
+        private val mg_5_6: Migration = object : Migration(5, 6) {
             override fun migrate(database: SupportSQLiteDatabase) {
                 database.execSQL("ALTER TABLE schedule ADD COLUMN textAlignFlag INTEGER NOT NULL DEFAULT 0")
                 database.execSQL("ALTER TABLE schedule ADD COLUMN maxHideCharLimit INTEGER NOT NULL DEFAULT 6")
             }
         }
 
+
+        private val mg_6_7: Migration = object : Migration(6, 7) {
+            override fun migrate(database: SupportSQLiteDatabase) {
+                database.execSQL("CREATE TABLE IF NOT EXISTS event (id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, name TEXT,startTime INTEGER NOT NULL DEFAULT 0,rule TEXT)")
+                database.execSQL("CREATE TABLE IF NOT EXISTS memo (id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, done INTEGER NOT NULL DEFAULT 0,type INTEGER NOT NULL DEFAULT 0,content TEXT NOT NULL DEFAULT '',parentId INTEGER NOT NULL DEFAULT 0)")
+            }
+        }
 
     }
 }

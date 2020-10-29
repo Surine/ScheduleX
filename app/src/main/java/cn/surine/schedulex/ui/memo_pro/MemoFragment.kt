@@ -1,6 +1,11 @@
 package cn.surine.schedulex.ui.memo_pro
 
+import android.animation.ObjectAnimator
+import android.text.SpannableStringBuilder
 import android.view.View
+import androidx.core.net.toUri
+import androidx.core.text.bold
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import cn.surine.schedulex.BR
@@ -8,10 +13,10 @@ import cn.surine.schedulex.R
 import cn.surine.schedulex.app_base.VmManager
 import cn.surine.schedulex.base.controller.BaseAdapter
 import cn.surine.schedulex.base.controller.BaseFragment
+import cn.surine.schedulex.base.ktx.open
 import cn.surine.schedulex.base.utils.load
 import cn.surine.schedulex.data.entity.Memo
 import kotlinx.android.synthetic.main.fragment_memo.*
-import kotlinx.android.synthetic.main.view_recycle_list.view.*
 
 /**
  * Intro：
@@ -21,12 +26,13 @@ import kotlinx.android.synthetic.main.view_recycle_list.view.*
  */
 class MemoFragment : BaseFragment() {
     private lateinit var memoViewModel: MemoViewModel
-    private lateinit var datas: List<Memo>
+    private var datas: List<Memo> = emptyList()
     override fun onInit(parent: View?) {
+
         VmManager(this).apply {
             memoViewModel = vmMemo
         }
-        memoList.recyclerview.load(LinearLayoutManager(activity), BaseAdapter(datas, R.layout.item_memo,BR.memo)) {
+        memoList.load(LinearLayoutManager(activity), BaseAdapter(datas, R.layout.item_memo, BR.memo)) {
             it.setOnItemClickListener {
                 //click
             }
@@ -36,11 +42,12 @@ class MemoFragment : BaseFragment() {
             memoViewModel.getMemos()
         }
         memoViewModel.memos.observe(this, Observer {
-            memoList.recyclerview.adapter
+            datas = it
+            memoList.adapter?.notifyDataSetChanged()
         })
 
         addMemo.setOnClickListener {
-            //add
+            open(R.id.action_memoFragment_to_addMemoFragment2)
         }
 
     }

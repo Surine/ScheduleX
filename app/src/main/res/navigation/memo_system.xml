@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/memo_system"
     app:startDestination="@id/memoFragment">
 
@@ -8,6 +9,7 @@
         android:id="@+id/memoFragment"
         android:name="cn.surine.schedulex.ui.memo_pro.MemoFragment"
         android:label="MemoFragment"
+        tools:layout="@layout/fragment_memo"
         >
         <action
             android:id="@+id/action_memoFragment_to_addMemoFragment2"
@@ -19,9 +21,13 @@
     <fragment
         android:id="@+id/memoInfoFragment"
         android:name="cn.surine.schedulex.ui.memo_pro.MemoInfoFragment"
-        android:label="MemoInfoFragment" />
+        android:label="MemoInfoFragment"
+        tools:layout="@layout/fragment_memo_info"
+        />
     <fragment
         android:id="@+id/addMemoFragment"
         android:name="cn.surine.schedulex.ui.memo_pro.AddMemoFragment"
-        android:label="AddMemoFragment" />
+        android:label="AddMemoFragment"
+        tools:layout="@layout/fragment_add_memo"
+        />
 </navigation>

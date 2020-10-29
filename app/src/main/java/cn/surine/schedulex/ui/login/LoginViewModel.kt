@@ -2,13 +2,11 @@ package cn.surine.schedulex.ui.login
 
 import android.text.Editable
 import android.text.TextUtils
-import android.text.TextWatcher
 import androidx.lifecycle.MutableLiveData
 import cn.surine.schedulex.base.Constants
 import cn.surine.schedulex.base.controller.BaseViewModel
 import cn.surine.schedulex.base.http.BaseHttpSubscriber
 import cn.surine.schedulex.base.utils.SimpleTextWatcher
-import cn.surine.schedulex.base.utils.Strs
 import cn.surine.schedulex.data.entity.VmResultString
 
 /**
@@ -59,8 +57,8 @@ class LoginViewModel(val mLoginRepository: LoginRepository) : BaseViewModel() {
         }
         loginStatus.value = START_LOGIN
         mLoginRepository.login(account.value!!, password.value!!).subscribe(object : BaseHttpSubscriber<VmResultString?>() {
-           override fun onSuccess(vm: MutableLiveData<VmResultString?>?) {
-               loginStatus.value = if (Strs.equals(Constants.LOGIN_SUCCESS, vm?.value!!.result)) LOGIN_SUCCESS else LOGIN_FAIL
+            override fun onSuccess(vm: MutableLiveData<VmResultString?>?) {
+                loginStatus.value = if (Constants.LOGIN_SUCCESS == vm?.value!!.result) LOGIN_SUCCESS else LOGIN_FAIL
             }
         })
     }

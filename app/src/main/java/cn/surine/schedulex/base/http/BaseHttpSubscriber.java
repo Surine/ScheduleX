@@ -67,7 +67,7 @@ public abstract class BaseHttpSubscriber<T extends BaseVm> implements Subscriber
 
     @CallSuper
     public void onFail(Throwable t) {
-        Exceptions.handle(t);
+//        Exceptions.handle(t);
     }
 
 }

@@ -30,6 +30,7 @@ object MemoRepository : BaseRepository() {
      * get all memos in the table
      * */
     fun getMemos(): List<Memo> {
-        return appDatabase!!.memoDao().getAll()
+        return emptyList()
+//        return appDatabase!!.memoDao().getAll()
     }
 }

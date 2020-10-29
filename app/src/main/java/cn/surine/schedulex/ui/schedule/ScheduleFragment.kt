@@ -147,7 +147,7 @@ class ScheduleFragment : BaseBindingFragment<FragmentScheduleBinding>() {
             }.crossFade().into(background)
         }
 
-
+        programEntry.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.action_scheduleFragment_to_MemoFragment))
         funcBtn.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.action_scheduleFragment_to_ScheduleListFragment2))
         addCourse.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.action_scheduleFragment_to_addCourseFragment))
         //设置彩蛋事件
