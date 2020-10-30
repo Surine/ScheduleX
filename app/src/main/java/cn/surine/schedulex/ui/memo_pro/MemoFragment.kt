@@ -19,6 +19,7 @@ import cn.surine.schedulex.base.ktx.open
 import cn.surine.schedulex.base.ktx.toast
 import cn.surine.schedulex.base.utils.load
 import cn.surine.schedulex.data.entity.MemoWithEvent
+import cn.surine.schedulex.ui.view.custom.helper.ItemDecoration
 import com.peanut.sdk.miuidialog.MIUIDialog
 import kotlinx.android.synthetic.main.fragment_memo.*
 import kotlinx.android.synthetic.main.item_memo.view.*
@@ -34,6 +35,7 @@ class MemoFragment : BaseFragment() {
 
     companion object {
         const val MEMO_TYPE = "MEMO_TYPE"
+        const val MEMO_ID = "MEMO_ID"
     }
 
     private lateinit var memoViewModel: MemoViewModel
@@ -46,6 +48,12 @@ class MemoFragment : BaseFragment() {
 
         val adapter = MemoAdapter(activity(), datas, R.layout.item_memo, BR.memo)
         memoList.load(LinearLayoutManager(activity), adapter)
+        memoList.addItemDecoration(ItemDecoration())
+        adapter.setOnItemClickListener {
+            open(R.id.action_memoFragment_to_memoInfoFragment2, Bundle().apply {
+                putLong(MEMO_ID, datas[it].memo.id)
+            })
+        }
 
         memoViewModel.getMemos()
         memoViewModel.memos.observe(this, Observer {
@@ -65,6 +73,8 @@ class MemoFragment : BaseFragment() {
                 }
             }
         }
+
+
     }
 
 

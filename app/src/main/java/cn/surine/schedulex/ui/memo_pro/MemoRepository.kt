@@ -44,4 +44,8 @@ object MemoRepository : BaseRepository() {
     fun getMemos(): List<MemoWithEvent> {
         return appDatabase!!.memoDao().getAll()
     }
+
+    fun getMemoById(id:Long): MemoWithEvent {
+        return appDatabase!!.memoDao().getMemoById(id)
+    }
 }

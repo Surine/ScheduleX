@@ -21,6 +21,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:drawablePadding="@dimen/dp10"
                 android:gravity="center"
                 android:tag="_normal"
                 android:text="normal"
@@ -31,9 +32,10 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:drawablePadding="@dimen/dp10"
                 android:gravity="center"
                 android:tag="_trip"
-                android:text="normal"
+                android:text="trip"
                 app:drawableTopCompat="@mipmap/android" />
 
             <TextView
@@ -42,16 +44,17 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:drawableTop="@mipmap/android"
+                android:drawablePadding="@dimen/dp10"
                 android:gravity="center"
                 android:tag="_exam"
-                android:text="normal" />
+                android:text="exam" />
         </LinearLayout>
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/dp20"
+        android:layout_marginTop="@dimen/dp50"
         android:layout_marginBottom="@dimen/dp20"
         android:orientation="vertical">
 
@@ -66,9 +69,10 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:drawableTop="@mipmap/android"
+                android:drawablePadding="@dimen/dp10"
                 android:gravity="center"
                 android:tag="_meeting"
-                android:text="normal" />
+                android:text="meeting" />
 
             <TextView
                 android:id="@+id/addOther"
@@ -76,9 +80,10 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:drawableTop="@mipmap/android"
+                android:drawablePadding="@dimen/dp10"
                 android:gravity="center"
                 android:tag="_other"
-                android:text="normal" />
+                android:text="other" />
 
             <View
                 android:layout_width="0dp"

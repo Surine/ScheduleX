@@ -12,14 +12,18 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:paddingTop="@dimen/dp10"
+        android:paddingBottom="@dimen/dp10"
+        >
 
         <ImageView
             android:id="@+id/imageView"
             android:layout_width="@dimen/dp30"
             android:layout_height="@dimen/dp30"
-            android:layout_marginLeft="@dimen/dp20"
-            android:layout_marginTop="@dimen/dp20"
+            android:layout_marginStart="@dimen/dp20"
+            android:src="@mipmap/android"
+            app:layout_constraintBottom_toBottomOf="@id/textView26"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:srcCompat="@tools:sample/avatars" />
@@ -28,7 +32,7 @@
             android:id="@+id/textView14"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/dp20"
+            android:layout_marginStart="@dimen/dp20"
             android:text="@{memo.memo.text}"
             android:textColor="@android:color/black"
             android:textSize="@dimen/t17"
@@ -43,7 +47,7 @@
             android:layout_marginEnd="@dimen/dp20"
             android:gravity="center"
             android:lineSpacingExtra="@dimen/dp5"
-            android:text="@{String.valueOf(memo.memo.time)}"
+            android:text="@{String.valueOf(memo.memo.displayTime)}"
             app:layout_constraintBottom_toBottomOf="@+id/textView26"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@+id/textView14" />
@@ -64,8 +68,10 @@
             android:layout_marginStart="@dimen/dp50"
             android:layout_marginTop="@dimen/dp20"
             android:layout_marginEnd="@dimen/dp20"
+            android:layout_marginBottom="@dimen/dp15"
             android:background="@drawable/config_card_background"
             android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintRight_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView26">

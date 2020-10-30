@@ -25,6 +25,12 @@ class MemoViewModel(private val memoRepository: MemoRepository) : BaseViewModel(
         MutableLiveData<MutableList<MemoWithEvent>>()
     }
 
+    val curMemos: MutableLiveData<MemoWithEvent> by lazy {
+        MutableLiveData<MemoWithEvent>()
+    }
+
+    fun getMemoById(id:Long) = memoRepository.getMemoById(id)
+
     fun getMemos() {
         memos.value = memoRepository.getMemos().toMutableList()
     }

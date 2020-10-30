@@ -105,8 +105,8 @@ abstract class BaseAppDatabase : RoomDatabase() {
 
         private val mg_6_7: Migration = object : Migration(6, 7) {
             override fun migrate(database: SupportSQLiteDatabase) {
-                database.execSQL("CREATE TABLE IF NOT EXISTS event (id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, name TEXT,startTime INTEGER NOT NULL DEFAULT 0,rule TEXT)")
-                database.execSQL("CREATE TABLE IF NOT EXISTS memo (id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, done INTEGER NOT NULL DEFAULT 0,type INTEGER NOT NULL DEFAULT 0,content TEXT NOT NULL DEFAULT '',parentId INTEGER NOT NULL DEFAULT 0)")
+                database.execSQL("CREATE TABLE IF NOT EXISTS memo (id  INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,text TEXT NOT NULL DEFAULT '',position TEXT NOT NULL DEFAULT '',time INTEGER NOT NULL DEFAULT 0,type INTEGER NOT NULL DEFAULT 0,color TEXT NOT NULL DEFAULT '',extra TEXT NOT NULL DEFAULT '',afterNote TEXT NOT NULL DEFAULT '')")
+                database.execSQL("CREATE TABLE IF NOT EXISTS event (id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, done INTEGER NOT NULL DEFAULT 0,content TEXT NOT NULL DEFAULT '',parentId INTEGER NOT NULL DEFAULT 0)")
             }
         }
 

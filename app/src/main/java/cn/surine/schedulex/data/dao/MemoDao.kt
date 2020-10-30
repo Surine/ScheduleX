@@ -36,7 +36,8 @@ interface MemoDao {
     @Query("select * from Memo")
     fun getAll(): List<MemoWithEvent>
 
-//    @Query("select * from Memo where id = :id")
-//    fun getById(id: Long): Memo?
+    @Transaction
+    @Query("select * from Memo where id = :id")
+    fun getMemoById(id: Long): MemoWithEvent
 
 }

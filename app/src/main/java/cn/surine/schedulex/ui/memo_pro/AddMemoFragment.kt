@@ -1,6 +1,8 @@
 package cn.surine.schedulex.ui.memo_pro
 
 import android.view.View
+import android.widget.DatePicker
+import android.widget.TimePicker
 import androidx.core.widget.addTextChangedListener
 import androidx.recyclerview.widget.LinearLayoutManager
 import cn.surine.schedulex.BR
@@ -14,7 +16,6 @@ import cn.surine.schedulex.base.utils.Dates
 import cn.surine.schedulex.base.utils.load
 import cn.surine.schedulex.data.entity.Event
 import cn.surine.schedulex.data.entity.Memo
-import cn.surine.schedulex.data.entity.MemoWithEvent
 import com.peanut.sdk.miuidialog.MIUIDialog
 import kotlinx.android.synthetic.main.fragment_add_memo.*
 import kotlinx.android.synthetic.main.view_datepicker.view.*
@@ -58,18 +59,22 @@ class AddMemoFragment : BaseFragment() {
 
         var sDate = ""
         var sTime = ""
+        var dpView: DatePicker? = null
+        var timeView: TimePicker? = null
         editTime.setOnClickListener {
             MIUIDialog(activity()).show {
-                customView(R.layout.view_datepicker) { datepicker ->
-                    sDate = "${datepicker.datepicker.year}-${datepicker.datepicker.month}-${datepicker.datepicker.dayOfMonth}"
+                customView(R.layout.view_datepicker) { dp ->
+                    dpView = dp.datepicker
                 }
                 positiveButton(text = "确定") {
+                    sDate = "${dpView?.datepicker?.year}-${dpView?.datepicker?.month}-${dpView?.datepicker?.dayOfMonth}"
                     cancel()
                     show {
-                        customView(R.layout.view_timepicker) { timerpicker ->
-                            sTime = "${timerpicker.timerpicker.currentHour}:${timerpicker.timerpicker.minute}"
+                        customView(R.layout.view_timepicker) { tp ->
+                            timeView = tp.timerpicker
                         }
                         positiveButton(text = "确定") {
+                            sTime = "${timeView?.timerpicker?.currentHour}:${timeView?.timerpicker?.minute}"
                             toast("$sDate $sTime")
                             mMemo.time = Dates.getDate("$sDate $sTime", Dates.yyyyMMddHHmm).time
                         }
