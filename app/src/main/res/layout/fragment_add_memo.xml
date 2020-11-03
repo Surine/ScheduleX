@@ -38,7 +38,7 @@
 
             <EditText
                 android:id="@+id/editPosition"
-                style="@style/textview_title_style"
+                style="@style/edit_text_style"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/dp50"
                 android:hint="please input your position" />

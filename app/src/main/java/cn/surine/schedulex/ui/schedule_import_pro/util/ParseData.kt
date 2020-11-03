@@ -23,6 +23,7 @@ object ParseData {
     const val NEW_QZ_2_1 = "new_qz_2_1" //新强智2-1
     const val SW = "sw" //树维
     const val NEW_URP = "new_urp" //新urp
+    const val JZ = "jz" //金智
 
     const val PKU = "pku" //北京大学
     const val NCUT = "ncut" //北方工业大学
@@ -45,7 +46,8 @@ object ParseData {
             NEW_QZ_2_1 to NewQz2_1(),
             USTC to Ustc(),
             WHUT_GRA to WhutGraduates(),
-            NEW_URP to NewUrp()
+            NEW_URP to NewUrp(),
+            JZ to Jz()
     )
 
     val commonHtmlSystem = listOf(QZ, NEW_QZ_2_1, SW)
@@ -60,6 +62,7 @@ object ParseData {
             LocalUniversity("新强智教务-2_1", "-10042", jwSystem = NEW_QZ_2_1),
             LocalUniversity("新强智教务-3", "-10043", jwSystem = NEW_QZ_3),
             LocalUniversity("树维教务", "-1005", jwSystem = SW),
-            LocalUniversity("新URP教务", "-1006", jwSystem = NEW_URP)
+            LocalUniversity("新URP教务", "-1006", jwSystem = NEW_URP),
+            LocalUniversity("金智教务", "-1007", jwSystem = JZ)
     )
 }

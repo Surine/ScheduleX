@@ -1,5 +1,6 @@
 package cn.surine.schedulex.ui.schedule_import_pro.core.jw_core.func_parser
 
+import cn.surine.schedulex.base.utils.Logs
 import cn.surine.schedulex.ui.schedule_import_pro.core.IJWParse
 import cn.surine.schedulex.ui.schedule_import_pro.model.CourseWrapper
 import org.jsoup.nodes.Element
@@ -20,9 +21,10 @@ abstract class TableParser : IJWParse {
             if (trIndex < skipRow()) continue
             val tds = trs[trIndex].getElementsByTag("td")
             for (tdIndex in tds.indices) {
-                if (trIndex < skipCol()) continue
+                if (tdIndex < skipCol()) continue
                 courseList.addAll(itemParse(tds[tdIndex], trIndex, tdIndex))
             }
+            Logs.d("******************* ");
         }
         return courseList
     }
