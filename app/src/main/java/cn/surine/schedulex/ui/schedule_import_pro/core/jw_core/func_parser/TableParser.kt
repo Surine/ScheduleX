@@ -24,7 +24,7 @@ abstract class TableParser : IJWParse {
                 if (tdIndex < skipCol()) continue
                 courseList.addAll(itemParse(tds[tdIndex], trIndex, tdIndex))
             }
-            Logs.d("******************* ");
+            println("***********")
         }
         return courseList
     }

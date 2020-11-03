@@ -8,7 +8,7 @@ import org.jsoup.nodes.Element
 
 /**
  * Intro：
- * 金智(base 南京工业大学黄埔学院)
+ * 金智(base 南京工业大学浦江学院)
  * @author sunliwei
  * @date 11/2/20 16:51
  */

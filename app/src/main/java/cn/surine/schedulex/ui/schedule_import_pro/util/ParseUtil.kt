@@ -13,6 +13,7 @@ import cn.surine.schedulex.ui.schedule_import_pro.model.compat.Course
 object ParseUtil {
     val commonMap = mapOf("周一" to 1, "周二" to 2, "周三" to 3, "周四" to 4, "周五" to 5, "周六" to 6, "周日" to 7)
     val commonMap2 = mapOf("星期一" to 1, "星期二" to 2, "星期三" to 3, "星期四" to 4, "星期五" to 5, "星期六" to 6, "星期日" to 7)
+    val commonMap3 = mapOf("Monday" to 1, "Tuesday" to 2, "Wednesday" to 3, "Thursday" to 4, "Friday" to 5, "Saturday" to 6, "Sunday" to 7)
 
     /**
      * 根据字符串返回目标

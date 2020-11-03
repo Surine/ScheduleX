@@ -30,6 +30,7 @@ object ParseData {
     const val SWUST = "swust" //西南科技大学
     const val USTC = "ustc" //中国科学技术大学
     const val WHUT_GRA = "whut_graduates" //武汉理工研究生院
+    const val WTU_GRA = "wtu_graduates" //武汉纺织研究生院
 
     val jwMap = mapOf(
             ZF to Zf(),
@@ -46,6 +47,7 @@ object ParseData {
             NEW_QZ_2_1 to NewQz2_1(),
             USTC to Ustc(),
             WHUT_GRA to WhutGraduates(),
+            WTU_GRA to WtuGraduates(),
             NEW_URP to NewUrp(),
             JZ to Jz()
     )
