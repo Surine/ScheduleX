@@ -20,7 +20,6 @@ import cn.surine.schedulex.base.utils.Others
 import cn.surine.schedulex.base.utils.Prefs
 import cn.surine.schedulex.base.utils.Toasts.toast
 import cn.surine.schedulex.base.utils.Toasts.toastLong
-import cn.surine.schedulex.data.entity.Schedule
 import cn.surine.schedulex.data.helper.ParserManager
 import cn.surine.schedulex.ui.course.CourseViewModel
 import cn.surine.schedulex.ui.schedule.ScheduleViewModel
@@ -119,6 +118,9 @@ class ScheduleThirdFetchFragment : BaseFragment() {
                             }
                             webviewBackup.reload()
                         }
+                        item("显示提示弹窗", "可以多次查看导入教程") {
+                            showTipDialog()
+                        }
                     }
                 }
             }
@@ -149,12 +151,16 @@ class ScheduleThirdFetchFragment : BaseFragment() {
                 negativeButton(text = "取消") { this.cancel() }
             }
         } else {
-            MIUIDialog(activity()).show {
-                title(text = "教务导入")
-                message(text = if (opInfo.isEmpty()) "1.首先登录账号并定位到课表页面\n2.然后点击右下角导入按钮导入课程" else opInfo)
-                positiveButton(text = "确定") { this.cancel() }
-                negativeButton(text = "取消") { this.cancel() }
-            }
+            showTipDialog()
+        }
+    }
+
+    private fun showTipDialog() {
+        MIUIDialog(activity()).show {
+            title(text = "教务导入")
+            message(text = if (opInfo.isEmpty()) "1.首先登录账号并定位到课表页面\n2.然后点击右下角导入按钮导入课程" else opInfo)
+            positiveButton(text = "确定") { this.cancel() }
+            negativeButton(text = "取消") { this.cancel() }
         }
     }
 
@@ -290,7 +296,7 @@ class ScheduleThirdFetchFragment : BaseFragment() {
             dataFetchViewModel.uploadFetchSuccess(mUniversity)
             toast("导入成功")
             Prefs.save(Constants.CUR_SCHEDULE, scheduleId)
-            if(list.isNotEmpty()){
+            if (list.isNotEmpty()) {
                 hit(UNIVERSITY_IMPORT_SUCCESS, "data" to "name:${Prefs.getString(SelectSchoolFragment.CUR_SCHOOL_NAME, "*" + mUniversity.name)},jw:${mUniversity.jwSystem},url:${addressBox.text.toString()}")
             }
             Navigations.open(this, R.id.action_scheduleThirdFetchFragment_to_scheduleFragment)

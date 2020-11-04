@@ -24,16 +24,19 @@ open class NewQz2 : IJWParse {
                 val div = tds[tdIndex].getElementsByClass("kbcontent").first() ?: continue
                 val infos = div.getElementsByTag("font")
                 if (infos == null || infos.isEmpty()) continue
-                courseList.add(CourseWrapper().apply {
-                    name = div.textNodes()[0].text()
-                    teacher = infos[0].text()
-                    position = if (infos.size == 3) infos[2].text() else ""
-                    sectionStart = trIndex * 2 - 1
-                    sectionContinue = 2
-                    day = tdIndex + 1
-                    val weekInfo = infos[1].text()
-                    week = getWeekList(weekInfo)
-                })
+                //适用于单格子多课程的
+                infos.windowed(3,3).forEachIndexed { index,it->
+                    courseList.add(CourseWrapper().apply {
+                        name = div.textNodes()[2 * index].text()
+                        teacher = it[0].text()
+                        position = if (it.size == 3) it[2].text() else ""
+                        sectionStart = trIndex * 2 - 1
+                        sectionContinue = 2
+                        day = tdIndex + 1
+                        val weekInfo = it[1].text()
+                        week = getWeekList(weekInfo)
+                    })
+                }
             }
         }
         return courseList
