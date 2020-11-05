@@ -74,7 +74,7 @@ class Jz : IJWParse {
                             position = it[2].text()
                             teacher = it[1].text()
                             name = info1[0]
-                            week = ParseUtil.getWeekInfoByStr(info1[1].substringBefore(" "), commonRules = "%d-%d周")
+                            week = ParseUtil.getWeekInfoByStr(info1[1].substringBefore(" "), singleRules = "%d-%d周(单)",doubleRules = "%d-%d周(双)",commonRules = "%d-%d周")
                             sectionStart = sessionInfo[0].toInt()
                             sectionContinue = sessionInfo[1].toInt() - sectionStart + 1
                             day = j + 1

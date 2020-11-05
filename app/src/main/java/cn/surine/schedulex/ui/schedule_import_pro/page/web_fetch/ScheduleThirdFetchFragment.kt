@@ -64,6 +64,7 @@ class ScheduleThirdFetchFragment : BaseFragment() {
     var helperType = ""
     lateinit var webviewBackup: WebView
     override fun layoutId(): Int = R.layout.fragment_third_fetch
+    @SuppressLint("SetTextI18n")
     override fun onInit(parent: View?) {
         VmManager(this).apply {
             scheduleViewModel = vmSchedule
