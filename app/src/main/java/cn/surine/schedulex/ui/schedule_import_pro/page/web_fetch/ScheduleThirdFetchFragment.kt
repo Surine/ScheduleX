@@ -256,7 +256,7 @@ class ScheduleThirdFetchFragment : BaseFragment() {
                         hit(IMPORT_FAIL, "data" to "name:${mUniversity.name},jwSystemName:${mUniversity.jwSystemName},jwSystem:${mUniversity.jwSystem},inputUrl:${mUniversity.jwUrl}")
                         MIUIDialog(activity()).show {
                             title(text = "解析失败")
-                            message(text = "<html>请尝试定位到课表页面再进行解析，如果还是无法导入，请您加QQ群<a href='https://www.baidu.com'>686976115</a>进行反馈；同时，如果您有适配您的学校的想法也可以直接在群里联系开发者。<br><b>如果学校已经适配，但依然解析失败，可能是源码获取异常，请尝试反馈</b></html>") {
+                            message(text = "<html>请尝试定位到课表页面再进行解析，如果还是无法导入，请您加QQ群<a href='https://www.baidu.com'>686976115</a>进行反馈；同时，如果您有适配您的学校的想法也可以直接在群里联系开发者。<br><b>如果学校已经适配，但依然解析失败，可能是源码获取异常，请尝试反馈（源码保存路径: /Download/xxx.html）</b></html>") {
                                 html {
                                     Others.openUrl("https://jq.qq.com/?_wv=1027&k=SmyNDbv6")
                                 }

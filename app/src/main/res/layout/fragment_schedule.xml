@@ -160,6 +160,7 @@
             android:layout_marginEnd="@dimen/dp32"
             android:background="?selectableItemBackgroundBorderless"
             android:padding="@dimen/dp8"
+            android:visibility="gone"
             android:tint="@{schedule.lightTextColor()}"
             app:layout_constraintBottom_toBottomOf="@+id/funcBtn"
             app:layout_constraintEnd_toStartOf="@+id/addCourse"
