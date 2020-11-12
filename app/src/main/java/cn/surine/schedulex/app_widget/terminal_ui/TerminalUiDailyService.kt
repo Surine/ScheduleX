@@ -46,7 +46,7 @@ class TerminalUiDailyService : DailyRemoteViewService() {
             remoteViews.setTextViewText(R.id.day_class_subtitle, sb)
             val sb2 = course.classSessions + "-" + (course.classSessions.toInt() + course.continuingSession.toInt() - 1)
             remoteViews.setTextViewText(R.id.day_class_session, sb2)
-            remoteViews.setTextViewText(R.id.widget_day_class_course_time, "(" + sb2 + ") " + data.startTime + "-" + data.endTime)
+            remoteViews.setTextViewText(R.id.widget_day_class_course_time, "(" + sb2 + ") " + data.startTime)
         } else {
             val str = ""
             remoteViews.setTextViewText(R.id.day_class_title, str)

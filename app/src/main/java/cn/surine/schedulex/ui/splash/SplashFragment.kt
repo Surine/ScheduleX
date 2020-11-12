@@ -1,12 +1,10 @@
 package cn.surine.schedulex.ui.splash
 
-import android.os.Bundle
 import android.os.Handler
 import android.view.View
 import cn.surine.schedulex.R
 import cn.surine.schedulex.base.Constants
 import cn.surine.schedulex.base.controller.BaseFragment
-import cn.surine.schedulex.base.utils.Navigations
 import cn.surine.schedulex.base.utils.Navigations.open
 import cn.surine.schedulex.base.utils.Prefs.getBoolean
 
