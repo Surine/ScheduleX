@@ -31,6 +31,7 @@ object ParseData {
     const val USTC = "ustc" //中国科学技术大学
     const val WHUT_GRA = "whut_graduates" //武汉理工研究生院
     const val WTU_GRA = "wtu_graduates" //武汉纺织研究生院
+    const val HIT_GRA = "hit_graduates" //哈工大研究生院
 
     val jwMap = mapOf(
             ZF to Zf(),
@@ -49,7 +50,8 @@ object ParseData {
             WHUT_GRA to WhutGraduates(),
             WTU_GRA to WtuGraduates(),
             NEW_URP to NewUrp(),
-            JZ to Jz()
+            JZ to Jz(),
+            HIT_GRA to HitGraduates()
     )
 
     val commonHtmlSystem = listOf(QZ, NEW_QZ_2_1, SW)

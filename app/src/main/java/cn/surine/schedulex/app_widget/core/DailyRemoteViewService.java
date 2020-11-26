@@ -71,6 +71,9 @@ public abstract class DailyRemoteViewService extends RemoteViewsService {
             } catch (Exception e) {
                 course = new Course();
             }
+            if("".equals(course.classSessions)){
+                course.classSessions = "1";
+            }
             BTimeTable.BTimeInfo data = timeTable.timeInfoList.get(Integer.parseInt(course.classSessions) - 1);
             return onBindView(mContext, course, data);
         }
