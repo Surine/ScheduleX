@@ -73,7 +73,7 @@
     <string name="background">背景图</string>
     <string name="palette_color">文本颜色兼容</string>
     <string name="schedule_name">课表名称</string>
-    <string name="week_info">时间信息</string>
+    <string name="week_info">周数配置</string>
     <string name="_1">1</string>
     <string name="_2">2</string>
     <string name="_3">3</string>
@@ -160,7 +160,7 @@
     <string name="cant_small_than_30">不得小于30</string>
     <string name="not_cur_week">非本周</string>
     <string name="timetable_switched_successfully">切换课表成功</string>
-    <string name="timetable_info">时间表信息</string>
+    <string name="timetable_info">上课时间</string>
     <string name="time_table_has_been_deleted">时间表已删除</string>
     <string name="are_you_sure_to_delete_timetable">确定删除该时间表吗？删除后选择该时间表的课程表将不会显示时间</string>
     <string name="is_ban_to_delete">默认时间表不允许删除</string>

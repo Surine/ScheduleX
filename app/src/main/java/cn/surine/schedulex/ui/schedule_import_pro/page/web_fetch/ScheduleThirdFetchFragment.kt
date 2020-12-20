@@ -64,6 +64,7 @@ class ScheduleThirdFetchFragment : BaseFragment() {
     var helperType = ""
     lateinit var webviewBackup: WebView
     override fun layoutId(): Int = R.layout.fragment_third_fetch
+
     @SuppressLint("SetTextI18n")
     override fun onInit(parent: View?) {
         VmManager(this).apply {
@@ -159,7 +160,7 @@ class ScheduleThirdFetchFragment : BaseFragment() {
     private fun showTipDialog() {
         MIUIDialog(activity()).show {
             title(text = "教务导入")
-            message(text = if (opInfo.isEmpty()) "1.首先登录账号并定位到课表页面\n2.然后点击右下角导入按钮导入课程" else opInfo)
+            message(text = if (opInfo.isEmpty()) "1.在地址栏输入您的教务处链接地址（若地址栏为空或地址不正确）\n2.点击搜索按钮访问，登录账号并定位到课表页面\n3.最后点击右下角导入按钮导入课程" else opInfo)
             positiveButton(text = "确定") { this.cancel() }
             negativeButton(text = "取消") { this.cancel() }
         }
