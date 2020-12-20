@@ -18,7 +18,8 @@ data class LocalUniversity(
         var name: String,
         val code: String,
         val city: String = "",
-        val jwSystem: String = ""
+        val jwSystem: String = "",
+        var important:Boolean = false
 ) {
     fun isHtmlSystem() = if (ParseData.commonHtmlSystem.contains(jwSystem)) 3 else 1
 }

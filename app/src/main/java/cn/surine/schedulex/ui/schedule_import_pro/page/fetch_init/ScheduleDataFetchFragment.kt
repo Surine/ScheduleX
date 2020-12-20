@@ -22,17 +22,15 @@ import cn.surine.schedulex.base.controller.BaseAdapter
 import cn.surine.schedulex.base.controller.BaseFragment
 import cn.surine.schedulex.base.controller.BaseViewModel
 import cn.surine.schedulex.base.utils.*
-import cn.surine.schedulex.data.entity.Schedule
 import cn.surine.schedulex.data.helper.ParserManager
 import cn.surine.schedulex.ui.course.CourseViewModel
 import cn.surine.schedulex.ui.schedule.ScheduleViewModel
 import cn.surine.schedulex.ui.schedule_import_pro.core.FileParserDispatcher
 import cn.surine.schedulex.ui.schedule_import_pro.core.ParseDispatcher
-import cn.surine.schedulex.ui.schedule_import_pro.core.jw_core.NewUrp
-import cn.surine.schedulex.ui.schedule_import_pro.core.jw_core.func_parser.TableParser
 import cn.surine.schedulex.ui.schedule_import_pro.model.CourseWrapper
 import cn.surine.schedulex.ui.schedule_import_pro.model.RemoteUniversity
 import cn.surine.schedulex.ui.schedule_import_pro.page.change_school.SelectSchoolFragment
+import cn.surine.schedulex.ui.schedule_import_pro.util.CommonJw
 import cn.surine.schedulex.ui.schedule_import_pro.util.ParseData
 import cn.surine.schedulex.ui.schedule_import_pro.viewmodel.ScheduleDataFetchViewModel
 import cn.surine.schedulex.ui.view.custom.helper.CommonDialogs
@@ -112,7 +110,7 @@ class ScheduleDataFetchFragment : BaseFragment() {
                         curSchoolInfo.text = str
                         tryCommonJw.show()
                         tryCommonJw.setOnClickListener {
-                            showCommonJwDialog()
+                            showCommonJwDialog(null)
                         }
                         loginJw.setOnClickListener {
                             hit("adapter")
@@ -132,6 +130,19 @@ class ScheduleDataFetchFragment : BaseFragment() {
                         val str = "新版本已经适配了您的学校~ 请升级或者关注未来发版消息"
                         curSchoolInfo.text = str
                         tryCommonJw.hide()
+                    }
+                    ScheduleDataFetchViewModel.FORECAST_FLAG -> {
+                        val str = "咱还没适配您学校哦！点击此卡片查看适配教程~ \n您也可以尝试使用预测通用教务导入"
+                        curSchoolInfo.text = str
+                        tryCommonJw.show()
+                        tryCommonJw.text = "点此尝试：${mRemoteUniversity?.forecast}"
+                        tryCommonJw.setOnClickListener {
+                            showCommonJwDialog(mRemoteUniversity?.forecast)
+                        }
+                        loginJw.setOnClickListener {
+                            hit("adapter")
+                            Others.openUrl("https://support.qq.com/products/282532/faqs/79948")
+                        }
                     }
                     BaseViewModel.LOAD_SUCCESS -> {
                         loginJw.setOnClickListener {
@@ -159,7 +170,7 @@ class ScheduleDataFetchFragment : BaseFragment() {
         }
         skip.setOnClickListener {
             hit("skip")
-            Prefs.save(Constants.CUR_SCHEDULE, scheduleViewModel.addSchedule(scheduleName, 24, 1,0))
+            Prefs.save(Constants.CUR_SCHEDULE, scheduleViewModel.addSchedule(scheduleName, 24, 1, 0))
             Navigations.open(this, R.id.action_dataFetchFragment_to_scheduleFragment)
         }
         help.setOnClickListener {
@@ -191,8 +202,16 @@ class ScheduleDataFetchFragment : BaseFragment() {
 
     }
 
-    private fun showCommonJwDialog() {
-        val data = ParseData.commonJwData
+    private fun showCommonJwDialog(forecast: String?) {
+        val data = CommonJw().commonJwData
+        if (forecast != null) {
+            data.forEach {
+                if (!it.important && it.name.contains(forecast)) {
+                    it.name = "推荐：" + it.name
+                    it.important = true
+                }
+            }
+        }
         MIUIDialog(activity()).show {
             title(text = "通用系统")
             customView(R.layout.view_recycle_list) { view ->

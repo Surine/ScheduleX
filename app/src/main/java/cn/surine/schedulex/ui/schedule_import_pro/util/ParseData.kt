@@ -56,17 +56,21 @@ object ParseData {
 
     val commonHtmlSystem = listOf(QZ, NEW_QZ_2_1, SW)
 
+
+}
+
+class CommonJw{
     val commonJwData = listOf(
-            LocalUniversity("正方教务", "-1001", jwSystem = ZF),
-            LocalUniversity("正方教务-T6", "-1001", jwSystem = ZF_T6),
-            LocalUniversity("新正方教务", "-1002", jwSystem = NEW_ZF),
-            LocalUniversity("强智教务", "-1003", jwSystem = QZ),
-            LocalUniversity("新强智教务", "-1004", jwSystem = NEW_QZ),
-            LocalUniversity("新强智教务-2", "-10041", jwSystem = NEW_QZ_2),
-            LocalUniversity("新强智教务-2_1", "-10042", jwSystem = NEW_QZ_2_1),
-            LocalUniversity("新强智教务-3", "-10043", jwSystem = NEW_QZ_3),
-            LocalUniversity("树维教务", "-1005", jwSystem = SW),
-            LocalUniversity("新URP教务", "-1006", jwSystem = NEW_URP),
-            LocalUniversity("金智教务", "-1007", jwSystem = JZ)
+            LocalUniversity("正方教务", "-1001", jwSystem = ParseData.ZF),
+            LocalUniversity("正方教务-T6", "-1001", jwSystem = ParseData.ZF_T6),
+            LocalUniversity("新正方教务", "-1002", jwSystem = ParseData.NEW_ZF),
+            LocalUniversity("强智教务", "-1003", jwSystem = ParseData.QZ),
+            LocalUniversity("新强智教务", "-1004", jwSystem = ParseData.NEW_QZ),
+            LocalUniversity("新强智教务-2", "-10041", jwSystem = ParseData.NEW_QZ_2),
+            LocalUniversity("新强智教务-2_1", "-10042", jwSystem = ParseData.NEW_QZ_2_1),
+            LocalUniversity("新强智教务-3", "-10043", jwSystem = ParseData.NEW_QZ_3),
+            LocalUniversity("树维教务", "-1005", jwSystem = ParseData.SW),
+            LocalUniversity("新URP教务", "-1006", jwSystem = ParseData.NEW_URP),
+            LocalUniversity("金智教务", "-1007", jwSystem = ParseData.JZ)
     )
 }

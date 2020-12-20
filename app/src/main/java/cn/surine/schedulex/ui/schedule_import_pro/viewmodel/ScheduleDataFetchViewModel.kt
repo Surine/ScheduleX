@@ -23,6 +23,7 @@ class ScheduleDataFetchViewModel(val repository: ScheduleDataFetchRepository) : 
         const val LOAD_FAIL_VERSION_OLD = -1 //版本太旧
         const val LOAD_FAIL_MAINTENANCE = -2 //维护
         const val LOAD_FAIL_NULL = -3  //未适配
+        const val FORECAST_FLAG = -4  //预测系统
     }
 
     val mCommons: MutableLiveData<Commons> by lazy {
@@ -62,6 +63,11 @@ class ScheduleDataFetchViewModel(val repository: ScheduleDataFetchRepository) : 
                 //未适配
                 if (p1 != null || p0 == null) {
                     loadUniversityStatus.value = LOAD_FAIL_NULL
+                    return
+                }
+                if (p0[0].forecast.isNotEmpty()) {
+                    mUniversityInfo.value = p0[0]
+                    loadUniversityStatus.value = FORECAST_FLAG
                     return
                 }
                 //维护中
