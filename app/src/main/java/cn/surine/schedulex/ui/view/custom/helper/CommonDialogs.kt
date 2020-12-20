@@ -14,6 +14,7 @@ import android.widget.EditText
 import android.widget.TextView
 import android.widget.TimePicker
 import cn.surine.schedulex.R
+import cn.surine.schedulex.base.ktx.isValid
 import com.peanut.sdk.miuidialog.MIUIDialog
 
 /**
@@ -126,6 +127,9 @@ object CommonDialogs {
             message(text = msg)
             positiveButton(text = "确定") { okCall() }
             negativeButton(text = "取消") { cancelCall() }
+            if(!activity.isValid()){
+                return@show
+            }
         }
     }
 

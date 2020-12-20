@@ -114,7 +114,7 @@ dependencies {
     implementation 'com.github.iammert:MaterialIntroView:1.6.0'
     //CSV
     implementation 'org.apache.commons:commons-csv:1.5'
-    //json
+    //jsoup
     implementation 'org.jsoup:jsoup:1.13.1'
     //EXCEL
     implementation files('lib/poi-3.12-android-a.jar')
