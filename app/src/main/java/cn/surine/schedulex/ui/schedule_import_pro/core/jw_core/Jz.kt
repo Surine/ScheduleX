@@ -67,18 +67,22 @@ class Jz : IJWParse {
                 val handleNode = nodesMutableList.windowed(3, 3)
                 handleNode.map {
                     val info1 = it[0].text().trim().split(" ")
+                    val weekInfo1 = info1[1].split(",")
                     val sessionInfo = info1[2].substringAfter("第").substringBefore("节").split("-")
                     //如果有多个，只添加真正为本格子的那个
                     if (sessionInfo[0].toInt() == i + 1) {
-                        list.add(CourseWrapper().apply {
-                            position = it[2].text()
-                            teacher = it[1].text()
-                            name = info1[0]
-                            week = ParseUtil.getWeekInfoByStr(info1[1].substringBefore(" "), singleRules = "%d-%d周(单)",doubleRules = "%d-%d周(双)",commonRules = "%d-%d周")
-                            sectionStart = sessionInfo[0].toInt()
-                            sectionContinue = sessionInfo[1].toInt() - sectionStart + 1
-                            day = j + 1
-                        })
+                        //有可能有多个周信息
+                        weekInfo1.forEach { weekInfo ->
+                            list.add(CourseWrapper().apply {
+                                position = it[2].text()
+                                teacher = it[1].text()
+                                name = info1[0]
+                                week = ParseUtil.getWeekInfoByStr(weekInfo.substringBefore(" "), singleRules = "%d-%d周(单)", doubleRules = "%d-%d周(双)", commonRules = "%d-%d周")
+                                sectionStart = sessionInfo[0].toInt()
+                                sectionContinue = sessionInfo[1].toInt() - sectionStart + 1
+                                day = j + 1
+                            })
+                        }
                     }
                 }
             }
