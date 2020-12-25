@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <TextView
+        android:id="@+id/textView17"
+        style="@style/textview_title_style"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dp30"
+        android:text="录入课程"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="@dimen/dp60"
+        />
+    <androidx.core.widget.NestedScrollView
+        app:layout_constraintTop_toBottomOf="@id/textView17"
+        app:layout_constraintLeft_toLeftOf="@id/textView17"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginEnd="@dimen/dp30"
+        android:layout_width="0dp"
+        android:layout_marginTop="@dimen/dp30"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="end"
+            >
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/config_card_background"
+                android:orientation="vertical"
+                android:paddingTop="@dimen/dp8"
+                android:paddingBottom="@dimen/dp8">
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/editCourseName"
+                    style="@style/setting_item_ui">
+
+                    <TextView
+                        android:id="@+id/textView33"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/dp8"
+                        android:layout_marginTop="@dimen/dp8"
+                        android:text="@string/course_name"
+                        android:textColor="@android:color/black"
+                        android:textSize="@dimen/t18"
+                        android:textStyle="bold"
+                        app:layout_constraintBottom_toTopOf="@id/courseNameSubTitle"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+
+                    <TextView
+                        android:id="@+id/courseNameSubTitle"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dp8"
+                        android:layout_marginBottom="@dimen/dp16"
+                        android:text="@string/course_name_subtitle"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toStartOf="@+id/imageView10"
+                        app:layout_constraintStart_toStartOf="@+id/textView33"
+                        app:layout_constraintTop_toBottomOf="@+id/textView33" />
+
+                    <ImageView
+                        android:id="@+id/imageView10"
+                        android:layout_width="@dimen/dp20"
+                        android:layout_height="@dimen/dp20"
+                        android:layout_marginEnd="16dp"
+                        app:layout_constraintBottom_toBottomOf="@+id/courseNameSubTitle"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="@+id/textView33"
+                        app:srcCompat="@drawable/course_name_24dp" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/editCourseColor"
+                    style="@style/setting_item_ui">
+
+                    <TextView
+                        android:id="@+id/s2_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/dp8"
+                        android:layout_marginTop="@dimen/dp8"
+                        android:text="课程颜色"
+                        android:textColor="@android:color/black"
+                        android:textSize="@dimen/t18"
+                        android:textStyle="bold"
+                        app:layout_constraintBottom_toTopOf="@id/s2_subTitle"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+
+                    <TextView
+                        android:id="@+id/s2_subTitle"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dp8"
+                        android:layout_marginBottom="@dimen/dp16"
+                        android:text="选择您喜欢的颜色"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toStartOf="@+id/s2_img"
+                        app:layout_constraintStart_toStartOf="@+id/s2_title"
+                        app:layout_constraintTop_toBottomOf="@+id/s2_title" />
+
+                    <ImageView
+                        android:id="@+id/s2_img"
+                        android:layout_width="@dimen/dp20"
+                        android:layout_height="@dimen/dp20"
+                        android:layout_marginEnd="16dp"
+                        app:layout_constraintBottom_toBottomOf="@+id/s2_subTitle"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="@+id/s2_title"
+                        app:srcCompat="@drawable/course_name_24dp" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </LinearLayout>
+            <androidx.appcompat.widget.AppCompatButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="添加新的时间段"
+                android:textColor="@android:color/black"
+                android:drawableLeft="@drawable/ic_add_black_24dp"
+                android:layout_marginTop="@dimen/dp10"
+                android:layout_marginBottom="@dimen/dp10"
+                />
+            <androidx.recyclerview.widget.RecyclerView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/course_plan"
+                />
+        </LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginBottom="@dimen/dp16"
+        android:text="完成添加"
+        android:backgroundTint="@color/blue"
+        android:textColor="@android:color/white"
+        app:iconTint="@android:color/white"
+        app:icon="@drawable/ic_add_24dp"
+        />
+</androidx.constraintlayout.widget.ConstraintLayout>
