@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/root"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -37,12 +38,12 @@
             android:id="@+id/widget_day_class_next_day"
             android:layout_width="@dimen/dp40"
             android:layout_height="@dimen/dp40"
-            android:tint="@android:color/black"
             android:layout_alignParentEnd="true"
             android:layout_centerVertical="true"
             android:layout_marginEnd="@dimen/dp10"
             android:padding="@dimen/dp7"
-            android:src="@drawable/ic_keyboard_arrow_right_black_24dp" />
+            android:src="@drawable/ic_keyboard_arrow_right_black_24dp"
+            app:tint="@android:color/black" />
     </RelativeLayout>
 
 
@@ -53,7 +54,7 @@
         android:layout_alignParentBottom="true"
         android:alpha="0.5"
         android:src="@mipmap/undraw_code_thinking_1jeh"
-        android:visibility="gone" />
+        />
 
     <ListView
         android:id="@+id/listview"
