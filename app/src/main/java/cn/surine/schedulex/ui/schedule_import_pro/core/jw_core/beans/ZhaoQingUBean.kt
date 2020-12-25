@@ -12,7 +12,7 @@ package cn.surine.schedulex.ui.schedule_import_pro.core.jw_core.beans
 //    "teaxms":"孔"
 //},
 data class ZhaoQingUBean(
-        val kcxm:String = "", //课程名
+        val kcmc:String = "", //课程名
         val teaxms:String = "", //教师
         val jxcdmcs:String = "", //上课地点
         val xq:String = "", //星期
