@@ -8,9 +8,9 @@
         android:layout_width="0dp"
         android:padding="@dimen/dp20"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/dp32"
         app:chipSpacingHorizontal="@dimen/dp25"
         app:chipSpacingVertical="@dimen/dp10"
+        app:singleSelection="true"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
@@ -19,42 +19,49 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="周一"
+            android:checkable="true"
             android:id="@+id/week_1"
             />
         <com.google.android.material.chip.Chip
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="周二"
+            android:checkable="true"
             android:id="@+id/week_2"
             />
         <com.google.android.material.chip.Chip
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="周三"
+            android:checkable="true"
             android:id="@+id/week_3"
             />
         <com.google.android.material.chip.Chip
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="周四"
+            android:checkable="true"
             android:id="@+id/week_4"
             />
         <com.google.android.material.chip.Chip
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="周五"
+            android:checkable="true"
             android:id="@+id/week_5"
             />
         <com.google.android.material.chip.Chip
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="周六"
+            android:checkable="true"
             android:id="@+id/week_6"
             />
         <com.google.android.material.chip.Chip
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="周日"
+            android:checkable="true"
             android:id="@+id/week_7"
             />
     </com.google.android.material.chip.ChipGroup>

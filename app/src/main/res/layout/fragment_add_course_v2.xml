@@ -8,7 +8,7 @@
         style="@style/textview_title_style"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/dp30"
+        android:layout_marginStart="@dimen/dp20"
         android:text="录入课程"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
@@ -19,10 +19,12 @@
         app:layout_constraintTop_toBottomOf="@id/textView17"
         app:layout_constraintLeft_toLeftOf="@id/textView17"
         app:layout_constraintRight_toRightOf="parent"
-        android:layout_marginEnd="@dimen/dp30"
+        android:layout_marginEnd="@dimen/dp20"
         android:layout_width="0dp"
+        android:layout_marginBottom="@dimen/dp30"
+        app:layout_constraintBottom_toBottomOf="parent"
         android:layout_marginTop="@dimen/dp30"
-        android:layout_height="wrap_content">
+        android:layout_height="0dp">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -127,6 +129,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="添加新的时间段"
+                android:background="@null"
                 android:id="@+id/addNewPlan"
                 android:textColor="@android:color/black"
                 android:drawableLeft="@drawable/ic_add_black_24dp"
