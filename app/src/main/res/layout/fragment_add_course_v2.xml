@@ -84,7 +84,7 @@
                     style="@style/setting_item_ui">
 
                     <TextView
-                        android:id="@+id/s2_title"
+                        android:id="@+id/editCourseColorTitle"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="@dimen/dp8"
@@ -93,13 +93,13 @@
                         android:textColor="@android:color/black"
                         android:textSize="@dimen/t18"
                         android:textStyle="bold"
-                        app:layout_constraintBottom_toTopOf="@id/s2_subTitle"
+                        app:layout_constraintBottom_toTopOf="@id/editCourseColorSubtitle"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
 
                     <TextView
-                        android:id="@+id/s2_subTitle"
+                        android:id="@+id/editCourseColorSubtitle"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/dp8"
@@ -107,17 +107,17 @@
                         android:text="选择您喜欢的颜色"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toStartOf="@+id/s2_img"
-                        app:layout_constraintStart_toStartOf="@+id/s2_title"
-                        app:layout_constraintTop_toBottomOf="@+id/s2_title" />
+                        app:layout_constraintStart_toStartOf="@+id/editCourseColorTitle"
+                        app:layout_constraintTop_toBottomOf="@+id/editCourseColorTitle" />
 
                     <ImageView
                         android:id="@+id/s2_img"
                         android:layout_width="@dimen/dp20"
                         android:layout_height="@dimen/dp20"
                         android:layout_marginEnd="16dp"
-                        app:layout_constraintBottom_toBottomOf="@+id/s2_subTitle"
+                        app:layout_constraintBottom_toBottomOf="@+id/editCourseColorSubtitle"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="@+id/s2_title"
+                        app:layout_constraintTop_toTopOf="@+id/editCourseColorTitle"
                         app:srcCompat="@drawable/course_name_24dp" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
@@ -127,6 +127,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="添加新的时间段"
+                android:id="@+id/addNewPlan"
                 android:textColor="@android:color/black"
                 android:drawableLeft="@drawable/ic_add_black_24dp"
                 android:layout_marginTop="@dimen/dp10"
@@ -135,7 +136,7 @@
             <androidx.recyclerview.widget.RecyclerView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/course_plan"
+                android:id="@+id/coursePlanRecycler"
                 />
         </LinearLayout>
 

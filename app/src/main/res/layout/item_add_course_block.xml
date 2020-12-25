@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+        <variable
+            name="coursePlanBlock"
+            type="cn.surine.schedulex.data.entity.CoursePlanBlock" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/config_card_background"
+        android:orientation="vertical"
+        android:paddingTop="@dimen/dp8"
+        android:paddingBottom="@dimen/dp8">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp30"
+            android:gravity="end"
+            >
+            <ImageView
+                android:id="@+id/coursePlanItemDelete"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:src="@mipmap/close"
+                android:layout_marginEnd="@dimen/dp20"
+                />
+        </LinearLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/editCourseWeek"
+            style="@style/setting_item_ui">
+
+            <TextView
+                android:id="@+id/textView33"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dp8"
+                android:layout_marginTop="@dimen/dp8"
+                android:text="周次安排"
+                android:textColor="@android:color/black"
+                android:textSize="@dimen/t18"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toTopOf="@id/courseNameSubTitle"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
+            <TextView
+                android:id="@+id/courseWeekSubTitle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp8"
+                android:layout_marginBottom="@dimen/dp16"
+                android:text="选择本节课的上课周次"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/imageView10"
+                app:layout_constraintStart_toStartOf="@+id/textView33"
+                app:layout_constraintTop_toBottomOf="@+id/textView33" />
+
+            <ImageView
+                android:id="@+id/imageView10"
+                android:layout_width="@dimen/dp20"
+                android:layout_height="@dimen/dp20"
+                android:layout_marginEnd="16dp"
+                app:layout_constraintBottom_toBottomOf="@+id/courseWeekSubTitle"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/textView33"
+                app:srcCompat="@drawable/course_name_24dp" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/editCourseDay"
+            style="@style/setting_item_ui">
+
+            <TextView
+                android:id="@+id/editCourseDayTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dp8"
+                android:layout_marginTop="@dimen/dp8"
+                android:text="星期安排"
+                android:textColor="@android:color/black"
+                android:textSize="@dimen/t18"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toTopOf="@id/editCourseColorSubtitle"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
+            <TextView
+                android:id="@+id/editCourseDaySubtitle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp8"
+                android:layout_marginBottom="@dimen/dp16"
+                android:text="选择本节课周几上课"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/s2_img"
+                app:layout_constraintStart_toStartOf="@+id/editCourseDayTitle"
+                app:layout_constraintTop_toBottomOf="@+id/editCourseDayTitle" />
+
+            <ImageView
+                android:id="@+id/s2_img"
+                android:layout_width="@dimen/dp20"
+                android:layout_height="@dimen/dp20"
+                android:layout_marginEnd="16dp"
+                app:layout_constraintBottom_toBottomOf="@+id/editCourseDaySubtitle"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/editCourseDayTitle"
+                app:srcCompat="@drawable/course_name_24dp" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/editCourseSession"
+            style="@style/setting_item_ui">
+
+            <TextView
+                android:id="@+id/s3_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dp8"
+                android:layout_marginTop="@dimen/dp8"
+                android:text="节次安排"
+                android:textColor="@android:color/black"
+                android:textSize="@dimen/t18"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toTopOf="@id/s3_subTitle"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
+            <TextView
+                android:id="@+id/s3_subTitle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp8"
+                android:layout_marginBottom="@dimen/dp16"
+                android:text="选择本节课哪节课上课"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/s3_img"
+                app:layout_constraintStart_toStartOf="@+id/s3_title"
+                app:layout_constraintTop_toBottomOf="@+id/s3_title" />
+
+            <ImageView
+                android:id="@+id/s3_img"
+                android:layout_width="@dimen/dp20"
+                android:layout_height="@dimen/dp20"
+                android:layout_marginEnd="16dp"
+                app:layout_constraintBottom_toBottomOf="@+id/s3_subTitle"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/s3_title"
+                app:srcCompat="@drawable/course_name_24dp" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </LinearLayout>
+</layout>
