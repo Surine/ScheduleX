@@ -27,7 +27,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="@dimen/dp40"
-            android:gravity="end"
+            android:gravity="end|center_vertical"
             android:orientation="horizontal"
             >
             <ImageView
@@ -38,14 +38,18 @@
                 android:id="@+id/coursePlanItemExpand"
                 android:layout_marginEnd="@dimen/dp20"
                 />
-            <ImageView
+            <TextView
                 android:id="@+id/coursePlanItemDelete"
-                android:layout_width="@dimen/dp40"
-                android:layout_height="match_parent"
-                android:src="@mipmap/ic_delete"
+                android:layout_width="@dimen/dp50"
+                android:layout_height="wrap_content"
                 android:padding="@dimen/dp8"
-                android:layout_marginEnd="@dimen/dp15"
-                app:tint="@android:color/holo_red_light" />
+                android:text="删除"
+                android:gravity="center"
+                android:background="@drawable/shape_red_circle"
+                android:textSize="@dimen/t10"
+                android:textColor="@android:color/white"
+                android:layout_marginEnd="@dimen/dp12"
+                />
         </LinearLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout

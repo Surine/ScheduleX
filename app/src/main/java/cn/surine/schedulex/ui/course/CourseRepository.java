@@ -78,6 +78,11 @@ public class CourseRepository extends BaseRepository {
         return appDatabase.courseDao().getByCourseId(id);
     }
 
+
+    public List<Course> getCourseByName(String name) {
+        return appDatabase.courseDao().getByCourseName(name);
+    }
+
     public int update(Course course) {
         int result = appDatabase.courseDao().update(course);
         return result;

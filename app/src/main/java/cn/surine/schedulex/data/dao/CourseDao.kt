@@ -43,4 +43,7 @@ interface CourseDao {
 
     @Query("select * from course where classDay = :day and scheduleId = :roomId")
     fun getTodayCourse(day: Int, roomId: Int): List<Course?>?
+
+    @Query("select * from course where coureName = :name")
+    fun getByCourseName(name:String):List<Course>?
 }

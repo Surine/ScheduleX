@@ -1,40 +1,60 @@
 package cn.surine.schedulex.ui.course.op_delegate
 
-import android.graphics.Color
 import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import cn.surine.schedulex.BR
 import cn.surine.schedulex.R
 import cn.surine.schedulex.base.Constants
 import cn.surine.schedulex.base.controller.BaseAdapter
+import cn.surine.schedulex.base.utils.Prefs
 import cn.surine.schedulex.base.utils.Toasts
-import cn.surine.schedulex.base.utils.hide
 import cn.surine.schedulex.base.utils.load
-import cn.surine.schedulex.base.utils.show
 import cn.surine.schedulex.data.entity.Course
 import cn.surine.schedulex.data.entity.CoursePlanBlock
 import cn.surine.schedulex.ui.course.AddCourseFragment
 import cn.surine.schedulex.ui.view.custom.helper.SelectWeeksDialog
+import cn.surine.ui_lib.setting
+import com.afollestad.materialdialogs.LayoutMode
 import com.afollestad.materialdialogs.MaterialDialog
 import com.afollestad.materialdialogs.bottomsheets.BottomSheet
 import com.afollestad.materialdialogs.color.ColorPalette
 import com.afollestad.materialdialogs.color.colorChooser
+import com.afollestad.materialdialogs.customview.customView
 import com.google.android.material.chip.ChipGroup
 import com.google.android.material.slider.RangeSlider
 import com.peanut.sdk.miuidialog.MIUIDialog
 import kotlinx.android.synthetic.main.fragment_add_course_v2.*
-import kotlinx.android.synthetic.main.item_add_course_block.*
-import kotlinx.android.synthetic.main.view_course_info.*
+import kotlinx.android.synthetic.main.view_dsl_setting.*
+import okhttp3.internal.toHexString
 import kotlin.random.Random
 
-class CreateCourseDelegate:CourseOpDelegate{
+open class CreateCourseDelegate:CourseOpDelegate{
+    var deleteConfirm = false
+
     override fun initDelegate(fragment: AddCourseFragment) {
         //初始化课程
-        fragment.mCourse = Course().apply {
-            scheduleId = fragment.schedule.roomId.toLong()
-            color = Constants.COLOR_1[Random(System.currentTimeMillis()).nextInt(Constants.COLOR_1.size)]
-            id = buildId(scheduleId)
+        initCourseData(fragment)
+
+
+        deleteConfirm = Prefs.getBoolean("course_block_delete",false)
+        fragment.help.setOnClickListener {
+            MaterialDialog(fragment.activity(), BottomSheet(LayoutMode.WRAP_CONTENT)).show {
+                customView(R.layout.view_dsl_setting)
+                fragment.setting(rootView) {
+                    group {
+                        switchItem("时间段列表布局", openSubTitle = "横向布局", closeSubTitle = "纵向布局", initValue = false, tag = "course_block_layout") { _, isChecked ->
+                            if (isChecked) {
+                                fragment.coursePlanRecycler.layoutManager = LinearLayoutManager(fragment.activity, LinearLayoutManager.HORIZONTAL, false)
+                            } else {
+                                fragment.coursePlanRecycler.layoutManager = LinearLayoutManager(fragment.activity, LinearLayoutManager.VERTICAL, false)
+                            }
+                        }
+                        switchItem("删除时间段前确认", openSubTitle = "开启确认", closeSubTitle = "关闭确认", initValue = false, tag = "course_block_delete") { _, isChecked ->
+                           deleteConfirm = isChecked
+                        }
+                    }
+                }
+            }
         }
 
         //修改课程名字
@@ -58,30 +78,39 @@ class CreateCourseDelegate:CourseOpDelegate{
                     subColors = ColorPalette.PrimarySub,
                     allowCustomArgb = true){
                     _,color ->
-                    fragment.mCourse.color = "#${color.toString(16)}"
+                    fragment.mCourse.color = "#${color.toHexString()}"
                     fragment.editCourseColorSubtitle.text = "已选择:${fragment.mCourse.color}"
+                    fragment.s2Img.setBackgroundColor(color)
                 }
                 positiveButton(text = "确定")
             }
         }
 
-        fragment.mCoursePlanBlockData.clear()
-        fragment.mCoursePlanBlockData.add(CoursePlanBlock())
+
+        if(fragment.mCoursePlanBlockData.size == 0){
+            fragment.mCoursePlanBlockData.add(CoursePlanBlock())
+        }
 
         //添加新的时间段
         fragment.addNewPlan.setOnClickListener {
             if(fragment.mCoursePlanBlockData.size >= 5){
                 Toasts.toast("最多只能添加5个时间段")
             }else{
-                fragment.mCoursePlanBlockData.add(CoursePlanBlock())
-                fragment.coursePlanRecycler.adapter?.notifyItemInserted(fragment.mCoursePlanBlockData.size)
-                fragment.coursePlanRecycler.scrollToPosition(fragment.mCoursePlanBlockData.size)
+                fragment.mCoursePlanBlockData.add(0,CoursePlanBlock())
+                fragment.coursePlanRecycler.adapter?.notifyItemInserted(0)
+                Toasts.toast("添加成功")
+                fragment.coursePlanRecycler.smoothScrollToPosition(0)
             }
         }
 
 
         //初始化列表
-        fragment.coursePlanRecycler.load(mLayoutManager = LinearLayoutManager(fragment.activity,LinearLayoutManager.VERTICAL,false),
+        var linearLayoutManager:LinearLayoutManager = if (!Prefs.getBoolean("course_block_layout",false)){
+            LinearLayoutManager(fragment.activity,LinearLayoutManager.VERTICAL,false)
+        }else{
+            LinearLayoutManager(fragment.activity,LinearLayoutManager.HORIZONTAL,false)
+        }
+        fragment.coursePlanRecycler.load(mLayoutManager = linearLayoutManager,
                     mAdapter = BaseAdapter(fragment.mCoursePlanBlockData, R.layout.item_add_course_block,BR.coursePlanBlock)
                 ){
             //删除事件
@@ -90,8 +119,20 @@ class CreateCourseDelegate:CourseOpDelegate{
                     if(fragment.mCoursePlanBlockData.size == 1){
                         Toasts.toast("至少保留一个时间段")
                     }else{
-                        fragment.mCoursePlanBlockData.removeAt(position)
-                        it.notifyItemRemoved(position)
+                        if(deleteConfirm){
+                            MIUIDialog(fragment.activity()).show {
+                                title(text = "确认删除")
+                                message(text = "确认删除该时间段吗？此操作不可恢复，请谨慎")
+                                positiveButton(text = "确定"){ m->
+                                    fragment.mCoursePlanBlockData.removeAt(position)
+                                    it.notifyItemRemoved(position)
+                                }
+                                negativeButton(text = "取消") {  }
+                            }
+                        }else{
+                            fragment.mCoursePlanBlockData.removeAt(position)
+                            it.notifyItemRemoved(position)
+                        }
                     }
                 }
             })
@@ -127,13 +168,12 @@ class CreateCourseDelegate:CourseOpDelegate{
                                     R.id.week_7 -> 7
                                     else -> 1
                                 }
-                                Toasts.toast("选择了:$week")
                                 fragment.mCoursePlanBlockData[position].day = week
                                 fragment.coursePlanRecycler.adapter?.notifyItemChanged(position)
                                 val dialog = this
                                 v.postDelayed({
                                     dialog.dismiss()
-                                },1000)
+                                },700)
                             }
                         }
                     }
@@ -200,6 +240,14 @@ class CreateCourseDelegate:CourseOpDelegate{
                     }
                 }
             })
+        }
+    }
+
+    open fun initCourseData(fragment: AddCourseFragment) {
+        fragment.mCourse = Course().apply {
+            scheduleId = fragment.schedule.roomId.toLong()
+            color = Constants.COLOR_1[Random(System.currentTimeMillis()).nextInt(Constants.COLOR_1.size)]
+            id = buildId(scheduleId)
         }
     }
 }

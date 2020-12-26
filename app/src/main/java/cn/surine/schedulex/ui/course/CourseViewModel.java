@@ -158,6 +158,10 @@ public class CourseViewModel extends ViewModel {
         return mCourseRepository.getCourseById(id);
     }
 
+    public List<Course> getCourseByName(String name){
+        return mCourseRepository.getCourseByName(name);
+    }
+
 
     /**
      * 更新课程
