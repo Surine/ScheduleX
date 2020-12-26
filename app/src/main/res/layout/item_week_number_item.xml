@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="selectInt"
+            type="cn.surine.schedulex.ui.view.custom.helper.SelectInt" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/dp10"
+        >
+
+        <TextView
+            android:id="@+id/tvWeekNumberItem"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp40"
+            android:text="@{String.valueOf(selectInt.number)}"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:textColor="@android:color/black"
+            app:layout_constraintTop_toTopOf="parent"
+            android:background="@{selectInt.select ? @color/blue : @android:color/white}" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

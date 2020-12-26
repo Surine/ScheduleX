@@ -128,7 +128,7 @@
             <androidx.appcompat.widget.AppCompatButton
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="添加新的时间段"
+                android:text="添加时间段"
                 android:background="@null"
                 android:id="@+id/addNewPlan"
                 android:textColor="@android:color/black"

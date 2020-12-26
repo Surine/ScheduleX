@@ -15,6 +15,7 @@ import cn.surine.schedulex.base.utils.show
 import cn.surine.schedulex.data.entity.Course
 import cn.surine.schedulex.data.entity.CoursePlanBlock
 import cn.surine.schedulex.ui.course.AddCourseFragment
+import cn.surine.schedulex.ui.view.custom.helper.SelectWeeksDialog
 import com.afollestad.materialdialogs.MaterialDialog
 import com.afollestad.materialdialogs.bottomsheets.BottomSheet
 import com.afollestad.materialdialogs.color.ColorPalette
@@ -74,6 +75,7 @@ class CreateCourseDelegate:CourseOpDelegate{
             }else{
                 fragment.mCoursePlanBlockData.add(CoursePlanBlock())
                 fragment.coursePlanRecycler.adapter?.notifyItemInserted(fragment.mCoursePlanBlockData.size)
+                fragment.coursePlanRecycler.scrollToPosition(fragment.mCoursePlanBlockData.size)
             }
         }
 
@@ -103,10 +105,8 @@ class CreateCourseDelegate:CourseOpDelegate{
             //编辑周信息
             it.setOnItemElementClickListener(object :BaseAdapter.OnItemElementClickListener(R.id.editCourseWeek){
                 override fun onClick(v: View?, position: Int) {
-                    MIUIDialog(fragment.activity()).show {
-                        customView(R.layout.view_select_weeks){
-
-                        }
+                    SelectWeeksDialog().show(fragment.activity(),fragment.schedule.totalWeek){ v->
+                        Toasts.toast(v.toString())
                     }
                 }
             })

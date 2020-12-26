@@ -13,11 +13,11 @@
         style="@style/textview_title_style"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="选择上课周"
+        android:text="滑动选择"
         app:layout_constraintStart_toStartOf="@+id/guideline18"
         app:layout_constraintTop_toTopOf="@+id/guideline20" />
 
-    <androidx.recyclerview.widget.RecyclerView
+    <cn.surine.schedulex.ui.view.custom.helper.SelectWeekRecyclerView
         android:id="@+id/recyclerview"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -27,18 +27,6 @@
         app:layout_constraintEnd_toStartOf="@+id/guideline19"
         app:layout_constraintStart_toStartOf="@+id/dialog_title"
         app:layout_constraintTop_toBottomOf="@+id/dialog_title" />
-
-    <Button
-        android:id="@+id/button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/dp20"
-        android:text="@string/btn_ok"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/guideline19"
-        app:layout_constraintStart_toEndOf="@+id/all"
-        app:layout_constraintTop_toBottomOf="@id/recyclerview"
-        app:layout_constraintVertical_bias="0.03" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline18"
