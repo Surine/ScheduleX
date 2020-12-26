@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    >
+
+    <TextView
+        android:id="@+id/dialog_title"
+        style="@style/textview_title_style"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="请核对信息"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <LinearLayout
+        android:id="@+id/confirmContainer"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp60"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/dialog_title"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:id="@+id/confirmCourseName"
+            android:gravity="center_vertical"
+            android:text="课程信息"
+            android:textSize="@dimen/t17"
+            android:textStyle="bold"
+            />
+    </LinearLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/confirmRecyclerView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp6"
+        app:chipSpacingHorizontal="@dimen/dp25"
+        app:chipSpacingVertical="@dimen/dp10"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/confirmContainer" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

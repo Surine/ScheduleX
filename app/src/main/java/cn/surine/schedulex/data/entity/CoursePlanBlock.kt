@@ -21,5 +21,10 @@ data class CoursePlanBlock(
     //获取节次信息
     fun getSessionStr() = "上课节次：$sessionStart - $sessionEnd 节"
     //获取周信息
-    fun getWeekStr() = if(weeks.size == 0) "暂无上课周" else "上课周：$weeks"
+    fun getWeekStr() = if(weeks.isEmpty()) "暂无上课周" else "上课周：$weeks"
+
+    fun getPlanTimeInfo() = "$weeks ${ParseUtil.weekList[day - 1]} $sessionStart-$sessionEnd 节"
+    fun getPlanExtraInfo() = "教师：$teacher 位置：$position 学分：$score"
+
+    fun isWarning() = weeks.isEmpty()
 }

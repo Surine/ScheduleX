@@ -25,5 +25,6 @@
     <color name="shape_file_color">#CC73B9C4</color>
     <color name="shape_mi_color">#CCF16609</color>
     <color name="shape_super_color">#CC98A8F6</color>
+    <color name="shape_red_color">#F44336</color>
 
 </resources>

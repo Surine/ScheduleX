@@ -194,6 +194,7 @@
         app:layout_constraintRight_toRightOf="parent"
         android:layout_marginBottom="@dimen/dp16"
         android:text="完成添加"
+        android:id="@+id/confirmFab"
         android:backgroundTint="@color/blue"
         android:textColor="@android:color/white"
         app:iconTint="@android:color/white"

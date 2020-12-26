@@ -25,8 +25,8 @@ data class SelectInt(
 }
 
 class SelectWeeksDialog {
-    fun show(context: Context, totalWeek:Int = Constants.MAX_WEEK, function:(List<Int>)->Unit){
-        val mDatas = List(totalWeek){ SelectInt(it + 1) }
+    fun show(context: Context, totalWeek:Int = Constants.MAX_WEEK, initValue:List<Int>,function:(List<Int>)->Unit){
+        val mDatas = List(totalWeek){ SelectInt(it + 1, initValue.contains(it + 1)) }
         MIUIDialog(context).show {
             customView(viewRes = R.layout.view_select_weeks) {
                 val weekRecyclerView = it.findViewById<SelectWeekRecyclerView>(R.id.recyclerview)

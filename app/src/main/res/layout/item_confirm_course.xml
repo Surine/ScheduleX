@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="confirmData"
+            type="cn.surine.schedulex.data.entity.CoursePlanBlock" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/confirmBackground"
+        android:paddingTop="@dimen/dp20"
+        android:layout_marginBottom="@dimen/dp5"
+        android:layout_marginTop="@dimen/dp5"
+        android:paddingBottom="@dimen/dp20"
+        android:paddingStart="@dimen/dp10"
+        android:paddingEnd="@dimen/dp10"
+        android:background="@{confirmData.isWarning() ? @drawable/shape_radius_card_5 : @drawable/shape_radius_card_1}"
+        android:orientation="vertical">
+
+        <TextView
+            android:textColor="@android:color/white"
+            android:id="@+id/confirmTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/t17"
+            android:layout_marginTop="@dimen/dp5"
+            android:layout_marginBottom="@dimen/dp5"
+            app:layout_constraintTop_toTopOf="parent"
+            android:text="@{confirmData.getPlanTimeInfo}" />
+
+        <TextView
+            android:textColor="@android:color/white"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@{confirmData.getPlanExtraInfo}"
+            android:id="@+id/confirmSubTitle" />
+    </LinearLayout>
+</layout>
