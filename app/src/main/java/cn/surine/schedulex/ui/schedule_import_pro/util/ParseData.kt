@@ -24,6 +24,7 @@ object ParseData {
     const val SW = "sw" //树维
     const val NEW_URP = "new_urp" //新urp
     const val JZ = "jz" //金智
+    const val CF = "cf"   //乘方
 
     const val PKU = "pku" //北京大学
     const val NCUT = "ncut" //北方工业大学
@@ -32,7 +33,8 @@ object ParseData {
     const val WHUT_GRA = "whut_graduates" //武汉理工研究生院
     const val WTU_GRA = "wtu_graduates" //武汉纺织研究生院
     const val HIT_GRA = "hit_graduates" //哈工大研究生院
-    const val CS = "cs"   //肇庆学院-丛师科技
+    const val SANXIA = "sanxia" //三峡
+    const val NEW_QZ_2_2 = "new_qz_2_2" //中南林业大学涉外学院
 
     val jwMap = mapOf(
             ZF to Zf(),
@@ -53,7 +55,9 @@ object ParseData {
             NEW_URP to NewUrp(),
             JZ to Jz(),
             HIT_GRA to HitGraduates(),
-            CS to ZhaoQingU()
+            CF to CF(),
+            SANXIA to SanXia(),
+            NEW_QZ_2_2 to NewQz2_2()
     )
 
     val commonHtmlSystem = listOf(QZ, NEW_QZ_2_1, SW)
@@ -61,7 +65,7 @@ object ParseData {
 
 }
 
-class CommonJw{
+class CommonJw {
     val commonJwData = listOf(
             LocalUniversity("正方教务", "-1001", jwSystem = ParseData.ZF),
             LocalUniversity("正方教务-T6", "-1001", jwSystem = ParseData.ZF_T6),
@@ -73,6 +77,7 @@ class CommonJw{
             LocalUniversity("新强智教务-3", "-10043", jwSystem = ParseData.NEW_QZ_3),
             LocalUniversity("树维教务", "-1005", jwSystem = ParseData.SW),
             LocalUniversity("新URP教务", "-1006", jwSystem = ParseData.NEW_URP),
-            LocalUniversity("金智教务", "-1007", jwSystem = ParseData.JZ)
+            LocalUniversity("金智教务", "-1007", jwSystem = ParseData.JZ),
+            LocalUniversity("乘方教务", "-1008", jwSystem = ParseData.CF)
     )
 }

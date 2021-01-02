@@ -11,7 +11,7 @@ package cn.surine.schedulex.ui.schedule_import_pro.core.jw_core.beans
 //    "jxcdmcs":"1号教学楼504",
 //    "teaxms":"孔"
 //},
-data class ZhaoQingUBean(
+data class ChengFangUBean(
         val kcmc:String = "", //课程名
         val teaxms:String = "", //教师
         val jxcdmcs:String = "", //上课地点
