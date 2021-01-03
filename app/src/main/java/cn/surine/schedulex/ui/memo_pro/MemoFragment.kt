@@ -88,11 +88,11 @@ class MemoFragment : BaseFragment() {
     override fun layoutId() = R.layout.fragment_memo
 }
 
-class MemoAdapter(val context: Context, private val mDatas: List<MemoWithEvent>, layoutId: Int, bindName: Int) : BaseAdapter<MemoWithEvent>(mDatas, layoutId, bindName) {
+class MemoAdapter(val context: Context, private val list: List<MemoWithEvent>, layoutId: Int, bindName: Int) : BaseAdapter<MemoWithEvent>(list, layoutId, bindName) {
     @SuppressLint("InflateParams")
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         super.onBindViewHolder(holder, position)
-        for ((index, i) in mDatas[position].events.withIndex()) {
+        for ((index, i) in list[position].events.withIndex()) {
             val view = LayoutInflater.from(context).inflate(R.layout.item_child_event_display, null)
             val checkBox = view.findViewById<CheckBox>(R.id.taskInfo)
             checkBox.isChecked = i.done

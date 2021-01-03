@@ -11,335 +11,342 @@
             type="cn.surine.schedulex.data.entity.CoursePlanBlock" />
     </data>
 
-    <LinearLayout
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/config_card_background"
-        android:orientation="vertical"
-        android:layout_marginTop="@dimen/dp5"
-        android:layout_marginBottom="@dimen/dp5"
-        android:animateLayoutChanges="true"
-        android:layout_marginStart="@dimen/dp5"
-        android:layout_marginEnd="@dimen/dp5"
-        android:paddingTop="@dimen/dp8"
-        android:paddingBottom="@dimen/dp8">
+        android:layout_height="wrap_content">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="@dimen/dp40"
-            android:gravity="end|center_vertical"
-            android:orientation="horizontal"
-            >
-            <ImageView
-                android:layout_width="@dimen/dp40"
-                android:layout_height="match_parent"
-                android:src="@mipmap/ic_expand"
-                android:padding="@dimen/dp8"
-                android:id="@+id/coursePlanItemExpand"
-                android:layout_marginEnd="@dimen/dp20"
-                />
-            <TextView
-                android:id="@+id/coursePlanItemDelete"
-                android:layout_width="@dimen/dp50"
-                android:layout_height="wrap_content"
-                android:padding="@dimen/dp8"
-                android:text="删除"
-                android:gravity="center"
-                android:background="@drawable/shape_red_circle"
-                android:textSize="@dimen/t10"
-                android:textColor="@android:color/white"
-                android:layout_marginEnd="@dimen/dp12"
-                />
+            android:layout_height="wrap_content"
+            android:background="@drawable/config_card_background"
+            android:orientation="vertical"
+            android:layout_marginTop="@dimen/dp5"
+            android:layout_marginBottom="@dimen/dp5"
+            android:animateLayoutChanges="true"
+            android:layout_marginStart="@dimen/dp5"
+            android:layout_marginEnd="@dimen/dp5"
+            android:paddingTop="@dimen/dp8"
+            android:paddingBottom="@dimen/dp8">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp40"
+                android:gravity="end|center_vertical"
+                android:orientation="horizontal"
+                >
+                <ImageView
+                    android:layout_width="@dimen/dp40"
+                    android:layout_height="match_parent"
+                    android:src="@mipmap/ic_expand"
+                    android:padding="@dimen/dp8"
+                    android:id="@+id/coursePlanItemExpand"
+                    android:layout_marginEnd="@dimen/dp20"
+                    />
+                <TextView
+                    android:id="@+id/coursePlanItemDelete"
+                    android:layout_width="@dimen/dp46"
+                    android:layout_height="@dimen/dp22"
+                    android:padding="@dimen/dp2"
+                    android:text="删除"
+                    android:gravity="center"
+                    android:background="@drawable/shape_red_circle"
+                    android:textSize="@dimen/t10"
+                    android:textColor="@android:color/white"
+                    android:layout_marginEnd="@dimen/dp12"
+                    />
+            </LinearLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/editCourseWeek"
+                style="@style/setting_item_ui">
+
+                <TextView
+                    android:id="@+id/textView33"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/dp8"
+                    android:layout_marginTop="@dimen/dp8"
+                    android:text="周次安排"
+                    android:textColor="@android:color/black"
+                    android:textSize="@dimen/t18"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toTopOf="@id/courseWeekSubTitle"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+
+                <TextView
+                    android:id="@+id/courseWeekSubTitle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp8"
+                    android:layout_marginBottom="@dimen/dp16"
+                    android:text="@{coursePlanBlock.getWeekStr}"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/imageView10"
+                    app:layout_constraintStart_toStartOf="@+id/textView33"
+                    app:layout_constraintTop_toBottomOf="@+id/textView33" />
+
+                <ImageView
+                    android:id="@+id/imageView10"
+                    android:layout_width="@dimen/dp20"
+                    android:layout_height="@dimen/dp20"
+                    android:layout_marginEnd="16dp"
+                    app:layout_constraintBottom_toBottomOf="@+id/courseWeekSubTitle"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/textView33"
+                    app:srcCompat="@drawable/course_name_24dp" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/editCourseDay"
+                style="@style/setting_item_ui">
+
+                <TextView
+                    android:id="@+id/editCourseDayTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/dp8"
+                    android:layout_marginTop="@dimen/dp8"
+                    android:text="星期安排"
+                    android:textColor="@android:color/black"
+                    android:textSize="@dimen/t18"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toTopOf="@id/editCourseDaySubtitle"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+
+                <TextView
+                    android:id="@+id/editCourseDaySubtitle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp8"
+                    android:layout_marginBottom="@dimen/dp16"
+                    android:text="@{coursePlanBlock.getDayStr()}"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/s2_img"
+                    app:layout_constraintStart_toStartOf="@+id/editCourseDayTitle"
+                    app:layout_constraintTop_toBottomOf="@+id/editCourseDayTitle" />
+
+                <ImageView
+                    android:id="@+id/s2_img"
+                    android:layout_width="@dimen/dp20"
+                    android:layout_height="@dimen/dp20"
+                    android:layout_marginEnd="16dp"
+                    app:layout_constraintBottom_toBottomOf="@+id/editCourseDaySubtitle"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/editCourseDayTitle"
+                    app:srcCompat="@mipmap/ic_clock"
+                    app:tint="@android:color/black" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/editCourseSession"
+                style="@style/setting_item_ui">
+
+                <TextView
+                    android:id="@+id/s3_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/dp8"
+                    android:layout_marginTop="@dimen/dp8"
+                    android:text="节次安排"
+                    android:textColor="@android:color/black"
+                    android:textSize="@dimen/t18"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toTopOf="@id/s3_subTitle"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+
+                <TextView
+                    android:id="@+id/s3_subTitle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp8"
+                    android:layout_marginBottom="@dimen/dp16"
+                    android:text="@{coursePlanBlock.getSessionStr}"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/s3_img"
+                    app:layout_constraintStart_toStartOf="@+id/s3_title"
+                    app:layout_constraintTop_toBottomOf="@+id/s3_title" />
+
+                <ImageView
+                    android:id="@+id/s3_img"
+                    android:layout_width="@dimen/dp20"
+                    android:layout_height="@dimen/dp20"
+                    android:layout_marginEnd="16dp"
+                    app:layout_constraintBottom_toBottomOf="@+id/s3_subTitle"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/s3_title"
+                    app:srcCompat="@drawable/ic_baseline_eco_24" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/editCoursePosition"
+                android:visibility="@{coursePlanBlock.expand ? View.VISIBLE : View.GONE}"
+                style="@style/setting_item_ui">
+
+                <TextView
+                    android:id="@+id/textView35"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/dp8"
+                    android:layout_marginTop="@dimen/dp8"
+                    android:text="@string/position"
+                    android:textColor="@android:color/black"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:ignore="HardcodedText" />
+
+
+                <TextView
+                    android:id="@+id/coursePositionSubtitle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp8"
+                    android:layout_marginBottom="@dimen/dp16"
+                    android:text="@{coursePlanBlock.position}"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/short_btn_edit"
+                    app:layout_constraintStart_toStartOf="@+id/textView35"
+                    app:layout_constraintTop_toBottomOf="@+id/textView35" />
+
+                <ImageView
+                    android:id="@+id/short_btn_edit"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_marginEnd="16dp"
+                    app:layout_constraintBottom_toBottomOf="@+id/coursePositionSubtitle"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/textView35"
+                    app:srcCompat="@drawable/course_position_24dp" />
+
+                <TextView
+                    android:id="@+id/textView10"
+                    style="@style/optional_parameter_tv"
+                    android:layout_marginStart="@dimen/dp12"
+                    app:layout_constraintBottom_toBottomOf="@+id/textView35"
+                    app:layout_constraintStart_toEndOf="@+id/textView35"
+                    app:layout_constraintTop_toTopOf="@+id/textView35" />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/editCourseTeacher"
+                android:visibility="@{coursePlanBlock.expand ? View.VISIBLE : View.GONE}"
+                style="@style/setting_item_ui">
+
+                <TextView
+                    android:id="@+id/textView35_4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/dp8"
+                    android:layout_marginTop="@dimen/dp8"
+                    android:text="@string/teacher"
+                    android:textColor="@android:color/black"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:ignore="HardcodedText" />
+
+
+                <TextView
+                    android:id="@+id/courseTeacherSubtitle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp8"
+                    android:layout_marginBottom="@dimen/dp16"
+                    android:text="@{coursePlanBlock.teacher}"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/imageView9_4"
+                    app:layout_constraintStart_toStartOf="@+id/textView35_4"
+                    app:layout_constraintTop_toBottomOf="@+id/textView35_4" />
+
+                <ImageView
+                    android:id="@+id/imageView9_4"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_marginEnd="16dp"
+                    app:layout_constraintBottom_toBottomOf="@+id/courseTeacherSubtitle"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/textView35_4"
+                    app:srcCompat="@drawable/ic_person_black_24dp" />
+
+                <TextView
+                    android:id="@+id/textView11"
+                    style="@style/optional_parameter_tv"
+                    android:layout_marginStart="@dimen/dp12"
+                    app:layout_constraintBottom_toBottomOf="@+id/textView35_4"
+                    app:layout_constraintStart_toEndOf="@+id/textView35_4"
+                    app:layout_constraintTop_toTopOf="@+id/textView35_4" />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/editCourseScore"
+                android:visibility="@{coursePlanBlock.expand ? View.VISIBLE : View.GONE}"
+                style="@style/setting_item_ui">
+
+                <TextView
+                    android:id="@+id/textView35_5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/dp8"
+                    android:layout_marginTop="@dimen/dp8"
+                    android:text="@string/score"
+                    android:textColor="@android:color/black"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:ignore="HardcodedText" />
+
+
+                <TextView
+                    android:id="@+id/courseScoreSubtitle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp8"
+                    android:layout_marginBottom="@dimen/dp16"
+                    android:text="@{coursePlanBlock.score}"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/imageView9_5"
+                    app:layout_constraintStart_toStartOf="@+id/textView35_5"
+                    app:layout_constraintTop_toBottomOf="@+id/textView35_5" />
+
+                <ImageView
+                    android:id="@+id/imageView9_5"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_marginEnd="16dp"
+                    app:layout_constraintBottom_toBottomOf="@+id/courseScoreSubtitle"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/textView35_5"
+                    app:srcCompat="@drawable/course_xf_24dp" />
+
+                <TextView
+                    android:id="@+id/textView12"
+                    style="@style/optional_parameter_tv"
+                    android:layout_marginStart="@dimen/dp12"
+                    app:layout_constraintBottom_toBottomOf="@+id/textView35_5"
+                    app:layout_constraintStart_toEndOf="@+id/textView35_5"
+                    app:layout_constraintTop_toTopOf="@+id/textView35_5" />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
         </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/editCourseWeek"
-            style="@style/setting_item_ui">
-
-            <TextView
-                android:id="@+id/textView33"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/dp8"
-                android:layout_marginTop="@dimen/dp8"
-                android:text="周次安排"
-                android:textColor="@android:color/black"
-                android:textSize="@dimen/t18"
-                android:textStyle="bold"
-                app:layout_constraintBottom_toTopOf="@id/courseWeekSubTitle"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-
-            <TextView
-                android:id="@+id/courseWeekSubTitle"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/dp8"
-                android:layout_marginBottom="@dimen/dp16"
-                android:text="@{coursePlanBlock.getWeekStr}"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/imageView10"
-                app:layout_constraintStart_toStartOf="@+id/textView33"
-                app:layout_constraintTop_toBottomOf="@+id/textView33" />
-
-            <ImageView
-                android:id="@+id/imageView10"
-                android:layout_width="@dimen/dp20"
-                android:layout_height="@dimen/dp20"
-                android:layout_marginEnd="16dp"
-                app:layout_constraintBottom_toBottomOf="@+id/courseWeekSubTitle"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/textView33"
-                app:srcCompat="@drawable/course_name_24dp" />
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/editCourseDay"
-            style="@style/setting_item_ui">
-
-            <TextView
-                android:id="@+id/editCourseDayTitle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/dp8"
-                android:layout_marginTop="@dimen/dp8"
-                android:text="星期安排"
-                android:textColor="@android:color/black"
-                android:textSize="@dimen/t18"
-                android:textStyle="bold"
-                app:layout_constraintBottom_toTopOf="@id/editCourseDaySubtitle"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-
-            <TextView
-                android:id="@+id/editCourseDaySubtitle"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/dp8"
-                android:layout_marginBottom="@dimen/dp16"
-                android:text="@{coursePlanBlock.getDayStr()}"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/s2_img"
-                app:layout_constraintStart_toStartOf="@+id/editCourseDayTitle"
-                app:layout_constraintTop_toBottomOf="@+id/editCourseDayTitle" />
-
-            <ImageView
-                android:id="@+id/s2_img"
-                android:layout_width="@dimen/dp20"
-                android:layout_height="@dimen/dp20"
-                android:layout_marginEnd="16dp"
-                app:layout_constraintBottom_toBottomOf="@+id/editCourseDaySubtitle"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/editCourseDayTitle"
-                app:srcCompat="@drawable/course_name_24dp" />
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/editCourseSession"
-            style="@style/setting_item_ui">
-
-            <TextView
-                android:id="@+id/s3_title"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/dp8"
-                android:layout_marginTop="@dimen/dp8"
-                android:text="节次安排"
-                android:textColor="@android:color/black"
-                android:textSize="@dimen/t18"
-                android:textStyle="bold"
-                app:layout_constraintBottom_toTopOf="@id/s3_subTitle"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-
-            <TextView
-                android:id="@+id/s3_subTitle"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/dp8"
-                android:layout_marginBottom="@dimen/dp16"
-                android:text="@{coursePlanBlock.getSessionStr}"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/s3_img"
-                app:layout_constraintStart_toStartOf="@+id/s3_title"
-                app:layout_constraintTop_toBottomOf="@+id/s3_title" />
-
-            <ImageView
-                android:id="@+id/s3_img"
-                android:layout_width="@dimen/dp20"
-                android:layout_height="@dimen/dp20"
-                android:layout_marginEnd="16dp"
-                app:layout_constraintBottom_toBottomOf="@+id/s3_subTitle"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/s3_title"
-                app:srcCompat="@drawable/course_name_24dp" />
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/editCoursePosition"
-            android:visibility="@{coursePlanBlock.expand ? View.VISIBLE : View.GONE}"
-            style="@style/setting_item_ui">
-
-            <TextView
-                android:id="@+id/textView35"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/dp8"
-                android:layout_marginTop="@dimen/dp8"
-                android:text="@string/position"
-                android:textColor="@android:color/black"
-                android:textSize="18sp"
-                android:textStyle="bold"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:ignore="HardcodedText" />
-
-
-            <TextView
-                android:id="@+id/coursePositionSubtitle"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/dp8"
-                android:layout_marginBottom="@dimen/dp16"
-                android:text="@{coursePlanBlock.position}"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/short_btn_edit"
-                app:layout_constraintStart_toStartOf="@+id/textView35"
-                app:layout_constraintTop_toBottomOf="@+id/textView35" />
-
-            <ImageView
-                android:id="@+id/short_btn_edit"
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:layout_marginEnd="16dp"
-                app:layout_constraintBottom_toBottomOf="@+id/coursePositionSubtitle"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/textView35"
-                app:srcCompat="@drawable/course_position_24dp" />
-
-            <TextView
-                android:id="@+id/textView10"
-                style="@style/optional_parameter_tv"
-                android:layout_marginStart="@dimen/dp12"
-                app:layout_constraintBottom_toBottomOf="@+id/textView35"
-                app:layout_constraintStart_toEndOf="@+id/textView35"
-                app:layout_constraintTop_toTopOf="@+id/textView35" />
-
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/editCourseTeacher"
-            android:visibility="@{coursePlanBlock.expand ? View.VISIBLE : View.GONE}"
-            style="@style/setting_item_ui">
-
-            <TextView
-                android:id="@+id/textView35_4"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/dp8"
-                android:layout_marginTop="@dimen/dp8"
-                android:text="@string/teacher"
-                android:textColor="@android:color/black"
-                android:textSize="18sp"
-                android:textStyle="bold"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:ignore="HardcodedText" />
-
-
-            <TextView
-                android:id="@+id/courseTeacherSubtitle"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/dp8"
-                android:layout_marginBottom="@dimen/dp16"
-                android:text="@{coursePlanBlock.teacher}"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/imageView9_4"
-                app:layout_constraintStart_toStartOf="@+id/textView35_4"
-                app:layout_constraintTop_toBottomOf="@+id/textView35_4" />
-
-            <ImageView
-                android:id="@+id/imageView9_4"
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:layout_marginEnd="16dp"
-                app:layout_constraintBottom_toBottomOf="@+id/courseTeacherSubtitle"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/textView35_4"
-                app:srcCompat="@drawable/ic_person_black_24dp" />
-
-            <TextView
-                android:id="@+id/textView11"
-                style="@style/optional_parameter_tv"
-                android:layout_marginStart="@dimen/dp12"
-                app:layout_constraintBottom_toBottomOf="@+id/textView35_4"
-                app:layout_constraintStart_toEndOf="@+id/textView35_4"
-                app:layout_constraintTop_toTopOf="@+id/textView35_4" />
-
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/editCourseScore"
-            android:visibility="@{coursePlanBlock.expand ? View.VISIBLE : View.GONE}"
-            style="@style/setting_item_ui">
-
-            <TextView
-                android:id="@+id/textView35_5"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/dp8"
-                android:layout_marginTop="@dimen/dp8"
-                android:text="@string/score"
-                android:textColor="@android:color/black"
-                android:textSize="18sp"
-                android:textStyle="bold"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:ignore="HardcodedText" />
-
-
-            <TextView
-                android:id="@+id/courseScoreSubtitle"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/dp8"
-                android:layout_marginBottom="@dimen/dp16"
-                android:text="@{coursePlanBlock.score}"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/imageView9_5"
-                app:layout_constraintStart_toStartOf="@+id/textView35_5"
-                app:layout_constraintTop_toBottomOf="@+id/textView35_5" />
-
-            <ImageView
-                android:id="@+id/imageView9_5"
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:layout_marginEnd="16dp"
-                app:layout_constraintBottom_toBottomOf="@+id/courseScoreSubtitle"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/textView35_5"
-                app:srcCompat="@drawable/course_xf_24dp" />
-
-            <TextView
-                android:id="@+id/textView12"
-                style="@style/optional_parameter_tv"
-                android:layout_marginStart="@dimen/dp12"
-                app:layout_constraintBottom_toBottomOf="@+id/textView35_5"
-                app:layout_constraintStart_toEndOf="@+id/textView35_5"
-                app:layout_constraintTop_toTopOf="@+id/textView35_5" />
-
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-    </LinearLayout>
 </layout>

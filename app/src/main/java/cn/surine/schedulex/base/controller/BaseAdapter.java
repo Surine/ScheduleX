@@ -131,7 +131,7 @@ public class BaseAdapter<T> extends RecyclerView.Adapter<ViewHolder> {
         }
 
         //长按事件
-        if(onItemLongClickListener != null){
+        if (onItemLongClickListener != null) {
             holder.itemView.setOnLongClickListener(v -> onItemLongClickListener.onClick(position));
         }
 
@@ -149,6 +149,29 @@ public class BaseAdapter<T> extends RecyclerView.Adapter<ViewHolder> {
     @Override
     public int getItemCount() {
         return mDatas == null ? 0 : mDatas.size();
+    }
+
+
+    public void addData(int position, T t) {
+        mDatas.add(position, t);
+        notifyItemInserted(position);
+    }
+
+
+    public void addData(T t) {
+        mDatas.add(t);
+        notifyItemInserted(mDatas.size() - 1);
+    }
+
+
+    public void removeData(int position) {
+        mDatas.remove(position);
+        notifyItemRemoved(position);
+        notifyItemRangeChanged(position,mDatas.size() - position);
+    }
+
+    public List<T> getMDatas() {
+        return mDatas;
     }
 }
 

@@ -156,8 +156,9 @@ class ScheduleListFragment : BaseFragment() {
                 scheduleViewModel.deleteScheduleById(data[position].roomId.toLong())
                 courseViewModel.deleteCourseByScheduleId(data[position].roomId.toLong())
                 Toasts.toast(getString(R.string.schedule_is_delete))
-                data.removeAt(position)
-                viewRecycler.adapter?.notifyDataSetChanged()
+                if(viewRecycler.adapter != null){
+                    (viewRecycler.adapter as BaseAdapter<*>).removeData(position)
+                }
             })
         }
     }

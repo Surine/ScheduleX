@@ -40,6 +40,7 @@ import org.jetbrains.annotations.NotNull
  */
 object BtmDialogs {
     const val COURSE_ID = "course_id"
+    const val COURSE_NAME = "course_name"
 
     /**
      * 获取一个底部弹窗的基础UI
@@ -97,6 +98,7 @@ object BtmDialogs {
         courseClassDay.background = Drawables.getDrawable(App.context.resources.getColor(R.color.colorPrimary), 180, 0, 0)
         val bundle = Bundle()
         bundle.putString(COURSE_ID, course.id)
+        bundle.putString(COURSE_NAME, course.coureName)
         edit.setOnClickListener {
             open(baseFragment, R.id.action_scheduleFragment_to_addCourseFragment, bundle)
             bt.dismiss()
