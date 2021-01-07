@@ -18,7 +18,7 @@ import cn.surine.schedulex.ui.timetable_list.TimeTableViewModel
 
 /**
  * Intro：
- * 不想写这些样板代码 (ಥ﹏ಥ)
+ * 不想写这些样板代码 (ಥ﹏ಥ) 测试
  * @author sunliwei
  * @date 2020/6/26 10:50
  */
