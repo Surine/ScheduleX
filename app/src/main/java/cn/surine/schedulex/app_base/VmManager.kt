@@ -20,7 +20,7 @@ import cn.surine.schedulex.ui.timetable_list.TimeTableViewModel
  * Intro：
  * 不想写这些样板代码 (ಥ﹏ಥ) 测试
  * @author sunliwei
- * @date 2020/6/26 10:50
+ * @date 2020/6/26 10:51
  */
 class VmManager(private val fragment: Fragment) {
     //课表vm
