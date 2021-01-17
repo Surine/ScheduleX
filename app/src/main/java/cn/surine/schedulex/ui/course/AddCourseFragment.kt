@@ -3,9 +3,7 @@ package cn.surine.schedulex.ui.course
 import android.view.View
 import cn.surine.schedulex.R
 import cn.surine.schedulex.app_base.VmManager
-import cn.surine.schedulex.base.Constants
 import cn.surine.schedulex.base.controller.BaseFragment
-import cn.surine.schedulex.base.utils.Toasts
 import cn.surine.schedulex.data.entity.Course
 import cn.surine.schedulex.data.entity.CoursePlanBlock
 import cn.surine.schedulex.data.entity.Schedule
@@ -16,9 +14,6 @@ import cn.surine.schedulex.ui.course.op_delegate.ModifyCourseDelegate
 import cn.surine.schedulex.ui.schedule.ScheduleViewModel
 import cn.surine.schedulex.ui.schedule.ScheduleViewPagerAdapter
 import cn.surine.schedulex.ui.view.custom.helper.BtmDialogs
-import com.peanut.sdk.miuidialog.MIUIDialog
-import kotlinx.android.synthetic.main.fragment_add_course_v2.*
-import java.util.*
 
 class AddCourseFragment :BaseFragment(){
     lateinit var scheduleViewModel: ScheduleViewModel
@@ -46,11 +41,11 @@ class AddCourseFragment :BaseFragment(){
         //选择合适的委托
         when{
             arguments == null -> curOpDelegate = CreateCourseDelegate()
-            requireArguments().getString(BtmDialogs.COURSE_ID,"").isNotEmpty() -> {
-                curOpDelegate = ModifyCourseDelegate()
-            }
             requireArguments().getBoolean(ScheduleViewPagerAdapter.IS_COPY) -> {
                 curOpDelegate = CopyCourseDelegate()
+            }
+            requireArguments().getString(BtmDialogs.COURSE_ID,"").isNotEmpty() -> {
+                curOpDelegate = ModifyCourseDelegate()
             }
         }
 
