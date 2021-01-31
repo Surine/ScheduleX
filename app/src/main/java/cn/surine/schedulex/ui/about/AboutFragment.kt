@@ -2,12 +2,17 @@ package cn.surine.schedulex.ui.about
 
 
 import android.view.View
+import androidx.lifecycle.ViewModelProvider
 import cn.surine.schedulex.R
 import cn.surine.schedulex.app_base.hit
 import cn.surine.schedulex.base.controller.BaseFragment
+import cn.surine.schedulex.base.utils.InstanceFactory
 import cn.surine.schedulex.base.utils.Others
 import cn.surine.schedulex.base.utils.Toasts.toast
 import cn.surine.schedulex.base.utils.Toasts.toastLong
+import cn.surine.schedulex.base.utils.hide
+import cn.surine.schedulex.base.utils.show
+import cn.surine.schedulex.ui.splash.SplashViewModel
 import com.peanut.sdk.miuidialog.MIUIDialog
 import com.tencent.bugly.beta.Beta
 import kotlinx.android.synthetic.main.fragment_about.*
@@ -22,6 +27,13 @@ class AboutFragment : BaseFragment() {
     override fun layoutId(): Int = R.layout.fragment_about
 
     override fun onInit(parent: View?) {
+        val vmSplash by lazy { ViewModelProvider(requireActivity(), InstanceFactory.getInstance(arrayOf<Class<*>>(), arrayOf<Any>()))[SplashViewModel::class.java] }
+        val bdUrl = vmSplash.mCommonParam.value?.bdUrl ?: ""
+        if (bdUrl.isEmpty()) {
+            bytedance.hide()
+        } else {
+            bytedance.show()
+        }
         versionSlogan.text = getString(R.string.version_slogan, Others.getAppVersion())
         aboutItemQQ.setOnClickListener {
             hit("qq")
@@ -43,7 +55,10 @@ class AboutFragment : BaseFragment() {
             toastLong("感谢捐赠，请在扫码界面，选择相册里的微信收款码（**伟）进行识别。")
             Others.donateWeixin(activity)
         }
-
+        bytedance.setOnClickListener {
+            hit("bytedance")
+            Others.openUrl(bdUrl)
+        }
         aboutItemCoolApk.setOnClickListener {
             hit("coolapk")
             Others.startCoolApk("667393")

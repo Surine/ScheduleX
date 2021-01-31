@@ -13,6 +13,7 @@ import cn.surine.schedulex.ui.schedule.ScheduleRepository
 import cn.surine.schedulex.ui.schedule.ScheduleViewModel
 import cn.surine.schedulex.ui.schedule_import_pro.repository.ScheduleDataFetchRepository
 import cn.surine.schedulex.ui.schedule_import_pro.viewmodel.ScheduleDataFetchViewModel
+import cn.surine.schedulex.ui.splash.SplashViewModel
 import cn.surine.schedulex.ui.timer.TimerRepository
 import cn.surine.schedulex.ui.timer.TimerViewModel
 import cn.surine.schedulex.ui.timetable_list.TimeTableRepository
@@ -45,4 +46,7 @@ class VmManager(private val fragment: Fragment) {
 
     //memo
     val vmMemo by lazy { ViewModelProvider(fragment, InstanceFactory.getInstance(arrayOf<Class<*>>(MemoRepository::class.java), arrayOf<Any>(MemoRepository)))[MemoViewModel::class.java] }
+
+    //splash
+    val vmSplash by lazy { ViewModelProvider(fragment, InstanceFactory.getInstance(arrayOf<Class<*>>(), arrayOf<Any>()))[SplashViewModel::class.java] }
 }
