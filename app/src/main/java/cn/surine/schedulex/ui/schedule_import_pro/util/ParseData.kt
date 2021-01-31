@@ -1,6 +1,11 @@
 package cn.surine.schedulex.ui.schedule_import_pro.util
 
 import cn.surine.schedulex.ui.schedule_import_pro.core.jw_core.*
+import cn.surine.schedulex.ui.schedule_import_pro.core.jw_core.qz_group.NewQzBase.Companion.KB_CONTENT
+import cn.surine.schedulex.ui.schedule_import_pro.core.jw_core.qz_group.NewQzBase.Companion.SCHOOL_NAME
+import cn.surine.schedulex.ui.schedule_import_pro.core.jw_core.qz_group.NewQzBase.Companion.SKIP_ROW
+import cn.surine.schedulex.ui.schedule_import_pro.core.jw_core.qz_group.NewQzBase.Companion.TABLE_NAME
+import cn.surine.schedulex.ui.schedule_import_pro.core.jw_core.qz_group.NewQzV2
 import cn.surine.schedulex.ui.schedule_import_pro.model.LocalUniversity
 
 /**
@@ -37,6 +42,10 @@ object ParseData {
     const val NEW_QZ_2_2 = "new_qz_2_2" //中南林业大学涉外学院
     const val JNU = "jnu" //暨南大学
     const val SICAU = "sicau" //四川农业大学
+    const val BUPT = "bupt" //北京邮电大学
+    const val ZNLYDXSWXY = "znlydxswxy"  //中南林业大学涉外学院(备用标识符)
+    const val DLGYDX = "DLGYDX"  //大连工业大学(备用标识符)
+    const val HNLYDX = "HNLYDX"  //华南林业科技大学(备用标识符)
 
     val jwMap = mapOf(
             ZF to Zf(),
@@ -61,7 +70,13 @@ object ParseData {
             SANXIA to SanXia(),
             NEW_QZ_2_2 to NewQz2_2(),
             JNU to Jnu(),
-            SICAU to Sicau()
+            SICAU to Sicau(),
+            BUPT to NewQzV2(hashMapOf(
+                    SCHOOL_NAME to BUPT,
+                    TABLE_NAME to "kbtable",
+                    KB_CONTENT to "kbcontent",
+                    SKIP_ROW to "1"
+            ))
     )
 
     val commonHtmlSystem = listOf(QZ, NEW_QZ_2_1, SW)

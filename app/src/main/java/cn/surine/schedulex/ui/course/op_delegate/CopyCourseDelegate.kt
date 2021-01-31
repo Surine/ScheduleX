@@ -9,6 +9,7 @@ class CopyCourseDelegate :CreateCourseDelegate(){
         super.initCourseData(fragment)
         val otherData = fragment.courseViewModel.getCourseById(fragment.requireArguments().getString(BtmDialogs.COURSE_ID))
         fragment.mCourse.coureName = otherData.coureName
+        fragment.mCourse.id = buildId(otherData.scheduleId)
         val list = mutableListOf<Int>()
         for (i in otherData.classWeek.indices) {
             if (otherData.classWeek[i] == '1') {
@@ -16,7 +17,7 @@ class CopyCourseDelegate :CreateCourseDelegate(){
             }
         }
         fragment.mCoursePlanBlockData.add(CoursePlanBlock(
-                belongId = otherData.id,
+                belongId = fragment.mCourse.id,
                 weeks = list,
                 day = otherData.classDay.toInt(),
                 sessionStart = otherData.classSessions.toInt(),
