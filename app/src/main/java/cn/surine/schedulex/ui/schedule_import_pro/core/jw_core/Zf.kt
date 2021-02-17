@@ -4,6 +4,7 @@ import android.util.Log
 import cn.surine.schedulex.ui.schedule_import_pro.core.IJWParse
 import cn.surine.schedulex.ui.schedule_import_pro.model.CourseWrapper
 import cn.surine.schedulex.ui.schedule_import_pro.util.ParseUtil
+import cn.surine.schedulex.ui.schedule_import_pro.util.WeekUtilsV2
 import org.jsoup.Jsoup
 import org.jsoup.nodes.Element
 
@@ -42,14 +43,16 @@ open class Zf() : IJWParse {
                     position = nodes[3].text()
                     teacher = nodes[2].text()
                     day = ParseUtil.getDayInfoByStr(nodes[1].text().substring(0, 2))
-                    week = ParseUtil.getWeekInfoByStr(nodes[1].text().substringAfter("{"),
-                            singleRules = "第%d-%d周|单周}",
-                            doubleRules = "第%d-%d周|双周}",
-                            commonRules = "第%d-%d周}"
-                    )
-                    val sessionInfo = nodes[1].text().substring(2, nodes[1].text().indexOf("{")).removePrefix("第").removeSuffix("节").split(",")
-                    sectionStart = sessionInfo[0].toInt()
-                    sectionContinue = sessionInfo.size
+                    try {
+                        week = ParseUtil.getWeekInfoByStr(nodes[1].text().substringAfter("{"),
+                                singleRules = "第%d-%d周|单周}",
+                                doubleRules = "第%d-%d周|双周}",
+                                commonRules = "第%d-%d周}"
+                        )
+                        val sessionInfo = nodes[1].text().substring(2, nodes[1].text().indexOf("{")).removePrefix("第").removeSuffix("节").split(",")
+                        sectionStart = sessionInfo[0].toInt()
+                        sectionContinue = sessionInfo.size
+                    }catch (e:Exception){}
                 })
                 nodes = nodes.subList(4, nodes.size)
             }
