@@ -123,7 +123,11 @@ public class Schedule extends BaseVm {
 
     @SuppressLint({"StringFormatInvalid", "StringFormatMatches"})
     public String getCurWeekStr() {
-        return App.context.getString(R.string.current_week, curWeek());
+        int curWeek = curWeek();
+        if (curWeek < 0) {
+            return "当前未开学，" + curWeek() + "周";
+        }
+        return App.context.getString(R.string.current_week, curWeek);
     }
 
 
@@ -150,7 +154,13 @@ public class Schedule extends BaseVm {
     }
 
     public int curWeek() {
-        return (Dates.getDateDif(Dates.getDate(Dates.yyyyMMdd), termStartDate) / 7) + 1;
+        //在过去开学
+        if (Dates.compareDate(termStartDate, Dates.getDate(Dates.yyyyMMdd)) > 0) {
+            return -1 * ((Dates.getDateDif(Dates.getDate(Dates.yyyyMMdd), termStartDate) / 7) + 1);
+        } else {
+            //在未来开学
+            return (Dates.getDateDif(Dates.getDate(Dates.yyyyMMdd), termStartDate) / 7) + 1;
+        }
     }
 
     public int lightTextColor() {

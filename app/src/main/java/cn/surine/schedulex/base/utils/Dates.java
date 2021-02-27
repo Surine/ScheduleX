@@ -61,6 +61,14 @@ public class Dates {
 
 
     /**
+     * 是否是周一
+     * */
+    public static boolean isMon(String dateStr){
+        return getWeekDay(dateStr) == 1;
+    }
+
+
+    /**
      * 获取星期的汉语
      */
     public static String getWeekInChi(int day) {

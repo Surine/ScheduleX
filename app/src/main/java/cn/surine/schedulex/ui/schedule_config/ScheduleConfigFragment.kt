@@ -3,14 +3,17 @@ package cn.surine.schedulex.ui.schedule_config
 import android.Manifest
 import android.annotation.SuppressLint
 import android.app.Activity.RESULT_OK
+import android.app.DatePickerDialog
 import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Build
 import android.os.Bundle
 import android.provider.MediaStore
+import android.text.format.DateUtils
 import android.view.View
 import android.widget.Button
+import android.widget.DatePicker
 import android.widget.SeekBar
 import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -40,8 +43,10 @@ import com.peanut.sdk.miuidialog.MIUIDialog
 import com.tbruyelle.rxpermissions2.RxPermissions
 import kotlinx.android.synthetic.main.fragment_schedule_config.*
 import kotlinx.android.synthetic.main.view_recycle_list.view.*
+import kotlinx.android.synthetic.main.view_schedule_time.*
 import kotlinx.android.synthetic.main.view_single_slider_ui.view.*
 import java.io.File
+import java.util.*
 
 /**
  * Intro：
@@ -419,6 +424,28 @@ class ScheduleConfigFragment : BaseBindingFragment<FragmentScheduleConfigBinding
                     scheduleViewModel.updateSchedule(schedule)
                     dismiss()
                 }
+            }
+
+            termStartModel.setOnClickListener {
+                val calendar = Calendar.getInstance()
+                val datePickerDialog = DatePickerDialog(it.context, DatePickerDialog.OnDateSetListener { view, year, month, dayOfMonth ->
+                    val dateStr = "${year}-${month + 1}-${dayOfMonth}"
+                    if(Dates.isMon(dateStr)){
+                        if (mTotalWeek == 0) {
+                            Toasts.toast(getString(R.string.param_is_illgal))
+                        } else {
+                            schedule.totalWeek = mTotalWeek
+                            schedule.termStartDate = dateStr
+                            this@ScheduleConfigFragment.scheduleWeekSubtitle.text = t1.text.toString() + " " + schedule.curWeekStr
+                            scheduleViewModel.updateSchedule(schedule)
+                            dismiss()
+                        }
+                    }else{
+                        Toasts.toast("抱歉，目前仅支持周一设置为开学～后续会全时段支持。")
+                    }
+                }, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH)
+                        , calendar.get(Calendar.DAY_OF_MONTH));
+                datePickerDialog.show()
             }
         }
     }

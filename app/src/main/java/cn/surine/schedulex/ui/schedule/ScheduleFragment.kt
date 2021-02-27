@@ -107,7 +107,7 @@ class ScheduleFragment : BaseBindingFragment<FragmentScheduleBinding>() {
         //当前周
         currentWeek = curSchedule.curWeek()
         if (currentWeek > curSchedule.totalWeek) {
-            alert("当前周: $currentWeek 而最大周: ${curSchedule.curWeek()} 数据不正确，请删除课表重新导入")
+            alert("当前周: $currentWeek 而最大周: ${curSchedule.totalWeek} 数据不正确，请删除课表重新导入")
         }
         timerViewModel.curWeekStr.value = getString(R.string.week, currentWeek.toString())
 
@@ -193,7 +193,8 @@ class ScheduleFragment : BaseBindingFragment<FragmentScheduleBinding>() {
             @SuppressLint("StringFormatMatches")
             override fun onPageSelected(position: Int) {
                 curViewPagerPosition = position
-                timerViewModel.curWeekStr.value = getString(R.string.week, position + 1) + if (currentWeek == position + 1) "" else " [" + getString(R.string.not_cur_week) + "]"
+                val tip = if(currentWeek < 0) "未开学" else "非本周"
+                timerViewModel.curWeekStr.value = getString(R.string.week, position + 1) + if (currentWeek == position + 1) "" else " [" + tip + "]"
                 scheduleViewPagerAdapter.apply {
                     setWeek(position + 1)
                     //2020.9.18：滑动过程中，数据更新可能被打断，所以需要在绘制完成再更新数据

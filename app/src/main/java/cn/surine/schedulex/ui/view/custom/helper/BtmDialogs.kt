@@ -10,8 +10,12 @@ import android.text.TextUtils
 import android.view.View
 import android.view.View.GONE
 import android.view.View.VISIBLE
+import android.view.animation.BounceInterpolator
 import android.widget.*
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.dynamicanimation.animation.DynamicAnimation
+import androidx.dynamicanimation.animation.SpringAnimation
+import androidx.dynamicanimation.animation.SpringForce
 import cn.surine.schedulex.R
 import cn.surine.schedulex.base.controller.App
 import cn.surine.schedulex.base.controller.BaseFragment
@@ -51,7 +55,7 @@ object BtmDialogs {
         setContentView(view)
         window!!.findViewById<View>(R.id.design_bottom_sheet).setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         dismissWithAnimation = true
-        view.animate().translationY(50f)
+        springAnimation(view)
         block(view, this)
         show()
     }
@@ -72,7 +76,10 @@ object BtmDialogs {
         bt.window!!.findViewById<View>(R.id.design_bottom_sheet).setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         bt.dismissWithAnimation = true
         bt.show()
-        view.animate().translationY(50f)
+//        view.animate().translationY(50f)
+
+        springAnimation(view)
+
         val courseName = view.findViewById<TextView>(R.id.courseName)
         val coursePosition = view.findViewById<TextView>(R.id.coursePosition)
         val courseClassDay = view.findViewById<TextView>(R.id.courseClassDay)
@@ -164,6 +171,17 @@ object BtmDialogs {
         bt.setOnDismissListener {
             if (modifyTag) call.back()
         }
+    }
+
+    private fun springAnimation(view: View) {
+        val spring =  SpringForce(0F)
+                .setDampingRatio(SpringForce.DAMPING_RATIO_MEDIUM_BOUNCY)
+                .setStiffness(SpringForce.STIFFNESS_LOW)
+
+        val anim = SpringAnimation(view, DynamicAnimation.X, 0F)
+                .setSpring(spring)
+                .setStartVelocity(3000F)
+        anim.start()
     }
 
 
