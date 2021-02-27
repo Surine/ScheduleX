@@ -46,6 +46,7 @@ object ParseData {
     const val ZNLYDXSWXY = "znlydxswxy"  //中南林业大学涉外学院(备用标识符)
     const val DLGYDX = "DLGYDX"  //大连工业大学(备用标识符)
     const val HNLYDX = "HNLYDX"  //华南林业科技大学(备用标识符)
+    const val WHUT = "whut" //武汉理工大学
 
     val jwMap = mapOf(
             ZF to Zf(),
@@ -76,7 +77,8 @@ object ParseData {
                     TABLE_NAME to "kbtable",
                     KB_CONTENT to "kbcontent",
                     SKIP_ROW to "1"
-            ))
+            )),
+            WHUT to Whut()
     )
 
     val commonHtmlSystem = listOf(QZ, NEW_QZ_2_1, SW)

@@ -188,7 +188,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="@dimen/dp15"
                         android:lineSpacingExtra="@dimen/dp5"
-                        android:text="想拥有一份在宇宙条实习的机会吗，快戳我内推～"
+                        android:text="想拥有一份在宇宙条工作的机会吗，快戳我内推～加群更有简历指导哦"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintLeft_toLeftOf="@id/title"
                         app:layout_constraintRight_toRightOf="parent"
