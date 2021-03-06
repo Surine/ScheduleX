@@ -47,6 +47,7 @@ object ParseData {
     const val DLGYDX = "DLGYDX"  //大连工业大学(备用标识符)
     const val HNLYDX = "HNLYDX"  //华南林业科技大学(备用标识符)
     const val WHUT = "whut" //武汉理工大学
+    const val CHANGZHOU_U = "cczu" //常州大学
 
     val jwMap = mapOf(
             ZF to Zf(),
