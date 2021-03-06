@@ -75,7 +75,6 @@ class SelectWeeksDialog {
                         if(prePosition != position || eventDown){
                             mDatas[position].select = !mDatas[position].select
                             weekRecyclerView.adapter?.notifyItemChanged(position)
-                            Log.d("slw", "show: $position - $eventDown")
                             if(prePosition != position){
                                 prePosition = position
                             }

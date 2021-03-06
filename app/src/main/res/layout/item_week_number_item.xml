@@ -21,8 +21,8 @@
             android:text="@{String.valueOf(selectInt.number)}"
             android:textStyle="bold"
             android:gravity="center"
-            android:textColor="@android:color/black"
+            android:textColor="@{selectInt.select ? @android:color/white : @android:color/black}"
             app:layout_constraintTop_toTopOf="parent"
-            android:background="@{selectInt.select ? @color/blue : @android:color/white}" />
+            android:background="@{selectInt.select ? @drawable/button_background : null}" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
