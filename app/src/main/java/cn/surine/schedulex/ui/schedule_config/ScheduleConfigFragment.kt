@@ -426,6 +426,7 @@ class ScheduleConfigFragment : BaseBindingFragment<FragmentScheduleConfigBinding
                 }
             }
 
+            termStartModel.show()
             termStartModel.setOnClickListener {
                 val calendar = Calendar.getInstance()
                 val datePickerDialog = DatePickerDialog(it.context, DatePickerDialog.OnDateSetListener { view, year, month, dayOfMonth ->

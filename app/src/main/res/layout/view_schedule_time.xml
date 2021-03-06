@@ -103,6 +103,7 @@
         android:layout_height="wrap_content"
         android:text="开学日期模式"
         android:textStyle="bold"
+        android:visibility="gone"
         android:textColor="@color/colorAccent"
         app:layout_constraintBottom_toBottomOf="@+id/button"
         app:layout_constraintEnd_toStartOf="@+id/button"
