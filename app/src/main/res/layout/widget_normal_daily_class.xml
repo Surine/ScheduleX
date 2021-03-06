@@ -53,6 +53,7 @@
         android:layout_height="@dimen/dp200"
         android:layout_alignParentBottom="true"
         android:alpha="0.5"
+        android:visibility="gone"
         android:src="@mipmap/undraw_code_thinking_1jeh"
         />
 
