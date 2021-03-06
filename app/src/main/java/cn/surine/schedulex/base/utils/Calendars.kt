@@ -78,7 +78,7 @@ object Calendars {
      * @param remindTime 提醒时间 分钟
      * */
     @SuppressLint("MissingPermission")
-    fun addCalendarEvent(context: Context, title: String, description: String, startTime: Long, endTime: Long, remindTime: Int = 15): Long {
+    fun addCalendarEvent(context: Context, title: String,description: String, startTime: Long, endTime: Long, remindTime: Int = 15,addr:String = ""): Long {
         //首先检查日历账户是否存在
         val calendarId = checkCalendarAccount(context)
 
@@ -103,6 +103,7 @@ object Calendars {
             put(CalendarContract.Events.DTSTART, start) //起始时间
             put(CalendarContract.Events.DTEND, end) //终止时间
             put(CalendarContract.Events.TITLE, title) //标题
+            put(CalendarContract.Events.EVENT_LOCATION,addr) //地点
             put(CalendarContract.Events.DESCRIPTION, description) //描述
             put(CalendarContract.Events.CALENDAR_ID, calendarId)  //日历id
             put(CalendarContract.Events.EVENT_TIMEZONE, "Asia/Shanghai") //时区

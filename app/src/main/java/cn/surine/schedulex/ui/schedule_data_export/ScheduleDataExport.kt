@@ -126,7 +126,8 @@ class ScheduleDataExport : BaseFragment() {
             for (course in list) {
                 //事件名称和提示信息
                 val eventTitle = course.coureName
-                val eventMsg = course.teachingBuildingName + course.classroomName + "/" + course.teacherName
+                val addrs = course.teachingBuildingName + course.classroomName
+                val eventMsg = addrs + "/" + course.teacherName
                 //当前周
                 val curSchedule = scheduleViewModel.curSchedule
                 val currentWeek = curSchedule.curWeek()
@@ -139,7 +140,7 @@ class ScheduleDataExport : BaseFragment() {
                     val eventStartTime = dateOffSet + getCourseTime(course.classSessions.toInt(), true)
                     val eventEndTime = dateOffSet + getCourseTime(course.classSessions.toInt() + course.continuingSession.toInt() - 1, false)
                     //insert into calendar
-                    val result = Calendars.addCalendarEvent(activity(), eventTitle, eventMsg, eventStartTime, eventEndTime)
+                    val result = Calendars.addCalendarEvent(activity(), eventTitle, eventMsg, eventStartTime, eventEndTime, addr = addrs)
                     if (result != -1L) {
                         calendarIds.add(result)
                     }
