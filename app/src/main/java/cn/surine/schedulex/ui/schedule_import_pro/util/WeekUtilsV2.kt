@@ -47,8 +47,8 @@ object WeekUtilsV2 {
                 //目前短破折号要么自己出现，要么搭配逗号出现,自己出现的时候仅有一个范围段
                 Regex("""\d+-\d+""").find(str)?.value?.split("-")?.let { result ->
                     when {
-                        str.contains("单") -> list.addAll((result[0].toInt()..result[1].toInt()).filterIndexed { index, _ -> index % 2 == 0 })
-                        str.contains("双") -> list.addAll((result[0].toInt()..result[1].toInt()).filterIndexed { index, _ -> index % 2 == 1 })
+                        str.contains("单") -> list.addAll((result[0].toInt()..result[1].toInt()).filterIndexed { _, value -> value % 2 == 1 })
+                        str.contains("双") -> list.addAll((result[0].toInt()..result[1].toInt()).filterIndexed { _, value -> value % 2 == 0 })
                         else -> list.addAll(result[0].toInt()..result[1].toInt())
                     }
                 }
