@@ -22,8 +22,8 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import net.fortuna.ical4j.model.component.VEvent
 import java.util.*
-import kotlin.collections.ArrayList
 
 /**
  * Intro：
@@ -37,7 +37,6 @@ class ScheduleDataExport : BaseFragment() {
     lateinit var courseViewModel: CourseViewModel
     private lateinit var timeTableViewModel: TimeTableViewModel
     lateinit var schedule: Schedule
-    val calendarIds = ArrayList<Long>()
     override fun layoutId(): Int = R.layout.fragment_date_export
 
     override fun onInit(parent: View?) {
@@ -101,6 +100,18 @@ class ScheduleDataExport : BaseFragment() {
         }
 
         exportExcel.setOnClickListener { Toasts.toast("暂不支持！") }
+        exportIcs.setOnClickListener {
+            hit("export ics")
+            val dialog = ProgressDialog(activity()).apply {
+                setMessage("正在导出ics文件，请勿退出~")
+                setTitle("提醒")
+                setCancelable(false)
+                show()
+            }
+            CoroutineScope(Dispatchers.IO).launch {
+                addCourseTask(scheduleId, dialog,forICS = true)
+            }
+        }
     }
 
     /**
@@ -118,11 +129,12 @@ class ScheduleDataExport : BaseFragment() {
     /**
      * 添加日程
      * */
-    private suspend fun addCourseTask(scheduleId: Int, dialog: ProgressDialog) {
+    private suspend fun addCourseTask(scheduleId: Int, dialog: ProgressDialog,forICS:Boolean = false) {
         withContext(Dispatchers.Default) {
             val list: List<Course> = courseViewModel.getCourseByScheduleId(scheduleId)
             val c: Calendar = Calendar.getInstance()
             c.timeInMillis = System.currentTimeMillis()
+            val icsList = mutableListOf<VEvent>()
             for (course in list) {
                 //事件名称和提示信息
                 val eventTitle = course.coureName
@@ -140,16 +152,23 @@ class ScheduleDataExport : BaseFragment() {
                     val eventStartTime = dateOffSet + getCourseTime(course.classSessions.toInt(), true)
                     val eventEndTime = dateOffSet + getCourseTime(course.classSessions.toInt() + course.continuingSession.toInt() - 1, false)
                     //insert into calendar
-                    val result = Calendars.addCalendarEvent(activity(), eventTitle, eventMsg, eventStartTime, eventEndTime, addr = addrs)
-                    if (result != -1L) {
-                        calendarIds.add(result)
+                    if(forICS){
+                        //操作ICS
+                        icsList.add(ICs.getVEvent(activity(), eventTitle, eventMsg, eventStartTime, eventEndTime, addr = addrs))
+                    }else{
+                        //操作日历
+                       Calendars.addCalendarEvent(activity(), eventTitle, eventMsg, eventStartTime, eventEndTime, addr = addrs)
                     }
                 }
+            }
+            //ICS导出需要创建文件
+            if(forICS){
+                ICs.exportIcs(icsList)
             }
         }
         withContext(Dispatchers.Main) {
             dialog.dismiss()
-            Toasts.toast("添加成功！")
+            Toasts.toast("操作成功！")
         }
     }
 

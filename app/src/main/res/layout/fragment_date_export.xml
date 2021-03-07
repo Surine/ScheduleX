@@ -104,9 +104,8 @@
             android:layout_height="@dimen/dp90"
             android:background="?selectableItemBackgroundBorderless"
             android:src="@mipmap/i1"
-            android:visibility="gone"
             app:layout_constraintStart_toStartOf="@+id/guideline25"
-            app:layout_constraintTop_toTopOf="@+id/guideline27" />
+            app:layout_constraintTop_toTopOf="@+id/guideline28" />
 
         <ImageView
             android:id="@+id/exportExcel"
@@ -147,7 +146,6 @@
             android:text="@string/export_ics"
             android:textColor="@android:color/black"
             android:textStyle="bold"
-            android:visibility="gone"
             app:layout_constraintEnd_toEndOf="@+id/exportIcs"
             app:layout_constraintStart_toStartOf="@+id/guideline25"
             app:layout_constraintTop_toBottomOf="@+id/exportIcs" />

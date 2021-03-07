@@ -25,6 +25,8 @@ import static android.provider.DocumentsContract.isDocumentUri;
  */
 public class Files {
 
+    public static final String DOWNLOAD_FILE = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS).getAbsolutePath();
+
     /**
      * 保存为Json格式
      *
@@ -38,7 +40,7 @@ public class Files {
 
 
     public static boolean save(String fileName, String data, String type) {
-        File file = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS).getAbsolutePath() + "/" + fileName + "." + type);
+        File file = new File(DOWNLOAD_FILE + "/" + fileName + "." + type);
         FileWriter writer = null;
         try {
             if (file.exists()) {

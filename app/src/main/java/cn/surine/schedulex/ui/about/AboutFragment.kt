@@ -3,19 +3,20 @@ package cn.surine.schedulex.ui.about
 
 import android.view.View
 import androidx.lifecycle.ViewModelProvider
+import cn.surine.schedulex.BuildConfig
 import cn.surine.schedulex.R
 import cn.surine.schedulex.app_base.hit
 import cn.surine.schedulex.base.controller.BaseFragment
-import cn.surine.schedulex.base.utils.InstanceFactory
-import cn.surine.schedulex.base.utils.Others
+import cn.surine.schedulex.base.utils.*
 import cn.surine.schedulex.base.utils.Toasts.toast
 import cn.surine.schedulex.base.utils.Toasts.toastLong
-import cn.surine.schedulex.base.utils.hide
-import cn.surine.schedulex.base.utils.show
 import cn.surine.schedulex.ui.splash.SplashViewModel
 import com.peanut.sdk.miuidialog.MIUIDialog
 import com.tencent.bugly.beta.Beta
 import kotlinx.android.synthetic.main.fragment_about.*
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 /**
  * Intro：
@@ -33,6 +34,11 @@ class AboutFragment : BaseFragment() {
             bytedance.hide()
         } else {
             bytedance.show()
+        }
+        if(BuildConfig.DEBUG){
+            textView17.setOnClickListener {
+
+            }
         }
         versionSlogan.text = getString(R.string.version_slogan, Others.getAppVersion())
         aboutItemQQ.setOnClickListener {
