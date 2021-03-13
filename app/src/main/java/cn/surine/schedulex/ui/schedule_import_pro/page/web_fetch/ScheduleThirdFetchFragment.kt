@@ -303,12 +303,19 @@ class ScheduleThirdFetchFragment : BaseFragment() {
             val targetList = ParserManager.wrapper2course(list, scheduleId)
             courseViewModel.saveCourseByDb(targetList, scheduleId)
             dataFetchViewModel.uploadFetchSuccess(mUniversity)
-            toast("导入成功")
             Prefs.save(Constants.CUR_SCHEDULE, scheduleId)
             if (list.isNotEmpty()) {
                 hit(UNIVERSITY_IMPORT_SUCCESS, "data" to "name:${Prefs.getString(SelectSchoolFragment.CUR_SCHOOL_NAME, "*" + mUniversity.name)},jw:${mUniversity.jwSystem},url:${addressBox.text.toString()}")
             }
-            Navigations.open(this, R.id.action_scheduleThirdFetchFragment_to_scheduleFragment)
+            val fragment = this
+            MIUIDialog(activity()).show {
+                title(text = "导入成功")
+                message(text = "教务处解析器不能完美应对各种情况，请务必花费几分钟手动核对每一节是否正确，是否有少课漏课的情况～" +
+                        "感谢您的信任与支持！祝使用愉快～")
+                positiveButton {
+                    Navigations.open(fragment, R.id.action_scheduleThirdFetchFragment_to_scheduleFragment)
+                }
+            }
         }
     }
 
