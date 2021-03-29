@@ -6,7 +6,6 @@ import cn.surine.schedulex.R
 import cn.surine.schedulex.base.controller.BaseFragment
 import cn.surine.schedulex.base.interfaces.IBack
 import cn.surine.schedulex.base.utils.StatusBars
-import com.umeng.analytics.MobclickAgent
 
 /**
  * Intro：
@@ -23,7 +22,7 @@ class MainActivity : AppCompatActivity(), IBack {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        StatusBars.setStatusBarUI(this, true)
+        StatusBars.setStatusBarUI(this,true)
         setContentView(R.layout.activity_main)
     }
 
