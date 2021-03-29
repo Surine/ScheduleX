@@ -27,7 +27,7 @@ class SplashFragment : BaseFragment() {
         runnable = Runnable {
             open(this, if (!getBoolean(Constants.IS_FIRST, false)) R.id.action_splashFragment_to_dataFetchFragment else R.id.action_splashFragment_to_scheduleFragment)
         }
-        handler?.postDelayed(runnable, 200)
+        handler?.postDelayed(runnable, 3000)
     }
 
     override fun onStop() {

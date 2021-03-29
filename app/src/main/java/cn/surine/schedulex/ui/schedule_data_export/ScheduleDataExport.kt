@@ -168,7 +168,11 @@ class ScheduleDataExport : BaseFragment() {
         }
         withContext(Dispatchers.Main) {
             dialog.dismiss()
-            Toasts.toast("操作成功！")
+            if(forICS){
+                Toasts.toast("操作成功！请在系统下载目录查看～")
+            }else{
+                Toasts.toast("操作成功！")
+            }
         }
     }
 

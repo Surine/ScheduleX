@@ -57,7 +57,7 @@ object ICs {
         }
         // 验证
         calendar.validate()
-        val fout = FileOutputStream(Files.DOWNLOAD_FILE + "/${System.currentTimeMillis()}_courses.ics")
+        val fout = FileOutputStream(Files.DOWNLOAD_FILE + "/schedulex_${System.currentTimeMillis()}_courses.ics")
         val outputter = CalendarOutputter()
         outputter.output(calendar, fout)
     }

@@ -216,9 +216,6 @@ public class CourseTableView extends LinearLayout {
                 tvWeekName.setTextSize(MAIN_TEXT_SIZE);
                 tvWeekName.setGravity(Gravity.CENTER);
                 tvWeekName.setLayoutParams(lp0);
-
-                //不显示月份（可走配置）
-                tvWeekName.setVisibility(INVISIBLE);
             } else {
                 LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
                 lp.gravity = Gravity.CENTER;
