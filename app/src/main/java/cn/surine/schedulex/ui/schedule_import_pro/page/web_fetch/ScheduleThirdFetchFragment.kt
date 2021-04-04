@@ -309,6 +309,7 @@ class ScheduleThirdFetchFragment : BaseFragment() {
             }
             val fragment = this
             MIUIDialog(activity()).show {
+                cancelable = false
                 title(text = "导入成功")
                 message(text = "教务处解析器不能完美应对各种情况，请务必花费几分钟手动核对每一节是否正确，是否有少课漏课的情况～" +
                         "感谢您的信任与支持！祝使用愉快～")

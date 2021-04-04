@@ -49,7 +49,8 @@ object ParseData {
     const val WHUT = "whut" //武汉理工大学
     const val CHANGZHOU_U = "cczu" //常州大学
     const val WHXY = "whxy" //武汉学院
-    const val HUAT = "huat" //湖北汽车工业学院
+    const val HUAT  = "huat"  //湖北汽车工业学院
+    const val HENAU  = "henau"  //河南农业大学
 
     val jwMap = mapOf(
             ZF to Zf(),
@@ -84,7 +85,8 @@ object ParseData {
             WHUT to Whut(),
             CHANGZHOU_U to Czuu(),
             WHXY to Whxy(),
-            HUAT to Huat()
+            HUAT to Huat(),
+            HENAU to Henau()
     )
 
     val commonHtmlSystem = listOf(QZ, NEW_QZ_2_1, SW)
