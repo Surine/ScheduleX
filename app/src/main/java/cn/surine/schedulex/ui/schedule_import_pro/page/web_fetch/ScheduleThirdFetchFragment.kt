@@ -92,19 +92,26 @@ class ScheduleThirdFetchFragment : BaseFragment() {
         }
         parseName.text = "${mUniversity.jwSystemName}解析器"
         importThirdHtml.setOnClickListener {
-            val js = "javascript:var ifrs=document.getElementsByTagName(\"iframe\");" +
-                    "var iframeContent=\"\";" +
-                    "for(var i=0;i<ifrs.length;i++){" +
-                    "iframeContent=iframeContent+ifrs[i].contentDocument.body.parentElement.outerHTML;" +
-                    "}\n" +
-                    "var frs=document.getElementsByTagName(\"frame\");" +
-                    "var frameContent=\"\";" +
-                    "for(var i=0;i<frs.length;i++){" +
-                    "frameContent=frameContent+frs[i].contentDocument.body.parentElement.outerHTML;" +
-                    "}\n" +
-                    "window.local_obj.showSource(document.getElementsByTagName('html')[0].innerHTML + iframeContent + frameContent,'$type');"
-            toast("开始解析，请稍后~")
-            thirdPageWebView.loadUrl(js)
+            if(mUniversity.twiceJumpUrl.isNotEmpty()){
+                toast("已完成页面重定向，请再次点击此按钮！")
+                addressBox.setText(mUniversity.twiceJumpUrl)
+                thirdPageWebView.loadUrl(mUniversity.twiceJumpUrl)
+            }else{
+                val js = "javascript:var ifrs=document.getElementsByTagName(\"iframe\");" +
+                        "var iframeContent=\"\";" +
+                        "for(var i=0;i<ifrs.length;i++){" +
+                        "iframeContent=iframeContent+ifrs[i].contentDocument.body.parentElement.outerHTML;" +
+                        "}\n" +
+                        "var frs=document.getElementsByTagName(\"frame\");" +
+                        "var frameContent=\"\";" +
+                        "for(var i=0;i<frs.length;i++){" +
+                        "frameContent=frameContent+frs[i].contentDocument.body.parentElement.outerHTML;" +
+                        "}\n" +
+                        "window.local_obj.showSource(document.getElementsByTagName('html')[0].innerHTML + iframeContent + frameContent,'$type');"
+                toast("开始解析，请稍后~")
+                thirdPageWebView.loadUrl(js)
+            }
+            mUniversity.twiceJumpUrl = ""
         }
 
         tool.setOnClickListener {

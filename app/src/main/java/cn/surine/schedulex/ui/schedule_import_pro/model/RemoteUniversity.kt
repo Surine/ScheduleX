@@ -21,5 +21,6 @@ data class RemoteUniversity(
         val jwSystem: String = "", //教务系统代号
         val status: Int = 0, //0可用 -1不可用
         val version: Int = 0, //对应app版本，低版本无法保证兼容最新适配，所以要有限制
-        val forecast: String = "" //教务系统预测
+        val forecast: String = "", //教务系统预测
+        var twiceJumpUrl:String = "" //部分教务二跳地址
 ) : BmobObject()
