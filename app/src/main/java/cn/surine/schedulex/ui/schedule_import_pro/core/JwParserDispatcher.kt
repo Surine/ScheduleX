@@ -1,5 +1,6 @@
 package cn.surine.schedulex.ui.schedule_import_pro.core
 
+import cn.surine.schedulex.BuildConfig
 import cn.surine.schedulex.ui.schedule_import_pro.core.jw_core.Normal
 import cn.surine.schedulex.ui.schedule_import_pro.model.CourseWrapper
 import cn.surine.schedulex.ui.schedule_import_pro.util.ParseData
@@ -12,10 +13,14 @@ import cn.surine.schedulex.ui.schedule_import_pro.util.ParseData
  */
 object JwParserDispatcher {
     fun parse(type: String, html: String, result: (list: List<CourseWrapper>?, e: Exception?) -> Unit) {
-        try {
+        if(BuildConfig.DEBUG){
             result(getParse(type).parse(html), null)
-        } catch (e: Exception) {
-            result(null, e)
+        }else{
+            try {
+                result(getParse(type).parse(html), null)
+            } catch (e: Exception) {
+                result(null, e)
+            }
         }
     }
 
