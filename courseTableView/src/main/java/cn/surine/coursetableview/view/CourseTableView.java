@@ -454,13 +454,13 @@ public class CourseTableView extends LinearLayout {
             RelativeLayout curDayLayout = layoutList.get(thisDay);
             isCurWeek = bCourse.getWeek().contains(mDataConfig.curWeek());
             //first to load curweek class
-            if (isCurWeek) {
-                continue;
-            }
-            //if this position has a course,skip it
-            if (map.containsKey(bCourse.getSectionStart() + "/" + thisDay)) {
-                continue;
-            }
+//            if (isCurWeek) {
+//                continue;
+//            }
+//            //if this position has a course,skip it
+//            if (map.containsKey(bCourse.getSectionStart() + "/" + thisDay)) {
+//                continue;
+//            }
 
             RelativeLayout frameLayout = new RelativeLayout(getContext());
             TextView tv = new TextView(mContext);
