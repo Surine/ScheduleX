@@ -1,23 +1,22 @@
 package cn.surine.schedulex.ui.schedule;
 
 import android.annotation.SuppressLint;
+import android.graphics.Color;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.OvershootInterpolator;
 import android.widget.Button;
 import android.widget.CalendarView;
 import android.widget.CheckBox;
+import android.widget.PopupWindow;
 
 import androidx.annotation.NonNull;
 import androidx.databinding.library.baseAdapters.BR;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
-import com.tencent.bugly.crashreport.CrashReport;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -38,6 +37,7 @@ import cn.surine.schedulex.base.controller.BaseFragment;
 import cn.surine.schedulex.base.interfaces.Call;
 import cn.surine.schedulex.base.utils.DataMaps;
 import cn.surine.schedulex.base.utils.Dates;
+import cn.surine.schedulex.base.utils.Drawables;
 import cn.surine.schedulex.base.utils.Navigations;
 import cn.surine.schedulex.base.utils.Prefs;
 import cn.surine.schedulex.base.utils.Toasts;
@@ -47,8 +47,6 @@ import cn.surine.schedulex.data.entity.Schedule;
 import cn.surine.schedulex.ui.course.CourseViewModel;
 import cn.surine.schedulex.ui.view.custom.helper.BtmDialogs;
 import kotlin.Unit;
-
-import static cn.surine.schedulex.ui.view.custom.helper.BtmDialogs.COURSE_ID;
 
 /**
  * Intro：
@@ -93,13 +91,13 @@ public class ScheduleViewPagerAdapter extends RecyclerView.Adapter<ScheduleViewP
         uiConfig = new UIConfig();
         if (schedule.isShowWeekend) {
             uiConfig.setMaxClassDay(7);
-            uiConfig.setItemTextSize(12);
+            uiConfig.setItemTextSize(11);
             uiConfig.setItemTopMargin(5);
-            uiConfig.setItemSideMargin(3);
-            uiConfig.setSectionViewWidth(Uis.dip2px(App.context, 40));
+            uiConfig.setItemSideMargin(2);
+            uiConfig.setSectionViewWidth(Uis.dip2px(App.context, 39));
         } else {
             uiConfig.setMaxClassDay(5);
-            uiConfig.setItemTextSize(13);
+            uiConfig.setItemTextSize(12);
             uiConfig.setItemTopMargin(10);
             uiConfig.setItemSideMargin(8);
             uiConfig.setSectionViewWidth(Uis.dip2px(App.context, 50));
@@ -112,6 +110,7 @@ public class ScheduleViewPagerAdapter extends RecyclerView.Adapter<ScheduleViewP
         uiConfig.setColorUI(schedule.lightText ? UIConfig.LIGHT : UIConfig.DARK);
         uiConfig.setMaxHideCharLimit(schedule.maxHideCharLimit);
         uiConfig.setTextAlignFlag(schedule.textAlignFlag);
+        uiConfig.setShowNotCurWeekCourse(true);
     }
 
     public void setWeek(int week) {
@@ -127,7 +126,7 @@ public class ScheduleViewPagerAdapter extends RecyclerView.Adapter<ScheduleViewP
 
     @SuppressLint("SetTextI18n")
     @Override
-    public void onBindViewHolder(@NonNull ScheduleViewPagerAdapter.ViewPagerViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull ViewPagerViewHolder holder, int position) {
         if (selectCourse != null) {
             selectCourse.clear();
         }
@@ -141,10 +140,20 @@ public class ScheduleViewPagerAdapter extends RecyclerView.Adapter<ScheduleViewP
 
         holder.courseTableView.update(uiConfig, dataConfig);
 
-        holder.courseTableView.setmClickCourseItemListener((view, list, itemPosition, isThisWeek) -> {
+        holder.courseTableView.setClickCourseItemListener((v, clickList, isThisWeek, section, day) -> {
             if (!Prefs.getBoolean(Constants.EGG, false)) {
-                Course course = DataMaps.dataMappingByBCourse(courseList.get(position).get(itemPosition));
-                BtmDialogs.INSTANCE.showCourseInfoBtmDialog(baseFragment, course, schedule.alphaForCourseItem, courseViewModel, () -> {
+                holder.courseTableView.clearStatus();
+                if(clickList == null || isThisWeek == null){
+                    //点击了空白格子
+                    v.setBackground(Drawables.getDrawable(Color.GRAY,20,0,Color.WHITE));
+                    return;
+                }
+                List<Course> courseList = new ArrayList<>();
+                for (BCourse bCourse : clickList) {
+                    Course course = DataMaps.dataMappingByBCourse(bCourse);
+                    courseList.add(course);
+                }
+                BtmDialogs.INSTANCE.showCourseInfoBtmDialog(baseFragment, courseList, isThisWeek, courseViewModel, () -> {
                     if (dataSetUpdateCall != null) {
                         dataSetUpdateCall.back();
                     }
@@ -155,37 +164,50 @@ public class ScheduleViewPagerAdapter extends RecyclerView.Adapter<ScheduleViewP
             }
         });
 
-        holder.courseTableView.setLongClickCourseItemListener((view, list, itemPosition, isThisWeek) -> {
-            Bundle bundle = new Bundle();
-            bundle.putString(COURSE_ID, list.get(itemPosition).getId());
-            if (view.getTag(view.getId()) == null || !(Boolean) view.getTag(view.getId())) {
-                view.setTag(view.getId(), true);
-                view.animate().scaleX(0.8F).scaleY(0.8F).setInterpolator(new OvershootInterpolator());
-                selectCourse.put(list.get(itemPosition).getId(), list.get(itemPosition));
-            } else {
-                view.animate().scaleX(1F).scaleY(1F).setInterpolator(new OvershootInterpolator());
-                view.setTag(view.getId(), false);
-                selectCourse.remove(list.get(itemPosition).getId());
-            }
-            ScheduleFragment scheduleFragment = (ScheduleFragment) baseFragment;
-            try {
-                if (selectCourse.size() > 0) {
-                    Uis.show(scheduleFragment.getDataBinding().courseOp);
-                    scheduleFragment.getDataBinding().courseOp.setOnClickListener(v -> {
-                        if (selectCourse.size() > 0) {
-                            showSelectCourseDialog(position);
-                        } else {
-                            Uis.hide(scheduleFragment.getDataBinding().courseOp);
-                        }
-                    });
-                } else {
-                    Uis.hide(scheduleFragment.getDataBinding().courseOp);
-                }
-            } catch (Exception e) {
-                CrashReport.postCatchedException(new RuntimeException("获取DataBinding失败" + e.getMessage()));
-            }
+
+        holder.courseTableView.setLongClickCourseItemListener((v, clickList, isThisWeek, section, day) -> {
+            View view = LayoutInflater.from(baseFragment.activity()).inflate(R.layout.view_course_op_menu, null);
+            PopupWindow popupWindow = new PopupWindow(view, Uis.dip2px(baseFragment.activity(), 200f), Uis.dip2px(baseFragment.activity(), 50F));
+            popupWindow.setOutsideTouchable(true);
+            popupWindow.setFocusable(true);
+            popupWindow.setTouchable(true);
+            popupWindow.setElevation(8);
+            popupWindow.setBackgroundDrawable(Drawables.getDrawable(Color.WHITE, 10, 0, Color.WHITE));
+            popupWindow.showAsDropDown(v, 20, 30);
 
         });
+//
+//        holder.courseTableView.setLongClickCourseItemListener((view, list, itemPosition, isThisWeek) -> {
+//            Bundle bundle = new Bundle();
+//            bundle.putString(COURSE_ID, list.get(itemPosition).getId());
+//            if (view.getTag(view.getId()) == null || !(Boolean) view.getTag(view.getId())) {
+//                view.setTag(view.getId(), true);
+//                view.animate().scaleX(0.8F).scaleY(0.8F).setInterpolator(new OvershootInterpolator());
+//                selectCourse.put(list.get(itemPosition).getId(), list.get(itemPosition));
+//            } else {
+//                view.animate().scaleX(1F).scaleY(1F).setInterpolator(new OvershootInterpolator());
+//                view.setTag(view.getId(), false);
+//                selectCourse.remove(list.get(itemPosition).getId());
+//            }
+//            ScheduleFragment scheduleFragment = (ScheduleFragment) baseFragment;
+//            try {
+//                if (selectCourse.size() > 0) {
+//                    Uis.show(scheduleFragment.getDataBinding().courseOp);
+//                    scheduleFragment.getDataBinding().courseOp.setOnClickListener(v -> {
+//                        if (selectCourse.size() > 0) {
+//                            showSelectCourseDialog(position);
+//                        } else {
+//                            Uis.hide(scheduleFragment.getDataBinding().courseOp);
+//                        }
+//                    });
+//                } else {
+//                    Uis.hide(scheduleFragment.getDataBinding().courseOp);
+//                }
+//            } catch (Exception e) {
+//                CrashReport.postCatchedException(new RuntimeException("获取DataBinding失败" + e.getMessage()));
+//            }
+//
+//        });
 
     }
 

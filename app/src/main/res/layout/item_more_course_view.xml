@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/vMoreCourseTitle"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:text="CourseTitle"
+        android:layout_marginTop="@dimen/dp20"
+        android:layout_marginStart="@dimen/dp15"
+        android:textColor="@android:color/black"
+        android:textSize="@dimen/t18"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/vMoreCourseSubTitle"
+        app:layout_constraintTop_toBottomOf="@id/vMoreCourseTitle"
+        app:layout_constraintLeft_toLeftOf="@id/vMoreCourseTitle"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginBottom="@dimen/dp20"
+        android:text="CourseSubTitle"
+        />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

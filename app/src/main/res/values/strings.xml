@@ -112,7 +112,7 @@
     <string name="please_input_teacher">请输入教师姓名</string>
     <string name="please_enter_course_credits">请输入课程学分</string>
     <string name="score">学分</string>
-    <string name="weekday">星期 %s</string>
+    <string name="weekday">星期%s</string>
     <string name="session">节</string>
     <string name="choose_session">开始节次</string>
     <string name="cotinue_session">持续节次</string>

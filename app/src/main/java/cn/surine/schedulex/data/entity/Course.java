@@ -1,5 +1,7 @@
 package cn.surine.schedulex.data.entity;
 
+import android.text.TextUtils;
+
 import androidx.annotation.NonNull;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
@@ -7,6 +9,7 @@ import androidx.room.PrimaryKey;
 
 import cn.surine.schedulex.R;
 import cn.surine.schedulex.base.controller.App;
+import cn.surine.schedulex.base.utils.Dates;
 
 /**
  * Intro：
@@ -84,12 +87,36 @@ public class Course extends BaseVm {
 
 
     public String getClassDayDescription() {
-        return App.context.getString(R.string.weekday, classDay);
+        return App.context.getString(R.string.weekday, Dates.getWeekInChi(Integer.parseInt(classDay)));
     }
 
 
     public String getSessionDescription() {
         return classSessions + "-" + (Integer.parseInt(classSessions) + Integer.parseInt(continuingSession) - 1) + App.context.getString(R.string.session);
+    }
+
+    public String getPositionDescription(){
+        String result =  campusName + teachingBuildingName + classroomName;
+        if(TextUtils.isEmpty(result)){
+            return "无位置";
+        }
+        return result;
+    }
+
+    public String getTeacherName(){
+        if(TextUtils.isEmpty(teacherName)){
+            return "未知";
+        }else{
+            return teacherName;
+        }
+    }
+
+    public String getScore(){
+        if(TextUtils.isEmpty(xf)){
+            return "未知";
+        }else{
+            return xf + "分";
+        }
     }
 
 

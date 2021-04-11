@@ -124,6 +124,7 @@ public class CourseViewModel extends ViewModel {
     }
 
 
+    //[week] -1 for all courses
     public List<Course> queryCourseByWeek(int week, int scheduleId) {
         return mCourseRepository.queryCourseByWeek(week, scheduleId);
     }

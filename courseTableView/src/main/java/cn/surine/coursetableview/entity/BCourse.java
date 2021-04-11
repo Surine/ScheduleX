@@ -38,6 +38,9 @@ public class BCourse implements Serializable {
 
     public String memo;
 
+    //UI辅助
+    public List<BCourse> extraCourse;
+
     public String getName() {
         return name;
     }

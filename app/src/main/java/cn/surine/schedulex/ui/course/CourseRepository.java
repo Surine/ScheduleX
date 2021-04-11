@@ -42,6 +42,7 @@ public class CourseRepository extends BaseRepository {
 
     List<Course> queryCourseByWeek(int week, int scheduleId) {
         List<Course> list = appDatabase.courseDao().getByScheduleId(scheduleId);
+        if(week == -1)return list;
         List<Course> handleList = new ArrayList<>();
         for (Course course : list) {
             try {

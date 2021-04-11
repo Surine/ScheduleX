@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/dp60">
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:text="删除"
+        android:id="@+id/opDelete"
+        android:textColor="@android:color/black"
+        android:gravity="center"
+        android:layout_weight="1"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:text="复制"
+        android:id="@+id/opCopy"
+        android:textColor="@android:color/black"
+        android:gravity="center"
+        android:layout_weight="1"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:text="迁移"
+        android:id="@+id/opMove"
+        android:textColor="@android:color/black"
+        android:gravity="center"
+        android:layout_weight="1"
+        />
+</LinearLayout>

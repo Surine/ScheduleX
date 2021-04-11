@@ -218,7 +218,8 @@ class ScheduleFragment : BaseBindingFragment<FragmentScheduleBinding>() {
     private fun initData(init: Boolean) {
         handleCourseList.clear()
         for (i in 0 until curSchedule.totalWeek) {
-            val dbData = courseViewModel.queryCourseByWeek(i + 1, curSchedule.roomId)
+//            val dbData = courseViewModel.queryCourseByWeek(i + 1, curSchedule.roomId)
+            val dbData = courseViewModel.queryCourseByWeek(-1, curSchedule.roomId)
             val bCourseList: MutableList<BCourse> = ArrayList()
             for (course in dbData) {
                 DataMaps.dataMappingByCourse(course).apply {

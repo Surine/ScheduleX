@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="course"
+            type="cn.surine.schedulex.data.entity.Course" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:background="@android:color/transparent"
+        android:layout_height="wrap_content">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/dp10"
+            android:id="@+id/courseInfoMainContent"
+            android:background="@drawable/shape_rect_10_white"
+            android:paddingBottom="@dimen/dp40">
+
+            <View
+                android:layout_width="@dimen/dp50"
+                android:layout_height="@dimen/dp6"
+                android:layout_marginTop="@dimen/dp16"
+                android:alpha="0.3"
+                android:background="@drawable/sidebar"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/courseName"
+                style="@style/textview_title_style"
+                android:layout_width="@dimen/dp280"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="28dp"
+                android:layout_marginTop="48dp"
+                android:text="@{course.coureName}"
+                app:layout_constraintHorizontal_bias="0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/coursePosition"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp8"
+                android:text="@{course.getPositionDescription()}"
+                android:textSize="@dimen/t17"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="@+id/courseName"
+                app:layout_constraintTop_toBottomOf="@+id/courseName" />
+
+            <TextView
+                android:id="@+id/courseClassDay"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/dp30"
+                android:layout_marginTop="24dp"
+                android:background="@color/colorPrimary"
+                android:padding="@dimen/dp5"
+                android:text="@{course.classDayDescription}"
+                android:textColor="@android:color/white"
+                app:layout_constraintStart_toStartOf="@+id/coursePosition"
+                app:layout_constraintTop_toBottomOf="@+id/coursePosition" />
+
+            <TextView
+                android:id="@+id/courseSession"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/dp30"
+                android:layout_marginStart="16dp"
+                android:background="@color/colorAccent"
+                android:padding="@dimen/dp5"
+                android:text="@{course.sessionDescription}"
+                android:textColor="@android:color/white"
+                app:layout_constraintBottom_toBottomOf="@+id/courseClassDay"
+                app:layout_constraintStart_toEndOf="@+id/courseClassDay"
+                app:layout_constraintTop_toTopOf="@+id/courseClassDay"
+                app:layout_constraintVertical_bias="0.0" />
+
+            <ImageView
+                android:id="@+id/imageView4"
+                android:layout_width="@dimen/dp25"
+                android:layout_height="@dimen/dp25"
+                android:layout_marginTop="@dimen/dp37"
+                android:src="@mipmap/ic_teacher"
+                app:layout_constraintStart_toStartOf="@+id/courseClassDay"
+                app:layout_constraintTop_toBottomOf="@+id/courseClassDay"
+                app:tint="@android:color/holo_orange_dark" />
+
+            <TextView
+                android:id="@+id/courseTeacher"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:text="@{course.getTeacherName()}"
+                android:textColor="@color/text"
+                android:textSize="@dimen/t17"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@+id/imageView4"
+                app:layout_constraintEnd_toStartOf="@+id/guideline40"
+                app:layout_constraintStart_toEndOf="@+id/imageView4"
+                app:layout_constraintTop_toTopOf="@+id/imageView4"
+                app:layout_constraintVertical_bias="0.555" />
+
+            <ImageView
+                android:id="@+id/imageView5"
+                android:layout_width="@dimen/dp25"
+                android:layout_height="@dimen/dp25"
+                android:layout_marginTop="@dimen/dp30"
+                android:src="@mipmap/ic_score"
+                app:layout_constraintStart_toStartOf="@+id/imageView4"
+                app:layout_constraintTop_toBottomOf="@+id/imageView4"
+                app:tint="@android:color/holo_red_dark" />
+
+            <TextView
+                android:id="@+id/courseScore"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{course.getScore()}"
+                android:textColor="@color/text"
+                android:textSize="@dimen/t17"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@+id/imageView5"
+                app:layout_constraintStart_toStartOf="@+id/courseTeacher"
+                app:layout_constraintTop_toTopOf="@+id/imageView5" />
+
+            <TextView
+                android:id="@+id/weekInfo"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@{course.weekDescription}"
+                android:textColor="@color/text"
+                android:textSize="@dimen/t17"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@+id/imageView2"
+                app:layout_constraintEnd_toStartOf="@+id/guideline40"
+                app:layout_constraintStart_toStartOf="@+id/courseTeacher"
+                app:layout_constraintTop_toTopOf="@+id/imageView2" />
+
+            <ImageView
+                android:id="@+id/courseEdit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_create_black_24dp"
+                app:layout_constraintBottom_toBottomOf="@+id/courseName"
+                app:layout_constraintEnd_toStartOf="@+id/guideline40"
+                app:layout_constraintTop_toTopOf="@+id/courseName" />
+
+            <ImageView
+                android:id="@+id/imageView2"
+                android:layout_width="@dimen/dp25"
+                android:layout_height="@dimen/dp25"
+                android:layout_marginTop="@dimen/dp30"
+                android:src="@mipmap/ic_more"
+                app:layout_constraintEnd_toEndOf="@+id/imageView5"
+                app:layout_constraintStart_toStartOf="@+id/imageView5"
+                app:layout_constraintTop_toBottomOf="@+id/imageView5"
+                app:tint="@android:color/holo_blue_dark" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline40"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.93430656" />
+
+            <TextView
+                android:id="@+id/exam_plan"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/dp30"
+                android:layout_marginStart="@dimen/dp16"
+                android:background="@drawable/shape_full_radius_light_blue"
+                android:gravity="center"
+                android:padding="@dimen/dp5"
+                android:text="考试安排"
+                android:textColor="@android:color/white"
+                app:layout_constraintBottom_toBottomOf="@+id/courseSession"
+                app:layout_constraintStart_toEndOf="@+id/courseSession"
+                app:layout_constraintTop_toTopOf="@+id/courseSession" />
+
+            <TextView
+                android:id="@+id/memo"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/dp30"
+                android:layout_marginStart="@dimen/dp16"
+                android:background="@drawable/shape_full_radius_orange"
+                android:gravity="center"
+                android:padding="@dimen/dp5"
+                android:text="备忘录"
+                android:textColor="@android:color/white"
+                app:layout_constraintBottom_toBottomOf="@+id/exam_plan"
+                app:layout_constraintStart_toEndOf="@+id/exam_plan"
+                app:layout_constraintTop_toTopOf="@+id/exam_plan" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    </LinearLayout>
+</layout>
