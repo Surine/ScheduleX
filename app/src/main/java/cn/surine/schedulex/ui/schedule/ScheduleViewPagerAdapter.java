@@ -12,6 +12,8 @@ import android.widget.Button;
 import android.widget.CalendarView;
 import android.widget.CheckBox;
 import android.widget.PopupWindow;
+import android.widget.RadioGroup;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.databinding.library.baseAdapters.BR;
@@ -42,6 +44,7 @@ import cn.surine.schedulex.base.utils.Navigations;
 import cn.surine.schedulex.base.utils.Prefs;
 import cn.surine.schedulex.base.utils.Toasts;
 import cn.surine.schedulex.base.utils.Uis;
+import cn.surine.schedulex.base.utils.Vibrators;
 import cn.surine.schedulex.data.entity.Course;
 import cn.surine.schedulex.data.entity.Schedule;
 import cn.surine.schedulex.ui.course.CourseViewModel;
@@ -166,15 +169,16 @@ public class ScheduleViewPagerAdapter extends RecyclerView.Adapter<ScheduleViewP
 
 
         holder.courseTableView.setLongClickCourseItemListener((v, clickList, isThisWeek, section, day) -> {
+            Vibrators.INSTANCE.vib(baseFragment.activity(),50);
             View view = LayoutInflater.from(baseFragment.activity()).inflate(R.layout.view_course_op_menu, null);
-            PopupWindow popupWindow = new PopupWindow(view, Uis.dip2px(baseFragment.activity(), 200f), Uis.dip2px(baseFragment.activity(), 50F));
+            PopupWindow popupWindow = new PopupWindow(view, Uis.dip2px(baseFragment.activity(), 200f), Uis.dip2px(baseFragment.activity(), 150F));
             popupWindow.setOutsideTouchable(true);
             popupWindow.setFocusable(true);
             popupWindow.setTouchable(true);
             popupWindow.setElevation(8);
             popupWindow.setBackgroundDrawable(Drawables.getDrawable(Color.WHITE, 10, 0, Color.WHITE));
             popupWindow.showAsDropDown(v, 20, 30);
-
+            loadViewAction(view);
         });
 //
 //        holder.courseTableView.setLongClickCourseItemListener((view, list, itemPosition, isThisWeek) -> {
@@ -210,6 +214,20 @@ public class ScheduleViewPagerAdapter extends RecyclerView.Adapter<ScheduleViewP
 //        });
 
     }
+
+    private void loadViewAction(View view) {
+        TextView vDelete = view.findViewById(R.id.opDelete);
+        TextView vCopy = view.findViewById(R.id.opCopy);
+        TextView vMore = view.findViewById(R.id.opMore);
+        RadioGroup vRadioGroup = view.findViewById(R.id.opRadioGroup);
+        vRadioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+
+            }
+        });
+    }
+
 
     /**
      * 展示批量操作弹窗
