@@ -8,51 +8,51 @@
         android:orientation="horizontal"
         android:layout_height="@dimen/dp50"
         >
-        <TextView
+        <Button
+            android:id="@+id/opAdd"
+            style="@style/Widget.AppCompat.Button.Borderless.Colored"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:text="删除"
-            android:id="@+id/opDelete"
-            android:textColor="@android:color/black"
-            android:gravity="center"
             android:layout_weight="1"
-            />
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:text="复制"
+            android:gravity="center"
+            android:text="添加"
+            android:textColor="@android:color/black" />
+        <Button
             android:id="@+id/opCopy"
-            android:textColor="@android:color/black"
-            android:gravity="center"
-            android:layout_weight="1"
-            />
-        <TextView
+            style="@style/Widget.AppCompat.Button.Borderless.Colored"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:text="更多"
-            android:id="@+id/opMore"
-            android:textColor="@android:color/black"
-            android:gravity="center"
             android:layout_weight="1"
-            />
+            android:gravity="center"
+            android:text="复制"
+            android:textColor="@android:color/black" />
+        <Button
+            android:id="@+id/opDelete"
+            style="@style/Widget.AppCompat.Button.Borderless.Colored"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="删除"
+            android:textColor="@android:color/black" />
     </LinearLayout>
 
     <RadioGroup
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/opRadioGroup"
-        android:checkedButton="@id/radioButton1"
+        android:checkedButton="@id/radioButtonCurWeek"
         android:layout_marginStart="@dimen/dp5"
         android:layout_marginEnd="@dimen/dp5"
         >
         <RadioButton
-            android:text="仅影响当前周"
-            android:id="@+id/radioButton1"
+            android:text="作用域当前周"
+            android:id="@+id/radioButtonCurWeek"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
         <RadioButton
-            android:text="影响全部周"
-            android:id="@+id/radioButton2"
+            android:text="作用域全部周"
+            android:id="@+id/radioButtonAllWeek"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
     </RadioGroup>

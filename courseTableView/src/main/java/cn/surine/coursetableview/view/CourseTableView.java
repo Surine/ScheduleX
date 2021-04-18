@@ -392,12 +392,12 @@ public class CourseTableView extends LinearLayout {
                 mClickCourseItemListener.onClickItemV2(v, null, null,start,day);
             }
         });
-//        frameLayout.setOnLongClickListener(v -> {
-//            if (mLongClickCourseItemListener != null) {
-//                mLongClickCourseItemListener.onClickItemV2(v, null, null,start,day);
-//            }
-//            return true;
-//        });
+        frameLayout.setOnLongClickListener(v -> {
+            if (mLongClickCourseItemListener != null) {
+                mLongClickCourseItemListener.onClickItemV2(v, null, null,start,day);
+            }
+            return true;
+        });
         return frameLayout;
     }
 

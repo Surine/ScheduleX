@@ -12,6 +12,7 @@ import android.widget.Button;
 import android.widget.CalendarView;
 import android.widget.CheckBox;
 import android.widget.PopupWindow;
+import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
@@ -25,6 +26,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Random;
 import java.util.UUID;
+import java.util.concurrent.atomic.AtomicInteger;
 
 import cn.surine.coursetableview.entity.BCourse;
 import cn.surine.coursetableview.entity.BTimeTable;
@@ -40,6 +42,7 @@ import cn.surine.schedulex.base.interfaces.Call;
 import cn.surine.schedulex.base.utils.DataMaps;
 import cn.surine.schedulex.base.utils.Dates;
 import cn.surine.schedulex.base.utils.Drawables;
+import cn.surine.schedulex.base.utils.ExtendsKt;
 import cn.surine.schedulex.base.utils.Navigations;
 import cn.surine.schedulex.base.utils.Prefs;
 import cn.surine.schedulex.base.utils.Toasts;
@@ -70,11 +73,15 @@ public class ScheduleViewPagerAdapter extends RecyclerView.Adapter<ScheduleViewP
     private Call dataSetUpdateCall;
     private HashMap<String, BCourse> selectCourse = new HashMap<>();
     public static final String IS_COPY = "IS_COPY";
+    public static final String SCOPE = "SCOPE";  //作用域
+    public static final String NORMAL_SELECT_WEEK_DAY = "NORMAL_SELECT_WEEK_DAY";
+    public static final String NORMAL_SELECT_SESSION = "NORMAL_SELECT_SESSIOn";
     int[] raws = new int[]{
             R.raw.a4, R.raw.a4m, R.raw.b4, R.raw.c4,
             R.raw.c4m, R.raw.d4, R.raw.d4m, R.raw.e4,
             R.raw.f4, R.raw.f4m, R.raw.g4, R.raw.g4m,
     };
+    Course wantToCopyCourse = null;
 
 
     public ScheduleViewPagerAdapter(List<List<BCourse>> courseList, BTimeTable timeTable, BaseFragment baseFragment, Schedule schedule, int week, CourseViewModel courseViewModel) {
@@ -142,13 +149,12 @@ public class ScheduleViewPagerAdapter extends RecyclerView.Adapter<ScheduleViewP
 
 
         holder.courseTableView.update(uiConfig, dataConfig);
-
         holder.courseTableView.setClickCourseItemListener((v, clickList, isThisWeek, section, day) -> {
             if (!Prefs.getBoolean(Constants.EGG, false)) {
                 holder.courseTableView.clearStatus();
-                if(clickList == null || isThisWeek == null){
+                if (clickList == null || isThisWeek == null) {
                     //点击了空白格子
-                    v.setBackground(Drawables.getDrawable(Color.GRAY,20,0,Color.WHITE));
+//                    v.setBackground(Drawables.getDrawable(Color.GRAY, 20, 0, Color.WHITE));
                     return;
                 }
                 List<Course> courseList = new ArrayList<>();
@@ -166,65 +172,91 @@ public class ScheduleViewPagerAdapter extends RecyclerView.Adapter<ScheduleViewP
                 mp.start();
             }
         });
-
-
         holder.courseTableView.setLongClickCourseItemListener((v, clickList, isThisWeek, section, day) -> {
-            Vibrators.INSTANCE.vib(baseFragment.activity(),50);
+            Vibrators.INSTANCE.vib(baseFragment.activity(), 50);
             View view = LayoutInflater.from(baseFragment.activity()).inflate(R.layout.view_course_op_menu, null);
             PopupWindow popupWindow = new PopupWindow(view, Uis.dip2px(baseFragment.activity(), 200f), Uis.dip2px(baseFragment.activity(), 150F));
             popupWindow.setOutsideTouchable(true);
             popupWindow.setFocusable(true);
             popupWindow.setTouchable(true);
             popupWindow.setElevation(8);
-            popupWindow.setBackgroundDrawable(Drawables.getDrawable(Color.WHITE, 10, 0, Color.WHITE));
+            popupWindow.setBackgroundDrawable(Drawables.getDrawable(Color.WHITE, 20, 0, Color.WHITE));
             popupWindow.showAsDropDown(v, 20, 30);
-            loadViewAction(view);
+            holder.courseTableView.clearStatus();
+            loadViewAction(v, popupWindow, view, clickList, clickList == null || isThisWeek == null, section, day);
+            popupWindow.setOnDismissListener(() -> holder.courseTableView.clearStatus());
         });
-//
-//        holder.courseTableView.setLongClickCourseItemListener((view, list, itemPosition, isThisWeek) -> {
-//            Bundle bundle = new Bundle();
-//            bundle.putString(COURSE_ID, list.get(itemPosition).getId());
-//            if (view.getTag(view.getId()) == null || !(Boolean) view.getTag(view.getId())) {
-//                view.setTag(view.getId(), true);
-//                view.animate().scaleX(0.8F).scaleY(0.8F).setInterpolator(new OvershootInterpolator());
-//                selectCourse.put(list.get(itemPosition).getId(), list.get(itemPosition));
-//            } else {
-//                view.animate().scaleX(1F).scaleY(1F).setInterpolator(new OvershootInterpolator());
-//                view.setTag(view.getId(), false);
-//                selectCourse.remove(list.get(itemPosition).getId());
-//            }
-//            ScheduleFragment scheduleFragment = (ScheduleFragment) baseFragment;
-//            try {
-//                if (selectCourse.size() > 0) {
-//                    Uis.show(scheduleFragment.getDataBinding().courseOp);
-//                    scheduleFragment.getDataBinding().courseOp.setOnClickListener(v -> {
-//                        if (selectCourse.size() > 0) {
-//                            showSelectCourseDialog(position);
-//                        } else {
-//                            Uis.hide(scheduleFragment.getDataBinding().courseOp);
-//                        }
-//                    });
-//                } else {
-//                    Uis.hide(scheduleFragment.getDataBinding().courseOp);
-//                }
-//            } catch (Exception e) {
-//                CrashReport.postCatchedException(new RuntimeException("获取DataBinding失败" + e.getMessage()));
-//            }
-//
-//        });
-
     }
 
-    private void loadViewAction(View view) {
+    private void loadViewAction(View targetView, PopupWindow popupWindow, View view, List<BCourse> bCourses, boolean isBlankScope, int section, int day) {
         TextView vDelete = view.findViewById(R.id.opDelete);
         TextView vCopy = view.findViewById(R.id.opCopy);
-        TextView vMore = view.findViewById(R.id.opMore);
+        TextView vAdd = view.findViewById(R.id.opAdd);
         RadioGroup vRadioGroup = view.findViewById(R.id.opRadioGroup);
-        vRadioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(RadioGroup group, int checkedId) {
+        RadioButton vRadioButtonCurWeek = view.findViewById(R.id.radioButtonCurWeek);
+        RadioButton vRadioButtonAllWeek = view.findViewById(R.id.radioButtonAllWeek);
+        AtomicInteger curSelectedId = new AtomicInteger(vRadioGroup.getCheckedRadioButtonId());
+        vRadioGroup.setOnCheckedChangeListener((group, checkedId) -> {
+            curSelectedId.set(checkedId);
+        });
 
+        //空白格子的一些元素调整
+        if (isBlankScope) {
+            vCopy.setText("粘贴");
+            vRadioButtonCurWeek.setEnabled(false);
+            vRadioButtonAllWeek.setEnabled(false);
+            vDelete.setEnabled(false);
+            targetView.setBackground(Drawables.getDrawable(App.context.getResources().getColor(R.color.main_back_color), 20, 0, Color.WHITE));
+        }
+
+        vDelete.setOnClickListener(v -> {
+            if (isBlankScope) return;
+            if (curSelectedId.get() == R.id.radioButtonCurWeek) {
+                courseViewModel.deleteCourseWeekByCourseId(bCourses.get(0).getId(), week);
+            } else {
+                courseViewModel.deleteByCourseId(bCourses.get(0).getId());
             }
+            //通知主页刷新数据
+            popupWindow.dismiss();
+            if (dataSetUpdateCall != null) {
+                dataSetUpdateCall.back();
+            }
+            Toasts.toast(App.context.getResources().getString(R.string.handle_success));
+        });
+        vCopy.setOnClickListener(v -> {
+            if (isBlankScope) {
+                //粘贴
+                if (wantToCopyCourse != null) {
+                    wantToCopyCourse.classDay = "" + (day + 1);
+                    wantToCopyCourse.classSessions = "" + section;
+                    wantToCopyCourse.id = schedule.roomId +""+ System.currentTimeMillis();
+                    courseViewModel.insert(wantToCopyCourse);
+                    wantToCopyCourse = null;
+                }
+            } else {
+                //复制
+                wantToCopyCourse = DataMaps.dataMappingByBCourse(bCourses.get(0));
+                //仅复制本周
+                if(curSelectedId.get() == R.id.radioButtonCurWeek){
+                    List<Integer> weeks = new ArrayList<>();
+                    weeks.add(week);
+                    wantToCopyCourse.classWeek = ExtendsKt.bitCount(weeks,30);
+                }
+                Toasts.toast("复制成功，长按课表空白格子可以粘贴");
+            }
+            popupWindow.dismiss();
+            if (dataSetUpdateCall != null) {
+                dataSetUpdateCall.back();
+            }
+        });
+
+        //新建
+        vAdd.setOnClickListener(v -> {
+            Bundle bundle = new Bundle();
+            bundle.putInt(NORMAL_SELECT_WEEK_DAY, day);
+            bundle.putInt(NORMAL_SELECT_SESSION, section);
+            Navigations.open(baseFragment, R.id.action_scheduleFragment_to_addCourseFragment, bundle);
+            popupWindow.dismiss();
         });
     }
 

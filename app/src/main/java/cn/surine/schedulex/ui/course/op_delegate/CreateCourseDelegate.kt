@@ -12,6 +12,7 @@ import cn.surine.schedulex.base.utils.*
 import cn.surine.schedulex.data.entity.Course
 import cn.surine.schedulex.data.entity.CoursePlanBlock
 import cn.surine.schedulex.ui.course.AddCourseFragment
+import cn.surine.schedulex.ui.schedule.ScheduleViewPagerAdapter
 import cn.surine.schedulex.ui.view.custom.helper.SelectWeeksDialog
 import cn.surine.ui_lib.setting
 import com.afollestad.materialdialogs.LayoutMode
@@ -109,8 +110,16 @@ open class CreateCourseDelegate : CourseOpDelegate {
         }
 
         //默认时间段
-        if (fragment.mCoursePlanBlockData.size == 0) {
-            fragment.mCoursePlanBlockData.add(CoursePlanBlock())
+        if(fragment.arguments != null){
+            val day = fragment.requireArguments().getInt(ScheduleViewPagerAdapter.NORMAL_SELECT_WEEK_DAY,-1)
+            val section = fragment.requireArguments().getInt(ScheduleViewPagerAdapter.NORMAL_SELECT_SESSION,-1)
+            if (fragment.mCoursePlanBlockData.size == 0) {
+                fragment.mCoursePlanBlockData.add(CoursePlanBlock(day = day + 1, sessionStart = section + 1, sessionEnd = section + 2))
+            }
+        }else{
+            if (fragment.mCoursePlanBlockData.size == 0) {
+                fragment.mCoursePlanBlockData.add(CoursePlanBlock())
+            }
         }
 
         //添加新的时间段
@@ -138,7 +147,7 @@ open class CreateCourseDelegate : CourseOpDelegate {
 
         mAdapter.setOnItemElementClickListener(object : BaseAdapter.OnItemElementClickListener(R.id.coursePlanItemDelete) {
             override fun onClick(v: View?, position: Int) {
-                deletePlanBlock(fragment,position)
+                deletePlanBlock(fragment, position)
             }
         })
         //展开
@@ -250,7 +259,7 @@ open class CreateCourseDelegate : CourseOpDelegate {
     }
 
     //默认删除
-    open fun deletePlanBlock(fragment: AddCourseFragment,position:Int) {
+    open fun deletePlanBlock(fragment: AddCourseFragment, position: Int) {
         if (fragment.mCoursePlanBlockData.size == 1) {
             Toasts.toast("至少保留一个时间段")
         } else {

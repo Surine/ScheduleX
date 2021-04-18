@@ -2,12 +2,14 @@ package cn.surine.schedulex.ui.course.op_delegate
 
 import cn.surine.schedulex.data.entity.CoursePlanBlock
 import cn.surine.schedulex.ui.course.AddCourseFragment
+import cn.surine.schedulex.ui.schedule.ScheduleViewPagerAdapter
 import cn.surine.schedulex.ui.view.custom.helper.BtmDialogs
 
 class CopyCourseDelegate :CreateCourseDelegate(){
     override fun initCourseData(fragment: AddCourseFragment) {
         super.initCourseData(fragment)
         val otherData = fragment.courseViewModel.getCourseById(fragment.requireArguments().getString(BtmDialogs.COURSE_ID))
+        val week = fragment.requireArguments().getInt(ScheduleViewPagerAdapter.SCOPE)
         fragment.mCourse.coureName = otherData.coureName
         fragment.mCourse.id = buildId(otherData.scheduleId)
         val list = mutableListOf<Int>()
@@ -18,7 +20,7 @@ class CopyCourseDelegate :CreateCourseDelegate(){
         }
         fragment.mCoursePlanBlockData.add(CoursePlanBlock(
                 belongId = fragment.mCourse.id,
-                weeks = list,
+                weeks = if(week != 0) listOf(week) else list,
                 day = otherData.classDay.toInt(),
                 sessionStart = otherData.classSessions.toInt(),
                 sessionEnd = otherData.classSessions.toInt() + otherData.continuingSession.toInt() - 1,

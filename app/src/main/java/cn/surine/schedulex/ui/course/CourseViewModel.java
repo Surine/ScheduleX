@@ -1,7 +1,5 @@
 package cn.surine.schedulex.ui.course;
 
-import android.util.Log;
-
 import androidx.annotation.Keep;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
@@ -159,7 +157,7 @@ public class CourseViewModel extends ViewModel {
         return mCourseRepository.getCourseById(id);
     }
 
-    public List<Course> getCourseByName(String name){
+    public List<Course> getCourseByName(String name) {
         return mCourseRepository.getCourseByName(name);
     }
 
@@ -195,6 +193,10 @@ public class CourseViewModel extends ViewModel {
         StringBuilder stringBuilder = new StringBuilder(course.classWeek);
         stringBuilder.replace(week - 1, week, "0");
         course.classWeek = stringBuilder.toString();
-        mCourseRepository.update(course);
+        if (course.classWeek.contains("1")) {
+            mCourseRepository.update(course);
+        } else {
+            mCourseRepository.deleteByCourseId(id);
+        }
     }
 }
