@@ -440,6 +440,50 @@
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
 
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/scheduleIsNotCurWeek"
+                        style="@style/setting_item_ui">
+
+                        <TextView
+                            android:id="@+id/scheduleIsNotCurWeekTitle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/dp8"
+                            android:layout_marginTop="@dimen/dp8"
+                            android:text="是否显示非本周课程"
+                            android:textColor="@android:color/black"
+                            android:textSize="18sp"
+                            android:textStyle="bold"
+                            app:layout_constraintLeft_toLeftOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+
+                        <TextView
+                            android:id="@+id/scheduleIsNotCurWeekSubTitle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/dp8"
+                            android:layout_marginBottom="@dimen/dp16"
+                            android:text="@{data.isShowNotCurWeek? @string/show_not_cur_week : @string/not_show_not_cur_week}"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toStartOf="@+id/scheduleIsNotCurWeekTitle"
+                            app:layout_constraintTop_toBottomOf="@+id/scheduleIsNotCurWeekTitle" />
+
+                        <Switch
+                            android:id="@+id/switchIsNotCurWeek"
+                            android:layout_width="wrap_content"
+                            android:layout_height="@dimen/dp20"
+                            android:clickable="false"
+                            android:checked="true"
+                            app:layout_constraintBottom_toBottomOf="@+id/scheduleIsNotCurWeekSubTitle"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="@+id/scheduleIsNotCurWeekTitle"
+                            tools:ignore="UseSwitchCompatOrMaterialXml" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:id="@+id/scheduleCourseAlphaItem"
                         style="@style/setting_item_ui">

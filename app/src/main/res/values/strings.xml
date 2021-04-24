@@ -134,6 +134,8 @@
     <string name="first_toast">主界面左右滑动或者点击周显示文字都可以快速切换周哦！</string>
     <string name="black_txt">黑色文字</string>
     <string name="white_txt">白色文字</string>
+    <string name="show_not_cur_week">当前显示非本周课程</string>
+    <string name="not_show_not_cur_week">当前不显示非本周课程</string>
     <string name="ready_to_fetch_course">正在获取课表……</string>
     <string name="fetch_fail_please_retry">获取失败，请重试!</string>
     <string name="import_super_class">导入超表数据</string>

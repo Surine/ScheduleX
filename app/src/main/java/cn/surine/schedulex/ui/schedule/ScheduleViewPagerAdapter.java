@@ -120,7 +120,7 @@ public class ScheduleViewPagerAdapter extends RecyclerView.Adapter<ScheduleViewP
         uiConfig.setColorUI(schedule.lightText ? UIConfig.LIGHT : UIConfig.DARK);
         uiConfig.setMaxHideCharLimit(schedule.maxHideCharLimit);
         uiConfig.setTextAlignFlag(schedule.textAlignFlag);
-        uiConfig.setShowNotCurWeekCourse(true);
+        uiConfig.setShowNotCurWeekCourse(schedule.isShowNotCurWeek);
     }
 
     public void setWeek(int week) {

@@ -18,7 +18,8 @@ object DataHandler {
         val dayResult = data.groupBy { it.day }
         for ((_, value) in dayResult) {
             //分组后按照持续节次倒序排序，然后按照起始节次分组
-            val sectionStartResult = value.sortedWith(compareBy { -1 * it.sectionContinue }).groupBy { it.sectionStart }
+            val sectionStartResult = value.sortedWith(compareBy { -1 * it.sectionContinue })
+                    .groupBy { it.sectionStart }
             for ((_,v2) in sectionStartResult){
                 //按照是否本周排列
                 val sortResult = v2.sortedBy { !it.week.contains(currentWeek) }

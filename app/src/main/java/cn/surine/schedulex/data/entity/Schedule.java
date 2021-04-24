@@ -112,6 +112,12 @@ public class Schedule extends BaseVm {
 
 
     /**
+     * 显示非本周课程
+     * */
+    public boolean isShowNotCurWeek = true;
+
+
+    /**
      * 最大字符隐藏限制
      */
     public int maxHideCharLimit = 6;

@@ -39,14 +39,18 @@ class AddCourseFragment :BaseFragment(){
         schedule = scheduleViewModel.curSchedule
 
         //选择合适的委托
-        curOpDelegate = when{
-            requireArguments().getBoolean(ScheduleViewPagerAdapter.IS_COPY) -> {
-                CopyCourseDelegate()
+        curOpDelegate = if(arguments == null){
+            CreateCourseDelegate()
+        }else{
+            when{
+                requireArguments().getBoolean(ScheduleViewPagerAdapter.IS_COPY) -> {
+                    CopyCourseDelegate()
+                }
+                requireArguments().getString(BtmDialogs.COURSE_ID,"").isNotEmpty() -> {
+                    ModifyCourseDelegate()
+                }
+                else -> CreateCourseDelegate()
             }
-            requireArguments().getString(BtmDialogs.COURSE_ID,"").isNotEmpty() -> {
-                ModifyCourseDelegate()
-            }
-            else -> CreateCourseDelegate()
         }
 
         //开始加载

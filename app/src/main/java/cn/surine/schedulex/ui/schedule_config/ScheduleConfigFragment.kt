@@ -137,6 +137,15 @@ class ScheduleConfigFragment : BaseBindingFragment<FragmentScheduleConfigBinding
             showWeekSwitchs.isChecked = schedule.isShowWeekend
             showWeekSubTitle.setText(if (schedule.isShowWeekend) R.string.show_weekend else R.string.not_show_weekend)
         }
+        switchIsNotCurWeek.isChecked = schedule.isShowNotCurWeek
+        scheduleIsNotCurWeek.setOnClickListener {
+            schedule.isShowNotCurWeek = !schedule.isShowNotCurWeek
+            scheduleViewModel.updateSchedule(schedule)
+            switchIsNotCurWeek.isChecked = schedule.isShowNotCurWeek
+            scheduleIsNotCurWeekSubTitle.setText(if(schedule.isShowNotCurWeek) R.string.show_not_cur_week else R.string.not_show_not_cur_week)
+        }
+
+
         //打开透明度配置窗口
         scheduleCourseAlphaItem.setOnClickListener { showCourseItemAlphaDialog() }
         //配置最大节次

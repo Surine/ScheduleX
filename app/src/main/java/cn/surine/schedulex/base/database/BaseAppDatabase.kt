@@ -16,7 +16,7 @@ import cn.surine.schedulex.data.entity.*
  * @author sunliwei
  * @date 2020-01-16 20:53
  */
-@Database(entities = [Course::class, Schedule::class, TimeTable::class, Memo::class,Event::class], version = 7)
+@Database(entities = [Course::class, Schedule::class, TimeTable::class, Memo::class,Event::class], version = 8)
 abstract class BaseAppDatabase : RoomDatabase() {
     /**
      * 获取课表数据DAO
@@ -39,7 +39,7 @@ abstract class BaseAppDatabase : RoomDatabase() {
                     if (instance == null) {
                         instance = Room.databaseBuilder(context.applicationContext, BaseAppDatabase::class.java, Constants.DB_NAME)
                                 .allowMainThreadQueries() //TODO：slw 主线程访问，不安全
-                                .addMigrations(mg_1_2, mg_2_3, mg_3_4, mg_4_5, mg_5_6, mg_6_7)
+                                .addMigrations(mg_1_2, mg_2_3, mg_3_4, mg_4_5, mg_5_6, mg_6_7, mg_7_8)
                                 .build()
                     }
                 }
@@ -110,5 +110,10 @@ abstract class BaseAppDatabase : RoomDatabase() {
             }
         }
 
+        private val mg_7_8: Migration = object : Migration(7, 8) {
+            override fun migrate(database: SupportSQLiteDatabase) {
+                database.execSQL("ALTER TABLE schedule ADD COLUMN isShowNotCurWeek INTEGER NOT NULL DEFAULT 1")
+            }
+        }
     }
 }
