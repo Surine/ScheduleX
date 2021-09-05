@@ -17,7 +17,9 @@ class SplashViewModel() : BaseViewModel() {
             query.setLimit(1)
             query.findObjects(object : FindListener<CommonParam>() {
                 override fun done(p0: MutableList<CommonParam>?, p1: BmobException?) {
-                    mCommonParam.value = p0?.get(0)
+                    if(p0 != null && p0.size != 0){
+                        mCommonParam.value = p0[0]
+                    }
                 }
             })
         }

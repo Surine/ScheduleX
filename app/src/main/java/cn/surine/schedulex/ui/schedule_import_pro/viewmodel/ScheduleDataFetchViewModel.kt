@@ -61,7 +61,7 @@ class ScheduleDataFetchViewModel(val repository: ScheduleDataFetchRepository) : 
         query.findObjects(object : FindListener<RemoteUniversity>() {
             override fun done(p0: MutableList<RemoteUniversity>?, p1: BmobException?) {
                 //未适配
-                if (p1 != null || p0 == null) {
+                if (p1 != null || p0 == null || p0.size == 0) {
                     loadUniversityStatus.value = LOAD_FAIL_NULL
                     return
                 }
