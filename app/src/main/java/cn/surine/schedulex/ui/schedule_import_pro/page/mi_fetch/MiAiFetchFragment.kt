@@ -1,6 +1,7 @@
 package cn.surine.schedulex.ui.schedule_import_pro.page.mi_fetch
 
 import android.annotation.SuppressLint
+import android.util.Log
 import android.view.View
 import android.webkit.*
 import cn.surine.schedulex.R
@@ -41,7 +42,7 @@ class MiAiFetchFragment : BaseFragment() {
     companion object {
         const val DEEPLINK_PREFIX = "voiceassist:"
         const val DEEPLINK_PREFIX2 = "xiaoailite:"
-        const val COURSE_INFO_URL = "https://i.ai.mi.com/course/courseInfo?"
+        const val COURSE_INFO_URL = "https://i.ai.mi.com/course-multi/table?"
     }
 
     override fun onInit(parent: View?) {
@@ -80,7 +81,7 @@ class MiAiFetchFragment : BaseFragment() {
 
             override fun shouldInterceptRequest(view: WebView?, request: WebResourceRequest?): WebResourceResponse? {
                 val text = request?.url.toString()
-                if (text.startsWith(COURSE_INFO_URL)) {
+                if (text.startsWith(COURSE_INFO_URL) && !text.contains("userId=0")) {
                     targetText = text
                 }
                 return super.shouldInterceptRequest(view, request)
@@ -94,8 +95,9 @@ class MiAiFetchFragment : BaseFragment() {
             web.clearCache(true)
             web.hide()
             web.loadUrl(intentUrl)
-            toast("正在分析数据，请等待3s~")
+            toast("正在请求数据，请等待3s~")
             web.postDelayed({
+                toast("正在分析数据，请等待3s~")
                 if (targetText.isNotEmpty()) {
                     loadUrl(targetText)
                 }
@@ -104,19 +106,21 @@ class MiAiFetchFragment : BaseFragment() {
     }
 
     private fun loadUrl(url: String) {
+        Log.d("slw", "loadUrl: ")
         val okHttpClient = OkHttpClient()
         val request: Request = Request.Builder()
                 .url(url)
                 .build()
         okHttpClient.newCall(request).enqueue(object : Callback {
             override fun onFailure(call: Call, e: IOException) {
+                Log.d("slw", "loadUrl fail: ${e.localizedMessage}")
             }
 
             override fun onResponse(call: Call, response: Response) {
                 val text = response.body?.string() ?: ""
                 if (text.isNotEmpty()) {
                     val data = Jsons.parseJsonWithGson<MiAiBean>(text)
-                    if (data.data.courseInfos.isNotEmpty()) {
+                    if (data.data.courses.isNotEmpty()) {
                         parseCourse("我的小爱课表", data.data)
                     }
                 }
@@ -126,7 +130,7 @@ class MiAiFetchFragment : BaseFragment() {
 
 
     private fun parseCourse(str: String, miAiCourseInfo: MiAiCourseInfo) {
-        val scheduleId = scheduleViewModel.addSchedule(str, miAiCourseInfo.totalWeek, miAiCourseInfo.presentWeek, Schedule.IMPORT_WAY.MI_AI)
+        val scheduleId = scheduleViewModel.addSchedule(str, Constants.MAX_WEEK, miAiCourseInfo.current, Schedule.IMPORT_WAY.MI_AI)
         save(Constants.CUR_SCHEDULE, scheduleId)
         ParserManager.aiParser(scheduleId, miAiCourseInfo) {
             courseViewModel.saveCourseByDb(it, scheduleId)

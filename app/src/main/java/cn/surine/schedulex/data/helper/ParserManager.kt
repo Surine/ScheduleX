@@ -7,6 +7,7 @@ import cn.surine.schedulex.base.utils.ifLess
 import cn.surine.schedulex.data.entity.Course
 import cn.surine.schedulex.ui.schedule_import_pro.model.mi_model.MiAiCourseInfo
 import cn.surine.schedulex.ui.schedule_import_pro.model.CourseWrapper
+import cn.surine.schedulex.ui.schedule_import_pro.model.mi_model.Section
 import java.util.*
 import kotlin.math.abs
 
@@ -20,9 +21,9 @@ object ParserManager {
     //小爱解析
     fun aiParser(scheduleId: Long, miAiCourseInfo: MiAiCourseInfo, block: (List<Course>) -> Unit) {
         val courseList = mutableListOf<Course>()
-        while (miAiCourseInfo.courseInfos.isNotEmpty()) {
-            for (index in miAiCourseInfo.courseInfos.indices) {
-                val info = miAiCourseInfo.courseInfos[index]
+        while (miAiCourseInfo.courses.isNotEmpty()) {
+            for (index in miAiCourseInfo.courses.indices) {
+                val info = miAiCourseInfo.courses[index]
                 courseList.add(Course().apply {
                     this.scheduleId = scheduleId
                     id = generateId(scheduleId)
@@ -31,14 +32,15 @@ object ParserManager {
                     teachingBuildingName = info.position
                     classDay = info.day.toString()
                     color = generateColor()
-                    classWeek = generateBitWeek(info.weeks, Constants.MAX_WEEK)
+                    classWeek = generateBitWeek(info.weeks.split(",").map { it.toInt() }.toList(), Constants.MAX_WEEK)
                     //区间合并
-                    val start = info.sections[0]
+                    var sectionsComp:MutableList<Section> = info.sections.split(",").map { Section(it.toInt()) }.toMutableList()
+                    val start = sectionsComp[0]
                     var end = start
                     start.section *= -1  //标记位
-                    for (i in 1 until info.sections.size) {
-                        if (i < info.sections.size && info.sections[i].section - 1 == abs(end.section)) {
-                            end = info.sections[i]
+                    for (i in 1 until sectionsComp.size) {
+                        if (i < sectionsComp.size && sectionsComp[i].section - 1 == abs(end.section)) {
+                            end = sectionsComp[i]
                             end.section *= -1
                         } else {
                             break
@@ -46,13 +48,14 @@ object ParserManager {
                     }
                     classSessions = abs(start.section).toString()
                     continuingSession = ifLess(abs(end.section) - abs(start.section) + 1, Constants.STAND_SESSION).toString()
-                    info.sections = info.sections.filter { it.section > 0 }.toMutableList()
+                    sectionsComp = sectionsComp.filter { it.section > 0 }.toMutableList()
+                    info.sections = sectionsComp.joinToString(separator = ",")
                     if (info.sections.isEmpty()) {
                         info.tag = true
                     }
                 })
             }
-            miAiCourseInfo.courseInfos = miAiCourseInfo.courseInfos.filter { !it.tag }.toMutableList()
+            miAiCourseInfo.courses = miAiCourseInfo.courses.filter { !it.tag }.toMutableList()
         }
         block(courseList)
     }

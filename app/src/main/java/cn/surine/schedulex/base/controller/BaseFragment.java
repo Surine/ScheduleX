@@ -12,6 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.databinding.ViewDataBinding;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
 import androidx.navigation.fragment.NavHostFragment;
 
 import com.umeng.analytics.MobclickAgent;
@@ -33,7 +34,7 @@ public abstract class BaseFragment extends Fragment {
      * Host activity
      */
     protected ViewDataBinding dataBind;
-    private Activity activity;
+    private FragmentActivity activity;
 
     /**
      * override this method return the fragment layout id
@@ -57,7 +58,7 @@ public abstract class BaseFragment extends Fragment {
     }
 
 
-    public Activity activity() {
+    public FragmentActivity activity() {
         return getActivity() == null ? activity : getActivity();
     }
 
@@ -66,7 +67,7 @@ public abstract class BaseFragment extends Fragment {
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
         if (context instanceof Activity && activity == null) {
-            this.activity = (Activity) context;
+            this.activity = (FragmentActivity) context;
         }
     }
 

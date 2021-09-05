@@ -2,7 +2,7 @@
   "formatVersion": 1,
   "database": {
     "version": 7,
-    "identityHash": "a83b7daf9ecd8117d23cf2498914b12b",
+    "identityHash": "c8221d2d8beffab4a9ccbd937c26505c",
     "entities": [
       {
         "tableName": "Course",
@@ -122,7 +122,7 @@
       },
       {
         "tableName": "Schedule",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`roomId` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `name` TEXT, `totalWeek` INTEGER NOT NULL, `termStartDate` TEXT, `color` TEXT, `imageUrl` TEXT, `lightText` INTEGER NOT NULL, `isShowWeekend` INTEGER NOT NULL, `alphaForCourseItem` INTEGER NOT NULL, `maxSession` INTEGER NOT NULL, `itemHeight` INTEGER NOT NULL, `importWay` INTEGER NOT NULL, `timeTableId` INTEGER NOT NULL, `isShowTime` INTEGER NOT NULL, `courseThemeId` INTEGER NOT NULL, `textAlignFlag` INTEGER NOT NULL, `maxHideCharLimit` INTEGER NOT NULL)",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`roomId` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `name` TEXT, `totalWeek` INTEGER NOT NULL, `termStartDate` TEXT, `color` TEXT, `imageUrl` TEXT, `lightText` INTEGER NOT NULL, `isShowWeekend` INTEGER NOT NULL, `alphaForCourseItem` INTEGER NOT NULL, `maxSession` INTEGER NOT NULL, `itemHeight` INTEGER NOT NULL, `importWay` INTEGER NOT NULL, `timeTableId` INTEGER NOT NULL, `isShowTime` INTEGER NOT NULL, `courseThemeId` INTEGER NOT NULL, `textAlignFlag` INTEGER NOT NULL, `isShowNotCurWeek` INTEGER NOT NULL, `maxHideCharLimit` INTEGER NOT NULL)",
         "fields": [
           {
             "fieldPath": "roomId",
@@ -217,6 +217,12 @@
           {
             "fieldPath": "textAlignFlag",
             "columnName": "textAlignFlag",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "isShowNotCurWeek",
+            "columnName": "isShowNotCurWeek",
             "affinity": "INTEGER",
             "notNull": true
           },
@@ -378,7 +384,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'a83b7daf9ecd8117d23cf2498914b12b')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'c8221d2d8beffab4a9ccbd937c26505c')"
     ]
   }
 }

@@ -5,7 +5,8 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />   <!-- 读取SD卡的权限:打开相册选取图片所必须的权限 -->
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"
+        tools:ignore="ScopedStorage" />   <!-- 读取SD卡的权限:打开相册选取图片所必须的权限 -->
     <uses-permission android:name="android.permission.READ_CALENDAR" />
     <uses-permission android:name="android.permission.WRITE_CALENDAR" /><!-- 日历权限 -->
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
@@ -29,7 +30,8 @@
         tools:replace="android:allowBackup">
         <activity
             android:name=".ui.MainActivity"
-            android:windowSoftInputMode="adjustPan">
+            android:windowSoftInputMode="adjustPan"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -55,7 +57,8 @@
 
         <receiver
             android:name=".app_widget.normal_daily.NormalDailyProvider"
-            android:label="每日课程-默认">
+            android:label="每日课程-默认"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE_OPTIONS" />
@@ -76,7 +79,8 @@
 
         <receiver
             android:name=".app_widget.little_daily.LittleDailyProvider"
-            android:label="彩虹">
+            android:label="彩虹"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE_OPTIONS" />
@@ -97,7 +101,8 @@
 
         <receiver
             android:name=".app_widget.terminal_ui.TerminalUiDailyProvider"
-            android:label="终端">
+            android:label="终端"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE_OPTIONS" />
@@ -117,7 +122,8 @@
 
         <receiver
             android:name=".app_widget.normal_week.NormalWeekProvider"
-            android:label="每周课程-默认">
+            android:label="每周课程-默认"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE_OPTIONS" />
@@ -139,7 +145,7 @@
         <service
             android:name=".app_widget.core.KeepService"
             android:enabled="true"
-            android:exported="true" />
+            android:exported="false" />
 
         <service
             android:name=".app_widget.normal_daily.NormalDailyService"
@@ -182,7 +188,8 @@
 
         <provider
             android:name="cn.bmob.v3.util.BmobContentProvider"
-            android:authorities="cn.surine.schedulex.BmobContentProvider"></provider>
+            android:authorities="cn.surine.schedulex.BmobContentProvider"
+            android:exported="false" />
     </application>
 
 </manifest>

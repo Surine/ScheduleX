@@ -130,12 +130,16 @@ class ScheduleThirdFetchFragment : BaseFragment() {
                         item("显示提示弹窗", "可以多次查看导入教程") {
                             showTipDialog()
                         }
+                        item("强制Html导入","如果登陆遇到困难，可以强制使用Html导入"){
+                            chooseHtmlFile()
+                        }
                     }
                 }
             }
         }
     }
 
+    @SuppressLint("CheckResult")
     private fun loadTip() {
         if (isHtml) {
             MIUIDialog(activity()).show {
@@ -148,19 +152,24 @@ class ScheduleThirdFetchFragment : BaseFragment() {
                     }
                 }
                 positiveButton(text = "选择文件") {
-                    RxPermissions(activity()).request(Manifest.permission.READ_EXTERNAL_STORAGE).subscribe {
-                        if (it) {
-                            hit("html_jw_import")
-                            importFile()
-                        } else {
-                            toast("请授予读写文件权限")
-                        }
-                    }
+                   chooseHtmlFile()
                 }
                 negativeButton(text = "取消") { this.cancel() }
             }
         } else {
             showTipDialog()
+        }
+    }
+
+    @SuppressLint("CheckResult")
+    private fun chooseHtmlFile() {
+        RxPermissions(activity()).request(Manifest.permission.READ_EXTERNAL_STORAGE).subscribe {
+            if (it) {
+                hit("html_jw_import")
+                importFile()
+            } else {
+                toast("请授予读写文件权限")
+            }
         }
     }
 
@@ -191,7 +200,7 @@ class ScheduleThirdFetchFragment : BaseFragment() {
             try {
                 val uri = data.data
                 localHtml = Files.getFileContent(Files.getFilePath(activity(), uri))
-                thirdPageWebView.loadData(localHtml, "text/html; charset=UTF-8", null)
+                thirdPageWebView.loadData(localHtml!!, "text/html; charset=UTF-8", null)
                 toast("加载成功，您可以直接点击导入按钮。")
             } catch (e: Exception) {
                 toast("加载失败:${e.message}")
@@ -253,6 +262,7 @@ class ScheduleThirdFetchFragment : BaseFragment() {
     }
 
     internal inner class InJavaScriptLocalObj {
+        @SuppressLint("CheckResult")
         @JavascriptInterface
         fun showSource(html: String, system: String) {
             JwParserDispatcher.parse(system, if (localHtml != null) localHtml!! else html) { list, e ->
@@ -321,7 +331,6 @@ class ScheduleThirdFetchFragment : BaseFragment() {
     }
 
     override fun onDestroyView() {
-        thirdPageWebView.webViewClient = null
         thirdPageWebView.webChromeClient = null
         thirdPageWebView.clearCache(true)
         thirdPageWebView.clearHistory()
