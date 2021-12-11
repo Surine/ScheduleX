@@ -4,6 +4,7 @@ import android.app.PendingIntent
 import android.appwidget.AppWidgetManager
 import android.content.Context
 import android.content.Intent
+import android.os.Build
 import android.widget.RemoteViews
 import cn.surine.schedulex.app_widget.data.Actions
 import cn.surine.schedulex.base.Constants
@@ -30,7 +31,11 @@ object WidgetUtil {
     fun toMain(remoteViews: RemoteViews, context: Context?, id: Int) {
         val intent = Intent(context, MainActivity::class.java)
         val str = Constants.APP_WIDGET_ID
-        remoteViews.setOnClickPendingIntent(id, PendingIntent.getActivity(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT))
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            remoteViews.setOnClickPendingIntent(id, PendingIntent.getActivity(context, 0, intent, PendingIntent.FLAG_IMMUTABLE))
+        }else{
+            remoteViews.setOnClickPendingIntent(id, PendingIntent.getActivity(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT))
+        }
     }
 
     /**
@@ -60,7 +65,11 @@ object WidgetUtil {
             intent.action = Actions.PREVIOUS_DAY
         }
         intent.putExtra(Constants.APP_WIDGET_ID, appId)
-        remoteViews.setOnClickPendingIntent(layoutId, PendingIntent.getBroadcast(context, cur++, intent, PendingIntent.FLAG_UPDATE_CURRENT))
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            remoteViews.setOnClickPendingIntent(layoutId, PendingIntent.getBroadcast(context, cur++, intent, PendingIntent.FLAG_IMMUTABLE))
+        }else{
+            remoteViews.setOnClickPendingIntent(layoutId, PendingIntent.getBroadcast(context, cur++, intent, PendingIntent.FLAG_UPDATE_CURRENT))
+        }
     }
 
     fun setDay(target: Class<*>?, context: Context?, remoteViews: RemoteViews, appId: Int, layoutId: Int) {
@@ -72,7 +81,11 @@ object WidgetUtil {
             intent.action = Actions.PREVIOUS_DAY
         }
         intent.putExtra(Constants.APP_WIDGET_ID, appId)
-        remoteViews.setOnClickPendingIntent(layoutId, PendingIntent.getBroadcast(context, cur++, intent, PendingIntent.FLAG_UPDATE_CURRENT))
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            remoteViews.setOnClickPendingIntent(layoutId, PendingIntent.getBroadcast(context, cur++, intent, PendingIntent.FLAG_IMMUTABLE))
+        }else{
+            remoteViews.setOnClickPendingIntent(layoutId, PendingIntent.getBroadcast(context, cur++, intent, PendingIntent.FLAG_UPDATE_CURRENT))
+        }
     }
 
     fun showOrHide(remoteViews: RemoteViews, dayView: Int, status: Int) {
