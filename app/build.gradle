@@ -13,7 +13,7 @@ android {
         minSdkVersion 21
         targetSdkVersion 31
         versionCode 1080
-        versionName "1.0.8.0"
+        versionName "1.0.8.1"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         useLibrary 'org.apache.http.legacy'  //bmob 兼容6.0
         buildFeatures {
