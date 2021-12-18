@@ -29,7 +29,7 @@ allprojects {
         maven { url 'https://jitpack.io' }
 //        maven { url 'https://maven.aliyun.com/nexus/content/groups/public/'}
 //        maven {url 'https://dl.bintray.com/chaozhouzhang/maven' }
-        maven { url 'https://dl.bintray.com/umsdk/release' }
+//        maven { url 'https://dl.bintray.com/umsdk/release' }
     }
 }
 
