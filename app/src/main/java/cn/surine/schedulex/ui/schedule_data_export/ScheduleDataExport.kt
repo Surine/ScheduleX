@@ -7,6 +7,7 @@ import cn.surine.schedulex.R
 import cn.surine.schedulex.app_base.VmManager
 import cn.surine.schedulex.app_base.hit
 import cn.surine.schedulex.base.controller.BaseFragment
+import cn.surine.schedulex.base.ktx.toast
 import cn.surine.schedulex.base.utils.*
 import cn.surine.schedulex.data.entity.Course
 import cn.surine.schedulex.data.entity.Schedule
@@ -163,7 +164,11 @@ class ScheduleDataExport : BaseFragment() {
             }
             //ICS导出需要创建文件
             if(forICS){
-                ICs.exportIcs(icsList)
+                try {
+                    ICs.exportIcs(icsList)
+                }catch (e:Exception){
+                    toast("请检查权限～")
+                }
             }
         }
         withContext(Dispatchers.Main) {

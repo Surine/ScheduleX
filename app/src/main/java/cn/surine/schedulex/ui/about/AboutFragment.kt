@@ -43,8 +43,9 @@ class AboutFragment : BaseFragment() {
         versionSlogan.text = getString(R.string.version_slogan, Others.getAppVersion())
         aboutItemQQ.setOnClickListener {
             hit("qq")
-            Others.startQQ(activity(), "686976115")
-            toast(getString(R.string.qq_copy))
+            Others.joinQQGroup(activity())
+//            Others.startQQ(activity(), "686976115")
+//            toast(getString(R.string.qq_copy))
         }
         github.setOnClickListener {
             hit("github")

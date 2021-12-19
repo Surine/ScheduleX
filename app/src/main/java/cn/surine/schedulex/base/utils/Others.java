@@ -71,11 +71,30 @@ public class Others {
             ClipboardManager cmb = (ClipboardManager) context.getSystemService(CLIPBOARD_SERVICE);
             cmb.setText(qqNumber);
             intent = packageManager.getLaunchIntentForPackage(qq);
+            context.startActivity(intent);
         } catch (Exception e) {
             intent = packageManager.getLaunchIntentForPackage(tim);
+            context.startActivity(intent);
         }
-        context.startActivity(intent);
     }
+
+
+
+    public static boolean joinQQGroup(Context context) {
+        String key = "CPdMZInN5ZKhmHyxKumYifjgPKfsI6i5";
+        Intent intent = new Intent();
+        intent.setData(Uri.parse("mqqopensdkapi://bizAgent/qm/qr?url=http%3A%2F%2Fqm.qq.com%2Fcgi-bin%2Fqm%2Fqr%3Ffrom%3Dapp%26p%3Dandroid%26jump_from%3Dwebapi%26k%3D" + key));
+        try {
+            context.startActivity(intent);
+            return true;
+        } catch (Exception e) {
+            // 未安装手Q或安装的版本不支持
+            Toasts.toast("未检测到QQ，请您手动加群");
+            return false;
+        }
+    }
+
+
 
 
     /**

@@ -21,7 +21,11 @@ import cn.surine.schedulex.data.helper.DataHandler
  */
 class NormalDailyService : DailyRemoteViewService() {
     //这里回调数据
-    override fun dataSetChanged(mAppWidgetId: Int, courseCall: DCall<List<Course>>, bTimeTableDCall: DCall<BTimeTable>) {
+    override fun dataSetChanged(
+        mAppWidgetId: Int,
+        courseCall: DCall<List<Course>>,
+        bTimeTableDCall: DCall<BTimeTable>
+    ) {
         val sb = Constants.NEXT_DAY_STATUS + mAppWidgetId
         val isNextDay = getBoolean(sb, false)
         val today = Dates.getWeekDay()
@@ -44,9 +48,14 @@ class NormalDailyService : DailyRemoteViewService() {
             remoteViews.setTextViewText(R.id.day_class_title, course.coureName)
             val sb = course.teachingBuildingName + course.classroomName
             remoteViews.setTextViewText(R.id.day_class_subtitle, sb)
-            val sb2 = course.classSessions + "-" + (course.classSessions.toInt() + course.continuingSession.toInt() - 1)
-            remoteViews.setTextViewText(R.id.day_class_session, sb2)
             remoteViews.setTextViewText(R.id.widget_day_class_course_time, data.startTime)
+            if (course.classSessions.isBlank() || course.continuingSession.isBlank()) {
+                remoteViews.setTextViewText(R.id.day_class_session, "无数据")
+            } else {
+                val sb2 =
+                    course.classSessions + "-" + (course.classSessions.toInt() + course.continuingSession.toInt() - 1)
+                remoteViews.setTextViewText(R.id.day_class_session, sb2)
+            }
         } else {
             val str = ""
             remoteViews.setTextViewText(R.id.day_class_title, str)
